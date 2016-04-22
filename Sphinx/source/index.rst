@@ -1,0 +1,22 @@
+Welcome to the Orthanc Book!
+============================
+
+.. image:: _static/orthanc.png
+           :align: right
+
+This site documents Orthanc. If you want to access more general
+information about Orthanc, please go to the `official Web site
+<http://www.orthanc-server.com>`_.
+
+
+Contents
+--------
+
+.. toctree::
+   :maxdepth: 2
+
+   users.rst
+   dicom-guide.rst
+   developers.rst
+   faq.rst
+   contributing.rst
