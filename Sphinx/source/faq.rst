@@ -34,4 +34,5 @@ Specific FAQs
    faq/nginx.rst
    faq/https.rst
    faq/same-origin.rst
+   faq/video.rst
    faq/why-orthanc.rst
