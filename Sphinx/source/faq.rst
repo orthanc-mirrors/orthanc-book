@@ -35,4 +35,5 @@ Specific FAQs
    faq/https.rst
    faq/same-origin.rst
    faq/video.rst
+   faq/viewers.rst
    faq/why-orthanc.rst
