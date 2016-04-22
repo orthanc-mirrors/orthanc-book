@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Orthanc Book'
-copyright = u'2015-2016, University Hospital of Liège and Osimis, Belgium'
+copyright = u''  # Copyright is set in "_templates/layout.html"
 author = u''
 
 # The version info for the project you're documenting, acts as replacement for
