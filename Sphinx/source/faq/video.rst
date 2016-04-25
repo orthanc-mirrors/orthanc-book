@@ -16,7 +16,9 @@ The answer to this question really depends on what you mean by
 If you "just" want to **query/receive/transfer** DICOM videos, Orthanc
 will work fine either with 2D+t or real videos (because Orthanc is a
 `Vendor Neutral Archive
-<https://en.wikipedia.org/wiki/Vendor_Neutral_Archive>`__).
+<https://en.wikipedia.org/wiki/Vendor_Neutral_Archive>`__). This
+distinction is also discussed in :ref:`another FAQ entry
+<supported-images>`.
 
 If you also want to **play** the videos, to the best of our knowledge,
 there is currently no Orthanc plugin for H.264 or MPEG2 (though such a

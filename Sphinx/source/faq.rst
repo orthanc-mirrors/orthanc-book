@@ -15,9 +15,19 @@ General questions
    faq/compiling.rst
    faq/features.rst
    faq/rest-samples.rst
-   faq/supported-images.rst
    faq/proprietary.rst
+
+Features supported by Orthanc
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
    faq/improving-interface.rst
+   faq/supported-images.rst
+   faq/video.rst
+   faq/worklist.rst
+   faq/viewers.rst
 
 
 Specific FAQs
@@ -34,7 +44,4 @@ Specific FAQs
    faq/nginx.rst
    faq/https.rst
    faq/same-origin.rst
-   faq/video.rst
-   faq/worklist.rst
-   faq/viewers.rst
    faq/why-orthanc.rst
