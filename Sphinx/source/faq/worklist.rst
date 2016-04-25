@@ -1,15 +1,35 @@
 Does Orthanc support worklists?
-==============================
+===============================
 
-Orthanc partially supports the Dicom Modality Worklists (MWL) through
-one of his `plugin <https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.0.0/Plugins/Samples/ModalityWorklists/>`__.
+Orthanc supports DICOM Modality Worklists (MWL) through its `plugin
+SDK
+<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__.
+In other words, Orthanc can act as a worklist server (C-Find SCP), but
+an user-defined plugin must be provided to answer a list of worklists
+given a MWL query.
 
-Thanks to this plugin, Orthanc can act as a worklist server (C-Find SCP)
-and serve the worklists stored in a folder.  
+The rationale for using plugins instead of providing a built-in MWL
+mechanism, is that the way worklists are generated is very specific to
+the clinical flows and to the manufacturer of your `RIS system
+<https://en.wikipedia.org/wiki/Radiology_information_system>`__.
+Indeed, depending on the situation, worklists can be generated either
+from HL7 messages, from calls to a Web service (e.g. through FHIR), or
+from a direct access to some RIS database. It is thus up to the
+Orthanc user to provide the worklist generator that is best suited for
+her use.
 
-However, Orthanc does not provide any functionality to generate the worklist files.
-Usually, worklists are generated from HL7 messages or directly from a `RIS <https://en.wikipedia.org/wiki/Radiology_information_system>`__
-database.  It's actually your responsibility to provide the worklist
-generator.  `dump2dcm <http://support.dcmtk.org/docs/dump2dcm.html>`__ 
-might be very useful in this task.
+A `sample plugin
+<https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/ModalityWorklists/>`__
+is available to serve the worklists stored in some folder on the
+filesystem. This mimics the behavior of the ``wlmscpfs`` command-line
+tool from the `DCMTK software
+<http://support.dcmtk.org/docs/wlmscpfs.html>`__. ``dump2dcm`` might
+be a very `useful companion tool
+<http://support.dcmtk.org/docs/dump2dcm.html>`__ to feed the sample
+plugin with worklists for some separate maintenance script.
 
+For more complex or integrated workflows where you must implement a
+custom MWL plugin, please check the `documentation of the part of the
+Orthanc plugin SDK
+<https://orthanc.chu.ulg.ac.be/sdk/group__Worklists.html>`__ that is
+related to the management of worklists.
