@@ -565,10 +565,13 @@ corresponds to the initiation of a query/retrieve:
 
 |
 
-*Note 1:* Even if C-Move may seem counter-intuitive, it is the only
-way to initiate a query/retrieve. Once upon a time, there was a
-conceptually simpler ``C-Get`` command, but this command is now
-deprecated.
+*Note 1:* Even if C-Move may seem counter-intuitive, this is the most
+popular and widespread way to initiate a query/retrieve against a PACS
+server. The DICOM standard features an `alternative mechanism called
+C-Get
+<http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`_.
+As of Orthanc 1.0.0, C-Get is not supported yet (but work is in
+progress).
 
 *Note 2:* As :ref:`written above <dicom-pixel-data>`, the Orthanc
 engine is quite generic and is compatible with virtually any image
