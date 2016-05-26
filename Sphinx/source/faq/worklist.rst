@@ -33,3 +33,45 @@ custom MWL plugin, please check the `documentation of the part of the
 Orthanc plugin SDK
 <https://orthanc.chu.ulg.ac.be/sdk/group__Worklists.html>`__ that is
 related to the management of worklists.
+
+
+How should I use it ?
+---------------------
+
+- download `DCMTK utilities <http://dicom.offis.de/download/dcmtk/release/bin/>`__
+- download sample `worklist files <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/ModalityWorklists/>`__ from the Orthanc source code and copy them in a dedicated folder. 
+
+.. highlight:: javascript
+ 
+- Enable the ModalityWorklist plugin in your config.json by adding this section::
+	
+    "Worklists" : {
+      "Enable": true,
+      "Database": "WorklistsDatabase"  //this is the path to the folder with the worklist files.  Use absolute path !
+    },
+
+- Add the plugin to the list of plugins to load (this is an example for Windows)::
+	
+	"Plugins" : [
+	  "OsimisWebViewer.dll",
+	  "ModalityWorklists.dll" // on Linux, use ModalityWorklists.so
+	],
+
+- Add the findscu utility to the list of know modalities (considering findscu and Orthanc runs on the same machine)::
+	
+    "DicomModalities" : {
+      "horos" : [ "HOROS", "192.168.0.8", 11112 ],
+      "findscu" : [ "FINDSCU", "127.0.0.1", 1234 ]
+    },
+
+.. highlight:: bash
+	
+- Launch Orthanc as usual, make sure to pass him the configuration file (ex for Windows)::
+	
+	Orthanc.exe config.json
+
+- In a prompt, launch a findscu request to ask Orthanc to return all Worklists for 'CT' modalities (considering findscu and Orthanc both runs on your machine: 127.0.0.1 is the Orthanc url and 4242 is the Orthanc DICOM port)::
+
+    findscu -W -k "ScheduledProcedureStepSequence[0].Modality=CT" 127.0.0.1 4242
+
+- findscu should display the matching worklists
