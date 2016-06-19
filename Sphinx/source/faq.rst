@@ -42,6 +42,7 @@ Specific FAQs
    faq/redhat.rst
    faq/apache.rst
    faq/nginx.rst
+   faq/iis.rst
    faq/https.rst
    faq/same-origin.rst
    faq/why-orthanc.rst

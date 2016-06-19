@@ -15,9 +15,9 @@ Troubleshooting
 * **Orthanc Explorer is slow under Windows on the localhost**: You
   have to disable the IPv6 support. This is a Windows-specific problem
   that is discussed `here
-  <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`_
+  <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
   and `here
-  <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`_.
+  <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
 * Under Windows, Orthanc creates the "OrthancStorage" folder, and
   crashes with the error "**SQLite: Unable to open the database**":
   Your directory name is either too long, or it contains special
