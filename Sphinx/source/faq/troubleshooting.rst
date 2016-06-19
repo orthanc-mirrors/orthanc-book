@@ -3,8 +3,20 @@
 Troubleshooting
 ===============
 
-* Always make sure you use the `most recent version
-  <http://www.orthanc-server.com/download.php>`_ of Orthanc.
+As a general rule, when you encounter an issue, always make sure that
+you use the `most recent version
+<http://www.orthanc-server.com/download.php>`__ of Orthanc.
+
+Also make a search on the `Orthanc Users discussion group
+<https://groups.google.com/forum/#!forum/orthanc-users>`__, and make a
+search in the present Orthanc Book (there is a search field at the top
+of this page). Your issue might indeed have already been discussed in
+the past or in the FAQ.
+
+
+Orthanc Explorer
+----------------
+
 * **I cannot login to Orthanc Explorer**: For security reasons, access
   to Orthanc from remote hosts is disabled by default. Only the
   localhost is allowed to access Orthanc. You have to set the
@@ -12,12 +24,32 @@ Troubleshooting
   <configuration>` to ``true``. It is then strongly advised to set
   ``AuthenticationEnabled`` to ``true`` and to add a user to the
   ``RegisteredUsers`` option, also in the configuration file.
+
+
+Performance issues
+------------------
+
 * **Orthanc Explorer is slow under Windows on the localhost**: You
   have to disable the IPv6 support. This is a Windows-specific problem
   that is discussed `here
   <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
   and `here
   <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
+
+* If you experience **slow DICOM transfers under Linux**, please read
+  the `following bug report
+  <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=785400>`__. This
+  issue does *not* affect all the versions of Linux. A
+  patch to this issue is shipped with the Orthanc source code. In
+  order to take advantage of this patch, you need to statically link
+  Orthanc against DCMTK by using the ``-DUSE_SYSTEM_DCMTK=OFF`` flag
+  `when invoking CMake
+  <https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`__.
+
+
+Windows-specific issues
+-----------------------
+
 * Under Windows, Orthanc creates the "OrthancStorage" folder, and
   crashes with the error "**SQLite: Unable to open the database**":
   Your directory name is either too long, or it contains special
