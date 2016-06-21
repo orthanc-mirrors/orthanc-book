@@ -9,6 +9,7 @@ can run behind `Microsoft IIS (Internet Information Services)
 servers through reverse proxying. The instructions below are provided
 courtesy of `Mark Hodge
 <https://groups.google.com/d/msg/orthanc-users/3-b3cLBAr8U/QIePcADMAAAJ>`__.
+They also illustrate how to configure :ref:`HTTPS encryption <https>`.
 
 - IIS is available as a feature you can enable via the Programs and Features in non Server versions of Windows.
 

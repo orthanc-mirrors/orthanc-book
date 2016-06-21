@@ -9,7 +9,7 @@ to protect its REST API, as it provides access to medical
 information. To this end, you have two possibilites:
 
 1. Put Orthanc behind an enterprise-ready HTTPS server such as
-   :ref:`Apache <apache>` or :ref:`nginx <nginx>`.
+   :ref:`Apache <apache>`, :ref:`nginx <nginx>` or :ref:`Microsoft IIS <iis>`.
 2. For simple deployments, use Orthanc :ref:`built-in HTTPS server <https-builtin>`.
 
 **You should always favor the first option**. The second option might make
