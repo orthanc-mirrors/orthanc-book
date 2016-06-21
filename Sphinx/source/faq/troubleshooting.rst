@@ -29,12 +29,20 @@ Orthanc Explorer
 Performance issues
 ------------------
 
-* **Orthanc Explorer is slow under Windows on the localhost**: You
-  have to disable the IPv6 support. This is a Windows-specific problem
-  that is discussed `here
-  <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
-  and `here
-  <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
+* **Orthanc Explorer is slow under Windows on the localhost**:
+
+  - Favor ``127.0.0.1`` instead of ``localhost`` when specifying the
+    network address of a server. Users have reported that this minor
+    change `can massively improve performance
+    <https://groups.google.com/d/msg/orthanc-users/tTe28zR0nGk/Lvs0STJLAgAJ>`__
+    on Windows. Starting with Orthanc 1.0.1, the samples from the
+    source distribution have been adapted in this way.
+
+  - As an alternative, you can disable IPv6 support. This is a
+    Windows-specific problem that is discussed `here
+    <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
+    and `here
+    <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
 
 * If you experience **slow DICOM transfers under Linux**, please read
   the `following bug report
