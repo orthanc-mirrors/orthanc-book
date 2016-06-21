@@ -356,12 +356,55 @@ would replace the ``StationName`` DICOM tag::
  end
 
 
-**Important remark:** The ``SendToModality()``, ``SendToPeer()``,
-``ModifyInstance()`` and ``Delete()`` functions are for the most
-common cases of auto-routing (implying a single DICOM instance, and
-possibly a basic modification of this instance). For more evolved
-auto-routing scenarios, remember that Lua scripts :ref:`have full to
-the REST API of Orthanc <lua-rest>`, and that :ref:`other callbacks
-are available <lua-callbacks>` to react to other events than the
-reception of a single instance (notably ``OnStablePatient()``,
-``OnStableStudy()`` and ``OnStableSeries()``).
+Important Remarks about Auto-Routing
+------------------------------------
+
+The ``SendToModality()``, ``SendToPeer()``, ``ModifyInstance()`` and
+``Delete()`` functions are for the most basic cases of auto-routing
+(implying a single DICOM instance, and possibly a basic modification
+of this instance). The ``ModifyInstance()`` function `could also lead
+to problems
+<https://groups.google.com/d/msg/orthanc-users/hmv2y-LgKm8/oMAuGJWMBgAJ>`__
+if it deals with tags wrongly interpreted as numbers by Lua.
+
+For more evolved auto-routing scenarios, remember that Lua scripts
+:ref:`have full to the REST API of Orthanc <lua-rest>`. This is
+illustrated by the ``AutoroutingModification.lua`` sample available in
+the source distribution of Orthanc::
+
+ function OnStoredInstance(instanceId, tags, metadata, origin)
+    -- Ignore the instances that result from the present Lua script to
+    -- avoid infinite loops
+    if origin['RequestOrigin'] ~= 'Lua' then
+    
+       -- The tags to be replaced
+       local replace = {}
+       replace['StationName'] = 'My Medical Device'
+       replace['0031-1020'] = 'Some private tag'
+       
+       -- The tags to be removed
+       local remove = { 'MilitaryRank' }
+       
+       -- Modify the instance
+       local command = {}
+       command['Replace'] = replace
+       command['Remove'] = remove
+       local modifiedFile = RestApiPost('/instances/' .. instanceId .. '/modify', DumpJson(command, true))
+       
+       -- Upload the modified instance to the Orthanc database so that
+       -- it can be sent by Orthanc to other modalities
+       local modifiedId = ParseJson(RestApiPost('/instances/', modifiedFile)) ['ID']
+       
+       -- Send the modified instance to another modality
+       RestApiPost('/modalities/sample/store', modifiedId)
+              
+       -- Delete the original and the modified instances
+       RestApiDelete('/instances/' .. instanceId)
+       RestApiDelete('/instances/' .. modifiedId)
+    end
+ end
+
+Also note that :ref:`other callbacks are available <lua-callbacks>`
+(``OnStablePatient()``, ``OnStableStudy()`` and ``OnStableSeries()``)
+to react to other events than the reception of a single instance 
+with ``OnStoredInstance()``.
