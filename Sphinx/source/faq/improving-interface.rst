@@ -1,3 +1,5 @@
+.. _improving-interface:
+
 Orthanc Explorer is not user-friendly enough for my use
 =======================================================
 
@@ -24,7 +26,8 @@ managers, medical physicists, and researchers).
 staff...) **might expect an user interface that is more user-friendly
 than Orthanc Explorer**, and/or that integrates more features (such as
 sorting resources, access control lists, tagging images, beautiful
-layout...). If you need such a more advanced `user experience
+layout, tunable anonymization, modification of instances...). If you
+need such a more advanced `user experience
 <https://en.wikipedia.org/wiki/User_experience>`__ so that Orthanc
 better fits your clinical workflow, you will have to develop a
 separate, custom Web interface on the top of the :ref:`rest`, maybe as

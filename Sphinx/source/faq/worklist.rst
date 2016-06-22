@@ -1,3 +1,5 @@
+.. _worklist:
+
 Does Orthanc support worklists?
 ===============================
 

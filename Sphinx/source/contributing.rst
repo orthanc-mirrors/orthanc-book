@@ -24,12 +24,19 @@ here are some tasks you can take in charge that would greatly help us:
   Matlab/Octave, Python, Horos, dicompyler...). Check the `already
   supported frameworks <http://www.orthanc-server.com/static.php?page=resources>`_.
 * Develop `C/C++ plugins
-  <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`_,
-  some ideas of which can be found in the `official roadmap
-  <https://trello.com/b/cjA9X1wM/orthanc-roadmap>`_.
+  <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`_.
+  Here are some ideas of plugins:
 
+  * Check the right-hand column of the `official roadmap <https://trello.com/b/cjA9X1wM/orthanc-roadmap>`__.
+  * Create a :ref:`more advanced Web interface <improving-interface>` than the built-in Orthanc Explorer.
+  * Extend the :ref:`sample modality worklist plugin <worklist>` so that it manages the worklists
+    (i.e. add/remove items) with a REST API or HL7 messages, instead of reading them from 
+    some folder on the filesystem.
 
-The **recommended way of contributing to the source code of Orthanc is
+* Have a look at the `Orthanc Wishlist board <https://trello.com/b/gcn33tDM/orthanc-wishlist>`__,
+  where users can submit their ideas for the future features of Orthanc.
+
+Always remember that he **recommended way of contributing to the source code of Orthanc is
 by creating C/C++ plugins**. If the current plugin SDK is insufficient
 for you to develop some feature as a plugin, do not hesitate to
 request an extension to the Orthanc SDK on the `mailing list
