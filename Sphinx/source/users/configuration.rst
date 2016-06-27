@@ -6,7 +6,7 @@ Configuration of Orthanc
 
 Configuring Orthanc simply consists in copying and adapting the
 `default configuration file
-<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.0.0/Resources/Configuration.json>`_. This
+<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.1.0/Resources/Configuration.json>`_. This
 file is in the `JSON <https://en.wikipedia.org/wiki/JSON>`_ file
 format. You can generate a sample configuration file with the
 following call::
