@@ -35,7 +35,8 @@ modalities. As preliminary debugging actions, you should:
 
 * Restart Orthanc with the ``--verbose`` option at command line, and
   carefully inspect the log. This might provide immediate debugging
-  information.
+  information. Make sure to read :ref:`how to generate an exploitable
+  log <log>`.
 * Issue a :ref:`DICOM C-Echo <dicom-echo>` from each modality to make
   sure the DICOM protocol is properly configured (sending a C-Echo
   from Orthanc Explorer is possible starting with Orthanc 0.9.3, in
@@ -55,6 +56,7 @@ detailed description of your problem, notably:
 * Specify the operating system, the vendor, the DICOM software, and
   the version of each modality.
 * Attach sample DICOM files, possibly anonymized.
-* Attach the log of the two modalities. The log must be generated with
-  the ``--trace`` command-line option as far as Orthanc is concerned.
+* Attach the log of the two modalities. The :ref:`log must be
+  generated <log>` with the ``--trace`` command-line option as far as
+  Orthanc is concerned.
 * Attach any screenshot that is useful to understand the problem.

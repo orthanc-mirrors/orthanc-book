@@ -36,6 +36,7 @@ Specific FAQs
 .. toctree::
    :maxdepth: 1
 
+   faq/log.rst
    faq/orthanc-ids.rst
    faq/versioning.rst
    faq/debian-daemon.rst
