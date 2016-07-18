@@ -1,3 +1,4 @@
+.. _coding-style:
 .. highlight:: c++
 
 Coding style

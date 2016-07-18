@@ -17,6 +17,7 @@ Contents
 
    users.rst
    dicom-guide.rst
+   plugins.rst
    developers.rst
    faq.rst
    contributing.rst

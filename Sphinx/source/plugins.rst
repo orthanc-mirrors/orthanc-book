@@ -1,0 +1,52 @@
+.. _plugins:
+
+Plugins
+=======
+
+The core of Orthanc can be extended through **plugins**. A plugin
+takes the form of a shared library (``.DLL`` under Windows, ``.so``
+under Linux, ``.dylib`` under Apple OS X...). A plugin can do various
+things, among others:
+
+* Serving new **Web applications** that have full access to the REST
+  API of Orthanc, which makes easy to handle DICOM images from
+  JavaScript code.
+* Replacing **the way DICOM images are decoded** (e.g. the official
+  :ref:`Web viewer plugin <webviewer>` introduces the decoding of
+  JPEG2000 images, which is not available in the core of Orthanc).
+* Replacing the default **database back-end** of Orthanc (that is built
+  upon SQLite) by another (:ref:`PostgreSQL <postgresql>`, MySQL, SQL Server...).
+* Creating **new REST APIs** on the top of the Orthanc built-in API (as in
+  in the official :ref:`DICOMweb <dicomweb>` plugin).
+* **Reacting** to the arrival of new DICOM images or other
+  DICOM-related events so as to carry on automated processing.
+
+
+.. _plugins-official:
+
+Index of the official plugins
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/serve-folders.rst
+   plugins/dicomweb.rst
+   plugins/postgresql.rst
+   plugins/webviewer.rst
+   plugins/worklists-plugin.rst
+
+
+.. _plugins-contributed:
+
+Index of the contributed plugins
+--------------------------------
+
+* `DWV Orthanc Plugin
+  <https://github.com/ivmartel/dwv-orthanc-plugin>`__: This plugin by
+  Yves Martelli is based on `dwv
+  <https://github.com/ivmartel/dwv/wiki>`__ and extends Orthanc with a
+  Web viewer of DICOM images.
+* Another Web viewer is provided courtesy of `Emsy Chan
+  <https://groups.google.com/forum/#!topic/orthanc-users/EC5Z2KaM4Hs>`__.
+
