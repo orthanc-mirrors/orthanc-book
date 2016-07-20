@@ -46,4 +46,5 @@ Specific FAQs
    faq/iis.rst
    faq/https.rst
    faq/same-origin.rst
+   faq/matlab.rst
    faq/why-orthanc.rst
