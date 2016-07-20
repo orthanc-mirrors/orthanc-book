@@ -34,7 +34,7 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 * ``OrthancPostgreSQLIndex`` replaces the default SQLite index of Orthanc by PostgreSQL. 
 * ``OrthancPostgreSQLStorage`` makes Orthanc store the DICOM files it receives into PostgreSQL. 
 
-Some pre-compiled binaries for Microsoft Windows `are also available
+Pre-compiled binaries for Microsoft Windows `are also available
 <http://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
 Package for `Apple's Mac OS X
 <http://localhost/~jodogne/orthanc/static.php?page=download-mac>`__
@@ -46,9 +46,10 @@ Usage
 
 .. highlight:: json
 
-You of course first have to install Orthanc, with a version above
-0.9.1. You then have to **create a database** dedicated to Orthanc on
-some PostgreSQL server. Please refer to the `PostgreSQL documentation
+You of course first have to :ref:`install Orthanc <compiling>`, with a
+version above 0.9.1. You then have to **create a database** dedicated
+to Orthanc on some PostgreSQL server. Please refer to the `PostgreSQL
+documentation
 <https://www.postgresql.org/docs/current/static/tutorial-createdb.html>`__.
 
 Once Orthanc is installed and the database is created, you must add a

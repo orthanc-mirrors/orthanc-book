@@ -145,6 +145,8 @@ Explorer <orthanc-explorer>`:
            :width: 400px
 
 
+.. _model-world:
+
 Model of the real world
 ^^^^^^^^^^^^^^^^^^^^^^^
 
