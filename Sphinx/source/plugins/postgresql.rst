@@ -36,7 +36,7 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 
 Pre-compiled binaries for Microsoft Windows `are also available
 <http://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
-Package for `Apple's Mac OS X
+A package for `Apple's Mac OS X
 <http://localhost/~jodogne/orthanc/static.php?page=download-mac>`__
 are available courtesy of `Osimis <http://osimis.io/>`__.
 
