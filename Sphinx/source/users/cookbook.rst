@@ -15,6 +15,9 @@ To obtain the Orthanc binaries, you have several possibilities:
 
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * `Download pre-compiled packages <http://www.orthanc-server.com/download.php>`__.
+* `Use Docker <https://github.com/jodogne/OrthancDocker>`__.
+* External contributors are also maintaining `Vagrant VM for Orthanc
+  <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#vagrant>`__.
 
 
 .. _orthanc-explorer:
@@ -45,7 +48,11 @@ drop your DICOM files and click on the Upload button.
 
 You can `watch this video tutorial
 <https://www.youtube.com/watch?v=4dOcXGMlcFo&hd=1>`__ that shows how
-to upload files to Orthanc through Orthanc Explorer.
+to upload files to Orthanc through Orthanc Explorer with Chromium.
+
+**Important:** There is currently a `known issue
+<https://bitbucket.org/sjodogne/orthanc/issues/21/dicom-files-missing-after-uploading-with>`__
+that prevents Mozilla Firefox to correctly upload all DICOM files.
 
 
 Uploading through the DICOM protocol
