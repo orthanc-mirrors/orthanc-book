@@ -31,6 +31,10 @@ that contains the Web viewer plugin.  Pre-compiled binaries for
 Microsoft Windows `are also available
 <http://www.orthanc-server.com/browse.php?path=/plugin-webviewer>`__.
 
+*Remark:* Some older build instructions are also available in the
+`source distribution
+<https://bitbucket.org/sjodogne/orthanc-webviewer/src/default/Resources/BuildInstructions.txt>`__.
+
 
 Usage
 -----
