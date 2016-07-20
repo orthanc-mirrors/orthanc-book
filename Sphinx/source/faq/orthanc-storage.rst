@@ -65,6 +65,11 @@ reasons:
 * By directly reading the content of ``OrthancStorage``, you bypass
   all the locking mechanisms used by Orthanc, which might result in
   data corruption.
+* One SQLite database should be accessed by at most one process at any
+  time to avoid any problem (e.g. with NFS filesystems), for reasons
+  that are `explained in the SQLite FAQ
+  <https://www.sqlite.org/faq.html#q5>`__. Orthanc will stop if it
+  receives the ``SQLITE_BUSY`` status.
 
 As a consequence, it is **HIGHLY recommended NOT to directly access**
 the ``OrthancStorage`` folder and the SQLite database. Use the
