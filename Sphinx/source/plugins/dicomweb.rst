@@ -313,8 +313,7 @@ Note how all the GET arguments must be specified in the ``Arguments``
 field. Orthanc will take care of properly encoding it to a URL.
 
 An user-friendly reference of the features available in QIDO-RS and
-WADO-RS `can be found on this site
-<http://dicomweb.hcintegrations.ca/#/home>`__.
+WADO-RS `can be found on this site <http://www.dicomweb.org/>`__.
 
 
 Sending DICOM resources to a STOW-RS server
