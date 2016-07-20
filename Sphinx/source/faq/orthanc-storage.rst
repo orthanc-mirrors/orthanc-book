@@ -1,5 +1,5 @@
-How does Orthanc stores its database?
-=====================================
+How does Orthanc store its database?
+====================================
 
 Storage folder
 --------------
