@@ -8,7 +8,7 @@ Quickstart
    :depth: 2
 
 
-.. _compiling:
+.. _binaries:
 
 Obtaining binaries
 ------------------

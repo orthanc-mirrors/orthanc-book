@@ -39,11 +39,11 @@ Index of the official plugins
 .. toctree::
    :maxdepth: 1
 
-   plugins/serve-folders.rst
+   plugins/webviewer.rst
    plugins/dicomweb.rst
    plugins/postgresql.rst
-   plugins/webviewer.rst
    plugins/worklists-plugin.rst
+   plugins/serve-folders.rst
 
 
 .. _plugins-contributed:
@@ -51,6 +51,11 @@ Index of the official plugins
 Index of the contributed plugins
 --------------------------------
 
+* `Osimis <http://osimis.io/>`__ maintains an evolution of the
+  official Web viewer plugin. The Osimis plugin adds tools for
+  measuring, for viewing multiple series, and for split-pane.  `Check
+  out their source code
+  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 * `DWV Orthanc Plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__: This plugin by
   Yves Martelli is based on `dwv

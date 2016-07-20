@@ -50,7 +50,7 @@ Usage
 
 .. highlight:: json
 
-You of course first have to :ref:`install Orthanc <compiling>`. Once
+You of course first have to :ref:`install Orthanc <binaries>`. Once
 Orthanc is installed, you must change the :ref:`configuration file
 <configuration>` to tell Orthanc where it can find the plugin: This is
 done by properly modifying the ``Plugins`` option. You could for

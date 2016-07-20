@@ -46,7 +46,7 @@ Usage
 
 .. highlight:: json
 
-You of course first have to :ref:`install Orthanc <compiling>`, with a
+You of course first have to :ref:`install Orthanc <binaries>`, with a
 version above 0.9.1. You then have to **create a database** dedicated
 to Orthanc on some PostgreSQL server. Please refer to the `PostgreSQL
 documentation
