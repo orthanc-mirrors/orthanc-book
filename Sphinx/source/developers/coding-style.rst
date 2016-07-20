@@ -52,7 +52,7 @@ Replaced Rules
     keyword (the code being moved at the end of the header)
 
 * Rule 40: Use ``#pragma once`` in each header file (cf. `Wikipedia
-  <http://en.wikipedia.org/wiki/Pragma_once>`__)
+  <https://en.wikipedia.org/wiki/Pragma_once>`__)
 * Rules 73 and 80: Use Visual Studio's default style that does not add
   two whitespaces in front of public, protected, private and case::
 
@@ -71,7 +71,7 @@ Additional Rules
 ----------------
 
 * Use C++ exceptions, avoid error codes.
-* Use the `RAII design pattern <http://en.wikipedia.org/wiki/RAII>`__ (Resource Allocation Is Initialization) wherever possible.
+* Use the `RAII design pattern <https://en.wikipedia.org/wiki/RAII>`__ (Resource Allocation Is Initialization) wherever possible.
 * No C-style casting, use ``static_cast``, ``reinterpret_cast``,
   ``dynamic_cast`` and ``const_cast``.
 * Never use ``using namespace`` in header files (except inside inline
@@ -81,7 +81,27 @@ Additional Rules
 * Minimize the number of #include in header files.
 * Never use ``catch (...)``, except when protecting non-Orthanc code.
 * To ease unit testing, favor the `JavaBeans
-  <http://en.wikipedia.org/wiki/Java_beans>`__ conventions:
+  <https://en.wikipedia.org/wiki/Java_beans>`__ conventions:
 
   * Single constructor without argument,
   * Use getters/setters.
+
+
+Conventions for pointers and references
+---------------------------------------
+
+Except when clearly stated in the documentation:
+
+* A function that receives a **reference** to an object as an argument
+  is not responsible for the lifecycle of the object, and must not
+  ``delete`` it. The object is allowed to keep this reference in a
+  member variable. The caller must ensure that the referenced object
+  will not be freed between the object that references it.
+* A function that receives a **pointer** to an object as an argument
+  takes the ownership of the object.
+* A function that returns a **reference** to an object indicates that
+  the object should not be freed by the caller.
+* A function that returns a **pointer** to an object transfers its
+  ownership to the caller. Occasionally, a pointer is also returned to
+  indicate the presence or the absence (represented by ``NULL``) of
+  some resource: In such a case, the pointer must not be freed.

@@ -6,7 +6,7 @@ Server-side scripting with Lua
 .. contents::
 
 Since release 0.5.2, Orthanc supports server-side scripting through
-the `Lua <http://en.wikipedia.org/wiki/Lua_(programming_language)>`__
+the `Lua <https://en.wikipedia.org/wiki/Lua_(programming_language)>`__
 scripting language. Thanks to this major feature, Orthanc can be tuned
 to specific medical workflows without being driven by an external
 script. This page summarizes the possibilities of Orthanc server-side
@@ -45,7 +45,7 @@ a single Lua command through the REST API::
 *Note:* The ``--data-binary`` cURL option is used instead of
 ``--data`` to prevent the interpretation of newlines by cURL, which is
 `mandatory for the proper evaluation
-<http://stackoverflow.com/q/3872427/881731>`__ of the possible
+<http://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__ of the possible
 comments inside the Lua script.
 
 
@@ -248,7 +248,7 @@ the resource is granted if and only if this callback script returns
 ``true``.
 
 This mechanism can be used to implement fine-grained `access control
-lists <http://en.wikipedia.org/wiki/Access_control_list>`__. Here is
+lists <https://en.wikipedia.org/wiki/Access_control_list>`__. Here is
 an example of a Lua script that limits POST, PUT and DELETE requests
 to an user that is called "admin"::
 

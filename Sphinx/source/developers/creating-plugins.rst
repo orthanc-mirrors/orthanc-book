@@ -17,11 +17,25 @@ the official Orthanc repository
 (in the ``Plugins/Samples`` folder of the ``plugins`` branch). A
 tutorial showing how to implement a basic WADO server is `available on
 CodeProject
-<http://codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
+<http://www.codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
+
+We suggest developers to adopt the :ref:`coding style of the Orthanc
+core <coding-style>`, although this is of course not required.
+
+Do not hesitate to `contact us
+<http://www.orthanc-server.com/static.php?page=contact>`__ if you wish
+your plugin to be **indexed** in :ref:`this part of the Orthanc Book
+<plugins-contributed>`!
+
+
+Structure of the plugins
+------------------------
 
 A plugin takes the form of a shared library (``.DLL`` under Windows,
-``.so`` under Linux, ``.dylib`` under Apple OS X...) that must declare 4
-public functions/symbols:
+``.so`` under Linux, ``.dylib`` under Apple OS X...) that use the `ABI
+of the C language
+<https://en.wikipedia.org/wiki/Application_binary_interface>`__ to
+declare 4 public functions/symbols:
 
 * ``int32_t OrthancPluginInitialize(OrthancPluginContext* context)``. This
   callback function is responsible for initializing the plugin. The
@@ -33,11 +47,8 @@ public functions/symbols:
 * ``const char* OrthancPluginGetVersion()``. This function must
   provide the version of the plugin.
 
-We suggest developers to adopt the :ref:`coding style of the Orthanc
-core <coding-style>`, although this is of course not required.
-
-Do not hesitate to `contact us
-<http://www.orthanc-server.com/static.php?page=contact>`__ if you wish
-your plugin to be **indexed** in :ref:`this part of the Orthanc Book
-<plugins-contributed>`!
-
+*Remark:* The size of the memory buffers that are exchanged between
+the Orthanc core and the plugins must be below 4GB. This is a
+consequence of the fact that the Orthanc plugin SDK uses ``uint32_t``
+to encode the size of a memory buffer. We might extend the SDK in
+the future to deal with buffers whose size if above 4GB.

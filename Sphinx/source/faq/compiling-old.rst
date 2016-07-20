@@ -77,9 +77,9 @@ Static Linking on CentOS 6.3 and 6.4
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You have to build and install `CMake 2.8 from source
-<http://www.cmake.org/cmake/resources/software.html>`_, or you can use
+<https://cmake.org/download/>`_, or you can use
 the cmake28 package from `EPEL
-<https://admin.fedoraproject.org/pkgdb/acls/name/cmake28>`_. The
+<https://admin.fedoraproject.org/pkgdb/package/rpms/cmake28/>`_. The
 ``STATIC_BUILD=ON`` option will then work::
 
     $ /usr/local/bin/cmake -DSTATIC_BUILD:BOOL=ON -DCMAKE_BUILD_TYPE=Debug

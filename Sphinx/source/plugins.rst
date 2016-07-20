@@ -3,6 +3,11 @@
 Plugins
 =======
 
+.. contents::
+
+Overview
+--------
+
 The core of Orthanc can be extended through **plugins**. A plugin
 takes the form of a shared library (``.DLL`` under Windows, ``.so``
 under Linux, ``.dylib`` under Apple OS X...). A plugin can do various
@@ -20,6 +25,10 @@ things, among others:
   in the official :ref:`DICOMweb <dicomweb>` plugin).
 * **Reacting** to the arrival of new DICOM images or other
   DICOM-related events so as to carry on automated processing.
+* ...
+
+Developers external to the official Orthanc project are :ref:`invited
+to contribute <contributing>` by creating third-party plugins.
 
 
 .. _plugins-official:
@@ -48,5 +57,5 @@ Index of the contributed plugins
   <https://github.com/ivmartel/dwv/wiki>`__ and extends Orthanc with a
   Web viewer of DICOM images.
 * Another Web viewer is provided courtesy of `Emsy Chan
-  <https://groups.google.com/forum/#!topic/orthanc-users/EC5Z2KaM4Hs>`__.
+  <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
 

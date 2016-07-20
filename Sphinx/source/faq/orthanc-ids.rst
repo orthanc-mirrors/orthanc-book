@@ -7,7 +7,7 @@ In Orthanc, each patient, study, series and instance is assigned with
 an unique identifier that is derived from the DICOM identifiers.
 Contrarily to the :ref:`identifiers of the DICOM standard
 <dicom-identifiers>`, the Orthanc identifiers are formatted as a
-`SHA-1 hash <http://en.wikipedia.org/wiki/Sha-1>`__ with a fixed
+`SHA-1 hash <https://en.wikipedia.org/wiki/Sha-1>`__ with a fixed
 length, so as to be more Web-friendly. More specifically:
 
 * Patients are identified as the SHA-1 hash of their PatientID tag

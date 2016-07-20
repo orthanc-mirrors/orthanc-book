@@ -50,4 +50,4 @@ If using PostgreSQL, you can do hot backups (i.e. while Orthanc is
 running), and you benefit from all the flexibility of PostgreSQL
 backup. These procedures are out of the scope of this manual.  Please
 check the `official backup and restore manual
-<http://www.postgresql.org/docs/devel/static/backup.html>`__.
+<https://www.postgresql.org/docs/devel/static/backup.html>`__.

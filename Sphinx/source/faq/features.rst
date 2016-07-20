@@ -64,7 +64,7 @@ If your disk space is limited, besides :ref:`recycling`, you should
 also consider using **disk space compression**. When compression is
 enabled, Orthanc compresses the incoming DICOM instances on-the-fly
 before writing them to the filesystem, using `zlib
-<http://en.wikipedia.org/wiki/Zlib>`_. This is useful, because the
+<https://en.wikipedia.org/wiki/Zlib>`_. This is useful, because the
 images are often stored as raw, uncompressed arrays in DICOM
 instances: The size of a typical DICOM instance can hopefully be
 divided by a factor 2 through lossless compression. This compression

@@ -20,7 +20,7 @@ This implies that anything that can be done through Orthanc Explorer,
 can also be done through REST queries.
 
 *Note:* All the examples are illustrated with the `cURL command-line
-tool <http://curl.haxx.se/>`__, but equivalent calls can be readily
+tool <https://curl.haxx.se/>`__, but equivalent calls can be readily
 transposed to any programming language that supports both HTTP and
 JSON.
 
@@ -50,7 +50,7 @@ the location of the stored instance, such as::
 
 Note that in the case of curl, setting the ``Expect`` HTTP Header will
 significantly `reduce the execution time of POST requests
-<http://stackoverflow.com/a/463277/881731>`__::
+<http://stackoverflow.com/questions/463144/php-http-post-fails-when-curl-data-1024/463277#463277>`__::
 
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
@@ -83,7 +83,7 @@ your local Orthanc instance::
     $ curl http://localhost:8042/instances
 
 Note that the result of this command is a `JSON file
-<http://en.wikipedia.org/wiki/Json>`__ that contains an array of
+<https://en.wikipedia.org/wiki/Json>`__ that contains an array of
 resource identifiers. The JSON file format is lightweight and can be
 parsed from almost any computer language.
 
@@ -93,7 +93,7 @@ Accessing a patient
 .. highlight:: bash
 
 To access a single resource, add its identifier to the `URI
-<http://en.wikipedia.org/wiki/Uniform_resource_identifier>`__. You
+<https://en.wikipedia.org/wiki/Uniform_resource_identifier>`__. You
 would for instance retrieve the main information about one patient as
 follows::
 
@@ -475,7 +475,7 @@ This output corresponds to the receiving of one single DICOM instance
 by Orthanc. It records that a new instance, a new series, a new study
 and a new patient has been created inside Orthanc. Note that each
 changes is labeled by a ``ChangeType``, a ``Date`` (in the `ISO format
-<http://en.wikipedia.org/wiki/ISO_8601>`__), the location of the
+<https://en.wikipedia.org/wiki/ISO_8601>`__), the location of the
 resource inside Orthanc, and a sequence number (``Seq``).
 
 Note that this call is non-blocking. It is up to the calling program

@@ -15,7 +15,7 @@ interested readers are invited to read a more formal textbook about
 DICOM, such as the so-called "`Practical introduction and survival
 guide <http://www.springer.com/us/book/9783642108495>`__", or to read
 the full `DICOM specification
-<http://medical.nema.org/medical/dicom/current/output/html/>`__.
+<http://dicom.nema.org/medical/dicom/current/output/html/>`__.
 
 All the DICOM concepts that are defined in this introduction are
 illustrated with `Orthanc <http://www.orthanc-server.com/>`__, a
@@ -151,7 +151,7 @@ Model of the real world
 This concludes our overview of the DICOM file format itself. It is now
 important to give an overview of the so-called "**DICOM model of the
 real world**" (`source
-<http://medical.nema.org/medical/dicom/current/output/html/part04.html#sect_C.6.1.1>`__):
+<http://dicom.nema.org/medical/dicom/current/output/html/part04.html#sect_C.6.1.1>`__):
 
 .. image:: images/PS3.4_C.6-1.svg
            :align: center

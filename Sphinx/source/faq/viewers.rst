@@ -11,9 +11,9 @@ list of free and open-source viewers that are known to be compatible
 with Orthanc (do not hesitate to `warn us
 <mailto:s.jodogne@gmail.com>`__ about other compatible FOSS):
 
-* `Horos <http://www.horosproject.org/>`__.
-* `Gingko CADx <http://www.ginkgo-cadx.com/>`__ (a :ref:`configuration
-  guide <ginkgo-cadx>` is available).
+* `Horos <https://www.horosproject.org/>`__.
+* `Gingko CADx <https://www.ginkgo-cadx.com/>`__ (a
+  :ref:`configuration guide <ginkgo-cadx>` is available).
 * `3D Slicer <https://www.slicer.org/>`__.
 * `medInria <https://med.inria.fr/>`__.
 * `Aeskulap <http://aeskulap.nongnu.org/>`__.

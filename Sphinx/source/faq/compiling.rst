@@ -32,11 +32,11 @@ Please explain the build infrastructure
 ---------------------------------------
 
 The build infrastructure of Orthanc is based upon `CMake
-<http://www.cmake.org/>`_. The build scripts are designed to embed all
+<https://cmake.org/>`_. The build scripts are designed to embed all
 the third-party dependencies directly inside the Orthanc
 executable. This is the meaning of the ``-DSTATIC_BUILD=TRUE`` option,
 as described in the `INSTALL
-<http://orthanc.googlecode.com/hg/INSTALL>`_ file of Orthanc.
+<https://bitbucket.org/sjodogne/orthanc/src/default/INSTALL>`_ file of Orthanc.
 
 Such a static linking is very desirable under Windows, since the
 Orthanc binaries do not depend on any external DLL, which results in a
@@ -44,7 +44,7 @@ straightforward installation procedure (just download the Windows
 binaries and execute them), which eases the setup of the development
 machines (no external library is to be manually installed, everything
 is downloaded during the build configuration), and which avoids the
-`DLL hell <http://en.wikipedia.org/wiki/Dll_hell>`_. As a downside,
+`DLL hell <https://en.wikipedia.org/wiki/Dll_hell>`_. As a downside,
 this makes our build infrastructure rather complex.
 
 Static linking is not as desirable under Linux than under

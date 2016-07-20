@@ -24,22 +24,22 @@ Built-in encryption
 
 To enable the built-in HTTP server of Orthanc, you need to:
 
-1. Obtain a `X.509 certificate <http://en.wikipedia.org/wiki/X.509>`_
+1. Obtain a `X.509 certificate <https://en.wikipedia.org/wiki/X.509>`_
    in the `PEM format
-   <http://en.wikipedia.org/wiki/X.509#Certificate_filename_extensions>`_.
+   <https://en.wikipedia.org/wiki/X.509#Certificate_filename_extensions>`_.
 2. Prepend this certificate with the content of your private key. 
 3. Modify the ``SslEnabled`` and ``SslCertificate`` variables in the
    :ref:`Orthanc configuration file <configuration>`.
 
 Here are simple instructions to create a self-signed SSL certificate
 that is suitable for test environments with the `OpenSSL
-<http://en.wikipedia.org/wiki/Openssl>`_ command-line tools::
+<https://en.wikipedia.org/wiki/Openssl>`_ command-line tools::
 
     $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
     $ cat private.key certificate.crt > certificate.pem
 
 Some interesting references about this topic can be found `here
-<http://devsec.org/info/ssl-cert.html>`__, `here
+<http://www.devsec.org/info/ssl-cert.html>`__, `here
 <http://www.akadia.com/services/ssh_test_certificate.html>`__, and
 `here
 <http://stackoverflow.com/questions/991758/how-to-get-an-openssl-pem-file-from-key-and-crt-files>`__.
