@@ -92,7 +92,8 @@ The configuration of the Web viewer can be fine-tuned by adding some options::
     "WebViewer" : {
       "CachePath" : "WebViewerCache",
       "CacheSize" : 10,
-      "Threads" : 4
+      "Threads" : 4,
+      "EnableGdcm" : false
     }
   }
 
@@ -103,3 +104,32 @@ The configuration of the Web viewer can be fine-tuned by adding some options::
   megabytes. By default, a cache of 100 MB is used.
 * ``Threads`` specifies the number of threads that are used by the
   plugin to decode the DICOM images.
+* ``EnableGdcm`` specifies whether `GDCM
+  <https://sourceforge.net/projects/gdcm/>`__ should be used to decode
+  DICOM images, replacing the built-in decoder of Orthanc that
+  internally uses `DCMTK <http://dicom.offis.de/dcmtk.php.en>`__.
+  This is notably necessary to deal with DICOM images encoded using
+  `JPEG2000 <https://en.wikipedia.org/wiki/JPEG_2000>`__, as this
+  format is not readily supported by the core version of DCMTK.  By
+  default, this option is set to ``true``.
+
+As a complement to the ``EnableGdcm`` option, you also have the
+possibility to restrict the GDCM decoder to some specific `transfer
+syntaxes
+<http://dicom.nema.org/medical/dicom/current/output/html/part05.html#chapter_10>`__
+using the ``RestrictTransferSyntaxes`` option.  For instance, the
+following configuration would use GDCM to decode JPEG 2000 images,
+while using DCMTK to decode the other transfer syntaxes::
+
+  {
+    [...]
+    "WebViewer" : {
+      "EnableGdcm" : true,
+      "RestrictTransferSyntaxes" : [
+        "1.2.840.10008.1.2.4.90",   # JPEG 2000 Image Compression (Lossless Only)	 
+        "1.2.840.10008.1.2.4.91",   # JPEG 2000 Image Compression 	 
+        "1.2.840.10008.1.2.4.92",   # JPEG 2000 Part 2 Multicomponent Image Compression (Lossless Only)
+        "1.2.840.10008.1.2.4.93"    # JPEG 2000 Part 2 Multicomponent Image Compression
+      ]
+    }
+  }
