@@ -47,4 +47,5 @@ Specific FAQs
    faq/https.rst
    faq/same-origin.rst
    faq/matlab.rst
+   faq/orthanc-storage.rst
    faq/why-orthanc.rst

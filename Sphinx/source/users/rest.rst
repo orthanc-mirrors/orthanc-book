@@ -574,5 +574,12 @@ Further reading
 
 The examples above have shown you the basic principles for driving an
 instance of Orthanc through its REST API. All the possibilities of the
-API have not been described. A :ref:`FAQ entry <rest-samples>` lists
-where you can find more advanced samples of the REST API of Orthanc.
+API have not been described:
+
+* A :ref:`FAQ entry <rest-samples>` lists where you can find more
+  advanced samples of the REST API of Orthanc.
+* The full documentation of the REST API is maintained as an online
+  spreadsheet accessible from the `documentation part of the official
+  Web site
+  <http://www.orthanc-server.com/static.php?page=documentation>`__
+  (click on the *Reference of the REST API* button).
