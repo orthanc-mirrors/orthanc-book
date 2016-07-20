@@ -1,3 +1,5 @@
+.. _creating-plugins:
+
 Creating new plugins
 ====================
 

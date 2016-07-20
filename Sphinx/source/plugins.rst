@@ -28,8 +28,9 @@ things, among others:
 * ...
 
 Developers external to the official Orthanc project are :ref:`invited
-to contribute <contributing>` by creating third-party plugins.
-
+to contribute <contributing>` to the C/C++ part of Orthanc by creating
+third-party plugins.  A specific section of the Orthanc Book explains
+:ref:`how to create new Orthanc plugins <creating-plugins>`.
 
 .. _plugins-official:
 
@@ -64,3 +65,6 @@ Index of the contributed plugins
 * Another Web viewer is provided courtesy of `Emsy Chan
   <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
 
+*Remark:* Do not hesitate to `contact us
+<http://www.orthanc-server.com/static.php?page=contact>`__ if you have
+developed a plugin so that we can include it in the list above!
