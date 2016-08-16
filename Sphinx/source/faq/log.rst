@@ -1,6 +1,6 @@
 .. _log:
 
-Generating an Exploitable Log
+Generating an exploitable log
 -----------------------------
 
 For your log to be exploitable by the Orthanc community, you must
