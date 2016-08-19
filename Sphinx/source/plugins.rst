@@ -64,6 +64,9 @@ Index of the contributed plugins
   Web viewer of DICOM images.
 * Another Web viewer is provided courtesy of `Emsy Chan
   <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
+* Check out the `OrthancContributed repository on GitHub
+  <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__, that
+  might contain plugins that are not tracked in this list.
 
 *Remark:* Do not hesitate to `contact us
 <http://www.orthanc-server.com/static.php?page=contact>`__ if you have

@@ -25,9 +25,8 @@ here are some tasks you can take in charge that would greatly help us:
 * Interface Orthanc with other software (e.g. 3D Slicer,
   Matlab/Octave, Python, Horos, dicompyler...). Check the `already
   supported frameworks <http://www.orthanc-server.com/static.php?page=resources>`_.
-* Develop `C/C++ plugins
-  <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`_.
-  Here are some ideas of plugins:
+* Develop :ref:`C/C++ plugins extending the Orthanc core <plugins>`.  Here are some ideas
+  of possible plugins:
 
   * Check the right-hand column of the `official roadmap <https://trello.com/b/cjA9X1wM/orthanc-roadmap>`__.
   * Create a :ref:`more advanced Web interface <improving-interface>` than the built-in Orthanc Explorer.
