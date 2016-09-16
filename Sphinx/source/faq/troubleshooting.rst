@@ -58,14 +58,14 @@ Performance issues
     and `here
     <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
 
-* If you experience **slow DICOM transfers under Linux**, please read
-  the `following bug report
+* If you experience **slow DICOM transfers under GNU/Linux**, please
+  read the `following bug report
   <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=785400>`__. This
-  issue does *not* affect all the versions of Linux. A
-  patch to this issue is shipped with the Orthanc source code. In
-  order to take advantage of this patch, you need to statically link
-  Orthanc against DCMTK by using the ``-DUSE_SYSTEM_DCMTK=OFF`` flag
-  `when invoking CMake
+  issue does *not* affect all the versions of GNU/Linux. A patch to
+  this issue is shipped with the Orthanc source code. In order to take
+  advantage of this patch, you need to statically link Orthanc against
+  DCMTK by using the ``-DUSE_SYSTEM_DCMTK=OFF`` flag `when invoking
+  CMake
   <https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`__.
 
 

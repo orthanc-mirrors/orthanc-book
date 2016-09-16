@@ -10,8 +10,8 @@ Overview
 
 The core of Orthanc can be extended through **plugins**. A plugin
 takes the form of a shared library (``.DLL`` under Windows, ``.so``
-under Linux, ``.dylib`` under Apple OS X...). A plugin can do various
-things, among others:
+under GNU/Linux, ``.dylib`` under Apple OS X...). A plugin can do
+various things, among others:
 
 * Serving new **Web applications** that have full access to the REST
   API of Orthanc, which makes easy to handle DICOM images from

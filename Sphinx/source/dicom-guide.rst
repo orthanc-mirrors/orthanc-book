@@ -384,11 +384,11 @@ firewalls that are installed on the clients or on the servers might
 also block the DICOM protocol. This is especially true for the
 `Microsoft Windows firewall
 <https://en.wikipedia.org/wiki/Windows_Firewall>`__ and for
-:ref:`RedHat-based Linux boxes <redhat>`. As a consequence, after any
-change in the DICOM topology of an hospital (notably when connecting
-two imaging devices), one should always check whether the DICOM
-protocol can travel from end to end, i.e.  between the DICOM client
-and the DICOM server.
+:ref:`RedHat-based GNU/Linux boxes <redhat>`. As a consequence, after
+any change in the DICOM topology of an hospital (notably when
+connecting two imaging devices), one should always check whether the
+DICOM protocol can travel from end to end, i.e.  between the DICOM
+client and the DICOM server.
 
 This is where the **DICOM Echo service** comes into play. This service
 is triggered when the client sends a so-called ``C-Echo`` command to

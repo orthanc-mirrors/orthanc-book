@@ -3,7 +3,8 @@
 Installing Orthanc as a Debian/Ubuntu daemon
 ============================================
 
-To install Orthanc as a Linux daemon on a Debian/Ubuntu system, you can:
+To install Orthanc as a GNU/Linux daemon on a Debian/Ubuntu system,
+you can:
 
 1. Download this `service script
    <http://anonscm.debian.org/cgit/debian-med/orthanc.git/tree/debian/orthanc.init>`_

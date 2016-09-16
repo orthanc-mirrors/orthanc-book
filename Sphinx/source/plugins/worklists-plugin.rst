@@ -43,7 +43,7 @@ How should I use it ?
 	
 	"Plugins" : [
 	  "OsimisWebViewer.dll",
-	  "ModalityWorklists.dll" // on Linux, use ModalityWorklists.so
+	  "ModalityWorklists.dll" // on GNU/Linux, use ModalityWorklists.so
 	],
 
 - Add the findscu utility to the list of know modalities (considering findscu and Orthanc runs on the same machine)::

@@ -1,19 +1,19 @@
 .. highlight:: bash
 .. _compiling-old:
 
-Old build instructions for Linux
-================================
+Old build instructions for GNU/Linux
+====================================
 
-This page summarizes the Linux build instructions that were used **up
-to Orthanc 0.7.0 (inclusive)**.  Instructions for Orthanc above 0.7.0
-can be found directly `inside the source package
+This page summarizes the GNU/Linux build instructions that were used
+**up to Orthanc 0.7.0 (inclusive)**.  Instructions for Orthanc above
+0.7.0 can be found directly `inside the source package
 <https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`_.
 
 Static linking
 --------------
 
-In general, the static linking should work on any Linux distribution
-(in particular, this works on Debian Squeeze)::
+In general, the static linking should work on any GNU/Linux
+distribution (in particular, this works on Debian Squeeze)::
 
     $ cmake -DSTATIC_BUILD:BOOL=ON -DCMAKE_BUILD_TYPE=Debug
 
