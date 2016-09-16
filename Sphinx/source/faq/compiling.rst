@@ -27,6 +27,17 @@ Darwin
 <https://bitbucket.org/sjodogne/orthanc/src/default/DarwinCompilation.txt>`_
 inside the source package.
 
+Performance warning
+-------------------
+
+If performance is important to you, make sure to add the option
+``-DCMAKE_BUILD_TYPE=Release`` when invoking ``cmake``. Indeed, by
+default, `run-time debug assertions
+<https://en.wikipedia.org/wiki/Assertion_(software_development)#Assertions_for_run-time_checking>`_
+are enabled, which can seriously impact performance, especially if
+your Orthanc server stores a lot of DICOM instances.
+
+
 
 Please explain the build infrastructure
 ---------------------------------------

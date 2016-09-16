@@ -29,6 +29,20 @@ Orthanc Explorer
 Performance issues
 ------------------
 
+* **Run-time debug assertions**: If performance is important to you,
+  make sure to add the option ``-DCMAKE_BUILD_TYPE=Release`` when
+  invoking ``cmake`` while :ref:`compiling Orthanc
+  <compiling>`. Indeed, by default, `run-time debug assertions
+  <https://en.wikipedia.org/wiki/Assertion_(software_development)#Assertions_for_run-time_checking>`_
+  are enabled, which can seriously impact performance, especially if
+  your Orthanc server stores a lot of DICOM instances.
+
+  Note that the `official Docker images
+  <https://github.com/jodogne/OrthancDocker>`__ of Orthanc <= 1.0.0
+  were not compiled in ``Release`` mode. As a consequence, to improve
+  performance, make sure to use either the mainline version of the
+  container, or versions more recent than ``jodogne/orthanc:1.1.0``.
+
 * **Orthanc Explorer is slow under Windows on the localhost**:
 
   - Favor ``127.0.0.1`` instead of ``localhost`` when specifying the
