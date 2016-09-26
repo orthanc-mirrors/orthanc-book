@@ -45,6 +45,21 @@ Performance issues
   most recent version of the mainline), or versions more recent than
   ``jodogne/orthanc:1.1.0``.
 
+* **Orthanc slows down if storing many files**: The default database
+  engine that is built in Orthanc is `SQLite
+  <https://www.sqlite.org/>`__. As SQLite is above all a lightweight
+  database engine, it is not designed to `store very large datasets
+  <https://www.sqlite.org/whentouse.html>`__. If you are sure that you
+  have properly disabled run-time debug assertions (cf. above), but
+  still experience degradation in performance over time, you should
+  seriously consider switching to a more scalable database engine. To
+  this end, you can notably check out the :ref:`official PostgreSQL
+  plugin <postgresql>`.
+
+  As a rule of thumb, the performance of the default SQLite engine
+  built in Orthanc should run fine up to about 50,000 DICOM instances.
+
+
 * **Orthanc Explorer is slow under Windows on the localhost**:
 
   - Favor ``127.0.0.1`` instead of ``localhost`` when specifying the
