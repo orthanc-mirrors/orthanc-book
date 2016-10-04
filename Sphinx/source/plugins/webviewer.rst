@@ -130,10 +130,10 @@ while using DCMTK to decode the other transfer syntaxes::
     "WebViewer" : {
       "EnableGdcm" : true,
       "RestrictTransferSyntaxes" : [
-        "1.2.840.10008.1.2.4.90",   # JPEG 2000 Image Compression (Lossless Only)	 
-        "1.2.840.10008.1.2.4.91",   # JPEG 2000 Image Compression 	 
-        "1.2.840.10008.1.2.4.92",   # JPEG 2000 Part 2 Multicomponent Image Compression (Lossless Only)
-        "1.2.840.10008.1.2.4.93"    # JPEG 2000 Part 2 Multicomponent Image Compression
+        "1.2.840.10008.1.2.4.90",   // JPEG 2000 Image Compression (Lossless Only)	 
+        "1.2.840.10008.1.2.4.91",   // JPEG 2000 Image Compression 	 
+        "1.2.840.10008.1.2.4.92",   // JPEG 2000 Part 2 Multicomponent Image Compression (Lossless Only)
+        "1.2.840.10008.1.2.4.93"    // JPEG 2000 Part 2 Multicomponent Image Compression
       ]
     }
   }
