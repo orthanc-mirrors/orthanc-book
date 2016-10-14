@@ -5,5 +5,6 @@ Developer's guide
    :maxdepth: 1
 
    developers/creating-plugins.rst
+   developers/stone.rst
    developers/coding-style.rst
    developers/db-versioning.rst
