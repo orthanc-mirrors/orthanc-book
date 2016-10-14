@@ -39,6 +39,16 @@ This method will only succeed if:
   disabled (cf. option ``StorageCompression`` in the
   :ref:`configuration file <configuration>`).
 
+**Important remark:** Because of :ref:`the way Orthanc stores its
+database <orthanc-storage>` on the filesystem, it is *entirely normal*
+that the ``ImportDicomFiles.py`` script ends by saying that only half
+of the DICOM files were properly sent. This is because the JSON
+summaries are not DICOM files, and are thus rejected by the target
+Orthanc server. More information are available `on the discussion
+group
+<https://groups.google.com/d/msg/orthanc-users/Zlhtcpo76qQ/tp8EqaRCAQAJ>`__.
+
+
 Generic replication
 -------------------
 

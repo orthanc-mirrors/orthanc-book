@@ -1,3 +1,5 @@
+.. _orthanc-storage:
+
 How does Orthanc store its database?
 ====================================
 
