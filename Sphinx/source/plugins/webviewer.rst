@@ -137,3 +137,14 @@ while using DCMTK to decode the other transfer syntaxes::
       ]
     }
   }
+
+
+Frequently Asked Questions
+--------------------------
+
+* If **Orthanc does not start anymore** after a hard shutdown, this
+  might reflect a corruption in the cache of the Web viewer. In such a
+  case, it is safe to remove the folder that contains the cache. By
+  default, this folder is called
+  ``OrthancStorage/WebViewerCache/``. Of course, don't remove the
+  folder ``OrthancStorage/``, as it contains the DICOM files.
