@@ -5,7 +5,7 @@ Basically, any viewer that supports :ref:`DICOM query/retrieve
 <query-retrieve>` should be compatible with Orthanc.
 
 Because the Orthanc project is focused on the promotion of free
-software for medical imaging, we cannot keep track of the list of
+software for medical imaging, we do not publish the list of
 proprietary DICOM viewers that are compatible with Orthanc. Here is a
 list of free and open-source viewers that are known to be compatible
 with Orthanc (do not hesitate to `warn us
@@ -26,6 +26,11 @@ Make also sure to check out the following official extensions to Orthanc:
 
 * `Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
 * `ImageJ extension <http://www.orthanc-server.com/static.php?page=imagej>`__.
+
+Very importantly, Marco Barnig independently keeps track of a list of
+`Mobile DICOM Viewers <http://www.web3.lu/mobile-dicom-viewers/>`__
+that are compatible with Orthanc. The Orthanc project is very grateful
+to Marco for this great contribution.
 
 As far as Sébastien Jodogne is concerned, he uses the Web viewer
 plugin and the ImageJ extension for simple analysis tasks. For more
