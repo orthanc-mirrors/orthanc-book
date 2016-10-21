@@ -22,10 +22,13 @@ with Orthanc (do not hesitate to `warn us
   discussion
   <http://blog.purview.net/an-open-letter-to-the-osirix-community>`__).
 
-Make also sure to check out the following official extensions to Orthanc:
+Make also sure to check out the following extensions to Orthanc:
 
 * `Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
 * `ImageJ extension <http://www.orthanc-server.com/static.php?page=imagej>`__.
+* `Stone of Orthanc <http://www.orthanc-server.com/static.php?page=stone>`__.
+* `Advanced Web viewer plugin by Osimis
+  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
 Very importantly, Marco Barnig independently keeps track of a list of
 `Mobile DICOM Viewers <http://www.web3.lu/mobile-dicom-viewers/>`__
