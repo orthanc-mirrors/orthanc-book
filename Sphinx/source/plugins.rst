@@ -43,6 +43,7 @@ Index of the official plugins
    plugins/webviewer.rst
    plugins/dicomweb.rst
    plugins/postgresql.rst
+   plugins/wsi.rst
    plugins/worklists-plugin.rst
    plugins/serve-folders.rst
 
