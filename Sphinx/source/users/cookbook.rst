@@ -17,7 +17,7 @@ To obtain the Orthanc binaries, you have several possibilities:
 
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * `Download pre-compiled packages <http://www.orthanc-server.com/download.php>`__.
-* `Use Docker <https://github.com/jodogne/OrthancDocker>`__.
+* :ref:`Use Docker <docker>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#vagrant>`__.
 
