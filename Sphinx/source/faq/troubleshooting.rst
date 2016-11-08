@@ -94,3 +94,13 @@ Windows-specific issues
   Your directory name is either too long, or it contains special
   characters. Please try and run Orthanc in a folder with a simple
   name such as ``C:\Orthanc``.
+
+* If **Orthanc crashes when handling one large DICOM file**, this most
+  probably indicates a memory allocation error. Indeed, the `official
+  Windows binaries
+  <http://www.orthanc-server.com/download-windows.php>`__ are compiled
+  using a 32bit compiler. As a consequence, Orthanc only has access to
+  less than 4GB of RAM. If this is an important limitation for you,
+  precompiled command-line versions of Orthanc for Windows 64bit are
+  available courtesy of `Osimis
+  <http://www.osimis.io/en/download.html>`__.
