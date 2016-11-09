@@ -3,8 +3,9 @@
 Creating new plugins
 ====================
 
-The recommended way of :ref:`contributing to the Orthanc code <contributing>`
-is by extending it by :ref:`creating new plugins <plugins>`.
+The recommended way of :ref:`contributing to the Orthanc code
+<contributing>` consists in extending it by creating new :ref:`plugins
+<plugins>`.
 
 Overview
 --------
