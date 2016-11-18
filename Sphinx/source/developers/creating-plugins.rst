@@ -17,7 +17,7 @@ in C or C++. They must also fullfil the terms of the `GPLv3 license
 used by the core of Orthanc. Sample code for plugins can be found `in
 the official Orthanc repository
 <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/>`__
-(in the ``Plugins/Samples`` folder of the ``plugins`` branch). A
+(in the ``Plugins/Samples`` folder). A
 tutorial showing how to implement a basic WADO server is `available on
 CodeProject
 <http://www.codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
