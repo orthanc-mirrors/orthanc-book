@@ -100,7 +100,7 @@ new medical images:
   `sample script is available
   <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
 
-Furthermore, whenever a DICOM association is negociated for C-Store
+Furthermore, whenever a DICOM association is negotiated for C-Store
 SCP, several callbacks are successively invoked to specify which
 **transfer syntaxes** are accepted for the association. These
 callbacks are listed in `this sample script

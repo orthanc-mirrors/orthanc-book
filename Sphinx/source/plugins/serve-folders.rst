@@ -21,7 +21,7 @@ Basic usage
 
 1. First, generate the :ref:`default configuration of Orthanc <configuration>`.
 2. Then, modify the ``Plugins`` option to point to the folder containing
-   the built shared library.
+   the shared library of the plugin.
 3. Finally, create a section ``ServeFolders`` in the configuration file to
    specify which folder you want to serve, and at which URI.
 
