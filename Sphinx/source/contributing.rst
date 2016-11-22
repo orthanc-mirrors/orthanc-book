@@ -28,7 +28,7 @@ here are some tasks you can take in charge that would greatly help us:
 * Develop :ref:`C/C++ plugins extending the Orthanc core <plugins>`.  Here are some ideas
   of possible plugins:
 
-  * Check the right-hand column of the `official roadmap <https://trello.com/b/cjA9X1wM/orthanc-roadmap>`__.
+  * Check the TODO file of the `official roadmap <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
   * Create a :ref:`more advanced Web interface <improving-interface>` than the built-in Orthanc Explorer.
   * Extend the :ref:`sample modality worklist plugin <worklist>` so that it manages the worklists
     (i.e. add/remove items) with a REST API or HL7 messages, instead of reading them from 

@@ -1,3 +1,5 @@
+.. _viewers:
+
 What DICOM viewer is compatible with Orthanc?
 =============================================
 

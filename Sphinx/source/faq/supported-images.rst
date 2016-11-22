@@ -29,7 +29,9 @@ Other type of encodings are available in the `Web viewer plugin
 <http://www.orthanc-server.com/static.php?page=web-viewer>`__, that
 mostly supports whatever is supported by the well-known `GDCM toolkit
 <https://sourceforge.net/projects/gdcm/>`__ by Mathieu Malaterre. Note
-that multiframe (notably cine) DICOM instances are currently not
-supported by the Web viewer plugin. It is also planned to create a
-`plugin to extend the image formats <https://trello.com/c/MAh6vIXF>`__
-that are supported by the Orthanc core.
+however that multiframe (notably cine) DICOM instances are currently
+not supported by the Web viewer plugin.
+
+Finally, consider having a look at the section in the Orthanc Book
+about the :ref:`compatible DICOM viewers <viewers>`.
+
