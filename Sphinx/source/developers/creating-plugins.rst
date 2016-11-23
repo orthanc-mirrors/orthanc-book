@@ -11,7 +11,7 @@ Overview
 --------
 
 Orthanc plugins must use the `plugin SDK
-<https://orthanc.chu.ulg.ac.be/sdk/index.html>`__ and must be written
+<http://sdk.orthanc-server.com/>`__ and must be written
 in C or C++. They must also fullfil the terms of the `GPLv3 license
 <http://www.gnu.org/licenses/quick-guide-gplv3.en.html>`__ that is
 used by the core of Orthanc. Sample code for plugins can be found `in
@@ -27,8 +27,8 @@ core <coding-style>`, although this is of course not required.
 
 Do not hesitate to `contact us
 <http://www.orthanc-server.com/static.php?page=contact>`__ if you wish
-your plugin to be **indexed** in :ref:`this part of the Orthanc Book
-<plugins-contributed>`!
+your plugin to be **indexed** in :ref:`the dedicated part of the
+Orthanc Book <plugins-contributed>`!
 
 
 Structure of the plugins
