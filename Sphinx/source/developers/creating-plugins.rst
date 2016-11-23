@@ -35,7 +35,7 @@ Structure of the plugins
 ------------------------
 
 A plugin takes the form of a shared library (``.DLL`` under Windows,
-``.so`` under GNU/Linux, ``.dylib`` under Apple OS X...) that use the
+``.so`` under GNU/Linux, ``.dylib`` under Apple OS X...) that uses the
 `ABI of the C language
 <https://en.wikipedia.org/wiki/Application_binary_interface>`__ to
 declare 4 public functions/symbols:
