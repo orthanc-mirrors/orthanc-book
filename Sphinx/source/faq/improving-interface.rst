@@ -17,18 +17,18 @@ However, Orthanc comes out-of-the-box with :ref:`Orthanc Explorer
 Explorer is designed for administrative, low-level purpose.** It is
 also used by the development team to test the features of Orthanc as
 they get introduced in the REST API. Orthanc Explorer is mainly
-targeted towards a technical audience (notably system/network
-engineers, `PACS
+targeted towards an English-speaking technical audience (notably
+system/network engineers, `PACS
 <https://en.wikipedia.org/wiki/Picture_archiving_and_communication_system>`__
 managers, medical physicists, and researchers).
 
 **Non-technical audience** (physicists, patients, administrative
 staff...) **might expect an user interface that is more user-friendly
 than Orthanc Explorer**, and/or that integrates more features (such as
-sorting resources, access control lists, tagging images, beautiful
-layout, tunable anonymization, modification of instances, paging if
-many patients, handling of timeouts...). If you need such a more
-advanced `user experience
+language translations, sorting resources, access control lists,
+tagging images, beautiful layout, tunable anonymization, modification
+of instances, paging if many patients, handling of timeouts...). If
+you need such a more advanced `user experience
 <https://en.wikipedia.org/wiki/User_experience>`__ so that Orthanc
 better fits your clinical workflow, you will have to develop a
 separate, custom Web interface on the top of the :ref:`rest`, maybe as
