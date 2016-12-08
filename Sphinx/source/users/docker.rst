@@ -37,9 +37,13 @@ http://localhost:8042/ to interact with Orthanc. The default username
 is ``orthanc`` and its password is ``orthanc``.
 
 The command above starts the mainline version of Orthanc, whose
-development is in continuous progress. This gives you access to the
-latest features. If more stability is required, you can select the
-release of Orthanc to be run::
+development is in continuous progress. Do not forget to regularly
+update the Docker image to benefit from the latest features::
+
+  $ sudo docker pull jodogne/orthanc
+
+If more stability is required, you can select the official release of
+Orthanc to be run::
 
   $ sudo docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.1.0
 
