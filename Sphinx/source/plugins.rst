@@ -65,11 +65,11 @@ Index of the contributed plugins
   Web viewer of DICOM images.
 * Another Web viewer is provided courtesy of `Emsy Chan
   <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
-* `VPI Reveal <http://www.vpireveal.com/>` provides a plugin to "write
-  the DICOM records in a normal Windows-readable file hierarchy
+* `VPI Reveal <http://www.vpireveal.com/>`__ provides a plugin to
+  "write the DICOM records in a normal Windows-readable file hierarchy
   (patient-study-series-DICOM file) at a location called
   ``VPIStorage`` that can then be imported into VPI Reveal."  `Check
-  out the source code
+  out their source code
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthancVPIRevealPlugin>`__.
 * Check out the `OrthancContributed repository on GitHub
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__, that
