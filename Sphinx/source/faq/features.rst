@@ -97,6 +97,10 @@ trade-off: Metadata must be kept small (as a rule of thumb, under 1KB)
 and used if fast access is needed, whereas attachments can be used to
 store arbitrarily large piece of data.
 
+Also note that metadata and attachments are only available for
+resources stored inside Orthanc. Once one DICOM instance leaves the
+Orthanc ecosystem, its associated metadata and attachments are lost.
+
 
 Core metadata
 ^^^^^^^^^^^^^
