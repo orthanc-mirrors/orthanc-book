@@ -12,7 +12,8 @@ special characters should contain the ``SpecificCharacterSet
 <http://dicom.nema.org/dicom/2013/output/chtml/part03/sect_C.12.html#sect_C.12.1.1.2>`__
 is used by the DICOM instance. Internally, Orthanc converts all these
 codepages to the `UTF-8 encoding
-<https://en.wikipedia.org/wiki/UTF-8>`__.
+<https://en.wikipedia.org/wiki/UTF-8>`__ (cf. the
+``Orthanc::ParsedDicomFile`` class).
 
 In particular, :ref:`plugins <creating-plugins>` must assume that any
 string or JSON file coming from the Orthanc core is encoded using
