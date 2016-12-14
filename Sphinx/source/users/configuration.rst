@@ -25,6 +25,10 @@ The default configuration file would:
 * Create a HTTP server for the REST API that listens on the port 8042.
 * Store the Orthanc database in a folder called ``OrthancStorage``.
 
+*Remark:* When specifying paths under Microsoft Windows, backslashes
+(i.e. ``\``) should be either escaped by doubling them (as in ``\\``),
+or replaced by forward slashes (as in ``/``).
+
 To obtain more diagnostic, you can use the ``--verbose`` or the
 ``--trace`` options::
 

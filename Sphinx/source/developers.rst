@@ -6,5 +6,6 @@ Developer's guide
 
    developers/creating-plugins.rst
    developers/stone.rst
-   developers/coding-style.rst
    developers/db-versioning.rst
+   developers/implementation-notes.rst
+   developers/coding-style.rst
