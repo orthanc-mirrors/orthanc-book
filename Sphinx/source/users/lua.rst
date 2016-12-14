@@ -16,7 +16,7 @@ Many other examples are `available in the source distribution
 <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/>`__.
 
 
-Installing a Lua Script
+Installing a Lua script
 -----------------------
 
 .. highlight:: bash
@@ -198,7 +198,7 @@ to the value of ``origin["RequestOrigin"]``:
 
 .. _lua-filter-dicom:
 
-Filtering Incoming DICOM Instances
+Filtering incoming DICOM instances
 ----------------------------------
 
 .. highlight:: lua
@@ -236,7 +236,7 @@ The argument ``origin`` is :ref:`documented separately <lua-origin>`.
 
 .. _lua-filter-rest:
 
-Filtering Incoming REST Requests
+Filtering incoming REST requests
 --------------------------------
 
 .. highlight:: lua
@@ -284,7 +284,7 @@ Here is a description of the arguments of this Lua callback:
 
 .. _lua-auto-routing:
 
-Auto-Routing of DICOM Images
+Auto-routing of DICOM images
 ----------------------------
 
 .. highlight:: lua
@@ -356,8 +356,8 @@ would replace the ``StationName`` DICOM tag::
  end
 
 
-Important Remarks about Auto-Routing
-------------------------------------
+Important remarks about auto-routing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``SendToModality()``, ``SendToPeer()``, ``ModifyInstance()`` and
 ``Delete()`` functions are for the most basic cases of auto-routing
@@ -408,3 +408,11 @@ Also note that :ref:`other callbacks are available <lua-callbacks>`
 (``OnStablePatient()``, ``OnStableStudy()`` and ``OnStableSeries()``)
 to react to other events than the reception of a single instance 
 with ``OnStoredInstance()``.
+
+
+Fixing C-Find
+-------------
+
+:ref:`C-Find requests <dicom-find>` are sometimes interpreted
+differently by different manufacturers (e.g. the ``*`` wildcard), and
+sometimes a querying modality sets 

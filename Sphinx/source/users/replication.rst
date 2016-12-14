@@ -9,9 +9,41 @@ Orthanc to another instance of Orthanc. This is useful to **upgrade**
 between :ref:`versions of the database schema <db-versioning>`, or to
 create **mirrored DICOM servers**.
 
-Note that if you only want to automatically upgrade the database for
-successive versions of Orthanc, you most probably only have to add the
-``--upgrade`` command-line option while starting Orthanc.
+
+Upgrade the database schema
+---------------------------
+
+As explained :ref:`elsewhere in the Orthanc Book <db-versioning>`,
+successive versions of Orthanc might use a different version of the
+database schema. If this happens, Orthanc will refuse to start (with
+an explicit message in its :ref:`logs <log>`), to let the user decides
+whether she actually wants to upgrade the database. At this point, the
+user might indeed decide to modify its :ref:`configuration file
+<configuration>` to create a new database elsewhere on the filesystem.
+
+If you decide to upgrade the database schema, you have to apply the
+following 3 steps:
+
+1. If not done yet, stop the running Orthanc service:
+
+   * Under Microsoft Windows, use the `services control panel
+     <https://en.wikipedia.org/wiki/Windows_service>`__.
+   * Under Debian, use ``sudo /etc/init.d/orthanc stop``.
+
+2. Manually call Orthanc with the ``--upgrade`` command-line option, 
+   and point to your default configuration file:
+
+   * Under Microsoft Windows, ``Orthanc.exe c:/Orthanc/``.
+   * Under Debian, use ``sudo /usr/sbin/Orthanc /etc/orthanc/ --upgrade``.
+
+3. Start the Orthanc service again:
+
+   * Under Microsoft Windows, use the `services control panel
+     <https://en.wikipedia.org/wiki/Windows_service>`__.
+   * Under Debian, use ``sudo /etc/init.d/orthanc stop``.
+
+Note that, depending on the size of the Orthanc database, upgrading
+the database schema might take time.
 
 
 Direct access to the filesystem
