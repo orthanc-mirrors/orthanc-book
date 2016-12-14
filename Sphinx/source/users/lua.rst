@@ -410,9 +410,54 @@ to react to other events than the reception of a single instance
 with ``OnStoredInstance()``.
 
 
-Fixing C-Find
--------------
+Fixing C-Find requests
+----------------------
 
 :ref:`C-Find requests <dicom-find>` are sometimes interpreted
-differently by different manufacturers (e.g. the ``*`` wildcard), and
-sometimes a querying modality sets 
+differently by different DICOM servers (e.g. the ``*`` wildcard, as
+`reported by users
+<https://groups.google.com/d/msg/orthanc-users/3g7V7kqr3g0/IREL88RWAwAJ>`__),
+and sometimes a querying modality might set unexpected DICOM tags
+(cf. `this real-world example
+<https://groups.google.com/d/msg/orthanc-users/PLWKqVVaXLs/n_0x4vKhAgAJ>`__). In
+such situations, it is possible to dynamically fix incoming or
+outgoing C-Find queries using a Lua script.
+
+Fixing incoming C-Find requests can be done by implementing the
+``IncomingFindRequestFilter(query, origin)`` callback that is called
+whenever the Orthanc C-Find SCP is queried by a remote modality. For
+instance, here is Lua script to remove a private tag that is specified
+by some manufacturer::
+
+  function IncomingFindRequestFilter(query, origin)
+    -- First display the content of the C-Find query
+    PrintRecursive(query)
+    PrintRecursive(origin)
+
+    -- Remove the "PrivateCreator" tag from the query
+    local v = query
+    v['5555,0010'] = nil
+
+    return v
+  end
+
+The ``origin`` argument contains information about which modality has
+issued the request.
+
+Similarly, the callback ``OutgoingFindRequestFilter(query, modality)``
+is invoked whenever Orthanc acts as a C-Find SCU, which gives the
+opportunity to dynamically fix outgoing C-Find requests before they
+are actually sent to the queried modality. For instance, here is a
+sample Lua callback that would replace asterisk wildcards (i.e. ``*``)
+by an empty string for any query/retrieve issued by Orthanc (including
+from Orthanc Explorer)::
+
+  function OutgoingFindRequestFilter(query, modality)
+    for key, value in pairs(query) do
+      if value == '*' then
+        query[key] = ''
+      end
+    end
+
+    return query
+  end
