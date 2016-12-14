@@ -86,7 +86,7 @@ new medical images:
   amount of time (cf. the option ``StableAge`` in the
   :ref:`configuration file <configuration>`). The :ref:`identifier
   <orthanc-ids>` of the patient is provided, together with her DICOM
-  tags and her metadata.
+  tags and her :ref:`metadata <metadata>`.
 * ``function OnStableSeries(seriesId, tags, metadata)``: Invoked
   whenever a series has not received any new instance for a certain
   amount of time.
