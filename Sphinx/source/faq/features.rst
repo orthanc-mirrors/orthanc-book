@@ -154,7 +154,7 @@ Accessing metadata
 .. highlight:: bash
 
 Metadata associated with one DICOM resource can be accessed through
-the REST API, for instance::
+the :ref:`REST API <rest>`, for instance::
 
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/metadata
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/metadata/RemoteAet
