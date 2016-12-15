@@ -26,7 +26,7 @@ for every UNIX-like distribution (including GNU/Linux)::
 
   $ mkdir Build
   $ cd Build
-  $ cmake .. -DSTATIC_BUILD=ON
+  $ cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
   $ make
 
 The compilation will produce 2 shared libraries, each containing one plugin for Orthanc:

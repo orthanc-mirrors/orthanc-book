@@ -15,7 +15,7 @@ plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
 Compilation
 -----------
 
-.. highlight:: text
+.. highlight:: bash
 
 The procedure to compile these plugins is similar of that for the
 :ref:`core of Orthanc <binaries>`. The following commands should work
@@ -23,7 +23,7 @@ for every UNIX-like distribution (including GNU/Linux)::
 
   $ mkdir Build
   $ cd Build
-  $ cmake .. -DSTATIC_BUILD=ON
+  $ cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
   $ make
 
 The compilation will produce a shared library ``OrthancWebViewer``
