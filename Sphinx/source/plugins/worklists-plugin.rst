@@ -50,7 +50,10 @@ A basic configuration would read as follows::
     ],
     "Worklists" : {
       "Enable": true,
-      "Database": "./WorklistsDatabase"
+      "Database": "./WorklistsDatabase",
+      "FilterIssuerAet": false, // Some modalities do not specify ``ScheduledStationAETitle``
+                                // in the C-Find and may receive worklists not related to them.  This option 
+                                // adds an extra filtering based on the AET of the modality issuing the C-Find.
     }
   }
 
