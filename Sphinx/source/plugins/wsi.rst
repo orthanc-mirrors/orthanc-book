@@ -15,7 +15,7 @@ for whole-slide microscopic imaging (WSI):
 2. A plugin that extends Orthanc with a Web viewer of whole-slide
    images for digital pathology. 
 3. Another command-line tool that converts a DICOM series stored
-   in Orthanc, to a standard hierarchical TIFF image.
+   inside Orthanc, to a standard hierarchical TIFF image.
 
 For general information, check out the `official homepage of the
 framework <http://www.orthanc-server.com/static.php?page=wsi>`__. 
@@ -45,7 +45,7 @@ The compilation will produce 3 binaries:
 
 * ``Applications/Build/OrthancWSIDicomizer``, which contains the DICOM-izer.
 * ``Applications/Build/OrthancWSIDicomToTiff``, which contains the DICOM-to-TIFF converter.
-* ``ViewerPlugin/Build/OrthancWSI``, which is a shared library containing the plugin for Orthanc.
+* ``ViewerPlugin/Build/OrthancWSI``, which is a shared library containing the viewer plugin for Orthanc.
 
 Note that pre-compiled binaries for Microsoft Windows `are available
 <http://www.orthanc-server.com/browse.php?path=/whole-slide-imaging>`__.
@@ -76,10 +76,10 @@ option.
 
 Once a :ref:`DICOM series <model-world>` is opened using Orthanc
 Explorer, a yellow button entitled ``Whole-Slide Imaging Viewer`` will
-show up for whole-slide images. It will open the WSI viewer for that
-particular series. This behavior can be seen on the Orthanc Explorer
-running on our `WSI demonstration server
-<http://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
+show up for series corresponding to whole-slide images. This button
+will open the WSI viewer for that particular series. This behavior can
+be seen on the Orthanc Explorer running on our `WSI demonstration
+server <http://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
 
 
 
@@ -113,6 +113,16 @@ on ``localhost`` and listening to HTTP port ``8042``) using its
 :ref:`REST API <rest>`. This operation is fast, as no re-encoding
 takes place: If the source TIFF image contains JPEG tiles, these tiles
 will be written as such.
+
+Obviously, you can specify the parameters of your Orthanc server::
+
+  $ OrthancWSIDicomizer Source.tif --orthanc=http://localhost:8042/ --username=orthanc --password=orthanc
+
+It is also possible to write the DICOM instance directly onto some
+folder of the filesystem (the target folder must be existing)::
+
+  $ OrthancWSIDicomizer Source.tif --folder=/tmp/dicomized/
+
 
 
 Re-encoding a DICOM image
