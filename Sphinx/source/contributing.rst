@@ -43,9 +43,8 @@ for you to develop some feature as a plugin, do not hesitate to
 request an extension to the Orthanc SDK on the `mailing list
 <https://groups.google.com/forum/#!forum/orthanc-users>`_.
 
-The University Hospital of Liège will also happily accept **external
-patches** in the core of Orthanc and in its associated official
-plugins, provided they are put in the public domain. Such patches must
-be sent to the `mailing list
-<https://groups.google.com/forum/#!forum/orthanc-users>`_ (*not* via a
-pull request).
+The Orthanc project will also happily accept **external patches** in
+the core of Orthanc and in its associated official plugins. Such
+patches can either be sent to the `mailing list
+<https://groups.google.com/forum/#!forum/orthanc-users>`_ or via a
+pull request.

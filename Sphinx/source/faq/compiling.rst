@@ -76,10 +76,10 @@ dependencies. Here are the most useful:
 * ``-DUSE_SYSTEM_DCMTK=OFF`` to statically link against DCMTK.
 * ``-DUSE_SYSTEM_JSONCPP=OFF`` to statically link against JsonCpp.
 
-You will also have to set the ``-DALLOW_DOWNLOADS=ON`` to
-explicitely allow the CMake script to download the source code of any
-required dependency. The source code of all these dependencies is
-self-hosted on our servers at the University Hospital of Liège.
+You will also have to set the ``-DALLOW_DOWNLOADS=ON`` to explicitely
+allow the CMake script to download the source code of any required
+dependency. The source code of all these dependencies is self-hosted
+on the Web server running our official homepage.
 
 Please also note that the option ``-DSTANDALONE_BUILD=ON`` must be
 used whenever your plan to move the binaries or to install them on
