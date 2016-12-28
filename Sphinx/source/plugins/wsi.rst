@@ -200,7 +200,9 @@ package)::
   $ ./OrthancWSIDicomizer --openslide=libopenslide.so CMU-1-JP2K-33005.svs
 
 Pre-compiled Microsoft Windows binaries of this shared library can be
-found on the `OpenSlide homepage <http://openslide.org/download/>`__::
+found on the `OpenSlide homepage <http://openslide.org/download/>`__ (Note that
+you should copy all .dll files from the OpenSlide package next to the OrthancWSIDicomizer
+executable)::
 
   $ ./OrthancWSIDicomizer --openslide=libopenslide-0.dll CMU-1-JP2K-33005.svs
 
