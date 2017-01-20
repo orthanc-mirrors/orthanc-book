@@ -309,8 +309,9 @@ answer and pretty-printing through the ``json_pp`` command-line tool::
   }
   EOF
 
-Note how all the GET arguments must be specified in the ``Arguments``
-field. Orthanc will take care of properly encoding it to a URL.
+Note how all the GET arguments for the QIDO-RS request must be
+specified in the ``Arguments`` field. Orthanc will take care of
+properly encoding it to a URL.
 
 An user-friendly reference of the features available in QIDO-RS and
 WADO-RS `can be found on this site <http://www.dicomweb.org/>`__.
@@ -392,7 +393,8 @@ Remark 1: Contrarily to the ``.../stow`` URI that uses :ref:`Orthanc
 identifiers <orthanc-ids>`, the ``.../retrieve`` URI uses DICOM
 identifiers.
 
-Remark 2: The ``HttpArguments`` is also available.
+Remark 2: The ``HttpHeaders`` and ``Arguments`` arguments are also
+available, as for QIDO-RS.
 
 
 
