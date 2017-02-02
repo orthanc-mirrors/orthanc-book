@@ -155,13 +155,14 @@ Similarly to the functions to :ref:`call the REST API of Orthanc
 <lua-rest>`, several functions are available to make generic HTTP
 requests to Web services:
 
-* ``HttpGet(url)``
-* ``HttpPost(url, body)``
-* ``HttpPut(url, body)``
-* ``HttpDelete(url)``
+* ``HttpGet(url, headers)``
+* ``HttpPost(url, body, headers)``
+* ``HttpPut(url, body, headers)``
+* ``HttpDelete(url, headers)``
 * ``SetHttpCredentials(username, password)`` can be used to setup the
   HTTP credentials.
 
+The ``headers`` argument has been added in release 1.2.1.
 
 .. _lua-origin:
 
