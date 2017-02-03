@@ -162,7 +162,8 @@ requests to Web services:
 * ``SetHttpCredentials(username, password)`` can be used to setup the
   HTTP credentials.
 
-The ``headers`` argument has been added in release 1.2.1.
+The ``headers`` argument is optional and has been added in release
+1.2.1. It allows to set the HTTP headers for the HTTP client request.
 
 .. _lua-origin:
 
