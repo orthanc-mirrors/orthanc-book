@@ -77,8 +77,8 @@ Compression is controlled by the ``StorageCompression`` option in the
 
 .. _metadata:
 
-Metadata
---------
+Metadata & attachments
+----------------------
 
 Metadata consists in an **associative key-value array** (mapping a
 integer key in the range [0,65535] to a string value) that is
@@ -145,7 +145,12 @@ core metadata).
 
 You can associate a symbolic name to user-defined metadata using the
 ``UserMetadata`` option inside the :ref:`configuration of Orthanc
-<configuration>`.
+<configuration>`::
+
+  "UserMetadata" : {
+    "SampleMetaData1" : 1024,
+    "SampleMetaData2" : 1025
+  }
 
 
 Accessing metadata
@@ -158,6 +163,7 @@ the :ref:`REST API <rest>`, for instance::
 
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/metadata
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/metadata/RemoteAet
+  $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/metadata/SampleMetaData1
 
 User-defined metadata can be modified by issuing a HTTP PUT against
 the REST API::
@@ -167,6 +173,45 @@ the REST API::
   hello
 
 
+
+.. _attachments:
+
+User-defined attachments
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Orthanc users are allowed to define their own **user-defined attachments**.
+Such attachments are associated with an integer key that is
+greater or equal to 1024 (whereas keys below 1023 are reserved for
+core attachments).
+
+You can associate a symbolic name to user-defined attachments using the
+``UserContentType`` option inside the :ref:`configuration of Orthanc
+<configuration>`.  Optionally, the user may specify a MIME content type
+for the attachment::
+
+  "UserContentType" : {
+    "samplePdf" : [1024, "application/pdf"],
+    "sampleJson" : [1025, "application/json"],
+    "sampleRaw" : 1026
+  }
+
+Accessing attachments
+^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Attachments associated with one DICOM resource can be accessed through
+the :ref:`REST API <rest>`, for instance::
+
+  $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/samplePdf/data
+  $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/sampleJson/data
+
+User-defined attachments can be modified by issuing a HTTP PUT against
+the REST API::
+
+  $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/samplePdf -X PUT --data-binary @sample.pdf
+  $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/sampleRaw -X PUT -d 'raw data'
+  
 
 .. _registry:
 
