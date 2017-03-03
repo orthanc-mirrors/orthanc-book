@@ -71,6 +71,10 @@ Index of the contributed plugins
   ``VPIStorage`` that can then be imported into VPI Reveal."  `Check
   out their source code
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthancVPIRevealPlugin>`__.
+* `Doc Cirrus <https://www.doc-cirrus.com/>`__ is working on `MongoDB
+  <https://en.wikipedia.org/wiki/MongoDB>`__ database plugins. `Check
+  out their source code
+  <https://github.com/Doc-Cirrus/orthanc-mongodb>`__.
 * Check out the `OrthancContributed repository on GitHub
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__, that
   might contain plugins that are not tracked in this list.
