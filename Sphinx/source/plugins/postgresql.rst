@@ -37,7 +37,7 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 Pre-compiled binaries for Microsoft Windows `are also available
 <http://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
 A package for `Apple's Mac OS X
-<http://localhost/~jodogne/orthanc/static.php?page=download-mac>`__
+<http://www.osimis.io/en/download.html>`__
 are available courtesy of `Osimis <http://osimis.io/>`__.
 
 
@@ -81,6 +81,9 @@ file::
 Note that ``EnableIndex`` and ``EnableStorage`` must be explicitly set
 to true, otherwise Orthanc will continue to use its default SQLite
 back-end.
+
+**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM files are stored as large objects in the database.  This actually consumes more space than the DICOM file itself (around 40% more).  
+When dealing with large  number of files, it is recommended to continue using the default filesystem storage for DICOM files and enable the ``Index`` PostgreSQL plugin.
 
 .. highlight:: text
 
