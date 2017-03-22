@@ -37,6 +37,9 @@ third-party plugins.  A specific section of the Orthanc Book explains
 Index of the official plugins
 -----------------------------
 
+From University Hospital of Liège
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. toctree::
    :maxdepth: 1
 
@@ -47,17 +50,21 @@ Index of the official plugins
    plugins/worklists-plugin.rst
    plugins/serve-folders.rst
 
+From Osimis
+^^^^^^^^^^^
+
+* :ref:`authorization`
+* `Osimis <http://osimis.io/>`__ maintains an evolution of the
+  official Web viewer plugin. The Osimis plugin adds tools for
+  measuring, for viewing multiple series, and for split-pane. `Check
+  out the source code
+  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
 .. _plugins-contributed:
 
 Index of the contributed plugins
 --------------------------------
 
-* `Osimis <http://osimis.io/>`__ maintains an evolution of the
-  official Web viewer plugin. The Osimis plugin adds tools for
-  measuring, for viewing multiple series, and for split-pane.  `Check
-  out their source code
-  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 * `DWV Orthanc Plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__: This plugin by
   Yves Martelli is based on `dwv
