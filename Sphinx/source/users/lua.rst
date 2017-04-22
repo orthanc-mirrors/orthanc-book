@@ -411,6 +411,7 @@ Also note that :ref:`other callbacks are available <lua-callbacks>`
 to react to other events than the reception of a single instance 
 with ``OnStoredInstance()``.
 
+.. _lua-fix-cfind:
 
 Fixing C-Find requests
 ----------------------

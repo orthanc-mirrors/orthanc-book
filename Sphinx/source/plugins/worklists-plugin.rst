@@ -15,7 +15,7 @@ command-line tool from the `DCMTK software
 <http://support.dcmtk.org/docs/wlmscpfs.html>`__. 
 
 The worklists to be served must be put inside the folder of interest
-by an external application or script. ``dump2dcm`` might be a very
+by an external application or script (note: files must have a ``.wl`` extension). ``dump2dcm`` might be a very
 `useful companion tool
 <http://support.dcmtk.org/docs/dump2dcm.html>`__ to generate such
 worklist files. Whenever a C-Find SCP request is issued to Orthanc,
@@ -77,7 +77,7 @@ Tutorial
   from the Orthanc source code and copy them in a dedicated folder.
 - Generate the :ref:`default configuration of Orthanc <configuration>`.
 - Enable the ModalityWorklist plugin in your configuration file by adding this section::
-	
+  
     "Worklists" : {
       "Enable": true,
       "Database": "WorklistsDatabase"  // Path to the folder with the worklist files
@@ -85,7 +85,7 @@ Tutorial
 
 - Add the plugin to the list of plugins to load (this is an example
   for Microsoft Windows)::
-	
+  
     "Plugins" : [
       "OsimisWebViewer.dll",
       "ModalityWorklists.dll"   // On GNU/Linux, use libModalityWorklists.so
@@ -97,17 +97,17 @@ Tutorial
   ``findscu`` and Orthanc runs on the same computer (i.e. on the
   ``127.0.0.1`` localhost), declare the ``FINDSCU`` AET to the list of
   know modalities::
-	
+  
     "DicomModalities" : {
       "horos" : [ "HOROS", "192.168.0.8", 11112 ],
       "findscu" : [ "FINDSCU", "127.0.0.1", 1234 ]
     },
 
 .. highlight:: bash
-	
+  
 - Launch Orthanc as usual, making sure to give the proper
   configuration file (e.g. for Microsoft Windows)::
-	
+  
     Orthanc.exe config.json
 
 - In another command-line prompt, launch a ``findscu`` request to ask
@@ -127,7 +127,7 @@ How to create a worklist file
 -----------------------------
 
 .. highlight:: bash
-	
+  
 - Start with an existing worklist file, some samples of which can be
   found in the `Orthanc source distribution
   <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/ModalityWorklists/WorklistsDatabase/>`__
@@ -136,7 +136,7 @@ How to create a worklist file
   using ``dcmdump``::
 
     dcmdump.exe wklist1.wl > sampleWorklist.txt
-	
+  
 - The content of the just-generated ``sampleWorklist.txt`` file should
   look similar to this text file::
 
@@ -167,14 +167,84 @@ How to create a worklist file
     (0032,1060) LO [EXAM6]                                  #   6, 1 RequestedProcedureDescription
     (0040,1001) SH [RP454G234]                              #  10, 1 RequestedProcedureID
     (0040,1003) SH [LOW]                                    #   4, 1 RequestedProcedurePriority
-	
+  
 - Open ``sampleWorklist.txt`` file in a standard text editor so as to
   modify, add or remove some DICOM tags depending on your needs.
 - Generate a new DICOM worklist file from your modified file using
   ``dump2dcm``::
 
     dump2dcm.exe sampleWorklist.txt newWorklist.wl
-	
+  
 - As a last step, copy that file in the folder where Orthanc searches
   for its worklist files. Of course, this worklist generation workflow
   can be automated using any scripting language.
+
+Troubleshooting C-Find queries
+------------------------------
+
+When trying to retrieve worklists from a modality, one usually don't get debugging capabilities from the modality itself.
+Therefore, it is usually convenient to mimic the modality with ``findscu`` (provided by `DCMTK software
+<http://support.dcmtk.org/docs/wlmscpfs.html>`__).  
+
+- First, you should make sure that you have configured the Worklist plugin correctly and that you have pushed
+  at least a ``.wl`` file in the worklist database.  For this, you should issue this kind of command::
+
+    findscu -W 127.0.0.1 4242 -k 0008,0050="*"
+
+  This is the most generic C-Find request and should return all AccessionNumber of all the worklists in your database.
+
+  Note: you should make sure you have added a ``findscu`` DICOM modality in your configuration file.
+
+  ``findscu`` should output something like this::
+  
+    W: ---------------------------
+    W: Find Response: 1 (Pending)
+    W:
+    W: # Dicom-Data-Set
+    W: # Used TransferSyntax: Little Endian Explicit
+    W: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+    W: (0008,0050) SH [**********]                             #  10, 1 AccessionNumber
+    W:
+
+  If you don't get any output, you may add ``-v -d`` options to the ``findscu`` command line to get additional details.
+
+- Everytime it receives a C-Find request, Orthanc displays the query parameters in its :ref:`logs <log>`.
+  With the previous C-Find command, you should expect this kind of output::
+
+    I0422 17:16:03.512449 CommandDispatcher.cpp:490] Association Received from AET FINDSCU on IP 127.0.0.1
+    I0422 17:16:03.514433 CommandDispatcher.cpp:688] Association Acknowledged (Max Send PDV: 16372)
+    I0422 17:16:03.532062 main.cpp:118] No limit on the number of C-FIND results at the Patient, Study and Series levels
+    I0422 17:16:03.535986 main.cpp:128] No limit on the number of C-FIND results at the Instance level
+    I0422 17:16:03.536968 PluginsManager.cpp:171] Received worklist query from remote modality FINDSCU:
+    {
+       "0008,0050" : "*"
+    }
+    I0422 17:16:03.559539 CommandDispatcher.cpp:891] DUL Peer Requested Release
+    I0422 17:16:03.560520 CommandDispatcher.cpp:898] Association Release
+
+- Now you may try to issue a C-Find request from your modality and check Orthanc logs.  You should then have a better understanding of the query
+  content and eventually understand why it does not match your worklists.  You should also be able re-issue ``findscu`` requests with additional arguments to mimic the requests issued by your modality.
+
+Common problems
+---------------
+
+- Some modalities do not include their AET name in ``ScheduledStationAETitle``.  Therefore, they do receive worklists that do not concern them.
+  This may be handled by the ``FilterIssuerAet`` configuration option.
+
+- Orthanc 1.2.0 does not handle the ``Generic group length`` tags.  
+  You might need to include this kind of :ref:`lua script <lua-fix-cfind>` to remove these tags from the queries::
+  
+    function IncomingFindRequestFilter(query, origin)
+      
+      -- First display the content of the C-Find query
+      PrintRecursive(query)
+      PrintRecursive(origin)
+
+      -- Remove the "Generic group length" tags from the query
+      local v = query
+      v['0008,0000'] = nil
+      v['0010,0000'] = nil
+      v['0020,0000'] = nil
+      return v
+    
+    end
