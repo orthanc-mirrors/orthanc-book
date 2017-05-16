@@ -31,8 +31,8 @@ circumvent the same-origin policy, you have three choices:
 
 1. Branch the REST API of Orthanc as a **reverse proxy** into the Web
    server that serves the JavaScript code (cf. the instructions for
-   :ref:`Apache <apache>` and :ref:`nginx <nginx>`). This is the best
-   solution for production.
+   :ref:`Apache <apache>`, :ref:`nginx <nginx>` and :ref:`iis <IIS>`). 
+   This is the best solution for production.
 2. Use the official :ref:`ServeFolders plugin <serve-folders>` that
    can be used to serve JavaScript code directly by the **embedded Web
    server of Orthanc** (i.e. next to its REST API). This is the best
