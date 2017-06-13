@@ -26,7 +26,7 @@ Using JSONlab, the following code will download and display a DICOM image::
   instances = loadjson(urlread([ URL '/series/' SERIES '/instances' ]));
 
   # Select one slice from the series
-  instance = instances(1,1).ID
+  instance = instances{1}.ID
 
   # Decode the slice with Orthanc thanks to the "/matlab" URI
   slice = eval(urlread([ URL '/instances/' instance '/matlab' ]));
