@@ -447,6 +447,10 @@ by some manufacturer::
 The ``origin`` argument contains information about which modality has
 issued the request.
 
+Note that, as of Orthanc 1.2.1, the ``IncomingFindRequestFilter`` is 
+not applied to C-Find requests targeting the Modality Worklists plugin.  
+This might be fixed in a `future release <https://bitbucket.org/sjodogne/orthanc/issues/57/c-find-matching-refactoring-required>`__. 
+
 Similarly, the callback ``OutgoingFindRequestFilter(query, modality)``
 is invoked whenever Orthanc acts as a C-Find SCU, which gives the
 opportunity to dynamically fix outgoing C-Find requests before they
