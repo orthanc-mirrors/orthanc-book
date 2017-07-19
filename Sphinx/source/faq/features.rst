@@ -35,11 +35,14 @@ space recycling**: The patient that has been stored for the longest
 time inside Orthanc can be automatically deleted when the disk space
 used by Orthanc grows above a threshold, or when the number of stored
 patients grows above a threshold. This feature enables the automated
-control of the disk space dedicated to Orthanc.
+control of the disk space dedicated to Orthanc.  Note that pushing a 
+new study for an existing patient will not change its position in the
+recycling order.
 
 Recycling is controlled by the ``MaximumStorageSize`` and the
 ``MaximumPatientCount`` options in the :ref:`Orthanc configuration
-file <configuration>`.
+file <configuration>`.  Setting both these values to 0 will disable 
+recycling.
 
 It is possible to prevent important data from being automatically
 recycled. This mechanism is called **protection**. Each patient can be
@@ -53,7 +56,6 @@ recycling. The rationale is that we think it is important to keep
 available all the data related to one patient. Unwillingly losing a
 study/series that is part of the same patient might lead to a loss in
 consistency with respect to the medical history of this patient.
-
 
 .. _compression:
 
