@@ -25,24 +25,25 @@ DICOM standard 2008 or 2017c (default). Example::
 It is possible to control how anonymization is achieved by specifying
 a JSON body::
 
-    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{"Replace":{"PatientName":"hello","0010-0020":"world"},"Keep":["StudyDescription", "SeriesDescription"],"KeepPrivateTags": null, "DicomVersion" : "2017c"}' > Anonymized.dcm
+    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{"Replace":{"PatientName":"Hello","0010-1001":"World"},"Keep":["StudyDescription", "SeriesDescription"],"KeepPrivateTags": true, "DicomVersion" : "2017c"}' > Anonymized.dcm
 
 Explanations:
 
 * New UUIDs are automatically generated for the study, the series and
   the instance.
-* The DICOM tags can be specified either by their name (``PatientName``)
-  or by their hexadecimal identifier (``0010-0020`` corresponds to
-  ``PatientID``).
+* The DICOM tags can be specified either by their name
+  (``PatientName``) or by their hexadecimal identifier (in the example
+  above, ``0010-1001`` corresponds to ``Other Patient Names``).
 * ``Replace`` is an associative array that associates a DICOM tag with its
   new string value. The value is dynamically cast to the proper DICOM
   data type (an HTTP error will occur if the cast fails). Replacements
   are applied after all the tags to anonymize have been removed.
 * ``Keep`` specifies a list of tags that should be preserved from full
   anonymization.
-* If ``KeepPrivateTags`` is absent from the JSON request, private tags
-  (i.e. manufacturer-specific tags) are also removed. This is the
-  default behavior, as such tags can contain patient-specific
+* If ``KeepPrivateTags`` is set to ``true`` in the JSON request,
+  private tags (i.e. manufacturer-specific tags) are not removed by
+  the anonymization process. The default behavior consists in removing
+  the private tags, as such tags can contain patient-specific
   information.
 * ``DicomVersion`` specifies which version of the DICOM standard shall be used
   for anonymization.  Allowed values are ``2008`` and ``2017c`` (default value 
@@ -57,13 +58,18 @@ Orthanc allows to modify a set of specified tags in a single DICOM
 instance and to download the resulting anonymized DICOM
 file. Example::
 
-    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify -X POST -d '{"Replace":{"PatientName":"hello","PatientID":"world"},"Remove":["InstitutionName"],"RemovePrivateTags": null}' > Modified.dcm
+    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify -X POST -d '{"Replace":{"PatientName":"hello","PatientID":"world"},"Remove":["InstitutionName"],"RemovePrivateTags": true, "Force": true}' > Modified.dcm
 
 Remarks:
 
 * The ``Remove`` array specifies the list of the tags to remove.
 * The ``Replace`` associative array specifies the substitions to be applied (cf. anonymization).
-* If ``RemovePrivateTags`` is present, the private tags (i.e. manufacturer-specific tags) are removed.
+* If ``RemovePrivateTags`` is set to ``true``, the private tags
+  (i.e. manufacturer-specific tags) are removed.
+* The ``Force`` option must be set to ``true``, in order to allow the
+  modification of the ``PatientID``, as such a modification of the
+  :ref:`DICOM identifiers <dicom-identifiers>` might lead to breaking
+  the DICOM model of the real-world.
 
 
 Modification of Studies or Series
@@ -114,7 +120,7 @@ Modification of Patients
 Starting with Orthanc 0.7.5, Orthanc can also modify all the instances
 of a patient with a single REST call. Here is a sample::
 
-    $  curl http://localhost:8042/patients/6fb47ef5-072f4557-3215aa29-f99515c1-6fa22bf0/modify -X POST -d '{"Replace":{"PatientID":"Hello","PatientName":"Sample patient name"}}'
+    $ curl http://localhost:8042/patients/6fb47ef5-072f4557-3215aa29-f99515c1-6fa22bf0/modify -X POST -d '{"Replace":{"PatientID":"Hello","PatientName":"Sample patient name"},"Force":true}'
 
 .. highlight:: json
 
