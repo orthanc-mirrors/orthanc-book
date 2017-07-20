@@ -13,6 +13,24 @@ search in the present Orthanc Book (there is a search field at the top
 of this page). Your issue might indeed have already been discussed in
 the past or in the FAQ.
 
+Startup
+-------
+* If **Orthanc fails to start** with the error "**The TCP port of the DICOM 
+  server is privileged or already in use**", this means another software is
+  already using the port Orthanc is trying to use.  Usually, this means
+  that an other instance of Orthanc is running.  However, note that, by default, 
+  Orthanc uses port 4242 which might also be used by other software like
+  a `Juniper VPN client <https://www.file.net/process/dsncservice.exe.html>`__.
+  To determine which other process is using the port: 
+
+  On Windows, you may use the `Resource Monitor <https://en.wikipedia.org/wiki/Resource_Monitor>`__.
+  In the `Network` tab, check the `Listening Ports`.  
+
+  On Linux, you may use this command line: ``sudo ss --tcp --listen --numeric --processes``.
+
+  Starting with version 1.3.0, the check at Orthanc startup is more robust
+  (it also checks for UDP socket using the same port) and Orthanc 1.3.0 might 
+  display error messages that where not displayed by previous versions.
 
 Orthanc Explorer
 ----------------
