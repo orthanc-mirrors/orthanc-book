@@ -18,14 +18,14 @@ Anonymization of a Single Instance
 Orthanc allows to anonymize a single DICOM instance and to download
 the resulting anonymized DICOM file. Anonymization consists in erasing
 all the tags that are specified in Table E.1-1 from PS 3.15 of the
-DICOM standard 2008. Example::
+DICOM standard 2008 or 2017c (default). Example::
 
     $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{}' > Anonymized.dcm
 
 It is possible to control how anonymization is achieved by specifying
 a JSON body::
 
-    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{"Replace":{"PatientName":"hello","0010-0020":"world"},"Keep":["StudyDescription", "SeriesDescription"],"KeepPrivateTags": null}' > Anonymized.dcm
+    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{"Replace":{"PatientName":"hello","0010-0020":"world"},"Keep":["StudyDescription", "SeriesDescription"],"KeepPrivateTags": null, "DicomVersion" : "2017c"}' > Anonymized.dcm
 
 Explanations:
 
@@ -44,6 +44,10 @@ Explanations:
   (i.e. manufacturer-specific tags) are also removed. This is the
   default behavior, as such tags can contain patient-specific
   information.
+* ``DicomVersion`` specifies which version of the DICOM standard shall be used
+  for anonymization.  Allowed values are ``2008`` and ``2017c`` (default value 
+  if the parameter is absent).  This parameter has been introduced in Orthanc 
+  1.3.0.  In earlier version, the ``2008`` standard was used.
 
 
 Modification of a Single Instance
