@@ -16,3 +16,10 @@ the URI ``/Orthanc``, paste the following code in your
 
 *Note*: These instructions are for Ubuntu 11.10. You most probably
 have to adapt the absolute paths above to your distribution.
+
+You might also wish to adapt the ``LimitRequestBody`` `configuration
+option of Apache
+<https://www.cyberciti.biz/faq/apache-limiting-upload-size/>`__ to
+allow the uploading of large DICOM files if using the :ref:`REST API
+<sending-dicom-images>` of Orthanc.
+

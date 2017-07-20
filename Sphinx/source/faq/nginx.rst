@@ -22,6 +22,12 @@ proxying. Here is the configuration snippet for nginx::
 *Note:* Thanks to Qaler for `submitting this information
 <https://groups.google.com/d/msg/orthanc-users/oTMCM6kElfw/uj0r062mptoJ>`__.
 
+You might also wish to adapt the ``client_max_body_size``
+`configuration option of nginx
+<http://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size>`__
+to allow the uploading of DICOM files larger than the default 1MB if
+using the :ref:`REST API <sending-dicom-images>` of Orthanc.
+
 
 .. _nginx-cors:
 

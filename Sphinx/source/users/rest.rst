@@ -25,6 +25,8 @@ transposed to any programming language that supports both HTTP and
 JSON.
 
 
+.. _sending-dicom-images:
+
 Sending DICOM images
 --------------------
 
