@@ -69,7 +69,10 @@ Remarks:
 * The ``Force`` option must be set to ``true``, in order to allow the
   modification of the ``PatientID``, as such a modification of the
   :ref:`DICOM identifiers <dicom-identifiers>` might lead to breaking
-  the DICOM model of the real-world.
+  the DICOM model of the real-world. In general, any explicit
+  modification to one of the ``PatientID``, ``StudyInstanceUID``,
+  ``SeriesInstanceUID``, and ``SOPInstanceUID`` requires ``Force`` to
+  be set to ``true``, in order to prevent any unwanted side effect.     
 
 
 Modification of Studies or Series
