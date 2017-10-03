@@ -29,6 +29,10 @@ Make also sure to check out the following extensions to Orthanc:
 * `Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
 * `ImageJ extension <http://www.orthanc-server.com/static.php?page=imagej>`__.
 * `Stone of Orthanc <http://www.orthanc-server.com/static.php?page=stone>`__.
+* `dwv-orthanc-plugin
+  <https://github.com/ivmartel/dwv-orthanc-plugin>`__ by Yves
+  Martelli, that embeds `dwv
+  <https://github.com/ivmartel/dwv/wiki>`__.
 * `Advanced Web viewer plugin by Osimis
   <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
