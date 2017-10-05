@@ -46,3 +46,9 @@ that might have developed an advanced user interface. Currently,
 corporate services, but others might show up in the future. A `contact
 form <http://www.orthanc-server.com/orthanc-pro.php>`_ is available on
 the official Web page of Orthanc.
+
+**Update (2017-10-03):** A team of Master students from `ULiège
+<https://www.uliege.be/>`__ is currently working on creating a
+revamped version of Orthanc Explorer. You can get in touch with them
+on the `public discussion forum
+<https://groups.google.com/d/msg/orthanc-users/oOyKTmfs-J0/B6eyBJcvCAAJ>`__.
