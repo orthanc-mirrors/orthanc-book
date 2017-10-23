@@ -82,8 +82,11 @@ Note that ``EnableIndex`` and ``EnableStorage`` must be explicitly set
 to true, otherwise Orthanc will continue to use its default SQLite
 back-end.
 
-**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM files are stored as large objects in the database.  This actually consumes more space than the DICOM file itself (around 40% more).  
-When dealing with large  number of files, it is recommended to continue using the default filesystem storage for DICOM files and enable the ``Index`` PostgreSQL plugin.
+**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM files are stored as large objects in the database.  This might actually consume more space than the DICOM file itself.  We have observed overhead up to 40%.  However, it seems this overhead is temporary and comes from Write-Ahead Logging.  Check this `discussion <https://groups.google.com/d/msg/orthanc-users/pPzHOpb--iw/QkKZ808gIgAJ>`__ on the Orthanc Users group for more info).  
+
+Note that a typical usage of the PostgreSQL plugin is to enable only the ``Index`` and continue using the default filesystem storage for DICOM files.
+
+
 
 .. highlight:: text
 
