@@ -229,8 +229,12 @@ Common problems
 ---------------
 
 - According to the `specification
-  <http://dicom.nema.org/MEDICAL/Dicom/2015c/output/chtml/part02/sect_B.4.2.2.3.html>`, modalities should not include their AET name in ``ScheduledStationAETitle`` on user initiated queries.
-  Therefore, they do receive worklists that do not concern them. This may be handled by the ``FilterIssuerAet`` configuration option. Note that this might in some cases be intended.
+  <http://dicom.nema.org/MEDICAL/Dicom/2015c/output/chtml/part02/sect_B.4.2.2.3.html>`__,
+  modalities should not include their AET name in
+  ``ScheduledStationAETitle`` on user initiated queries.  Therefore,
+  they do receive worklists that do not concern them. This may be
+  handled by the ``FilterIssuerAet`` configuration option. Note that
+  this might in some cases be intended.
 
 - Orthanc 1.2.0 does not handle the ``Generic group length`` tags.  
   You might need to include this kind of :ref:`lua script <lua-fix-cfind>` to remove these tags from the queries::
