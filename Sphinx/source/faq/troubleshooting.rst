@@ -61,7 +61,7 @@ Performance issues
   performance, make sure to use either the mainline version of the
   container (run ``docker pull jodogne/orthanc`` to ensure you use the
   most recent version of the mainline), or versions more recent than
-  ``jodogne/orthanc:1.3.0``.
+  ``jodogne/orthanc:1.1.0``.
 
 * **Orthanc slows down if storing many files**: The default database
   engine that is built in Orthanc is `SQLite

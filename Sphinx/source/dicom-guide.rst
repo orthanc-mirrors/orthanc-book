@@ -241,7 +241,7 @@ level (and not from the patient level) as soon as you deal with an
 application that handles patients from different hospitals.
 
 *Note:* The current version of the :ref:`Orthanc Explorer
-<orthanc-explorer>` interface (1.3.0 at the time of writing) is
+<orthanc-explorer>` interface (1.3.1 at the time of writing) is
 designed for single-hospital scenarios, and thus does not provide
 study-level access. But the core engine of Orthanc does support
 study-level access through its :ref:`REST API <rest>`.
@@ -572,7 +572,7 @@ popular and widespread way to initiate a query/retrieve against a PACS
 server. The DICOM standard features an `alternative mechanism called
 C-Get
 <http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`_.
-As of Orthanc 1.3.0, C-Get is not supported yet (but work is in
+As of Orthanc 1.3.1, C-Get is not supported yet (but work is in
 progress).
 
 *Note 2:* As :ref:`written above <dicom-pixel-data>`, the Orthanc
