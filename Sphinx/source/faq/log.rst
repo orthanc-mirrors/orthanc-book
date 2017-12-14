@@ -1,10 +1,34 @@
 .. _log:
 
-Generating an exploitable log
------------------------------
+Collecing logs
+--------------
 
-For your log to be exploitable by the Orthanc community, you must
-generate them with the ``--verbose`` or ``--trace``. If you are using
+Standard logs
+=============
+
+Everytime the Orthanc service starts, it will generate
+a new log file in ``C:\Program Files\Orthanc Server\Logs`` on Windows 
+and in ``/var/log/orthanc/`` on Linux.  
+
+By default, on Windows, if the Orthanc service fails to start, it will 
+retry to start 5 times and stop so it does not generate thousands of log files.
+
+Log files are named as ``Orthanc.log.YYYYMMDD-hhmmss.ffff`` including
+the date/time when Orthanc was started.  
+
+Orthanc is not removing old logs so these log files might accumulate 
+and consume lot's of space.  It's up to you to manage the logs folder
+to make sure you don't fill your disk with logs.
+
+
+
+Generating an exploitable debug log
+===================================
+
+By default, Orthanc logs only the `WARNING` and `ERROR` level
+logs.  For your log to be exploitable by the Orthanc community, you must
+generate them with the ``--verbose`` or ``--trace`` to get the `INFO` 
+and `TRACE` information levels.  If you are using
 Orthanc at the command-line, simply add these flags and redirect the
 standard outputs to some log file. 
 
