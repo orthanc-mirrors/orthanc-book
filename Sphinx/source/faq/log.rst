@@ -1,7 +1,7 @@
 .. _log:
 
-Collecing logs
---------------
+Collecting logs
+---------------
 
 Standard logs
 =============
