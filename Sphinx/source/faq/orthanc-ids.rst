@@ -23,6 +23,10 @@ length, so as to be more Web-friendly. More specifically:
   (0020,000d), their SeriesInstanceUID tag (0020,000e), and their
   SOPInstanceUID tag (0008,0018).
 
+NB: The concatenation adds a `pipe
+<https://en.wikipedia.org/wiki/Vertical_bar>`__ separator "``|``"
+between the concatenated DICOM tags.
+
 Because the DICOM standard guarantees the StudyInstanceUID,
 SeriesInstanceUID and SOPInstanceUID tags to be globally unique, the
 Orthanc identifiers for studies, series and instances are also
