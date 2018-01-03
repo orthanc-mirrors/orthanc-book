@@ -18,6 +18,9 @@ plugins <http://www.orthanc-server.com/static.php?page=postgresql>`__.
 Compilation
 -----------
 
+Static linking
+^^^^^^^^^^^^^^
+
 .. highlight:: text
 
 The procedure to compile these plugins is similar of that for the
@@ -34,13 +37,34 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 * ``OrthancPostgreSQLIndex`` replaces the default SQLite index of Orthanc by PostgreSQL. 
 * ``OrthancPostgreSQLStorage`` makes Orthanc store the DICOM files it receives into PostgreSQL. 
 
+  
+Microsoft Windows and Apple OS X
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Pre-compiled binaries for Microsoft Windows `are also available
 <http://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
 A package for `Apple's Mac OS X
 <http://www.osimis.io/en/download.html>`__
-are available courtesy of `Osimis <http://osimis.io/>`__.
+is available courtesy of `Osimis <http://osimis.io/>`__.
 
 
+Dynamic linking on Ubuntu 16.04
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+If static linking is not desired, here are build instructions for
+Ubuntu 16.04 (provided build dependencies for the :ref:`core of
+Orthanc <compiling>` have already been installed)::
+
+  $ sudo apt-get install libpq-dev postgresql-server-dev-all
+  $ cmake .. -DCMAKE_BUILD_TYPE=Debug \
+             -DALLOW_DOWNLOADS=ON \
+             -DUSE_SYSTEM_GOOGLE_TEST=OFF \
+             -DUSE_SYSTEM_ORTHANC_SDK=OFF
+  $ make
+
+  
 Usage
 -----
 
