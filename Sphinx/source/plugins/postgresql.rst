@@ -58,7 +58,7 @@ Ubuntu 16.04 (provided build dependencies for the :ref:`core of
 Orthanc <compiling>` have already been installed)::
 
   $ sudo apt-get install libpq-dev postgresql-server-dev-all
-  $ cmake .. -DCMAKE_BUILD_TYPE=Debug \
+  $ cmake .. -DCMAKE_BUILD_TYPE=Release \
              -DALLOW_DOWNLOADS=ON \
              -DUSE_SYSTEM_GOOGLE_TEST=OFF \
              -DUSE_SYSTEM_ORTHANC_SDK=OFF
