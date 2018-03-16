@@ -231,5 +231,6 @@ attachments are therefore kindly invited to complete the **central
 registry** below:
 
 * ``Metadata 4200`` is used by the plugin for :ref:`whole-slide imaging <wsi>`.
+* ``Attachment 9998`` is used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store instance information.
 * ``Attachment 9999`` is used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store annotations.
 * ``Attachments 10000-13999`` are used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store reduced quality images.
