@@ -414,6 +414,139 @@ To circumvent this problem, you have 2 possibilities:
    <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
 
 
+Performing Query/Retrieve with REST
+-----------------------------------
+
+*Section contributed by Bryan Dearlove*
+
+Orthanc can be used to perform queries on the local Orthanc instance,
+or on remote modalities through the REST API.
+
+To perform a query of a remote modality you must define the modality
+within the :ref:`configuration file <configuration>` (See
+Configuration section under Sending resources to remote modalities).
+
+
+Performing a Query on a Remote Modality
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+To initiate a query you perform a POST command against the Modality
+with the identifiers you are looking for. The the example below we are
+performing a study level query against the modality sample for any
+study descriptions with the word chest within it. This search is case
+insensitive unless configured otherwise within the Orthanc
+configuration file::
+
+     $ curl --request POST \
+       --url http://localhost:8042/modalities/sample/query \
+       --data '{"Level":"Study","Query": {"PatientID":"","StudyDescription":"*Chest*","PatientName":""}}'
+
+
+.. highlight:: json
+
+You will receive back an ID which can be used to retrieve more information with GET commands or C-Move requests with a POST Command:: 
+
+     {
+     	"ID": "5af318ac-78fb-47ff-b0b0-0df18b0588e0",
+     	"Path": "/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0"
+     }
+
+     
+Additional Query Options
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: json
+
+You can use patient identifiers by including the `*` within your
+search. For example if you were searching for a name beginning with
+`Jones` you can do::
+
+  "PatientName":"Jones*". 
+
+If you wanted to search for a name with the words `Jo` anywhere within
+it you can do::
+
+ "PatientName":"*Jo*".
+
+
+Reviewing Level
+^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+::
+
+   $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/level
+
+Will retrieve the level with which the query was performed, Study,
+Series or Instance.
+ 
+
+Reviewing Modality
+^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+::
+
+   $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/modality
+
+Will provide the modality name which the original query was performed against. 
+
+
+Reviewing Query
+^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+To retrieve information on what identifiers the query was originally
+performed using you can use the query filter::
+
+  $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/query
+
+  
+Reviewing Query Answers
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+You are able to individually review each answer returned by performing
+a GET with the answers parameter::
+
+  $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers
+
+You will get a JSON back with numbered identifiers for each answer you
+received back. For example because we performed a Study level query we
+received back 5 studies answers back. We are able to query each answer
+for content details::
+
+  $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/content
+
+If there are content items missing, you may add them by adding that
+identifier to the original query. For example if we wanted Modalities
+listed in this JSON answer in the initial query we would add to the
+POST body: `"ModalitiesInStudy":""`
+
+
+Performing Retrieve (C-Move)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+You can perform a C-Move to retrieve all studies within the original
+query using a post command and identifying the Modality to be one to
+in the POST contents::
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data Orthanc
+
+You are also able to perform individual C-Moves for a content item by
+specifying that individual content item::
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
+
+
 Tracking changes
 ----------------
 
