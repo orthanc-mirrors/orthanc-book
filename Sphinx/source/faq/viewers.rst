@@ -18,7 +18,7 @@ with Orthanc (do not hesitate to `warn us
   :ref:`configuration guide <ginkgo-cadx>` is available).
 * `3D Slicer <https://www.slicer.org/>`__.
 * `medInria <https://med.inria.fr/>`__.
-* `Aeskulap <http://aeskulap.nongnu.org/>`__.
+* `Aeskulap <https://github.com/pipelka/aeskulap>`__.
 * `OsiriX <http://www.osirix-viewer.com/>`__ (note however that the
   openness of this particular software is `currently subject to
   discussion
