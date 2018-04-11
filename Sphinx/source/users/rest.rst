@@ -306,7 +306,7 @@ tags of an instance, without going through a JSON file. Here is how
 you would find the Patient Name of the instance::
 
     $ curl http://localhost:8042/instances/e668dcbf-8829a100-c0bd203b-41e404d9-c533f3d4/content/0010-0010
-    Anonymous^Unknown 
+    Anonymous^Unknown
 
 The list of all the available tags for this instance can also be retrieved easily::
 
@@ -414,7 +414,7 @@ To circumvent this problem, you have 2 possibilities:
    <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
 
 
-Performing Query/Retrieve with REST
+Performing Query/Retrieve and Find with REST
 -----------------------------------
 
 *Section contributed by Bryan Dearlove*
@@ -427,10 +427,10 @@ within the :ref:`configuration file <configuration>` (See
 Configuration section under Sending resources to remote modalities).
 
 
-Performing a Query on a Remote Modality
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. highlight:: bash
+
+Performing Queries on Modalities
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To initiate a query you perform a POST command against the Modality
 with the identifiers you are looking for. The the example below we are
@@ -446,16 +446,16 @@ configuration file::
 
 .. highlight:: json
 
-You will receive back an ID which can be used to retrieve more information with GET commands or C-Move requests with a POST Command:: 
+You will receive back an ID which can be used to retrieve more information with GET commands or C-Move requests with a POST Command::
 
      {
      	"ID": "5af318ac-78fb-47ff-b0b0-0df18b0588e0",
      	"Path": "/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0"
      }
 
-     
-Additional Query Options
-^^^^^^^^^^^^^^^^^^^^^^^^
+
+Additional Options
+^^^^^^^^^^^^^^^^^^
 
 .. highlight:: json
 
@@ -463,12 +463,16 @@ You can use patient identifiers by including the `*` within your
 search. For example if you were searching for a name beginning with
 `Jones` you can do::
 
-  "PatientName":"Jones*". 
+  "PatientName":"Jones*".
 
 If you wanted to search for a name with the words `Jo` anywhere within
 it you can do::
 
  "PatientName":"*Jo*".
+
+ To perform date searches you can specify within StudyDate a starting date and/or
+ a before date. For example "StudyDate":"20180323-" would search for all study dates after the specified date to now.
+ Doing "StudyDate":"20180323-20180325" would search for all study dates between the specified date.
 
 
 Reviewing Level
@@ -482,7 +486,7 @@ Reviewing Level
 
 Will retrieve the level with which the query was performed, Study,
 Series or Instance.
- 
+
 
 Reviewing Modality
 ^^^^^^^^^^^^^^^^^^
@@ -493,7 +497,7 @@ Reviewing Modality
 
    $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/modality
 
-Will provide the modality name which the original query was performed against. 
+Will provide the modality name which the original query was performed against.
 
 
 Reviewing Query
@@ -506,7 +510,7 @@ performed using you can use the query filter::
 
   $ curl --request GET --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/query
 
-  
+
 Reviewing Query Answers
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -545,6 +549,24 @@ You are also able to perform individual C-Moves for a content item by
 specifying that individual content item::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
+
+Performing Finds within Orthanc
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. highlight:: bash
+
+Performing a find within Orthanc is very similar to using Queries against DICOM modalities and the additional options listed above work with find also.
+When performing a find, you will receive the Orthanc ID's of all the matched items within your find. For example if you perform a study level find and 5 Studies
+match you will receive 5 study level Orthanc ID's in JSON format as a response::
+
+$ curl --request POST --url http://localhost:8042/tools/find --data '{"Level":"Instance","Query":{"Modality":"CR","StudyDate":"20180323-","PatientID":"*"}}'
+
+Additional Options
+^^^^^^^^^^^^^^^^^^
+.. highlight:: bash
+
+You also have the ability to limit the responses by specifying a limit within the body of the POST message. For example::
+
+"Limit":4
 
 
 Tracking changes
