@@ -415,7 +415,7 @@ To circumvent this problem, you have 2 possibilities:
 
 
 Performing Query/Retrieve and Find with REST
------------------------------------
+--------------------------------------------
 
 *Section contributed by Bryan Dearlove*
 
@@ -427,10 +427,10 @@ within the :ref:`configuration file <configuration>` (See
 Configuration section under Sending resources to remote modalities).
 
 
-.. highlight:: bash
-
 Performing Queries on Modalities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
 
 To initiate a query you perform a POST command against the Modality
 with the identifiers you are looking for. The the example below we are
@@ -446,7 +446,8 @@ configuration file::
 
 .. highlight:: json
 
-You will receive back an ID which can be used to retrieve more information with GET commands or C-Move requests with a POST Command::
+You will receive back an ID which can be used to retrieve more
+information with GET commands or C-Move requests with a POST Command::
 
      {
      	"ID": "5af318ac-78fb-47ff-b0b0-0df18b0588e0",
@@ -468,11 +469,13 @@ search. For example if you were searching for a name beginning with
 If you wanted to search for a name with the words `Jo` anywhere within
 it you can do::
 
- "PatientName":"*Jo*".
+  "PatientName":"*Jo*".
 
- To perform date searches you can specify within StudyDate a starting date and/or
- a before date. For example "StudyDate":"20180323-" would search for all study dates after the specified date to now.
- Doing "StudyDate":"20180323-20180325" would search for all study dates between the specified date.
+To perform date searches you can specify within StudyDate a starting
+date and/or a before date. For example ``"StudyDate":"20180323-"``
+would search for all study dates after the specified date to
+now. Doing ``"StudyDate":"20180323-20180325"`` would search for all
+study dates between the specified date.
 
 
 Reviewing Level
@@ -550,23 +553,28 @@ specifying that individual content item::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
 
+  
 Performing Finds within Orthanc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. highlight:: bash
 
-Performing a find within Orthanc is very similar to using Queries against DICOM modalities and the additional options listed above work with find also.
-When performing a find, you will receive the Orthanc ID's of all the matched items within your find. For example if you perform a study level find and 5 Studies
-match you will receive 5 study level Orthanc ID's in JSON format as a response::
+Performing a find within Orthanc is very similar to using Queries
+against DICOM modalities and the additional options listed above work
+with find also.  When performing a find, you will receive the Orthanc
+ID's of all the matched items within your find. For example if you
+perform a study level find and 5 Studies match you will receive 5
+study level Orthanc ID's in JSON format as a response::
 
-$ curl --request POST --url http://localhost:8042/tools/find --data '{"Level":"Instance","Query":{"Modality":"CR","StudyDate":"20180323-","PatientID":"*"}}'
+  $ curl --request POST --url http://localhost:8042/tools/find --data '{"Level":"Instance","Query":{"Modality":"CR","StudyDate":"20180323-","PatientID":"*"}}'
 
+  
 Additional Options
 ^^^^^^^^^^^^^^^^^^
-.. highlight:: bash
+.. highlight:: json
 
 You also have the ability to limit the responses by specifying a limit within the body of the POST message. For example::
 
-"Limit":4
+  "Limit":4
 
 
 Tracking changes
