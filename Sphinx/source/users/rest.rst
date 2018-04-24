@@ -464,12 +464,12 @@ You can use patient identifiers by including the `*` within your
 search. For example if you were searching for a name beginning with
 `Jones` you can do::
 
-  "PatientName":"Jones*".
+  "PatientName":"Jones*"
 
 If you wanted to search for a name with the words `Jo` anywhere within
 it you can do::
 
-  "PatientName":"*Jo*".
+  "PatientName":"*Jo*"
 
 To perform date searches you can specify within StudyDate a starting
 date and/or a before date. For example ``"StudyDate":"20180323-"``
