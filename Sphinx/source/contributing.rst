@@ -36,7 +36,8 @@ here are some tasks you can take in charge that would greatly help us:
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
     repository, via pull requests.
   - Improve the text of the `Orthanc Book
-    <https://bitbucket.org/sjodogne/orthanc-book/src/default/Sphinx/source/>`_.
+    <https://bitbucket.org/sjodogne/orthanc-book/>`_ (check out the "How to contribute" 
+    section in the README).
   - The Orthanc project will also happily accept **external patches**
     in the core of Orthanc and in its associated official
     plugins. Such patches can either be sent to the `mailing list
