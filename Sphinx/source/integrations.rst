@@ -13,3 +13,5 @@ Horos
 -----
 .. toctree::
    :maxdepth: 1
+
+   integrations/integrate-horos-using-dicom.rst
