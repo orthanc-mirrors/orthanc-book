@@ -19,5 +19,6 @@ Contents
    dicom-guide.rst
    plugins.rst
    developers.rst
+   integrations.rst
    faq.rst
    contributing.rst
