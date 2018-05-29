@@ -1,6 +1,5 @@
-Some examples of integrations with Orthanc
-=========================================
-
+Integrations
+============
 
 
 Osirix
@@ -8,7 +7,7 @@ Osirix
 .. toctree::
    :maxdepth: 1
 
-   integrations/integrate-osirix-with-dicom.rst
+   integrations/integrate-osirix-using-dicom.rst
 
 Horos
 -----
