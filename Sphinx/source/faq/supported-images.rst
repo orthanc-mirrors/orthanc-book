@@ -6,11 +6,17 @@ Supported DICOM images
 Orthanc can **receive/store/send** any kind of standard DICOM files
 (cf. the `DICOM conformance statement
 <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/DicomConformanceStatement.txt>`__).
+Note that the ``UnknownSopClassAccepted`` :ref:`configuration option
+<configuration>` can be set to `true` if interfacing with modalities
+that are producing non-standard SOP classes.
 
-However, its core engine is not able to **render** all of them as PNG
-images. An image that Orthanc cannot decode is displayed as
-"Unsupported" by Orthanc Explorer. Currently, the core engine of
-Orthanc can decode:
+Orthanc Explorer can **display the raw DICOM tags** of any such DICOM
+file (including notably DICOM-SR structured reports).
+
+However, the core engine of Orthanc is not able to **render all of the
+DICOM files as PNG images**. An image that Orthanc cannot decode is
+displayed as "Unsupported" by clicking on the "Preview" buttons of
+Orthanc Explorer. Currently, the core engine of Orthanc can decode:
 
 * uncompressed (raw) DICOM files,
 * JPEG DICOM files, and
