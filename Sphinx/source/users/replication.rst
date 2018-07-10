@@ -23,9 +23,9 @@ At this point, the user could indeed choose to modify its
 :ref:`configuration file <configuration>` in order to create a new
 database elsewhere on the filesystem (if using the default SQLite
 backend), or on the database management system (e.g. if using
-:ref:`PostgreSQL <postgresql>`). This is important to let the user
-experiment a new version of Orthanc, while keeping the older version
-up and running.
+:ref:`PostgreSQL <postgresql>` or :ref:`MySQL/MariaDB <mysql>`). This
+is important to let the user experiment a new version of Orthanc,
+while keeping the older version up and running.
 
 If you decide to upgrade the database schema, you have to apply the
 following 3 steps:
@@ -85,7 +85,9 @@ This method will only succeed if:
 
 * The source Orthanc uses the default SQLite back-end of Orthanc (and
   not the `PostgreSQL plugin
-  <http://www.orthanc-server.com/static.php?page=postgresql>`_, for
+  <http://www.orthanc-server.com/static.php?page=postgresql>`_ or the
+  `MySQL/MariaDB plugin
+  <http://www.orthanc-server.com/static.php?page=mysql>`_, for
   instance),
 * You have command-line access to the source Orthanc, and
 * The transparent :ref:`compression` of the DICOM instances is

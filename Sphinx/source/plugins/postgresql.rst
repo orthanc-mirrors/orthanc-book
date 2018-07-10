@@ -23,13 +23,13 @@ Static linking
 
 .. highlight:: text
 
-The procedure to compile these plugins is similar of that for the
+The procedure to compile these plugins is similar to that for the
 :ref:`core of Orthanc <compiling>`. The following commands should work
-for every UNIX-like distribution (including GNU/Linux)::
+for most UNIX-like distribution (including GNU/Linux)::
 
-  $ mkdir Build
-  $ cd Build
-  $ cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+  $ mkdir BuildPostgreSQL
+  $ cd BuildPostgreSQL
+  $ cmake ../PostgreSQL -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
   $ make
 
 The compilation will produce 2 shared libraries, each containing one plugin for Orthanc:
@@ -58,10 +58,12 @@ Ubuntu 16.04 (provided build dependencies for the :ref:`core of
 Orthanc <compiling>` have already been installed)::
 
   $ sudo apt-get install libpq-dev postgresql-server-dev-all
-  $ cmake .. -DCMAKE_BUILD_TYPE=Release \
-             -DALLOW_DOWNLOADS=ON \
-             -DUSE_SYSTEM_GOOGLE_TEST=OFF \
-             -DUSE_SYSTEM_ORTHANC_SDK=OFF
+  $ mkdir BuildPostgreSQL
+  $ cd BuildPostgreSQL
+  $ cmake ../PostgreSQL -DCMAKE_BUILD_TYPE=Release \
+                        -DALLOW_DOWNLOADS=ON \
+                        -DUSE_SYSTEM_GOOGLE_TEST=OFF \
+                        -DUSE_SYSTEM_ORTHANC_SDK=OFF
   $ make
 
   
@@ -71,7 +73,7 @@ Usage
 .. highlight:: json
 
 You of course first have to :ref:`install Orthanc <binaries>`, with a
-version above 0.9.1. You then have to **create a database** dedicated
+version above 0.9.5. You then have to **create a database** dedicated
 to Orthanc on some PostgreSQL server. Please refer to the `PostgreSQL
 documentation
 <https://www.postgresql.org/docs/current/static/tutorial-createdb.html>`__.
@@ -86,7 +88,6 @@ file::
 
   {
     "Name" : "MyOrthanc",
-    [...]
     "PostgreSQL" : {
       "EnableIndex" : true,
       "EnableStorage" : true,
@@ -97,18 +98,26 @@ file::
       "Password" : "orthanc"
     },
     "Plugins" : [
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLIndex.so",
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLStorage.so"
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLStorage.so"
     ]
   }
 
-Note that ``EnableIndex`` and ``EnableStorage`` must be explicitly set
-to true, otherwise Orthanc will continue to use its default SQLite
-back-end.
+**Important:** The ``EnableIndex`` and ``EnableStorage`` options must
+be explicitly set to ``true``, otherwise Orthanc will continue to use
+its default SQLite back-end and the filesystem storage area.
 
-**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM files are stored as large objects in the database.  This might actually consume more space than the DICOM file itself.  We have observed overhead up to 40%.  However, it seems this overhead is temporary and comes from Write-Ahead Logging.  Check this `discussion <https://groups.google.com/d/msg/orthanc-users/pPzHOpb--iw/QkKZ808gIgAJ>`__ on the Orthanc Users group for more info).  
+**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM
+files are stored as large objects in the database.  This might
+actually consume more space than the DICOM file itself.  We have
+observed overhead up to 40%.  However, it seems this overhead is
+temporary and comes from Write-Ahead Logging.  Check this `discussion
+<https://groups.google.com/d/msg/orthanc-users/pPzHOpb--iw/QkKZ808gIgAJ>`__
+on the Orthanc Users group for more info).
 
-Note that a typical usage of the PostgreSQL plugin is to enable only the ``Index`` and continue using the default filesystem storage for DICOM files.
+Note that a typical usage of the PostgreSQL plugin is to enable only
+the ``Index``, and to use the default filesystem storage for DICOM
+files.
 
 
 
@@ -121,10 +130,10 @@ configuration file. The log will contain an output similar to::
   W0212 16:30:34.576972 11285 main.cpp:632] Orthanc version: 0.8.6
   W0212 16:30:34.577386 11285 OrthancInitialization.cpp:80] Using the configuration from: Configuration.json
   [...]
-  W0212 16:30:34.598053 11285 main.cpp:379] Registering a plugin from: /home/jodogne/Subversion/OrthancPostgreSQL/Build/libOrthancPostgreSQLIndex.so
+  W0212 16:30:34.598053 11285 main.cpp:379] Registering a plugin from: /home/jodogne/Subversion/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so
   W0212 16:30:34.598470 11285 PluginsManager.cpp:258] Registering plugin 'postgresql-index' (version 1.0)
   W0212 16:30:34.598491 11285 PluginsManager.cpp:148] Using PostgreSQL index
-  W0212 16:30:34.608289 11285 main.cpp:379] Registering a plugin from: /home/jodogne/Subversion/OrthancPostgreSQL/Build/libOrthancPostgreSQLStorage.so
+  W0212 16:30:34.608289 11285 main.cpp:379] Registering a plugin from: /home/jodogne/Subversion/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLStorage.so
   W0212 16:30:34.608916 11285 PluginsManager.cpp:258] Registering plugin 'postgresql-storage' (version 1.0)
   W0212 16:30:34.608947 11285 PluginsManager.cpp:148] Using PostgreSQL storage area
   [...]
@@ -140,15 +149,14 @@ instance::
 
   {
     "Name" : "MyOrthanc",
-    [...]
     "PostgreSQL" : {
       "EnableIndex" : true,
       "EnableStorage" : true,
       "ConnectionUri" : "postgresql://username:password@localhost:5432/database"
     },
     "Plugins" : [
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLIndex.so",
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLStorage.so"
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLStorage.so"
     ]
   }
 
@@ -180,7 +188,6 @@ file::
 
   {
     "Name" : "MyOrthanc",
-    [...]
     "PostgreSQL" : {
       "EnableIndex" : true,
       "EnableStorage" : true,
@@ -188,8 +195,8 @@ file::
       "ConnectionUri" : "postgresql://username:password@localhost:5432/database"
     },
     "Plugins" : [
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLIndex.so",
-      "/home/user/OrthancPostgreSQL/Build/libOrthancPostgreSQLStorage.so"
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
+      "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLStorage.so"
     ]
   }
 

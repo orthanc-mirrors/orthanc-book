@@ -7,11 +7,11 @@ Storage folder
 --------------
 
 **By default** (i.e. if no database plugin such as :ref:`PostgreSQL
-<postgresql>` is used), Orthanc stores all the DICOM files it receives
-in a folder called ``OrthancStorage`` on the filesystem. Orthanc also
-associates each incoming DICOM file with a JSON file that summarizes
-all its DICOM tags, which speeds up subsequent processing by avoiding
-a costly DICOM parsing.
+<postgresql>` or :ref:`MySQL <mysql>` is used), Orthanc stores all the
+DICOM files it receives in a folder called ``OrthancStorage`` on the
+filesystem. Orthanc also associates each incoming DICOM file with a
+JSON file that summarizes all its DICOM tags, which speeds up
+subsequent processing by avoiding a costly DICOM parsing.
 
 More generally, the ``OrthancStorage`` folder contains a set of
 so-called **attachments**, that may correspond to either a DICOM file,
@@ -60,8 +60,9 @@ the content of the SQLite database is strongly discouraged for several
 reasons:
 
 * This internal organization is only true when no database plugin is
-  used (e.g. the :ref:`PostgreSQL plugin <postgresql>` can be
-  configured to store the attachments inside a database).
+  used (e.g. the :ref:`PostgreSQL <postgresql>` and :ref:`MySQL
+  <mysql>` plugins can be configured to store the attachments inside a
+  database).
 * Orthanc can be configured to compress the attachments before writing
   them on the disk (cf. the ``StorageCompression`` option).
 * By directly reading the content of ``OrthancStorage``, you bypass

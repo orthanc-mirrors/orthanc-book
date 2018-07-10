@@ -38,16 +38,22 @@ command-line tool is used to force the `WAL replay
 necessary for Orthanc >= 0.7.3.
 
 
-PostgreSQL
-----------
+PostgreSQL and MySQL
+--------------------
 
 The default SQLite engine is well adapted for DICOM routing or for
 image buffering tasks, but not for enterprise scenarios. In such
 cases, you are highly recommended to use the `PostgreSQL back-end
-<http://www.orthanc-server.com/static.php?page=postgresql>`__.
+<http://www.orthanc-server.com/static.php?page=postgresql>`__ or the
+`MySQL/MariaDB back-end
+<http://www.orthanc-server.com/static.php?page=mysql>`__.
 
 If using PostgreSQL, you can do hot backups (i.e. while Orthanc is
 running), and you benefit from all the flexibility of PostgreSQL
 backup. These procedures are out of the scope of this manual.  Please
 check the `official backup and restore manual
 <https://www.postgresql.org/docs/devel/static/backup.html>`__.
+
+Similar backup procedures are available for MySQL and MariaDB as
+well. Please check the official manual about `database backup methods
+<https://dev.mysql.com/doc/refman/8.0/en/backup-methods.html>`__.

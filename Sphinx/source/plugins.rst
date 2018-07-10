@@ -19,8 +19,9 @@ various things, among others:
 * Replacing **the way DICOM images are decoded** (e.g. the official
   :ref:`Web viewer plugin <webviewer>` introduces the decoding of
   JPEG2000 images, which is not available in the core of Orthanc).
-* Replacing the default **database back-end** of Orthanc (that is built
-  upon SQLite) by another (:ref:`PostgreSQL <postgresql>`, MySQL, SQL Server...).
+* Replacing the default **database back-end** of Orthanc (that is
+  built upon SQLite) by another (:ref:`PostgreSQL <postgresql>`,
+  :ref:`MySQL <mysql>`, SQL Server...).
 * Creating **new REST APIs** on the top of the Orthanc built-in API (as in
   in the official :ref:`DICOMweb <dicomweb>` plugin).
 * **Reacting** to the arrival of new DICOM images or other
@@ -53,6 +54,7 @@ From University Hospital of Liège
 From Osimis
 ^^^^^^^^^^^
 
+* :ref:`mysql`
 * :ref:`authorization`
 * `Osimis <http://osimis.io/>`__ maintains an evolution of the
   official Web viewer plugin. The Osimis plugin adds tools for
