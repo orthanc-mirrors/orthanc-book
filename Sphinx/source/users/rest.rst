@@ -710,11 +710,12 @@ To clear the content of the Changes Log, simply DELETE this URI::
 
     $ curl -X DELETE http://localhost:8042/changes
 
-Clearing log of exported resources
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For medical traceability, Orthanc stores a log of all the resources
-that have been exported to remote modalities::
+Log of exported resources
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For medical traceability, Orthanc can be configured to store a log of
+all the resources that have been exported to remote modalities::
 
     $ curl http://localhost:8042/exports
 
@@ -726,6 +727,10 @@ clear this log by DELETE-ing this URI::
 
     $ curl -X DELETE http://localhost:8042/exports
 
+NB: Starting with Orthanc 1.4.0, the ``LogExportedResources`` is set
+to ``false`` by default. If the logging is desired, set this option to
+``true``.
+    
 
 Anonymization and modification
 ------------------------------
