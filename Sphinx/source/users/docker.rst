@@ -45,7 +45,7 @@ update the Docker image to benefit from the latest features::
 If more stability is required, you can select the official release of
 Orthanc to be run::
 
-  $ sudo docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.3.2
+  $ sudo docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.4.0
 
 Passing additional command-line options (e.g. to make Orthanc verbose)
 can be done as follows (note the ``/etc/orthanc`` option that is
@@ -94,7 +94,7 @@ persistent by mapping the ``/var/lib/orthanc/db`` folder of the
 container to some path in the filesystem of your Linux host, e.g.::
 
   $ mkdir /tmp/orthanc-db
-  $ sudo docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.3.2 
+  $ sudo docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.4.0 
 
 
 Whole-slide imaging support
