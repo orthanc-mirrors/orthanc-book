@@ -88,8 +88,8 @@ file::
     "MySQL" : {
       "EnableIndex" : true,
       "EnableStorage" : true,
-      "Host" : "localhost",    // For Windows or network connections
-      "Port" : 3306,           // For Windows or network connections
+      "Host" : "localhost",    // For TCP connections (notably Windows)
+      "Port" : 3306,           // For TCP connections (notably Windows)
       "UnixSocket" : "/var/run/mysqld/mysqld.sock",  // For UNIX on localhost
       "Database" : "orthanc",
       "Username" : "orthanc",
@@ -102,12 +102,16 @@ file::
     ]
   }
 
-**Important:** The ``EnableIndex`` and ``EnableStorage`` options must
+**Important 1:** The ``EnableIndex`` and ``EnableStorage`` options must
 be explicitly set to ``true``, otherwise Orthanc will continue to use
 its default SQLite back-end and the filesystem storage area.
 
+**Important 2:** To force a TCP connection on the ``localhost`` in
+UNIX (i.e. to instruct Orthanc not to use UNIX socket), the
+``UnixSocket`` can be set to the empty string.
+
 **Remark:** When using the ``Storage`` MySQL plugin, the DICOM files
-are stored as blobs in the database.  This might actually consume more
+are stored as blobs in the database. This might actually consume more
 space than the DICOM file itself.
 
 Note that a typical usage of the MySQL plugin is to enable only the
