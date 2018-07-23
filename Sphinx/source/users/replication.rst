@@ -83,12 +83,12 @@ of Orthanc whose REST API is listening on
 
 This method will only succeed if:
 
-* The source Orthanc uses the default SQLite back-end of Orthanc (and
-  not the `PostgreSQL plugin
-  <http://www.orthanc-server.com/static.php?page=postgresql>`_ or the
-  `MySQL/MariaDB plugin
-  <http://www.orthanc-server.com/static.php?page=mysql>`_, for
-  instance),
+* The source Orthanc uses the default storage area on the filesystem
+  (i.e. Orthanc does *not* use one of the "storage plugins", such as
+  for `PostgreSQL
+  <http://www.orthanc-server.com/static.php?page=postgresql>`_ or
+  `MySQL/MariaDB
+  <http://www.orthanc-server.com/static.php?page=mysql>`_),
 * You have command-line access to the source Orthanc, and
 * The transparent :ref:`compression` of the DICOM instances is
   disabled (cf. option ``StorageCompression`` in the
