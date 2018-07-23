@@ -84,11 +84,12 @@ of Orthanc whose REST API is listening on
 This method will only succeed if:
 
 * The source Orthanc uses the default storage area on the filesystem
-  (i.e. Orthanc does *not* use one of the "storage plugins", such as
-  for `PostgreSQL
+  (i.e. the source Orthanc does *not* store its DICOM files using one
+  of the "storage area plugins", such as for `PostgreSQL
   <http://www.orthanc-server.com/static.php?page=postgresql>`_ or
   `MySQL/MariaDB
-  <http://www.orthanc-server.com/static.php?page=mysql>`_),
+  <http://www.orthanc-server.com/static.php?page=mysql>`_ - but it's
+  OK for the source of Orthanc to use any of the "index plugins"),
 * You have command-line access to the source Orthanc, and
 * The transparent :ref:`compression` of the DICOM instances is
   disabled (cf. option ``StorageCompression`` in the
@@ -102,6 +103,8 @@ summaries are not DICOM files, and are thus rejected by the target
 Orthanc server. More information are available `on the discussion
 group
 <https://groups.google.com/d/msg/orthanc-users/Zlhtcpo76qQ/tp8EqaRCAQAJ>`__.
+
+
 
 
 Generic replication
