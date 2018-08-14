@@ -67,6 +67,11 @@ From Osimis
 Index of the contributed plugins
 --------------------------------
 
+* `AWS S3 storage plugin
+  <https://github.com/radpointhq/orthanc-s3-storage>`__: This plugin
+  by `Radpoint <https://www.radpoint.pl/>`__ makes Orthanc store its
+  DICOM files into an `Amazon S3 bucket
+  <https://en.wikipedia.org/wiki/Amazon_S3>`__.
 * `DWV Orthanc Plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__: This plugin by
   Yves Martelli is based on `dwv
