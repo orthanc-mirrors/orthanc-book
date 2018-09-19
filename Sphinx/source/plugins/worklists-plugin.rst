@@ -228,28 +228,18 @@ Therefore, it is usually convenient to mimic the modality with ``findscu`` (prov
 Common problems
 ---------------
 
+- C-FIND requests can be modified by implementing the
+  ``IncomingWorklistRequestFilter`` :ref:`Lua callback
+  <lua-fix-cfind>` since Orthanc 1.4.2. This can be useful to
+  fix/sanitize worklist queries.
+
 - According to the `specification
   <http://dicom.nema.org/MEDICAL/Dicom/2015c/output/chtml/part02/sect_B.4.2.2.3.html>`__,
   modalities should not include their AET name in
   ``ScheduledStationAETitle`` on user initiated queries.  Therefore,
   they do receive worklists that do not concern them. This may be
   handled by the ``FilterIssuerAet`` configuration option. Note that
-  this might in some cases be intended.
+  the default behavior might in some cases be intended.
 
-- Orthanc 1.2.0 does not handle the ``Generic group length`` tags.  
-  You might need to include this kind of :ref:`lua script <lua-fix-cfind>` to remove these tags from the queries::
-  
-    function IncomingFindRequestFilter(query, origin)
-      
-      -- First display the content of the C-Find query
-      PrintRecursive(query)
-      PrintRecursive(origin)
-
-      -- Remove the "Generic group length" tags from the query
-      local v = query
-      v['0008,0000'] = nil
-      v['0010,0000'] = nil
-      v['0020,0000'] = nil
-      return v
-    
-    end
+- Orthanc <= 1.4.1 might behave unexpectedly in the presence of
+  ``Generic group length (0x????, 0x0000)`` tags. Please upgrade.

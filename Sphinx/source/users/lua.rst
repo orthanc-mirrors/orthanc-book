@@ -426,7 +426,7 @@ and sometimes a querying modality might set unexpected DICOM tags
 such situations, it is possible to dynamically fix incoming or
 outgoing C-Find queries using a Lua script.
 
-Fixing incoming C-Find requests can be done by implementing the
+Sanitizing incoming C-Find requests can be done by implementing the
 ``IncomingFindRequestFilter(query, origin)`` callback that is called
 whenever the Orthanc C-Find SCP is queried by a remote modality. For
 instance, here is Lua script to remove a private tag that is specified
@@ -447,9 +447,22 @@ by some manufacturer::
 The ``origin`` argument contains information about which modality has
 issued the request.
 
-Note that, as of Orthanc 1.2.1, the ``IncomingFindRequestFilter`` is 
-not applied to C-Find requests targeting the Modality Worklists plugin.  
-This might be fixed in a `future release <https://bitbucket.org/sjodogne/orthanc/issues/57/c-find-matching-refactoring-required>`__. 
+Note that the ``IncomingFindRequestFilter`` callback is not applied to
+C-Find requests targeting :ref:`modality worklists
+<worklists-plugin>`. Since Orthanc 1.4.2, the corresponding
+``IncomingWorklistRequestFilter`` callback can be used to sanitize
+C-FIND requests against worklists::
+
+  function IncomingWorklistRequestFilter(query, origin)
+    PrintRecursive(query)
+    PrintRecursive(origin)
+
+    -- Implements the same behavior as the "FilterIssuerAet"
+    -- option of the sample worklist plugin
+    query['0040,0100'][1]['0040,0001'] = origin['RemoteAet']
+
+    return query
+  end
 
 Similarly, the callback ``OutgoingFindRequestFilter(query, modality)``
 is invoked whenever Orthanc acts as a C-Find SCU, which gives the
