@@ -240,11 +240,9 @@ different patients imaged in different hospitals might share the same
 level (and not from the patient level) as soon as you deal with an
 application that handles patients from different hospitals.
 
-*Note:* The current version of the :ref:`Orthanc Explorer
-<orthanc-explorer>` interface (1.4.1 at the time of writing) is
-designed for single-hospital scenarios, and thus does not provide
-study-level access. But the core engine of Orthanc does support
-study-level access through its :ref:`REST API <rest>`.
+*Note:* Note that since Orthanc 1.4.0, the :ref:`Orthanc Explorer
+<orthanc-explorer>` interface provides a new tab entitled "Studies"
+for study-level access.
 
 Finally, the patient module is not always fully meaningful. This is
 for instance the case in emergency imaging, where the `radiology
