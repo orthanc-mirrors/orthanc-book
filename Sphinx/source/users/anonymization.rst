@@ -156,3 +156,74 @@ Study and series can be anonymized the same way as they are modified::
 
 As written above, the anonymization process can be fine-tuned by using
 a JSON body.
+
+
+Split/merge of DICOM studies
+----------------------------
+
+Starting with Orthanc 1.4.3, Orthanc supports splitting and merging
+DICOM studies through its REST API.
+
+Splitting
+^^^^^^^^^
+
+Here is the syntax to **split** a DICOM study::
+
+  $ curl http://localhost:8042/studies/6e2c0ec2-5d99c8ca-c1c21cee-79a09605-68391d12/split -d \
+         '{"Series":["6ca4c9f3-5e895cb3-4d82c6da-09e060fe-9c59f228"],"Replace":{"PatientName":"HELLO"},"Remove":["AccessionNumber"]}'
+
+By issuing this command, the series whose :ref:`Orthanc identifier
+<dicom-identifiers>` is
+``6ca4c9f3-5e895cb3-4d82c6da-09e060fe-9c59f228``, and that is part of
+the source study with identifier
+``6e2c0ec2-5d99c8ca-c1c21cee-79a09605-68391d12``, will be removed from
+the source study, and will be moved to a brand new study.
+
+This is done by generating a new value for all the following DICOM
+tags in the DICOM instances of the series of interest:
+``StudyInstanceUID (0x0020, 0x000d)``, ``SeriesInstanceUID (0x0020,
+0x000e)``, and ``SOPInstanceUID (0x0008, 0x0018)``. Here are the
+arguments of this ``/studies/{study}/split`` URI:
+
+* ``Series`` gives the list of series to be separated from the parent
+  study (mandatory option).  These series must all be children of the
+  same source study, that is specified in the URI.
+* ``Replace`` allows to overwrite the DICOM tags that are part of the
+  "Patient Module Attributes" and the "General Study Module
+  Attributes", as specified by the DICOM 2011 standard in Tables C.7-1
+  and C.7-3.
+* ``Remove`` allows to remove DICOM tags from the same modules as in
+  the ``Replace`` options.
+* ``KeepSource`` (Boolean value), if set to ``true``, instructs
+  Orthanc to keep a copy of the original series in the source study.
+  By default, the original series are deleted from Orthanc.
+
+
+Merging
+^^^^^^^
+
+Here is the syntax to **merge** DICOM series, into another DICOM study::
+
+  $ curl http://localhost:8042/studies/6e2c0ec2-5d99c8ca-c1c21cee-79a09605-68391d12/merge -d \
+         '{"Resources":["ef2ce55f-9342856a-aee23907-2667e859-9f3b734d"]}'
+
+By issuing this command, the DICOM series whose :ref:`Orthanc
+identifier <dicom-identifiers>` is
+``ef2ce55f-9342856a-aee23907-2667e859-9f3b734d``, will be merged into
+target study with identifier
+``6e2c0ec2-5d99c8ca-c1c21cee-79a09605-68391d12``.
+
+As in the case of splitting, this is done by updating the following
+DICOM tags: ``StudyInstanceUID (0x0020, 0x000d)``, ``SeriesInstanceUID
+(0x0020, 0x000e)``, and ``SOPInstanceUID (0x0008,
+0x0018)``. Furthermore, all the DICOM tags that are part of the
+"Patient Module Attributes" and the "General Study Module Attributes"
+(as specified by the DICOM 2011 standard in Tables C.7-1 and C.7-3),
+are modified to match the target study. Here are the
+arguments of this ``/studies/{study}/merge`` URI:
+
+* ``Resources`` gives the list of source studies or source series
+  that are to be merged into the target study.
+* ``KeepSource`` (Boolean value), if set to ``true``, instructs
+  Orthanc to keep the source studies and series.  By default, the
+  original resources are deleted from Orthanc.
