@@ -121,6 +121,9 @@ Here is a possible answer from Orthanc::
 This is once again a JSON file. Note how Orthanc gives you a summary
 of the main DICOM tags that correspond to the patient level.
 
+
+.. _browsing-hierarchy:
+
 Browsing from the patient down to the instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -327,16 +330,47 @@ Downloading images
 
 .. highlight:: bash
 
-It is also possible to download a preview PNG image that corresponds to some DICOM instance::
+As :ref:`explained above <browsing-hierarchy>`, the raw DICOM file
+corresponding to a single instance can be retrieved as follows::
 
-    $ curl http://localhost:8042/instances/e668dcbf-8829a100-c0bd203b-41e404d9-c533f3d4/preview > Preview.png
+  $ curl http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/file > Instance.dcm
 
-The resulting image will be a standard graylevel PNG image that can be opened by any painting software.
+It is also possible to download a preview PNG image that corresponds
+to some DICOM instance::
 
+  $ curl http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/preview > Preview.png
 
+The resulting image will be a standard graylevel PNG image (with 8
+bits per pixel) that can be opened by any painting software. The
+dynamic range of the pixel data is stretched to the [0..255] range.
+An equivalent JPEG image can be downloaded by setting the `HTTP header
+<https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`__
+``Accept`` to ``image/jpeg``::
+
+  $ curl -H 'Accept: image/jpeg' http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/preview > Preview.png
+
+If you don't want to stretch the dynamic range, and create a 8bpp or
+16bpp PNG image, you can use the following URIs::
+
+  $ curl http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/image-uint8 > full-8.png
+  $ curl http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/image-uint16 > full-16.png
+
+In these images, the values are cropped to the maximal value that can
+be encoded by the target image format. The
+``/instances/{...}/image-int16`` is available as well to download
+signed DICOM pixel data.
+
+Since Orthanc 1.4.2, it is also possible to download such images in
+the generic `PAM format
+<https://en.wikipedia.org/wiki/Netpbm#PAM_graphics_format>`__::
+
+  $ curl -H 'Accept: image/x-portable-arbitrarymap' http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/image-uint16 > full-16.pam
+
+Users of Matlab or Octave can find related information :ref:`in the
+dedicated section <matlab>`.
+
+  
 .. _changes:
-
-
 
 Sending resources to remote modalities
 --------------------------------------

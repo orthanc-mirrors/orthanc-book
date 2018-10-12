@@ -1,3 +1,5 @@
+.. _matlab:
+
 Interfacing with Matlab and Octave
 ==================================
 
