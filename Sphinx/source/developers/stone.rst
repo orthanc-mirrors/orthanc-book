@@ -9,5 +9,5 @@ work-in-progress.
 
 For the time being, documentation is provided through various sample
 applications that can be found in the `source distribution
-<https://bitbucket.org/sjodogne/orthanc-stone/src/default/Samples/>`__.
+<https://bitbucket.org/sjodogne/orthanc-stone/src/default/Applications/Samples/>`__.
 
