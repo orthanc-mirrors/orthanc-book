@@ -340,7 +340,7 @@ identifiers <orthanc-ids>` corresponding to the resources (patients,
 studies, series and/or instances) to be exported.
 
 Remark 1: Additional HTTP headers can be added with an optional
-``HttpHeaders" argument`` as for QIDO-RS and WADO-RS. This might be
+``HttpHeaders`` argument as for QIDO-RS and WADO-RS. This might be
 useful e.g. for cookie-based session management.
 
 Remark 2: One call to this ``.../stow`` primitive will possibly result
