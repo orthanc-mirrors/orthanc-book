@@ -418,7 +418,8 @@ would use the following command to send it::
 The ``/sample/`` component of the URI corresponds to the identifier of
 the remote modality, as specified above in the configuration file.
 
-Note that you can send isolated DICOM instances with this command, but also entire patients, studies or series.
+Note that you can send isolated DICOM instances with this command, but
+also entire patients, studies or series.
 
 Bulk Store SCU
 ^^^^^^^^^^^^^^
@@ -426,19 +427,21 @@ Bulk Store SCU
 .. highlight:: bash
 
 Each time a POST request is made to ``/modalities/.../store``, a new
-DICOM connection is possibly established. This may lead to a large
-communication overhead if sending multiple isolated instances.
+DICOM association is possibly established. This may lead to a large
+communication overhead if sending multiple isolated instances by
+making one REST call for each of these instances.
 
 To circumvent this problem, you have 2 possibilities:
 
 1. Set the ``DicomAssociationCloseDelay`` option in the
    :ref:`configuration file <configuration>` to a non-zero value. This
    will keep the DICOM connection open for a certain amount of time,
-   waiting for new instances to be routed.
+   waiting for new instances to be routed. This is useful if 
+   autorouting images :ref:`using Lua <lua-auto-routing>`.
 
-2. If you do not want to keep the connection open but inactive, it is
-   possible to send multiple instances with a single POST request
-   (so-called "Bulk Store SCU", available from Orthanc 0.5.2)::
+2. It is possible to send multiple instances with a single POST
+   request (so-called "Bulk Store SCU", available from Orthanc
+   0.5.2)::
 
     $ curl -X POST http://localhost:8042/modalities/sample/store -d '["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88","d5604121-7d613ce6-c315a5-a77b3cf3-9c253b23","cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e"]'
 
@@ -446,6 +449,11 @@ To circumvent this problem, you have 2 possibilities:
    this case, a single DICOM connection is used. `Sample code is
    available
    <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
+
+   Note that the list of resources to be sent can include the
+   :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
+   studies or series as well.
+
 
 
 Performing Query/Retrieve and Find with REST
