@@ -16,6 +16,9 @@ here are some tasks you can take in charge that would greatly help us:
     <http://www.orthanc-server.com/static.php?page=blog#survey>`_.
   - Improve and translate the `Wikipedia pages
     <https://en.wikipedia.org/wiki/Orthanc_(software)>`_ about Orthanc.
+  - Cite the `reference paper about Orthanc
+    <https://link.springer.com/article/10.1007/s10278-018-0082-y>`__
+    in your research work.
   - Answer questions posted to the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
   - Improve the text of the `Orthanc Book
