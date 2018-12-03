@@ -186,16 +186,29 @@ Finally, you can start Orthanc::
 Debugging
 ---------
 
+.. highlight:: text
+
 For debugging purpose, you can start an interactive bash session as
 follows::
 
   $ sudo docker run -i -t --rm --entrypoint=bash jodogne/orthanc
   $ sudo docker run -i -t --rm --entrypoint=bash jodogne/orthanc-plugins
 
-For developers, the images ``jodogne/orthanc-debug`` contain the
-Orthanc core compiled in debug mode (with runtime assertions enabled,
-and including debugging symbols). A ``gdb`` session can be started as
-follows::
+For developers and power users, the images ``jodogne/orthanc-debug``
+contain the Orthanc core compiled in debug mode (i.e. with runtime
+assertions enabled, and including debugging symbols). A ``gdb``
+session can be started as follows::
 
-  $ sudo docker run -i -t --rm --entrypoint=bash --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 orthanc-debug
-  # gdb --args Orthanc /etc/orthanc/
+  $ sudo docker run -i -t --rm --entrypoint=bash --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 jodogne/orthanc-debug
+  # gdb --args Orthanc /etc/orthanc/ --verbose
+
+Note that:
+
+* The plugins are not available in this image yet.
+
+* The Orthanc source code can be found in folder ``/root/orthanc``.
+
+* The build artifacts can be found in folder ``/root/orthanc/Build``.
+
+* This command launches the mainline version. To start a released version,
+  use e.g. ``jodogne/orthanc-debug:1.4.2``.
