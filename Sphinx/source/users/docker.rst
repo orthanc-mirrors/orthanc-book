@@ -191,3 +191,11 @@ follows::
 
   $ sudo docker run -i -t --rm --entrypoint=bash jodogne/orthanc
   $ sudo docker run -i -t --rm --entrypoint=bash jodogne/orthanc-plugins
+
+For developers, the images ``jodogne/orthanc-debug`` contain the
+Orthanc core compiled in debug mode (with runtime assertions enabled,
+and including debugging symbols). A ``gdb`` session can be started as
+follows::
+
+  $ sudo docker run -i -t --rm --entrypoint=bash --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 orthanc-debug
+  # gdb --args Orthanc /etc/orthanc/
