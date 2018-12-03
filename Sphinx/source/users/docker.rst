@@ -197,9 +197,9 @@ follows::
 For developers and power users, the images ``jodogne/orthanc-debug``
 contain the Orthanc core compiled in debug mode (i.e. with runtime
 assertions enabled, and including debugging symbols). A ``gdb``
-session can be started as follows::
+command-line session can be started as follows::
 
-  $ sudo docker run -i -t --rm --entrypoint=bash --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 jodogne/orthanc-debug
+  $ sudo docker run -i -t --rm --entrypoint=bash --network=host --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 jodogne/orthanc-debug
   # gdb --args Orthanc /etc/orthanc/ --verbose
 
 Note that:
