@@ -161,7 +161,7 @@ a JSON body.
 Split/merge of DICOM studies
 ----------------------------
 
-Starting with Orthanc 1.4.3, Orthanc supports splitting and merging
+Starting with Orthanc 1.5.0, Orthanc supports splitting and merging
 DICOM studies through its REST API.
 
 Splitting
