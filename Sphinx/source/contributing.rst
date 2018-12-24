@@ -83,5 +83,5 @@ here are some tasks you can take in charge that would greatly help us:
     + Currently, Osimis is the only company ensuring such corporate
       services according to an open-source business model, but others
       might show up in the future. `Please warn us
-      <mailto:s.jodogne@gmail.com>`__ if your know about another such
+      <mailto:s.jodogne@orthanc-labs.com>`__ if your know about another such
       company!

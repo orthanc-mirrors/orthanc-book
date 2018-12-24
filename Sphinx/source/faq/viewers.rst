@@ -11,7 +11,7 @@ software for medical imaging, we do not publish the list of
 proprietary DICOM viewers that are compatible with Orthanc. Here is a
 list of free and open-source viewers that are known to be compatible
 with Orthanc (do not hesitate to `warn us
-<mailto:s.jodogne@gmail.com>`__ about other compatible FOSS):
+<mailto:s.jodogne@orthanc-labs.com>`__ about other compatible FOSS):
 
 * `Horos <https://www.horosproject.org/>`__.
 * `Gingko CADx <https://www.ginkgo-cadx.com/>`__ (a
