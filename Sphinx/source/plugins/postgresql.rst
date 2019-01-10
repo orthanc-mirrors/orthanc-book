@@ -95,7 +95,8 @@ file::
       "Port" : 5432,
       "Database" : "orthanc",
       "Username" : "orthanc",
-      "Password" : "orthanc"
+      "Password" : "orthanc",
+      "EnableSsl" : false     // New in version 3.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -107,7 +108,7 @@ file::
 be explicitly set to ``true``, otherwise Orthanc will continue to use
 its default SQLite back-end and the filesystem storage area.
 
-**Remark:** When using the ``Storage`` PostgreSQL plugin, the DICOM
+**Remark 1:** When using the ``Storage`` PostgreSQL plugin, the DICOM
 files are stored as large objects in the database.  This might
 actually consume more space than the DICOM file itself.  We have
 observed overhead up to 40%.  However, it seems this overhead is
@@ -115,9 +116,20 @@ temporary and comes from Write-Ahead Logging.  Check this `discussion
 <https://groups.google.com/d/msg/orthanc-users/pPzHOpb--iw/QkKZ808gIgAJ>`__
 on the Orthanc Users group for more info).
 
-Note that a typical usage of the PostgreSQL plugin is to enable only
-the ``Index``, and to use the default filesystem storage for DICOM
-files.
+**Remark 2:** A typical usage of the PostgreSQL plugin is to enable
+only the ``Index``, and to use the default filesystem storage for
+DICOM files (on a NAS with proper disaster recovery strategies). This
+setup provides best performance for large-scale databases.
+
+**Remark 3:** Setting the ``EnableSsl`` to ``true`` forces the use of
+`SSL connections
+<https://www.postgresql.org/docs/current/libpq-ssl.html>`__ between
+Orthanc and the PostgreSQL server. It is a synonym for
+``sslmode=require`` in connections URI (see below). Setting
+``EnableSsl`` to ``false`` corresponds to ``sslmode=disable``
+(i.e. SSL is not used, even if it is both available in Orthanc and
+PostgreSQL). To choose other values for the SSL mode (i.e. ``allow``
+and ``prefer``), please use connection URIs.
 
 
 
@@ -152,7 +164,7 @@ instance::
     "PostgreSQL" : {
       "EnableIndex" : true,
       "EnableStorage" : true,
-      "ConnectionUri" : "postgresql://username:password@localhost:5432/database"
+      "ConnectionUri" : "postgresql://username:password@localhost:5432/database?sslmode=prefer"
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
