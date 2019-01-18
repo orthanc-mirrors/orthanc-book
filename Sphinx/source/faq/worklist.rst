@@ -29,5 +29,5 @@ on the filesystem. This sample plugin mimics the behavior of the
 For more complex or integrated workflows where you must implement a
 custom MWL plugin, please check the `documentation of the part of the
 Orthanc plugin SDK
-<https://orthanc.chu.ulg.ac.be/sdk/group__Worklists.html>`__ that is
-related to the management of worklists.
+<http://sdk.orthanc-server.com/group__DicomCallbacks.html#ga23080c4e871b8428ede61d9841c10d76>`__
+that is related to the management of worklists.
