@@ -202,6 +202,10 @@ command-line session can be started as follows::
   $ sudo docker run -i -t --rm --entrypoint=bash --network=host --cap-add=SYS_PTRACE -p 4242:4242 -p 8042:8042 jodogne/orthanc-debug
   # gdb --args Orthanc /etc/orthanc/ --verbose
 
+Exceptions can be automatically caught by launching ``gdb`` as follows::
+
+  # gdb --ex 'catch t' --ex r --ex bt --args ./Orthanc /etc/orthanc/ --verbose
+ 
 Note that:
 
 * The plugins are not available in this image yet.
