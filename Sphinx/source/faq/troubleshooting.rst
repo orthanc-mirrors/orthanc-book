@@ -76,6 +76,10 @@ Performance issues
 
   As a rule of thumb, the performance of the default SQLite engine
   built in Orthanc should run fine up to about 50,000 DICOM instances.
+  However, we have seen Orthanc running fairly well with more than 2
+  millions of instances. This limit really depends upon your
+  application, and upon the patterns of access to the database.
+
   Also check out the section about the :ref:`scalability`.
 
 
