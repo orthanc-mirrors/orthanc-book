@@ -20,16 +20,16 @@ to the speed of :ref:`DICOM C-FIND <dicom-find>`.
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure that :ref:`run-time debug assertions <troubleshooting>`
-  are turned off. A warning will show in the logs if this is not the
-  case.
-
 * Make sure to use the latest release of Orthanc (1.5.3 at the time of
   writing).
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
   <postgresql>` to store the database index (3.0 at the time of
   writing). Make sure that ``EnableIndex`` is set to ``true``.
+
+* Make sure that :ref:`run-time debug assertions <troubleshooting>`
+  are turned off. A warning will show in the logs if this is not the
+  case.
 
 * We suggest to use the default filesystem storage area. Of course,
   make sure that the filesystem is properly backup, and that
@@ -55,6 +55,5 @@ presence of large databases:
   mode, especially at the startup of Orthanc. The logs may contain
   very important information regarding performance.
 
-* Make sure to read guides about the :ref:`tuning of PostgreSQL
+* Make sure to read guides about the `tuning of PostgreSQL
   <https://wiki.postgresql.org/wiki/Performance_Optimization>`__.
-
