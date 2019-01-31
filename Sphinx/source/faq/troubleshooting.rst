@@ -76,6 +76,7 @@ Performance issues
 
   As a rule of thumb, the performance of the default SQLite engine
   built in Orthanc should run fine up to about 50,000 DICOM instances.
+  Also check out the section about the :ref:`scalability`.
 
 
 * **Orthanc Explorer is slow under Windows on the localhost**:

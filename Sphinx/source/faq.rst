@@ -13,6 +13,7 @@ General questions
    faq/dicom.rst
    faq/query-retrieve.rst
    faq/compiling.rst
+   faq/scalability.rst
    faq/features.rst
    faq/rest-samples.rst
    faq/proprietary.rst
