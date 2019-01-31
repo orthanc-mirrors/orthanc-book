@@ -40,7 +40,7 @@ presence of large databases:
   correctly configured in that respect.
 
 * We suggest to use the default filesystem storage area. Of course,
-  make sure that the filesystem is properly backup, and that
+  make sure that the filesystem is properly backed up, and that
   technologies such as RAID are enabled. Make sure that the option
   ``EnableStorage`` of the PostgreSQL plugins is set to ``false``.
 
