@@ -49,7 +49,7 @@ presence of large databases:
 
 * The :ref:`Orthanc configuration file <configuration>` should have
   the following values for performance-related options (but make sure
-  to understand their implication):
+  to understand their implications):
   
   * ``StorageCompression = false``
   * ``LimitFindResults = 100``
