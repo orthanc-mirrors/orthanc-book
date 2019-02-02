@@ -370,7 +370,7 @@ to problems
 if it deals with tags wrongly interpreted as numbers by Lua.
 
 For more evolved auto-routing scenarios, remember that Lua scripts
-:ref:`have full to the REST API of Orthanc <lua-rest>`. This is
+:ref:`have full access to the REST API of Orthanc <lua-rest>`. This is
 illustrated by the ``AutoroutingModification.lua`` sample available in
 the source distribution of Orthanc::
 
