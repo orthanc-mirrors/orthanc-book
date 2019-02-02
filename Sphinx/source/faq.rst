@@ -16,6 +16,7 @@ General questions
    faq/scalability.rst
    faq/features.rst
    faq/rest-samples.rst
+   faq/series-completion.rst
    faq/proprietary.rst
 
 Features supported by Orthanc
