@@ -108,6 +108,21 @@ Performance issues
   CMake
   <https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`__.
 
+Checking DICOM file integrity
+-----------------------------
+Orthanc stores, in its database, an `MD5 hash <https://en.wikipedia.org/wiki/MD5>`_ of the DICOM file contents.
+
+This MD5 corresponds to the hash of the DICOM file in memory, before it is written to the disk by Orthanc. This information is safely stored inside the database for any incoming DICOM file (provided that the ``StoreMD5ForAttachments`` configuration option is set to ``true``).
+
+It ispossible to ask Orthanc to check by itself whether the DICOM file was corrupted (i.e. to check whether the MD5 hash stored in the database corresponds to the hash of the file on the disk):
+
+``curl -X POST http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/verify-md5 -d ''``
+
+This MD5 may be different if errors occurred while the DICOM file was initially written to the storage, or if the file contents were tampered with afterwards.
+
+You can retrieve the stored MD5 hash of a DICOM instance as follows:
+
+``curl http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/md5``
 
 Windows-specific issues
 -----------------------
