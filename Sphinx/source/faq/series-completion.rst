@@ -14,4 +14,3 @@ However, for some types of images (such as cardiac MRI), the DICOM modules might
 this information. If such a tag is available for a series, Orthanc will either report a *Complete* status
 (if all the instances have been received), *Incomplete* (if some instances are [still] missing) or *Inconsistent*
 if there is an error inside the numbering of the instances.
-
