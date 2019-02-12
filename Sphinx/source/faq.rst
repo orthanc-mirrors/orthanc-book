@@ -9,6 +9,7 @@ General questions
 .. toctree::
    :maxdepth: 1
 
+   faq/licensing.rst
    faq/troubleshooting.rst
    faq/dicom.rst
    faq/query-retrieve.rst
