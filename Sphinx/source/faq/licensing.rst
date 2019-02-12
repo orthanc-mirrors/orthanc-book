@@ -75,7 +75,7 @@ prevented ("No"), or restricted ("Dual licensing"):
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Usage of the Orthanc ecosystem                      | Permissive    | GPLv3 | AGPLv3 | Internal use | Proprietary software   | Proprietary cloud |
 |                                                     | (MIT, BSD,    |       |        |              | distributed to clients | platform          |
-|                                                     | Apache2...)   |       |        |              |                        |                   |
+|                                                     | Apache...)    |       |        |              |                        |                   |
 +=====================================================+===============+=======+========+==============+========================+===================+
 | Using Orthanc as such, even if some AGPL-licensed   | N/A           | N/A   | N/A    | Yes          | Yes                    | Yes               |
 | plugin is installed                                 |               |       |        |              |                        |                   |
@@ -124,10 +124,23 @@ prevented ("No"), or restricted ("Dual licensing"):
   must mention the copyright of the Orthanc project.
 
 * An Orthanc plugin cannot be licensed under a permissive license
-  (MIT, BSD, Apache2...) because it must interface with the Orthanc
-  SDK that is licensed under GPLv3. Check out the `license
-  compatibility matrix on Wikipedia
+  (MIT, BSD, Apache...) because it cannot run independently of the
+  Orthanc SDK, which implies that the plugin and the Orthanc core form
+  a single combined program, which in turn means that the plugin
+  should be licensed under GPLv3 by `copyleft
+  <https://en.wikipedia.org/wiki/Copyleft>`__ contamination. Check out
+  the `license compatibility matrix on Wikipedia
   <https://en.wikipedia.org/wiki/License_compatibility#Compatibility_of_FOSS_licenses>`__.
+  Here is the corresponding entry about this topic in the `GPL FAQ
+  <https://www.gnu.org/licenses/gpl-faq.en.html#GPLPlugins>`__: *"If
+  the main program dynamically links plug-ins, and they make function
+  calls to each other and share data structures, we believe they form
+  a single combined program, which must be treated as an extension of
+  both the main program and the plug-ins. [...] If the main program
+  and the plugins are a single combined program then this means you
+  must license the plug-in under the GPL or a GPL-compatible free
+  software license and distribute it with source code in a
+  GPL-compliant way."*
 
 * If you deal with medical applications in Europe, note that Osimis
   sells **CE-approved** versions of a Web viewer plugin.
@@ -164,7 +177,9 @@ internal code:
   fully uncoupled from the Orthanc project, and keep the intellectual
   property of their developments. Such contributors are however kindly
   invited to index their contributions in the `dedicated repository on
-  GitHub <https://github.com/jodogne/OrthancContributed>`__.
+  GitHub <https://github.com/jodogne/OrthancContributed>`__, and
+  contributed plugins should also be indexed in the :ref:`Orthanc Book
+  <plugins-contributed>`.
 
 * **Internal code** refers to source code that only makes sense if
   embedded within the Orthanc core or within one of the official

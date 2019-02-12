@@ -98,4 +98,4 @@ Index of the contributed plugins
 
 *Remark:* Do not hesitate to `contact us
 <http://www.orthanc-server.com/static.php?page=contact>`__ if you have
-developed a plugin so that we can include it in the list above!
+developed a plugin so that we can promote it in the list above!
