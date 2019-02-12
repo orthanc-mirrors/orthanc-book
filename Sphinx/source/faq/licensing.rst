@@ -62,7 +62,7 @@ Guidelines
 Over the years, it was observed that people fear the use of GPL and
 AGPL licenses, that are wrongly considered as preventing commercial
 uses. This is most often a wrong assumption, given that the Orthanc
-server that is a standalone executable, not a software library.
+server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
 situations, and indicates whether the use is accepted ("Yes"),
@@ -208,8 +208,9 @@ issue a `pull request
   may be modified, yet even rejected. A rejection might for instance
   occur if your contribution does not match the Orthanc roadmap, does
   not meet our high-quality code standards, or breaks backward
-  compatibility. Please be sure that we warmly welcome contributions,
-  but that we are quite strict.
+  compatibility. Please be sure that we warmly welcome and appreciate
+  your contributions, but be aware of the fact that we are quite
+  strict, and that the review process might take time.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users
