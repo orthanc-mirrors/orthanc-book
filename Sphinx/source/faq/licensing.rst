@@ -188,6 +188,11 @@ internal code:
   described in the sections below.
 
 
+**Important:** You should always favor the :ref:`creation of a new
+plugin <creating-plugins>` over modifications to the internal code
+(see below)!
+
+
 
 Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -259,7 +264,19 @@ issue a `pull request
   not meet our high-quality code standards, or breaks backward
   compatibility. Please be sure that we warmly welcome and appreciate
   your contributions, but be aware of the fact that we are quite
-  strict, and that the review process might take time.
+  strict, and that the review process might take time. This is why the
+  recommended way of contributing to Orthanc is always by
+  :ref:`creating contributed plugins <creating-plugins>`.
+
+* Your pull requests should be kept **as small as possible**, and
+  should be focused on one very specific issue or feature. Large
+  architectural changes are reserved for the core development team of
+  Orthanc, as we must follow our `long-term roadmap
+  <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
+
+* Unit testing is mandatory. Integration tests should be submitted to
+  the `dedicated repository
+  <http://bitbucket.org/sjodogne/orthanc-tests/>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

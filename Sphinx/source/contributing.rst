@@ -41,14 +41,12 @@ here are some tasks you can take in charge that would greatly help us:
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
     repository, via pull requests.
-  - The Orthanc project will also happily accept **external patches**
-    in the core of Orthanc and in its associated official
-    plugins. Such patches can either be sent to the `mailing list
-    <https://groups.google.com/forum/#!forum/orthanc-users>`_ or via a
-    `pull request <https://bitbucket.org/sjodogne/orthanc/pull-requests/>`_.
 
 * **Coding tasks**:
       
+  - The Orthanc project will happily accept patches in the core of
+    Orthanc and in its associated official plugins. Please read the
+    :ref:`dedicated FAQ entry <cla>`.
   - Interface Orthanc with other software (e.g. 3D Slicer,
     Matlab/Octave, Python, Horos, dicompyler...). Check the `already
     supported frameworks <http://www.orthanc-server.com/static.php?page=resources>`_.
