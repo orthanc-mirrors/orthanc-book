@@ -92,13 +92,14 @@ prevented ("No"), or restricted ("Dual licensing"):
 | is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Modifying the Orthanc GPL-licensed code, or the     | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
-| code of an official GPL-licensed Orthanc plugin,    |               |       |        |              |                        |                   |
-| or reusing such code in another project             |               |       |        |              |                        |                   |
+| Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
+| code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |
+| some GPL-licensed plugin, or reusing their original |               |       |        |              |                        |                   |
+| code in a third-party system                        |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Modifying the code of an official AGPL-licensed     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
-| Orthanc plugin, or reusing such code in another     |               |       |        |              |                        |                   |
-| project                                             |               |       |        |              |                        |                   |
+| Using a modified version of some AGPL-licensed      | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
+| third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Using the :ref:`Stone of Orthanc <stone>` library   | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
@@ -108,15 +109,16 @@ prevented ("No"), or restricted ("Dual licensing"):
 * The wording "third-party system" is very broad, as it encompasses
   many possibilities. It can for instance be a Web application, a
   heavyweight desktop application, an automated script, or more
-  generally any system that uses Orthanc as a service in its global
-  architecture.
+  generally any system that takes advantage of Orthanc as a service in
+  its global architecture.
 
-* If your use case falls in a "**Dual licensing**" cell, please get
-  in touch with `Osimis <http://osimis.io/>`__, the official
-  commercial partner of the Orthanc project that is the only entity
-  entitled to grant a `license exception
+* If your use case falls in a "**Dual licensing**" cell, please get in
+  touch with `Osimis <http://osimis.io/>`__, the commercial partner of
+  the Orthanc project that is the only entity entitled to grant a
+  `license exception
   <https://www.fsf.org/blogs/rms/selling-exceptions>`__ to your
-  company.
+  company for the Orthanc core and its :ref:`associated official
+  plugins <plugins-official>`.
 
 * If you reuse code from Orthanc or one of its associated plugins, you
   must mention the copyright of the Orthanc project.
@@ -134,11 +136,11 @@ prevented ("No"), or restricted ("Dual licensing"):
   <https://link.springer.com/article/10.1007%2Fs10278-018-0082-y>`__
   in your scientific work.
 
-* This is our own technical interpretation of the GPLv3+ and AGPLv3+
-  in the very specific context of Orthanc. It is not intended to be a
-  complete guide to copyleft licensing. Please get in touch with the
-  `Free Software Foundation <https://www.fsf.org/>`__ for more legal
-  information.
+* This is our own simplified, technical interpretation of the GPLv3+
+  and AGPLv3+ in the very specific context of Orthanc. It is not
+  intended to be a complete guide to copyleft licensing. Please get in
+  touch with the `Free Software Foundation <https://www.fsf.org/>`__
+  for more legal information.
 
 
 .. _cla:
@@ -146,20 +148,20 @@ prevented ("No"), or restricted ("Dual licensing"):
 Contributing to the code of Orthanc
 -----------------------------------
 
-Third-party vs. internal code
+Contributed vs. internal code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is important to make the distinction between third-party code
-and internal code:
+It is important to make the distinction between contributed code and
+internal code:
 
-* **Third-party code** refers to source code that takes advantage of
+* **Contributed code** refers to source code that takes advantage of
   Orthanc and/or that extends Orthanc, such as new :ref:`plugins
   <plugins>`, :ref:`Lua scripts <lua>`, or any higher-level
   application that uses the :ref:`REST API <rest>` of Orthanc. This
   code can live outside of the official source repositories of the
-  Orthanc ecosystem. The third-party contributors can distribute such
-  code on whatever platform they prefer, in a way that is fully
-  uncoupled from the Orthanc project, and keep the intellectual
+  Orthanc ecosystem. External contributors can distribute such
+  contributed code on whatever platform they prefer, in a way that is
+  fully uncoupled from the Orthanc project, and keep the intellectual
   property of their developments. Such contributors are however kindly
   invited to index their contributions in the `dedicated repository on
   GitHub <https://github.com/jodogne/OrthancContributed>`__.
@@ -206,8 +208,8 @@ is the procedure:
 
 **Important:** This form is only valid for individual contributors
 acting as physical persons. If your company wishes to become
-contributor, please request a Corporate CLA at the same e-mail
-address: ``orthanc-legal@osimis.io``.
+contributor as a juridical person, please request a Corporate CLA at
+the same e-mail address: ``orthanc-legal@osimis.io``.
 
 
 Submitting code
