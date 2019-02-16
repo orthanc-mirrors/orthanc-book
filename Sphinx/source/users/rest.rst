@@ -585,8 +585,8 @@ Performing Retrieve (C-Move)
 .. highlight:: bash
 
 You can perform a C-Move to retrieve all studies within the original
-query using a post command and identifying the Modality to be one to
-in the POST contents::
+query using a post command and identifying the Modality (named in this 
+example `"Orthanc"`), to be one to in the POST contents::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data Orthanc
 
@@ -595,7 +595,19 @@ specifying that individual content item::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
 
-  
+If C-Moves take too long (for example, performing a C-Move of a big study)
+you may run the request in asynchronous fashion:
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data '{"TargetAet":"Orthanc","Synchronous":false}'
+
+The answer of this POST request is the job ID taking care of the C-Move
+
+  {
+      "ID" : "11541b16-e368-41cf-a8e9-3acf4061d238",
+      "Path" : "/jobs/11541b16-e368-41cf-a8e9-3acf4061d238"
+  }
+
+
 Performing Finds within Orthanc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. highlight:: bash
