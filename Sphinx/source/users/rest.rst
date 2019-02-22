@@ -390,19 +390,42 @@ modality::
 
     ...
     "DicomModalities" : {
-      "sample" : [ "STORESCP", "127.0.0.1", 2000 ]
+      "sample" : [ "ORTHANCA", "127.0.0.1", 2000 ], // short version
+      "sample2" : {                                 // long version
+        "AET" : "ORTHANCB",
+        "Port" : 2001,
+        "Host" : "127.0.0.1",
+        "Manufacturer" : "Generic",
+        "AllowEcho" : true,
+        "AllowFind" : true,
+        "AllowMove" : true,
+        "AllowStore" : true
+      }
     },
     ...
 
 .. highlight:: bash
 
-Such a configuration would enable Orthanc to connect to another DICOM
-store (for instance, another Orthanc instance) that listens on the
-localhost on the port 2000. The modalities that are known to Orthanc
+Such a configuration would enable Orthanc to connect to two DICOM
+stores (for instance, other Orthanc instances) that listens on the
+localhost on the port 2000 & 2001. The modalities that are known to Orthanc
 can be queried::
 
-    $ curl http://localhost:8042/modalities
+    $ curl http://localhost:8042/modalities?expand
 
+The modalities can then be updated through the API too::
+
+    $ curl -v -X PUT http://localhost:8042/modalities/sample -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
+
+
+Note that, by default, modalities are stored in Orthanc configuration files
+and are updated in Orthanc memory only.  If you want your modifications
+to be persistent, you should configure Orthanc to store its modalities
+in the database.  This is done through this configuration::
+
+    ...
+    "DicomModalitiesInDatabase" : true,
+    ...
 
 Sending One Resource
 ^^^^^^^^^^^^^^^^^^^^
