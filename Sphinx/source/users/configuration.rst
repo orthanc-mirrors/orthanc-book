@@ -23,7 +23,7 @@ The default configuration file would:
 
 However, we recommend that you start from an empty configuration file
 and only specify the options for which you don't wan't to use
-the default value.  In exemple, a simple configuration file would be::
+the default value.  In example, a simple configuration file would be::
 
     {
         "Name": "My archive",
@@ -33,7 +33,7 @@ the default value.  In exemple, a simple configuration file would be::
     }
 
 It's also a very good practice to split your configuration files per topic.
-In exemple, have a ``dicom.json`` for everything that is related to DICOM,
+In example, have a ``dicom.json`` for everything that is related to DICOM,
 a ``http.json`` for all HTTP related configurations, one file per plugin...  
 This is how the configuration files are provided with the Windows Installer.
 
