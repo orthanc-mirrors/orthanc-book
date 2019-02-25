@@ -369,6 +369,9 @@ the generic `PAM format
 Users of Matlab or Octave can find related information :ref:`in the
 dedicated section <matlab>`.
 
+
+.. _peering:
+
 Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
 ------------------------------------------------------
 

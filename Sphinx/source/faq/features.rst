@@ -22,7 +22,7 @@ Furthermore, as HTTP(S) communications are generally not blocked by
 firewalls (contrarily to the DICOM protocol that is inherently an
 Intranet protocol and that often requires the setup of VPN tunnels),
 it is much easier to setup communications of medical images through
-the Internet with Orthanc peers.
+the Internet with :ref:`Orthanc peers <peering>`.
 
 
 .. _recycling:
