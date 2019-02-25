@@ -369,11 +369,106 @@ the generic `PAM format
 Users of Matlab or Octave can find related information :ref:`in the
 dedicated section <matlab>`.
 
-  
-.. _changes:
+Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
+------------------------------------------------------
 
-Sending resources to remote modalities
---------------------------------------
+Orthanc can send its DICOM instances to remote Orthanc over HTTP/HTTPS through its Rest API. 
+This process can be triggered by the REST API.
+
+Configuration
+^^^^^^^^^^^^^
+
+.. highlight:: json
+
+You first have to declare the Url of the remote orthanc inside the :ref:`configuration file
+<configuration>`. For instance, here is how to declare a remote
+orthanc peer::
+
+    ...
+    "Peers" : {
+      "sample" : [ "http://localhost:8043" ], // short version
+      "sample2" : {                           // long version
+        "Url" : "http://localhost:8044",
+        "Username" : "alice",                          // optional
+        "Password" : "alicePassword",                  // optional
+        "HttpHeaders" : { "Token" : "Hello world" },   // optional
+        "CertificateFile" : "client.crt",              // optional (only if using client certificate authentication)
+        "CertificateKeyFile" : "client.key",           // optional (only if using client certificate authentication)
+        "CertificateKeyPassword" : "certpass"          // optional (only if using client certificate authentication)
+    },
+    ...
+
+.. highlight:: bash
+
+Such a configuration would enable Orthanc to connect to two other
+Orthanc instances that listens on the
+localhost on the port 8043 & 8044. The peers that are known to Orthanc
+can be queried::
+
+    $ curl http://localhost:8042/peers?expand
+
+The peers can then be updated through the API too::
+
+    $ curl -v -X PUT http://localhost:8042/peers/sample -d '{"Url" : "http://127.0.0.1:8043"}'
+
+
+Note that, by default, peers are stored in Orthanc configuration files
+and are updated in Orthanc memory only.  If you want your modifications
+to be persistent, you should configure Orthanc to store its peers
+in the database.  This is done through this configuration::
+
+    ...
+    "OrthancPeersInDatabase" : true,
+    ...
+
+Sending One Resource
+^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Once you have identified the Orthanc identifier of the DICOM resource
+that would like to send :ref:`as explained above <rest-access>`, you
+would use the following command to send it::
+
+    $ curl -X POST http://localhost:8042/peers/sample/store -d c4ec7f68-9b162055-2c8c5888-5bf5752f-155ab19f
+
+The ``/sample/`` component of the URI corresponds to the identifier of
+the remote modality, as specified above in the configuration file.
+
+Note that you can send isolated DICOM instances with this command, but
+also entire patients, studies or series. It is possible to send multiple instances with a single POST
+request::
+
+    $ curl -X POST http://localhost:8042/peers/sample/store -d '["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88","d5604121-7d613ce6-c315a5-a77b3cf3-9c253b23","cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e"]'
+
+Note that the list of resources to be sent can include the
+:ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
+studies or series as well.
+
+Using HTTPS
+^^^^^^^^^^^
+
+If you're transfering medical data over internet, it is mandatory to use HTTPS.  
+
+On the server side, we recommend to put Orthanc behing an :ref:`HTTPS server that will take care of the TLS <https>`.
+
+On the client side, in order for the client Orthanc to recognize the server certificate, you'll have to provide a path
+to the CA (certification authority) certificates.  This is done in the configuration file through this configurationg::
+
+    ...
+    "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt,
+    ...
+
+If you wan't your server to accept incoming connections for known hosts only, you can either:
+
+- configure a firewall to accept incoming connections from known IP addresses 
+- configure your client Orthanc to use a client certificate to authenticate at the Server.  This is done through the ``CertificateFile``, ``CertificateKeyFile`` and ``CertificateKeyPassword`` entries in the configuration file.
+
+
+
+
+Sending resources to remote modalities (through DICOM)
+------------------------------------------------------
 
 Orthanc can send its DICOM instances to remote DICOM modalities (C-Store SCU). This process
 can be triggered by the REST API.
@@ -658,6 +753,8 @@ You also have the ability to limit the responses by specifying a limit within th
 
   "Limit":4
 
+
+.. _changes:
 
 Tracking changes
 ----------------
