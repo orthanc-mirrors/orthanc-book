@@ -27,7 +27,7 @@ especially when it comes to the speed of :ref:`DICOM C-FIND
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.5.4 at the time of
+* Make sure to use the latest release of Orthanc (1.5.5 at the time of
   writing).
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
