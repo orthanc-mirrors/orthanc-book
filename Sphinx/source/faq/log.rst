@@ -49,7 +49,7 @@ Under Windows, if you used the official installer:
 2. Stop the Orthanc service. The actual process depends on your
    version of Windows.
 
-3. Copy the just-downloaded ``Orthanc-1.5.4-Release.exe`` together
+3. Copy the just-downloaded ``Orthanc-1.5.5-Release.exe`` together
    with your configuration file (that is by default located in
    ``C:\Orthanc\Configuration.json``) into the same folder
    (e.g. ``C:\Temp``).
@@ -57,7 +57,7 @@ Under Windows, if you used the official installer:
 4. Type in a command-line shell, to generate the ``Orthanc.log`` file::
 
    $ cd C:\Temp
-   $ Orthanc-1.5.4-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
+   $ Orthanc-1.5.5-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
 
 5. Restart the Orthanc service.
 
