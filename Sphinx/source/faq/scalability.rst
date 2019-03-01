@@ -31,7 +31,7 @@ presence of large databases:
   writing).
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
-  <postgresql>` to store the database index (3.1 at the time of
+  <postgresql>` to store the database index (3.2 at the time of
   writing). Make sure that ``EnableIndex`` is set to ``true``.
 
 * Make sure that :ref:`run-time debug assertions <troubleshooting>`
