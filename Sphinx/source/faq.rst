@@ -31,6 +31,7 @@ Features supported by Orthanc
    faq/video.rst
    faq/worklist.rst
    faq/viewers.rst
+   faq/orthanc-dicom-origin.rst
 
 
 Specific FAQs
