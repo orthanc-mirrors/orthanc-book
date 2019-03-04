@@ -235,6 +235,7 @@ plugin. They are listed below::
       "Threads" : 6,             // Number of worker threads for one transfer
       "BucketSize" : 4096,       // Optimal size for a bucket (in KB)
       "CacheSize" : 128,         // Size of the memory cache to process DICOM files (in MB)
-      "MaxPushTransactions" : 4  // Maximum number of simultaneous receptions in push mode
+      "MaxPushTransactions" : 4, // Maximum number of simultaneous receptions in push mode
+      "MaxHttpRetries" : 0       // Maximum number of HTTP retries for one bucket
     }
   }
