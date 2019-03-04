@@ -462,7 +462,7 @@ to the CA (certification authority) certificates.  This is done in the configura
     "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt,
     ...
 
-If you wan't your server to accept incoming connections for known hosts only, you can either:
+If you want your server to accept incoming connections for known hosts only, you can either:
 
 - configure a firewall to accept incoming connections from known IP addresses 
 - configure your client Orthanc to use a client certificate to authenticate at the Server.  This is done through the ``CertificateFile``, ``CertificateKeyFile`` and ``CertificateKeyPassword`` entries in the configuration file.
