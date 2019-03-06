@@ -68,9 +68,11 @@ Indeed, this prevents timeouts in the HTTP protocol.
 PDF
 ---
 
-Among many different types of data, DICOM files can be used to store PDF files. The ``create-dicom`` API route can be used to upload a PDF file to Orthanc.
-
-The following scripts perform such a *dicomization* ; they convert the ``HelloWorld2.pdf`` file to base64, then perform a ``POST`` request with JSON data containing the converted payload.
+Among many different types of data, DICOM files can be used to store
+PDF files. The ``/tools/create-dicom`` URI can be used to upload a PDF
+file to Orthanc. The following scripts perform such a *DICOM-ization*;
+They convert the ``HelloWorld2.pdf`` file to base64, then perform a
+``POST`` request with JSON data containing the converted payload.
 
 Using bash::
 
@@ -94,4 +96,8 @@ Using Powershell::
     # display the result
     Write-Host "The instance can be retrieved in PDF at http://localhost:8042$($reply.Path)/pdf"
 
-Please note that the `create-dicom` API call will return the Orthanc instance ID of the newly created DICOM resource. You can then use the ``http://localhost:8042/<INSTANCE-ID>/pdf`` route to request the stored file as PDF.
+Please note that the ``/tools/create-dicom`` API call will return the
+Orthanc instance ID of the newly created DICOM resource.
+
+You can use the ``/instances/.../pdf`` URI to retrieve an embedded PDF
+file.
