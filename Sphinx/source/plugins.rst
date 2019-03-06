@@ -51,6 +51,8 @@ From University Hospital of Liège
    plugins/worklists-plugin.rst
    plugins/serve-folders.rst
 
+.. _plugins-osimis:
+   
 From Osimis
 ^^^^^^^^^^^
 

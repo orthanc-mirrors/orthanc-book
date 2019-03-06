@@ -18,7 +18,28 @@ the `DockerHub platform <https://hub.docker.com/u/jodogne/>`__. The
 source code of the corresponding Docker images is available on `GitHub
 <https://github.com/jodogne/OrthancDocker>`__.
 
-*Note for CentOS users:* The Docker environment might be difficult to
+**Note about Orthanc vs. Osimis Docker images:** 
+
+* The ``jodogne/orthanc`` and ``jodogne/orthanc-plugins`` Docker
+  images that are described on this page are always kept in sync with
+  the latest releases of the Orthanc project, with a basic
+  configuration system that is inherited from the Debian packages
+  (i.e. manual edition of the configuration files).
+
+* Our commercial partner `Osimis <http://osimis.io>`__ also `publishes
+  separated Docker images
+  <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__.
+  These ``osimis/orthanc`` images are used by the technical team of
+  Osimis in order to provide professional support to their customers,
+  with a configuration system that can be tuned through environment
+  variables (which is very handy if using ``docker-compose``). These
+  images are not necessarily always in sync with the Orthanc project,
+  but they also include the :ref:`plugins edited by Osimis
+  <plugins-osimis>`, notably the Osimis Web viewer (that is much more
+  advanced than the Orthanc Web viewer) and the advanced authorization
+  plugin.
+
+**Note for CentOS users:** The Docker environment might be difficult to
 configure on your platform. Hints are available on the `Orthanc Users
 discussion group
 <https://groups.google.com/d/msg/orthanc-users/w-uPAknnRQc/-XhzBGSCAwAJ>`__.

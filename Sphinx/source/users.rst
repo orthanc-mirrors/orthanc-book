@@ -6,6 +6,7 @@ User's guide
 
    users/cookbook.rst
    users/configuration.rst
+   users/docker.rst
    users/rest.rst
    users/backup.rst
    users/replication.rst
