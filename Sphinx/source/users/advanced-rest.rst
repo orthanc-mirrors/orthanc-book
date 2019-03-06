@@ -1,5 +1,4 @@
 .. _rest-advanced:
-.. highlight:: bash
 
 Advanced features of the REST API
 =================================
@@ -18,17 +17,31 @@ Jobs
 ----
 
 Since Orthanc 1.4.0, a jobs engine is embedded within Orthanc. Jobs
-are tasks to be done by Orthanc. Jobs are first added to a queue of
-pending tasks, and Orthanc will simultaneously a fixed number of jobs
-(check out :ref:`configuration option <configuration>`
-``ConcurrentJobs``). Once the jobs have been processed, they are tagged
-as successful or failed, and kept in a history (the size of this
-history is controlled by the ``JobsHistorySize`` option).
+are high-level tasks to be processed by Orthanc. Jobs are first added
+to a queue of pending tasks, and Orthanc will simultaneously execute a
+fixed number of jobs (check out :ref:`configuration option
+<configuration>` ``ConcurrentJobs``). Once the jobs have been
+processed, they are tagged as successful or failed, and kept in a
+history (the size of this history is controlled by the
+``JobsHistorySize`` option).
 
-Synchronous vs. asynchronous
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+By default, Orthanc saves the jobs into its database (check out the
+``SaveJobs`` option). If Orthanc is stopped then relaunched, the jobs
+whose processing was not finished are automatically put into the queue
+of pending tasks. The command-line option ``--no-jobs`` can also be
+used to prevent the loading of jobs from the database upon the launch
+of Orthanc.
 
-Some calls to the REST API of Orthanc require time to be executed, and
+Note that the queue of pending jobs has a maximum size (check out the
+``LimitJobs`` option). When this limit is reached, the addition of new
+jobs is blocked until some job finishes.
+
+
+
+Synchronous vs. asynchronous calls
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some calls to the REST API of Orthanc need time to be executed, and
 thus result in adding a job to the processing queue. This notably
 includes the following URIs:
 
@@ -46,20 +59,95 @@ or an asynchronous mode:
 * **Synchronous calls** wait for the end of the execution of their
   associated job. This is in general the default behavior.
 * **Asynchronous calls** end immediately and return a handle to their
-  associated job. It is up to the caller to monitor the end of the
-  execution by calling the jobs API.
+  associated job. It is up to the caller to monitor the execution by
+  calling the jobs API (e.g. to know whether the job has finished its
+  execution).
 
 The choice between synchronous and asynchronous modes is done by
-setting the `Synchronous` field (or indifferently `Asynchronous`
-field) in the POST body of the call to the REST API. Note that the
-:ref:`transfers accelerator <transfers>` only run in the asynchronous
-mode.
+setting the ``Synchronous`` field (or indifferently the
+``Asynchronous`` field) in the POST body of the call to the REST
+API. Note that the :ref:`transfers accelerator <transfers>` only runs
+in asynchronous mode.
 
-Even if it is more complex to handle, the asynchronous mode is highly
+An integer number (possibly negative) can be specified in the
+``Priority`` field of the POST body. Jobs with higher priority will be
+executed first. By default, the priority is set to zero.
+
+Despite being more complex to handle, the asynchronous mode is highly
 recommended for jobs whose execution time can last over a dozen of
 seconds (typically, the creation of an archive or a network transfer).
-Indeed, this prevents timeouts in the HTTP protocol.
+Indeed, synchronous calls can be affected by timeouts in the HTTP
+protocol if they last too long.
 
+
+Monitoring jobs
+^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+The list of all jobs can be retrieved as follows::
+
+  $ curl http://localhost:8042/jobs
+  [ "e0d12aac-47eb-454f-bb7f-9857931e2904" ]
+
+Full details about each job can be retrieved::
+
+  $ curl http://localhost:8042/jobs/e0d12aac-47eb-454f-bb7f-9857931e2904
+  {
+    "CompletionTime" : "20190306T095223.753851",
+    "Content" : {
+      "Description" : "REST API",
+      "InstancesCount" : 1,
+      "UncompressedSizeMB" : 0
+    },
+    "CreationTime" : "20190306T095223.750666",
+    "EffectiveRuntime" : 0.001,
+    "ErrorCode" : 0,
+    "ErrorDescription" : "Success",
+    "ID" : "e0d12aac-47eb-454f-bb7f-9857931e2904",
+    "Priority" : 0,
+    "Progress" : 100,
+    "State" : "Success",
+    "Timestamp" : "20190306T095408.556082",
+    "Type" : "Archive"
+  }
+
+Note that the ``/jobs?expand`` URI will retrieve this information in
+one single REST query. The ``Content`` field contains the parameters
+of the job, and is very specific to the ``Type`` of job.
+
+The ``State`` field can be:
+
+* ``Pending``: The job is waiting to be executed.
+* ``Running``: The job is being executed. The ``Progress`` field will
+  be continuously updated to reflect the progression of the execution.
+* ``Success``: The job has finished with success.
+* ``Failure``: The job has finished with failure. Check out the
+  ``ErrorCode`` and ``ErrorDescription`` fields for more information.
+* ``Paused``: The job has been paused.
+* ``Retry``: The job has failed internally, and has been scheduled for
+  re-submission after a delay. As of Orthanc 1.5.6, this feature is not
+  used by any type of job.
+
+In order to wait for the end of an asynchronous call, the caller will
+typically have to poll the ``/jobs/...` URI (i.e. make periodic
+calls), waiting for the ``State`` field to become ``Success`` or
+``Failure``.
+
+
+Interacting with jobs
+^^^^^^^^^^^^^^^^^^^^^
+
+Given the ID of some job, one can:
+
+* Cancel the job by POST-ing to ``/jobs/.../cancel``.
+* Pause the job by POST-ing to ``/jobs/.../pause``.
+* Resume a job in ``Paused`` state by POST-ing to ``/jobs/.../resume``.
+* Retry a job in ``Failed`` state by POST-ing to ``/jobs/.../resubmit``.
+
+The related state machine is depicted in the `implementation notes
+<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.5.6/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
+  
 
 
 
@@ -74,6 +162,8 @@ file to Orthanc. The following scripts perform such a *DICOM-ization*;
 They convert the ``HelloWorld2.pdf`` file to base64, then perform a
 ``POST`` request with JSON data containing the converted payload.
 
+.. highlight:: bash
+
 Using bash::
 
     # create the json data, with the BASE64 data embedded in it
@@ -81,6 +171,8 @@ Using bash::
 
     # upload it to Orthanc
     cat /tmp/foo | curl -H "Content-Type: application/json" -d @- http://localhost:8042/tools/create-dicom
+
+.. highlight:: powershell
 
 Using Powershell::
 
