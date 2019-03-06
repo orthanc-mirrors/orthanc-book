@@ -158,11 +158,15 @@ As written above, the anonymization process can be fine-tuned by using
 a JSON body.
 
 
+.. _split-merge: 
+
 Split/merge of DICOM studies
 ----------------------------
 
 Starting with Orthanc 1.5.0, Orthanc supports splitting and merging
 DICOM studies through its REST API.
+
+.. _split:
 
 Splitting
 ^^^^^^^^^
@@ -198,6 +202,7 @@ arguments of this ``/studies/{study}/split`` URI:
   Orthanc to keep a copy of the original series in the source study.
   By default, the original series are deleted from Orthanc.
 
+.. _merge:
 
 Merging
 ^^^^^^^

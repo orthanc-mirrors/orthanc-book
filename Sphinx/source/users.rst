@@ -11,3 +11,4 @@ User's guide
    users/replication.rst
    users/anonymization.rst
    users/lua.rst
+   users/advanced-rest.rst

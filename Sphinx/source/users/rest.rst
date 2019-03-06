@@ -373,7 +373,7 @@ dedicated section <matlab>`.
 .. _peering:
 
 Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
-------------------------------------------------------
+-----------------------------------------------------------------------------
 
 Orthanc can send its DICOM instances to remote Orthanc over HTTP/HTTPS through its Rest API. 
 This process can be triggered by the REST API.
@@ -928,6 +928,8 @@ The examples above have shown you the basic principles for driving an
 instance of Orthanc through its REST API. All the possibilities of the
 API have not been described:
 
+* Advanced features of the REST API can be found on :ref:`another page
+  <rest-advanced>`.
 * A :ref:`FAQ entry <rest-samples>` lists where you can find more
   advanced samples of the REST API of Orthanc.
 * The full documentation of the REST API is maintained as an online

@@ -6,6 +6,8 @@ Finding samples for the REST API
 
 * This "Orthanc Book" proposes a :ref:`number of samples showing how
   to use the REST API <rest>` of Orthanc.
+* More advanced features of the REST API can be found :ref:`in this
+  dedicated section <rest-advanced>`.
 * Many working examples written in Python are `available in the source
   distribution
   <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/>`__.

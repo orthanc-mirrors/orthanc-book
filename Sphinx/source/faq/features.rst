@@ -1,6 +1,9 @@
 Terminology of advanced features
 ================================
 
+.. contents::
+   :depth: 3
+
 .. _peers:
 
 Peers
@@ -235,3 +238,10 @@ registry** below:
 * ``Attachment 9998`` is used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store instance information.
 * ``Attachment 9999`` is used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store annotations.
 * ``Attachments 10000-13999`` are used by the `Osimis WebViewer plugin <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ to store reduced quality images.
+
+
+Jobs
+----
+
+Check out the :ref:`advanced features of the REST API <jobs>`.
+
