@@ -1,4 +1,5 @@
 .. _rest-advanced:
+.. highlight:: bash
 
 Advanced features of the REST API
 =================================
@@ -67,4 +68,30 @@ Indeed, this prevents timeouts in the HTTP protocol.
 PDF
 ---
 
-TODO
+Among many different types of data, DICOM files can be used to store PDF files. The ``create-dicom`` API route can be used to upload a PDF file to Orthanc.
+
+The following scripts perform such a *dicomization* ; they convert the ``HelloWorld2.pdf`` file to base64, then perform a ``POST`` request with JSON data containing the converted payload.
+
+Using bash::
+
+    # create the json data, with the BASE64 data embedded in it
+    (echo -n '{"Tags" : {"PatientName" : "Benjamino", "Modality" : "CT"},"Content" : "data:application/pdf;base64,'; base64 HelloWorld2.pdf; echo '"}') > /tmp/foo
+
+    # upload it to Orthanc
+    cat /tmp/foo | curl -H "Content-Type: application/json" -d @- http://localhost:8042/tools/create-dicom
+
+Using Powershell::
+
+    # create the BASE64 string data
+    $fileInBase64 = $([Convert]::ToBase64String((gc -Path "HelloWorld2.pdf" -Encoding Byte)))
+
+    # create the json data
+    $params = @{Tags = @{PatientName = "Benjamino";Modality = "CT"};Content= "data:application/pdf;base64,$fileInBase64"}
+
+    # upload it to Orthanc and convert the result to json
+    $reply = Invoke-WebRequest -Uri http://localhost:8042/tools/create-dicom -Method POST -Body ($params|ConvertTo-Json) -ContentType "application/json" | ConvertFrom-Json
+
+    # display the result
+    Write-Host "The instance can be retrieved in PDF at http://localhost:8042$($reply.Path)/pdf"
+
+Please note that the `create-dicom` API call will return the Orthanc instance ID of the newly created DICOM resource. You can then use the ``http://localhost:8042/<INSTANCE-ID>/pdf`` route to request the stored file as PDF.
