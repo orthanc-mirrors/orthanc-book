@@ -193,3 +193,75 @@ Orthanc instance ID of the newly created DICOM resource.
 
 You can use the ``/instances/.../pdf`` URI to retrieve an embedded PDF
 file.
+
+
+
+.. _prometheus:
+
+Instrumentation with Prometheus
+-------------------------------
+
+.. highlight:: text
+
+Orthanc publishes its metrics according to the `text-based format of
+Prometheus
+<https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format>`__
+(check also the `OpenMetrics project <https://openmetrics.io/>`__), onto
+the ``/tools/metrics-prometheus`` URI of the REST API. For instance::
+
+  $ curl http://localhost:8042/tools/metrics-prometheus
+  orthanc_count_instances 1 1551868380543
+  orthanc_count_patients 1 1551868380543
+  orthanc_count_series 1 1551868380543
+  orthanc_count_studies 1 1551868380543
+  orthanc_disk_size_mb 0.0135002136 1551868380543
+  orthanc_jobs_completed 1 1551868380543
+  orthanc_jobs_failed 0 1551868380543
+  orthanc_jobs_pending 0 1551868380543
+  orthanc_jobs_running 0 1551868380543
+  orthanc_jobs_success 1 1551868380543
+  orthanc_rest_api_active_requests 1 1551868380543
+  orthanc_rest_api_duration_ms 0 1551868094265
+  orthanc_storage_create_duration_ms 0 1551865919315
+  orthanc_storage_read_duration_ms 0 1551865943752
+  orthanc_store_dicom_duration_ms 5 1551865919319
+  orthanc_uncompressed_size_mb 0.0135002136 1551868380543
+
+
+.. highlight:: bash
+
+Note that the collection of metrics can be statically disabled by
+setting the :ref:`global configuration option <configuration>`
+``MetricsEnabled`` to ``false``, or dynamically disabled by PUT-ing
+``0`` on ``/tools/metrics``::
+
+  $ curl http://localhost:8042/tools/metrics
+  1
+  $ curl http://localhost:8042/tools/metrics -X PUT -d '0'
+  $ curl http://localhost:8042/tools/metrics
+  0
+
+
+.. highlight:: yaml
+
+Here is a sample configuration for Prometheus (in the `YAML format
+<https://en.wikipedia.org/wiki/YAML>`__)::
+
+  scrape_configs:
+    - job_name: 'orthanc'
+      scrape_interval: 10s
+      metrics_path: /tools/metrics-prometheus
+      basic_auth:
+        username: orthanc
+        password: orthanc
+      static_configs:
+        - targets: ['192.168.0.2:8042']
+
+.. highlight:: bash
+
+Obviously, make sure to adapt this sample with your actual IP
+address. Thanks to Docker, you can easily start a Prometheus server by
+writing this configuration to, say, ``/tmp/prometheus.yml``, then
+type::
+          
+  $ sudo docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml --rm prom/prometheus:v2.7.0
