@@ -13,6 +13,11 @@ by a MySQL or a MariaDB database.
 For general information, check out the `official homepage of the
 plugins <http://www.orthanc-server.com/static.php?page=mysql>`__.
 
+**Warning:** According to `this thread on our discussion group
+ <https://groups.google.com/d/msg/orthanc-users/yV3LSTh_TjI/Fb4ShaYMBAAJ>`__,
+ the MySQL/MariaDB plugins require MySQL 8.x if running on Microsoft
+ Windows.
+
 
 
 Compilation
