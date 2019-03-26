@@ -74,6 +74,16 @@ Some **permission-related events** allow to filter incoming requests:
   httpHeaders)``: Invoked to known whether a REST request should be
   accepted. :ref:`See this section <lua-filter-rest>`.
 
+Some **job-related events** allow to react to :ref:`job <jobs>` completion/failure:
+
+* ``function OnJobSubmitted(jobId)``:
+  Invoked when a new job has been submitted.  Note that this does not
+  mean the the job execution has started.
+* ``function OnJobFailure(jobId)``:
+  Invoked when a job has failed.
+* ``function OnJobSuccess(jobId)``: 
+  Invoked when a job has completed successfully.
+
 Some **DICOM-related events** allow to react to the reception of
 new medical images:
 
