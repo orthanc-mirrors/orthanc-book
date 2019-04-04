@@ -134,13 +134,17 @@ through the following functions:
 * ``RestApiPut(uri, body, builtin)``
 * ``RestApiDelete(uri, builtin)``
 
-The ``uri`` arguments specifies the URI against which to make the
-request, and ``body`` is a string containing the body of POST/PUT
-request.  The ``builtin`` parameter is an optional Boolean that
-specifies whether the request targets only the built-in REST API of
-Orthanc (if set to ``true``), or the full the REST API after being
-tainted by the plugins (if set to ``false``).
+The parameters:
 
+* ``uri`` specifies the resource being accessed, do not include URL schema, hostname or port. (For example:  '/instances' )
+
+* ``body`` is a json-formatted string containing the body of a POST or PUT request. (For example: '{"Keep":"StudyDate"}' )
+
+* ``builtin`` is an optional Boolean that specifies whether the request targets only the built-in REST API of Orthanc (if set to ``true``), or the full the REST API after being tainted by plugins (if set to ``false``).
+
+For example:
+
+ RestApiPost('/instances/5af318ac-78fb-47ff-b0b0-0df18b0588e0/anonymize', '{}')
 
 General-purpose functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
