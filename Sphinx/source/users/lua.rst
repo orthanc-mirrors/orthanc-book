@@ -134,17 +134,31 @@ through the following functions:
 * ``RestApiPut(uri, body, builtin)``
 * ``RestApiDelete(uri, builtin)``
 
-The parameters:
+Here is a description of the parameters:
 
-* ``uri`` specifies the resource being accessed, do not include URL schema, hostname or port. (For example:  '/instances' )
+* ``uri`` specifies the resource being accessed
+  (e.g. ``/instances``). It must not include the URL schema
+  (protocol), hostname or port.
 
-* ``body`` is a json-formatted string containing the body of a POST or PUT request. (For example: '{"Keep":"StudyDate"}' )
+* In the context of a POST or PUT request, ``body`` is a string
+  containing the body of the request
+  (e.g. ``{"Keep":"StudyDate"}``). This string will often correspond
+  to a JSON-formatted version of a `Lua table
+  <http://lua-users.org/wiki/TablesTutorial>`__. The ``DumpJson()``
+  function (see below) is very useful to achieve this conversion from
+  a Lua table to a plain string.
 
-* ``builtin`` is an optional Boolean that specifies whether the request targets only the built-in REST API of Orthanc (if set to ``true``), or the full the REST API after being tainted by plugins (if set to ``false``).
+* ``builtin`` is an optional Boolean that specifies whether the
+  request targets only the built-in REST API of Orthanc (if set to
+  ``true``), or the full the REST API after being tainted by plugins
+  (if set to ``false``).
 
-For example:
+.. highlight:: bash
 
- RestApiPost('/instances/5af318ac-78fb-47ff-b0b0-0df18b0588e0/anonymize', '{}')
+For instance::
+
+  RestApiPost('/instances/5af318ac-78fb-47ff-b0b0-0df18b0588e0/anonymize', '{}')
+
 
 General-purpose functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
