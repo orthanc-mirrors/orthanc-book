@@ -40,5 +40,6 @@ How to contribute
  * Make sure to understand the [reStructuredText file format](https://en.wikipedia.org/wiki/ReStructuredText).
  * Fork this repository onto your BitBucket account.
  * Edit the content of the [`./Sphinx/source/` folder](./Sphinx/source/).
+ * Generate locally the Orthanc Book (cf. above), and make sure it displays properly on your computer.
  * Submit a [pull request](https://confluence.atlassian.com/bitbucket/create-a-pull-request-945541466.html) for review by the Orthanc project.
  * Once the pull request is reviewed, the continuous integration server of the Orthanc project will automatically publish the new version [online](http://book.orthanc-server.com/).
