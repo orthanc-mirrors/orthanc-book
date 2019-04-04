@@ -54,12 +54,15 @@ Under Windows, if you used the official installer:
    ``C:\Orthanc\Configuration.json``) into the same folder
    (e.g. ``C:\Temp``).
 
-4. Type in a command-line shell, to generate the ``Orthanc.log`` file::
+4. In a command-line shell, manually start Orthanc to generate the
+   ``Orthanc.log`` file::
 
    $ cd C:\Temp
    $ Orthanc-1.5.6-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
 
-5. Restart the Orthanc service.
+5. Once the log has been generated (by default, it is available as
+   ``C:\Temp\Orthanc.log``), stop Orthanc and possibly restart the
+   Orthanc service.
 
 
 Under Debian GNU/Linux
