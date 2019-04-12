@@ -19,6 +19,7 @@ General questions
    faq/rest-samples.rst
    faq/series-completion.rst
    faq/proprietary.rst
+   faq/security.rst
 
 Features supported by Orthanc
 -----------------------------

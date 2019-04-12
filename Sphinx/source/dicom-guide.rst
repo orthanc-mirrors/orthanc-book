@@ -262,6 +262,8 @@ is implemented by the ``/tools/lookup`` URI of the :ref:`REST API of
 Orthanc <rest>`.
 
 
+.. _dicom-protocol:
+
 DICOM network protocol
 ----------------------
 

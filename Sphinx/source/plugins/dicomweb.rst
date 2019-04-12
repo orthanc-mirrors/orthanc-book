@@ -253,6 +253,8 @@ Here is how to generate a JPEG preview of one instance with WADO-RS
 
 
 
+.. _dicomweb-client:
+
 Querying a remote DICOMweb server with Orthanc
 ----------------------------------------------
 

@@ -65,3 +65,6 @@ presence of large databases:
 
 * Make sure to read guides about the `tuning of PostgreSQL
   <https://wiki.postgresql.org/wiki/Performance_Optimization>`__.
+
+* You might also be interested in checking the options related to
+  :ref:`security <security>`.
