@@ -54,4 +54,5 @@ Specific FAQs
    faq/matlab.rst
    faq/orthanc-storage.rst
    faq/authentication.rst
+   faq/crash.rst
    faq/why-orthanc.rst
