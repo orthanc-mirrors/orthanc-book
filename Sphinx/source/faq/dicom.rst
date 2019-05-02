@@ -10,6 +10,9 @@ modalities. As preliminary debugging actions, you should:
 * Make sure you use the `most recent version <http://www.orthanc-server.com/download.php>`_ of Orthanc.
 * Make sure the two computers can "ping" each other.
 * Turn off all the firewalls on the two computers (especially on Microsoft Windows).
+* Make sure the remote computer has `DICOM TLS encryption
+  <https://www.dicomstandard.org/using/security/>`__ turned off (this
+  feature is not supported yet as of Orthanc 1.5.6).
 * Write down on a paper the following information about each modality:
 
   * its IP address (avoid using symbolic names if possible to troubleshot any DNS problem),
