@@ -20,6 +20,7 @@ General questions
    faq/series-completion.rst
    faq/proprietary.rst
    faq/security.rst
+   faq/debugging.rst
 
 Features supported by Orthanc
 -----------------------------
