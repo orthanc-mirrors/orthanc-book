@@ -37,7 +37,7 @@ here are some tasks you can take in charge that would greatly help us:
     workarounds on the `issue tracker
     <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`_.
   - Package Orthanc and its associated plugins for more UNIX or
-    GNU/Linux distributions (e.g. RHEL, CentOS, openSUSE...).
+    GNU/Linux distributions (e.g. Ubuntu PPA, RHEL, CentOS, openSUSE...).
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
     repository, via pull requests.
