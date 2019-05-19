@@ -13,6 +13,7 @@ list of free and open-source viewers that are known to be compatible
 with Orthanc (do not hesitate to `warn us
 <mailto:s.jodogne@orthanc-labs.com>`__ about other compatible FOSS):
 
+* `Open Health Imaging Foundation (OHIF) <https://docs.ohif.org/>`__.
 * `Horos <https://www.horosproject.org/>`__.
 * `Gingko CADx <https://www.ginkgo-cadx.com/>`__ (a
   :ref:`configuration guide <ginkgo-cadx>` is available).
