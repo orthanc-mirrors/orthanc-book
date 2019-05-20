@@ -123,6 +123,13 @@ Besides its REST API that is served through its embedded HTTP/HTTPS
 server, Orthanc also acts as a :ref:`DICOM server <dicom-protocol>`
 (more precisely, as a DICOM SCP).
 
+In general, the DICOM protocol should be disabled if running Orthanc
+on a cloud server, except if you use a VPN (cf. `reference
+<https://groups.google.com/d/msg/orthanc-users/yvHexxG3dTY/7s3A7EHVBAAJ>`__).
+Favor HTTPS for transfering medical images across sites (see
+above). You can turn off DICOM protocol by setting the configuration
+option ``DicomServerEnabled`` to ``false``.
+
 The DICOM modalities that are known to Orthanc are defined by setting
 the ``DicomModalities`` configuration option. Out-of-the-box, Orthanc
 accepts C-ECHO and C-STORE commands sent by unknown modalities, but
@@ -178,4 +185,5 @@ To fully secure the DICOM protocol, you should:
 **Remark:** As of Orthanc 1.5.6, `DICOM TLS encryption
 <https://www.dicomstandard.org/using/security/>`__ is not supported
 yet. We are looking for :ref:`an industrial sponsor <contributing>` to
-get this feature implemented, as it is useful in enterprise scenarios.
+get this feature implemented, as it is useful in enterprise and cloud
+environments.
