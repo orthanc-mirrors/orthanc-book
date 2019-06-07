@@ -30,6 +30,21 @@ Do not hesitate to `contact us
 your plugin to be **indexed** in :ref:`the dedicated part of the
 Orthanc Book <plugins-contributed>`!
 
+**Note for C++ developers**: Convenience C++ wrappers around the plain
+C API are available in the source Orthanc distribution. The following
+three files can be used in your projects, and only depend on `Boost
+<https://www.boost.org/>`__ and `JsonCpp
+<https://github.com/open-source-parsers/jsoncpp>`__ if macro
+``HAS_ORTHANC_EXCEPTION`` is set to ``0``:
+
+* `Plugins/Samples/Common/OrthanPluginCppWrapper.h
+  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginCppWrapper.h>`__
+* `Plugins/Samples/Common/OrthanPluginCppWrapper.cpp
+  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginCppWrapper.cpp>`__
+* `Plugins/Samples/Common/OrthanPluginException.h
+  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginException.h>`__
+
+
 
 Structure of the plugins
 ------------------------
