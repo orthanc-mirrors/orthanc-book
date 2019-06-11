@@ -78,8 +78,8 @@ in your projects, and only depend on `Boost
 ``HAS_ORTHANC_EXCEPTION`` is set to ``0``:
 
 * `Plugins/Samples/Common/OrthanPluginCppWrapper.h
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginCppWrapper.h>`__
+  <https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.5.6/Plugins/Samples/Common/OrthancPluginCppWrapper.h>`__
 * `Plugins/Samples/Common/OrthanPluginCppWrapper.cpp
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginCppWrapper.cpp>`__
+  <https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.5.6/Plugins/Samples/Common/OrthancPluginCppWrapper.cpp>`__
 * `Plugins/Samples/Common/OrthanPluginException.h
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/Common/OrthancPluginException.h>`__
+  <https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.5.6/Plugins/Samples/Common/OrthancPluginException.h>`__
