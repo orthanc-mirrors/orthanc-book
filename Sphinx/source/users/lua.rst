@@ -129,10 +129,10 @@ Calling the REST API of Orthanc
 Lua scripts have :ref:`full access to the REST API <rest>` of Orthanc
 through the following functions:
 
-* ``RestApiGet(uri, builtin)``
-* ``RestApiPost(uri, body, builtin)``
-* ``RestApiPut(uri, body, builtin)``
-* ``RestApiDelete(uri, builtin)``
+* ``RestApiGet(uri, builtin, headers)``
+* ``RestApiPost(uri, body, builtin, headers)``
+* ``RestApiPut(uri, body, builtin, headers)``
+* ``RestApiDelete(uri, builtin, headers)``
 
 Here is a description of the parameters:
 
@@ -152,6 +152,9 @@ Here is a description of the parameters:
   request targets only the built-in REST API of Orthanc (if set to
   ``true``), or the full the REST API after being tainted by plugins
   (if set to ``false``).
+
+* ``headers`` is an optional argument and was added in release
+  1.5.7. It allows to provide the REST API endpoint with HTTP headers.
 
 .. highlight:: bash
 
@@ -190,7 +193,7 @@ requests to Web services:
 * ``SetHttpCredentials(username, password)`` can be used to setup the
   HTTP credentials.
 
-The ``headers`` argument is optional and has been added in release
+The ``headers`` argument is optional and was added in release
 1.2.1. It allows to set the HTTP headers for the HTTP client request.
 
 .. _lua-origin:
