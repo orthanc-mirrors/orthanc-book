@@ -25,7 +25,7 @@ Compilation
 
 .. highlight:: text
 
-The procedure to compile these plugins is similar of that for the
+The procedure to compile this plugin is similar of that for the
 :ref:`core of Orthanc <compiling>`. The following commands should work
 for every UNIX-like distribution (including GNU/Linux)::
 
@@ -37,8 +37,10 @@ for every UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancDicomWeb`` that
 contains the DICOMweb plugin. Pre-compiled binaries for Microsoft
 Windows `are also available
-<http://www.orthanc-server.com/browse.php?path=/plugin-dicom-web>`__.
-A package for `Apple's Mac OS X
+<http://www.orthanc-server.com/browse.php?path=/plugin-dicom-web>`__,
+and are included in the `Windows installers
+<https://www.orthanc-server.com/download-windows.php>`__.  A package
+for `Apple's Mac OS X
 <http://localhost/~jodogne/orthanc/static.php?page=download-mac>`__ is
 available courtesy of `Osimis <http://osimis.io/>`__.
 
@@ -125,6 +127,8 @@ HTTP headers ``Forwarded`` and ``Host``, as provided by the HTTP
 clients.
 
 
+
+.. _dicomweb-client-config:
 
 Client-related options
 ^^^^^^^^^^^^^^^^^^^^^^
