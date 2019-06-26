@@ -127,7 +127,7 @@ Secondly, you have to modify the :ref:`Orthanc configuration
 <configuration>` in order to provide the GCP plugin with your service
 account file and with the parameters of your `DICOM store
 <https://cloud.google.com/healthcare/docs/how-tos/dicom>`__. Here is a
-sample, minimalistic configuration of Orthanc::
+sample, minimalist configuration of Orthanc::
 
   {
     "HttpsCACertificates": "/etc/ssl/certs/ca-certificates.crt",
@@ -164,7 +164,7 @@ user"* (check out the `Google documentation
 
 The easiest way of setting up a user account is through the `gcloud
 command-line tool <https://cloud.google.com/sdk/gcloud/>`__.
-`Google's quickstarts
+`Google's quick-starts
 <https://cloud.google.com/sdk/docs/quickstarts>`__ explain how to
 initialize the environment depending on your operating system (check
 out the "Initialize the SDK" sections, which essentially boil down to
@@ -183,7 +183,7 @@ extract credentials for Orthanc by typing the following command::
 
 This command produces JSON file containing all the required
 information, that can be written to a file (say,
-``dicom-user.json``). Given this file, here is a sample, minimalistic
+``dicom-user.json``). Given this file, here is a sample, minimalist
 configuration of Orthanc::
 
   {
