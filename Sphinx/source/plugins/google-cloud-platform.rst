@@ -225,7 +225,7 @@ extract only these fields, e.g. using the `jq
 
 .. highlight:: json
 
-You can use this information as follows in order to create a
+You can copy/paste these fields as follows in order to create a
 configuration for Orthanc that is equivalent to the one using the full
 JSON::
   
