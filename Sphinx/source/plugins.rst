@@ -59,6 +59,7 @@ From Osimis
 * :ref:`mysql`
 * :ref:`authorization`
 * :ref:`transfers`
+* :ref:`google`    
 * `Osimis <http://osimis.io/>`__ maintains an evolution of the
   official Web viewer plugin. The Osimis plugin adds tools for
   measuring, for viewing multiple series, and for split-pane. `Check
