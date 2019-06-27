@@ -11,6 +11,8 @@ protocols <https://en.wikipedia.org/wiki/DICOMweb>`__. More precisely,
 the plugin introduces a basic, reference implementation of WADO-URI,
 WADO-RS, QIDO-RS and STOW-RS, following `DICOM PS3.18
 <http://dicom.nema.org/medical/dicom/current/output/html/part18.html>`__.
+The plugin simultaneously turns Orthanc into a **DICOMweb server** and 
+into a **DICOMweb client**.
 
 For general information, check out the `official homepage of the
 plugins <http://www.orthanc-server.com/static.php?page=dicomweb>`__.
@@ -49,8 +51,8 @@ available courtesy of `Osimis <http://osimis.io/>`__.
 <https://bitbucket.org/sjodogne/orthanc-dicomweb/src/default/Resources/BuildInstructions.txt>`__.
 
 
-Usage
------
+Installation
+------------
 
 .. highlight:: json
 
@@ -114,12 +116,31 @@ the Orthanc configuration file::
       "EnableWado" : true,        // Whether WADO-URI (previously known as WADO) support is enabled
       "WadoRoot" : "/wado",       // Root URI of the WADO-URI (aka. WADO) API
       "Ssl" : false,              // Whether HTTPS should be used for subsequent WADO-RS requests
-      "StowMaxInstances" : 10,    // For STOW-RS client, the maximum number of instances in one single HTTP query (0 = no limit)
-      "StowMaxSize" : 10,         // For STOW-RS client, the maximum size of the body in one single HTTP query (in MB, 0 = no limit)
       "QidoCaseSensitive" : true, // For QIDO-RS server, whether search is case sensitive (since release 0.5)
       "Host" : "localhost"        // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
     }
   }
+
+Furthermore, the global option ``DefaultEncoding`` specifies the
+encoding (specific character set) that will be used when answering a
+QIDO-RS request. It might be a good idea to set this option to
+``Utf8`` if you are dealing with an international environment.
+
+The following configuration options were present in releases <= 0.6 of the plugin,
+but are not used anymore::
+
+  {
+    [...]
+    "DicomWeb" : {
+      "StowMaxInstances" : 10,    // For STOW-RS client, the maximum number of instances in one single HTTP query (0 = no limit)
+      "StowMaxSize" : 10,         // For STOW-RS client, the maximum size of the body in one single HTTP query (in MB, 0 = no limit)
+    }
+  }
+
+These older configuration options were used to limit the size of the
+HTTP requests, by issuing multiple calls to STOW-RS (set both options
+to 0 to send one single request).
+
 
 **Remark:** The option ``Host`` is deprecated. Starting with release
 0.7 of the DICOMweb plugin, its value are computed from the standard
@@ -168,8 +189,44 @@ access authentication
     }
   }
 
-If the DICOMweb server is protected with HTTPS client authentication,
-you must provide your client certificate (in the `PEM format
+Two important options can be provided for individual remote DICOMweb servers:
+
+* ``HasDelete`` can be set to ``true`` to indicate that the HTTP
+  DELETE method can be used to delete remote studies/series/instances.
+  This notably adds a "delete" button on the Web interface of the
+  DICOMweb client, and creates a route
+  ``/dicom-web/servers/sample/delete`` in the REST API.
+
+* ``ChunkedTransfers`` must be set to ``false`` if the remote DICOMweb
+  server does not support `HTTP chunked transfer encoding
+  <https://en.wikipedia.org/wiki/Chunked_transfer_encoding>`__. Setting
+  this option to ``true`` is the best choice to reduce memory
+  consumption. However, it must be set to ``false`` if the remote
+  DICOMweb server is Orthanc <= 1.5.6, as chunked transfer encoding is
+  only supported starting with Orthanc 1.5.7.
+
+You'll have to convert the JSON array into a JSON object to set these
+options::
+
+  {
+    [...]
+    "DicomWeb" : {
+      "Servers" : {
+        "sample" : {
+          "Url" : "http://192.168.1.1/dicom-web/", 
+          "Username" : "username", 
+          "Password" : "password",
+          "HasDelete" : true,
+          "ChunkedTransfers" : true   // Set to "false" if "sample" is Orthanc <= 1.5.6
+        }
+      }
+    }
+  }
+
+
+Furthermore, if the DICOMweb server is protected with HTTPS client
+authentication, you must provide your client certificate (in the `PEM
+format
 <https://en.wikipedia.org/wiki/Privacy-enhanced_Electronic_Mail>`__),
 your client private key (also in the PEM format), together with the
 password protecting the private key::
@@ -207,20 +264,38 @@ configuration file has a proper ``Pkcs11`` section)::
     }
   }
 
+**Remark:** A :ref:`plugin by Osimis <google>` is available to
+dynamically create authenticated connections to Google Cloud Platform.
+
 **Important remark:** When querying a DICOMweb server, Orthanc will
 automatically use the global configuration options ``HttpProxy``,
 ``HttpTimeout``, ``HttpsVerifyPeers``, ``HttpsCACertificates``, and
 ``Pkcs11``. Make sure to adapt them if need be.
 
 
-Quickstart
-----------
+Quickstart - DICOMweb client
+----------------------------
 
-Once your Orthanc is properly configured (see above), you can make
-REST calls to the DICOMweb API. For demonstration purpose, this
-section makes the assumption that the ``VIX`` dataset provided by
-`OsiriX <http://www.osirix-viewer.com/datasets/>`__ has been uploaded
-to Orthanc.
+Starting with version 1.0 of the DICOMweb plugin, a Web interface is
+provided to use Orthanc as a DICOMweb client. Simply click on the
+"Open DICOMweb client" button at the bottom of the welcome screen of
+:ref:`Orthanc Explorer <orthanc-explorer>`.
+
+Here is a direct link to the DICOMweb client running on our demo
+server:
+`http://demo.orthanc-server.com/dicom-web/app/client/index.html
+<http://demo.orthanc-server.com/dicom-web/app/client/index.html>`__
+
+
+
+Quickstart - DICOMweb server
+----------------------------
+
+Once your Orthanc server is properly configured (see above), you can
+make REST calls to the API of the DICOMweb server. For demonstration
+purpose, this section makes the assumption that the ``VIX`` dataset
+provided by `OsiriX <http://www.osirix-viewer.com/datasets/>`__ has
+been uploaded to Orthanc.
 
 WADO-URI
 ^^^^^^^^
@@ -232,99 +307,128 @@ render one slice of the VIX dataset as a JPEG image::
 
   http://localhost:8042/wado?objectUID=1.3.12.2.1107.5.1.4.54693.30000006100507010800000005466&requestType=WADO
 
+
+.. highlight:: bash
+
 The ``objectUID`` corresponds to the ``SOPInstanceUID`` DICOM tag of
 some instance in the ``VIX`` dataset. Given the Orthanc identifier of
 an instance from VIX
 (e.g. ``14b4db2c-065edecb-6a767936-7068293a-92fcb080``), the latter
 tag can be obtained from the ``MainDicomTags`` field::
 
-  # curl http://localhost:8042/instances/14b4db2c-065edecb-6a767936-7068293a-92fcb080
+  $ curl http://localhost:8042/instances/14b4db2c-065edecb-6a767936-7068293a-92fcb080
+
+
+QIDO-RS
+^^^^^^^
+
+.. highlight:: bash
+
+Regarding QIDO-RS (querying the content of a remote DICOMweb server),
+here is how to obtain the list of studies stored by Orthanc::
+
+  $ curl http://localhost:8042/dicom-web/studies
+
+Note that the ``/dicom-web/`` prefix comes from the configuration
+option ``Root`` of the ``DicomWeb`` section. Filtering the studies is
+possible as follows::
+
+  $ curl http://localhost:8042/dicom-web/studies?PatientName=VIX
+
 
 
 WADO-RS
 ^^^^^^^
 
-.. highlight:: text
+A study can be retrieved through WADO-RS. Here is a sample::
 
-Regarding WADO-RS (i.e. DICOMweb RESTful services), here is how to
-obtain the tags of all the instances stored by Orthanc::
+  $ curl http://localhost:8042/dicom-web/studies/2.16.840.1.113669.632.20.1211.10000315526/
 
-  # curl http://localhost:8042/dicom-web/instances
+This answer is a `multipart stream
+<https://en.wikipedia.org/wiki/MIME#Multipart_messages>`__ of
+``application/dicom`` DICOM instances, so a Web browser will not be
+able to display it (. You will have to use either AJAX (JavaScript) or a
+command-line tool (such as cURL).
 
-Note that, as the MIME type of this answer is a multipart
-``application/dicom+xml``, a Web browser will not be able to display
-it. You will have to use either AJAX (JavaScript) or a command-line
-tool (such as curl).
+You can render one individual frame as a plain PNG image as follows::
 
-Here is how to generate a JPEG preview of one instance with WADO-RS
-(through the RetrieveFrames primitive)::
+  $ curl http://localhost:8042/dicom-web/studies/2.16.840.1.113669.632.20.1211.10000315526/series/1.3.12.2.1107.5.1.4.54693.30000006100507010800000005268/instances/1.3.12.2.1107.5.1.4.54693.30000006100507010800000005466/frames/1/rendered -H 'accept: image/png'
 
-  # curl http://localhost:8042/dicom-web/studies/2.16.840.1.113669.632.20.1211.10000315526/series/1.3.12.2.1107.5.1.4.54693.30000006100507010800000005268/instances/1.3.12.2.1107.5.1.4.54693.30000006100507010800000005466/frames/1 -H 'accept: multipart/related; type=image/dicom+jpeg'
+
+Other endpoints
+^^^^^^^^^^^^^^^
+
+This page only provides some very basic examples about the use of a
+DICOMweb server. Please check out `the full reference of the DICOMweb
+API <https://www.dicomstandard.org/dicomweb/>`__ for more information.
 
 
 
 .. _dicomweb-client:
 
-Querying a remote DICOMweb server with Orthanc
-----------------------------------------------
+REST API of the Orthanc DICOMweb client
+---------------------------------------
 
 Listing the available servers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. highlight:: text
+.. highlight:: bash
 
 The list of the remote DICOMweb servers that are known to the DICOMweb
 plugin can be obtained as follows::
 
-  # curl http://localhost:8042/dicom-web/servers/
+  $ curl http://localhost:8042/dicom-web/servers/
   [ "sample" ]
 
-Here, a single server called ``sample`` is configured.
+In this case, a single server called ``sample`` is configured.
 
 
 Making a call to QIDO-RS or WADO-RS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. highlight:: text
+.. highlight:: bash
 
 In Orthanc, the URI ``/{dicom-web-root}/servers/{name}/get`` allows to
 make a HTTP GET call against a DICOMweb server. This can be used to
 issue a QIDO-RS or WADO-RS command. Orthanc will take care of properly
-encoding the URL and authenticating the client.
+encoding the URL and authenticating the client. For instance, here is
+a sample QIDO-RS search to query all the studies (using a bash
+command-line)::
 
-For instance, here is a sample QIDO-RS search to query all the studies
-(using a bash command-line)::
-
-  # curl http://localhost:8042/dicom-web/servers/sample/get -d @- << EOF
+  $ curl http://localhost:8042/dicom-web/servers/sample/get -d @- << EOF
   {
     "Uri" : "/studies"
   }
   EOF
 
-You do not have to specify the base URL of the remote DICOMweb server,
-as it is encoded in the configuration file.
+The result of this call is a JSON document formatted according to the
+DICOMweb standard. You do not have to specify the base URL of the
+remote DICOMweb server, as it is encoded in the configuration file.
 
-The result of the command above is a multipart
-``application/dicom+xml`` document.  It is possible to request a more
-human-friendly JSON answer by adding the ``Accept`` HTTP header. Here
-is how to search for a given patient name, while requesting a JSON
-answer and pretty-printing through the ``json_pp`` command-line tool::
+As a more advanced example, here is how to search all the series
+associated with a given patient name, while requesting to use an XML
+format::
 
-  # curl http://localhost:8042/dicom-web/servers/sample/get -d @- << EOF | json_pp 
+  $ curl http://localhost:8042/dicom-web/servers/sample/get -d @- << EOF
   {
-    "Uri" : "/studies",
+    "Uri" : "/series",
     "HttpHeaders" : {
-      "Accept" : "application/json"
+      "Accept" : "application/dicom+xml"
     },
     "Arguments" : {
-      "00100010" : "*JODOGNE*"
+      "00100010" : "KNIX"
     }
   }
   EOF
 
-Note how all the GET arguments for the QIDO-RS request must be
+The result of the command above is a `multipart stream
+<https://en.wikipedia.org/wiki/MIME#Multipart_messages>`__ of XML
+documents describing each series.
+
+Note how all the GET arguments to the QIDO-RS request must be
 specified in the ``Arguments`` field. Orthanc will take care of
-properly encoding it to a URL.
+`properly encoding it as an URL
+<https://en.wikipedia.org/wiki/Percent-encoding>`__.
 
 An user-friendly reference of the features available in QIDO-RS and
 WADO-RS `can be found on this site <http://www.dicomweb.org/>`__.
@@ -333,13 +437,13 @@ WADO-RS `can be found on this site <http://www.dicomweb.org/>`__.
 Sending DICOM resources to a STOW-RS server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. highlight:: text
+.. highlight:: bash
 
 STOW-RS allows to send local DICOM resources to a remote DICOMweb
 server. In Orthanc, the STOW-RS client primitive is available at URI
 ``/{dicom-web-root}/servers/{name}/stow``. Here is a sample call::
 
-  # curl http://localhost:8042/dicom-web/servers/sample/stow -X POST -d @- << EOF
+  $ curl http://localhost:8042/dicom-web/servers/sample/stow -X POST -d @- << EOF
   {
     "Resources" : [
       "6ca4c9f3-5e895cb3-4d82c6da-09e060fe-9c59f228"
@@ -351,36 +455,55 @@ Note that this primitive takes as its input a list of :ref:`Orthanc
 identifiers <orthanc-ids>` corresponding to the resources (patients,
 studies, series and/or instances) to be exported.
 
-Remark 1: Additional HTTP headers can be added with an optional
-``HttpHeaders`` argument as for QIDO-RS and WADO-RS. This might be
-useful e.g. for cookie-based session management.
+Additional HTTP headers can be added with an optional ``HttpHeaders``
+argument as for QIDO-RS and WADO-RS. This might be useful e.g. for
+cookie-based session management.
 
-Remark 2: One call to this ``.../stow`` primitive will possibly result
-in several HTTP requests to the DICOMweb server, in order to limit the
-size of the HTTP messages. The configuration options
-``DicomWeb.StowMaxInstances`` and ``DicomWeb.StowMaxSize`` can be used
-to tune this behavior (set both options to 0 to send one single
-request).
+Internally, this call results in creating an :ref:`Orthanc job <job>`
+that is executed synchronously (the REST call only returns once the 
+STOW-RS request is finished). You can run the job in asynchronous 
+mode as follows::
+
+  $ curl http://localhost:8042/dicom-web/servers/sample/stow -X POST -d @- << EOF
+  {
+    "Resources" : [
+      "6ca4c9f3-5e895cb3-4d82c6da-09e060fe-9c59f228"
+    ],
+    "Synchronous" : false,
+    "Priority" : 10
+  }
+  EOF
+
+  {
+    "ID" : "a7bd2a5c-291d-4ca5-977a-66502cab22a1",
+    "Path" : ".././../jobs/a7bd2a5c-291d-4ca5-977a-66502cab22a1"
+  }
+
+Such a call ends immediately, and returns the ID of the job created by
+Orthanc. The :ref:`status of the job <jobs-monitoring>` can then be
+monitored using the Orthanc REST API.
+
 
 
 Retrieving DICOM resources from a WADO-RS server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. highlight:: text
+.. highlight:: bash
 
 Once DICOM resources of interest have been identified through a
 QIDO-RS call to a remote DICOMweb server (cf. above), it is
 interesting to download them locally with a WADO-RS call. You could do
 it manually with a second call to the
 ``/{dicom-web-root}/servers/{name}/get`` URI, but Orthanc provides
-another primitive ``.../retrieve`` to automate this process.
+another primitive ``.../retrieve`` to automate this process, in order
+to avoid the manual parsing of the multipart stream.
 
 Here is how you would download one study, one series and one instance
 whose StudyInstanceUID (0020,000d), SeriesInstanceUID (0020,000e) are
 SOPInstanceUID (0008,0018) have been identified through a former
 QIDO-RS call::
 
-  # curl http://localhost:8042/dicom-web/servers/sample/retrieve -X POST -d @- << EOF
+  $ curl http://localhost:8042/dicom-web/servers/sample/retrieve -X POST -d @- << EOF
   {
     "Resources" : [
       {
@@ -407,7 +530,12 @@ identifiers <orthanc-ids>`, the ``.../retrieve`` URI uses DICOM
 identifiers.
 
 Remark 2: The ``HttpHeaders`` and ``Arguments`` arguments are also
-available, as for QIDO-RS.
+available, as for QIDO-RS, to fine-tune the parameters of the WADO-RS
+request.
+
+Remark 3: As for QIDO-RS, the request is run synchronously by default.
+The ``Synchronous`` and ``Priority`` arguments can be used to
+asynchronously run the request.
 
 
 
@@ -420,6 +548,8 @@ are available for `Python
 and for `JavaScript
 <https://bitbucket.org/sjodogne/orthanc-dicomweb/src/default/Resources/Samples/JavaScript>`__.
 
-Some integration tests are also `available separately
-<https://bitbucket.org/sjodogne/orthanc-tests/src/default/Plugins/DicomWeb/Run.py>`__
-(work in progress).
+Integration tests are `available separately
+<https://bitbucket.org/sjodogne/orthanc-tests/src/default/Plugins/DicomWeb/Run.py>`__,
+and provide samples for more advanced features of the REST API (such
+as dynamically adding/updating/removing remote DICOMweb servers using
+HTTP PUT and DELETE methods).

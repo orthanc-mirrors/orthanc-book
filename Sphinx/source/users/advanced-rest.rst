@@ -80,6 +80,8 @@ Indeed, synchronous calls can be affected by timeouts in the HTTP
 protocol if they last too long.
 
 
+.. _jobs-monitoring:
+
 Monitoring jobs
 ^^^^^^^^^^^^^^^
 

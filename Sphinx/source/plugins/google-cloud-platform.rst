@@ -16,29 +16,28 @@ interface Orthanc with the Healthcare API of `Google Cloud Platform
 (GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ through
 `DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
 
-This GCP plugin notably enables the upload of DICOM images using
-STOW-RS, the querying of the cloud content using QIDO-RS, and the
-retrieval of remote content using WADO-RS. These operations can be
-possibly scripted thanks to the REST API of Orthanc.
+This GCP plugin turns Orthanc into a DICOMweb client connected to GCP
+servers, enabling the upload of DICOM images using STOW-RS, the
+querying of the cloud content using QIDO-RS, and the retrieval of
+remote content using WADO-RS. These operations can be possibly
+:ref:`scripted <dicomweb-client>` thanks to the REST API of Orthanc.
 
-Concretely, the GCP plugin manages the credentials to Google Cloud
+Concretely, the role of the GCP plugin is to `manage the credentials
+<https://cloud.google.com/docs/authentication/>`__ to Google Cloud
 Platform. It requires the official :ref:`DICOMweb plugin <dicomweb>`
-to be installed. As soon as Orthanc is started, the GCP plugin
-automatically acquires and refreshes the `access tokens
-<https://cloud.google.com/docs/authentication/>`__, transparently
-updating the remote :ref:`DICOMweb servers <dicomweb-client-config>`
-that are known to the DICOMweb plugin. The access tokens can
-be derived either from service accounts, or from user accounts.
+to be installed, as all the user interactions are done through the
+latter plugin. As soon as Orthanc is started, the GCP plugin
+automatically acquires then periodically refreshes the access tokens,
+transparently updating the remote :ref:`DICOMweb servers
+<dicomweb-client-config>` that are known to the DICOMweb plugin. The
+access tokens can be derived either from service accounts, or from
+user accounts.
 
 This page makes the assumption that you have created a Google Cloud
 Platform project, in which you have enabled the `Healthcare API
 <https://cloud.google.com/healthcare/>`__, and in which you have
 created a `DICOM store
 <https://cloud.google.com/healthcare/docs/how-tos/dicom>`__.
-
-Under the hood, the GCP plugin is built on the top of the official
-`Google Cloud Platform C++ Client Libraries
-<https://github.com/googleapis/google-cloud-cpp>`__.
 
 
 
@@ -63,27 +62,38 @@ plugin. Pre-compiled binaries for Microsoft Windows `are available
 and are included in the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
+Under the hood, the GCP plugin is built on the top of the official
+`Google Cloud Platform C++ Client Libraries
+<https://github.com/googleapis/google-cloud-cpp>`__.
+
 
 
 Configuration
 -------------
 
+Dependencies
+^^^^^^^^^^^^
+
+As explained above, the GCP plugin requires Orthanc (with version
+above 1.5.4), and the :ref:`official DICOMweb plugin <dicomweb>` to be
+installed (with version above 1.0). All the communications with Google
+Cloud Platform are done using the DICOMweb plugin, and the
+responsibility of the GCP plugin is to aquire and periodically refresh
+the access tokens whose lifetime is limited.
+
 
 Common parameters
 ^^^^^^^^^^^^^^^^^
 
-As explained above, the GCP plugin requires the :ref:`official
-DICOMweb plugin <dicomweb>` to be installed (with version above
-1.0). All the communications with Google Cloud Platform are done using
-the DICOMweb plugin, and the responsibility of the GCP plugin is to
-aquire and periodically refresh the access tokens whose lifetime is
-limited.
+There are some common parameters to be set. Firstly, the ``Plugins``
+:ref:`configuration option <configuration>` of Orthanc must contain
+the path that contains the ``OrthancGoogleCloudPlatform`` shared
+library.
 
-Obtaining the access tokens for Google Cloud Platform necessitates a
-sequence of HTTPS requests. As a consequence, the Orthanc
-:ref:`configuration options <configuration>` must specify how the
-authenticity of the Google servers is verified. You have two
-possibilities to that end:
+Secondly, obtaining the access tokens for Google Cloud Platform
+necessitates a sequence of HTTPS requests. As a consequence, the
+Orthanc configuration must specify how the authenticity of the Google
+servers is verified. You have two possibilities to that end:
 
 1. Disabling the verification of the remote servers (**not recommended
    in production**). This is done by setting option ``HttpsVerifyPeers``
@@ -99,13 +109,14 @@ possibilities to that end:
 
    * On Debian-based system, the standard file
      ``/etc/ssl/certs/ca-certificates.crt`` can be used.
-   * On other systems, the cURL project provides `CA certificates
+   * On other systems (including Microsoft Windows), the cURL project
+     provides `CA certificates
      <https://curl.haxx.se/docs/caextract.html>`__ that are extracted
-     from Mozilla. 
+     from Mozilla.
 
 Note that to debug HTTPS communications, you have the possibility of
 setting the ``HttpVerbose`` configuration option of Orthanc to
-``true``.  It is also useful to run Orthanc in ``--verbose`` mode
+``true``. It can also be useful to run Orthanc in ``--verbose`` mode
 (check out :ref:`this page <log>`).
 
 
@@ -186,7 +197,7 @@ command::
 
 .. highlight:: json
 
-This command produces JSON file containing all the required
+This command generates a JSON file containing all the required
 information, that can be written to a file (say,
 ``dicom-user.json``). Given this file, here is a sample, minimalist
 configuration of Orthanc::
