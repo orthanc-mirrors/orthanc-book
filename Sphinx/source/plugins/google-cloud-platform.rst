@@ -13,21 +13,21 @@ Introduction
 Osimis freely provides the `source code
 <https://bitbucket.org/osimis/orthanc-gcp/src>`__ of a plugin to
 interface Orthanc with the Healthcare API of `Google Cloud Platform
-(GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ thanks
-to `DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
+(GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ through
+`DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
 
-This GCP plugin notably enables the upload of DICOM images through
-STOW-RS, the querying of the cloud content through QIDO-RS, and the
-retrieval of remote content through WADO-RS. These operations can be
+This GCP plugin notably enables the upload of DICOM images using
+STOW-RS, the querying of the cloud content using QIDO-RS, and the
+retrieval of remote content using WADO-RS. These operations can be
 possibly scripted thanks to the REST API of Orthanc.
 
 Concretely, the GCP plugin manages the credentials to Google Cloud
 Platform. It requires the official :ref:`DICOMweb plugin <dicomweb>`
 to be installed. As soon as Orthanc is started, the GCP plugin
-automatically acquires and refreshes the `authentication tokens
+automatically acquires and refreshes the `access tokens
 <https://cloud.google.com/docs/authentication/>`__, transparently
 updating the remote :ref:`DICOMweb servers <dicomweb-client-config>`
-that are known to the DICOMweb plugin. The authentication tokens can
+that are known to the DICOMweb plugin. The access tokens can
 be derived either from service accounts, or from user accounts.
 
 This page makes the assumption that you have created a Google Cloud
@@ -57,7 +57,7 @@ on any recent UNIX-like distribution (including GNU/Linux)::
   $ make
 
 The compilation produces a shared library
-``OrthancGoogleCloudPlatform`` that contains the DICOMweb
+``OrthancGoogleCloudPlatform`` that contains the GCP
 plugin. Pre-compiled binaries for Microsoft Windows `are available
 <http://www.orthanc-server.com/browse.php?path=/plugin-google-cloud>`__,
 and are included in the `Windows installers
@@ -74,12 +74,15 @@ Common parameters
 
 As explained above, the GCP plugin requires the :ref:`official
 DICOMweb plugin <dicomweb>` to be installed (with version above
-1.0).
+1.0). All the communications with Google Cloud Platform are done using
+the DICOMweb plugin, and the responsibility of the GCP plugin is to
+aquire and periodically refresh the access tokens whose lifetime is
+limited.
 
-Furthermore, as obtaining the authentication tokens for Google Cloud
-Platform necessitates a sequence of HTTPS requests, the Orthanc
+Obtaining the access tokens for Google Cloud Platform necessitates a
+sequence of HTTPS requests. As a consequence, the Orthanc
 :ref:`configuration options <configuration>` must specify how the
-authenticity of the Google servers is checked. You have two
+authenticity of the Google servers is verified. You have two
 possibilities to that end:
 
 1. Disabling the verification of the remote servers (**not recommended
@@ -100,8 +103,10 @@ possibilities to that end:
      <https://curl.haxx.se/docs/caextract.html>`__ that are extracted
      from Mozilla. 
 
-Note that to debug HTTPS communications, you have the possibility
-of setting the ``HttpVerbose`` configuration option of Orthanc to ``true``.
+Note that to debug HTTPS communications, you have the possibility of
+setting the ``HttpVerbose`` configuration option of Orthanc to
+``true``.  It is also useful to run Orthanc in ``--verbose`` mode
+(check out :ref:`this page <log>`).
 
 
 
@@ -173,7 +178,8 @@ calling ``gcloud init``).
 .. highlight:: bash
 
 Once the ``gcloud init`` command-line has been invoked, you can
-extract credentials for Orthanc by typing the following command::
+extract credentials to be used by Orthanc by typing the following
+command::
 
   $ gcloud auth print-access-token --format json
 
@@ -210,9 +216,9 @@ API of Orthanc.
 .. highlight:: bash
 
 Note that only 3 fields in the JSON file produced by the ``gcloud auth
-print-access-token`` are required: ``client_id``, ``client_secret``,
-and ``refresh_token``. Instead of using the full JSON file, you can
-extract only these fields, e.g. using the `jq
+print-access-token`` command are required: ``client_id``,
+``client_secret``, and ``refresh_token``. Instead of using the full
+JSON file, you can extract only these fields, e.g. using the `jq
 <https://stedolan.github.io/jq/>`__ command-line tool::
 
   $ gcloud auth print-access-token --format json | jq '{ AuthorizedUserClientId: .client_id, AuthorizedUserClientSecret:.client_secret, AuthorizedUserRefreshToken:.refresh_token }'
@@ -225,9 +231,9 @@ extract only these fields, e.g. using the `jq
 
 .. highlight:: json
 
-You can copy/paste these fields as follows in order to create a
-configuration for Orthanc that is equivalent to the one using the full
-JSON::
+These fields can then be copied/pasted as follows in order to create a
+configuration for Orthanc that is equivalent to the one using the
+separate JSON file::
   
   {
     "HttpsCACertificates": "/etc/ssl/certs/ca-certificates.crt",
@@ -244,5 +250,27 @@ JSON::
           "AuthorizedUserRefreshToken": "1/e2ngXXXXXX"
         }
       }
+    }
+  }
+
+
+Advanced options
+^^^^^^^^^^^^^^^^
+
+.. highlight:: json
+
+Some advanced configuration options are available as well, as
+summarized in this excerpt::
+
+  {
+    ...
+    // In seconds, must be large enough to send/receive your largest studies
+    // using WADO or STOW, depending on the speed of your Internet connection
+    "HttpTimeout" : 600,
+
+    "GoogleCloudPlatform" : {
+      ...
+       // Path to the URL of the GCP services
+      "BaseUrl" : "https://healthcare.googleapis.com/v1beta1/"
     }
   }
