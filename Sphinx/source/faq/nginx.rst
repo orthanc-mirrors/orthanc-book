@@ -11,7 +11,7 @@ proxying. Here is the configuration snippet for nginx::
        listen  80  default_server;
        ...
        location  /orthanc/  {
-          proxy_pass http://localhost:8042;
+          proxy_pass http://127.0.0.1:8042;
           proxy_set_header HOST $host;
           proxy_set_header X-Real-IP $remote_addr;
           rewrite /orthanc(.*) $1 break;
@@ -42,7 +42,7 @@ nginx::
        listen  80  default_server;
        ...
        location  /orthanc/  {
-          proxy_pass http://localhost:8042;
+          proxy_pass http://127.0.0.1:8042;
           proxy_set_header HOST $host;
           proxy_set_header X-Real-IP $remote_addr;
           rewrite /orthanc(.*) $1 break;
