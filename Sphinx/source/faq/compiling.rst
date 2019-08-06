@@ -11,6 +11,21 @@ Under GNU/Linux
   inside the source package.
 * Orthanc <= 0.7.0: See the :ref:`compiling-old`.
 
+**Note for packagers:** As explained :ref:`below on this page
+<compiling-infrastructure>`, the CMake scripts of Orthanc and its
+associated plugins may have to download the source code of third-party
+dependencies. This is an undesirable feature if packaging Orthanc for
+some GNU/Linux distribution, as network connections are forbidden in
+such situations to enable reproducible builds. To prevent the CMake
+scripts to download from Internet, package maintainers can manually
+download third-party dependencies by themselves (by checking what is
+downloaded by CMake during a fresh build), then put them in a
+subfolder named ``ThirdPartyDownloads/`` in the same folder as the
+``CMakeLists.txt`` file of the project. If the third-party packages
+are already in that subfolder, the CMake script will not try and
+download them from Internet.
+
+
 Under Microsoft Windows
 -----------------------
 
@@ -38,6 +53,8 @@ are enabled, which can seriously impact performance, especially if
 your Orthanc server stores a lot of DICOM instances.
 
 
+
+.. _compiling-infrastructure:
 
 Please explain the build infrastructure
 ---------------------------------------

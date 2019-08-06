@@ -7,7 +7,7 @@ To install Orthanc as a GNU/Linux daemon on a Debian/Ubuntu system,
 you can:
 
 1. Download this `service script
-   <http://anonscm.debian.org/cgit/debian-med/orthanc.git/tree/debian/orthanc.init>`_
+   <https://salsa.debian.org/med-team/orthanc/raw/master/debian/orthanc.init>`_
    (this file is part of the `official Debian package
    <https://tracker.debian.org/pkg/orthanc>`_ of Orthanc),
 2. Adapt some of its variables to reflect the configuration of your

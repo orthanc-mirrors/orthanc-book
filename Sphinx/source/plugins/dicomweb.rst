@@ -459,7 +459,7 @@ Additional HTTP headers can be added with an optional ``HttpHeaders``
 argument as for QIDO-RS and WADO-RS. This might be useful e.g. for
 cookie-based session management.
 
-Internally, this call results in creating an :ref:`Orthanc job <job>`
+Internally, this call results in creating an :ref:`Orthanc job <jobs>`
 that is executed synchronously (the REST call only returns once the 
 STOW-RS request is finished). You can run the job in asynchronous 
 mode as follows::
