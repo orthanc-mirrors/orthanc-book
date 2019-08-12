@@ -48,6 +48,8 @@ A package for `Apple's Mac OS X
 is available courtesy of `Osimis <http://osimis.io/>`__.
 
 
+.. _postgresql-ubuntu1604:
+
 Dynamic linking on Ubuntu 16.04
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -66,6 +68,28 @@ Orthanc <compiling>` have already been installed)::
                         -DUSE_SYSTEM_ORTHANC_SDK=OFF
   $ make
 
+
+.. _postgresql-cmake:
+  
+Dynamic linking on other GNU/Linux distributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+The build instructions should always be very similar to those for
+:ref:`Ubuntu 16.04 <postgresql-ubuntu1604>`. One difficulty that could
+however arise is that it is possible that the CMake environment that
+is shipped with the GNU/Linux distribution cannot locate a recent
+version of the development headers for PostgreSQL. This leads to an
+error while invoking CMake that looks like::
+
+  -- Could NOT find PostgreSQL (missing: PostgreSQL_TYPE_INCLUDE_DIR)
+
+In such a situation, please add your version of PostgreSQL to the
+macro ``PostgreSQL_ADDITIONAL_VERSIONS`` that is defined at the end of
+the `Resources/CMake/PostgreSQLConfiguration.cmake file
+<https://bitbucket.org/sjodogne/orthanc-databases/src/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__ in the sources of the project.
+  
   
 Usage
 -----
