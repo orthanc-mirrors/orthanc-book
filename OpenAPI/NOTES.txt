@@ -1,0 +1,8 @@
+To install latest version of ReDoc
+==================================
+
+# mkdir /tmp/i
+# cd /tmp/i
+# npm install redoc
+# cd -
+# cp /tmp/i/node_modules/redoc/bundles/redoc.standalone.js .
