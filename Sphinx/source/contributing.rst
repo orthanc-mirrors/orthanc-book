@@ -21,9 +21,9 @@ here are some tasks you can take in charge that would greatly help us:
     in your research work.
   - Answer questions posted to the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
-  - Improve the text of the `Orthanc Book
-    <https://bitbucket.org/sjodogne/orthanc-book/>`_ (check out the "How to contribute" 
-    section in the README).
+  - Improve the text of the `Orthanc Book and REST API documentation
+    <https://bitbucket.org/sjodogne/orthanc-book/>`_ (check out the
+    instructions provided in the README).
   - Provide documentation and use cases (inside the dedicated `GitHub
     repository <https://github.com/jodogne/OrthancContributed>`_, via
     pull requests).
