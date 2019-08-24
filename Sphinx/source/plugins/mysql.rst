@@ -166,6 +166,8 @@ to prevent other instances of Orthanc from using the same database. If
 you want several instances of Orthanc to share the same database, set
 the ``Lock`` option to ``false`` in the configuration file.
 
-Obviously, one must be very cautious when sharing the same database
-between instances of Orthanc. In particular, all these instances
-should share the same configuration.
+In the absence of locking, the same limitation apply to the
+MySQL/MariaDB plugins than to the PostgreSQL plugins (i.e. at most one
+instance of Orthanc writing to the database).  For more information,
+please check out the :ref:`documentation for PostgreSQL
+<postgresql-lock>`.
