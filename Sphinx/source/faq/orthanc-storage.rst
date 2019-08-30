@@ -51,6 +51,18 @@ by a number between 0 and 65535. Identifiers <= 1023 are reserved for
 the Orthanc core, whereas identifiers >= 1024 can be user-defined for
 external applications.
 
+Besides the attachments, the database index maintains other
+information for each DICOM resource, notably the :ref:`metadata
+<metadata>`, the :ref:`history of changes <changes>`, and an
+associative map that stores the so-called "main" DICOM tags (to avoid
+accessing the storage folder are when this is not needed). The SQLite
+database schema is kept as simple as possible, and can be found in the
+following two files of the source code of Orthanc:
+`PrepareDatabase.sql
+<https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.5.7/OrthancServer/Database/PrepareDatabase.sql>`__
+and `InstallTrackAttachmentsSize.sql
+<https://bitbucket.org/sjodogne/orthanc/src/Orthanc-1.5.7/OrthancServer/Database/InstallTrackAttachmentsSize.sql>`__.
+
 
 Direct access
 -------------
