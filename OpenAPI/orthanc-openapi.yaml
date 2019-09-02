@@ -3,7 +3,8 @@ info:
   title: Orthanc
   version: 1.0.0
   description: >-
-    One of the major strengths of Orthanc lies in its built-in RESTful API, that can be used to drive Orthanc from external applications, independently of the programming language that is used to develop these applications. The REST API of Orthanc gives a full programmatic access to all the core features of Orthanc. Importantly, Orthanc Explorer (the embedded administrative interface of Orthanc) entirely resorts to this REST API for all its features. This implies that anything that can be done through Orthanc Explorer, can also be done through REST queries.
+    One of the major strengths of Orthanc lies in its built-in RESTful API, that can be used to drive Orthanc from external applications, independently of the programming language that is used to develop these applications. The REST API of Orthanc gives a full programmatic access to all the core features of Orthanc. Importantly, Orthanc Explorer (the embedded administrative interface of Orthanc) entirely resorts to this REST API for all its features. This implies that anything that can be done through Orthanc Explorer, can also be done through REST queries.<p>
+    This documentation is <b>work-in-progress</b>: The entire REST API is not covered yet. Please contribute by improving the source code of the documenation: https://bitbucket.org/sjodogne/orthanc-book/src/default/
 servers:
   - url: 'https://demo.orthanc-server.com'
 components:
