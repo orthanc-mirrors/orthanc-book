@@ -1,3 +1,5 @@
+syntax: glob
 Sphinx/build
 Sphinx/env
 .vscode/
+*~

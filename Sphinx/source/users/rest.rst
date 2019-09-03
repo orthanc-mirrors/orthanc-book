@@ -937,3 +937,5 @@ API have not been described:
   Web site
   <http://www.orthanc-server.com/static.php?page=documentation>`__
   (click on the *Reference of the REST API* button).
+* A documentation of the REST API in the OpenAPI/Swagger format is
+  `available as work-in-progress <https://api.orthanc-server.com/>`__.
