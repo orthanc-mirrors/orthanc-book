@@ -12,25 +12,26 @@ When you face a problem, you should first check out the following
 resources:
 
 1. Make sure to :ref:`understand the basics of DICOM <dicom-guide>`.
-2. Follow the :ref:`general troubleshooting guide <troubleshooting>`.
-3. If the problem is related to the DICOM network protocol, follow
+2. Carefully read your :ref:`log files in verbose mode <log>`.
+3. Follow the :ref:`general troubleshooting guide <troubleshooting>`.
+4. If the problem is related to the DICOM network protocol, follow
    the :ref:`DICOM troubleshooting guide <dicom>`.
-4. Have a look at **all** the :ref:`frequently asked questions (FAQs)
+5. Have a look at **all** the :ref:`frequently asked questions (FAQs)
    <faq>` that are already available in the Orthanc Book.
-5. Make a search for similar problem previously discussed in the
+6. Make a search for similar problem previously discussed in the
    `Orthanc Users discussion forum
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
-6. Check out the ``Pending changes in the mainline`` section of the
+7. Check out the ``Pending changes in the mainline`` section of the
    `NEWS file
    <https://bitbucket.org/sjodogne/orthanc/src/default/NEWS>`__, as
    your issue might already be solved in the mainline of Orthanc (i.e.
    in the cutting-edge version of Orthanc since the last stable
    official release).
-7. Carefully read the `TODO file
+8. Carefully read the `TODO file
    <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__ that
    contains our roadmap, as you might be requesting a feature that is
    currently pending in our backlog (i.e. not implemented yet).
-8. Have a look for the issue in the `official bug tracker
+9. Have a look for the issue in the `official bug tracker
    <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`__
    (click on the ``All`` button, as your issue might already been solved).
 
