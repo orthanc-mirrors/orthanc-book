@@ -11,7 +11,9 @@ Analyzing your problem
 When you face a problem, you should first check out the following
 resources:
 
-1. Make sure to :ref:`understand the basics of DICOM <dicom-guide>`.
+1. Make sure to :ref:`check all the content of the Orthanc Book
+   <orthanc-book>`, and notably to :ref:`understand the basics of
+   DICOM <dicom-guide>`.
 2. Carefully read your :ref:`log files in verbose mode <log>`.
 3. Follow the :ref:`general troubleshooting guide <troubleshooting>`.
 4. If the problem is related to the DICOM network protocol, follow

@@ -1,3 +1,5 @@
+.. _orthanc-book:
+
 Welcome to the Orthanc Book!
 ============================
 
