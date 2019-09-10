@@ -22,8 +22,8 @@ distinction is also discussed in :ref:`another FAQ entry
 
 If you also want to **play** the videos, the `Osimis WebViewer plugin
 <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ is able to play
-H.264 (MPEG4) videos and 2D+t (cine) sequence but not MPEG2 videos that
-actually can not be played by Web browsers. 
+H.264 (MPEG4) videos and 2D+t (cine) sequences but not MPEG2 videos that
+currently can not be played by Web browsers. 
 
 If your video is a 2D+t (cine) sequence, Orthanc can also display it inside 
 a Web browser by at least 2 different means:
@@ -38,4 +38,4 @@ a Web browser by at least 2 different means:
 
 To summarize, if your video is not encoded with MPEG2, OR if
 you do not need to play the video within a Web browser, Orthanc
-actually supports video.
+actually supports video if the Osimis Web viewer plugin is installed.
