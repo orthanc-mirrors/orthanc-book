@@ -28,7 +28,8 @@ than Orthanc Explorer**, and/or that integrates more features (such as
 language translations, sorting resources, access control lists,
 tagging images, beautiful layout, tunable anonymization, modification
 of instances, paging if many patients, handling of timeouts,
-login/logout...). If you need such a more advanced `user experience
+login/logout, Web diffusion to patients/physicians...). If you need
+such a more advanced `user experience
 <https://en.wikipedia.org/wiki/User_experience>`__ so that Orthanc
 better fits your clinical workflow, you will have to develop a
 separate, custom Web interface on the top of the :ref:`rest`, maybe as
