@@ -310,4 +310,23 @@ remaining options:
   service. Think for instance about an authorization mechanism that
   simply associates its studies to a set of granted users: In this case,
   the series and instance levels can be ignored.
-     
+
+
+.. _orthanc-explorer-authorization:
+
+Integration with the Orthanc Explorer
+-------------------------------------
+
+Starting from Orthanc 1.5.8, you can pass authorization tokens in the url
+search params when opening the Orthanc explorer i.e. 
+http://localhost:8042/app/explorer.html?token=1234.  This token will be 
+included as an HTTP header in every request sent to the Orthanc Rest API.  
+It will also be included in the url search params when opening the Orthanc 
+or Osimis viewer.  
+
+Only 3 tokens name will be recognized and forwarded: ``token``, ``auth-token``
+and ``authorization``.
+
+Please note that the Orthanc Explorer has not been designed to handle
+the authorization so, when an authorization is not granted, it will simply 
+display an empty page or an error message.  

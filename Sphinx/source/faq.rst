@@ -56,4 +56,5 @@ Specific FAQs
    faq/orthanc-storage.rst
    faq/authentication.rst
    faq/crash.rst
+   faq/transcoding.rst
    faq/why-orthanc.rst

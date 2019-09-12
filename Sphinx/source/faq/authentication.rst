@@ -43,3 +43,5 @@ Depending on your scenario, you can consider the following options:
 * Create a :ref:`new Web user interface <improving-interface>` on the
   top of the REST API of Orthanc, using your favorite framework
   (Meteor, AngularJS, Ember.js, Node.js...).
+* Pass an :ref:`authorization token <orthanc-explorer-authorization>` 
+  in the url search params when opening the Orthanc Explorer.

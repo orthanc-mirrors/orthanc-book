@@ -20,11 +20,13 @@ will work fine either with 2D+t or real videos (because Orthanc is a
 distinction is also discussed in :ref:`another FAQ entry
 <supported-images>`.
 
-If you also want to **play** the videos, to the best of our knowledge,
-there is currently no Orthanc plugin for H.264 or MPEG2 (though such a
-plugin should be developed in the future). However, if your video is a
-2D+t (cine) sequence, Orthanc can already display it inside a Web
-browser by at least 2 different means:
+If you also want to **play** the videos, the `Osimis WebViewer plugin
+<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ is able to play
+H.264 (MPEG4) videos and 2D+t (cine) sequences but not MPEG2 videos that
+currently can not be played by Web browsers. 
+
+If your video is a 2D+t (cine) sequence, Orthanc can also display it inside 
+a Web browser by at least 2 different means:
 
 1. The built-in, administrative interface called :ref:`Orthanc
    Explorer <orthanc-explorer>` is able to display the individual
@@ -34,6 +36,6 @@ browser by at least 2 different means:
    allow you to use the mouse scroll wheel to display the successive
    frames of the video.
 
-To summarize, if your video is not encoded with MPEG2 or H264, OR if
+To summarize, if your video is not encoded with MPEG2, OR if
 you do not need to play the video within a Web browser, Orthanc
-actually supports video.
+actually supports video if the Osimis Web viewer plugin is installed.
