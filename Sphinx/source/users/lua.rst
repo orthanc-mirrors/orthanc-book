@@ -196,6 +196,14 @@ requests to Web services:
 The ``headers`` argument is optional and was added in release
 1.2.1. It allows to set the HTTP headers for the HTTP client request.
 
+Example::
+
+   local preview = RestApiGet('/instances/' .. instanceId .. '/preview')
+   local headers = {
+      ["content-type"] = "image/png",
+   }
+   HttpPost("http://localhost/my-web-service/instance-preview", preview, headers)
+
 .. _lua-origin:
 
 Origin of the instances
