@@ -1,10 +1,16 @@
+Starting Orthanc as a GNU/Linux daemon
+======================================
+
+.. contents::
+
 .. highlight:: bash
 
-Installing Orthanc as a Debian/Ubuntu daemon
-============================================
+"init" flavor
+-------------
 
-To install Orthanc as a GNU/Linux daemon on a Debian/Ubuntu system,
-you can:
+To install Orthanc as a GNU/Linux `init daemon
+<https://en.wikipedia.org/wiki/Init>`__ on a Debian/Ubuntu system, you
+can:
 
 1. Download this `service script
    <https://salsa.debian.org/med-team/orthanc/raw/master/debian/orthanc.init>`_
@@ -32,3 +38,33 @@ you can:
 run at startup::
 
     $ sudo apt-get install rcconf
+
+
+"systemd" flavor
+----------------
+
+A sample `systemd daemon <https://en.wikipedia.org/wiki/Systemd>`__
+for Orthanc can be found in the official `Fedora package
+<https://apps.fedoraproject.org/packages/orthanc>`__:
+
+1. Download the `systemd script
+   <https://src.fedoraproject.org/rpms/orthanc/blob/master/f/orthanc.service>`__,
+2. Adapt some of its variables to reflect the configuration of your
+   system,
+3. Copy it as ``/etc/systemd/system/orthanc.service``,
+4. Start the daemon as follows::
+
+     $ sudo systemctl daemon-reload
+     $ sudo systemctl start orthanc.service
+
+5. To make this change permanent after a reboot, you can create a
+   symbolic link as follows::
+
+     $ sudo ln -s /etc/systemd/system/orthanc.service /etc/systemd/system/default.target.wants/
+    
+
+Other GNU/Linux distributions
+-----------------------------
+
+The instructions above have been tested on Debian/Ubuntu/Fedora
+systems, but should work similarly on other GNU/Linux distributions.
