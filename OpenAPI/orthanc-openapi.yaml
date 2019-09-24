@@ -8,6 +8,11 @@ info:
 servers:
   - url: 'https://demo.orthanc-server.com'
 components:
+
+####################################################################################
+## SCHEMAS / MODELS
+####################################################################################
+
   schemas:
     patient:
       properties:
@@ -204,6 +209,8 @@ components:
         "ParentSeries" : "318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
         "Type" : "Instance"
       }
+
+
     jobId:
       properties:
         ID:
@@ -214,6 +221,8 @@ components:
         "ID": "11541b16-e368-41cf-a8e9-3acf4061d238",
         "Path": "/jobs/11541b16-e368-41cf-a8e9-3acf4061d238"
       }
+
+
     jobCStore:
       properties:
         Description:
@@ -251,6 +260,8 @@ components:
           "http://127.0.0.1:8543/"
         ]
       }
+
+
     listOfResourcesWithAsynchOption:
       properties:
         Resources:
@@ -265,6 +276,8 @@ components:
         "Resources" : ["62cdfbea-07c71f0c-cd643b19-841a306a-01221339"],
         "Asynchronous" : true
       }
+
+
     listOfResources:
       description: A list of resources IDs (Patient, Studies, Series or Instances)
       schema:
@@ -272,10 +285,17 @@ components:
         items:
           type: string
       example: ["62cdfbea-07c71f0c-cd643b19-841a306a-01221339"]
+
+
     singleResource:
       description: A resource ID (Patient, Studies, Series or Instances)
       type: string
       example: "62cdfbea-07c71f0c-cd643b19-841a306a-01221339"
+
+####################################################################################
+## ROUTES / PATHS
+####################################################################################
+
 paths:
   /instances:
     post:
@@ -1009,7 +1029,7 @@ paths:
             schema:
               oneOf:
                 - $ref: "#/components/schemas/listOfResourcesWithAsynchOption"
-                - $ref: "#/components/schemas/listOfResources"
+                - $ref: "#/components/schemas/listOfResources"          
           text/plain:
             schema:
               $ref: "#/components/schemas/singleResource"
