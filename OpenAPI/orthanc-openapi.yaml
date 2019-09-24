@@ -270,7 +270,9 @@ components:
           items:
             type: string
         Asynchronous:
-          description: true to create a job and return immediately, false to wait for job completion
+          description: true to create a job and return immediately, false to wait for job completion.  
+            The response will vary according to this parameter.  If the call is synchronous, you'll receive
+            a completed job in the response while if the call is asynchronous, you'll receive a job identifier.
           type: boolean
       example: {
         "Resources" : ["62cdfbea-07c71f0c-cd643b19-841a306a-01221339"],
