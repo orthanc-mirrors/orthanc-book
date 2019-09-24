@@ -35,17 +35,17 @@ components:
           enum:
             - Patient
       example: {
-  "ID" : "07a6ec1c-1be5920b-18ef5358-d24441f3-10e926ea",
-  "MainDicomTags" : {
-     "OtherPatientIDs" : "(null)",
-     "PatientBirthDate" : "0",
-     "PatientID" : "000000185",
-     "PatientName" : "Anonymous^Unknown",
-     "PatientSex" : "O"
-  },
-  "Studies" : [ "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15" ],
-  "Type" : "Patient"
-}
+        "ID" : "07a6ec1c-1be5920b-18ef5358-d24441f3-10e926ea",
+        "MainDicomTags" : {
+          "OtherPatientIDs" : "(null)",
+          "PatientBirthDate" : "0",
+          "PatientID" : "000000185",
+          "PatientName" : "Anonymous^Unknown",
+          "PatientSex" : "O"
+        },
+        "Studies" : [ "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15" ],
+        "Type" : "Patient"
+      }
     study:
       properties:
         ID:
@@ -76,23 +76,23 @@ components:
           enum:
             - Study
       example: {
-  "ID" : "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15",
-  "MainDicomTags" : {
-     "AccessionNumber" : "(null)",
-     "StudyDate" : "20120716",
-     "StudyDescription" : "TestSUVce-TF",
-     "StudyID" : "23848",
-     "StudyInstanceUID" : "1.2.840.113704.1.111.7016.1342451220.40",
-     "StudyTime" : "170728"
-  },
-  "ParentPatient" : "07a6ec1c-1be5920b-18ef5358-d24441f3-10e926ea",
-  "Series" : [
-     "6821d761-31fb55a9-031ebecb-ba7f9aae-ffe4ddc0",
-     "2cc6336f-2d4ae733-537b3ca3-e98184b1-ba494b35",
-     "7384c47e-6398f2a8-901846ef-da1e2e0b-6c50d598"
-  ],
-  "Type" : "Study"
-}
+        "ID" : "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15",
+        "MainDicomTags" : {
+          "AccessionNumber" : "(null)",
+          "StudyDate" : "20120716",
+          "StudyDescription" : "TestSUVce-TF",
+          "StudyID" : "23848",
+          "StudyInstanceUID" : "1.2.840.113704.1.111.7016.1342451220.40",
+          "StudyTime" : "170728"
+        },
+        "ParentPatient" : "07a6ec1c-1be5920b-18ef5358-d24441f3-10e926ea",
+        "Series" : [
+          "6821d761-31fb55a9-031ebecb-ba7f9aae-ffe4ddc0",
+          "2cc6336f-2d4ae733-537b3ca3-e98184b1-ba494b35",
+          "7384c47e-6398f2a8-901846ef-da1e2e0b-6c50d598"
+        ],
+        "Type" : "Study"
+      }
     series:
       properties:
         ID:
@@ -137,30 +137,30 @@ components:
           enum:
             - Complete
       example: {
-  "ExpectedNumberOfInstances" : 45,
-  "ID" : "2cc6336f-2d4ae733-537b3ca3-e98184b1-ba494b35",
-  "Instances" : [
-     "41bc3f74-360f9d10-6ae9ffa4-01ea2045-cbd457dd",
-     "1d3de868-6c4f0494-709fd140-7ccc4c94-a6daa3a8",
-     "1010f80b-161b71c0-897ec01b-c85cd206-e669a3ea",
-     "e668dcbf-8829a100-c0bd203b-41e404d9-c533f3d4"
-  ],
-  "MainDicomTags" : {
-     "Manufacturer" : "Philips Medical Systems",
-     "Modality" : "PT",
-     "NumberOfSlices" : "45",
-     "ProtocolName" : "CHU/Body_PET/CT___50",
-     "SeriesDate" : "20120716",
-     "SeriesDescription" : "[WB_CTAC] Body",
-     "SeriesInstanceUID" : "1.3.46.670589.28.2.12.30.26407.37145.2.2516.0.1342458737",
-     "SeriesNumber" : "587370",
-     "SeriesTime" : "171121",
-     "StationName" : "r054-svr"
-  },
-  "ParentStudy" : "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15",
-  "Status" : "Complete",
-  "Type" : "Series"
-}
+        "ExpectedNumberOfInstances" : 45,
+        "ID" : "2cc6336f-2d4ae733-537b3ca3-e98184b1-ba494b35",
+        "Instances" : [
+          "41bc3f74-360f9d10-6ae9ffa4-01ea2045-cbd457dd",
+          "1d3de868-6c4f0494-709fd140-7ccc4c94-a6daa3a8",
+          "1010f80b-161b71c0-897ec01b-c85cd206-e669a3ea",
+          "e668dcbf-8829a100-c0bd203b-41e404d9-c533f3d4"
+        ],
+        "MainDicomTags" : {
+          "Manufacturer" : "Philips Medical Systems",
+          "Modality" : "PT",
+          "NumberOfSlices" : "45",
+          "ProtocolName" : "CHU/Body_PET/CT___50",
+          "SeriesDate" : "20120716",
+          "SeriesDescription" : "[WB_CTAC] Body",
+          "SeriesInstanceUID" : "1.3.46.670589.28.2.12.30.26407.37145.2.2516.0.1342458737",
+          "SeriesNumber" : "587370",
+          "SeriesTime" : "171121",
+          "StationName" : "r054-svr"
+        },
+        "ParentStudy" : "9ad2b0da-a406c43c-6e0df76d-1204b86f-78d12c15",
+        "Status" : "Complete",
+        "Type" : "Series"
+      }
     instance:
       properties:
         FileSize:
@@ -190,20 +190,92 @@ components:
           enum:
             - Instance
       example: {
-   "FileSize" : 35440,
-   "FileUuid" : "7976ad32-4d15-439b-8789-bf70f52200ec",
-   "ID" : "055bfbaf-2aae936c-82ed5a9a-9267f8b7-416a4000",
-   "IndexInSeries" : 59,
-   "MainDicomTags" : {
-      "AcquisitionNumber" : "2",
-      "ImageIndex" : "59",
-      "ImagePositionPatient" : "-134.74816\\-272.14441\\-712.764",
-      "InstanceNumber" : "59",
-      "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.36085.2.0.3752288429331748"
-   },
-   "ParentSeries" : "318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
-   "Type" : "Instance"
-}
+        "FileSize" : 35440,
+        "FileUuid" : "7976ad32-4d15-439b-8789-bf70f52200ec",
+        "ID" : "055bfbaf-2aae936c-82ed5a9a-9267f8b7-416a4000",
+        "IndexInSeries" : 59,
+        "MainDicomTags" : {
+            "AcquisitionNumber" : "2",
+            "ImageIndex" : "59",
+            "ImagePositionPatient" : "-134.74816\\-272.14441\\-712.764",
+            "InstanceNumber" : "59",
+            "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.36085.2.0.3752288429331748"
+        },
+        "ParentSeries" : "318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
+        "Type" : "Instance"
+      }
+    jobId:
+      properties:
+        ID:
+          type: string
+        Path:
+          type: string
+      example: {
+        "ID": "11541b16-e368-41cf-a8e9-3acf4061d238",
+        "Path": "/jobs/11541b16-e368-41cf-a8e9-3acf4061d238"
+      }
+    jobCStore:
+      properties:
+        Description:
+          type: string
+        FailedInstancesCount: 
+          type: number
+        InstancesCount:
+          type: number
+        LocalAet:
+          type: string
+        RemoteAet:
+          type: string
+      example: {
+        "Description": "REST API",
+        "FailedInstancesCount": 0,
+        "InstancesCount": 1,
+        "LocalAet": "ORTHANCA",
+        "RemoteAet": "ORTHANCB"
+      }
+    jobPeerStore:
+      properties:
+        Description:
+          type: string
+        FailedInstancesCount: 
+          type: number
+        InstancesCount:
+          type: number
+        Peer:
+          type: string
+      example: {
+        "Description": "REST API",
+        "FailedInstancesCount": 0,
+        "InstancesCount": 1,
+        "Peer": [
+          "http://127.0.0.1:8543/"
+        ]
+      }
+    listOfResourcesWithAsynchOption:
+      properties:
+        Resources:
+          description: A list of resources IDs (Patient, Studies, Series or Instances)
+          type: array
+          items:
+            type: string
+        Asynchronous:
+          description: true to create a job and return immediately, false to wait for job completion
+          type: boolean
+      example: {
+        "Resources" : ["62cdfbea-07c71f0c-cd643b19-841a306a-01221339"],
+        "Asynchronous" : true
+      }
+    listOfResources:
+      description: A list of resources IDs (Patient, Studies, Series or Instances)
+      schema:
+        type: array
+        items:
+          type: string
+      example: ["62cdfbea-07c71f0c-cd643b19-841a306a-01221339"]
+    singleResource:
+      description: A resource ID (Patient, Studies, Series or Instances)
+      type: string
+      example: "62cdfbea-07c71f0c-cd643b19-841a306a-01221339"
 paths:
   /instances:
     post:
@@ -902,7 +974,8 @@ paths:
   /peers/{Peer}:
     put:
       tags: [Orthanc Peers]
-      description: Add a new Orthanc peer. Note that this will only be stored in memory unless the 'OrthancPeersInDatabase' configuration option is set.
+      summary: Add a new Orthanc peer. 
+      description: Note that this will only be stored in memory unless the 'OrthancPeersInDatabase' configuration option is set.
       parameters:
         - name: Peer
           in: path
@@ -922,53 +995,66 @@ paths:
   /peers/{Peer}/store:
     post:
       tags: [Orthanc Peers]
-      description: Send a resource to an Orthanc peer. Resource ID's are provided either as JSON array or a raw string.
+      summary: Send resources to an Orthanc peer.
       parameters:
         - name: Peer
           in: path
           required: true
+          description: the peer alias as defined in the Orthanc configuration file
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                type: string
-                description: Resource ID (patient, study, series or instance) to send to the peer.
-            example: ["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88","d5604121-7d613ce6-c315a5-a77b3cf3-9c253b23","cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e"]
+              oneOf:
+                - $ref: "#/components/schemas/listOfResourcesWithAsynchOption"
+                - $ref: "#/components/schemas/listOfResources"
           text/plain:
-            example: d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88
+            schema:
+              $ref: "#/components/schemas/singleResource"
       responses:
         200:
-          description: Resources sent
+          description: Jobs that have been created
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/jobId"
+                  - $ref: "#/components/schemas/jobPeerStore"
 
   /modalities/{Modality}/store:
     post:
-      tags: [Orthanc Peers]
-      description: Once you have identified the Orthanc identifier of the DICOM resource that would like to send you would use the following command to send it.
+      tags: [Remote Modalities]
+      summary: Send resources from Orthanc to a remote modality through C-Store.
       parameters:
         - name: Modality
           in: path
           required: true
-          description: The Modality to invoke C-STORE from within the Orthanc configuration file
+          description: the modality alias where you want to send data (as defined in the Orthanc configuration file)
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                type: string
-                description: Resource ID (patient, study, series or instance) to send to the remote modality.
-            example: ["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88","d5604121-7d613ce6-c315a5-a77b3cf3-9c253b23","cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e"]
+              oneOf:
+                - $ref: "#/components/schemas/listOfResourcesWithAsynchOption"
+                - $ref: "#/components/schemas/listOfResources"
           text/plain:
-            example: d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88
+            schema:
+              $ref: "#/components/schemas/singleResource"
       responses:
         200:
-          description: Resources sent
+          description: Jobs that have been created
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/jobId"
+                  - $ref: "#/components/schemas/jobCStore"
+
+
   /modalities/{Modality}/query:
     post:
       tags: [Remote Modalities]
