@@ -242,6 +242,8 @@ components:
         "LocalAet": "ORTHANCA",
         "RemoteAet": "ORTHANCB"
       }
+
+
     jobPeerStore:
       properties:
         Description:
@@ -293,6 +295,37 @@ components:
       description: A resource ID (Patient, Studies, Series or Instances)
       type: string
       example: "62cdfbea-07c71f0c-cd643b19-841a306a-01221339"
+
+    peer:
+      required:
+        - Url
+      properties:
+        Url:
+          type: string
+          description: the root url of the Orthanc Rest API of the other peer
+        Username: 
+          type: string
+        Password:
+          type: string
+        HttpHeaders:
+          description: HTTP headers to add to every request sent to that peer
+          type: object
+        CertificateFile:
+          type: string
+        CertificateKeyFile:
+          type: string
+        CertificateKeyPassword:
+          type: string
+      example: {
+        "Url" : "http://localhost:8044",
+        "Username" : "alice",                          
+        "Password" : "alicePassword",                  
+        "HttpHeaders" : { "Token" : "Hello world" },   
+        "CertificateFile" : "client.crt",              
+        "CertificateKeyFile" : "client.key",           
+        "CertificateKeyPassword" : "certpass"          
+      }
+
 
 ####################################################################################
 ## ROUTES / PATHS
@@ -1008,9 +1041,9 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                Url:
-                  type: string
+              type: array
+              items:
+                $ref: "#/components/schemas/peer"
       responses:
         200:
           description: Peer created
