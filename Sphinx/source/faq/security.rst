@@ -100,9 +100,14 @@ option to ``true``, you should:
   user that runs Orthanc.
 
 * Consider implementing a :ref:`higher-level application
-  <improving-interface>` (e.g. in PHP) that takes care of user
-  authentication/authorization, and that is the only one to be
-  allowed to contact the Orthanc REST API.
+  <improving-interface>` (e.g. in PHP, Java, Django...) that takes
+  care of user authentication/authorization, and that is the only one
+  to be allowed to contact the Orthanc REST API. In particular, you
+  must create a higher-level application so as to properly deal with
+  `CSRF attacks
+  <https://en.wikipedia.org/wiki/Cross-site_request_forgery>`__:
+  Indeed, as explained in the introduction, Orthanc is a microservice
+  that is designed to be used within a secured environment.
 
 * For advanced scenarios, you might have interest in the
   :ref:`advanced authorization plugin <authorization>`. Similarly,
