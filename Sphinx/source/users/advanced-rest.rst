@@ -128,7 +128,7 @@ The ``State`` field can be:
   ``ErrorCode`` and ``ErrorDescription`` fields for more information.
 * ``Paused``: The job has been paused.
 * ``Retry``: The job has failed internally, and has been scheduled for
-  re-submission after a delay. As of Orthanc 1.5.7, this feature is not
+  re-submission after a delay. As of Orthanc 1.5.8, this feature is not
   used by any type of job.
 
 In order to wait for the end of an asynchronous call, the caller will
@@ -148,7 +148,7 @@ Given the ID of some job, one can:
 * Retry a job in ``Failed`` state by POST-ing to ``/jobs/.../resubmit``.
 
 The related state machine is depicted in the `implementation notes
-<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.5.7/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
+<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.5.8/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
   
 
 
