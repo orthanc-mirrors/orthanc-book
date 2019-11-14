@@ -37,7 +37,8 @@ Explanations:
 * ``Replace`` is an associative array that associates a DICOM tag with its
   new string value. The value is dynamically cast to the proper DICOM
   data type (an HTTP error will occur if the cast fails). Replacements
-  are applied after all the tags to anonymize have been removed.
+  are applied after all the tags to anonymize have been removed.  
+  You may also use the ``Replace`` field to add new tags to the file.
 * ``Keep`` specifies a list of tags that should be preserved from full
   anonymization.
 * If ``KeepPrivateTags`` is set to ``true`` in the JSON request,
@@ -74,7 +75,35 @@ Remarks:
   ``SeriesInstanceUID``, and ``SOPInstanceUID`` requires ``Force`` to
   be set to ``true``, in order to prevent any unwanted side effect.     
 
+.. highlight:: json
 
+* To replace a sequence of tags, you may use this syntax:: 
+
+
+    {
+      "Replace" : {
+        "ProcedureCodeSequence" : [	
+          {
+            "CodeValue" : "2",	
+            "CodingSchemeDesignator" : "1",	
+            "CodeMeaning": "1" 
+          }
+        ]
+      }
+    }
+
+* To replace a binary tag, you should encode it in base64 and use::
+
+    {
+      "Replace" : {
+        "EncryptedAttributesSequence" : [
+          {
+            "EncryptedContentTransferSyntaxUID" : "1.2.840.10008.1.2",
+            "EncryptedContent" : "data:application/octet-stream;base64,SSB3YXMgaGVyZSBpbiAyMDE5LiAgTWFydHkgTWNGbHku"
+          }
+        ]
+      }
+    }
 Modification of Studies or Series
 ---------------------------------
 
