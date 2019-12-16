@@ -6,6 +6,7 @@ Integrations
 .. toctree::
    :maxdepth: 1
 
+   integrations/modality.rst
    integrations/ginkgo-cadx.rst
    integrations/integrate-horos-using-dicom.rst
    integrations/integrate-osirix-using-dicom.rst

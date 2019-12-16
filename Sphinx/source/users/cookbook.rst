@@ -15,9 +15,9 @@ Obtaining binaries
 
 To obtain the Orthanc binaries, you have several possibilities:
 
-* :ref:`Compile Orthanc by yourself <compiling>`.
 * `Download pre-compiled packages <http://www.orthanc-server.com/download.php>`__.
 * :ref:`Use Docker <docker>`.
+* :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#vagrant>`__.
 
@@ -62,9 +62,10 @@ Uploading through the DICOM protocol
 
 Once Orthanc is up and running, any imaging modality can send
 instances to Orthanc through the DICOM protocol (with the C-Store
-command).
+command).  Check :ref:`this tutorial <configure-modality>` to 
+connect your modality to Orthanc.
 
-You can use the standard command-line tool ``storescu`` from the
+You can also use the standard command-line tool ``storescu`` from the
 `DCMTK software <http://dicom.offis.de/dcmtk.php.en>`__ to 
 manually send DICOM images to Orthanc, for instance::
 
