@@ -203,7 +203,10 @@ Two important options can be provided for individual remote DICOMweb servers:
   this option to ``true`` is the best choice to reduce memory
   consumption. However, it must be set to ``false`` if the remote
   DICOMweb server is Orthanc <= 1.5.6, as chunked transfer encoding is
-  only supported starting with Orthanc 1.5.8.
+  only supported starting with Orthanc 1.5.8. Beware setting ``ChunkedTransfers``
+  to ``true`` utilizes all CPU resources which results in extremely low throughput
+  as of version 1.0 of the DICOMweb plugin (see
+  `issue 156 <https://bitbucket.org/sjodogne/orthanc/issues/156/>`__ for status).
 
 You'll have to convert the JSON array into a JSON object to set these
 options::
