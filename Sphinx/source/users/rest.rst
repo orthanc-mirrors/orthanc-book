@@ -448,6 +448,18 @@ Note that the list of resources to be sent can include the
 :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
 studies or series as well.
 
+Testing connectivity with a remote peer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+In version 1.5.9+, we have introduced a route to retrieve the ``/system`` info from
+a remote peer.  This route can also be used to test the connectivity with that peer
+without actually sending a DICOM resource.::
+
+    $ curl http://localhost:8042/peers/sample/system
+
+
 Using HTTPS
 ^^^^^^^^^^^
 
