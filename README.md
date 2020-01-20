@@ -13,10 +13,6 @@ documentation of the
 integration server (CIS) of Orthanc watches this repository, and
 automatically publishes modifications online.
 
-Improvements that should be done in the documentation can be reported
-onto the
-[dedicated issue tracker](https://bitbucket.org/sjodogne/orthanc-book/issues?status=new&status=open).
-
 
 Orthanc Book
 ============
