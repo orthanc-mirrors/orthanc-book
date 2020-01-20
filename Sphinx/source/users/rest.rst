@@ -64,6 +64,20 @@ the REST API::
     $ python ImportDicomFiles.py localhost 8042 ~/DICOM/
 
 
+.. highlight:: perl
+
+If you are using Powershell (>= 3.0), you can use the following to send a single
+Dicom instance to Orthanc::
+
+    # disabling progress bar tremendously increases the Invoke-RestMethod call
+    $ProgressPreference = 'SilentlyContinue'
+
+    # upload it to Orthanc
+    $reply = Invoke-RestMethod http://localhost:8042/instances -Method POST -InFile CT.X.1.2.276.0.7230010.dcm
+
+    # display the result
+    Write-Host "The instance can be retrieved at http://localhost:8042$($reply.Path)"
+
 .. _rest-access:
 
 Accessing the content of Orthanc

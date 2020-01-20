@@ -164,9 +164,9 @@ file to Orthanc. The following scripts perform such a *DICOM-ization*;
 They convert the ``HelloWorld2.pdf`` file to base64, then perform a
 ``POST`` request with JSON data containing the converted payload.
 
-.. highlight:: bash
+Using bash:
 
-Using bash::
+.. code-block:: bash
 
     # create the json data, with the BASE64 data embedded in it
     (echo -n '{"Tags" : {"PatientName" : "Benjamino", "Modality" : "CT"},"Content" : "data:application/pdf;base64,'; base64 HelloWorld2.pdf; echo '"}') > /tmp/foo
@@ -174,9 +174,10 @@ Using bash::
     # upload it to Orthanc
     cat /tmp/foo | curl -H "Content-Type: application/json" -d @- http://localhost:8042/tools/create-dicom
 
-.. highlight:: powershell
 
-Using Powershell::
+Using powershell:
+
+.. code-block:: perl
 
     # create the BASE64 string data
     $fileInBase64 = $([Convert]::ToBase64String((gc -Path "HelloWorld2.pdf" -Encoding Byte)))
@@ -184,8 +185,11 @@ Using Powershell::
     # create the json data
     $params = @{Tags = @{PatientName = "Benjamino";Modality = "CT"};Content= "data:application/pdf;base64,$fileInBase64"}
 
-    # upload it to Orthanc and convert the result to json
-    $reply = Invoke-WebRequest -Uri http://localhost:8042/tools/create-dicom -Method POST -Body ($params|ConvertTo-Json) -ContentType "application/json" | ConvertFrom-Json
+    # disabling progress bar tremendously increases the Invoke-RestMethod call
+    $ProgressPreference = 'SilentlyContinue'
+
+    # upload it to Orthanc
+    $reply = Invoke-RestMethod http://localhost:8042/tools/create-dicom -Method POST -Body ($params|ConvertTo-Json) -ContentType 'application/json'
 
     # display the result
     Write-Host "The instance can be retrieved in PDF at http://localhost:8042$($reply.Path)/pdf"
