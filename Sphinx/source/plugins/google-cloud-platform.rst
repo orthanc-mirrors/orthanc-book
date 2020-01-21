@@ -103,7 +103,7 @@ servers is verified. You have two possibilities to that end:
    <https://curl.haxx.se/docs/sslcerts.html>`__ to the HTTPS client
    that is internally used by Orthanc (namely, `cURL
    <https://en.wikipedia.org/wiki/CURL>`__). This is done by properly
-   setting ``HttpsVerifyPeers`` option, so that it points to a file
+   setting ``HttpsCACertificates`` option, so that it points to a file
    containing a store of CA certificates. Depending on your operating
    system, this file can be found as follows:
 
