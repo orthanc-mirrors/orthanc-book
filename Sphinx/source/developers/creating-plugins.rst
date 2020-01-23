@@ -13,17 +13,26 @@ The recommended way of :ref:`contributing to the Orthanc code
 <plugins>`.
 
 Orthanc plugins must use the `plugin SDK
-<http://sdk.orthanc-server.com/>`__ and must be written
-in C or C++. They must also fullfil the terms of the `GPLv3 license
+<http://sdk.orthanc-server.com/>`__ and must be written in C or
+C++. They must also fullfil the terms of the `GPLv3 license
 <http://www.gnu.org/licenses/quick-guide-gplv3.en.html>`__ that is
-used by the core of Orthanc. Sample code for plugins can be found `in
-the official Orthanc repository
-<https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/>`__
-(in the ``Plugins/Samples`` folder). A
-tutorial showing how to implement a basic WADO server is `available on
-CodeProject
-<http://www.codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
+used by the core of Orthanc. Here are some resources about creating
+plugins:
 
+* Sample code for plugins can be found `in the official Orthanc
+  repository
+  <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/>`__
+  (in the ``Plugins/Samples`` folder).
+
+* A tutorial showing how to implement a basic WADO server is
+  `available on CodeProject
+  <http://www.codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
+
+* Marco Barnig provides `tutorial lessons to create Orthanc plugins
+  <https://github.com/mbarnig/RadioLogic/wiki#orthanc-plugin-development>`__
+  as part of his `RadioLogic project
+  <https://github.com/mbarnig/RadioLogic/>`__.
+  
 We suggest developers to adopt the :ref:`coding style of the Orthanc
 core <coding-style>`, although this is of course not required.
 
