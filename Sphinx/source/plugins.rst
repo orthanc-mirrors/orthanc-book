@@ -56,15 +56,11 @@ From University Hospital of Liège
 From Osimis
 ^^^^^^^^^^^
 
+* :ref:`osimis_webviewer`
 * :ref:`mysql`
 * :ref:`authorization`
 * :ref:`transfers`
 * :ref:`google`    
-* `Osimis <http://osimis.io/>`__ maintains an evolution of the
-  official Web viewer plugin. The Osimis plugin adds tools for
-  measuring, for viewing multiple series, and for split-pane. `Check
-  out the source code
-  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
 .. _plugins-contributed:
 
