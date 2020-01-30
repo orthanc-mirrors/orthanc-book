@@ -21,4 +21,99 @@ plugin
 Also `check out the source code
 <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
-*To be written.*
+
+How to get it
+-------------
+
+The Osimis Web viewer is part of the `Windows installers
+<https://www.orthanc-server.com/download-windows.php>`__.
+
+For Linux users, you'll find it in the `osimis/orthanc <https://hub.docker.com/repository/docker/osimis/orthanc>`__ 
+docker images or you can download the LSB binary `here <http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.3.1/libOsimisWebViewer.so>`__.
+
+The compilation process is quite complex since it requires to build
+first the frontend and then the backend.  All information can be found
+in the `source code
+<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
+
+
+Usage
+-----
+
+.. highlight:: json
+
+On Windows, the plugin is enabled by default.
+
+If you're using the ``osimis/orthanc`` docker image, you'll have
+to define the WVB_ENABLED `environment variable <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages?-OsimisWebViewer>`__.
+to ``true``
+
+On Linux, the Osimis Web viewer will only work with LSB orthanc binaries
+that can be downloaded from `here <https://lsb.orthanc-server.com/>`__ and
+that will work with most recent Linux distros.
+
+Once Orthanc is installed, you must change the :ref:`configuration file
+<configuration>` to tell Orthanc where it can find the plugin: This is
+done by properly modifying the ``Plugins`` option. You could for
+instance use the following configuration file::
+
+  {
+    "Name" : "MyOrthanc",
+    [...]
+    "Plugins" : [
+      "/home/user/xxx/Downloads/libOsimisWebViewer.so"
+    ]
+  }
+
+.. highlight:: text
+
+Orthanc must of course be restarted after the modification of its
+configuration file. 
+
+Once a :ref:`DICOM study <model-world>` is opened using Orthanc
+Explorer, a yellow button entitled ``Osimis Web Viewer`` will show
+up. It will open the Web viewer for that particular study.  See also
+the demonstration video on `official homepage of the plugin
+<https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
+
+Advanced options
+----------------
+
+.. highlight:: json
+
+The configuration of the Web viewer can be fine-tuned by adding some in
+the `configuration file <https://bitbucket.org/osimis/osimis-webviewer-plugin/src/master/doc/default-configuration.json>`__.
+
+FAQ
+---
+
+- **What video formats are supported by the Osimis Web Viewer ?**
+
+  The set of codecs supported by the Osimis Viewer is an intersection of the sets of codecs supported by 
+  the `DICOM standard <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__ 
+  and those supported by the `web browsers <https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats>`__.
+  In short, this mostly comes down to just MPEG-4.
+  
+- **Where are the annotations stored ?**
+
+  Annotations are stored in :ref:`metadata <metadata>`.  Note that annotation 
+  storage is disabled by default and can be enabled by setting ``"AnnotationStorageEnabled": true``
+  in the configuration file.
+
+  
+
+CE marking
+----------
+
+Legally, in Europe, the Osimis Web viewer can not be used for medical usage unless you
+purchase the `CE marked version by Osimis <https://www.osimis.io/en/products/orthanc-plugins/osimis-viewer-pro.html>`__.  
+If you're outside Europe, you should check your local regulation but it's most likely 
+that you're not allowed to use it for medical usage as well.
+
+Although the free and open source version of the Osimis Web viewer offers the same feature scope, 
+CE marking requires a "supplier-end user" agreement in which the supplier guarantees that:
+
+- the viewer has been tested for medical use against all possible patient risk,
+- the end user receives regular updates on new features and bug fixes,
+- the end user can be informed of any bug in the medical device. 
+

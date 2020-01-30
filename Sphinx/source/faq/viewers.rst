@@ -27,22 +27,22 @@ with Orthanc (do not hesitate to `warn us
 
 Make also sure to check out the following extensions to Orthanc:
 
-* `Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
+* `Orthanc Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
+* `Osimis Web viewer plugin (Advanced version of the Orthanc Web viewer)
+  <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
 * `ImageJ extension <http://www.orthanc-server.com/static.php?page=imagej>`__.
 * `Stone of Orthanc <http://www.orthanc-server.com/static.php?page=stone>`__.
 * `dwv-orthanc-plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__ by Yves
   Martelli, that embeds `dwv
   <https://github.com/ivmartel/dwv/wiki>`__.
-* `Advanced Web viewer plugin by Osimis
-  <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
 Very importantly, Marco Barnig independently keeps track of a list of
 `Mobile DICOM Viewers <http://www.web3.lu/mobile-dicom-viewers/>`__
 that are compatible with Orthanc. The Orthanc project is very grateful
 to Marco for this great contribution.
 
-As far as Sébastien Jodogne is concerned, he uses the Web viewer
+As far as Sébastien Jodogne is concerned, he uses the Orthanc Web viewer
 plugin and the ImageJ extension for simple analysis tasks. For more
 intensive 3D viewing, he uses Ginkgo CADx. Finally, for advanced
 usages (such as PET-CT fusion or contouring), he switches to 3D

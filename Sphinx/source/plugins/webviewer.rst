@@ -1,8 +1,8 @@
 .. _webviewer:
 
 
-Web Viewer plugin
-=================
+Orthanc Web Viewer plugin
+=========================
 
 .. contents::
 
