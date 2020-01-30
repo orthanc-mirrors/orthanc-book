@@ -72,12 +72,12 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Financial support**:
 
-  - Participate in our `crowdfunding campaigns
-    <http://www.orthanc-server.com/static.php?page=contribute>`__.
   - Buy commercial services:
 
-    + Osimis provides `support packages
-      <http://www.orthanc-server.com/orthanc-pro.php>`__ dedicated to Orthanc.
+    + Osimis provides `support packs
+      <https://www.osimis.io/en/services.html>`__ dedicated to Orthanc.
+    + Osimis can be hired to do `custom developments
+      <https://www.orthanc-server.com/orthanc-pro.php>`__ related to medical imaging.
     + Currently, Osimis is the only company ensuring such corporate
       services according to an open-source business model, but others
       might show up in the future. `Please warn us
