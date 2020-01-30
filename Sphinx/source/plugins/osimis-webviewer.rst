@@ -106,7 +106,7 @@ CE marking
 ----------
 
 Legally, in Europe, the Osimis Web viewer can not be used for medical usage unless you
-purchase the `CE marked version by Osimis <https://www.osimis.io/en/products/orthanc-plugins/osimis-viewer-pro.html>`__.  
+purchase the `CE marked version by Osimis <https://www.osimis.io/en/services.html>`__.  
 If you're outside Europe, you should check your local regulation but it's most likely 
 that you're not allowed to use it for medical usage as well.
 
