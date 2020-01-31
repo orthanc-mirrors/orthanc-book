@@ -96,7 +96,7 @@ FAQ
   
 - **Where are the annotations stored ?**
 
-  Annotations are stored in :ref:`metadata <metadata>`.  Note that annotation 
+  Annotations are stored in :ref:`metadata <metadata>` (id ``9999``) in a custom format.  Note that annotation 
   storage is disabled by default and can be enabled by setting ``"AnnotationStorageEnabled": true``
   in the configuration file.
 
