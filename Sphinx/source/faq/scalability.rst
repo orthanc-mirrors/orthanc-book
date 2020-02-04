@@ -68,3 +68,13 @@ presence of large databases:
 
 * You might also be interested in checking the options related to
   :ref:`security <security>`.
+
+* Consider using filesystems that are known to achieve high
+  performance, such as `XFS <https://en.wikipedia.org/wiki/XFS>`__ or
+  `Btrfs <https://en.wikipedia.org/wiki/Btrfs>`__ on GNU/Linux
+  distributions.
+
+* On GNU/Linux distributions, `LVM (Logical Volume Manager)
+  <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__
+  can be used to dynamically and easily grow the storage area as more
+  space becomes needed.
