@@ -343,7 +343,7 @@ possible as follows::
 WADO-RS
 ^^^^^^^
 
-A study can be retrieved through WADO-RS. Here is a sample::
+A study can be retrieved through WADO-RS. Here is a sample using the VIX dataset::
 
   $ curl http://localhost:8042/dicom-web/studies/2.16.840.1.113669.632.20.1211.10000315526/
 
