@@ -155,8 +155,8 @@ The related state machine is depicted in the `implementation notes
 
 .. _pdf:
 
-PDF
----
+Attaching PDF file as DICOM series
+----------------------------------
 
 Among many different types of data, DICOM files can be used to store
 PDF files. The ``/tools/create-dicom`` URI can be used to upload a PDF
