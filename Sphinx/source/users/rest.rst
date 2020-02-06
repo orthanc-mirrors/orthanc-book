@@ -776,6 +776,10 @@ study level Orthanc ID's in JSON format as a response::
 Setting the ``Expand`` field to ``true`` in the POST body of the
 query will automatically report details about each study::
 
+  $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"}}'
+  [
+    "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0"
+  ]
   $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"},"Expand":true}'
   [
     {
