@@ -397,9 +397,9 @@ Configuration
 
 .. highlight:: json
 
-You first have to declare the Url of the remote orthanc inside the :ref:`configuration file
-<configuration>`. For instance, here is how to declare a remote
-orthanc peer::
+You first have to declare the Url of the remote orthanc inside the
+:ref:`configuration file <configuration>`. For instance, here is how
+to declare a remote orthanc peer::
 
     ...
     "Peers" : {
@@ -632,6 +632,13 @@ configuration file::
        --url http://localhost:8042/modalities/sample/query \
        --data '{"Level":"Study","Query": {"PatientID":"","StudyDescription":"*Chest*","PatientName":""}}'
 
+You might be interested in including the ``Normalize`` option to bypass
+the normalization of the outgoing C-FIND queries. For instance, for
+the ``InstitutionName`` to be included at the ``Study`` level, one would
+run::
+
+  $ curl -v http://localhost:8042/modalities/sample/query -X POST -d \
+    '{"Level":"Study","Query":{"InstitutionName":"a"},"Normalize":false}'
 
 .. highlight:: json
 
@@ -649,14 +656,14 @@ Additional Options
 
 .. highlight:: json
 
-You can use patient identifiers by including the `*` within your
+You can use patient identifiers by including the ``*`` within your
 search. For example if you were searching for a name beginning with
-`Jones` you can do::
+``Jones`` you can do::
 
   "PatientName":"Jones*"
 
-If you wanted to search for a name with the words `Jo` anywhere within
-it you can do::
+If you wanted to search for a name with the words ``Jo`` anywhere
+within it you can do::
 
   "PatientName":"*Jo*"
 
@@ -723,7 +730,7 @@ for content details::
 If there are content items missing, you may add them by adding that
 identifier to the original query. For example if we wanted Modalities
 listed in this JSON answer in the initial query we would add to the
-POST body: `"ModalitiesInStudy":""`
+POST body: ``"ModalitiesInStudy":""``
 
 
 Performing Retrieve (C-Move)
