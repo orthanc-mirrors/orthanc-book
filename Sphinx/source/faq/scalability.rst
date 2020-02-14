@@ -47,6 +47,10 @@ presence of large databases:
 * Obviously, the PostgreSQL database should be stored on a high-speed
   drive (SSD). This is less important for the storage area.
 
+* It may be useful to store the PostgreSQL database on another drive
+  than the storage area. This should improve the use of the available
+  bandwidth to the disks.
+
 * The :ref:`Orthanc configuration file <configuration>` should have
   the following values for performance-related options (but make sure
   to understand their implications):
