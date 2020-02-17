@@ -6,29 +6,27 @@ Scalability of Orthanc
 One of the most common question about Orthanc is: *"How many DICOM
 instances can be stored by Orthanc?"* 
 
-The source code of Orthanc imposes no such hard limit by itself. At
-the time of writing, we know that Orthanc is being used in production
-in hospitals with more than 15TB of data, 125,000 studies and around
-50 millions of instances (please `get in touch with us
+The source code of Orthanc imposes no such hard limit by itself.
+
+At the time of writing, we know that Orthanc is being used in
+production in hospitals with more than 15TB of data, 125,000 studies
+and around 50 millions of instances (please `get in touch with us
 <https://www.orthanc-server.com/static.php?page=contact>`__ if you can
-share other testimonials). Other users have even reported 28TB of
-data. Here are some links to references published on the `Orthanc
-Users <https://groups.google.com/forum/#!forum/orthanc-users>`__
-discussion group: `1
-<https://groups.google.com/d/msg/orthanc-users/tSC0s9Mnp5o/Fg-RXo9sGwAJ>`__,
-`2
+share other testimonials). Other users have even reported more than
+28TB of data. Here are links to some testimonials that were published
+on the `Orthanc Users
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
+group: `1
 <https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/KmWnwEijAgAJ>`__,
-`3
+`2
 <https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/nLXxtYzuCQAJ>`__,
-`4
+`3
 <https://groups.google.com/d/msg/orthanc-users/s5-XlgA2BEY/ZpYagqBwAAAJ>`__,
-`5
+`4
 <https://groups.google.com/d/msg/orthanc-users/A4hPaJo439s/NwR6zk9FCgAJ>`__,
-`6
-<https://groups.google.com/d/msg/orthanc-users/aYQ7cIFDWEU/HexfDkwJAgAJ>`__,
-`7
+`5
 <https://groups.google.com/d/msg/orthanc-users/Z5cLwbVgJc0/SxVzxF7ABgAJ>`__,
-`8
+`6
 <https://groups.google.com/d/msg/orthanc-users/6tGNOqlUk-Q/vppkAYnFAQAJ>`__...
 
 The stress is actually put on the underlying database engine, and on
