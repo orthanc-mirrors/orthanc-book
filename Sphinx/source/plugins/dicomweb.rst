@@ -98,6 +98,9 @@ accessible at ``http://localhost:8042/dicom-web/``.
 Options
 -------
 
+
+.. _dicomweb-server-config:
+
 Server-related options
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -117,7 +120,9 @@ the Orthanc configuration file::
       "WadoRoot" : "/wado",       // Root URI of the WADO-URI (aka. WADO) API
       "Ssl" : false,              // Whether HTTPS should be used for subsequent WADO-RS requests
       "QidoCaseSensitive" : true, // For QIDO-RS server, whether search is case sensitive (since release 0.5)
-      "Host" : "localhost"        // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
+      "Host" : "localhost",       // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
+      "StudiesMetadata" : "Full", // How study-level metadata is retrieved ("Full" or "MainDicomTags", since 1.1)
+      "SeriesMetadata" : "Full"   // How series-level metadata is retrieved ("Full" or "MainDicomTags", since 1.1)
     }
   }
 
@@ -126,8 +131,47 @@ encoding (specific character set) that will be used when answering a
 QIDO-RS request. It might be a good idea to set this option to
 ``Utf8`` if you are dealing with an international environment.
 
-The following configuration options were present in releases <= 0.6 of the plugin,
-but are not used anymore::
+
+The options ``StudiesMetadata`` and ``SeriesMetadata`` were introduced
+in release 1.1 of the DICOMweb plugin. These options specify how the
+calls to ``/dicom-web/studies/.../metadata`` and
+``/dicom-web/studies/.../series/.../metadata`` (i.e. `WADO-RS Retrieve
+Metadata
+<http://dicom.nema.org/medical/dicom/2019a/output/chtml/part18/sect_6.5.6.html>`__)
+are processed:
+
+* If ``Full`` mode is used, the plugin will have to read all the DICOM
+  instances of the study/series from the :ref:`storage area
+  <orthanc-storage>`, which gives exact results but requires all the
+  individual instances to be read and parsed from the filesystem,
+  leading to bad performance (cf. `issue 162
+  <https://bitbucket.org/sjodogne/orthanc/issues/162/dicomweb-metadata-resource-reads-all>`__).
+  This is the default mode.
+
+* If ``MainDicomTags`` mode is used, the plugin will only report the
+  main DICOM tags that are stored inside the Orthanc database index.
+  The DICOM files are not read from the disk, which provides very good
+  performance. However, this is a small subset of all the tags that
+  would be retrieved if using the ``Full`` mode: A DICOMweb viewer
+  might need more tags.
+
+* *Work-in-progress:* In the future, another mode might be introduced
+  for the series level, that would assume that the value of some
+  non-main DICOM tags is constant across all the instances of the
+  series. It would then be sufficient for the DICOMweb plugin to only
+  read one instance from the series. This mode would be a compromise
+  between ``MainDicomTags`` (focus on speed) and ``Full`` (focus on
+  accuracy). This mode is still under active investigation, as it
+  might silently break DICOMweb viewers.
+
+* If you are using a DICOMweb viewer (such as forthcoming Stone Web
+  viewer or OHIF viewer) in a setup where performance is important,
+  you should most probably set ``StudiesMetadata`` to
+  ``MainDicomTags`` and ``SeriesMetadata`` to ``Full``.
+
+  
+**Remark 1:** The following configuration options were present in
+releases <= 0.6 of the plugin, but are not used anymore::
 
   {
     [...]
@@ -142,7 +186,7 @@ HTTP requests, by issuing multiple calls to STOW-RS (set both options
 to 0 to send one single request).
 
 
-**Remark:** The option ``Host`` is deprecated. Starting with release
+**Remark 2:** The option ``Host`` is deprecated. Starting with release
 0.7 of the DICOMweb plugin, its value are computed from the standard
 HTTP headers ``Forwarded`` and ``Host``, as provided by the HTTP
 clients.

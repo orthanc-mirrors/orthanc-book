@@ -98,3 +98,7 @@ presence of large databases:
   <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__
   can be used to dynamically and easily grow the storage area as more
   space becomes needed.
+
+* If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
+  consider setting configuration option ``StudiesMetadata`` to
+  ``MainDicomTags``.
