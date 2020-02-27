@@ -137,6 +137,8 @@ calls), waiting for the ``State`` field to become ``Success`` or
 ``Failure``.
 
 
+.. _jobs-controlling:
+
 Interacting with jobs
 ^^^^^^^^^^^^^^^^^^^^^
 
