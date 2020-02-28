@@ -11,20 +11,20 @@ Introduction
 ------------
            
 Starting with **release 1.6.0**, Orthanc implements DICOM storage
-commitment, both as an SCP and as a SCU.
+commitment, both as SCP and as SCU (i.e. both as a server and as a
+client).
 
 Storage commitment is a feature of the DICOM standard by which an
 imaging modality "A" asks a remote imaging modality "B", whether "B"
-accepts responsibility for having stored the images "A" has sent to
-it.
+accepts responsibility for having stored a set of DICOM instances.
 
 Typically, a storage commitment request is issued by "A" after "A" has
 sent images to "B" using the :ref:`DICOM C-STORE command
 <dicom-store>`. If "B" answers that all the images have been properly
 received, the modality "A" has the guarantee that the C-STORE commands
-ran fine, and thus "A" might decide to remove the images from its
-database. If "B" answers that there was an error, "A" might decide to
-send the images again.
+ran fine, and thus "A" could decide to remove the images from its
+local database. If "B" answers that there was an error, "A" could
+decide to send the images again.
 
 For more technical information, one may refer to the storage
 commitment `Information Object Definition
@@ -71,21 +71,20 @@ Here is a diagram that outlines how storage commitment works in Orthanc:
 
 The list of the DICOM modalities from which Orthanc accepts incoming
 storage commitment requests is specified in the :ref:`configuration
-file of Orthanc <configuration>`, by the ``DicomModalities``
+file of Orthanc <configuration>`, through the ``DicomModalities``
 option. It is possible to disable storage commitment for selected
 modalities by setting their dedicated Boolean permission flag
 ``AllowStorageCommitment`` to ``false``.
 
-As can be seen, the storage commitment SCP of Orthanc also takes
-advantage of the :ref:`jobs engine <jobs>` that is embedded within
-Orthanc. Whenever Orthanc receives a storage commitment request, it
-internally creates a job with a dedicated type (namely
-``StorageCommitmentScp``). :ref:`This job can be controlled
+As can be seen in the figure above, the storage commitment SCP of
+Orthanc takes advantage of the :ref:`jobs engine <jobs>` that is
+embedded within Orthanc. Whenever Orthanc receives a storage
+commitment request, it internally creates a job with a dedicated type
+(namely ``StorageCommitmentScp``). :ref:`This job can be controlled
 <jobs-monitoring>` using the REST API of Orthanc, just like any other
 job. As a consequence, an external software is able to monitor, cancel
 or pause incoming storage commitment requests, by inspecting the list
 of jobs whose type is ``StorageCommitmentScp``.
-
 
 
 Sample usage
@@ -93,7 +92,7 @@ Sample usage
 
 In this section, we show how to query the storage commitment SCP of
 Orthanc from the command-line tool ``stgcmtscu``. This free and
-open-source tool originates from the `dcm4che project
+open-source tool is part of the `dcm4che project
 <https://www.dcm4che.org/>`__ and simulates a basic storage commitment
 SCU.
 
@@ -143,11 +142,12 @@ file. Here is what can be read at the end of the logs of
 As can be seen, the SOP class/instance UIDs of ``/tmp/DummyCT.dcm``
 are reported by the Orthanc SCP in the ``FailedSOPSequence`` field,
 which indicates the fact that Orthanc has not stored this instance
-yet. The ``FailureReason`` 274 corresponds to status 0x0112, namely
-"No such object instance".
+yet. The ``FailureReason`` 274 corresponds to `status 0x0112
+<http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.14.html#sect_C.14.1.1>`__,
+namely *"No such object instance"*.
 
-Fourthly, let's upload the sample file, then execute ``stgcmtscu`` a
-second time::
+Fourthly, let's upload the sample file to Orthanc, then execute
+``stgcmtscu`` for a second time::
 
   $ storescu localhost 4242 /tmp/DummyCT.dcm
   $ /home/jodogne/Downloads/dcm4che-5.20.0/bin/stgcmtscu -b STGCMTSCU:11114 -c ORTHANC@localhost:4242 /tmp/DummyCT.dcm
@@ -184,9 +184,10 @@ using the ``OrthancPluginRegisterStorageCommitmentScpCallback()``
 function of the `plugin SDK <http://sdk.orthanc-server.com/>`__.
 
 Importantly, this primitive frees the plugin developer from manually
-creating the Orthanc jobs. One job is automatically created for each
-incoming storage commitment request by the Orthanc core, allowing the
-developer to focus only on the processing of the queried instances.
+creating the Orthanc jobs. One job is transparently created by the
+Orthanc core for each incoming storage commitment request, allowing
+the plugin developer to focus only on the processing of the queried
+instances.
 
 Note that a `sample plugin
 <https://bitbucket.org/sjodogne/orthanc/src/storage-commitment/Plugins/Samples/StorageCommitmentScp/>`__
