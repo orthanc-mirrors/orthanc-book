@@ -275,7 +275,7 @@ access authentication
     }
   }
 
-Two important options can be provided for individual remote DICOMweb servers:
+Three important options can be provided for individual remote DICOMweb servers:
 
 * ``HasDelete`` can be set to ``true`` to indicate that the HTTP
   DELETE method can be used to delete remote studies/series/instances.
@@ -294,6 +294,19 @@ Two important options can be provided for individual remote DICOMweb servers:
   as of version 1.0 of the DICOMweb plugin (see
   `issue 156 <https://bitbucket.org/sjodogne/orthanc/issues/156/>`__ for status).
 
+* ``HasWadoRsUniversalTransferSyntax`` (new in DICOMweb 1.1) must be
+  set to ``false`` if the remote DICOMweb server does not support the
+  value ``transfer-syntax=*`` in the ``Accept`` HTTP header for
+  WADO-RS requests. This option is notably needed if the remote
+  DICOMweb server is Orthanc equipped with DICOMweb plugin <= 1.0. On
+  the other hand, setting this option to ``true`` prevents the remote
+  DICOMweb server from transcoding to uncompressed transfer syntaxes,
+  which gives `much better performance
+  <https://groups.google.com/d/msg/orthanc-users/w1Ekrsc6-U8/T2a_DoQ5CwAJ>`__.
+  The implicit value of this parameter was ``false`` in DICOMweb
+  plugin <= 1.0, and its default value is ``true`` since DICOMweb
+  plugin 1.1.
+  
 You'll have to convert the JSON array into a JSON object to set these
 options::
 
@@ -306,7 +319,8 @@ options::
           "Username" : "username", 
           "Password" : "password",
           "HasDelete" : true,
-          "ChunkedTransfers" : true   // Set to "false" if "sample" is Orthanc <= 1.5.6
+          "ChunkedTransfers" : true,                 // Set to "false" if "sample" is Orthanc <= 1.5.6
+          "HasWadoRsUniversalTransferSyntax" : true  // Set to "false" if "sample" is Orthanc DICOMweb plugin <= 1.0
         }
       }
     }
