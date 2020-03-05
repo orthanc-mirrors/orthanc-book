@@ -1,7 +1,7 @@
 .. _storage-commitment:
 
-Storage commitment
-==================
+DICOM storage commitment
+========================
 
 .. contents::
    :depth: 3
