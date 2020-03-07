@@ -80,6 +80,11 @@ Orthanc community to **reproduce your problem independently of your
 setup**. If we can't reproduce your issue, we can't provide any
 support!
 
+In addition, please note that the original author of Orthanc
+(Sébastien Jodogne), as a free software advocate, will only personally
+deal with issues that are reproducible on recent GNU/Linux
+distributions (typically, on Ubuntu 18.04 LTS or through Docker).
+
 
 .. _support-tracker:
 
