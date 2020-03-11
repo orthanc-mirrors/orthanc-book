@@ -56,7 +56,7 @@ Here is a diagram that outlines how storage commitment works in Orthanc:
 
 .. image:: ../images/StorageCommitmentSCP.svg
            :align: center
-           :width: 650px
+           :width: 700px
 
 | In this sequence, three DICOM associations are used: The first one
   is the usual command to send the DICOM images from some SCU to the
@@ -87,14 +87,16 @@ or pause incoming storage commitment requests, by inspecting the list
 of jobs whose type is ``StorageCommitmentScp``.
 
 
+.. _storage-commitment-scp-sample:
+
 Sample usage
 ^^^^^^^^^^^^
 
 In this section, we show how to query the storage commitment SCP of
 Orthanc from the command-line tool ``stgcmtscu``. This free and
 open-source tool is part of the `dcm4che project
-<https://www.dcm4che.org/>`__ and simulates a basic storage commitment
-SCU.
+<https://www.dcm4che.org/>`__ and emulates the behavior of a storage
+commitment SCU.
 
 .. highlight:: json
 
@@ -105,7 +107,7 @@ for Orthanc::
   {
     "DicomPort" : 4242,
     "DicomModalities" : {
-      "storage-commitment" : [ "STGCMTSCU", "127.0.0.1", 11114 ]
+      "scu" : [ "STGCMTSCU", "127.0.0.1", 11114 ]
     }
   }
 
@@ -200,6 +202,297 @@ is also available in the source distribution of Orthanc.
 Storage commitment SCU
 ----------------------
 
-*Work in progress*
+As written above, Orthanc can act as a storage commitment SCP
+(server). It can also act as a storage commitment SCU (client), which
+is discussed in this section. Here is the corresponding workflow:
 
-*Sample using dcmqrscp*
+.. image:: ../images/StorageCommitmentSCU.svg
+           :align: center
+           :width: 700px
+
+Note that depending on the type of long-term archive media (hard disk,
+optical disk, tape, hard drive, cloud provider...), the storage
+commitment report (DICOM command ``N-EVENT-REPORT``) may be sent long
+time after Orthanc has sent its storage commitment request (DICOM
+command ``N-ACTION``), which necessitates Orthanc to handle reports
+asynchronously.
+
+The active storage commitment reports are stored in RAM only, and are
+lost if Orthanc is restarted. The :ref:`configuration option
+<configuration>` ``StorageCommitmentReportsSize`` sets the limit on
+the number of active storage commitment reports in order to avoid
+infinite memory growth because of the asynchronous notifications (the
+default limit is 100): The least recently used transactions are
+removed first.
+
+
+REST API
+^^^^^^^^
+
+Overview
+........
+
+As can be seen in the figure above, storage commitment SCU is governed
+by 3 new routes that were introduced in the REST API of Orthanc 1.6.0:
+
+* POST-ing to ``/modalities/{scp}/storage-commitment`` initiates
+  storage commitment requests. In this route, ``{scp}`` corresponds to
+  the symbolic name of a remote DICOM modality, as declared in the
+  ``DicomModalities`` :ref:`configuration option <configuration>` of
+  Orthanc.
+
+* GET-ing on ``/storage-commitment/{transaction}`` retrieves the
+  status of a previous storage commitment request. In this route,
+  ``{transaction}`` corresponds to an identifier that is available in
+  the output of the call to ``/modalities/{scp}/storage-commitment``.
+
+* POST-ing on ``/storage-commitment/{transaction}/remove`` asks
+  Orthanc to remove the instances that have been reported as
+  successfully stored by the remote SCP. This route is only available
+  for fully successful storage commitment reports.
+
+In addition, the route ``/modalities/{scp}/store`` that is used to
+:ref:`send one file from Orthanc to another modality
+<rest-store-scu>`, accepts a new Boolean field
+``StorageCommitment``. If this field is set to ``true``, a storage
+commitment SCU request is automatically issued by Orthanc after the
+C-STORE operation succeeds.
+
+
+.. _storage-commitment-scu-trigger:
+
+Triggering storage commitment SCU
+.................................
+
+.. highlight:: json
+               
+We'll be using a sample configuration file that is almost :ref:`the
+same as for the SCP samples <storage-commitment-scp-sample>`, but in
+which we declare a remote SCP instead of a remote SCU (only the AET
+changes)::
+
+  {
+    "DicomPort" : 4242,
+    "DicomModalities" : {
+      "scp" : [ "DCMQRSCP", "127.0.0.1", 11114 ]
+    }
+  }
+
+  
+.. highlight:: text
+               
+Given that configuration, here is how to trigger a storage commitment
+SCU request against the remote SCP, asking whether a single DICOM
+instance is properly stored remotely::
+
+  $ curl http://localhost:8042/modalities/scp/storage-commitment -X POST -d '{"DicomInstances": [ { "SOPClassUID" : "1.2.840.10008.5.1.4.1.1.4", "SOPInstanceUID" : "1.2.840.113619.2.176.2025.1499492.7040.1171286242.109" } ]}'
+  {
+    "ID" : "2.25.77313390743082158294121927935820988919",
+    "Path" : "/storage-commitment/2.25.77313390743082158294121927935820988919"
+  }
+
+The REST call returns with the identifier of a storage commitment
+transaction that can successively be monitored by the external
+application (see below). A shorthand notation exists as well, where
+the JSON object containing the fields ``SOPClassUID`` and
+``SOPInstanceUID`` object is replaced by a JSON array containing these
+two elements::
+  
+  $ curl http://localhost:8042/modalities/scp/storage-commitment -X POST -d '{"DicomInstances": [ [ "1.2.840.10008.5.1.4.1.1.4", "1.2.840.113619.2.176.2025.1499492.7040.1171286242.109" ] ]}'
+
+It is also possible to query the state of all the instances from DICOM
+resources that are locally stored by the Orthanc server (these
+resources can be patients, studies, series or instances). In such a
+situation, one has to use the ``Resources`` field and provide a list
+of :ref:`Orthanc identifiers <orthanc-ids>`::
+  
+  $ curl http://localhost:8042/modalities/scp/storage-commitment -X POST -d '{"Resources": [ "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0" ]}'
+
+Evidently, the call above accept a list of DICOM instances, not just a
+single one (hence the enclosing JSON array).
+
+
+Chaining C-STORE with storage commitment
+........................................
+
+Often, C-STORE SCU and storage commitment SCU requests are chained:
+The images are sent, then storage commitment is used to check whether
+all the images have all properly been received. This chaining can be
+automatically done by setting the ``StorageCommitment`` field in the
+:ref:`corresponding call to the REST API <rest-store-scu>`::
+
+  $ curl http://localhost:8042/modalities/scp/store -X POST -d '{"StorageCommitment":true, "Resources": [ "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0" ]}'
+  {
+     "Description" : "REST API",
+     "FailedInstancesCount" : 0,
+     "InstancesCount" : 1,
+     "LocalAet" : "ORTHANC",
+     "ParentResources" : [ "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0" ],
+     "RemoteAet" : "ORTHANC",
+     "StorageCommitmentTransactionUID" : "2.25.300965561481187126241492642575174449473"
+  }
+
+Note that the identifier of the storage commitment transaction is part
+of the answer. It can be used to inspect the storage commitment report
+(see below).
+  
+
+Inspecting the report
+.....................
+
+Given the ID of one storage commitment transaction, one can monitor
+the status of the report::
+
+  $ curl http://localhost:8042/storage-commitment/2.25.77313390743082158294121927935820988919
+  {
+     "RemoteAET" : "ORTHANC",
+     "Status" : "Pending"
+  }
+
+The ``Status`` field can have three different values:
+
+* ``Pending`` indicates that Orthanc is still waiting for the response
+  from the remote storage commitment SCP.
+* ``Success`` indicates that the remote SCP commits to having properly
+  stored all the requested instances.
+* ``Failure`` indicates that the remote SCP has not properly stored at
+  least one of the requested instances.
+
+After waiting for some time, the report becomes available::
+
+  $ curl http://localhost:8042/storage-commitment/2.25.77313390743082158294121927935820988919
+  {
+     "Failures" : [
+        {
+           "Description" : "One or more of the elements in the Referenced SOP Instance Sequence was not available",
+           "FailureReason" : 274,
+           "SOPClassUID" : "1.2.840.10008.5.1.4.1.1.4",
+           "SOPInstanceUID" : "1.2.840.113619.2.176.2025.1499492.7040.1171286242.109"
+        }
+     ],
+     "RemoteAET" : "ORTHANC",
+     "Status" : "Failure",
+     "Success" : []
+  }
+
+This call shows that the remote SCP had not received the requested
+instance. Here the result of another storage commitment request after
+having sent the same instance of interest::
+  
+  $ curl http://localhost:8042/storage-commitment/2.25.332757466317867686107317231615319266620
+  {
+     "Failures" : [],
+     "RemoteAET" : "ORTHANC",
+     "Status" : "Success",
+     "Success" : [
+        {
+           "SOPClassUID" : "1.2.840.10008.5.1.4.1.1.4",
+           "SOPInstanceUID" : "1.2.840.113619.2.176.2025.1499492.7040.1171286242.109"
+        }
+     ]
+  }
+
+
+Removing the instances
+......................
+
+If the ``Status`` field of the report equals ``Success``, it is then
+possible to remove the instances from the Orthanc database through a
+single call to the REST API::
+
+  $ curl http://localhost:8042/storage-commitment/2.25.332757466317867686107317231615319266620/remove -X POST -d ''
+  {}
+
+
+Plugins
+^^^^^^^
+
+Thanks to the fact that Orthanc plugins have full access to the REST
+API of Orthanc, plugins can easily trigger storage commitment SCU
+requests as if they were external applications, by calling the
+functions ``OrthancPluginRestApiPost()`` and
+``OrthancPluginRestApiGet()``.
+
+
+Testing against dcm4che
+^^^^^^^^^^^^^^^^^^^^^^^
+
+As explained :ref:`in a earlier section about SCP
+<storage-commitment-scp-sample>`, the dcm4che project proposes
+command-line tools to emulate the behavior of a storage commitment SCU
+and SCP. The emulation tool for the SCP part is called ``dcmqrscp``.
+This section gives instructions to test Orthanc against ``dcmqrscp``.
+
+Let's start Orthanc with an empty database and the configuration file
+we used :ref:`when describing the REST API for the SCU
+<storage-commitment-scu-trigger>`::
+
+  $ ./Orthanc --verbose storage-commitment.json
+
+In another terminal, let's upload a sample image to Orthanc, generate
+a DICOMDIR from it (as the tool ``dcmqrscp`` works with a DICOMDIR
+media), and start ``dcmqrscp``::
+
+  $ storescu localhost 4242 /tmp/DummyCT.dcm
+  $ curl http://localhost:8042/studies/b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0/media > /tmp/DummyCT.zip
+  $ mkdir /tmp/dcmqrscp
+  $ cd /tmp/dcmqrscp
+  $ unzip /tmp/DummyCT.zip
+  $ /home/jodogne/Downloads/dcm4che-5.20.0/bin/dcmqrscp -b DCMQRSCP:11114 --dicomdir /tmp/dcmqrscp/DICOMDIR
+  15:20:09,476 INFO  - Start TCP Listener on 0.0.0.0/0.0.0.0:11114
+
+In a third terminal, we ask Orthanc to send a storage commitment
+request to ``dcmqrscp`` about the study (that is now both stored by
+Orthanc and by ``dcmqrscp``)::
+
+  $ curl http://localhost:8042/modalities/scp/storage-commitment -X POST -d '{"Resources":["b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0"]}'
+  {
+     "ID" : "2.25.335431924334468284852143921743736408673",
+     "Path" : "/storage-commitment/2.25.335431924334468284852143921743736408673"
+  }
+  $ curl http://localhost:8042/storage-commitment/2.25.335431924334468284852143921743736408673
+  {
+     "Failures" : [],
+     "RemoteAET" : "DCMQRSCP",
+     "Status" : "Success",
+     "Success" : [
+        {
+           "SOPClassUID" : "1.2.840.10008.5.1.4.1.1.4",
+           "SOPInstanceUID" : "1.2.840.113619.2.176.2025.1499492.7040.1171286242.109"
+        }
+     ]
+  }
+
+As can be seen, ``dcmqrscp`` reports that it knows about the
+study. Let us now create another instance in the same study by
+:ref:`running a modification <study-modification>` through the REST
+API of Orthanc, then check that ``dcmqrscp`` doesn't know about this
+modified study::
+
+  $ curl http://localhost:8042/studies/b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0/modify -X POST -d '{"Replace":{"StudyDescription":"TEST"}}'
+  {
+     "ID" : "0b57dfc8-edb5f4c7-78f8bcdc-546908dc-b79b06f4",
+     "Path" : "/studies/0b57dfc8-edb5f4c7-78f8bcdc-546908dc-b79b06f4",
+     "PatientID" : "6816cb19-844d5aee-85245eba-28e841e6-2414fae2",
+     "Type" : "Study"
+  }
+  $ curl http://localhost:8042/modalities/scp/storage-commitment -X POST -d '{"Resources":["0b57dfc8-edb5f4c7-78f8bcdc-546908dc-b79b06f4"]}'
+  {
+     "ID" : "2.25.12626723691916447325628593043115134307",
+     "Path" : "/storage-commitment/2.25.12626723691916447325628593043115134307"
+  }
+  $ curl http://localhost:8042/storage-commitment/2.25.12626723691916447325628593043115134307
+  {
+     "Failures" : [
+        {
+           "Description" : "One or more of the elements in the Referenced SOP Instance Sequence was not available",
+           "FailureReason" : 274,
+           "SOPClassUID" : "1.2.840.10008.5.1.4.1.1.4",
+           "SOPInstanceUID" : "1.2.276.0.7230010.3.1.4.8323329.16403.1583936918.190455"
+        }
+     ],
+     "RemoteAET" : "DCMQRSCP",
+     "Status" : "Failure",
+     "Success" : []
+  }
+

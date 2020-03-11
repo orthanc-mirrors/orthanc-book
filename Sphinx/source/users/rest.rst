@@ -551,6 +551,9 @@ in the database.  This is done through this configuration::
     "DicomModalitiesInDatabase" : true,
     ...
 
+
+.. _rest-store-scu:
+    
 Sending One Resource
 ^^^^^^^^^^^^^^^^^^^^
 
