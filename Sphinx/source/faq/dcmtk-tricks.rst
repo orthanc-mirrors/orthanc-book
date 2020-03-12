@@ -28,9 +28,9 @@ Ubuntu 18.04 box::
 This error message is unrelated to Orthanc (especially if you have set
 the :ref:`configuration option <configuration>`
 ``UnknownSopClassAccepted`` to ``true``). To properly adapt the
-configuration file, first determine the DICOM tag ``SOPClassUID`` ()
-and the transfer syntax of the file, which can be done by using the
-``dcm2xml`` command-line tool::
+configuration file, first determine the value of the DICOM tag
+``SOPClassUID`` (0008,0016) and the transfer syntax of the file, which
+can be done by using the ``dcm2xml`` command-line tool::
 
   $ dcm2xml XC000000.dcm | grep -E 'data-set xfer|"SOPClassUID"'
   <data-set xfer="1.2.840.10008.1.2.4.102" name="MPEG-4 AVC/H.264 High Profile / Level 4.1">
