@@ -57,4 +57,5 @@ Specific FAQs
    faq/authentication.rst
    faq/crash.rst
    faq/transcoding.rst
+   faq/dcmtk-tricks.rst
    faq/why-orthanc.rst

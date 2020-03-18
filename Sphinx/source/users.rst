@@ -13,4 +13,5 @@ User's guide
    users/anonymization.rst
    users/lua.rst
    users/advanced-rest.rst
+   users/storage-commitment.rst
    users/support.rst

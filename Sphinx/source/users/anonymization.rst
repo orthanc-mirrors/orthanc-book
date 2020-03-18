@@ -105,6 +105,8 @@ Remarks:
       }
     }
 
+.. _study-modification:
+
 Modification of Studies or Series
 ---------------------------------
 

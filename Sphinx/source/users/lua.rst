@@ -110,6 +110,29 @@ new medical images:
   `sample script is available
   <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
 
+Some other **resource-related events** are available:
+
+* ``function OnDeletedPatient(patientId)``: Invoked when a patient has
+  been removed from the Orthanc database (new in Orthanc 1.6.0).
+* ``function OnDeletedStudy(studyId)``: Invoked when a study has been
+  removed from the Orthanc database (new in Orthanc 1.6.0).
+* ``function OnDeletedSeries(seriesId)``: Invoked when a series has
+  been removed from the Orthanc database (new in Orthanc 1.6.0).
+* ``function OnDeletedInstance(instanceId)``: Invoked when a instance
+  has been removed from the Orthanc database (new in Orthanc 1.6.0).
+* ``function OnUpdatedPatient(patientId)``: Invoked when some metadata
+  or some attachment associated with the given patient has been
+  updated (new in Orthanc 1.6.0).
+* ``function OnUpdatedStudy(studyId)``: Invoked when some metadata or
+  some attachment associated with the given study has been updated
+  (new in Orthanc 1.6.0).
+* ``function OnUpdatedSeries(seriesId)``: Invoked when some metadata
+  or some attachment associated with the given series has been updated
+  (new in Orthanc 1.6.0).
+* ``function OnUpdatedInstance(instanceId)``: Invoked when some
+  metadata or some attachment associated with the given instance has
+  been updated (new in Orthanc 1.6.0).
+  
 Furthermore, whenever a DICOM association is negotiated for C-Store
 SCP, several callbacks are successively invoked to specify which
 **transfer syntaxes** are accepted for the association. These

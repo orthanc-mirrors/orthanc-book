@@ -6,12 +6,28 @@ Scalability of Orthanc
 One of the most common question about Orthanc is: *"How many DICOM
 instances can be stored by Orthanc?"* 
 
-The source code of Orthanc imposes no such hard limit by itself. At
-the time of writing, we know that Orthanc is being used in production
-in hospitals with more than 15TB of data, 125,000 studies and around
-50 millions of instances (please `get in touch with us
+The source code of Orthanc imposes no such hard limit by itself.
+
+At the time of writing, we know that Orthanc is being used in
+production in hospitals with more than 15TB of data, 125,000 studies
+and around 50 millions of instances (please `get in touch with us
 <https://www.orthanc-server.com/static.php?page=contact>`__ if you can
-share other testimonials).
+share other testimonials). Other users have even reported more than
+28TB of data. Here are links to some testimonials that were published
+on the `Orthanc Users
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
+group: `1
+<https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/KmWnwEijAgAJ>`__,
+`2
+<https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/nLXxtYzuCQAJ>`__,
+`3
+<https://groups.google.com/d/msg/orthanc-users/s5-XlgA2BEY/ZpYagqBwAAAJ>`__,
+`4
+<https://groups.google.com/d/msg/orthanc-users/A4hPaJo439s/NwR6zk9FCgAJ>`__,
+`5
+<https://groups.google.com/d/msg/orthanc-users/Z5cLwbVgJc0/SxVzxF7ABgAJ>`__,
+`6
+<https://groups.google.com/d/msg/orthanc-users/6tGNOqlUk-Q/vppkAYnFAQAJ>`__...
 
 The stress is actually put on the underlying database engine, and on
 the storage area (check out :ref:`orthanc-storage`). As explained in
@@ -47,6 +63,10 @@ presence of large databases:
 * Obviously, the PostgreSQL database should be stored on a high-speed
   drive (SSD). This is less important for the storage area.
 
+* It may be useful to store the PostgreSQL database on another drive
+  than the storage area. This should improve the use of the available
+  bandwidth to the disks.
+
 * The :ref:`Orthanc configuration file <configuration>` should have
   the following values for performance-related options (but make sure
   to understand their implications):
@@ -68,3 +88,17 @@ presence of large databases:
 
 * You might also be interested in checking the options related to
   :ref:`security <security>`.
+
+* Consider using filesystems that are known to achieve high
+  performance, such as `XFS <https://en.wikipedia.org/wiki/XFS>`__ or
+  `Btrfs <https://en.wikipedia.org/wiki/Btrfs>`__ on GNU/Linux
+  distributions.
+
+* On GNU/Linux distributions, `LVM (Logical Volume Manager)
+  <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__
+  can be used to dynamically and easily grow the storage area as more
+  space becomes needed.
+
+* If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
+  consider setting configuration option ``StudiesMetadata`` to
+  ``MainDicomTags``.

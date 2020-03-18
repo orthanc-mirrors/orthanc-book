@@ -397,9 +397,9 @@ Configuration
 
 .. highlight:: json
 
-You first have to declare the Url of the remote orthanc inside the :ref:`configuration file
-<configuration>`. For instance, here is how to declare a remote
-orthanc peer::
+You first have to declare the Url of the remote orthanc inside the
+:ref:`configuration file <configuration>`. For instance, here is how
+to declare a remote orthanc peer::
 
     ...
     "Peers" : {
@@ -551,6 +551,9 @@ in the database.  This is done through this configuration::
     "DicomModalitiesInDatabase" : true,
     ...
 
+
+.. _rest-store-scu:
+    
 Sending One Resource
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -632,6 +635,13 @@ configuration file::
        --url http://localhost:8042/modalities/sample/query \
        --data '{"Level":"Study","Query": {"PatientID":"","StudyDescription":"*Chest*","PatientName":""}}'
 
+You might be interested in including the ``Normalize`` option to bypass
+the normalization of the outgoing C-FIND queries. For instance, for
+the ``InstitutionName`` to be included at the ``Study`` level, one would
+run::
+
+  $ curl -v http://localhost:8042/modalities/sample/query -X POST -d \
+    '{"Level":"Study","Query":{"InstitutionName":"a"},"Normalize":false}'
 
 .. highlight:: json
 
@@ -649,14 +659,14 @@ Additional Options
 
 .. highlight:: json
 
-You can use patient identifiers by including the `*` within your
+You can use patient identifiers by including the ``*`` within your
 search. For example if you were searching for a name beginning with
-`Jones` you can do::
+``Jones`` you can do::
 
   "PatientName":"Jones*"
 
-If you wanted to search for a name with the words `Jo` anywhere within
-it you can do::
+If you wanted to search for a name with the words ``Jo`` anywhere
+within it you can do::
 
   "PatientName":"*Jo*"
 
@@ -723,7 +733,7 @@ for content details::
 If there are content items missing, you may add them by adding that
 identifier to the original query. For example if we wanted Modalities
 listed in this JSON answer in the initial query we would add to the
-POST body: `"ModalitiesInStudy":""`
+POST body: ``"ModalitiesInStudy":""``
 
 
 Performing Retrieve (C-Move)
@@ -773,6 +783,46 @@ study level Orthanc ID's in JSON format as a response::
 
   $ curl --request POST --url http://localhost:8042/tools/find --data '{"Level":"Instance","Query":{"Modality":"CR","StudyDate":"20180323-","PatientID":"*"}}'
 
+Setting the ``Expand`` field to ``true`` in the POST body of the
+query will automatically report details about each study::
+
+  $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"}}'
+  [
+    "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0"
+  ]
+  $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"},"Expand":true}'
+  [
+    {
+      "ID" : "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0",
+      "IsStable" : true,
+      "LastUpdate" : "20180414T091528",
+      "MainDicomTags" : {
+         "InstitutionName" : "0ECJ52puWpVIjTuhnBA0um",
+         "ReferringPhysicianName" : "1",
+         "StudyDate" : "20070101",
+         "StudyDescription" : "Knee (R)",
+         "StudyID" : "1",
+         "StudyInstanceUID" : "1.2.840.113619.2.176.2025.1499492.7391.1171285944.390",
+         "StudyTime" : "120000.000000"
+      },
+      "ParentPatient" : "6816cb19-844d5aee-85245eba-28e841e6-2414fae2",
+      "PatientMainDicomTags" : {
+         "PatientID" : "ozp00SjY2xG",
+         "PatientName" : "KNIX"
+      },
+      "Series" : [
+         "20b9d0c2-97d85e07-f4dbf4d2-f09e7e6a-0c19062e",
+         "edbfa0a9-fa2641d7-29514b1c-45881d0b-46c374bd",
+         "f2635388-f01d497a-15f7c06b-ad7dba06-c4c599fe",
+         "4d04593b-953ced51-87e93f11-ae4cf03c-25defdcd",
+         "5e343c3e-3633c396-03aefde8-ba0e08c7-9c8208d3",
+         "8ea120d7-5057d919-837dfbcc-ccd04e0f-7f3a94aa"
+      ],
+      "Type" : "Study"
+    }
+  ]
+
+  
   
 Additional Options
 ^^^^^^^^^^^^^^^^^^

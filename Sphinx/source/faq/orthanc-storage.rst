@@ -3,8 +3,8 @@
 How does Orthanc store its database?
 ====================================
 
-Storage folder
---------------
+Storage area
+------------
 
 **By default** (i.e. if no database plugin such as :ref:`PostgreSQL
 <postgresql>` or :ref:`MySQL <mysql>` is used), Orthanc stores all the

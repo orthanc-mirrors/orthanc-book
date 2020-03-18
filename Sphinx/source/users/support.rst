@@ -64,10 +64,11 @@ you must provide all the following information:
 * Full logs as produced by Orthanc in :ref:`verbose mode <log>`.
 * Sample DICOM files.
 * A sequence of command lines that lead to your problem. These command
-  lines must only call commands that are available as free and
-  open-source software and that are cross-platform (:ref:`proprietary
-  software does not help <proprietary>`). The most useful commands are
-  `cURL <https://en.wikipedia.org/wiki/CURL>`__, `DCMTK
+  lines must only use commands that are available as free and
+  open-source software, that are cross-platform (:ref:`proprietary
+  software does not help <proprietary>`), and that are preferably
+  calls the :ref:`REST API of Orthanc <rest>`. The most useful
+  commands are `cURL <https://en.wikipedia.org/wiki/CURL>`__, `DCMTK
   <https://dicom.offis.de/dcmtk.php.en>`__, `dicom3tools
   <https://www.dclunie.com/dicom3tools.html>`__, `dcm4che command-line
   tools <https://www.dcm4che.org/>`__, or Python scripts.
@@ -78,6 +79,11 @@ All this information is mandatory, as it allows other members of the
 Orthanc community to **reproduce your problem independently of your
 setup**. If we can't reproduce your issue, we can't provide any
 support!
+
+In addition, please note that the original author of Orthanc
+(Sébastien Jodogne), as a free software advocate, will only personally
+deal with issues that are reproducible on recent GNU/Linux
+distributions (typically, on Ubuntu 18.04 LTS or through Docker).
 
 
 .. _support-tracker:

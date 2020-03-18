@@ -98,6 +98,9 @@ accessible at ``http://localhost:8042/dicom-web/``.
 Options
 -------
 
+
+.. _dicomweb-server-config:
+
 Server-related options
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -117,7 +120,9 @@ the Orthanc configuration file::
       "WadoRoot" : "/wado",       // Root URI of the WADO-URI (aka. WADO) API
       "Ssl" : false,              // Whether HTTPS should be used for subsequent WADO-RS requests
       "QidoCaseSensitive" : true, // For QIDO-RS server, whether search is case sensitive (since release 0.5)
-      "Host" : "localhost"        // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
+      "Host" : "localhost",       // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
+      "StudiesMetadata" : "Full", // How study-level metadata is retrieved (since release 1.1, cf. section below)
+      "SeriesMetadata" : "Full"   // How series-level metadata is retrieved (since release 1.1, cf. section below)
     }
   }
 
@@ -126,8 +131,8 @@ encoding (specific character set) that will be used when answering a
 QIDO-RS request. It might be a good idea to set this option to
 ``Utf8`` if you are dealing with an international environment.
 
-The following configuration options were present in releases <= 0.6 of the plugin,
-but are not used anymore::
+**Remark 1:** The following configuration options were present in
+releases <= 0.6 of the plugin, but are not used anymore::
 
   {
     [...]
@@ -142,11 +147,92 @@ HTTP requests, by issuing multiple calls to STOW-RS (set both options
 to 0 to send one single request).
 
 
-**Remark:** The option ``Host`` is deprecated. Starting with release
+**Remark 2:** The option ``Host`` is deprecated. Starting with release
 0.7 of the DICOMweb plugin, its value are computed from the standard
 HTTP headers ``Forwarded`` and ``Host``, as provided by the HTTP
 clients.
 
+
+.. _dicomweb-server-metadata-config:
+
+Fine-tuning server for WADO-RS Retrieve Metadata
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The options ``StudiesMetadata`` and ``SeriesMetadata`` were introduced
+in release 1.1 of the DICOMweb plugin. These options specify how the
+calls to ``/dicom-web/studies/.../metadata`` and
+``/dicom-web/studies/.../series/.../metadata`` (i.e. `WADO-RS Retrieve
+Metadata
+<http://dicom.nema.org/medical/dicom/2019a/output/chtml/part18/sect_6.5.6.html>`__)
+are processed:
+
+* If ``Full`` mode is used, the plugin will read all the DICOM
+  instances of the study/series of interest from the :ref:`storage
+  area <orthanc-storage>`, which gives fully accurate results but
+  requires all the individual instances to be read and parsed from the
+  filesystem, leading to slow performance (cf. `issue 162
+  <https://bitbucket.org/sjodogne/orthanc/issues/162/dicomweb-metadata-resource-reads-all>`__).
+  This is the default mode.
+
+* If ``MainDicomTags`` mode is used, the plugin will only report the
+  main DICOM tags that are indexed by the Orthanc database. The DICOM
+  files are not read from the disk, which provides best
+  performance. However, this is a small subset of all the tags that
+  would be retrieved if using the ``Full`` mode: A DICOMweb viewer
+  might need more tags.
+
+* If ``Extrapolate`` mode is used, the plugin will read up to 3 DICOM
+  instances at random that belong to the study/series of interest. It
+  will then test whether the majority of these instances share the
+  same value for a predefined subset of DICOM tags. If so, this value
+  is added to the metadata response; otherwise, the tag is not
+  reported. In other words, this mode extrapolates the value of some
+  predefined tags by assuming that these tags should be constant
+  across all the instances of the study/series. This mode is a
+  compromise between ``MainDicomTags`` (focus on speed) and ``Full``
+  (focus on accuracy).
+
+* If you are using a DICOMweb viewer (such as forthcoming Stone Web
+  viewer or `OHIF viewer
+  <https://groups.google.com/d/msg/orthanc-users/y1N5zOFVk0M/a3YMdhNqBwAJ>`__)
+  in a setup where performance and accuracy are both important, you
+  should most probably set ``StudiesMetadata`` to ``MainDicomTags``
+  and ``SeriesMetadata`` to ``Full``. Forthcoming Stone Web viewer
+  will probably specify a value for the
+  ``SeriesMetadataExtrapolatedTags`` option to be used for setups
+  where performance is extremely important.
+
+
+If using the ``Extrapolate`` mode, the predefined tags are provided
+using the ``StudiesMetadataExtrapolatedTags`` and
+``SeriesMetadataExtrapolatedTags`` configuration options as follows::
+  
+  {
+    [...]
+    "DicomWeb" : {
+      [...]
+      "StudiesMetadata" : "Extrapolate",
+      "StudiesMetadataExtrapolatedTags" : [
+        "AcquisitionDate"
+      ],
+      "SeriesMetadata" : "Extrapolate",
+      "SeriesMetadataExtrapolatedTags" : [
+        "BitsAllocated",
+        "BitsStored",
+        "Columns",
+        "HighBit",
+        "PhotometricInterpretation",
+        "PixelSpacing",
+        "PlanarConfiguration",
+        "RescaleIntercept",
+        "RescaleSlope",
+        "Rows",
+        "SOPClassUID",
+        "SamplesPerPixel",
+        "SliceThickness"
+      ]
+    }
+  }
 
 
 .. _dicomweb-client-config:
@@ -189,7 +275,7 @@ access authentication
     }
   }
 
-Two important options can be provided for individual remote DICOMweb servers:
+Three important options can be provided for individual remote DICOMweb servers:
 
 * ``HasDelete`` can be set to ``true`` to indicate that the HTTP
   DELETE method can be used to delete remote studies/series/instances.
@@ -203,11 +289,26 @@ Two important options can be provided for individual remote DICOMweb servers:
   this option to ``true`` is the best choice to reduce memory
   consumption. However, it must be set to ``false`` if the remote
   DICOMweb server is Orthanc <= 1.5.6, as chunked transfer encoding is
-  only supported starting with Orthanc 1.5.8. Beware setting ``ChunkedTransfers``
-  to ``true`` utilizes all CPU resources which results in extremely low throughput
-  as of version 1.0 of the DICOMweb plugin (see
-  `issue 156 <https://bitbucket.org/sjodogne/orthanc/issues/156/>`__ for status).
+  only supported starting with Orthanc 1.5.7. Beware setting
+  ``ChunkedTransfers`` to ``true`` in Orthanc 1.5.7 and 1.5.8 utilizes
+  one CPU at 100%, which results in very low throughput: This issue is
+  resolved in Orthanc 1.6.0 (cf. `issue 156
+  <https://bitbucket.org/sjodogne/orthanc/issues/156/>`__ for full
+  explanation).
 
+* ``HasWadoRsUniversalTransferSyntax`` (new in DICOMweb 1.1) must be
+  set to ``false`` if the remote DICOMweb server does not support the
+  value ``transfer-syntax=*`` in the ``Accept`` HTTP header for
+  WADO-RS requests. This option is notably needed if the remote
+  DICOMweb server is Orthanc equipped with DICOMweb plugin <= 1.0. On
+  the other hand, setting this option to ``true`` prevents the remote
+  DICOMweb server from transcoding to uncompressed transfer syntaxes,
+  which gives `much better performance
+  <https://groups.google.com/d/msg/orthanc-users/w1Ekrsc6-U8/T2a_DoQ5CwAJ>`__.
+  The implicit value of this parameter was ``false`` in DICOMweb
+  plugin <= 1.0, and its default value is ``true`` since DICOMweb
+  plugin 1.1.
+  
 You'll have to convert the JSON array into a JSON object to set these
 options::
 
@@ -220,7 +321,8 @@ options::
           "Username" : "username", 
           "Password" : "password",
           "HasDelete" : true,
-          "ChunkedTransfers" : true   // Set to "false" if "sample" is Orthanc <= 1.5.6
+          "ChunkedTransfers" : true,                 // Set to "false" if "sample" is Orthanc <= 1.5.6
+          "HasWadoRsUniversalTransferSyntax" : true  // Set to "false" if "sample" is Orthanc DICOMweb plugin <= 1.0
         }
       }
     }
@@ -343,7 +445,7 @@ possible as follows::
 WADO-RS
 ^^^^^^^
 
-A study can be retrieved through WADO-RS. Here is a sample::
+A study can be retrieved through WADO-RS. Here is a sample using the VIX dataset::
 
   $ curl http://localhost:8042/dicom-web/studies/2.16.840.1.113669.632.20.1211.10000315526/
 

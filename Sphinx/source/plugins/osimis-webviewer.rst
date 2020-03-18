@@ -24,8 +24,11 @@ How to get it
 The Osimis Web viewer is part of the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
-For Linux users, you'll find it in the `osimis/orthanc <https://hub.docker.com/repository/docker/osimis/orthanc>`__ 
-docker images or you can download the LSB binary `here <http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.3.1/libOsimisWebViewer.so>`__.
+For Linux users, you'll find it in the `osimis/orthanc
+<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__
+Docker images or you can download the LSB (Linux Standard Base)
+binaries `here
+<http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.3.1/libOsimisWebViewer.so>`__.
 
 The compilation process is quite complex since it requires to build
 first the frontend and then the backend.  All information can be found
@@ -38,20 +41,23 @@ Usage
 
 .. highlight:: json
 
-On Windows, the plugin is enabled by default.
+On Windows, the plugin is enabled by default and will work
+out-of-the-box.
 
-If you're using the ``osimis/orthanc`` docker image, you'll have
-to define the WVB_ENABLED `environment variable <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages?-OsimisWebViewer>`__.
-to ``true``
+If you're using the ``osimis/orthanc`` Docker image, you'll have to
+define the WVB_ENABLED `environment variable
+<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages?-OsimisWebViewer>`__
+to ``true``.
 
-On Linux, the Osimis Web viewer will only work with LSB orthanc binaries
-that can be downloaded from `here <https://lsb.orthanc-server.com/>`__ and
-that will work with most recent Linux distros.
-
-Once Orthanc is installed, you must change the :ref:`configuration file
-<configuration>` to tell Orthanc where it can find the plugin: This is
-done by properly modifying the ``Plugins`` option. You could for
-instance use the following configuration file::
+On plain GNU/Linux distributions (i.e. if not using Docker), the
+Osimis Web viewer will only work with LSB (Linux Standard Base)
+Orthanc binaries that can be downloaded from `here
+<https://lsb.orthanc-server.com/orthanc/>`__ (that will work with most
+recent GNU/Linux distributions). Once Orthanc is installed, you must
+change the :ref:`configuration file <configuration>` to tell Orthanc
+where it can find the plugin: This is done by properly modifying the
+``Plugins`` option. You could for instance use the following
+configuration file::
 
   {
     "Name" : "MyOrthanc",
@@ -69,7 +75,7 @@ configuration file.
 Once a :ref:`DICOM study <model-world>` is opened using Orthanc
 Explorer, a yellow button entitled ``Osimis Web Viewer`` will show
 up. It will open the Web viewer for that particular study.  See also
-the demonstration video on `official homepage of the plugin
+the interactive demonstration on the `official homepage of the plugin
 <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
 
 Advanced options
@@ -77,8 +83,9 @@ Advanced options
 
 .. highlight:: json
 
-The configuration of the Web viewer can be fine-tuned by adding some in
-the `configuration file <https://bitbucket.org/osimis/osimis-webviewer-plugin/src/master/doc/default-configuration.json>`__.
+The configuration of the Web viewer can be fine-tuned by adapting some
+options in the `configuration file
+<https://bitbucket.org/osimis/osimis-webviewer-plugin/src/master/doc/default-configuration.json>`__.
 
 FAQ
 ---
@@ -98,14 +105,17 @@ FAQ
 
 - **What video formats are supported by the Osimis Web Viewer ?**
 
-  The set of codecs supported by the Osimis Viewer is an intersection of the sets of codecs supported by 
-  the `DICOM standard <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__ 
-  and those supported by the `web browsers <https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats>`__.
+  The set of codecs supported by the Osimis Viewer is an intersection
+  of the sets of codecs supported by the `DICOM standard
+  <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__
+  and those supported by the `web browsers
+  <https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats>`__.
   In short, this mostly comes down to just MPEG-4.
   
 - **Where are the annotations stored ?**
 
-  Annotations are stored in :ref:`metadata <metadata>` (id ``9999``) in a custom format.  Note that annotation 
-  storage is disabled by default and can be enabled by setting ``"AnnotationStorageEnabled": true``
-  in the configuration file.
+  Annotations are stored in :ref:`metadata <metadata>` (id ``9999``)
+  in a custom format.  Note that annotation storage is disabled by
+  default and can be enabled by setting ``"AnnotationStorageEnabled":
+  true`` in the configuration file.
 

@@ -57,3 +57,7 @@ check the `official backup and restore manual
 Similar backup procedures are available for MySQL and MariaDB as
 well. Please check the official manual about `database backup methods
 <https://dev.mysql.com/doc/refman/8.0/en/backup-methods.html>`__.
+
+Here are some contributed documents:
+
+* `Backup for Windows 10, Orthanc and PostgreSQL plugin <https://blog.goo.ne.jp/wakida_ortho/e/3eb557fd134cf6136d5ba66cf72fd85a>`__ (in Japanese, 2020-02-02).
