@@ -11,10 +11,6 @@ images, with more advanced features than the basic :ref:`Orthanc Web
 viewer plugin <webviewer>`. The Osimis plugin adds tools for
 measuring, for viewing multiple series, and for split-pane.
 
-Importantly, contrarily to the basic Orthanc Web viewer, **CE
-marking** is available. By buying such a CE marking, this viewer can
-be used for diagnostic purpose.
-
 For general information, check out the `official homepage of the
 plugin
 <http://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
@@ -87,6 +83,19 @@ the `configuration file <https://bitbucket.org/osimis/osimis-webviewer-plugin/sr
 FAQ
 ---
 
+- **Can I use the Osimis Viewer in a medical environment ?**
+
+  The Osimis Viewer is not CE marked or FDA approved and can not be used to produce a diagnostic.
+  However, the viewer can be used by:
+
+  - Patients
+  - General practioner to explain a pathology to their patients
+  - Technicians to check the content/quality of studies
+  - Researchers
+  - Teachers
+  
+  Check your local regulations to ensure you're using it in a legal manner.
+
 - **What video formats are supported by the Osimis Web Viewer ?**
 
   The set of codecs supported by the Osimis Viewer is an intersection of the sets of codecs supported by 
@@ -99,21 +108,4 @@ FAQ
   Annotations are stored in :ref:`metadata <metadata>` (id ``9999``) in a custom format.  Note that annotation 
   storage is disabled by default and can be enabled by setting ``"AnnotationStorageEnabled": true``
   in the configuration file.
-
-  
-
-CE marking
-----------
-
-Legally, in Europe, the Osimis Web viewer can not be used for medical usage unless you
-purchase the `CE marked version by Osimis <https://www.osimis.io/en/services.html>`__.  
-If you're outside Europe, you should check your local regulation but it's most likely 
-that you're not allowed to use it for medical usage as well.
-
-Although the free and open source version of the Osimis Web viewer offers the same feature scope, 
-CE marking requires a "supplier-end user" agreement in which the supplier guarantees that:
-
-- the viewer has been tested for medical use against all possible patient risk,
-- the end user receives regular updates on new features and bug fixes,
-- the end user can be informed of any bug in the medical device. 
 
