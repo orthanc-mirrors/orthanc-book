@@ -92,16 +92,14 @@ FAQ
 
 - **Can I use the Osimis Viewer in a medical environment ?**
 
-  The Osimis Viewer is not CE marked or FDA approved and can not be used to produce a diagnostic.
-  However, the viewer can be used by:
+  The Osimis Viewer is not a Medical Device; it is not CE marked or FDA approved.
 
-  - Patients
-  - General practioner to explain a pathology to their patients
-  - Technicians to check the content/quality of studies
-  - Researchers
-  - Teachers
-  
-  Check your local regulations to ensure you're using it in a legal manner.
+  The Osimis Viewer is an open source Viewer that cannot be used for diagnostic or therapeutic purposes.
+
+  However, the viewer can be used as a communication tool that allows Researchers, Teachers, Technicians, General Practitioner or Patients to visualize medical images for information only.
+
+  Check your local regulations to ensure you’re using it in a legal manner.
+
 
 - **What video formats are supported by the Osimis Web Viewer ?**
 
