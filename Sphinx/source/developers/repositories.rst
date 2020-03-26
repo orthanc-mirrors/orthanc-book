@@ -24,13 +24,13 @@ As pointed out on `Wikipedia
 [debate] has become one of the holy wars of hacker culture."* We
 certainly don't want to endure this debate in the context of the
 Orthanc ecosystem.  The fact is that a distributed revision-control
-was needed for Orthanc, and that both Git and Mercurial have similar
+was needed for Orthanc, and that both Git and Mercurial have a similar
 set of features.
 
 If Orthanc were started in 2020, maybe we would have used Git, or
-maybe not. But the Orthanc ecosystem is not about versioning
-systems. We are entirely dedicated to lowering barriers to entry in
-the field of medical imaging. As a consequence, the choice of
+maybe not. But the Orthanc ecosystem is not at all about versioning
+systems. We want to be entirely dedicated to lowering barriers to
+entry in the field of medical imaging. As a consequence, the choice of
 Mercurial should be considered as a part of the history, and we simply
 ask people to accept it as a fact.
 
@@ -56,6 +56,8 @@ tool.
 Accessing Mercurial
 -------------------
 
+.. _hg-clone:
+
 Read-only access
 ^^^^^^^^^^^^^^^^
 
@@ -70,6 +72,10 @@ Locally cloning one of those Mercurial repositories (say, the main
 
   $ hg clone https://hg.orthanc-server.com/orthanc
 
+You can then use separate tools such as `TortoiseHg
+<https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
+richer features than the Web interface.
+
 
 Write access
 ^^^^^^^^^^^^
@@ -77,6 +83,8 @@ Write access
 Only the core developers of Orthanc have direct write access to the
 Orthanc repositories (through SSH).
 
+
+.. _hg-contributing:
 
 Submitting code
 ^^^^^^^^^^^^^^^
@@ -87,8 +95,10 @@ contributions to the Orthanc repositories!
 However, one of the weaknesses of our self-hosted infrastructure is
 that is does not support automation for `pull requests
 <https://en.wikipedia.org/wiki/Distributed_version_control#Pull_requests>`__.
-This section explains two ways of contributing: by submitting a patch,
-or by providing a branch.
+This section explains the `two accepted ways for communicating
+contributions
+<https://www.mercurial-scm.org/wiki/CommunicatingChanges>`__: by
+submitting a patch, or by exchanging a bundle.
 
 Importantly, before any contribution can be accepted into the Orthanc
 repositories, its author must sign a :ref:`CLA <cla>`. This allows
@@ -96,8 +106,10 @@ both the University Hospital of Liège and the Osimis company to act as
 the official guardians of the whole Orthanc ecosystem.
 
 
-Simple patch
-............
+.. _hg-patch:
+
+Simple patch (import/export)
+............................
 
 .. highlight:: bash
              
@@ -128,13 +140,55 @@ command on their side::
   $ hg import /tmp/contribution.patch
 
 
+.. _hg-bundle:
 
-Submitting a set of changes
-...........................
+Exchanging a bundle
+...................
 
-Work-in-progress.
+.. highlight:: bash
+             
+If your contribution is made of several changesets (commits), you
+should work in a dedicated branch, then submit a Mercurial bundle for
+this branch.
 
+First make sure to pull the latest version of the code repository,
+then create a branch, say ``my-user/my-fix``, that derives from the
+``default`` branch (which corresponds to the mainline code)::
 
+  $ hg pull
+  $ hg up -c default
+  $ hg branch my-user/my-fix
+
+WARNING: Please chose an unique, explicit name for your branch, and
+make sure that your username is included within for traceability! The
+name ``my-user/my-fix`` is only here for the purpose of the example.
+  
+You can then do all the modifications as required (including ``hg
+add``, ``hg rm``, and ``hg commit``) in the branch
+``my-user/my-fix``. When you're done, create a Mercurial bundle that
+gathers all your changes against the source repository as follows::
+
+  $ hg commit -m 'submitting my fix'
+  $ hg bundle /tmp/contribution.bundle https://hg.orthanc-server.com/orthanc
+
+Obviously, make sure to replace
+``https://hg.orthanc-server.com/orthanc`` by the location of the
+source repository.
+
+Finally, you can submit the file ``/tmp/contribution.bundle`` to the
+community, just like for simple patches. Note that this procedure
+inherently corresponds to the manual creation of a pull request.
+
+The core developers would reintegrate such a bundle into the mainline
+by typing the following commands on their side::
+
+  $ cd /tmp
+  $ hg clone https://hg.orthanc-server.com/orthanc
+  $ cd /tmp/orthanc
+  $ hg unbundle /tmp/contribution.bundle
+  $ hg up -c default
+  $ hg merge my-user/my-fix
+  
 
 Issue tracker
 -------------
