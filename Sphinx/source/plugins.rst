@@ -61,6 +61,7 @@ From Osimis
 * :ref:`authorization`
 * :ref:`transfers`
 * :ref:`google`    
+* :ref:`python-plugin`    
 
 .. _plugins-contributed:
 
