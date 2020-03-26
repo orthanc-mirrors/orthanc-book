@@ -81,7 +81,10 @@ Write access
 ^^^^^^^^^^^^
 
 Only the core developers of Orthanc have direct write access to the
-Orthanc repositories (through SSH).
+Orthanc repositories (through SSH). Core developers can clone a
+repository with write access as follows::
+
+  $ hg clone ssh://hg@hg.orthanc-server.com/public/orthanc
 
 
 .. _hg-contributing:
