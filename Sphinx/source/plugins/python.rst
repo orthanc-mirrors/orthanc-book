@@ -126,14 +126,18 @@ Orthanc, using `pydicom <https://pydicom.github.io/>`__::
 
   def DecodeInstance(output, uri, **request):
       if request['method'] == 'GET':
+          # Retrieve the instance ID from the regular expression (*)
           instanceId = request['groups'][0]
+          # Get the content of the DICOM file
           f = orthanc.GetDicomForInstance(instanceId)
+          # Parse it using pydicom
           dicom = pydicom.dcmread(io.BytesIO(f))
+          # Return a string representation the dataset to the caller
           output.AnswerBuffer(str(dicom), 'text/plain')
       else:
           output.SendMethodNotAllowed('GET')
 
-  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)
+  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
 
 .. highlight:: bash
 
@@ -141,3 +145,21 @@ This can be called as follows::
   
   $ curl http://localhost:8042/pydicom/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5
   
+
+Auto-routing studies
+....................
+
+.. highlight:: python
+
+Here is a sample Python plugin that routes any :ref:`stable study
+<lua-callbacks>` to a modality named ``samples`` (as declared in the
+``DicomModalities`` configuration option)::
+  
+  import orthanc
+
+  def OnChange(changeType, level, resourceId):
+      if changeType == orthanc.ChangeType.STABLE_STUDY:
+          print('Stable study: %s' % resourceId)
+          orthanc.RestApiPost('/modalities/sample/store', resourceId)
+
+  orthanc.RegisterOnChangeCallback(OnChange)
