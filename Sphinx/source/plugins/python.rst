@@ -9,7 +9,7 @@ Python plugin for Orthanc
 Work-in-progress.
 
 Being a plugin, the Python API has access to more features than
-:ref:`Lua scripts <lua>`.
+:ref:`Lua scripts <lua>`. 
 
 The Python API is automatically generated from the `Orthanc plugin SDK
 in C
