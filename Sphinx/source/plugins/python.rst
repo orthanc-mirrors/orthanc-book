@@ -60,6 +60,8 @@ The route can then be accessed as::
 Listening to changes
 ....................
 
+.. highlight:: python
+
 This sample uploads a DICOM file as soon as Orthanc is started::
 
    import orthanc
@@ -81,7 +83,9 @@ This sample uploads a DICOM file as soon as Orthanc is started::
 
 
 Accessing the content of a new instance
----------------------------------------
+.......................................
+
+.. highlight:: python
 
 ::
    
@@ -105,3 +109,35 @@ Accessing the content of a new instance
       pprint.pprint(json.loads(dicom.GetInstanceSimplifiedJson()))
 
   orthanc.RegisterOnStoredInstanceCallback(OnStoredInstance)
+
+
+Calling pydicom
+...............
+
+.. highlight:: python
+
+Here is a sample Python plugin that registers a REST callback to dump
+the content of the dataset of one given DICOM instance stored in
+Orthanc, using `pydicom <https://pydicom.github.io/>`__::
+  
+  import io
+  import orthanc
+  import pydicom
+
+  def DecodeInstance(output, uri, **request):
+      if request['method'] == 'GET':
+          instanceId = request['groups'][0]
+          f = orthanc.GetDicomForInstance(instanceId)
+          dicom = pydicom.dcmread(io.BytesIO(f))
+          output.AnswerBuffer(str(dicom), 'text/plain')
+      else:
+          output.SendMethodNotAllowed('GET')
+
+  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)
+
+.. highlight:: bash
+
+This can be called as follows::
+  
+  $ curl http://localhost:8042/pydicom/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5
+  
