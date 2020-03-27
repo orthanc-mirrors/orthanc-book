@@ -15,6 +15,8 @@ using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.  The coverage of the C SDK is about 75% (105 functions are
 automatically wrapped in Python out of a total of 139 functions in C).
 
+This provides much more flexibility than the Lua scripts.
+
 
 Samples
 -------
@@ -163,3 +165,38 @@ Here is a sample Python plugin that routes any :ref:`stable study
           orthanc.RestApiPost('/modalities/sample/store', resourceId)
 
   orthanc.RegisterOnChangeCallback(OnChange)
+
+
+Render a thumbnail using PIL/Pillow
+...................................
+
+.. highlight:: python
+
+::
+   
+  from PIL import Image
+  import io
+  import orthanc
+
+  def DecodeInstance(output, uri, **request):
+      if request['method'] == 'GET':
+          # Retrieve the instance ID from the regular expression (*)
+          instanceId = request['groups'][0]
+
+          # Render the instance, then open it in Python using PIL/Pillow
+          png = orthanc.RestApiGet('/instances/%s/rendered' % instanceId)
+          image = Image.open(io.BytesIO(png))
+
+          # Downsize the image as a 64x64 thumbnail
+          image.thumbnail((64, 64), Image.ANTIALIAS)
+
+          # Save the thumbnail as JPEG, then send the buffer to the caller
+          jpeg = io.BytesIO()
+          image.save(jpeg, format = "JPEG", quality = 80)
+          jpeg.seek(0)
+          output.AnswerBuffer(jpeg.read(), 'text/plain')
+
+      else:
+          output.SendMethodNotAllowed('GET')
+
+  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
