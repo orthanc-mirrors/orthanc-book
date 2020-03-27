@@ -77,6 +77,34 @@ You can then use separate tools such as `TortoiseHg
 richer features than the Web interface.
 
 
+Note for Microsoft Windows
+..........................
+
+.. highlight:: text
+
+On Microsoft Windows, while cloning the repository, you might face an
+error similar to::
+
+  abort: error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:661)
+
+In such a case, you must explicitly add the cryptographic fingerprint
+of our code server. To this end, edit the `configuration file
+<https://www.mercurial-scm.org/doc/hgrc.5.html#files>`__ of Mercurial
+(by default, ``%USERPROFILE%\Mercurial.ini``), and add the following
+lines::
+
+  [hostsecurity]
+  hg.orthanc-server.com:fingerprints=sha256:A1:75:3A:3F:20:74:C1:A6:C3:16:DD:EC:4C:67:74:C4:70:BE:E8:35:0A:0A:C7:2E:36:1F:49:8B:E2:60:61:73
+  
+.. highlight:: bash
+
+For reference, here is the command that was used to generate this
+fingerprint (`click here for more information
+<https://stackoverflow.com/a/56579497/881731>`__)::
+
+  $ openssl s_client -connect hg.orthanc-server.com:443 < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha256 -noout -in /dev/stdin
+  
+
 Write access
 ^^^^^^^^^^^^
 
