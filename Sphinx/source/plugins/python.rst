@@ -27,11 +27,16 @@ of the `AGPL license
 
 This has an important consequence: If you distribute Orthanc to
 clients together with one Python script, or if you make an Orthanc
-server equiped with one Python script available on a Web portal, you
+server equipped with one Python script available on a Web portal, you
 **must** disclose the source code of your Python script to the Orthanc
-community under the terms of the AGPL license. We suggest you to put
-your code on the `dedicated "OrthancContributed" repository on GitHub
-<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__.
+community under the terms of the AGPL license.
+
+We suggest you to put the source code of your Python scripts on the
+dedicated `"OrthancContributed" repository on GitHub
+<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__,
+and/or to send it to the `Orthanc Users
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
+group.
 
 Check out the :ref:`FAQ about licensing <licensing>` for more context.
 
