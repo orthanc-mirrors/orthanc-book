@@ -201,3 +201,130 @@ Render a thumbnail using PIL/Pillow
           output.SendMethodNotAllowed('GET')
 
   orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+
+
+Performance and concurrency
+---------------------------
+
+.. highlight:: python
+
+Let us consider the following sample Python script that makes a
+CPU-intensive computation on a REST callback::
+
+  import math
+  import orthanc
+  import time
+
+  # CPU-intensive computation taking about 4 seconds
+  def SlowComputation():
+      start = time.time()
+      for i in range(1000):
+          for j in range(30000):
+              math.sqrt(float(j))
+      end = time.time()
+      duration = (end - start)
+      return 'computation done in %.03f seconds\n' % duration
+
+  def OnRest(output, uri, **request):
+      answer = SlowComputation()
+      output.AnswerBuffer(answer, 'text/plain')
+
+  orthanc.RegisterRestCallback('/computation', OnRest)
+
+
+.. highlight:: text
+
+Calling this REST route from the command-line returns the time that is
+needed to compute 30 million times a squared root on your CPU::
+
+  $ curl http://localhost:8042/computation
+  computation done in 4.208 seconds
+
+Now, let us call this route three times concurrently (we use bash)::
+
+  $ (curl http://localhost:8042/computation & curl http://localhost:8042/computation & curl http://localhost:8042/computation )
+  computation done in 11.262 seconds
+  computation done in 12.457 seconds
+  computation done in 13.360 seconds
+
+As can be seen, the computation time has tripled. This means that the
+computations were not distributed across the available CPU cores.
+This might seem surprising, as Orthanc is a threaded server (in
+Orthanc, a pool of C++ threads serves concurrent requests).
+
+The explanation is that the Python interpreter (`CPython
+<https://en.wikipedia.org/wiki/CPython>`__ actually) is built on the
+top of a so-called `Global Interpreter Lock (GIL)
+<https://en.wikipedia.org/wiki/Global_interpreter_lock>`__. The GIL is
+basically a mutex that protects all the calls to the Python
+interpreter. If multiple C++ threads from Orthanc call a Python
+callback, only one can proceed at any given time.
+
+.. highlight:: python
+
+The solution is to use the `multiprocessing primitives
+<https://docs.python.org/3/library/multiprocessing.html>`__ of Python.
+The "master" Python interpreter that is initially started by the
+Orthanc plugin, can start several `children processes
+<https://en.wikipedia.org/wiki/Process_(computing)>`__, each of these
+processes running a separate Python interpreter. This allows to
+offload intensive computations from the "master" Python interpreter of
+Orthanc onto those "slave" interpreters. The ``multiprocessing``
+library is actually quite straightforward to use::
+
+  import math
+  import multiprocessing
+  import orthanc
+  import signal
+  import time
+
+  # CPU-intensive computation taking about 4 seconds
+  # (same code as above)
+  def SlowComputation():
+      start = time.time()
+      for i in range(1000):
+          for j in range(30000):
+              math.sqrt(float(j))
+      end = time.time()
+      duration = (end - start)
+      return 'computation done in %.03f seconds\n' % duration
+
+  # Ignore CTRL+C in the slave processes
+  def Initializer():
+      signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+  # Create a pool of 4 slave Python interpreters
+  POOL = multiprocessing.Pool(4, initializer = Initializer)
+
+  def OnRest(output, uri, **request):
+      # Offload the call to "SlowComputation" onto one slave process.
+      # The GIL is unlocked until the slave sends its answer back.
+      answer = POOL.apply(SlowComputation)
+      output.AnswerBuffer(answer, 'text/plain')
+
+  orthanc.RegisterRestCallback('/computation', OnRest)
+
+.. highlight:: text
+
+Here is now the result of calling this route three times concurrently::
+
+  $ (curl http://localhost:8042/computation & curl http://localhost:8042/computation & curl http://localhost:8042/computation )
+  computation done in 4.211 seconds
+  computation done in 4.215 seconds
+  computation done in 4.225 seconds
+
+As can be seen, the calls to the Python computation now fully run in
+parallel (the time is cut down from 12 seconds to 4 seconds, the same
+as for one isolated request).
+
+Note also how the ``multiprocessing`` library allows to make a fine
+control over the computational resources that are available to the
+Python script: The number of "slave" interpreters can be easily
+changed in the constructor of the ``multiprocessing.Pool`` object, and
+are fully independent of the threads used by the Orthanc server.
+
+Obviously, an in-depth discussion about the ``multiprocessing``
+library is out of the scope of this document. There are many
+references available on Internet. Also, note that ``multithreading``
+is not useful here, as Python multithreading is also limited by the
+GIL, and is more targeted at dealing with costly I/O operations.
