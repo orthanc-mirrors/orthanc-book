@@ -168,8 +168,8 @@ Here is a sample Python plugin that routes any :ref:`stable study
   orthanc.RegisterOnChangeCallback(OnChange)
 
 
-Render a thumbnail using PIL/Pillow
-...................................
+Rendering a thumbnail using PIL/Pillow
+......................................
 
 .. highlight:: python
 
@@ -322,6 +322,31 @@ control over the computational resources that are available to the
 Python script: The number of "slave" interpreters can be easily
 changed in the constructor of the ``multiprocessing.Pool`` object, and
 are fully independent of the threads used by the Orthanc server.
+
+.. highlight:: python
+
+Very importantly, pay attention to the fact that only the "master"
+Python interpreter has access to the Orthanc SDK. For instance, here
+is how you would parse a DICOM file in a slave process::
+
+  import pydicom
+  import io
+
+  def OffloadedDicomParsing(dicom):
+      # No access to the "orthanc" library here, as we are in the slave process
+      dataset = pydicom.dcmread(io.BytesIO(dicom))
+      return str(dataset)
+
+  def OnRest(output, uri, **request):
+      # The call to "orthanc.RestApiGet()" is only possible in the master process
+      dicom = orthanc.RestApiGet('/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/file')
+      answer = POOL.apply(OffloadedDicomParsing, args = (dicom, ))
+      output.AnswerBuffer(answer, 'text/plain')
+      
+Communication primitives such as ``multiprocessing.Queue`` are
+available to exchange messages from the "slave" Python interpreters to
+the "master" Python interpreter if further calls to the Orthanc SDK
+are required.
 
 Obviously, an in-depth discussion about the ``multiprocessing``
 library is out of the scope of this document. There are many
