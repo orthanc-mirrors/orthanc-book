@@ -68,14 +68,14 @@ server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
 situations, and indicates whether the use is accepted ("Yes"),
-prevented ("No"), or restricted ("Dual licensing"):
+forbidden ("No"), or restricted ("Dual licensing"):
 
 +-----------------------------------------------------+--------------------------------------------------------------------------------------------+
 |                                                     | Mode of distribution of the third-party system, or of the third-party plugin/script        |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Usage of the Orthanc ecosystem                      | Permissive    | GPLv3 | AGPLv3 | Internal use | Proprietary software   | Proprietary cloud |
-|                                                     | (MIT, BSD,    |       |        |              | distributed to clients | platform          |
-|                                                     | Apache...)    |       |        |              |                        |                   |
+|                                                     | (MIT, BSD,    |       |        |              | distributed to clients | platform or Web   |
+|                                                     | Apache...)    |       |        |              |                        | portal            |
 +=====================================================+===============+=======+========+==============+========================+===================+
 | Using Orthanc as such, even if some AGPL-licensed   | N/A           | N/A   | N/A    | Yes          | Yes                    | Yes               |
 | plugin is installed                                 |               |       |        |              |                        |                   |
@@ -91,6 +91,8 @@ prevented ("No"), or restricted ("Dual licensing"):
 | Creating an Orthanc plugin or a Lua script, that    | No            | Yes   | Yes    | Yes          | Dual licensing         | Dual licensing    |
 | is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
++-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
+| Creating a :ref:`Python script <python>`            | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
 | code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |

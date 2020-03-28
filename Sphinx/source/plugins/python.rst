@@ -18,6 +18,24 @@ using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.  The coverage of the C SDK is about 75% (105 functions are
 automatically wrapped in Python out of a total of 139 functions in C).
 
+Licensing
+---------
+
+Pay attention to the fact that this plugin is licensed under the terms
+of the `AGPL license
+<https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License>`__.
+
+This has an important consequence: If you distribute Orthanc to
+clients together with one Python script, or if you make an Orthanc
+server equiped with one Python script available on a Web portal, you
+**must** disclose the source code of your Python script to the Orthanc
+community under the terms of the AGPL license. We suggest you to put
+your code on the `dedicated "OrthancContributed" repository on GitHub
+<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__.
+
+Check out the :ref:`FAQ about licensing <licensing>` for more context.
+
+
 
 Samples
 -------
@@ -258,7 +276,9 @@ top of a so-called `Global Interpreter Lock (GIL)
 <https://en.wikipedia.org/wiki/Global_interpreter_lock>`__. The GIL is
 basically a mutex that protects all the calls to the Python
 interpreter. If multiple C++ threads from Orthanc call a Python
-callback, only one can proceed at any given time.
+callback, only one can proceed at any given time. Note however that
+the GIL only applies to the Python script: The baseline REST API of
+Orthanc is not affected by the GIL.
 
 .. highlight:: python
 
