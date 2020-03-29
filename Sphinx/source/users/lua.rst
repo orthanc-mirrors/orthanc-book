@@ -27,7 +27,8 @@ through the :ref:`REST API <rest-samples>`.
 
 To install it by the **configuration file** method, you just have to
 specify the path to the file containing the Lua script in the
-``LuaScripts`` variable.
+``LuaScripts`` variable. A comma seprated list of paths can be specified
+to install multiple scripts.
 
 To upload a script stored in the file "``script.lua``" through the
 **REST API**, use the following command::
@@ -48,7 +49,6 @@ a single Lua command through the REST API::
 <http://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__ of the possible
 comments inside the Lua script.
 
-
 Lua API
 -------
 
@@ -58,7 +58,7 @@ Lua API
 Callbacks to react to events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Lua engine of Orthanc comes invokes the following callbacks that
+The Lua engine of Orthanc invokes the following callbacks that
 are triggered on various events. Here are the **generic events**:
 
 * ``function Initialize()``: Invoked as soon as the Orthanc server is started.
@@ -141,7 +141,9 @@ callbacks are listed in `this sample script
 
 *Note:* All of these callbacks are guaranteed to be **invoked in
 mutual exclusion**. This implies that Lua scripting in Orthanc does
-not support any kind of concurrency.
+not support any kind of concurrency. If a callback is specified 
+multiple times in separate scripts, the event handler of the latest
+loaded script is used.
 
 
 .. _lua-rest:
