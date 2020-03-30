@@ -26,8 +26,8 @@ source code of the corresponding Docker images is available on `GitHub
   configuration system that is inherited from the Debian packages
   (i.e. manual edition of the configuration files).
 
-* Our commercial partner `Osimis <http://osimis.io>`__ also `publishes
-  separated Docker images
+* Our commercial partner `Osimis <https://www.osimis.io>`__ also
+  `publishes separated Docker images
   <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__.
   These ``osimis/orthanc`` images are used by the technical team of
   Osimis in order to provide professional support to their customers,
@@ -156,8 +156,8 @@ option ``--sample-dataset`` prints a sample JSON file that has the
 expected format).
 
 If you have a source image that is not a hierarchical TIFF, you must
-instruct the Dicomizer to use `OpenSlide <http://openslide.org/>`__ to
-decode it by adding the ``--openslide`` option::
+instruct the Dicomizer to use `OpenSlide <https://openslide.org/>`__
+to decode it by adding the ``--openslide`` option::
 
   $ sudo docker run -t -i --rm --link=orthanc-wsi:orthanc --entrypoint=OrthancWSIDicomizer -v /tmp/Source.svs:/tmp/Source.svs:ro jodogne/orthanc-plugins --username=orthanc --password=orthanc --orthanc=http://orthanc:8042/ --openslide=libopenslide.so /tmp/Source.svs
 

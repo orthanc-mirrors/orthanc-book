@@ -52,7 +52,7 @@ the location of the stored instance, such as::
 
 Note that in the case of curl, setting the ``Expect`` HTTP Header will
 significantly `reduce the execution time of POST requests
-<http://stackoverflow.com/questions/463144/php-http-post-fails-when-curl-data-1024/463277#463277>`__::
+<https://stackoverflow.com/questions/463144/php-http-post-fails-when-curl-data-1024/463277#463277>`__::
 
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
@@ -1011,7 +1011,7 @@ API have not been described:
 * The full documentation of the REST API is maintained as an online
   spreadsheet accessible from the `documentation part of the official
   Web site
-  <http://www.orthanc-server.com/static.php?page=documentation>`__
+  <https://www.orthanc-server.com/static.php?page=documentation>`__
   (click on the *Reference of the REST API* button).
 * A documentation of the REST API in the OpenAPI/Swagger format is
   `available as work-in-progress <https://api.orthanc-server.com/>`__.

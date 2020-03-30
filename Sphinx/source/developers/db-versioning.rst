@@ -4,10 +4,10 @@ Database versioning
 ===================
 
 Orthanc stores the index of the DICOM instances as an embedded `SQLite
-database <http://www.sqlite.org/>`_. The schema of this database has
-evolved across the versions of Orthanc, making the database
-incompatible between versions. This page clarifies which versions of
-Orthanc are compatible with other versions.
+database <https://www.sqlite.org/index.html>`_. The schema of this
+database has evolved across the versions of Orthanc, making the
+database incompatible between versions. This page clarifies which
+versions of Orthanc are compatible with other versions.
 
 Recent versions (post-0.3.1)
 ----------------------------

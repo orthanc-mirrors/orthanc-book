@@ -43,10 +43,10 @@ user interface will be developed in the future (provided we find
 funding for this development). In the meantime, you can also contact a
 company that provides **commercial support on the top of Orthanc** and
 that might have developed an advanced user interface. Currently,
-`Osimis <http://osimis.io/>`_ is the only company ensuring such
+`Osimis <https://www.osimis.io/>`_ is the only company ensuring such
 corporate services, but others might show up in the future. A `contact
-form <http://www.orthanc-server.com/orthanc-pro.php>`_ is available on
-the official Web page of Orthanc.
+form <https://www.orthanc-server.com/orthanc-pro.php>`_ is available
+on the official Web page of Orthanc.
 
 **Update (2017-10-03):** A team of Master students from `ULiège
 <https://www.uliege.be/>`__ is currently working on creating a

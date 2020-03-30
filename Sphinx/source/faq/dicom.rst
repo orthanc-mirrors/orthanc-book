@@ -7,7 +7,7 @@ In general, communication problems between two DICOM modalities over a
 computer network are related to the configuration of these
 modalities. As preliminary debugging actions, you should:
 
-* Make sure you use the `most recent version <http://www.orthanc-server.com/download.php>`_ of Orthanc.
+* Make sure you use the `most recent version <https://www.orthanc-server.com/download.php>`_ of Orthanc.
 * Make sure the two computers can "ping" each other.
 * Turn off all the firewalls on the two computers (especially on Microsoft Windows).
 * Make sure the remote computer has `DICOM TLS encryption

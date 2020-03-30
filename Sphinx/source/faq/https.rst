@@ -40,6 +40,6 @@ that is suitable for test environments with the `OpenSSL
 
 Some interesting references about this topic can be found `here
 <http://www.devsec.org/info/ssl-cert.html>`__, `here
-<http://www.akadia.com/services/ssh_test_certificate.html>`__, and
+<https://www.akadia.com/services/ssh_test_certificate.html>`__, and
 `here
-<http://stackoverflow.com/questions/991758/how-to-get-an-openssl-pem-file-from-key-and-crt-files>`__.
+<https://stackoverflow.com/questions/991758/how-to-get-pem-file-from-key-and-crt-files>`__.

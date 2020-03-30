@@ -32,7 +32,7 @@ a Web browser by at least 2 different means:
    Explorer <orthanc-explorer>` is able to display the individual
    frames and manually navigate between them through keyboard.
 2. The official `Web viewer plugin
-   <http://www.orthanc-server.com/static.php?page=web-viewer>`__ will
+   <https://www.orthanc-server.com/static.php?page=web-viewer>`__ will
    allow you to use the mouse scroll wheel to display the successive
    frames of the video.
 

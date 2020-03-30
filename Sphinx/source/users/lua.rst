@@ -46,8 +46,8 @@ a single Lua command through the REST API::
 *Note:* The ``--data-binary`` cURL option is used instead of
 ``--data`` to prevent the interpretation of newlines by cURL, which is
 `mandatory for the proper evaluation
-<http://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__ of the possible
-comments inside the Lua script.
+<https://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__
+of the possible comments inside the Lua script.
 
 Lua API
 -------

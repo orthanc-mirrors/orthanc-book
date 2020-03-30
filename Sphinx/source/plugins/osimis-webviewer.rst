@@ -13,7 +13,7 @@ measuring, for viewing multiple series, and for split-pane.
 
 For general information, check out the `official homepage of the
 plugin
-<http://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
+<https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
 Also `check out the source code
 <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
@@ -107,7 +107,7 @@ FAQ
   of the sets of codecs supported by the `DICOM standard
   <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__
   and those supported by the `web browsers
-  <https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats>`__.
+  <https://developer.mozilla.org/en-US/docs/Web/Media/Formats>`__.
   In short, this mostly comes down to just MPEG-4.
   
 - **Where are the annotations stored ?**

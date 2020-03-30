@@ -84,7 +84,7 @@ Microsoft Windows
 ^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows `are available
-<http://www.orthanc-server.com/browse.php?path=/plugin-transfers>`__.
+<https://www.orthanc-server.com/browse.php?path=/plugin-transfers>`__.
 
 
 Dynamic linking on Ubuntu 16.04

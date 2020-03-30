@@ -4,7 +4,7 @@ Stone of Orthanc
 ================
 
 This section of the Orthanc Book will document `Stone of Orthanc
-<http://www.orthanc-server.com/static.php?page=stone>`__. This is
+<https://www.orthanc-server.com/static.php?page=stone>`__. This is
 work-in-progress.
 
 For the time being, documentation is provided through various sample

@@ -11,7 +11,7 @@ default storage area (on the filesystem) and the default SQLite index
 by a PostgreSQL database.
 
 For general information, check out the `official homepage of the
-plugins <http://www.orthanc-server.com/static.php?page=postgresql>`__.
+plugins <https://www.orthanc-server.com/static.php?page=postgresql>`__.
 
 
 
@@ -42,10 +42,10 @@ Microsoft Windows and Apple OS X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows `are also available
-<http://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
+<https://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
 A package for `Apple's Mac OS X
-<http://www.osimis.io/en/download.html>`__
-is available courtesy of `Osimis <http://osimis.io/>`__.
+<https://www.osimis.io/en/download.html>`__
+is available courtesy of `Osimis <https://www.osimis.io/>`__.
 
 
 .. _postgresql-ubuntu1604:
@@ -100,7 +100,7 @@ You of course first have to :ref:`install Orthanc <binaries>`, with a
 version above 0.9.5. You then have to **create a database** dedicated
 to Orthanc on some PostgreSQL server. Please refer to the `PostgreSQL
 documentation
-<https://www.postgresql.org/docs/current/static/tutorial-createdb.html>`__.
+<https://www.postgresql.org/docs/current/tutorial-createdb.html>`__.
 
 Once Orthanc is installed and the database is created, you must add a
 section in the :ref:`configuration file <configuration>` that
@@ -180,7 +180,7 @@ configuration file. The log will contain an output similar to::
 
 Instead of specifying explicit authentication parameters, you can also
 use the `PostgreSQL connection URIs syntax
-<https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING>`__. For
+<https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING>`__. For
 instance::
 
   {
@@ -199,7 +199,7 @@ instance::
 
 **Remark:** The Debian Med project maintains `another useful set of
 instructions
-<https://anonscm.debian.org/viewvc/debian-med/trunk/packages/orthanc-postgresql/trunk/debian/README.Debian?view=markup>`__.
+<https://salsa.debian.org/med-team/orthanc-postgresql/-/blob/master/debian/README.Debian>`__.
 
 
 Advanced options
@@ -218,7 +218,7 @@ Locking
 
 By default, the plugins lock the database (using `PostgreSQL advisory
 locks
-<https://www.postgresql.org/docs/current/static/functions-admin.html#FUNCTIONS-ADVISORY-LOCKS>`__)
+<https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADVISORY-LOCKS>`__)
 to prevent other instances of Orthanc from using the same PostgreSQL
 database. If you want several instances of Orthanc to share the same
 database, set the ``Lock`` option to ``false`` in the configuration
@@ -280,5 +280,5 @@ such as::
 
 This is due to a timeout in the PostgreSQL server. Please make sure to
 `enable keep-alive
-<http://dba.stackexchange.com/questions/97534/is-there-a-timeout-option-for-remote-access-to-postgresql-database>`__
+<https://dba.stackexchange.com/questions/97534/is-there-a-timeout-option-for-remote-access-to-postgresql-database>`__
 in the configuration of your PostgreSQL server

@@ -8,7 +8,7 @@ Welcome to the Orthanc Book!
 
 This site documents Orthanc. If you want to access more general
 information about Orthanc, please go to the `official Web site
-<http://www.orthanc-server.com>`_.
+<https://www.orthanc-server.com>`_.
 
 
 Contents

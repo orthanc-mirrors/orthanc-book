@@ -1,10 +1,9 @@
 Why "Orthanc"?
 ==============
 
-The spelling "`Orthanc
-<https://en.wikipedia.org/wiki/Orthanc#Orthanc>`__" originates from
-`J.R.R. Tolkien <https://en.wikipedia.org/wiki/J._R._R._Tolkien>`__'s
-work.
+The spelling "`Orthanc <https://en.wikipedia.org/wiki/Isengard>`__"
+originates from `J.R.R. Tolkien
+<https://en.wikipedia.org/wiki/J._R._R._Tolkien>`__'s work.
 
 Orthanc is the black tower of Isengard that houses one of the
 **palantíri**. A `palantír

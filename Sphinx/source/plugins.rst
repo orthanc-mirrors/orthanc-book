@@ -70,7 +70,7 @@ Index of the contributed plugins
 
 * `AWS S3 storage plugin
   <https://github.com/radpointhq/orthanc-s3-storage>`__: This plugin
-  by `Radpoint <https://www.radpoint.pl/>`__ makes Orthanc store its
+  by `Radpoint <https://radpoint.pl/>`__ makes Orthanc store its
   DICOM files into an `Amazon S3 bucket
   <https://en.wikipedia.org/wiki/Amazon_S3>`__.
 * `DWV Orthanc Plugin
@@ -80,7 +80,7 @@ Index of the contributed plugins
   Web viewer of DICOM images.
 * Another Web viewer is provided courtesy of `Emsy Chan
   <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
-* `VPI Reveal <http://www.vpireveal.com/>`__ provides a plugin to
+* `VPI Reveal <https://www.vpireveal.com/>`__ provides a plugin to
   "write the DICOM records in a normal Windows-readable file hierarchy
   (patient-study-series-DICOM file) at a location called
   ``VPIStorage`` that can then be imported into VPI Reveal."  `Check
@@ -97,5 +97,5 @@ Index of the contributed plugins
   might contain plugins that are not tracked in this list.
 
 *Remark:* Do not hesitate to `contact us
-<http://www.orthanc-server.com/static.php?page=contact>`__ if you have
+<https://www.orthanc-server.com/static.php?page=contact>`__ if you have
 developed a plugin so that we can promote it in the list above!

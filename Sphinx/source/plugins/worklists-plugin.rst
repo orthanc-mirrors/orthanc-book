@@ -12,12 +12,12 @@ Orthanc supports DICOM worklists through plugins is explained in the
 The sample plugin will serve the worklists stored in some folder on
 the filesystem. This mimics the behavior of the ``wlmscpfs``
 command-line tool from the `DCMTK software
-<http://support.dcmtk.org/docs/wlmscpfs.html>`__. 
+<https://support.dcmtk.org/docs/wlmscpfs.html>`__. 
 
 The worklists to be served must be put inside the folder of interest
 by an external application or script (note: files must have a ``.wl`` extension). ``dump2dcm`` might be a very
 `useful companion tool
-<http://support.dcmtk.org/docs/dump2dcm.html>`__ to generate such
+<https://support.dcmtk.org/docs/dump2dcm.html>`__ to generate such
 worklist files. Whenever a C-Find SCP request is issued to Orthanc,
 the plugin will read the content of the folder of interest to locate
 the worklists that match the request. As a consequence, the external
@@ -62,7 +62,7 @@ Orthanc
 <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/ModalityWorklists/>`__
 contains a database of sample worklists, that comes from the DCMTK
 source distribution, as described in the `FAQ entry #37 of the DCMTK
-project <http://forum.dcmtk.org/viewtopic.php?t=84>`__.
+project <https://forum.dcmtk.org/viewtopic.php?t=84>`__.
 
 
 Tutorial
@@ -71,7 +71,7 @@ Tutorial
 .. highlight:: javascript
  
 - Download `DCMTK utilities
-  <http://dicom.offis.de/download/dcmtk/release/bin/>`__.
+  <https://dicom.offis.de/download/dcmtk/release/bin/>`__.
 - Download sample `worklist files
   <https://bitbucket.org/sjodogne/orthanc/src/default/Plugins/Samples/ModalityWorklists/>`__
   from the Orthanc source code and copy them in a dedicated folder.
@@ -93,7 +93,7 @@ Tutorial
 
 - The tests below will be done using the ``findscu`` command-line tool
   from the `DCMTK utilities
-  <http://support.dcmtk.org/docs/findscu.html>`__. Assuming
+  <https://support.dcmtk.org/docs/findscu.html>`__. Assuming
   ``findscu`` and Orthanc runs on the same computer (i.e. on the
   ``127.0.0.1`` localhost), declare the ``FINDSCU`` AET to the list of
   know modalities::
@@ -184,7 +184,7 @@ Troubleshooting C-Find queries
 
 When trying to retrieve worklists from a modality, one usually don't get debugging capabilities from the modality itself.
 Therefore, it is usually convenient to mimic the modality with ``findscu`` (provided by `DCMTK software
-<http://support.dcmtk.org/docs/wlmscpfs.html>`__).  
+<https://support.dcmtk.org/docs/wlmscpfs.html>`__).  
 
 - First, you should make sure that you have configured the Worklist plugin correctly and that you have pushed
   at least a ``.wl`` file in the worklist database.  For this, you should issue this kind of command::

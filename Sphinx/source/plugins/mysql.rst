@@ -11,7 +11,7 @@ default storage area (on the filesystem) and the default SQLite index
 by a MySQL or a MariaDB database.
 
 For general information, check out the `official homepage of the
-plugins <http://www.orthanc-server.com/static.php?page=mysql>`__.
+plugins <https://www.orthanc-server.com/static.php?page=mysql>`__.
 
 **Warning:** According to `this thread on our discussion group
 <https://groups.google.com/d/msg/orthanc-users/yV3LSTh_TjI/Fb4ShaYMBAAJ>`__,
@@ -47,7 +47,7 @@ Microsoft Windows
 ^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows `are also available
-<http://www.orthanc-server.com/browse.php?path=/plugin-mysql>`__.
+<https://www.orthanc-server.com/browse.php?path=/plugin-mysql>`__.
 
 
 Dynamic linking on Ubuntu 16.04
@@ -161,7 +161,7 @@ Locking
 
 By default, the plugins lock the database (using `MySQL/MariaDB
 "GET_LOCK()"
-<https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_get-lock>`__)
+<https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html>`__)
 to prevent other instances of Orthanc from using the same database. If
 you want several instances of Orthanc to share the same database, set
 the ``Lock`` option to ``false`` in the configuration file.

@@ -49,7 +49,7 @@ derived version of Orthanc**.
 Finally, if you need to complement the commercial services of your
 official supplier, please note that you can also contact a company
 that provides **commercial support on the top of Orthanc**. Currently,
-`Osimis <http://osimis.io/>`_ is the only company ensuring such
+`Osimis <https://www.osimis.io/>`_ is the only company ensuring such
 corporate services, but others might show up in the future. A `contact
-form <http://www.orthanc-server.com/orthanc-pro.php>`_ is available on
-the official Web page of Orthanc.
+form <https://www.orthanc-server.com/orthanc-pro.php>`_ is available
+on the official Web page of Orthanc.

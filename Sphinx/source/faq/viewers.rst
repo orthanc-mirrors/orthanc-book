@@ -14,24 +14,24 @@ with Orthanc (do not hesitate to `warn us
 <mailto:s.jodogne@orthanc-labs.com>`__ about other compatible FOSS):
 
 * `Open Health Imaging Foundation (OHIF) <https://docs.ohif.org/>`__.
-* `Horos <https://www.horosproject.org/>`__.
-* `Gingko CADx <https://www.ginkgo-cadx.com/>`__ (a
+* `Horos <https://horosproject.org/>`__.
+* `Gingko CADx <http://ginkgo-cadx.com/en/>`__ (a
   :ref:`configuration guide <ginkgo-cadx>` is available).
 * `3D Slicer <https://www.slicer.org/>`__.
 * `medInria <https://med.inria.fr/>`__.
 * `Aeskulap <https://github.com/pipelka/aeskulap>`__.
-* `OsiriX <http://www.osirix-viewer.com/>`__ (note however that the
+* `OsiriX <https://www.osirix-viewer.com/>`__ (note however that the
   openness of this particular software is `currently subject to
   discussion
-  <http://blog.purview.net/an-open-letter-to-the-osirix-community>`__).
+  <https://www.purview.net/blog/an-open-letter-to-the-osirix-community>`__).
 
 Make also sure to check out the following extensions to Orthanc:
 
-* `Orthanc Web viewer plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
+* `Orthanc Web viewer plugin <https://www.orthanc-server.com/static.php?page=web-viewer>`__.
 * `Osimis Web viewer plugin (Advanced version of the Orthanc Web viewer)
   <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
-* `ImageJ extension <http://www.orthanc-server.com/static.php?page=imagej>`__.
-* `Stone of Orthanc <http://www.orthanc-server.com/static.php?page=stone>`__.
+* `ImageJ extension <https://www.orthanc-server.com/static.php?page=imagej>`__.
+* `Stone of Orthanc <https://www.orthanc-server.com/static.php?page=stone>`__.
 * `dwv-orthanc-plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__ by Yves
   Martelli, that embeds `dwv

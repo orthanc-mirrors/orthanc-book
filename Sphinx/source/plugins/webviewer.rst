@@ -9,7 +9,7 @@ Orthanc Web Viewer plugin
 This **official** plugin extends Orthanc with a Web viewer of medical images.
 
 For general information, check out the `official homepage of the
-plugin <http://www.orthanc-server.com/static.php?page=web-viewer>`__.
+plugin <https://www.orthanc-server.com/static.php?page=web-viewer>`__.
 
 
 Compilation
@@ -29,7 +29,7 @@ for every UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancWebViewer``
 that contains the Web viewer plugin.  Pre-compiled binaries for
 Microsoft Windows `are also available
-<http://www.orthanc-server.com/browse.php?path=/plugin-webviewer>`__.
+<https://www.orthanc-server.com/browse.php?path=/plugin-webviewer>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
@@ -77,7 +77,7 @@ Once a :ref:`DICOM series <model-world>` is opened using Orthanc
 Explorer, a yellow button entitled ``Orthanc Web Viewer`` will show
 up. It will open the Web viewer for that particular series.  See also
 the demonstration video on `official homepage of the plugin
-<http://www.orthanc-server.com/static.php?page=web-viewer>`__.
+<https://www.orthanc-server.com/static.php?page=web-viewer>`__.
 
 
 Advanced options
@@ -111,7 +111,7 @@ The configuration of the Web viewer can be fine-tuned by adding some options::
 * ``EnableGdcm`` specifies whether `GDCM
   <https://sourceforge.net/projects/gdcm/>`__ should be used to decode
   DICOM images, replacing the built-in decoder of Orthanc that
-  internally uses `DCMTK <http://dicom.offis.de/dcmtk.php.en>`__.
+  internally uses `DCMTK <https://dicom.offis.de/dcmtk.php.en>`__.
   This is notably necessary to deal with DICOM images encoded using
   `JPEG2000 <https://en.wikipedia.org/wiki/JPEG_2000>`__, as this
   format is not readily supported by the core version of DCMTK.  By

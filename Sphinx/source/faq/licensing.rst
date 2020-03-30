@@ -92,7 +92,7 @@ forbidden ("No"), or restricted ("Dual licensing"):
 | is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Creating a :ref:`Python script <python>`            | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| Creating a :ref:`Python script <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
 | code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |
@@ -115,9 +115,9 @@ forbidden ("No"), or restricted ("Dual licensing"):
   its global architecture.
 
 * If your use case falls in a "**Dual licensing**" cell, please get in
-  touch with `Osimis <http://osimis.io/>`__, the commercial partner of
-  the Orthanc project that is the only entity entitled to grant a
-  `license exception
+  touch with `Osimis <https://www.osimis.io/>`__, the commercial
+  partner of the Orthanc project that is the only entity entitled to
+  grant a `license exception
   <https://www.fsf.org/blogs/rms/selling-exceptions>`__ to your
   company for the Orthanc core and its :ref:`associated official
   plugins <plugins-official>`.
@@ -148,7 +148,7 @@ forbidden ("No"), or restricted ("Dual licensing"):
   sells **CE-approved** versions of a Web viewer plugin.
 
 * You are kindly invited to cite the `reference paper about Orthanc
-  <https://link.springer.com/article/10.1007%2Fs10278-018-0082-y>`__
+  <https://link.springer.com/article/10.1007/s10278-018-0082-y>`__
   in your scientific work.
 
 * This is our own simplified, technical interpretation of the GPLv3+
@@ -278,7 +278,7 @@ issue a `pull request
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository
-  <http://bitbucket.org/sjodogne/orthanc-tests/>`__.
+  <https://bitbucket.org/sjodogne/orthanc-tests/>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

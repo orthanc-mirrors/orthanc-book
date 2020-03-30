@@ -32,7 +32,7 @@ values.  Multiframe (notably cine), uncompressed DICOM instances can
 also be displayed from Orthanc Explorer.
 
 Other type of encodings are available in the `Web viewer plugin
-<http://www.orthanc-server.com/static.php?page=web-viewer>`__, that
+<https://www.orthanc-server.com/static.php?page=web-viewer>`__, that
 mostly supports whatever is supported by the well-known `GDCM toolkit
 <https://sourceforge.net/projects/gdcm/>`__ by Mathieu Malaterre. Note
 however that multiframe (notably cine) DICOM instances are currently

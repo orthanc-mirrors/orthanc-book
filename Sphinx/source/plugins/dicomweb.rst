@@ -15,7 +15,7 @@ The plugin simultaneously turns Orthanc into a **DICOMweb server** and
 into a **DICOMweb client**.
 
 For general information, check out the `official homepage of the
-plugins <http://www.orthanc-server.com/static.php?page=dicomweb>`__.
+plugins <https://www.orthanc-server.com/static.php?page=dicomweb>`__.
 
 The full standard is not implemented yet, the supported features are
 `tracked in the repository
@@ -39,12 +39,12 @@ for every UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancDicomWeb`` that
 contains the DICOMweb plugin. Pre-compiled binaries for Microsoft
 Windows `are also available
-<http://www.orthanc-server.com/browse.php?path=/plugin-dicom-web>`__,
+<https://www.orthanc-server.com/browse.php?path=/plugin-dicom-web>`__,
 and are included in the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.  A package
 for `Apple's Mac OS X
-<http://localhost/~jodogne/orthanc/static.php?page=download-mac>`__ is
-available courtesy of `Osimis <http://osimis.io/>`__.
+<https://www.orthanc-server.com/static.php?page=download-mac>`__ is
+available courtesy of `Osimis <https://www.osimis.io/>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
@@ -388,8 +388,8 @@ provided to use Orthanc as a DICOMweb client. Simply click on the
 
 Here is a direct link to the DICOMweb client running on our demo
 server:
-`http://demo.orthanc-server.com/dicom-web/app/client/index.html
-<http://demo.orthanc-server.com/dicom-web/app/client/index.html>`__
+`https://demo.orthanc-server.com/dicom-web/app/client/index.html
+<https://demo.orthanc-server.com/dicom-web/app/client/index.html>`__
 
 
 
@@ -399,7 +399,8 @@ Quickstart - DICOMweb server
 Once your Orthanc server is properly configured (see above), you can
 make REST calls to the API of the DICOMweb server. For demonstration
 purpose, this section makes the assumption that the ``VIX`` dataset
-provided by `OsiriX <http://www.osirix-viewer.com/datasets/>`__ has
+provided by `OsiriX
+<https://www.osirix-viewer.com/resources/dicom-image-library/>`__ has
 been uploaded to Orthanc.
 
 WADO-URI
@@ -536,7 +537,8 @@ specified in the ``Arguments`` field. Orthanc will take care of
 <https://en.wikipedia.org/wiki/Percent-encoding>`__.
 
 An user-friendly reference of the features available in QIDO-RS and
-WADO-RS `can be found on this site <http://www.dicomweb.org/>`__.
+WADO-RS `can be found on this site
+<https://www.dicomstandard.org/dicomweb/>`__.
 
 
 Sending DICOM resources to a STOW-RS server

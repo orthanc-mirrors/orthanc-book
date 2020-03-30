@@ -13,7 +13,7 @@ here are some tasks you can take in charge that would greatly help us:
     on `Facebook <https://www.facebook.com/orthancdicom/>`__ and
     `Twitter <https://twitter.com/OrthancServer>`__).
   - Answer our `survey
-    <http://www.orthanc-server.com/static.php?page=blog#survey>`_.
+    <https://www.orthanc-server.com/static.php?page=blog#survey>`_.
   - Improve and translate the `Wikipedia pages
     <https://en.wikipedia.org/wiki/Orthanc_(software)>`_ about Orthanc.
   - Cite the `reference paper about Orthanc
@@ -49,7 +49,7 @@ here are some tasks you can take in charge that would greatly help us:
     :ref:`dedicated FAQ entry <cla>`.
   - Interface Orthanc with other software (e.g. 3D Slicer,
     Matlab/Octave, Python, Horos, dicompyler...). Check the `already
-    supported frameworks <http://www.orthanc-server.com/static.php?page=resources>`_.
+    supported frameworks <https://www.orthanc-server.com/static.php?page=resources>`_.
   - Develop :ref:`C/C++ plugins extending the Orthanc core <plugins>`.  Here are some ideas
     of possible plugins:
   

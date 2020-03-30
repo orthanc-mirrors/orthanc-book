@@ -34,7 +34,7 @@ Karsten Hilbert provided us with a `sample backup script
 for the official Debian package of Orthanc that automates this backup
 procedure. Note that in this script, the call to the SQLite
 command-line tool is used to force the `WAL replay
-<http://www.sqlite.org/wal.html>`__. This manual replay should not be
+<https://www.sqlite.org/wal.html>`__. This manual replay should not be
 necessary for Orthanc >= 0.7.3.
 
 
@@ -44,15 +44,15 @@ PostgreSQL and MySQL
 The default SQLite engine is well adapted for DICOM routing or for
 image buffering tasks, but not for enterprise scenarios. In such
 cases, you are highly recommended to use the `PostgreSQL back-end
-<http://www.orthanc-server.com/static.php?page=postgresql>`__ or the
+<https://www.orthanc-server.com/static.php?page=postgresql>`__ or the
 `MySQL/MariaDB back-end
-<http://www.orthanc-server.com/static.php?page=mysql>`__.
+<https://www.orthanc-server.com/static.php?page=mysql>`__.
 
 If using PostgreSQL, you can do hot backups (i.e. while Orthanc is
 running), and you benefit from all the flexibility of PostgreSQL
 backup. These procedures are out of the scope of this manual.  Please
 check the `official backup and restore manual
-<https://www.postgresql.org/docs/devel/static/backup.html>`__.
+<https://www.postgresql.org/docs/devel/backup.html>`__.
 
 Similar backup procedures are available for MySQL and MariaDB as
 well. Please check the official manual about `database backup methods

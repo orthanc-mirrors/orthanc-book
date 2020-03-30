@@ -5,7 +5,7 @@ Troubleshooting
 
 As a general rule, when you encounter an issue, always make sure that
 you use the `most recent version
-<http://www.orthanc-server.com/download.php>`__ of Orthanc.
+<https://www.orthanc-server.com/download.php>`__ of Orthanc.
 
 Also make a search on the `Orthanc Users discussion group
 <https://groups.google.com/forum/#!forum/orthanc-users>`__, and make a
@@ -65,14 +65,14 @@ Performance issues
 
 * **Orthanc slows down if storing many files**: The default database
   engine that is built in Orthanc is `SQLite
-  <https://www.sqlite.org/>`__. As SQLite is above all a lightweight
-  database engine, it is not designed to `store very large datasets
-  <https://www.sqlite.org/whentouse.html>`__. If you are sure that you
-  have properly disabled run-time debug assertions (cf. above), but
-  still experience degradation in performance over time, you should
-  seriously consider switching to a more scalable database engine. To
-  this end, you can notably check out the :ref:`official PostgreSQL
-  plugin <postgresql>`.
+  <https://www.sqlite.org/index.html>`__. As SQLite is above all a
+  lightweight database engine, it is not designed to `store very large
+  datasets <https://www.sqlite.org/whentouse.html>`__. If you are sure
+  that you have properly disabled run-time debug assertions
+  (cf. above), but still experience degradation in performance over
+  time, you should seriously consider switching to a more scalable
+  database engine. To this end, you can notably check out the
+  :ref:`official PostgreSQL plugin <postgresql>`.
 
   As a rule of thumb, the performance of the default SQLite engine
   built in Orthanc should run fine up to about 50,000 DICOM instances.
@@ -94,9 +94,9 @@ Performance issues
 
   - As an alternative, you can disable IPv6 support. This is a
     Windows-specific problem that is discussed `here
-    <http://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
+    <https://superuser.com/questions/43823/google-chrome-is-slow-to-localhost>`__
     and `here
-    <http://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
+    <https://stackoverflow.com/questions/1726585/firefox-and-chrome-slow-on-localhost-known-fix-doesnt-work-on-windows-7>`__.
 
 * If you experience **slow DICOM transfers under GNU/Linux**, please
   read the `following bug report
@@ -136,9 +136,9 @@ Windows-specific issues
 * If **Orthanc crashes when handling one large DICOM file**, this most
   probably indicates a memory allocation error. Indeed, the `official
   Windows binaries
-  <http://www.orthanc-server.com/download-windows.php>`__ are compiled
+  <https://www.orthanc-server.com/download-windows.php>`__ are compiled
   using a 32bit compiler. As a consequence, Orthanc only has access to
   less than 4GB of RAM. If this is an important limitation for you,
   precompiled command-line versions of Orthanc for Windows 64bit are
   available courtesy of `Osimis
-  <http://www.osimis.io/en/download.html>`__.
+  <https://www.osimis.io/en/download.html>`__.
