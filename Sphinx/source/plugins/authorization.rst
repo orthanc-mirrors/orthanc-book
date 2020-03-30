@@ -13,8 +13,8 @@ granted to the user. If access is not granted, the HTTP status code is
 set to ``403`` (Forbidden).
 
 The `source code of this plugin
-<https://bitbucket.org/osimis/orthanc-authorization>`__ is freely
-available under the terms of the AGPLv3 license.
+<https://hg.orthanc-server.com/orthanc-authorization/file/tip>`__ is
+freely available under the terms of the AGPLv3 license.
 
 
 Compilation
@@ -183,7 +183,7 @@ Here is a description of these two fields:
   the cache entry will never expire.
 
 **Note:** The source code of the plugin contains a `basic example
-<https://bitbucket.org/osimis/orthanc-authorization/src/default/Resources/TestService.js>`__
+<https://hg.orthanc-server.com/orthanc-authorization/file/tip/Resources/TestService.js>`__
 of such a Web service written in node.js.
 
 

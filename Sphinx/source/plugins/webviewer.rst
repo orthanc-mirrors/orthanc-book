@@ -33,7 +33,7 @@ Microsoft Windows `are also available
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
-<https://bitbucket.org/sjodogne/orthanc-webviewer/src/default/Resources/BuildInstructions.txt>`__.
+<https://hg.orthanc-server.com/orthanc-webviewer/file/tip/Resources/BuildInstructions.txt>`__.
 
 
 Usage

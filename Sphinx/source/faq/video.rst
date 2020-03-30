@@ -20,10 +20,10 @@ will work fine either with 2D+t or real videos (because Orthanc is a
 distinction is also discussed in :ref:`another FAQ entry
 <supported-images>`.
 
-If you also want to **play** the videos, the `Osimis WebViewer plugin
-<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__ is able to play
-H.264 (MPEG4) videos and 2D+t (cine) sequences but not MPEG2 videos that
-currently can not be played by Web browsers. 
+If you also want to **play** the videos, the :ref:`Osimis Web Viewer
+plugin <osimis_webviewer>` is able to play H.264 (MPEG4) videos and
+2D+t (cine) sequences but not MPEG2 videos that currently can not be
+played by Web browsers.
 
 If your video is a 2D+t (cine) sequence, Orthanc can also display it inside 
 a Web browser by at least 2 different means:

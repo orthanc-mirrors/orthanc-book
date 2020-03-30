@@ -11,8 +11,8 @@ Introduction
 ------------
 
 Osimis freely provides the `source code
-<https://bitbucket.org/osimis/orthanc-gcp/src>`__ of a plugin to
-interface Orthanc with the Healthcare API of `Google Cloud Platform
+<https://hg.orthanc-server.com/orthanc-gcp/file/tip/>`__ of a plugin
+to interface Orthanc with the Healthcare API of `Google Cloud Platform
 (GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ through
 `DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
 

@@ -7,7 +7,7 @@ Transfers accelerator plugin
 .. contents::
 
 Osimis provides a `transfers accelerator plugin
-<https://bitbucket.org/sjodogne/orthanc-transfers/src>`__ whose
+<https://hg.orthanc-server.com/orthanc-transfers/file/tip>`__ whose
 purpose is to speed up the transfers of DICOM instances over networks
 (with respect to the native DICOM protocol or to the built-in
 :ref:`Orthanc peers <peers>` mechanism).

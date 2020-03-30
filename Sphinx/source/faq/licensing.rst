@@ -234,23 +234,19 @@ contributor as a juridical person, please request a Corporate CLA at
 the same e-mail address: ``orthanc-legal@osimis.io``.
 
 
+.. _submitting_code:
+
 Submitting code
 ^^^^^^^^^^^^^^^
 
 Once the CLA onboarding process has succeeded, use `Mercurial
 <https://en.wikipedia.org/wiki/Mercurial>`__ to fork the official
-repository of interest from BitBucket. Here are the location of those
-repositories:
+repository of interest from BitBucket. All the repositories are
+centralized on our `self-hosted Mercurial server
+<https://hg.orthanc-server.com/>`__.
 
-* The `Orthanc server <https://bitbucket.org/sjodogne/orthanc/src>`__.
-
-* The `official plugins <https://bitbucket.org/sjodogne/>`__ originating from the University Hospital of Liège.
-
-* The `official plugins <https://bitbucket.org/osimis/>`__ originating from Osimis.
-
-Once you have finished modifying the code in your forked repository,
-issue a `pull request
-<https://confluence.atlassian.com/bitbucket/tutorial-learn-about-bitbucket-pull-requests-774243385.html>`__.
+A :ref:`dedicated page <repositories>` explains how to submit
+:ref:`simple patches <hg-patch>` or :ref:`full branches <hg-bundle>`.
 
 **Some words of warning:**
 
@@ -278,7 +274,7 @@ issue a `pull request
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository
-  <https://bitbucket.org/sjodogne/orthanc-tests/>`__.
+  <https://hg.orthanc-server.com/orthanc-tests/file/tip>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

@@ -136,6 +136,9 @@ repositories, its author must sign a :ref:`CLA <cla>`. This allows
 both the University Hospital of Liège and the Osimis company to act as
 the official guardians of the whole Orthanc ecosystem.
 
+Also, make sure to read our :ref:`FAQ if submitting code
+<submitting_code>`.
+
 
 .. _hg-patch:
 

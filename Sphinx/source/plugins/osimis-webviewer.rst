@@ -11,8 +11,8 @@ images, with more advanced features than the basic :ref:`Orthanc Web
 viewer plugin <webviewer>`. The Osimis plugin adds tools for
 measuring, for viewing multiple series, and for split-pane.
 
-For general information, check out the `official homepage of the
-plugin
+For general information and a demonstration, check out the `official
+homepage of the plugin
 <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
 Also `check out the source code
 <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.

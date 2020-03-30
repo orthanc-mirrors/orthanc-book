@@ -22,8 +22,10 @@ here are some tasks you can take in charge that would greatly help us:
   - Answer questions posted to the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
   - Improve the text of the `Orthanc Book and REST API documentation
-    <https://bitbucket.org/sjodogne/orthanc-book/>`_ (check out the
-    instructions provided in the README).
+    <https://hg.orthanc-server.com/orthanc-book/file/tip>`__ (check
+    out the instructions provided in the `README file
+    <https://hg.orthanc-server.com/orthanc-book/file/tip/README.md>`__,
+    and send us a :ref:`simple patch <hg-patch>`).
   - Provide documentation and use cases (inside the dedicated `GitHub
     repository <https://github.com/jodogne/OrthancContributed>`_, via
     pull requests).

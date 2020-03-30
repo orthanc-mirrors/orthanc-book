@@ -14,7 +14,7 @@ Finding samples for the REST API
 * If you cannot find an example for some feature in this manual or in
   the Python examples, please check the `publicly available
   integration tests
-  <https://bitbucket.org/sjodogne/orthanc-tests/src/default/Tests/Tests.py>`__
+  <https://hg.orthanc-server.com/orthanc-tests/file/tip/Tests/Tests.py>`__
   that span most of the REST API.
 * Samples for the deprecated APIs are available below.
 
@@ -50,7 +50,7 @@ You will have to define the modality "pacs" in the :ref:`configuration file
 
 *Note:* This API has been superseded by the ``/modalities/.../query``
 URI. Please check the ``test_rest_query_retrieve`` `integration test
-<https://bitbucket.org/sjodogne/orthanc-tests/src/default/Tests/Tests.py>`__.
+<https://hg.orthanc-server.com/orthanc-tests/file/tip/Tests/Tests.py>`__.
 
 
 Using Orthanc to Ease WADO Querying (Deprecated)
@@ -85,4 +85,4 @@ available for each instance of the series.
 
 *Note:* This API has been superseded by the ``/modalities/.../query``
 URI. Please check the ``test_rest_query_retrieve`` `integration test
-<https://bitbucket.org/sjodogne/orthanc-tests/src/default/Tests/Tests.py>`__.
+<https://hg.orthanc-server.com/orthanc-tests/file/tip/Tests/Tests.py>`__.
