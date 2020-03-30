@@ -27,8 +27,8 @@ through the :ref:`REST API <rest-samples>`.
 
 To install it by the **configuration file** method, you just have to
 specify the path to the file containing the Lua script in the
-``LuaScripts`` variable. A comma seprated list of paths can be specified
-to install multiple scripts.
+``LuaScripts`` variable. A comma-separated list of paths can be
+specified to install multiple scripts.
 
 To upload a script stored in the file "``script.lua``" through the
 **REST API**, use the following command::
@@ -141,9 +141,10 @@ callbacks are listed in `this sample script
 
 *Note:* All of these callbacks are guaranteed to be **invoked in
 mutual exclusion**. This implies that Lua scripting in Orthanc does
-not support any kind of concurrency. If a callback is specified 
-multiple times in separate scripts, the event handler of the latest
-loaded script is used.
+not support any kind of concurrency.
+
+If a callback is specified multiple times in separate scripts, the
+event handler of the latest loaded script is used.
 
 
 .. _lua-rest:
