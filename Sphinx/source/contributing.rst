@@ -60,7 +60,7 @@ here are some tasks you can take in charge that would greatly help us:
       REST API or HL7 messages, instead of reading them from some
       folder on the filesystem.
     + Have a look at the TODO file containing our `official roadmap
-      <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
+      <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
 
   - Always remember that he **recommended way of contributing to the
     source code of Orthanc is by creating C/C++ plugins**. If the

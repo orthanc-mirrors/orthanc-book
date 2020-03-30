@@ -12,7 +12,7 @@ similar to the so-called "`BSD/Allman style
 <https://en.wikipedia.org/wiki/Indent_style#Allman_style>`__", with
 some adaptations that are described below. A compliant Eclipse
 formatter is `available in the Orthanc distribution
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/EclipseCodingStyle.xml>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/EclipseCodingStyle.xml>`__.
 
 Licensing
 ---------

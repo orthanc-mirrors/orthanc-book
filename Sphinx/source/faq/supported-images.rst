@@ -5,7 +5,7 @@ Supported DICOM images
 
 Orthanc can **receive/store/send** any kind of standard DICOM files
 (cf. the `DICOM conformance statement
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/DicomConformanceStatement.txt>`__).
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/DicomConformanceStatement.txt>`__).
 Note that the ``UnknownSopClassAccepted`` :ref:`configuration option
 <configuration>` can be set to `true` if interfacing with modalities
 that are producing non-standard SOP classes.

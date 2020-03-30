@@ -274,7 +274,7 @@ issue a `pull request
   should be focused on one very specific issue or feature. Large
   architectural changes are reserved for the core development team of
   Orthanc, as we must follow our `long-term roadmap
-  <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository

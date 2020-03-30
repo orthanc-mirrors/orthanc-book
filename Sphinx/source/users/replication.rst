@@ -71,7 +71,7 @@ Direct access to the filesystem
 
 The most direct way to replicate an instance of Orthanc consists in
 using the `ImportDicomFiles
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
 script of the Orthanc distribution. For instance, the following
 command would recursively explore the content of the
 ``OrthancStorage`` folder (where Orthanc stores its DICOM files by
@@ -111,7 +111,7 @@ Generic replication
 -------------------
 
 If you cannot use the first method, you can use the `Replicate
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/Replicate.py>`_
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/Replicate.py>`_
 script of the Orthanc distribution. This script will use the REST API
 of both the source and target instances of Orthanc. For instance::
 

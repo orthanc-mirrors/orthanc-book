@@ -25,12 +25,12 @@ resources:
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
 7. Check out the ``Pending changes in the mainline`` section of the
    `NEWS file
-   <https://bitbucket.org/sjodogne/orthanc/src/default/NEWS>`__, as
+   <https://hg.orthanc-server.com/orthanc/file/default/NEWS>`__, as
    your issue might already be solved in the mainline of Orthanc (i.e.
    in the cutting-edge version of Orthanc since the last stable
    official release).
 8. Carefully read the `TODO file
-   <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__ that
+   <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__ that
    contains our roadmap, as you might be requesting a feature that is
    currently pending in our backlog (i.e. not implemented yet).
 9. Have a look for the issue in the `official bug tracker

@@ -106,7 +106,7 @@ Performance issues
   advantage of this patch, you need to statically link Orthanc against
   DCMTK by using the ``-DUSE_SYSTEM_DCMTK=OFF`` flag `when invoking
   CMake
-  <https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/LinuxCompilation.txt>`__.
 
 Checking DICOM file integrity
 -----------------------------

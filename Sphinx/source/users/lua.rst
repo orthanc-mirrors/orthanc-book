@@ -13,7 +13,7 @@ script. This page summarizes the possibilities of Orthanc server-side
 scripting.
 
 Many other examples are `available in the source distribution
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/>`__.
 
 
 Installing a Lua script
@@ -108,7 +108,7 @@ new medical images:
   protocol. This allows to inspect the content of the C-Find query,
   and possibly modify it if a patch is needed for some manufacturer. A
   `sample script is available
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
 
 Some other **resource-related events** are available:
 
@@ -137,7 +137,7 @@ Furthermore, whenever a DICOM association is negotiated for C-Store
 SCP, several callbacks are successively invoked to specify which
 **transfer syntaxes** are accepted for the association. These
 callbacks are listed in `this sample script
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
 
 *Note:* All of these callbacks are guaranteed to be **invoked in
 mutual exclusion**. This implies that Lua scripting in Orthanc does

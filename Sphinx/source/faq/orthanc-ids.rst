@@ -41,7 +41,7 @@ hospitals.
 
 The actual implementation of the hashing is carried on by the
 `DicomInstanceHasher class
-<https://bitbucket.org/sjodogne/orthanc/src/default/Core/DicomFormat/DicomInstanceHasher.cpp>`_.
+<https://hg.orthanc-server.com/orthanc/file/default/Core/DicomFormat/DicomInstanceHasher.cpp>`_.
 
 
 The "Inexistent Tag" error

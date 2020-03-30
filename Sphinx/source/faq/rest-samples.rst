@@ -10,7 +10,7 @@ Finding samples for the REST API
   dedicated section <rest-advanced>`.
 * Many working examples written in Python are `available in the source
   distribution
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/>`__.
 * If you cannot find an example for some feature in this manual or in
   the Python examples, please check the `publicly available
   integration tests

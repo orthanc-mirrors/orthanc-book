@@ -128,7 +128,7 @@ or **2D+t** images (e.g. for `ultrasound imaging
 <https://en.wikipedia.org/wiki/Medical_ultrasound>`__).
 
 `As written in its DICOM conformance statement
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/DicomConformanceStatement.txt>`__,
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/DicomConformanceStatement.txt>`__,
 the Orthanc software can receive, store and send any kind of DICOM
 images (i.e. all the standard transfer syntaxes are
 supported). Furthermore, Orthanc can :ref:`convert most uncompressed

@@ -13,7 +13,7 @@ when it has to send it to another modality using the DICOM protocol.
 
 Adding support for transcoding is one of the features that is pending
 on `our roadmap
-<https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__, and for which 
+<https://hg.orthanc-server.com/orthanc/file/default/TODO>`__, and for which 
 we are looking for industrial sponsors.
 
 
@@ -108,7 +108,7 @@ can be invoked from a :ref:`Lua script <lua>` (check out
 ``OrthancPluginRegisterOnStoredInstanceCallback()`` function). A
 sample Lua script that converts every incoming DICOM file to the
 JPEG2k transfer syntax is `part of the Orthanc sources
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__.
 
 
 Finally, as a fourth solution, it is possible to **combine two Orthanc
