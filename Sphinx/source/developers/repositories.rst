@@ -70,7 +70,7 @@ repositories, on our `self-hosted server
 Locally cloning one of those Mercurial repositories (say, the main
 ``orthanc`` repository) is as simple as typing::
 
-  $ hg clone https://hg.orthanc-server.com/orthanc
+  $ hg clone https://hg.orthanc-server.com/orthanc/
 
 You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
@@ -112,7 +112,7 @@ Only the core developers of Orthanc have direct write access to the
 Orthanc repositories (through SSH). Core developers can clone a
 repository with write access as follows::
 
-  $ hg clone ssh://hg@hg.orthanc-server.com/public/orthanc
+  $ hg clone ssh://hg@hg.orthanc-server.com/public/orthanc/
 
 
 .. _hg-contributing:
@@ -217,7 +217,7 @@ The core developers would reintegrate such a bundle into the mainline
 by typing the following commands on their side::
 
   $ cd /tmp
-  $ hg clone https://hg.orthanc-server.com/orthanc
+  $ hg clone https://hg.orthanc-server.com/orthanc/
   $ cd /tmp/orthanc
   $ hg unbundle /tmp/contribution.bundle
   $ hg up -c default
