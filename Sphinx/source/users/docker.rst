@@ -86,12 +86,17 @@ implementation <dicomweb>`, and its :ref:`whole-slide imaging viewer
 
   $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins
 
+Or you can also start a specific version of Orthanc for more stability::
+
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.6.0
+
 If you have an interest in the :ref:`Python plugin <python-plugin>`,
 you can use the ``orthanc-python`` image. The latter image is a
 heavier version of the ``orthanc-plugins`` image, as it embeds the
 Python 3.7 interpreter. Here is how to start this image::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.6.0
   
 
 Fine-tuning the configuration
