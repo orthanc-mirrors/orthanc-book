@@ -16,8 +16,13 @@ Orthanc plugins must use the `plugin SDK
 <https://sdk.orthanc-server.com/>`__ and must be written in C or
 C++. They must also fullfil the terms of the `GPLv3 license
 <http://www.gnu.org/licenses/quick-guide-gplv3.en.html>`__ that is
-used by the core of Orthanc. Here are some resources about creating
-plugins:
+used by the core of Orthanc.
+
+For developers who are more familiar with Python, it is also possible
+to create plugins using this simpler language. Check out the
+:ref:`dedicated Python plugin <python-plugin>`.
+
+Here are some resources about creating C/C++ plugins:
 
 * Sample code for plugins can be found `in the official Orthanc
   repository
