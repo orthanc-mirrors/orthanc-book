@@ -272,4 +272,4 @@ address. Thanks to Docker, you can easily start a Prometheus server by
 writing this configuration to, say, ``/tmp/prometheus.yml``, then
 type::
           
-  $ sudo docker run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml --rm prom/prometheus:v2.7.0
+  $ sudo run -p 9090:9090 -v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml --rm prom/prometheus:v2.7.0
