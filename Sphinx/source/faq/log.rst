@@ -88,3 +88,13 @@ Under Docker
 The command-line to be used is::
 
   $ sudo docker run -a stderr -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc --verbose /etc/orthanc > Orthanc.log 2>&1
+
+Change the log level while Orthanc is running
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting from Orthanc 1.6.0, you can also change the log level while Orthanc is running through the Rest API::
+  
+  $ curl -X PUT http://localhost:8042/tools/log-level -d "verbose"
+  $ curl -X PUT http://localhost:8042/tools/log-level -d "trace"
+  $ curl -X PUT http://localhost:8042/tools/log-level -d "default"
+
