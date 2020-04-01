@@ -18,7 +18,7 @@ for whole-slide microscopic imaging (WSI):
    inside Orthanc, to a standard hierarchical TIFF image.
 
 For general information, check out the `official homepage of the
-framework <http://www.orthanc-server.com/static.php?page=wsi>`__. 
+framework <https://www.orthanc-server.com/static.php?page=wsi>`__. 
 
 
 Compilation
@@ -55,7 +55,7 @@ Microsoft Windows
 ^^^^^^^^^^^^^^^^^
   
 Note that pre-compiled binaries for Microsoft Windows `are available
-<http://www.orthanc-server.com/browse.php?path=/whole-slide-imaging>`__.
+<https://www.orthanc-server.com/browse.php?path=/whole-slide-imaging>`__.
 
 
 Dynamic linking
@@ -113,7 +113,7 @@ Imaging Viewer`` will show up for series corresponding to whole-slide
 images. This button will open the WSI viewer for that particular
 series. This behavior can be seen on the Orthanc Explorer interface
 running on our `WSI demonstration server
-<http://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
+<https://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
 
 
 
@@ -221,7 +221,7 @@ Out-of-the-box, the DICOM-izer supports standard hierarchical TIFF
 images. Some commonplace image formats (PNG and JPEG) can be
 DICOM-ized as well. However, whole-slide images can come in many
 proprietary file formats. To re-encode such images, the DICOM-izer
-relies upon the `OpenSlide toolbox <http://openslide.org/>`__.
+relies upon the `OpenSlide toolbox <https://openslide.org/>`__.
 
 For this feature to work, you have to tell the command-line tool where
 it can find the OpenSlide shared library. GNU/Linux distributions
@@ -232,7 +232,7 @@ package)::
   $ ./OrthancWSIDicomizer --openslide=libopenslide.so CMU-1-JP2K-33005.svs
 
 Pre-compiled Microsoft Windows binaries of this shared library can be
-found on the `OpenSlide homepage <http://openslide.org/download/>`__ (Note that
+found on the `OpenSlide homepage <https://openslide.org/download/>`__ (Note that
 you should copy all .dll files from the OpenSlide package next to the OrthancWSIDicomizer
 executable)::
 

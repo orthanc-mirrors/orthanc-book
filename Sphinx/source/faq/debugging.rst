@@ -45,7 +45,7 @@ run on almost any recent GNU/Linux system (generated thanks to the
 to debug Orthanc without compiling from sources. Here is a sample
 debug session::
 
-  $ wget http://lsb.orthanc-server.com/orthanc/debug/1.6.0/Orthanc
+  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.6.0/Orthanc
   $ chmod +x ./Orthanc
   $ gdb ./Orthanc Configuration.json
   (gdb) catch throw
@@ -67,13 +67,13 @@ to post your backtrace on the `Orthanc forum
 plugins precompiled using the LSB are also available at the following
 locations:
 
-* `Orthanc core <http://lsb.orthanc-server.com/orthanc/debug/>`__
-* `DICOMweb plugin <http://lsb.orthanc-server.com/plugin-dicom-web/debug/>`__
-* `MySQL plugin <http://lsb.orthanc-server.com/plugin-mysql/debug/>`__
-* `Orthanc Web viewer <http://lsb.orthanc-server.com/plugin-webviewer/debug/>`__
-* `PostgreSQL plugin <http://lsb.orthanc-server.com/plugin-postgresql/debug/>`__
-* `Transfers accelerator plugin <http://lsb.orthanc-server.com/plugin-transfers/debug/>`__
-* `Whole-slide imaging <http://lsb.orthanc-server.com/whole-slide-imaging/debug/>`__
+* `Orthanc core <https://lsb.orthanc-server.com/orthanc/debug/>`__
+* `DICOMweb plugin <https://lsb.orthanc-server.com/plugin-dicom-web/debug/>`__
+* `MySQL plugin <https://lsb.orthanc-server.com/plugin-mysql/debug/>`__
+* `Orthanc Web viewer <https://lsb.orthanc-server.com/plugin-webviewer/debug/>`__
+* `PostgreSQL plugin <https://lsb.orthanc-server.com/plugin-postgresql/debug/>`__
+* `Transfers accelerator plugin <https://lsb.orthanc-server.com/plugin-transfers/debug/>`__
+* `Whole-slide imaging <https://lsb.orthanc-server.com/whole-slide-imaging/debug/>`__
   
 
 Docker

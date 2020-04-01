@@ -52,12 +52,12 @@ the location of the stored instance, such as::
 
 Note that in the case of curl, setting the ``Expect`` HTTP Header will
 significantly `reduce the execution time of POST requests
-<http://stackoverflow.com/questions/463144/php-http-post-fails-when-curl-data-1024/463277#463277>`__::
+<https://stackoverflow.com/questions/463144/php-http-post-fails-when-curl-data-1024/463277#463277>`__::
 
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -598,7 +598,7 @@ To circumvent this problem, you have 2 possibilities:
    The list of the resources to be sent are given as a JSON array. In
    this case, a single DICOM connection is used. `Sample code is
    available
-   <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
+   <https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
 
    Note that the list of resources to be sent can include the
    :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
@@ -922,7 +922,7 @@ sequence number the changes must be returned::
     $ curl 'http://localhost:8042/changes?limit=100&since=922'
 
 A `sample code in the source distribution
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/ChangesLoop.py>`__
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/ChangesLoop.py>`__
 shows how to use this Changes API to implement a polling loop.
 
 
@@ -1011,7 +1011,7 @@ API have not been described:
 * The full documentation of the REST API is maintained as an online
   spreadsheet accessible from the `documentation part of the official
   Web site
-  <http://www.orthanc-server.com/static.php?page=documentation>`__
+  <https://www.orthanc-server.com/static.php?page=documentation>`__
   (click on the *Reference of the REST API* button).
 * A documentation of the REST API in the OpenAPI/Swagger format is
   `available as work-in-progress <https://api.orthanc-server.com/>`__.

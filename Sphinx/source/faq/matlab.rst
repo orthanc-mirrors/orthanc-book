@@ -12,7 +12,7 @@ from Matlab or Octave, as depicted in the following sample image:
 
 Both Matlab and Octave have access to HTTP servers thanks to their
 built-in `urlread() function
-<http://nl.mathworks.com/help/matlab/ref/urlread.html>`__.  Once must
+<https://nl.mathworks.com/help/matlab/ref/urlread.html>`__.  Once must
 simply install a Matlab/Octave library to decode JSON files.  The
 `JSONLab toolkit <https://github.com/fangq/jsonlab>`__ works perfectly
 to this end.

@@ -70,11 +70,19 @@ repositories, on our `self-hosted server
 Locally cloning one of those Mercurial repositories (say, the main
 ``orthanc`` repository) is as simple as typing::
 
-  $ hg clone https://hg.orthanc-server.com/orthanc
+  $ hg clone https://hg.orthanc-server.com/orthanc/
 
 You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
 richer features than the Web interface.
+
+.. highlight:: text
+
+You might have to set up a host fingerprint in the Mercurial
+configuration. Add the following lines to your ``~/.hgrc`` file::
+
+  [hostfingerprints]
+  hg.orthanc-server.com = fc:45:10:18:69:4d:a6:2b:22:fa:c0:81:f4:ee:eb:8e:ba:ae:54:90
 
 
 Note for Microsoft Windows
@@ -112,7 +120,7 @@ Only the core developers of Orthanc have direct write access to the
 Orthanc repositories (through SSH). Core developers can clone a
 repository with write access as follows::
 
-  $ hg clone ssh://hg@hg.orthanc-server.com/public/orthanc
+  $ hg clone ssh://hg@hg.orthanc-server.com/public/orthanc/
 
 
 .. _hg-contributing:
@@ -135,6 +143,9 @@ Importantly, before any contribution can be accepted into the Orthanc
 repositories, its author must sign a :ref:`CLA <cla>`. This allows
 both the University Hospital of Liège and the Osimis company to act as
 the official guardians of the whole Orthanc ecosystem.
+
+Also, make sure to read our :ref:`FAQ if submitting code
+<submitting_code>`.
 
 
 .. _hg-patch:
@@ -214,7 +225,7 @@ The core developers would reintegrate such a bundle into the mainline
 by typing the following commands on their side::
 
   $ cd /tmp
-  $ hg clone https://hg.orthanc-server.com/orthanc
+  $ hg clone https://hg.orthanc-server.com/orthanc/
   $ cd /tmp/orthanc
   $ hg unbundle /tmp/contribution.bundle
   $ hg up -c default

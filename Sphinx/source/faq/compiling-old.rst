@@ -7,7 +7,7 @@ Old build instructions for GNU/Linux
 This page summarizes the GNU/Linux build instructions that were used
 **up to Orthanc 0.7.0 (inclusive)**.  Instructions for Orthanc above
 0.7.0 can be found directly `inside the source package
-<https://bitbucket.org/sjodogne/orthanc/src/default/LinuxCompilation.txt>`_.
+<https://hg.orthanc-server.com/orthanc/file/default/LinuxCompilation.txt>`_.
 
 Static linking
 --------------
@@ -61,7 +61,7 @@ Dynamic Linking on Debian Sid
     $ cmake -DSTATIC_BUILD:BOOL=OFF -DSTANDALONE_BUILD:BOOL=ON -DUSE_DYNAMIC_JSONCPP:BOOL=ON -DDEBIAN_USE_GTEST_SOURCE_PACKAGE:BOOL=ON -DCMAKE_BUILD_TYPE=Debug -DDCMTK_LIBRARIES="wrap;oflog"
 
 This is the configuration from the `official Debian package
-<http://anonscm.debian.org/cgit/debian-med/orthanc.git/tree/debian/orthanc.init>`_.
+<https://salsa.debian.org/med-team/orthanc/-/blob/master/debian/orthanc.init>`_.
 
 Dynamic Linking on Fedora 18 and 19
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -71,15 +71,14 @@ Dynamic Linking on Fedora 18 and 19
     $ cmake -DSTATIC_BUILD:BOOL=OFF -DSTANDALONE_BUILD:BOOL=ON -DUSE_DYNAMIC_GOOGLE_LOG:BOOL=ON -DUSE_DYNAMIC_JSONCPP:BOOL=ON -DCMAKE_BUILD_TYPE=Debug
 
 This is the configuration from the `official Fedora package
-<http://pkgs.fedoraproject.org/cgit/orthanc.git/tree/orthanc.spec?h=f18>`_.
+<https://src.fedoraproject.org/rpms/orthanc/blob/master/f/orthanc.spec>`_.
 
 Static Linking on CentOS 6.3 and 6.4
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You have to build and install `CMake 2.8 from source
-<https://cmake.org/download/>`_, or you can use
-the cmake28 package from `EPEL
-<https://admin.fedoraproject.org/pkgdb/package/rpms/cmake28/>`_. The
+<https://cmake.org/download/>`_, or you can use the cmake28 package
+from `EPEL <https://src.fedoraproject.org/rpms/cmake28>`_. The
 ``STATIC_BUILD=ON`` option will then work::
 
     $ /usr/local/bin/cmake -DSTATIC_BUILD:BOOL=ON -DCMAKE_BUILD_TYPE=Debug

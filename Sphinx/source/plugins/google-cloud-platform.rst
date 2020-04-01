@@ -11,8 +11,8 @@ Introduction
 ------------
 
 Osimis freely provides the `source code
-<https://bitbucket.org/osimis/orthanc-gcp/src>`__ of a plugin to
-interface Orthanc with the Healthcare API of `Google Cloud Platform
+<https://hg.orthanc-server.com/orthanc-gcp/file/tip/>`__ of a plugin
+to interface Orthanc with the Healthcare API of `Google Cloud Platform
 (GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ through
 `DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
 
@@ -58,7 +58,7 @@ on any recent UNIX-like distribution (including GNU/Linux)::
 The compilation produces a shared library
 ``OrthancGoogleCloudPlatform`` that contains the GCP
 plugin. Pre-compiled binaries for Microsoft Windows `are available
-<http://www.orthanc-server.com/browse.php?path=/plugin-google-cloud>`__,
+<https://www.orthanc-server.com/browse.php?path=/plugin-google-cloud>`__,
 and are included in the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
@@ -125,14 +125,14 @@ Service account
 ^^^^^^^^^^^^^^^
 
 As explained on the `Google documentation
-<https://cloud.google.com/docs/authentication/#service_accounts>`__,
-*"a service account is a Google account that represents an
-application, as opposed to representing an end user"*. This is
-presumably the most common situation in the case of Orthanc.
+<https://cloud.google.com/docs/authentication>`__, *"a service account
+is a Google account that represents an application, as opposed to
+representing an end user"*. This is presumably the most common
+situation in the case of Orthanc.
 
 You first have to `create a service account
-<https://cloud.google.com/docs/authentication/getting-started#creating_a_service_account>`__
-for your application. This will produce a JSON file (say,
+<https://cloud.google.com/docs/authentication/getting-started>`__ for
+your application. This will produce a JSON file (say,
 ``dicom-osimis.json``) that you have to store securely on the server
 that will run Orthanc.
 
@@ -173,7 +173,7 @@ User account
 User account is an alternative to service account, and can be used
 *"when the application needs to access resources on behalf of an end
 user"* (check out the `Google documentation
-<https://cloud.google.com/docs/authentication/#user_accounts>`__).
+<https://cloud.google.com/docs/authentication/end-user>`__).
 
 .. highlight:: json
 

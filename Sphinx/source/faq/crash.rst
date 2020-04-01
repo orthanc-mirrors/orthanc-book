@@ -64,7 +64,7 @@ analyzed by any developer of Orthanc. Assuming that the :ref:`plugin
 above <segfault-plugin>` is available as the ``crash.cpp`` file, here
 is a sample debug session::
 
-  $ wget http://lsb.orthanc-server.com/orthanc/debug/1.6.0/Orthanc
+  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.6.0/Orthanc
   $ chmod +x ./Orthanc
   $ gcc -fPIC -shared ./crash.cpp -I ~/orthanc/Plugins/Include -o crash.so
   $ ulimit -c unlimited

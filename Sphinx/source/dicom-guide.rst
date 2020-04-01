@@ -7,18 +7,18 @@ Understanding DICOM with Orthanc
 
 
 This section of the Orthanc Book provides a **gentle, informal,
-high-level introduction to DICOM**. We will try and map
-DICOM's own concepts to a modern terminology that should hopefully be
-more easy to understand for software engineers diving for the first
-time into DICOM. Once the concepts of this page are understood,
-interested readers are invited to read a more formal textbook about
-DICOM, such as the so-called "`Practical introduction and survival
-guide <http://www.springer.com/us/book/9783642108495>`__", or to read
-the full `DICOM specification
+high-level introduction to DICOM**. We will try and map DICOM's own
+concepts to a modern terminology that should hopefully be more easy to
+understand for software engineers diving for the first time into
+DICOM. Once the concepts of this page are understood, interested
+readers are invited to read a more formal textbook about DICOM, such
+as the so-called "`Practical introduction and survival guide
+<https://www.springer.com/us/book/9783642108495>`__", or to read the
+full `DICOM specification
 <http://dicom.nema.org/medical/dicom/current/output/html/>`__.
 
 All the DICOM concepts that are defined in this introduction are
-illustrated with `Orthanc <http://www.orthanc-server.com/>`__, a
+illustrated with `Orthanc <https://www.orthanc-server.com/>`__, a
 lightweight, yet powerful standalone DICOM server for healthcare and
 medical research. As Orthanc is free and open-source software, it is a
 good companion to learn DICOM.
@@ -128,7 +128,7 @@ or **2D+t** images (e.g. for `ultrasound imaging
 <https://en.wikipedia.org/wiki/Medical_ultrasound>`__).
 
 `As written in its DICOM conformance statement
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/DicomConformanceStatement.txt>`__,
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/DicomConformanceStatement.txt>`__,
 the Orthanc software can receive, store and send any kind of DICOM
 images (i.e. all the standard transfer syntaxes are
 supported). Furthermore, Orthanc can :ref:`convert most uncompressed
@@ -617,11 +617,12 @@ this end, you have two possibilities:
    authentication and :ref:`SSL encryption <https>`. The :ref:`Orthanc
    Explorer <orthanc-explorer>` interface can transparently use this
    peer mechanism to send DICOM files over HTTP(S).
-2. Resort to the `DICOMweb standard <http://www.dicomweb.org/>`__,
-   that is an extension to the DICOM standard specifying how to access
-   the content of a remote DICOM server through HTTP(S). Because the
-   peer mechanism is bound to Orthanc, DICOMweb offers a less
-   expressive, but more generic access to remote servers.
-   Importantly, a `DICOMweb plugin to Orthanc
-   <http://www.orthanc-server.com/static.php?page=dicomweb>`__ is
+2. Resort to the `DICOMweb standard
+   <https://www.dicomstandard.org/dicomweb/>`__, that is an extension
+   to the DICOM standard specifying how to access the content of a
+   remote DICOM server through HTTP(S). Because the peer mechanism is
+   bound to Orthanc, DICOMweb offers a less expressive, but more
+   generic access to remote servers.  Importantly, a `DICOMweb plugin
+   to Orthanc
+   <https://www.orthanc-server.com/static.php?page=dicomweb>`__ is
    freely available.

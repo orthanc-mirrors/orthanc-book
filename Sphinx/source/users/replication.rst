@@ -71,7 +71,7 @@ Direct access to the filesystem
 
 The most direct way to replicate an instance of Orthanc consists in
 using the `ImportDicomFiles
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
 script of the Orthanc distribution. For instance, the following
 command would recursively explore the content of the
 ``OrthancStorage`` folder (where Orthanc stores its DICOM files by
@@ -86,9 +86,9 @@ This method will only succeed if:
 * The source Orthanc uses the default storage area on the filesystem
   (i.e. the source Orthanc does *not* store its DICOM files using one
   of the "storage area plugins", such as for `PostgreSQL
-  <http://www.orthanc-server.com/static.php?page=postgresql>`_ or
+  <https://www.orthanc-server.com/static.php?page=postgresql>`_ or
   `MySQL/MariaDB
-  <http://www.orthanc-server.com/static.php?page=mysql>`_ - but it's
+  <https://www.orthanc-server.com/static.php?page=mysql>`_ - but it's
   OK for the source of Orthanc to use any of the "index plugins"),
 * You have command-line access to the source Orthanc, and
 * The transparent :ref:`compression` of the DICOM instances is
@@ -111,7 +111,7 @@ Generic replication
 -------------------
 
 If you cannot use the first method, you can use the `Replicate
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Python/Replicate.py>`_
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/Replicate.py>`_
 script of the Orthanc distribution. This script will use the REST API
 of both the source and target instances of Orthanc. For instance::
 

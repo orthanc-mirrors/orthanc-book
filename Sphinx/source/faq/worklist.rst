@@ -24,10 +24,10 @@ A :ref:`sample plugin <worklists-plugin>` is available in the source
 distribution of Orthanc to serve the worklists stored in some folder
 on the filesystem. This sample plugin mimics the behavior of the
 ``wlmscpfs`` command-line tool from the `DCMTK software
-<http://support.dcmtk.org/docs/wlmscpfs.html>`__.
+<https://support.dcmtk.org/docs/wlmscpfs.html>`__.
 
 For more complex or integrated workflows where you must implement a
 custom MWL plugin, please check the `documentation of the part of the
 Orthanc plugin SDK
-<http://sdk.orthanc-server.com/group__DicomCallbacks.html#ga23080c4e871b8428ede61d9841c10d76>`__
+<https://sdk.orthanc-server.com/group__DicomCallbacks.html#ga23080c4e871b8428ede61d9841c10d76>`__
 that is related to the management of worklists.

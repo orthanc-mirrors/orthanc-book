@@ -13,7 +13,7 @@ script. This page summarizes the possibilities of Orthanc server-side
 scripting.
 
 Many other examples are `available in the source distribution
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/>`__.
 
 
 Installing a Lua script
@@ -27,7 +27,8 @@ through the :ref:`REST API <rest-samples>`.
 
 To install it by the **configuration file** method, you just have to
 specify the path to the file containing the Lua script in the
-``LuaScripts`` variable.
+``LuaScripts`` variable. A comma-separated list of paths can be
+specified to install multiple scripts.
 
 To upload a script stored in the file "``script.lua``" through the
 **REST API**, use the following command::
@@ -45,9 +46,8 @@ a single Lua command through the REST API::
 *Note:* The ``--data-binary`` cURL option is used instead of
 ``--data`` to prevent the interpretation of newlines by cURL, which is
 `mandatory for the proper evaluation
-<http://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__ of the possible
-comments inside the Lua script.
-
+<https://stackoverflow.com/questions/3872427/how-to-send-line-break-with-curl>`__
+of the possible comments inside the Lua script.
 
 Lua API
 -------
@@ -58,7 +58,7 @@ Lua API
 Callbacks to react to events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Lua engine of Orthanc comes invokes the following callbacks that
+The Lua engine of Orthanc invokes the following callbacks that
 are triggered on various events. Here are the **generic events**:
 
 * ``function Initialize()``: Invoked as soon as the Orthanc server is started.
@@ -108,7 +108,7 @@ new medical images:
   protocol. This allows to inspect the content of the C-Find query,
   and possibly modify it if a patch is needed for some manufacturer. A
   `sample script is available
-  <https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
 
 Some other **resource-related events** are available:
 
@@ -137,11 +137,14 @@ Furthermore, whenever a DICOM association is negotiated for C-Store
 SCP, several callbacks are successively invoked to specify which
 **transfer syntaxes** are accepted for the association. These
 callbacks are listed in `this sample script
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
 
 *Note:* All of these callbacks are guaranteed to be **invoked in
 mutual exclusion**. This implies that Lua scripting in Orthanc does
 not support any kind of concurrency.
+
+If a callback is specified multiple times in separate scripts, the
+event handler of the latest loaded script is used.
 
 
 .. _lua-rest:

@@ -68,14 +68,14 @@ server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
 situations, and indicates whether the use is accepted ("Yes"),
-prevented ("No"), or restricted ("Dual licensing"):
+forbidden ("No"), or restricted ("Dual licensing"):
 
 +-----------------------------------------------------+--------------------------------------------------------------------------------------------+
 |                                                     | Mode of distribution of the third-party system, or of the third-party plugin/script        |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Usage of the Orthanc ecosystem                      | Permissive    | GPLv3 | AGPLv3 | Internal use | Proprietary software   | Proprietary cloud |
-|                                                     | (MIT, BSD,    |       |        |              | distributed to clients | platform          |
-|                                                     | Apache...)    |       |        |              |                        |                   |
+|                                                     | (MIT, BSD,    |       |        |              | distributed to clients | platform or Web   |
+|                                                     | Apache...)    |       |        |              |                        | portal            |
 +=====================================================+===============+=======+========+==============+========================+===================+
 | Using Orthanc as such, even if some AGPL-licensed   | N/A           | N/A   | N/A    | Yes          | Yes                    | Yes               |
 | plugin is installed                                 |               |       |        |              |                        |                   |
@@ -91,6 +91,8 @@ prevented ("No"), or restricted ("Dual licensing"):
 | Creating an Orthanc plugin or a Lua script, that    | No            | Yes   | Yes    | Yes          | Dual licensing         | Dual licensing    |
 | is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
++-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
+| Creating a :ref:`Python script <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
 | code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |
@@ -113,9 +115,9 @@ prevented ("No"), or restricted ("Dual licensing"):
   its global architecture.
 
 * If your use case falls in a "**Dual licensing**" cell, please get in
-  touch with `Osimis <http://osimis.io/>`__, the commercial partner of
-  the Orthanc project that is the only entity entitled to grant a
-  `license exception
+  touch with `Osimis <https://www.osimis.io/>`__, the commercial
+  partner of the Orthanc project that is the only entity entitled to
+  grant a `license exception
   <https://www.fsf.org/blogs/rms/selling-exceptions>`__ to your
   company for the Orthanc core and its :ref:`associated official
   plugins <plugins-official>`.
@@ -146,7 +148,7 @@ prevented ("No"), or restricted ("Dual licensing"):
   sells **CE-approved** versions of a Web viewer plugin.
 
 * You are kindly invited to cite the `reference paper about Orthanc
-  <https://link.springer.com/article/10.1007%2Fs10278-018-0082-y>`__
+  <https://link.springer.com/article/10.1007/s10278-018-0082-y>`__
   in your scientific work.
 
 * This is our own simplified, technical interpretation of the GPLv3+
@@ -232,23 +234,19 @@ contributor as a juridical person, please request a Corporate CLA at
 the same e-mail address: ``orthanc-legal@osimis.io``.
 
 
+.. _submitting_code:
+
 Submitting code
 ^^^^^^^^^^^^^^^
 
 Once the CLA onboarding process has succeeded, use `Mercurial
 <https://en.wikipedia.org/wiki/Mercurial>`__ to fork the official
-repository of interest from BitBucket. Here are the location of those
-repositories:
+repository of interest from BitBucket. All the repositories are
+centralized on our `self-hosted Mercurial server
+<https://hg.orthanc-server.com/>`__.
 
-* The `Orthanc server <https://bitbucket.org/sjodogne/orthanc/src>`__.
-
-* The `official plugins <https://bitbucket.org/sjodogne/>`__ originating from the University Hospital of Liège.
-
-* The `official plugins <https://bitbucket.org/osimis/>`__ originating from Osimis.
-
-Once you have finished modifying the code in your forked repository,
-issue a `pull request
-<https://confluence.atlassian.com/bitbucket/tutorial-learn-about-bitbucket-pull-requests-774243385.html>`__.
+A :ref:`dedicated page <repositories>` explains how to submit
+:ref:`simple patches <hg-patch>` or :ref:`full branches <hg-bundle>`.
 
 **Some words of warning:**
 
@@ -272,11 +270,11 @@ issue a `pull request
   should be focused on one very specific issue or feature. Large
   architectural changes are reserved for the core development team of
   Orthanc, as we must follow our `long-term roadmap
-  <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
+  <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository
-  <http://bitbucket.org/sjodogne/orthanc-tests/>`__.
+  <https://hg.orthanc-server.com/orthanc-tests/file/tip>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

@@ -44,7 +44,7 @@ Under Windows
 Under Windows, if you used the official installer:
 
 1. Download the `precompiled command-line version
-   <http://www.orthanc-server.com/download-windows.php>`__ of Orthanc.
+   <https://www.orthanc-server.com/download-windows.php>`__ of Orthanc.
 
 2. Stop the Orthanc service. The actual process depends on your
    version of Windows.

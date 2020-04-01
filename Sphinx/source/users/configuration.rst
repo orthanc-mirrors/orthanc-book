@@ -5,12 +5,11 @@ Configuration of Orthanc
 ========================
 
 Configuring Orthanc simply consists in providing a configuration file.
-Orthanc has numerous configuration that are documented in the `default 
+Orthanc has numerous configuration that are documented in the `default
 configuration file
-<https://bitbucket.org/sjodogne/orthanc/raw/Orthanc-1.6.0/Resources/Configuration.json>`_. This
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.6.0/Resources/Configuration.json>`_. This
 file is in the `JSON <https://en.wikipedia.org/wiki/JSON>`_ file
-format. You can generate this file file with the
-following call::
+format. You can generate this file file with the following call::
 
     $ Orthanc --config=Configuration.json
 

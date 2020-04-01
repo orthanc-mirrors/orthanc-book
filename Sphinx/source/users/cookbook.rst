@@ -15,11 +15,11 @@ Obtaining binaries
 
 To obtain the Orthanc binaries, you have several possibilities:
 
-* `Download pre-compiled packages <http://www.orthanc-server.com/download.php>`__.
+* `Download pre-compiled packages <https://www.orthanc-server.com/download.php>`__.
 * :ref:`Use Docker <docker>`.
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
-  <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#vagrant>`__.
+  <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#user-content-vagrant>`__.
 
 
 .. _orthanc-explorer:
@@ -66,8 +66,8 @@ command).  Check :ref:`this tutorial <configure-modality>` to
 connect your modality to Orthanc.
 
 You can also use the standard command-line tool ``storescu`` from the
-`DCMTK software <http://dicom.offis.de/dcmtk.php.en>`__ to 
-manually send DICOM images to Orthanc, for instance::
+`DCMTK software <https://dicom.offis.de/dcmtk.php.en>`__ to manually
+send DICOM images to Orthanc, for instance::
 
     $ storescu -aec ORTHANC localhost 4242 *.dcm
 

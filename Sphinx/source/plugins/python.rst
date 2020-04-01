@@ -6,17 +6,163 @@ Python plugin for Orthanc
 
 .. contents::
 
-Work-in-progress.
+Overview
+--------
+   
+This plugin can be used to write :ref:`Orthanc plugins
+<creating-plugins>` using the `Python programming language
+<https://en.wikipedia.org/wiki/Python_(programming_language)>`__
+instead of the more complex C/C++ programming languages.
 
-The Python API is automatically generated from the `Orthanc plugin SDK
-in C
+Python plugins have access to more features and a more consistent SDK
+than :ref:`Lua scripts <lua>`. The Python API is automatically
+generated from the `Orthanc plugin SDK in C
 <https://hg.orthanc-server.com/orthanc/file/Orthanc-1.5.7/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
-front-end.  The coverage of the C SDK is about 75% (105 functions are
-automatically wrapped in Python out of a total of 139 functions in C).
+front-end.
 
-This provides much more flexibility than the Lua scripts.
+As of initial release 1.0 of the plugin, the coverage of the C SDK is
+about 75% (105 functions are automatically wrapped in Python out of a
+total of 139 functions in the Orthanc SDK 1.5.7).
 
+Licensing
+---------
+
+Pay attention to the fact that this plugin is licensed under the terms
+of the `AGPL license
+<https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License>`__.
+
+This has an important consequence: If you distribute Orthanc to
+clients together with one Python script, or if you put an Orthanc
+server equipped with one Python script on a Web portal, you **must**
+disclose the source code of your Python script to the Orthanc
+community under the terms of the AGPL license.
+
+We suggest you to put the source code of your Python scripts on the
+dedicated `"OrthancContributed" repository on GitHub
+<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__,
+and/or to send it to the `Orthanc Users
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
+group.
+
+Check out the :ref:`FAQ about licensing <licensing>` for more context.
+
+
+Usage
+-----
+
+Docker
+......
+
+.. highlight:: json
+
+The most direct way of starting Orthanc together with the Python
+plugin is through :ref:`Docker <docker>`. Let's create the file
+``/tmp/hello.py`` that contains the following basic Python script::
+
+  print('Hello world!')
+
+.. highlight:: json
+
+Let's also create the file ``/tmp/orthanc.json`` that contains the
+following minimal :ref:`configuration for Orthanc <configuration>`::
+                 
+  {
+    "StorageDirectory" : "/var/lib/orthanc/db",
+    "RemoteAccessAllowed" : true,
+    "Plugins" : [ 
+      "/usr/local/share/orthanc/plugins"
+    ],
+    "PythonScript" : "/etc/orthanc/hello.py"
+  }
+    
+.. highlight:: bash
+
+Given these two files, Orthanc can be started as follows::
+               
+  $ docker run -p 4242:4242 -p 8042:8042 --rm \
+    -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro \
+    -v /tmp/hello.py:/etc/orthanc/hello.py:ro \
+    jodogne/orthanc-python
+
+.. highlight:: text
+
+You'll see the following excerpt in the log, which indicates that the Python plugin is properly loaded::
+
+  W0331 15:48:12.990661 PluginsManager.cpp:269] Registering plugin 'python' (version mainline)
+  W0331 15:48:12.990691 PluginsManager.cpp:168] Python plugin is initializing
+  W0331 15:48:12.990743 PluginsManager.cpp:168] Using Python script "hello.py" from directory: /etc/orthanc
+  W0331 15:48:12.990819 PluginsManager.cpp:168] Program name: /usr/local/sbin/Orthanc
+  Hello world!
+
+
+Compiling from source
+.....................
+
+.. highlight:: bash
+
+The procedure to compile this plugin from source is similar to that
+for the :ref:`core of Orthanc <compiling>`. The following commands
+should work for most UNIX-like distribution (including GNU/Linux)::
+
+  $ mkdir Build
+  $ cd Build
+  $ cmake .. -DPYTHON_VERSION=3.7 -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+  $ make
+
+Before running CMake, make sure that the Python interpreter and its
+associated development library are installed. On Ubuntu 18.04 LTS, you
+would for instance install packages ``libpython3.7-dev`` and
+``python3.7``.
+   
+The compilation will produce the shared library ``OrthancPython``,
+that can be loaded by properly setting the ``Plugins``
+:ref:`configuration option <configuration>` of Orthanc.
+
+**Warning:** The shared library is only compatible with the Python
+interpreter whose version corresponds to the value of the
+``PYTHON_VERSION`` argument that was given to CMake.
+     
+  
+Microsoft Windows
+.................
+
+Pre-compiled binaries for Microsoft Windows `are also available
+<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+
+Beware that one version of the Python plugin can only be run against
+one version of the Python interpreter. This version is clearly
+indicated in the name of the folder.
+
+As of release 1.0, the Orthanc project only provides pre-compiled
+binaries for Microsoft Windows 32bit and Python 2.7. Even though this
+version of Python is not supported anymore, it can still run on all
+the versions of Microsoft Windows that have been released for more
+than 10 years.
+
+.. highlight:: text
+
+You are of course free to compile the plugin from sources if you need
+a more recent version. You'll have to explicitly specify the path to
+your Python installation while invoking CMake. For instance::
+
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+                                    -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017"
+
+
+Configuration options
+---------------------
+
+The only two configuration options that are available for this plugin
+are the following:
+
+* ``PythonScript`` indicates where the Python script is located.  If
+  this configuration option is not provided, the Python plugin is not
+  started.
+
+* ``PythonVerbose`` is a Boolean value to make the Python interpreter
+  verbose.
+  
 
 Samples
 -------
@@ -167,8 +313,8 @@ Here is a sample Python plugin that routes any :ref:`stable study
   orthanc.RegisterOnChangeCallback(OnChange)
 
 
-Render a thumbnail using PIL/Pillow
-...................................
+Rendering a thumbnail using PIL/Pillow
+......................................
 
 .. highlight:: python
 
@@ -200,3 +346,157 @@ Render a thumbnail using PIL/Pillow
           output.SendMethodNotAllowed('GET')
 
   orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+
+
+Performance and concurrency
+---------------------------
+
+.. highlight:: python
+
+Let us consider the following sample Python script that makes a
+CPU-intensive computation on a REST callback::
+
+  import math
+  import orthanc
+  import time
+
+  # CPU-intensive computation taking about 4 seconds
+  def SlowComputation():
+      start = time.time()
+      for i in range(1000):
+          for j in range(30000):
+              math.sqrt(float(j))
+      end = time.time()
+      duration = (end - start)
+      return 'computation done in %.03f seconds\n' % duration
+
+  def OnRest(output, uri, **request):
+      answer = SlowComputation()
+      output.AnswerBuffer(answer, 'text/plain')
+
+  orthanc.RegisterRestCallback('/computation', OnRest)
+
+
+.. highlight:: text
+
+Calling this REST route from the command-line returns the time that is
+needed to compute 30 million times a squared root on your CPU::
+
+  $ curl http://localhost:8042/computation
+  computation done in 4.208 seconds
+
+Now, let us call this route three times concurrently (we use bash)::
+
+  $ (curl http://localhost:8042/computation & curl http://localhost:8042/computation & curl http://localhost:8042/computation )
+  computation done in 11.262 seconds
+  computation done in 12.457 seconds
+  computation done in 13.360 seconds
+
+As can be seen, the computation time has tripled. This means that the
+computations were not distributed across the available CPU cores.
+This might seem surprising, as Orthanc is a threaded server (in
+Orthanc, a pool of C++ threads serves concurrent requests).
+
+The explanation is that the Python interpreter (`CPython
+<https://en.wikipedia.org/wiki/CPython>`__ actually) is built on the
+top of a so-called `Global Interpreter Lock (GIL)
+<https://en.wikipedia.org/wiki/Global_interpreter_lock>`__. The GIL is
+basically a mutex that protects all the calls to the Python
+interpreter. If multiple C++ threads from Orthanc call a Python
+callback, only one can proceed at any given time. Note however that
+the GIL only applies to the Python script: The baseline REST API of
+Orthanc is not affected by the GIL.
+
+.. highlight:: python
+
+The solution is to use the `multiprocessing primitives
+<https://docs.python.org/3/library/multiprocessing.html>`__ of Python.
+The "master" Python interpreter that is initially started by the
+Orthanc plugin, can start several `children processes
+<https://en.wikipedia.org/wiki/Process_(computing)>`__, each of these
+processes running a separate Python interpreter. This allows to
+offload intensive computations from the "master" Python interpreter of
+Orthanc onto those "slave" interpreters. The ``multiprocessing``
+library is actually quite straightforward to use::
+
+  import math
+  import multiprocessing
+  import orthanc
+  import signal
+  import time
+
+  # CPU-intensive computation taking about 4 seconds
+  # (same code as above)
+  def SlowComputation():
+      start = time.time()
+      for i in range(1000):
+          for j in range(30000):
+              math.sqrt(float(j))
+      end = time.time()
+      duration = (end - start)
+      return 'computation done in %.03f seconds\n' % duration
+
+  # Ignore CTRL+C in the slave processes
+  def Initializer():
+      signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+  # Create a pool of 4 slave Python interpreters
+  POOL = multiprocessing.Pool(4, initializer = Initializer)
+
+  def OnRest(output, uri, **request):
+      # Offload the call to "SlowComputation" onto one slave process.
+      # The GIL is unlocked until the slave sends its answer back.
+      answer = POOL.apply(SlowComputation)
+      output.AnswerBuffer(answer, 'text/plain')
+
+  orthanc.RegisterRestCallback('/computation', OnRest)
+
+.. highlight:: text
+
+Here is now the result of calling this route three times concurrently::
+
+  $ (curl http://localhost:8042/computation & curl http://localhost:8042/computation & curl http://localhost:8042/computation )
+  computation done in 4.211 seconds
+  computation done in 4.215 seconds
+  computation done in 4.225 seconds
+
+As can be seen, the calls to the Python computation now fully run in
+parallel (the time is cut down from 12 seconds to 4 seconds, the same
+as for one isolated request).
+
+Note also how the ``multiprocessing`` library allows to make a fine
+control over the computational resources that are available to the
+Python script: The number of "slave" interpreters can be easily
+changed in the constructor of the ``multiprocessing.Pool`` object, and
+are fully independent of the threads used by the Orthanc server.
+
+.. highlight:: python
+
+Very importantly, pay attention to the fact that only the "master"
+Python interpreter has access to the Orthanc SDK. For instance, here
+is how you would parse a DICOM file in a slave process::
+
+  import pydicom
+  import io
+
+  def OffloadedDicomParsing(dicom):
+      # No access to the "orthanc" library here, as we are in the slave process
+      dataset = pydicom.dcmread(io.BytesIO(dicom))
+      return str(dataset)
+
+  def OnRest(output, uri, **request):
+      # The call to "orthanc.RestApiGet()" is only possible in the master process
+      dicom = orthanc.RestApiGet('/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/file')
+      answer = POOL.apply(OffloadedDicomParsing, args = (dicom, ))
+      output.AnswerBuffer(answer, 'text/plain')
+      
+Communication primitives such as ``multiprocessing.Queue`` are
+available to exchange messages from the "slave" Python interpreters to
+the "master" Python interpreter if further calls to the Orthanc SDK
+are required.
+
+Obviously, an in-depth discussion about the ``multiprocessing``
+library is out of the scope of this document. There are many
+references available on Internet. Also, note that ``multithreading``
+is not useful here, as Python multithreading is also limited by the
+GIL, and is more targeted at dealing with costly I/O operations.

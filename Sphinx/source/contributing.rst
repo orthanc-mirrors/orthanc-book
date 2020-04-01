@@ -13,7 +13,7 @@ here are some tasks you can take in charge that would greatly help us:
     on `Facebook <https://www.facebook.com/orthancdicom/>`__ and
     `Twitter <https://twitter.com/OrthancServer>`__).
   - Answer our `survey
-    <http://www.orthanc-server.com/static.php?page=blog#survey>`_.
+    <https://www.orthanc-server.com/static.php?page=blog#survey>`_.
   - Improve and translate the `Wikipedia pages
     <https://en.wikipedia.org/wiki/Orthanc_(software)>`_ about Orthanc.
   - Cite the `reference paper about Orthanc
@@ -22,8 +22,10 @@ here are some tasks you can take in charge that would greatly help us:
   - Answer questions posted to the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
   - Improve the text of the `Orthanc Book and REST API documentation
-    <https://bitbucket.org/sjodogne/orthanc-book/>`_ (check out the
-    instructions provided in the README).
+    <https://hg.orthanc-server.com/orthanc-book/file/tip>`__ (check
+    out the instructions provided in the `README file
+    <https://hg.orthanc-server.com/orthanc-book/file/tip/README.md>`__,
+    and send us a :ref:`simple patch <hg-patch>`).
   - Provide documentation and use cases (inside the dedicated `GitHub
     repository <https://github.com/jodogne/OrthancContributed>`_, via
     pull requests).
@@ -49,7 +51,7 @@ here are some tasks you can take in charge that would greatly help us:
     :ref:`dedicated FAQ entry <cla>`.
   - Interface Orthanc with other software (e.g. 3D Slicer,
     Matlab/Octave, Python, Horos, dicompyler...). Check the `already
-    supported frameworks <http://www.orthanc-server.com/static.php?page=resources>`_.
+    supported frameworks <https://www.orthanc-server.com/static.php?page=resources>`_.
   - Develop :ref:`C/C++ plugins extending the Orthanc core <plugins>`.  Here are some ideas
     of possible plugins:
   
@@ -60,7 +62,7 @@ here are some tasks you can take in charge that would greatly help us:
       REST API or HL7 messages, instead of reading them from some
       folder on the filesystem.
     + Have a look at the TODO file containing our `official roadmap
-      <https://bitbucket.org/sjodogne/orthanc/src/default/TODO>`__.
+      <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
 
   - Always remember that he **recommended way of contributing to the
     source code of Orthanc is by creating C/C++ plugins**. If the

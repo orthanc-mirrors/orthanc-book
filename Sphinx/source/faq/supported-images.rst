@@ -5,7 +5,7 @@ Supported DICOM images
 
 Orthanc can **receive/store/send** any kind of standard DICOM files
 (cf. the `DICOM conformance statement
-<https://bitbucket.org/sjodogne/orthanc/src/default/Resources/DicomConformanceStatement.txt>`__).
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/DicomConformanceStatement.txt>`__).
 Note that the ``UnknownSopClassAccepted`` :ref:`configuration option
 <configuration>` can be set to `true` if interfacing with modalities
 that are producing non-standard SOP classes.
@@ -32,7 +32,7 @@ values.  Multiframe (notably cine), uncompressed DICOM instances can
 also be displayed from Orthanc Explorer.
 
 Other type of encodings are available in the `Web viewer plugin
-<http://www.orthanc-server.com/static.php?page=web-viewer>`__, that
+<https://www.orthanc-server.com/static.php?page=web-viewer>`__, that
 mostly supports whatever is supported by the well-known `GDCM toolkit
 <https://sourceforge.net/projects/gdcm/>`__ by Mathieu Malaterre. Note
 however that multiframe (notably cine) DICOM instances are currently
