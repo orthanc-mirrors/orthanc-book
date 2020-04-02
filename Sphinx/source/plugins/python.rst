@@ -6,6 +6,7 @@ Python plugin for Orthanc
 
 .. contents::
 
+   
 Overview
 --------
    
@@ -25,6 +26,17 @@ As of initial release 1.0 of the plugin, the coverage of the C SDK is
 about 75% (105 functions are automatically wrapped in Python out of a
 total of 139 functions in the Orthanc SDK 1.5.7).
 
+
+Source code
+-----------
+   
+* Link to the `official releases of this plugin
+  <https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+
+* Link to the `code repository
+  <https://hg.orthanc-server.com/orthanc-python/>`__.
+
+  
 Licensing
 ---------
 
