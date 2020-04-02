@@ -76,6 +76,14 @@ You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
 richer features than the Web interface.
 
+.. highlight:: text
+
+You might have to set up a host fingerprint in the Mercurial
+configuration. Add the following lines to your ``~/.hgrc`` file::
+
+  [hostfingerprints]
+  hg.orthanc-server.com = fc:45:10:18:69:4d:a6:2b:22:fa:c0:81:f4:ee:eb:8e:ba:ae:54:90
+
 
 Note for Microsoft Windows
 ..........................
