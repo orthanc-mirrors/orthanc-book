@@ -380,7 +380,42 @@ features::
                   print('  - Method %s(): %s' % (subname, inspect.getdoc(subobj)))
           print('')
 
-  
+
+.. _python-scheduler:
+
+Scheduling a task for periodic execution
+........................................
+
+.. highlight:: python
+
+The following Python script will periodically (every second) run the
+function ``Hello()`` thanks to the ``threading`` module::
+
+  import orthanc
+  import threading
+
+  TIMER = None
+
+  def Hello():
+      global TIMER
+      TIMER = None
+      orthanc.LogWarning("In Hello()")
+      # Do stuff...
+      TIMER = threading.Timer(1, Hello)  # Re-schedule after 1 second
+      TIMER.start()
+
+  def OnChange(changeType, level, resource):
+      if changeType == orthanc.ChangeType.ORTHANC_STARTED:
+          orthanc.LogWarning("Starting the scheduler")
+          Hello()
+
+      elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
+          if TIMER != None:
+              orthanc.LogWarning("Stopping the scheduler")
+              TIMER.cancel()
+
+  orthanc.RegisterOnChangeCallback(OnChange)
+
                
 
 
