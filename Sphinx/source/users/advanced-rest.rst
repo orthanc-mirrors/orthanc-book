@@ -187,7 +187,7 @@ Using powershell:
     # create the json data
     $params = @{Tags = @{PatientName = "Benjamino";Modality = "CT"};Content= "data:application/pdf;base64,$fileInBase64"}
 
-    # disabling progress bar tremendously increases the Invoke-RestMethod call
+    # disabling the progress bar makes the Invoke-RestMethod call MUCH faster
     $ProgressPreference = 'SilentlyContinue'
 
     # upload it to Orthanc

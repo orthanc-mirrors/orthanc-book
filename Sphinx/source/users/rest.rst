@@ -69,7 +69,7 @@ the REST API::
 If you are using Powershell (>= 3.0), you can use the following to send a single
 Dicom instance to Orthanc::
 
-    # disabling progress bar tremendously increases the Invoke-RestMethod call
+    # disabling the progress bar makes the Invoke-RestMethod call MUCH faster
     $ProgressPreference = 'SilentlyContinue'
 
     # upload it to Orthanc
