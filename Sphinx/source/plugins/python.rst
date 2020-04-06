@@ -580,6 +580,7 @@ are required.
 
 Obviously, an in-depth discussion about the ``multiprocessing``
 library is out of the scope of this document. There are many
-references available on Internet. Also, note that ``multithreading``
-is not useful here, as Python multithreading is also limited by the
-GIL, and is more targeted at dealing with costly I/O operations.
+references available on Internet. Also, note that ``threading`` is not
+useful here, as Python multithreading is also limited by the GIL, and
+is more targeted at dealing with costly I/O operations or with the
+:ref:`scheduling of commands <python-scheduler>`.
