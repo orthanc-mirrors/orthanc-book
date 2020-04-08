@@ -394,7 +394,7 @@ All instances of a study can be retrieved as a zip file as follows::
 
 It is also possible to download a zipped DICOMDIR through::
 
-  $ curl http://localhost:8042/instances/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/media > Study.zip
+  $ curl http://localhost:8042/studies/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/media > Study.zip
 
 
 .. _peering:
