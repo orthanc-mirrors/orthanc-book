@@ -161,6 +161,30 @@ your Python installation while invoking CMake. For instance::
   C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
                                     -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017"
 
+**Note about debug builds**: usually, building Python modules such as the Python 
+plugin for Orthanc in debug mode (where ``_DEBUG`` is defined) leads to a module 
+(.exe or .dll) that requires a debug build of Python, and debug versions of all
+the Python libraries. This is quite cumbersome, for it requires building Python
+on your own or downloading additional debug files.
+
+Since using a debug build of Python is only necessary in very specific cases 
+(such as the debugging of code at the boundary between Python and an extension),
+we have changed the default behavior to use the release Python library by default.
+
+This means that you are able to build this plugin in debug mode with the 
+standard Python distribution.
+
+In case you need to use the Python debug libraries, you can instruct the build
+system to do so by setting the ``PYTHON_WINDOWS_USE_RELEASE_LIBS`` CMake option,
+that is ``ON`` by default, to ``OFF``. The previous build example would then be,
+should you require a full debug build::
+
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+                                    -DSTATIC_BUILD=ON -DPYTHON_WINDOWS_USE_RELEASE_LIBS=OFF \
+                                    -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 15 2017"
+
+Please note that this CMake option only impacts **debug** builds under Windows, 
+when using (any version of) the Microsoft Visual Studio compiler.
 
 Configuration options
 ---------------------
