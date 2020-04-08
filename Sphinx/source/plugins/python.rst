@@ -428,7 +428,116 @@ function ``Hello()`` thanks to the ``threading`` module::
 
   orthanc.RegisterOnChangeCallback(OnChange)
 
-               
+
+.. _python-metadata:
+
+Filtering and returning metadata
+................................
+
+Besides the main DICOM tags, Orthanc associates some metadata to each
+resource it stores (this includes the date of last update, the
+transfer syntax, the remote AET...). People are often interested in
+getting such metadata while calling the ``/tools/find`` route in the
+:ref:`REST API <rest-find>`, or even in filtering this metadata the
+same way they look for DICOM tags.
+
+This feature is not built in the core of Orthanc, as metadata is not
+indexed in the Orthanc database, contrarily to the main DICOM
+tags. Filtering metadata requires a linear search over all the
+matching resources, which induces a cost in the performance.
+
+.. highlight:: python
+
+Nevertheless, here is a full sample Python script that overwrites the
+``/tools/find`` route in order to give access to metadata::
+
+  import json
+  import orthanc
+  import re
+
+  # Get the path in the REST API to the given resource that was returned
+  # by a call to "/tools/find"
+  def GetPath(resource):
+      if resource['Type'] == 'Patient':
+          return '/patients/%s' % resource['ID']
+      elif resource['Type'] == 'Study':
+          return '/studies/%s' % resource['ID']
+      elif resource['Type'] == 'Series':
+          return '/series/%s' % resource['ID']
+      elif resource['Type'] == 'Instance':
+          return '/instances/%s' % resource['ID']
+      else:
+          raise Exception('Unknown resource level')
+
+  def FindWithMetadata(output, uri, **request):
+      # The "/tools/find" route expects a POST method
+      if request['method'] != 'POST':
+          output.SendMethodNotAllowed('POST')
+      else:
+          # Parse the query provided by the user, and backup the "Expand" field
+          query = json.loads(request['body'])       
+
+          if 'Expand' in query:
+              originalExpand = query['Expand']
+          else:
+              originalExpand = False
+
+          # Call the core "/tools/find" route
+          query['Expand'] = True
+          answers = orthanc.RestApiPost('/tools/find', json.dumps(query))
+
+          # Loop over the matching resources
+          filteredAnswers = []
+          for answer in json.loads(answers):
+              try:
+                  # Read the metadata that is associated with the resource
+                  metadata = json.loads(orthanc.RestApiGet('%s/metadata?expand' % GetPath(answer)))
+
+                  # Check whether the metadata matches the regular expressions
+                  # that were provided in the "Metadata" field of the user request
+                  isMetadataMatch = True
+                  if 'Metadata' in query:
+                      for (name, pattern) in query['Metadata'].items():
+                          if name in metadata:
+                              value = metadata[name]
+                          else:
+                              value = ''
+
+                          if re.match(pattern, value) == None:
+                              isMetadataMatch = False
+                              break
+
+                  # If all the metadata matches the provided regular
+                  # expressions, add the resource to the filtered answers
+                  if isMetadataMatch:
+                      if originalExpand:
+                          answer['Metadata'] = metadata
+                          filteredAnswers.append(answer)
+                      else:
+                          filteredAnswers.append(answer['ID'])
+              except:
+                  # The resource was deleted since the call to "/tools/find"
+                  pass
+
+          # Return the filtered answers in the JSON format
+          output.AnswerBuffer(json.dumps(filteredAnswers, indent = 3), 'application/json')
+
+  orthanc.RegisterRestCallback('/tools/find', FindWithMetadata)
+
+
+**Warning:** In the sample above, the filtering of the metadata is
+done using Python's `library for regular expressions
+<https://docs.python.org/3/library/re.html>`__. It is evidently
+possible to adapt this script in order to use the DICOM conventions
+about `attribute matching
+<http://dicom.nema.org/medical/dicom/2019e/output/chtml/part04/sect_C.2.2.2.html>`__.
+
+.. highlight:: python
+
+Here is a sample call to retrieve all the studies that were last
+updated in 2019 thanks to this Python script::
+
+  $ curl http://localhost:8042/tools/find -d '{"Level":"Study","Query":{},"Expand":true,"Metadata":{"LastUpdate":"^2019.*$"}}'
 
 
 Performance and concurrency

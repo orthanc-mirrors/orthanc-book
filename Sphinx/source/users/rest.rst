@@ -770,6 +770,8 @@ The answer of this POST request is the job ID taking care of the C-Move::
   }
 
 
+.. _rest-find:
+
 Performing Finds within Orthanc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. highlight:: bash
