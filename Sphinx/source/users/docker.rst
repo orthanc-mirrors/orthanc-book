@@ -118,6 +118,58 @@ Orthanc with your updated configuration::
   $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc
 
 
+.. _docker-compose:
+
+Configuration management using Docker Compose
+---------------------------------------------
+
+Depending on the context, the `Docker Compose tool
+<https://docs.docker.com/compose/>`__ might be easier to use than the
+plain Docker tool, as it allows replacing long command lines as above,
+by plain configuration files. The trick here is to provide the JSON
+configuration files to Orthanc as `secrets
+<https://docs.docker.com/compose/compose-file/#secrets>`__ (note that
+the related option ``configs`` could in theory be better,
+unfortunately it is only available to `Docker Swarm
+<https://github.com/docker/compose/issues/5110>`__).
+
+.. highlight:: yml
+
+First create the ``docker-compose.yml`` file as follows (this one uses
+the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
+
+  version: '3.1'  # Secrets are only available since this version of Docker Compose
+  services:
+    orthanc:
+      image: jodogne/orthanc-plugins:1.6.0
+      command: /run/secrets/  # Path to the configuration files (stored as secrets)
+      ports:
+        - 8042:8042
+      secrets:
+        - orthanc.json      
+  secrets:
+    orthanc.json:
+      file: orthanc.json
+
+.. highlight:: json
+
+Then, place the configuration file ``orthanc.json`` next to the
+``docker-compose.yml`` file. Here is a minimalist ``orthanc.json``::
+
+  {
+    "Name" : "Orthanc in Docker",
+    "RemoteAccessAllowed" : true
+  }
+
+.. highlight:: bash
+
+This single configuration file should contain all the required
+configuration options for Orthanc and all its plugins. The container
+can then be started as follows::
+
+  $ docker-compose up
+               
+
 Making the Orthanc database persistent
 --------------------------------------
 
