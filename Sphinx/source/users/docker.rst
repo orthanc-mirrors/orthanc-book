@@ -121,7 +121,8 @@ Orthanc with your updated configuration::
 variable ``MALLOC_ARENA_MAX`` to ``5`` in order to :ref:`control
 memory usage <scalability-memory>`. This default setting can be
 overriden by providing the option ``-e MALLOC_ARENA_MAX=1`` when
-invoking ``docker run``.
+invoking ``docker run`` (the value ``0`` corresponds to the default
+value).
 
 
 .. _docker-compose:
