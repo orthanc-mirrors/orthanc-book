@@ -66,10 +66,12 @@ are triggered on various events. Here are the **generic events**:
 
 Some **permission-related events** allow to filter incoming requests:
 
-* ``function ReceivedInstanceFilter(dicom, origin)``:
-  Invoked to known whether an incoming DICOM instance should be
+* ``function ReceivedInstanceFilter(dicom, origin, info)``: Invoked to
+  known whether an incoming DICOM instance should be
   accepted. :ref:`See this section <lua-filter-dicom>`. The ``origin``
-  parameter is :ref:`documented separately <lua-origin>`.
+  parameter is :ref:`documented separately <lua-origin>`. The ``info``
+  parameter contains additional information and was added in Orthanc
+  1.6.1.
 * ``function IncomingHttpRequestFilter(method, uri, ip, username,
   httpHeaders)``: Invoked to known whether a REST request should be
   accepted. :ref:`See this section <lua-filter-rest>`.
@@ -278,7 +280,7 @@ returns ``true``, the instance is accepted for storage. If it returns
 filter the incoming DICOM instances. Here is an example of a Lua
 filter that only allows incoming instances of MR modality::
 
- function ReceivedInstanceFilter(dicom, origin) 
+ function ReceivedInstanceFilter(dicom, origin, info) 
     -- Only allow incoming MR images   
     if dicom.Modality == 'MR' then
        return true 
@@ -287,18 +289,27 @@ filter that only allows incoming instances of MR modality::
     end
  end
 
-The argument dicom corresponds to a `Lua table
+The argument ``dicom`` corresponds to a `Lua table
 <http://www.lua.org/pil/2.5.html>`__ (i.e. an associative array) that
 contains the DICOM tags of the incoming instance. For debugging
 purpose, you can print this structure as follows::
 
- function ReceivedInstanceFilter(dicom, origin) 
+ function ReceivedInstanceFilter(dicom, origin, info) 
     PrintRecursive(dicom)
     -- Accept all incoming instances (default behavior)
     return true 
  end
 
 The argument ``origin`` is :ref:`documented separately <lua-origin>`.
+
+The argument ``info`` was introduced in Orthanc 1.6.1. It contains
+some additional information about the received DICOM instance,
+notably:
+
+* ``HasPixelData`` is ``true`` iff. the Pixel Data (7FE0,0010) tag is
+  present.
+* ``TransferSyntaxUID`` contains the transfer syntax UID of the
+  dataset of the instance (if applicable).
 
 
 .. _lua-filter-rest:
