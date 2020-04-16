@@ -3,6 +3,11 @@
 Scalability of Orthanc
 ======================
 
+.. contents::
+  
+Overview
+--------
+
 One of the most common question about Orthanc is: *"How many DICOM
 instances can be stored by Orthanc?"* 
 
@@ -39,6 +44,12 @@ of DICOM instances (check out the :ref:`postgresql` and
 presence of large databases has continuously improved over time,
 especially when it comes to the speed of :ref:`DICOM C-FIND
 <dicom-find>`.
+
+
+.. _scalability-setup:
+
+Recommended setup for best performance
+--------------------------------------
 
 Here is a generic setup that should provide best performance in the
 presence of large databases:
@@ -102,3 +113,52 @@ presence of large databases:
 * If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
   consider setting configuration option ``StudiesMetadata`` to
   ``MainDicomTags``.
+
+
+.. _scalability-memory:
+
+Controlling memory usage
+------------------------
+
+The absence of memory leaks in Orthanc is verified thanks to `valgrind
+<https://valgrind.org/>`__.
+
+On GNU/Linux systems, you might however `observe a large memory
+consumption
+<https://groups.google.com/d/msg/orthanc-users/qWqxpvCPv8g/47wnYyhOCAAJ>`__
+in the "resident set size" (VmRSS) of the application, notably if you
+upload multiple large DICOM files using the REST API.
+
+This large memory consumption comes from the fact that the embedded
+HTTP server is heavily multi-threaded, and that many so-called `memory
+arenas <https://sourceware.org/glibc/wiki/MallocInternals>`__ are
+created by the glibc standard library (up to one per thread). As a
+consequence, if each one of the 50 threads in the HTTP server of
+Orthanc (this was the default value in Orthanc <= 1.6.0) allocates at
+some point, say, 50MB, the total memory usage reported as "VmRSS" can
+grow up to 50 threads x 50MB = 2.5GB, even if the Orthanc threads
+properly free all the buffers.
+
+.. highlight:: bash
+               
+A possible solution to reducing this memory usage is to ask glibc to
+limit the number of "memory arenas" that are used by the Orthanc
+process. On GNU/Linux, this can be controlled by setting the
+environment variable ``MALLOC_ARENA_MAX``. For instance, the following
+bash command-line would use one single arena that is shared by all the
+threads in Orthanc::
+
+  $ MALLOC_ARENA_MAX=1 ./Orthanc
+
+Obviously, this restrictive setting will use minimal memory, but will
+result in contention among the threads. A good compromise might be to
+use 5 arenas::
+
+  $ MALLOC_ARENA_MAX=5 ./Orthanc
+
+Memory allocation on GNU/Linux is a complex topic. There are other
+options available as environment variables that could also reduce
+memory consumption (for instance, ``MALLOC_MMAP_THRESHOLD_`` would
+bypass arenas for large memory blocks such as DICOM files). Check out
+the `manpage <http://man7.org/linux/man-pages/man3/mallopt.3.html>`__
+of ``mallopt()`` for more information.

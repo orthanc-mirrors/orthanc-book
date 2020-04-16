@@ -117,6 +117,12 @@ Orthanc with your updated configuration::
 
   $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc
 
+*Remark:* These Docker images automatically set the environment
+variable ``MALLOC_ARENA_MAX`` to ``5`` in order to :ref:`control
+memory usage <scalability-memory>`. This default setting can be
+overriden by providing the option ``-e MALLOC_ARENA_MAX=1`` when
+invoking ``docker run``.
+
 
 .. _docker-compose:
 
