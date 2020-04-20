@@ -80,7 +80,7 @@ you must provide all the following information:
   tools <https://www.dcm4che.org/>`__, or Python scripts.
 * In the case of DICOM networking problems, the logs from the remote
   modality.
-* If applicable, a screenshot is worth a thousands word.
+* If applicable, a screenshot is worth a thousand words.
 * If you report a crash, if applicable, a :ref:`core file <crash>`.
 
 All this information is mandatory, as it allows other members of the
