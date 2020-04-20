@@ -15,27 +15,33 @@ resources:
    <orthanc-book>`, and notably to :ref:`understand the basics of
    DICOM <dicom-guide>`.
 2. Carefully read your :ref:`log files in verbose mode <log>`.
-3. Follow the :ref:`general troubleshooting guide <troubleshooting>`.
-4. If the problem is related to the DICOM network protocol, follow
+3. In the case of DICOM networking problems, carefully read the log
+   files from your remote modality. If you are :ref:`using Orthanc
+   against a proprietary system <proprietary>`, contact the support
+   team from the vendor of this system: You pay them to solve your
+   setup issues.
+4. Follow the :ref:`general troubleshooting guide <troubleshooting>`.
+5. If the problem is related to the DICOM network protocol, follow
    the :ref:`DICOM troubleshooting guide <dicom>`.
-5. Have a look at **all** the :ref:`frequently asked questions (FAQs)
+6. Have a look at **all** the :ref:`frequently asked questions (FAQs)
    <faq>` that are already available in the Orthanc Book.
-6. Make a search for similar problem previously discussed in the
+7. Make a search for similar problem previously discussed in the
    `Orthanc Users discussion forum
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
-7. Check out the ``Pending changes in the mainline`` section of the
+8. Check out the ``Pending changes in the mainline`` section of the
    `NEWS file
    <https://hg.orthanc-server.com/orthanc/file/default/NEWS>`__, as
    your issue might already be solved in the mainline of Orthanc (i.e.
    in the cutting-edge version of Orthanc since the last stable
    official release).
-8. Carefully read the `TODO file
+9. Carefully read the `TODO file
    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__ that
    contains our roadmap, as you might be requesting a feature that is
    currently pending in our backlog (i.e. not implemented yet).
-9. Have a look for the issue in the `official bug tracker
-   <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`__
-   (click on the ``All`` button, as your issue might already been solved).
+10. Have a look for the issue in the `official bug tracker
+    <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`__
+    (click on the ``All`` button, as your issue might already been
+    solved).
 
 
 Importantly, for all the features that are pending in the ``TODO``
@@ -72,6 +78,8 @@ you must provide all the following information:
   <https://dicom.offis.de/dcmtk.php.en>`__, `dicom3tools
   <https://www.dclunie.com/dicom3tools.html>`__, `dcm4che command-line
   tools <https://www.dcm4che.org/>`__, or Python scripts.
+* In the case of DICOM networking problems, the logs from the remote
+  modality.
 * If applicable, a screenshot is worth a thousands word.
 * If you report a crash, if applicable, a :ref:`core file <crash>`.
 
