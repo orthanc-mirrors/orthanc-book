@@ -87,21 +87,21 @@ configuration. Add the following lines to your ``~/.hgrc`` file::
   hg.orthanc-server.com = fc:45:10:18:69:4d:a6:2b:22:fa:c0:81:f4:ee:eb:8e:ba:ae:54:90
 
 
-Note for Microsoft Windows
-..........................
+Recent versions of Mercurial
+............................
 
 .. highlight:: text
 
-On Microsoft Windows, while cloning the repository, you might face an
-error similar to::
+While cloning the repository, you might face an error similar to::
 
   abort: error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:661)
 
 In such a case, you must explicitly add the cryptographic fingerprint
-of our code server. To this end, edit the `configuration file
+of our code server using a more recent option than the
+``hostfingerprints`` option. To this end, edit the `configuration file
 <https://www.mercurial-scm.org/doc/hgrc.5.html#files>`__ of Mercurial
-(by default, ``%USERPROFILE%\Mercurial.ini``), and add the following
-lines::
+(by default on Microsoft Windows, ``%USERPROFILE%\Mercurial.ini``),
+and add the following lines::
 
   [hostsecurity]
   hg.orthanc-server.com:fingerprints=sha256:A1:75:3A:3F:20:74:C1:A6:C3:16:DD:EC:4C:67:74:C4:70:BE:E8:35:0A:0A:C7:2E:36:1F:49:8B:E2:60:61:73
