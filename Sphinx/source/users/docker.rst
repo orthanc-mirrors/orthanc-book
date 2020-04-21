@@ -28,7 +28,7 @@ source code of the corresponding Docker images is available on `GitHub
 
 * Our commercial partner `Osimis <https://www.osimis.io>`__ also
   `publishes separated Docker images
-  <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__.
+  <https://hub.docker.com/repository/docker/osimis/orthanc>`__.
   These ``osimis/orthanc`` images are used by the technical team of
   Osimis in order to provide professional support to their customers,
   with a configuration system that can be tuned through environment
@@ -37,7 +37,8 @@ source code of the corresponding Docker images is available on `GitHub
   but they also include the :ref:`plugins edited by Osimis
   <plugins-osimis>`, notably the Osimis Web viewer (that is much more
   advanced than the Orthanc Web viewer) and the advanced authorization
-  plugin.
+  plugin.  A :ref:`specific page <docker-osimis>` is availble to describe 
+  how these images should be used.
 
 **Note for CentOS users:** The Docker environment might be difficult to
 configure on your platform. Hints are available on the `Orthanc Users
