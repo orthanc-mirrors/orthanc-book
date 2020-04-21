@@ -37,7 +37,7 @@ source code of the corresponding Docker images is available on `GitHub
   but they also include the :ref:`plugins edited by Osimis
   <plugins-osimis>`, notably the Osimis Web viewer (that is much more
   advanced than the Orthanc Web viewer) and the advanced authorization
-  plugin.  A :ref:`specific page <docker-osimis>` is availble to describe 
+  plugin. A :ref:`specific page <docker-osimis>` is available to describe 
   how these images should be used.
 
 **Note for CentOS users:** The Docker environment might be difficult to
