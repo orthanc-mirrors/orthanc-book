@@ -36,6 +36,12 @@ configuration in Orthanc.
 
 Note that these images have been re-written in April 2020.  The documentation
 for older images is still available `here <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages>`__
+The new images are backward compatible with the previous images except for the
+Google Cloud Platform configuration.  
+However, if you're still using legacy environment variables, you'll get some warning
+encouraging you to update to the new namings since the backward compatibility
+might be removed one day (currently planed in June 2021).
+
 
 Environmnent variables
 ----------------------
@@ -68,6 +74,9 @@ To find out a environment variable name from an Orthanc configuration
 - add ``ORTHANC__`` in front.  ``DICOM_WEB__STUDIES_METADATA`` now becomes
   ``ORTHANC__DICOM_WEB__STUDIES_METADATA``
 
+Note that, this automatic rule might fail because of 2 capital letters one after each other in some
+Orthanc configurations.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/env-var-non-standards.json>`__ to this rule 
+that are however quite intuitive.
 
 Special environment variables
 -----------------------------
@@ -84,7 +93,7 @@ but can be specified to control the way Orthanc is run.
 - ``NO_JOBS=true`` will start Orthanc with the ``--no-jobs`` option
 - ``UNLOCK=true`` will start Orthanc with the ``--unlock`` option
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
-
+- ``ORTHANC_JSON`` can be used to pass a json "root" configuration (see below).
 
 Configuration files
 -------------------
@@ -252,35 +261,58 @@ Below is a list of all plugins, their environment variable and their default con
 | **OsimisWebViewerBasic**                         | ``OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED``            |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 | **OsimisWebViewerBasicAlpha**                    | ``OSIMIS_WEB_VIEWER1_ALPHA_PLUGIN_ENABLED``      |                                                                                                    |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **PostgreSQL**                                   | ``POSTGRESQL_PLUGIN_ENABLED``                    | .. code-block:: json                                                                               |
-|                                                  |                                                  |                                                                                                    |
-|                                                  |                                                  |   {                                                                                                |
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **PostgreSQL**                                   | ``POSTGRESQL_PLUGIN_ENABLED``                    | .. code-block:: json                                                                               |        
+|                                                  |                                                  |                                                                                                    |        
+|                                                  |                                                  |   {                                                                                                |        
 |                                                  |                                                  |     "PostgreSQL": {                                                                                |
-|                                                  |                                                  |       "EnableIndex": true,                                                                         |
-|                                                  |                                                  |       "EnableStorage": false,                                                                      |
-|                                                  |                                                  |       "Port": 5432,                                                                                |
-|                                                  |                                                  |       "Host": "HOST MUST BE DEFINED",                                                              |
-|                                                  |                                                  |       "Database": "postgres",                                                                      |
+|                                                  |                                                  |       "EnableIndex": true,                                                                         |        
+|                                                  |                                                  |       "EnableStorage": false,                                                                      |        
+|                                                  |                                                  |       "Port": 5432,                                                                                |        
+|                                                  |                                                  |       "Host": "HOST MUST BE DEFINED",                                                              |        
+|                                                  |                                                  |       "Database": "postgres",                                                                      |        
 |                                                  |                                                  |       "Username": "postgres",                                                                      |
-|                                                  |                                                  |       "Password": "postgres",                                                                      |
-|                                                  |                                                  |       "EnableSsl": false,                                                                          |
-|                                                  |                                                  |       "Lock": false                                                                                |
-|                                                  |                                                  |     }                                                                                              |
-|                                                  |                                                  |   }                                                                                                |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **ServeFolders**                                 | ``SERVE_FOLDERS_PLUGIN_ENABLED``                 |                                                                                                    |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Transfers**                                    | ``TRANSFERS_PLUGIN_ENABLED``                     |                                                                                                    |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Worklists**                                    | ``WORKLISTS_PLUGIN_ENABLED``                     | .. code-block:: json                                                                               |
-|                                                  |                                                  |                                                                                                    |
-|                                                  |                                                  |   {                                                                                                |
-|                                                  |                                                  |     "Worklists": {                                                                                 |
-|                                                  |                                                  |       "Enable": true,                                                                              |
-|                                                  |                                                  |       "Database": "/var/lib/orthanc/worklists"                                                     |
-|                                                  |                                                  |     }                                                                                              |
-|                                                  |                                                  |   }                                                                                                |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Wsi**                                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |
-+--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
+|                                                  |                                                  |       "Password": "postgres",                                                                      |        
+|                                                  |                                                  |       "EnableSsl": false,                                                                          |        
+|                                                  |                                                  |       "Lock": false                                                                                |        
+|                                                  |                                                  |     }                                                                                              |        
+|                                                  |                                                  |   }                                                                                                |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **MySQL**                                        | ``MYSQL_PLUGIN_ENABLED``                         | .. code-block:: json                                                                               |        
+|                                                  |                                                  |                                                                                                    |        
+|                                                  |                                                  |   {                                                                                                |        
+|                                                  |                                                  |     "MySQL": {                                                                                     |        
+|                                                  |                                                  |       "EnableIndex": true,                                                                         |        
+|                                                  |                                                  |       "EnableStorage": false,                                                                      |        
+|                                                  |                                                  |       "Port": 3306,                                                                                |        
+|                                                  |                                                  |       "Host": "HOST MUST BE DEFINED",                                                              |        
+|                                                  |                                                  |       "Database": "mysql",                                                                         |        
+|                                                  |                                                  |       "Username": "root",                                                                          |        
+|                                                  |                                                  |       "Password": "mysql",                                                                         |        
+|                                                  |                                                  |       "Lock": false                                                                                |        
+|                                                  |                                                  |     }                                                                                              |        
+|                                                  |                                                  |   }                                                                                                |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **Python**                                       | ``PYTHON_PLUGIN_ENABLED``                        |                                                                                                    |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **ServeFolders**                                 | ``SERVE_FOLDERS_PLUGIN_ENABLED``                 |                                                                                                    |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **Transfers**                                    | ``TRANSFERS_PLUGIN_ENABLED``                     |                                                                                                    |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **Worklists**                                    | ``WORKLISTS_PLUGIN_ENABLED``                     | .. code-block:: json                                                                               |        
+|                                                  |                                                  |                                                                                                    |        
+|                                                  |                                                  |   {                                                                                                |        
+|                                                  |                                                  |     "Worklists": {                                                                                 |        
+|                                                  |                                                  |       "Enable": true,                                                                              |        
+|                                                  |                                                  |       "Database": "/var/lib/orthanc/worklists"                                                     |        
+|                                                  |                                                  |     }                                                                                              |        
+|                                                  |                                                  |   }                                                                                                |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+        
+| **Wsi**                                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |        
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+  
+Under the hood
+--------------
+
+The source code that is used to generate the image can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/Dockerfile>`__.
+
+The python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/generateConfiguration.py>`__
