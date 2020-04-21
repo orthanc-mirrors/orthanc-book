@@ -63,7 +63,9 @@ Read-only access
 
 Anybody has full read-only access to all of the Orthanc official
 repositories, on our `self-hosted server
-<https://hg.orthanc-server.com/>`__.
+<https://hg.orthanc-server.com/>`__. As the ``hg serve`` tool that is
+used by our Web server tends to be slow, we recommend people to
+locally clone our Mercurial repositories.
 
 .. highlight:: bash
 
