@@ -54,7 +54,7 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.6.0 at the time of
+* Make sure to use the latest release of Orthanc (1.6.1 at the time of
   writing).
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
@@ -134,9 +134,9 @@ HTTP server is heavily multi-threaded, and that many so-called `memory
 arenas <https://sourceware.org/glibc/wiki/MallocInternals>`__ are
 created by the glibc standard library (up to one per thread). As a
 consequence, if each one of the 50 threads in the HTTP server of
-Orthanc (this was the default value in Orthanc <= 1.6.0) allocates at
-some point, say, 50MB, the total memory usage reported as "VmRSS" can
-grow up to 50 threads x 50MB = 2.5GB, even if the Orthanc threads
+Orthanc (default value of the ``HttpThreadsCount`` option) allocates
+at some point, say, 50MB, the total memory usage reported as "VmRSS"
+can grow up to 50 threads x 50MB = 2.5GB, even if the Orthanc threads
 properly free all the buffers.
 
 .. highlight:: bash

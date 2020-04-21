@@ -6,7 +6,7 @@ Transcoding of DICOM files
 General information
 -------------------
 
-As of release 1.6.0, Orthanc does not feature support for transcoding
+As of release 1.6.1, Orthanc does not feature support for transcoding
 DICOM instances yet. In other words, the Orthanc core never changes
 the :ref:`transfer syntax <dicom-pixel-data>` of some DICOM instance
 when it has to send it to another modality using the DICOM protocol.

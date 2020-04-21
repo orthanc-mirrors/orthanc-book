@@ -187,7 +187,7 @@ To fully secure the DICOM protocol, you should:
   configuration of remote modalities.
   
 
-**Remark:** As of Orthanc 1.6.0, `DICOM TLS encryption
+**Remark:** As of Orthanc 1.6.1, `DICOM TLS encryption
 <https://www.dicomstandard.org/using/security/>`__ is not supported
 yet. We are looking for :ref:`an industrial sponsor <contributing>` to
 get this feature implemented, as it is useful in enterprise and cloud
