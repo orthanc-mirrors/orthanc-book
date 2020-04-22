@@ -61,7 +61,7 @@ too long.  That's why we have defined a standard way of naming the variable:
 | DicomWeb.Servers          | ORTHANC__DICOM_WEB__SERVERS                  | ``{"sample": [ "http://127.0.0.1/dicom-web/"]}``               |
 +---------------------------+----------------------------------------------+----------------------------------------------------------------+
 
-To find out a environment variable name from an Orthanc configuration
+To find out an environment variable name from an Orthanc setting
 (i.e. ``DicomWeb.StudiesMetadata`` is the ``path`` to a setting):
 
 - everytime a word contains a capital letter, insert an underscore ``_`` in front.
@@ -75,7 +75,7 @@ To find out a environment variable name from an Orthanc configuration
   ``ORTHANC__DICOM_WEB__STUDIES_METADATA``
 
 Note that, this automatic rule might fail because of 2 capital letters one after each other in some
-Orthanc configurations.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/env-var-non-standards.json>`__ to this rule 
+Orthanc settings.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/env-var-non-standards.json>`__ to this rule 
 that are however quite intuitive.
 
 Special environment variables
@@ -156,7 +156,7 @@ Docker secrets
 .. highlight:: yaml
 
 When using your container in a ``Docker Swarm`` or ``Kubernetes`` environment,
-it is usually to pass sensitive information through ``Docker Secrets``.
+it is usually advised to pass sensitive information through ``Docker Secrets``.
 For this purpose, any secret whose name is similar to the name of an 
 environment variable is considered as an environment variable::
 
