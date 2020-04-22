@@ -1,8 +1,12 @@
-.. highlight:: bash
 .. _https:
 
 HTTPS encryption with Orthanc
 =============================
+
+.. contents::
+
+Overview
+--------
 
 It is highly desirable to enable HTTPS (SSL) encryption with Orthanc
 to protect its REST API, as it provides access to medical
@@ -31,15 +35,143 @@ To enable the built-in HTTP server of Orthanc, you need to:
 3. Modify the ``SslEnabled`` and ``SslCertificate`` variables in the
    :ref:`Orthanc configuration file <configuration>`.
 
-Here are simple instructions to create a self-signed SSL certificate
-that is suitable for test environments with the `OpenSSL
+        
+Examples
+--------
+
+Securing Orthanc using self-signed certificate
+..............................................
+        
+.. highlight:: bash
+               
+Here are instructions to create a simple self-signed SSL certificate
+that is suitable for test environments thanks to the `OpenSSL
 <https://en.wikipedia.org/wiki/Openssl>`_ command-line tools::
 
-    $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
-    $ cat private.key certificate.crt > certificate.pem
+    $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/private.key -out /tmp/certificate.crt
+    $ cat /tmp/private.key /tmp/certificate.crt > /tmp/certificate.pem
 
-Some interesting references about this topic can be found `here
-<http://www.devsec.org/info/ssl-cert.html>`__, `here
-<https://www.akadia.com/services/ssh_test_certificate.html>`__, and
-`here
+**Important:** While invoking ``openssl``, make sure to set the option
+``Common Name (e.g. server FQDN or YOUR name)`` to the name of your
+server. For testing on your local computer, you would set this option
+to value ``localhost``.
+
+The file ``/tmp/certificate.crt`` can be publicly distributed. The
+files ``/tmp/private.key`` and ``/tmp/certificate.pem`` must be kept
+secret and must be stored securely.
+    
+Some interesting references about generating self-signed certificates
+can be found `here <http://www.devsec.org/info/ssl-cert.html>`__,
+`here <https://www.akadia.com/services/ssh_test_certificate.html>`__,
+and `here
 <https://stackoverflow.com/questions/991758/how-to-get-pem-file-from-key-and-crt-files>`__.
+
+.. highlight:: json
+               
+Once the certificate is generated, you can start Orthanc using the
+following minimal configuration file::
+
+  {
+    "SslEnabled" : true,
+    "SslCertificate" : "/tmp/certificate.pem"
+  }
+  
+        
+
+
+Querying Orthanc using HTTPS
+............................
+
+.. highlight:: txt
+
+If you contact Orthanc using a HTTP client, you will see that
+encryption is enabled::
+
+  $ curl http://localhost:8042/studies
+  curl: (52) Empty reply from server
+
+Nothing is returned from the Orthanc server using the HTTP protocol,
+as it must contacted using the HTTPS protocol. You have to provide the
+``https`` prefix::
+  
+  $ curl https://localhost:8042/studies
+  curl: (60) SSL certificate problem: self signed certificate
+  More details here: https://curl.haxx.se/docs/sslcerts.html
+
+  curl failed to verify the legitimacy of the server and therefore could not
+  establish a secure connection to it. To learn more about this situation and
+  how to fix it, please visit the web page mentioned above.
+
+The HTTPS client now complains, as it was not provided with our
+self-signed certificate. For the query to succeed, you must provide
+the public certificate ``/tmp/certificate.crt`` that was generated
+above to the HTTPS client::
+
+  $ curl --cacert /tmp/certificate.crt https://localhost:8042/studies
+  [ "66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e" ]
+  
+  
+Configuring Orthanc peers
+.........................
+
+.. highlight:: json
+
+Let us configure a second instance of Orthanc on the localhost that
+will act as a client (i.e., an :ref:`Orthanc peer <peers>`) to the
+HTTPS-protected Orthanc server. One would create the following
+configuration file::
+
+  {
+    "HttpPort" : 8043,
+    "DicomPort" : 4343,
+    "OrthancPeers" : {
+      "https" : [ "https://localhost:8042/" ]
+    }
+  }
+
+
+.. highlight:: bash
+
+The values of the ``HttpPort`` and ``DicomPort`` options are set to
+non-default values in order to avoid a collision with the
+HTTPS-protected Orthanc. Let us now trigger a query from our Orthanc
+client to the Orthanc server using the REST API of the Orthanc
+client::
+
+  $ curl http://localhost:8043/peers/https/system
+  {
+    "Details" : "libCURL error: Problem with the SSL CA cert (path? access rights?)",
+    "HttpError" : "Internal Server Error",
+    "HttpStatus" : 500,
+    [...]
+  }
+
+.. highlight:: json
+
+Just like the cURL command-line client, the Orthanc client complains
+about the fact it wasn't provided with the HTTPS public certificate.
+The certificate must be provided by adapting the configuration file as
+follows::
+
+ {
+    "HttpPort" : 8043,
+    "DicomPort" : 4343,
+    "HttpsCACertificates" : "/tmp/certificate.crt",
+    "OrthancPeers" : {
+      "https" : [ "https://localhost:8042/" ]
+    }
+  }
+
+
+.. highlight:: bash
+
+Using this new configuration, the query will succeed::
+
+  $ curl http://localhost:8043/peers/https/system
+  {
+    "ApiVersion" : 6,
+    "DicomAet" : "ORTHANC",
+    "DicomPort" : 4242,
+    "HttpPort" : 8042,
+    [...]
+  }
