@@ -41,7 +41,7 @@ provide a configuration system through:
 
 This `repository <https://bitbucket.org/osimis/orthanc-setup-samples/src>`__
 contains lots of examples on how to use these images.  In particular,
-`this example <https://bitbucket.org/osimis/orthanc-setup-samples/src/new-images/docker/all-usages/docker-compose.yml>`__ 
+`this example <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/all-usages/docker-compose.yml>`__ 
 shows all the way that can be used to generate the same
 configuration in Orthanc.
 
