@@ -9,7 +9,18 @@ Osimis Orthanc Docker images
    :depth: 3
 
 
-.. warning:: this is a preliminary documentation for images that are not publicly available yet
+.. warning:: This documentation applies to ``osimis/orthanc`` images from the ``20.4.2`` version.  
+  
+  Note that these images have been re-written in April 2020.  The documentation
+  for older images is still available `here <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages>`__
+  
+  The new images are backward compatible with the previous images except for the
+  Google Cloud Platform configuration.  
+  
+  However, if you're still using legacy environment variables, you'll get some warning
+  encouraging you to update to the new namings since the backward compatibility
+  might be removed one day (currently planed in June 2021).
+
 
 Introduction
 ------------
@@ -33,14 +44,6 @@ contains lots of examples on how to use these images.  In particular,
 `this example <https://bitbucket.org/osimis/orthanc-setup-samples/src/new-images/docker/all-usages/docker-compose.yml>`__ 
 shows all the way that can be used to generate the same
 configuration in Orthanc.
-
-Note that these images have been re-written in April 2020.  The documentation
-for older images is still available `here <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages>`__
-The new images are backward compatible with the previous images except for the
-Google Cloud Platform configuration.  
-However, if you're still using legacy environment variables, you'll get some warning
-encouraging you to update to the new namings since the backward compatibility
-might be removed one day (currently planed in June 2021).
 
 
 Environmnent variables
@@ -75,7 +78,7 @@ To find out an environment variable name from an Orthanc setting
   ``ORTHANC__DICOM_WEB__STUDIES_METADATA``
 
 Note that, this automatic rule might fail because of 2 capital letters one after each other in some
-Orthanc settings.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/env-var-non-standards.json>`__ to this rule 
+Orthanc settings.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/env-var-non-standards.json>`__ to this rule 
 that are however quite intuitive.
 
 Special environment variables
@@ -313,6 +316,6 @@ Below is a list of all plugins, their environment variable and their default con
 Under the hood
 --------------
 
-The source code that is used to generate the image can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/Dockerfile>`__.
+The source code that is used to generate the image can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/Dockerfile>`__.
 
-The python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/orthanc-dyn-build/docker/orthanc/generateConfiguration.py>`__
+The python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/generateConfiguration.py>`__
