@@ -470,7 +470,7 @@ also entire patients, studies or series. It is possible to send multiple instanc
 request::
 
     $ curl -X POST http://localhost:8042/peers/sample/store -d '["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88","d5604121-7d613ce6-c315a5-a77b3cf3-9c253b23","cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e"]'
-
+     
 Note that the list of resources to be sent can include the
 :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
 studies or series as well.
@@ -509,8 +509,8 @@ If you want your server to accept incoming connections for known hosts only, you
 
 
 
-Sending resources to remote modalities (through DICOM)
-------------------------------------------------------
+Sending resources to remote modalities (through DICOM C-Store)
+--------------------------------------------------------------
 
 Orthanc can send its DICOM instances to remote DICOM modalities (C-Store SCU). This process
 can be triggered by the REST API.
@@ -584,6 +584,20 @@ the remote modality, as specified above in the configuration file.
 Note that you can send isolated DICOM instances with this command, but
 also entire patients, studies or series.
 
+Various optional fields are also available::
+
+    $ curl -X POST http://localhost:8042/modalities/sample/store \
+      --data '{
+                "Resources" : ["d4b46c8e-74b16992-b0f5ca11-f04a60fa-8eb13a88"],
+                "Synchronous" : false,
+                "LocalAet" : "ORTHANC",
+                "MoveOriginatorAet": "ORTHANC",
+                "MoveOriginatorID": 1234,
+                "Timeout": 10,
+                "StorageCommitment": false
+              }'
+
+
 Bulk Store SCU
 ^^^^^^^^^^^^^^
 
@@ -618,9 +632,50 @@ To circumvent this problem, you have 2 possibilities:
    studies or series as well.
 
 
+Performing C-Echo
+-----------------
 
-Performing Query/Retrieve and Find with REST
---------------------------------------------
+To validate the DICOM connectivity between Orthanc and a remote modality,
+you can perform a C-ECHO::
+
+    $ curl -X POST http://localhost:8042/modalities/sample/echo -d ''
+
+From Orthanc 1.7.0, you can include an extra ``Timeout`` field.
+
+    $ curl -X POST http://localhost:8042/modalities/sample/echo -d '{ "Timeout": 10 }'
+
+If no ``Timeout`` parameter is specified, the value of the ``DicomScuTimeout``
+configuration is used as a default.  If ``Timeout`` is set to zero, this means 
+no timeout.
+
+
+Performing C-Move
+-----------------
+
+.. highlight:: bash
+
+You can perform a DICOM C-Move to move a specific study from one modality 
+to another (including Orthanc itself if you don't specify the ``TargetAet`` 
+field).  
+
+I.e. to move a study whose you know the ``StudyInstanceUID`` from
+the modality ``sample`` to another Orthanc whose AET is ``ORTHANCB``::
+
+  $ curl --request POST --url http://localhost:8042/modalities/samples/move \
+    --data '{ 
+              "Level" : "Study", 
+              "Resources" : [ 
+                { 
+                  "StudyInstanceUID": "1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129" 
+                } 
+              ], 
+              "TargetAet": "ORTHANCB",
+              "Timeout": 60 
+            }'
+
+
+Performing Query/Retrieve (C-Find) and Find with REST
+-----------------------------------------------------
 
 *Section contributed by Bryan Dearlove*
 
@@ -646,7 +701,14 @@ configuration file::
 
      $ curl --request POST \
        --url http://localhost:8042/modalities/sample/query \
-       --data '{"Level":"Study","Query": {"PatientID":"","StudyDescription":"*Chest*","PatientName":""}}'
+       --data '{
+                 "Level" : "Study",
+                 "Query" : {
+                   "PatientID" : "",
+                   "StudyDescription" : "*Chest*",
+                   "PatientName" : ""
+                 }
+               }'
 
 You might be interested in including the ``Normalize`` option to bypass
 the normalization of the outgoing C-FIND queries. For instance, for
@@ -783,6 +845,7 @@ The answer of this POST request is the job ID taking care of the C-Move::
   }
 
 
+
 .. _rest-find:
 
 Performing Finds within Orthanc
@@ -796,7 +859,15 @@ ID's of all the matched items within your find. For example if you
 perform a study level find and 5 Studies match you will receive 5
 study level Orthanc ID's in JSON format as a response::
 
-  $ curl --request POST --url http://localhost:8042/tools/find --data '{"Level":"Instance","Query":{"Modality":"CR","StudyDate":"20180323-","PatientID":"*"}}'
+  $ curl --request POST --url http://localhost:8042/tools/find \
+    --data '{
+              "Level" : "Instance",
+              "Query" : {
+                "Modality" : "CR",
+                "StudyDate" : "20180323-",
+                "PatientID" : "*"
+              }
+            }'
 
 Setting the ``Expand`` field to ``true`` in the POST body of the
 query will automatically report details about each study::
