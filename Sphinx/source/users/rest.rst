@@ -584,6 +584,14 @@ the remote modality, as specified above in the configuration file.
 Note that you can send isolated DICOM instances with this command, but
 also entire patients, studies or series.
 
+For more advanced uses (for instance if you need to monitor the state
+of a transfer), you can start the transfer in :ref:`asynchronous mode
+<jobs>`, which will provide you with the identifier of the Orthanc job
+that handles the transfer::
+
+  $ curl -X POST http://localhost:8042/modalities/sample/store -d '{"Resources":["66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e"],"Synchronous":false}'
+
+
 Bulk Store SCU
 ^^^^^^^^^^^^^^
 
