@@ -152,6 +152,7 @@ the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
       image: jodogne/orthanc-plugins:1.6.1
       command: /run/secrets/  # Path to the configuration files (stored as secrets)
       ports:
+        - 4242:4242
         - 8042:8042
       secrets:
         - orthanc.json      

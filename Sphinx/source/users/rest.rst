@@ -597,6 +597,9 @@ Various optional fields are also available::
                 "StorageCommitment": false
               }'
 
+For more advanced uses (for instance if you need to monitor the state
+of a transfer), you can start the transfer in :ref:`asynchronous mode
+<jobs>`, which will provide you with the identifier of the Orthanc job.
 
 Bulk Store SCU
 ^^^^^^^^^^^^^^
