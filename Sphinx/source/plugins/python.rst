@@ -108,6 +108,9 @@ You'll see the following excerpt in the log, which indicates that the Python plu
   Hello world!
 
 
+`Here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/python/>`__ is a full example
+of a more complex setup using the :ref:`osimis/orthanc <docker-osimis>` images.
+
 Compiling from source
 .....................
 
