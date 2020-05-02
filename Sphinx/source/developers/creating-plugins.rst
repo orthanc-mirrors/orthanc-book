@@ -37,6 +37,11 @@ Here are some resources about creating C/C++ plugins:
   <https://github.com/mbarnig/RadioLogic/wiki#user-content-orthanc-plugin-development>`__
   as part of his `RadioLogic project
   <https://github.com/mbarnig/RadioLogic/>`__.
+
+* Technical workshop about "`Writing an Orthanc C++ plugin
+  <https://bitbucket.org/bgo-osimis/orcon19-plugin-workshop/>`__"
+  presented by Benjamin Golinvaux at `OrthancCon 2019
+  <https://www.orthanc-server.com/static.php?page=conference-schedule>`__.
   
 We suggest developers to adopt the :ref:`coding style of the Orthanc
 core <coding-style>`, although this is of course not required.
