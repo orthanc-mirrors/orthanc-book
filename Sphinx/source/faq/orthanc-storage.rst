@@ -68,13 +68,13 @@ Direct access
 -------------
 
 Directly accessing the content of the ``OrthancStorage`` folder and
-the content of the SQLite database is strongly discouraged for several
-reasons:
+the content of the SQLite/MySQL/PostgreSQL database is strongly
+discouraged for several reasons:
 
-* This internal organization is only true when no database plugin is
-  used (e.g. the :ref:`PostgreSQL <postgresql>` and :ref:`MySQL
-  <mysql>` plugins can be configured to store the attachments inside a
-  database).
+* The internal organization outlined above is only true when no
+  database plugin is used (e.g. the :ref:`PostgreSQL <postgresql>` and
+  :ref:`MySQL <mysql>` plugins can be configured to store the
+  attachments inside a database).
 * Orthanc can be configured to compress the attachments before writing
   them on the disk (cf. the ``StorageCompression`` option).
 * By directly reading the content of ``OrthancStorage``, you bypass
@@ -87,9 +87,10 @@ reasons:
   receives the ``SQLITE_BUSY`` status.
 
 As a consequence, it is **HIGHLY recommended NOT to directly access**
-the ``OrthancStorage`` folder and the SQLite database. Use the
-:ref:`REST API <rest>` instead, which contains primitives to access
-the attachments (cf. the ``.../attachments/...`` URIs).
+the ``OrthancStorage`` folder and the SQLite/MySQL/PostgreSQL
+database. Use the :ref:`REST API <rest>` instead, which contains
+primitives to access the attachments (cf. the ``.../attachments/...``
+URIs).
 
 The only exception to this rule is for **read-only access when Orthanc
 is stopped**, e.g. as a part of a :ref:`backup <backup>` or
