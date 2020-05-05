@@ -43,6 +43,12 @@ The actual implementation of the hashing is carried on by the
 `DicomInstanceHasher class
 <https://hg.orthanc-server.com/orthanc/file/default/Core/DicomFormat/DicomInstanceHasher.cpp>`_.
 
+If two different instances have the same Orthanc identifier, only one
+of them is kept. By default, the first instance that was received by
+Orthanc is kept. You can choose to replace the first instance by the
+second instance by setting :ref:`configuration option <configuration>`
+``OverwriteInstances`` to ``true``.
+
 
 The "Inexistent Tag" error
 --------------------------
