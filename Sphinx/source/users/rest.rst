@@ -384,7 +384,7 @@ Users of Matlab or Octave can find related information :ref:`in the
 dedicated section <matlab>`.
 
 Downloading studies
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: bash
 

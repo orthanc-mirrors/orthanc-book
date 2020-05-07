@@ -21,6 +21,7 @@ General questions
    faq/proprietary.rst
    faq/security.rst
    faq/debugging.rst
+   faq/transcoding.rst
 
 Features supported by Orthanc
 -----------------------------
@@ -56,6 +57,5 @@ Specific FAQs
    faq/orthanc-storage.rst
    faq/authentication.rst
    faq/crash.rst
-   faq/transcoding.rst
    faq/dcmtk-tricks.rst
    faq/why-orthanc.rst

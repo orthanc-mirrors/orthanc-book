@@ -3,6 +3,27 @@
 Transcoding of DICOM files
 ==========================
 
+.. contents::
+
+
+Work-in-progress
+----------------
+
+Forthcoming Orthanc 1.7.0 will feature transcoding. The information in
+the sections below will thus soon become invalid!
+
+To be documented for Orthanc 1.7.0:
+
+* Explanation of DICOM protocol (transparent transcoding from
+  compressed transfer syntaxes to uncompressed transfer syntaxes).
+  
+  * ``TranscodingEnabled`` global configuration option
+
+  * ``AllowTranscoding`` in ``DicomModalities`` configuration option
+
+* ``/instances/.../modify`` route: ``Transcode`` option
+
+
 General information
 -------------------
 
