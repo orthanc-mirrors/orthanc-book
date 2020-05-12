@@ -571,9 +571,9 @@ corresponds to the initiation of a query/retrieve:
 popular and widespread way to initiate a query/retrieve against a PACS
 server. The DICOM standard features an `alternative mechanism called
 C-Get
-<http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`_.
-As of Orthanc 1.4.1, C-Get is not supported yet (but work is in
-progress).
+<http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`_
+that has been introduced in Orthanc 1.7.0 (see below).
+
 
 *Note 2:* As :ref:`written above <dicom-pixel-data>`, the Orthanc
 engine is quite generic and is compatible with virtually any image
@@ -589,6 +589,26 @@ unusable by such software. You might therefore have to **disable
 transfer syntaxes** by setting the ``*TransferSyntaxAccepted`` options
 to ``false`` in the :ref:`configuration file of Orthanc
 <configuration>` (by default, all the transfer syntaxes are enabled).
+
+
+.. _dicom-get:
+
+C-Get: retrieve
+^^^^^^^^^^^^^^^
+
+Once you know that a DICOM resource is available on a particular
+DICOM node, you may retrieve it directly without performing a C-Find
+before.  This can be done once you know one ore more of the unique
+key attributes (``PatientID``, ``StudyInstanceUID``, ``SeriesInstanceUID``
+or ``SOPInstanceUID``).
+
+As of Orthanc 1.7.0, Orthanc implements C-Get as a service provider (SCP)
+but not as a service user (SCU).  One way to use the C-Get against an 
+Orthanc is by using the `DCMTK <https://support.dcmtk.org/docs/dcmconv.html>`__ toolkit::
+
+    $ getscu -v localhost 4242 -aec ORTHANC -k "000d,0020=1.2...." -k "0008,0052=STUDY"
+
+
 
 
 
