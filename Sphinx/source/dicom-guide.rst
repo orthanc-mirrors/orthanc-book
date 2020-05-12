@@ -606,7 +606,7 @@ As of Orthanc 1.7.0, Orthanc implements C-Get as a service provider (SCP)
 but not as a service user (SCU).  One way to use the C-Get against an 
 Orthanc is by using the `DCMTK <https://support.dcmtk.org/docs/dcmconv.html>`__ toolkit::
 
-    $ getscu -v localhost 4242 -aec ORTHANC -k "000d,0020=1.2...." -k "0008,0052=STUDY"
+    $ getscu -v localhost 4242 -aec ORTHANC -k "0020,000d=1.2...." -k "0008,0052=STUDY"
 
 
 

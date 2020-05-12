@@ -154,7 +154,7 @@ To fully secure the DICOM protocol, you should:
 * For each modality that is defined in ``DicomModalities``,
   selectively specify what DICOM commands are allowed to be issued by
   the SCU of this modality by setting the suboptions ``AllowEcho``,
-  ``AllowFind``, ``AllowMove`` and ``AllowStore``. For instance, a
+  ``AllowFind``, ``AllowMove``, ``AllowStore`` and ``AllowGet``. For instance, a
   modality could be allowed to C-STORE images, but be disallowed to
   C-FIND the content of Orthanc. Here is a sample configuration to
   define a single modality that is only allowed to send DICOM
@@ -169,6 +169,7 @@ To fully secure the DICOM protocol, you should:
           "AllowEcho" : false,
           "AllowFind" : false,
           "AllowMove" : false,
+          "AllowGet" : false,
           "AllowStore" : true
         }
       }
