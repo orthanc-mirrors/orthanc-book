@@ -17,7 +17,7 @@ Compilation
 
 .. highlight:: bash
 
-The procedure to compile these plugins is similar of that for the
+The procedure to compile this plugin is similar of that for the
 :ref:`core of Orthanc <binaries>`. The following commands should work
 for every UNIX-like distribution (including GNU/Linux)::
 
@@ -33,7 +33,7 @@ Microsoft Windows `are also available
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
-<https://hg.orthanc-server.com/orthanc-webviewer/file/tip/Resources/BuildInstructions.txt>`__.
+<https://hg.orthanc-server.com/orthanc-webviewer/file/default/Resources/BuildInstructions.txt>`__.
 
 
 Usage
@@ -96,8 +96,7 @@ The configuration of the Web viewer can be fine-tuned by adding some options::
     "WebViewer" : {
       "CachePath" : "WebViewerCache",
       "CacheSize" : 10,
-      "Threads" : 4,
-      "EnableGdcm" : false
+      "Threads" : 4
     }
   }
 
@@ -108,22 +107,37 @@ The configuration of the Web viewer can be fine-tuned by adding some options::
   megabytes. By default, a cache of 100 MB is used.
 * ``Threads`` specifies the number of threads that are used by the
   plugin to decode the DICOM images.
-* ``EnableGdcm`` specifies whether `GDCM
+
+
+Old advanced options (up to 2.5)
+--------------------------------
+
+Up to release 2.5 of the Orthanc Web Viewer plugin, the plugin was
+shipping a decoder of DICOM images using the GDCM library. In May
+2020, the support of GDCM has been :ref:`moved as a separate plugin
+<gdcm>`. As a consequence, releases up to 2.5 had two more advanced
+options, that were removed starting with version 3.0:
+  
+* ``EnableGdcm`` specified whether `GDCM
   <https://sourceforge.net/projects/gdcm/>`__ should be used to decode
   DICOM images, replacing the built-in decoder of Orthanc that
   internally uses `DCMTK <https://dicom.offis.de/dcmtk.php.en>`__.
-  This is notably necessary to deal with DICOM images encoded using
+  This was notably necessary to deal with DICOM images encoded using
   `JPEG2000 <https://en.wikipedia.org/wiki/JPEG_2000>`__, as this
-  format is not readily supported by the core version of DCMTK.  By
-  default, this option is set to ``true``.
+  format is not readily supported by the core version of DCMTK. By
+  default, this option was set to ``true``.
 
-As a complement to the ``EnableGdcm`` option, you also have the
-possibility to restrict the GDCM decoder to some specific `transfer
-syntaxes
-<http://dicom.nema.org/medical/dicom/current/output/html/part05.html#chapter_10>`__
-using the ``RestrictTransferSyntaxes`` option.  For instance, the
-following configuration would use GDCM to decode JPEG 2000 images,
-while using DCMTK to decode the other transfer syntaxes::
+* As a complement to the ``EnableGdcm`` option, it was also possible
+  to restrict the GDCM decoder to some specific `transfer syntaxes
+  <http://dicom.nema.org/medical/dicom/current/output/html/part05.html#chapter_10>`__
+  using the ``RestrictTransferSyntaxes`` option.
+
+  
+.. highlight:: json
+
+For instance, the following configuration would enable GDCM to decode
+JPEG 2000 images, while using DCMTK to decode the other transfer
+syntaxes::
 
   {
     [...]

@@ -17,11 +17,13 @@ To be documented for Orthanc 1.7.0:
 * Explanation of DICOM protocol (transparent transcoding from
   compressed transfer syntaxes to uncompressed transfer syntaxes).
   
-  * ``TranscodingEnabled`` global configuration option
+  * ``TranscodeDicomProtocol`` global configuration option
 
   * ``AllowTranscoding`` in ``DicomModalities`` configuration option
 
 * ``/instances/.../modify`` route: ``Transcode`` option
+
+* Routes to create archives: ``Transcode`` option
 
 
 General information
