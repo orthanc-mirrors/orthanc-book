@@ -121,10 +121,10 @@ The configuration of the GDCM plugin can be fine-tuned by adding some options::
   the same Orthanc server. By default, no throttling is applied, and
   an unrestricted number of threads can call GDCM simultaneously.
 
-* ``BuiltinDecoderTranscoderOrder`` is a configuration option of the
-  Orthanc core (i.e. outside of the ``Gdcm`` section) that can be used
-  to control whether the built-in DCMTK decoder/transcoder is applied
-  before or after GDCM.
+* Starting with Orthanc 1.7.0, ``BuiltinDecoderTranscoderOrder`` is a
+  configuration option of the Orthanc core (i.e. outside of the
+  ``Gdcm`` section) that can be used to control whether the built-in
+  DCMTK decoder/transcoder is applied before or after GDCM.
 
 As a complement to the ``Enable`` option, you also have the
 possibility to restrict the GDCM decoder/transcoder to some specific
