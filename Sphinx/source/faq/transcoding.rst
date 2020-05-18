@@ -23,6 +23,10 @@ To be documented for Orthanc 1.7.0:
 
 * ``/instances/.../modify`` route: ``Transcode`` option
 
+* ``IngestTranscoding``
+
+* ``BuiltinDecoderTranscoderOrder``
+
 * Routes to create archives: ``Transcode`` option
 
 
