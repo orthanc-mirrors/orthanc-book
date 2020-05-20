@@ -62,6 +62,7 @@ From Osimis
 * :ref:`transfers`
 * :ref:`google`    
 * :ref:`python-plugin`    
+* :ref:`gdcm`    
 
 .. _plugins-contributed:
 
