@@ -289,7 +289,8 @@ allows to:
 2. **Send images** from the local imaging device to a remote device
    (:ref:`C-Store <dicom-store>`).
 3. **Search the content** of a remote device (:ref:`C-Find <dicom-find>`).
-4. **Retrieve images** from a remote device (:ref:`C-Move <dicom-move>`).
+4. **Retrieve images** from a remote device (:ref:`C-Move
+   <dicom-move>` or :ref:`C-Get <dicom-get>`).
 
 Here is a picture that summarizes some key concepts:
 
@@ -569,11 +570,9 @@ corresponds to the initiation of a query/retrieve:
 
 *Note 1:* Even if C-Move may seem counter-intuitive, this is the most
 popular and widespread way to initiate a query/retrieve against a PACS
-server. The DICOM standard features an `alternative mechanism called
-C-Get
-<http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`_.
-As of Orthanc 1.4.1, C-Get is not supported yet (but work is in
-progress).
+server. The DICOM standard features an alternative mechanism called
+:ref:`DICOM C-Get <dicom-get>` that has been introduced in Orthanc
+1.7.0 (see below).
 
 *Note 2:* As :ref:`written above <dicom-pixel-data>`, the Orthanc
 engine is quite generic and is compatible with virtually any image
@@ -589,6 +588,57 @@ unusable by such software. You might therefore have to **disable
 transfer syntaxes** by setting the ``*TransferSyntaxAccepted`` options
 to ``false`` in the :ref:`configuration file of Orthanc
 <configuration>` (by default, all the transfer syntaxes are enabled).
+
+
+.. _dicom-get:
+
+C-Get: Retrieve with one single SCP
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Orthanc 1.7.0 introduces support for `DICOM C-Get SCP
+<http://dclunie.blogspot.be/2016/05/to-c-move-is-human-to-c-get-divine.html>`__.
+C-Get provides a simpler alternative to C-Move, in the case where the
+*issuer* and the *target* (as depicted in the section about
+:ref:`C-Move <dicom-move>`) correspond to the same modality.
+
+In the case of C-Get, contrarily to C-Move, the *target* modality
+doesn't need to act as a C-Store SCP. This has advantage of
+simplifying the design of the SCU (only one DICOM server is needed in
+the *source* modality), and to ease the network configuration (instead
+of being bidirectional as in query/retrieve through C-Move, C-Get is
+unidirectional from *issuer* to *source*, which simplifies firewall
+rules). Nevertheless, C-Get is less generic than C-Move and is rarely
+encountered in clinical PACS workflow. It is more often used by DICOM
+viewers. Also note that :ref:`DICOMweb WADO-RS <dicomweb>` is designed
+for the same kind of use cases than C-Get.
+
+To retrieve DICOM instances using C-Get, you must provide one ore more
+of the unique key attributes (``PatientID``, ``StudyInstanceUID``,
+``SeriesInstanceUID`` or ``SOPInstanceUID``). This information can for
+instance be retrieved through a :ref:`C-Find request <dicom-find>`.
+
+.. highlight:: json
+               
+As an example, let us consider the following minimalist :ref:`Orthanc
+configuration <configuration>`::
+
+  {
+    "DicomModalities" : {
+      "getscu" : [ "GETSCU", "localhost", 2000 ]
+    }
+  }
+
+.. highlight:: text
+               
+Given this configuration, here is a sample command-line to call the
+C-Get SCP of Orthanc using the `DCMTK
+<https://support.dcmtk.org/docs/dcmconv.html>`__ toolkit, given some
+known ``StudyInstanceUID``::
+
+    $ getscu -v localhost 4242 -aec ORTHANC -k "0008,0052=STUDY" -k "0020,000d=1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129"
+
+*Note:* As of Orthanc 1.7.0, Orthanc implements C-Get as a service
+provider (SCP) but not as a service user (SCU).
 
 
 
