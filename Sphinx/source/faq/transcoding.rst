@@ -27,6 +27,8 @@ To be documented for Orthanc 1.7.0:
 
 * ``BuiltinDecoderTranscoderOrder``
 
+* ``DicomLossyCompressionLevel``
+
 * Routes to create archives: ``Transcode`` option
 
 
