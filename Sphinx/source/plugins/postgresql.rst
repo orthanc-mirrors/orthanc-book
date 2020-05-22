@@ -248,7 +248,7 @@ of database transactions, which is necessary to deal with conflicts
 between several instances of Orthanc that would simultaneously write
 to the database.
 
-As a consequence, as of Orthanc 1.6.1, when connecting multiple
+As a consequence, as of Orthanc 1.7.0, when connecting multiple
 Orthanc to a single database by setting ``Lock`` to ``false``, there
 should only be one instance of Orthanc acting as a writer and all the
 other instances of Orthanc acting as readers only. Be careful to set
