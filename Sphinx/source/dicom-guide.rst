@@ -112,14 +112,19 @@ In practice, few imaging devices in hospitals (besides the `PACS
 <https://en.wikipedia.org/wiki/Picture_archiving_and_communication_system>`__
 itself) support image compression. As a consequence, to ensure best
 portability, the pixel data of most DICOM files circulating in
-hospitals is **uncompressed**. In other words, the image is encoded as
-a raw buffer, with a given width, height, pixel type (integer or
-float), `color depth <https://en.wikipedia.org/wiki/Color_depth>`__
-(most often 8, 10, 12 bpp - *bits per pixel*) and photometric
-interpretation (most often grayscale or RGB). The transfer syntax that
-is associated with such uncompressed images can either be `little
-endian <https://fr.wikipedia.org/wiki/Endianness>`__ (the most common
-case) or big endian.
+hospitals is generally **uncompressed**. In other words, the image is
+encoded as a raw buffer, with a given width, height, pixel type
+(integer or float), `color depth
+<https://en.wikipedia.org/wiki/Color_depth>`__ (most often 8, 10, 12
+bpp - *bits per pixel*) and photometric interpretation (most often
+grayscale or RGB). The transfer syntax that is associated with such
+uncompressed images can either be `little endian
+<https://fr.wikipedia.org/wiki/Endianness>`__ (the most common case)
+or big endian (retired in recent versions of the DICOM standard).
+
+The process of converting one DICOM instance from some transfer syntax
+to another one is referred to as **transcoding**. The topic of
+transcoding is covered in a :ref:`separate FAQ entry <transcoding>`.
 
 A DICOM image can be **multi-frame**, meaning that it encodes an array
 of different image frames. This is for instance used to encode
@@ -575,19 +580,18 @@ server. The DICOM standard features an alternative mechanism called
 1.7.0 (see below).
 
 *Note 2:* As :ref:`written above <dicom-pixel-data>`, the Orthanc
-engine is quite generic and is compatible with virtually any image
-compression algorithm (aka. transfer syntax). In particular, during
-the :ref:`negotiation of a presentation context
+engine is quite generic and is compatible with many image compression
+algorithms (aka. transfer syntax). In particular, during the
+:ref:`negotiation of a presentation context
 <dicom-protocol-overview>`, Orthanc reports by default that it is
 compatible with the JPEG 2000 encoding. This leads some PACS engines
 to compress their images before sending them to Orthanc, so as to
 reduce the network bandwidth. Unfortunately, because many medical
 image analysis software are not compatible with such an image
-compression, the JPEG 2000 image that is received by Orthanc might be
-unusable by such software. You might therefore have to **disable
-transfer syntaxes** by setting the ``*TransferSyntaxAccepted`` options
-to ``false`` in the :ref:`configuration file of Orthanc
-<configuration>` (by default, all the transfer syntaxes are enabled).
+compression, the JPEG 2000 image that is received by Orthanc might not
+be usable by such software. Check out the :ref:`FAQ about DICOM
+transcoding <transcoding>` for more information about converting
+between transfer syntaxes over the DICOM protocol.
 
 
 .. _dicom-get:

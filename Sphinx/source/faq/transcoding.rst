@@ -6,44 +6,20 @@ Transcoding of DICOM files
 .. contents::
 
 
-Work-in-progress
-----------------
-
-Forthcoming Orthanc 1.7.0 will feature transcoding. The information in
-the sections below will thus soon become invalid!
-
-To be documented for Orthanc 1.7.0:
-
-* Explanation of DICOM protocol (transparent transcoding from
-  compressed transfer syntaxes to uncompressed transfer syntaxes).
-  
-  * ``TranscodeDicomProtocol`` global configuration option
-
-  * ``AllowTranscoding`` in ``DicomModalities`` configuration option
-
-* ``/instances/.../modify`` route: ``Transcode`` option
-
-* ``IngestTranscoding``
-
-* ``BuiltinDecoderTranscoderOrder``
-
-* ``DicomLossyCompressionLevel``
-
-* Routes to create archives: ``Transcode`` option
-
-
 General information
 -------------------
 
-As of release 1.6.1, Orthanc does not feature support for transcoding
-DICOM instances yet. In other words, the Orthanc core never changes
-the :ref:`transfer syntax <dicom-pixel-data>` of some DICOM instance
-when it has to send it to another modality using the DICOM protocol.
+**DICOM transcoding** refers to the process of changing the
+:ref:`transfer syntax <dicom-pixel-data>` of some DICOM instance.
 
-Adding support for transcoding is one of the features that is pending
-on `our roadmap
-<https://hg.orthanc-server.com/orthanc/file/default/TODO>`__, and for which 
-we are looking for industrial sponsors.
+Transcoding can be used to **compress** DICOM images, which is useful
+to reduce the required storage area or to optimize the network
+bandwidth for exchanges between sites. Conversely, transcoding can be
+used to **uncompress** DICOM images, which is needed as many DICOM
+viewers or specialized analysis software do not provide support for
+compressed transfer syntaxes.
+
+Support for transcoding was introduced in Orthanc 1.7.0. 
 
 
 Motivation for transcoding
@@ -80,23 +56,62 @@ it: As a vendor neutral archive, Orthanc can basically
 receive/store/transmit any DICOM transfer syntax. Unfortunately, this
 might not be the case of the target workstation, that is often limited
 to some selected transfer syntaxes. As a consequence, the workstation
-will complain about not being to read the DICOM file (in the situation
+will complain about not being to use the DICOM file (in the situation
 depicted above, because the PACS has decided to send the DICOM image
 using the JPEG2k transfer syntax).
 
 
-Solutions
----------
+Transcoding in Orthanc
+----------------------
 
-There are basically 4 solutions to this issue. The first one, as
-stated above, would be to **implement transcoding in Orthanc**. Feel
-free to `get in touch with us
-<https://www.orthanc-server.com/orthanc-pro.php>`__ if you want to
-sponsor this development.
+Orthanc 1.7.0 was the first release of Orthanc to feature built-in
+support for DICOM transcoding.
 
-The second solution consists in making Orthanc **refuse to accept the
-transfer syntaxes** that are not supported by the workstation. This
-is depicted in the following diagram:
+
+
+* Explanation of DICOM protocol (transparent transcoding from
+  compressed transfer syntaxes to uncompressed transfer syntaxes).
+  
+  * ``TranscodeDicomProtocol`` global configuration option
+
+  * ``AllowTranscoding`` in ``DicomModalities`` configuration option
+
+* ``/instances/.../modify`` route: ``Transcode`` option
+
+* ``IngestTranscoding``
+
+* ``BuiltinDecoderTranscoderOrder``
+
+* ``DicomLossyCompressionLevel``
+
+* Routes to create archives: ``Transcode`` option
+
+You might therefore have to **disable
+transfer syntaxes** by setting the ``*TransferSyntaxAccepted`` options
+to ``false`` in the :ref:`configuration file of Orthanc
+<configuration>` (by default, all the transfer syntaxes are enabled).
+
+
+Solutions to avoid transcoding
+------------------------------
+
+Up to release 1.6.1, Orthanc didn't feature support for transcoding
+DICOM instances. In other words, the Orthanc core never changed the
+:ref:`transfer syntax <dicom-pixel-data>` of some DICOM instance when
+it had to send it to another modality using the DICOM protocol.
+
+Three workarounds were available to bypass the need for DICOM
+transcoding in Orthanc <= 1.6.1. These workarounds are still valid in
+Orthanc >= 1.7.0, if transcoding is undesirable (e.g. if Orthanc is
+being run on a computer with sparse CPU/RAM resources).
+
+
+Refusing transfer syntaxes
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The first solution consists in making Orthanc **refuse to accept the
+transfer syntaxes** that are not supported by the workstation. This is
+depicted in the following diagram:
 
 .. image:: ../images/Transcoding3.svg
            :align: center
@@ -105,10 +120,10 @@ is depicted in the following diagram:
 .. highlight:: json
 
 If Orthanc tells the PACS that is doesn't accept, say, DICOM JPEG2k,
-the source PACS will be aware of this, and will transcode the DICOM
-file before it is sent to Orthanc. This is the role of the following
-:ref:`configuration options <configuration>` that specifies which
-transfer syntaxes are accepted by Orthanc::
+the source PACS will be aware of this, and will take care of
+transcoding the DICOM files before they are sent to Orthanc. This is
+the role of the following :ref:`configuration options <configuration>`
+that specifies which transfer syntaxes are accepted by Orthanc::
 
   {
     "DeflatedTransferSyntaxAccepted"     : true,
@@ -123,9 +138,13 @@ transfer syntaxes are accepted by Orthanc::
 
 If all of those options are set to ``false``, Orthanc will only
 receive uncompressed transfer syntaxes (obviously provided that the
-source PACS supports DICOM transcoding).
+source PACS itself supports DICOM transcoding).
 
-The third solution consists in **applying an external conversion
+
+Using external conversion tools
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The second solution consists in **applying an external conversion
 tool** to every DICOM image that is received by Orthanc. The standard
 command-line tools ``gdcmconv`` from `GDCM
 <http://gdcm.sourceforge.net/html/gdcmconv.html>`__ or ``dcmconv``
@@ -137,10 +156,15 @@ can be invoked from a :ref:`Lua script <lua>` (check out
 ``OrthancPluginRegisterOnStoredInstanceCallback()`` function). A
 sample Lua script that converts every incoming DICOM file to the
 JPEG2k transfer syntax is `part of the Orthanc sources
-<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__.
+<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__. Note
+that this solution makes no sense anymore in Orthanc 1.7.0, as it
+provides built-in support for transcoding.
 
 
-Finally, as a fourth solution, it is possible to **combine two Orthanc
+Transcoding buffer
+^^^^^^^^^^^^^^^^^^
+
+Finally, as a third solution, it is possible to **combine two Orthanc
 servers**, the first one being configured to accept any transfer
 syntax, and the second one being responsible to serve the DICOM files
 after conversion to uncompressed transfer syntax (which should be
@@ -150,13 +174,24 @@ compatible with any workstation):
            :align: center
            :width: 700px
 
-In this solution, a plugin or an external script continuously monitors
-the content of the first Orthanc server thanks to its :ref:`REST API
-<rest>`. Whenever a DICOM instance is received by the first Orthanc,
-the plugin/script uses external conversion tools to convert the
-instance to an uncompressed transfer syntax, then forward it to a
-second Orthanc server. In other words, the first Orthanc server acts
-as a transient buffer for decompression. Contrarily to the third
-solution, this solution has the advantage of better scalability (as
-decompression implemented in a Lua callback blocks Orthanc as long as
-the Lua script has not returned).
+In this solution, the first Orthanc server acts as a transient server
+that implements the decompression (i.e. it transcodes all the DICOM
+instances it receives to an uncompressed transfer syntax). To carry on
+the transcoding, this first Orthanc server can be:
+
+* either an instance Orthanc >= 1.7.0, with transcoding enabled, or
+
+* an instance of Orthanc (any version) equipped with a plugin or an
+  external script to do the necessary conversions to an uncompressed
+  transfer syntax, as explained in the second solution above.
+
+Whenever a DICOM instance is received by the first Orthanc, the DICOM
+instance is thus transcoded. The first Orthanc server automatically
+forwards all the transcoded instances to the second instance of
+Orthanc, thanks to a :ref:`Lua script <lua>` or an :ref:`external
+script <rest>`, taking advantage of :ref:`Orthanc peering <peering>`.
+
+Contrarily to the second solution, this solution has the advantage of
+better scalability (as decompression can be a time-consuming
+operation). The second instance of Orthanc can run even on a low-end
+computer, with any version of Orthanc.

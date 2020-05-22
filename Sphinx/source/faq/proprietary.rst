@@ -20,9 +20,8 @@ other free and open-source software**. Feel free to discuss
 interoperability problems of Orthanc with other FOSS tools on `our
 discussion group
 <https://groups.google.com/forum/#!forum/orthanc-users>`_, or to
-introduce `bug reports
-<https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`_
-detailing how to reproduce your problem.
+introduce :ref:`bug reports <support>` detailing how to reproduce your
+problem.
 
 Independently of FOSS, there exist many proprietary systems for
 medical imaging. Note that proprietary systems might either be paying
