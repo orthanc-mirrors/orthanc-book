@@ -15,7 +15,7 @@ General information
 Transcoding can be used to **compress** DICOM images, which is useful
 to reduce the required storage area or to optimize the network
 bandwidth for exchanges between sites. Conversely, transcoding can be
-used to **uncompress** DICOM images, which is needed as many DICOM
+used to **decompress** DICOM images, which is needed as many DICOM
 viewers or specialized analysis software do not provide support for
 compressed transfer syntaxes.
 
@@ -65,31 +65,85 @@ Transcoding in Orthanc
 ----------------------
 
 Orthanc 1.7.0 was the first release of Orthanc to feature built-in
-support for DICOM transcoding.
+support for DICOM transcoding. Transcoding is available at multiple
+levels, as depicted by the green arrows on the following drawing:
+
+.. image:: ../images/Transcoding-1.7.0.svg
+           :align: center
+           :width: 500px
 
 
+* **Automated transcoding while ingesting**. Orthanc can be configured
+  to automatically transcode each DICOM instance it receives (either
+  by DICOM protocol or by REST API) to a fixed transfer syntax. This
+  is especially useful to either create an archive of compressed files
+  (for long-term archiving), or to create a DICOM buffer with
+  uncompressed files (for interfacing with DICOM modalities that do
+  not support compressed transfer syntaxes). If the transcoding fails,
+  the DICOM instance is still stored using its original transfer
+  syntax.
 
-* Explanation of DICOM protocol (transparent transcoding from
-  compressed transfer syntaxes to uncompressed transfer syntaxes).
-  
-  * ``TranscodeDicomProtocol`` global configuration option
+  Automated transcoding is enabled by setting the :ref:`configuration
+  option <configuration>` ``IngestTranscoding`` to the transfer syntax
+  UID of interest. For instance, setting ``IngestTranscoding`` to
+  ``1.2.840.10008.1.2.1`` will decompress all the received DICOM
+  instances. Conversely, setting it to ``1.2.840.10008.1.2.4.70`` will
+  compress and store images using JPEG-LS (lossless).
 
-  * ``AllowTranscoding`` in ``DicomModalities`` configuration option
+* **Decompression while sending instances using the DICOM protocol**.
+  Orthanc can be configured to automatically decompress DICOM images
+  on its outgoing connections, if the remote modality does not support
+  the compressed transfer syntax of the source DICOM instances. This
+  feature is available for both :ref:`DICOM C-Move and C-Get commands
+  <dicom-move>`. Note that Orthanc won't transcode DICOM instances to
+  a compressed transfer syntax over the DICOM protocol.
 
-* ``/instances/.../modify`` route: ``Transcode`` option
+  By default, this automated decompression is enabled. This might be
+  undesirable if you want to limit the resources that are used by
+  Orthanc. As a consequence, you can disable this feature either
+  globally (by setting configuration option ``TranscodeDicomProtocol``
+  to ``false``), or on a per-modality basis (by setting the option
+  ``AllowTranscoding`` to ``false`` in the ``DicomModalities``
+  section).
 
-* ``IngestTranscoding``
+.. highlight:: bash
 
-* ``BuiltinDecoderTranscoderOrder``
+* **Transcoding while sending instances to an Orthanc peer**. The
+  ``/peers/{id}/store`` route in the Orthanc REST API allows to send
+  DICOM resources (patients, studies, series or instances) to
+  :ref:`another Orthanc server over HTTP/HTTPS <peering>`. Starting
+  with Orthanc 1.7.0, the ``Transcode`` option can be used in the JSON
+  POST body to instruct to transcode the DICOM files before they are
+  sent. For instance::
 
-* ``DicomLossyCompressionLevel``
+    $ curl -X POST http://localhost:8042/peers/sample/store -d '{"Transcode":"1.2.840.10008.1.2.4.70","Resources":["66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e"]}'
+    
+* **Transcoding using the REST API**. Starting with Orthanc 1.7.0,
+  some routes in the REST API also accept the ``Transcode`` option
+  in their JSON POST body. Those routes notably include:
 
-* Routes to create archives: ``Transcode`` option
+  * The routes to create ZIP files or DICOMDIR archives (``.../media``
+    and ``.../archive``).
 
-You might therefore have to **disable
-transfer syntaxes** by setting the ``*TransferSyntaxAccepted`` options
-to ``false`` in the :ref:`configuration file of Orthanc
-<configuration>` (by default, all the transfer syntaxes are enabled).
+  * The routes to modify DICOM resources
+    (``/{patients|studies|series|instances}/{id}/modify``).
+    
+Importantly, if you need to transcode JPEG2k DICOM instances, you'll
+have to install the :ref:`GDCM plugin <gdcm>` that replaces the
+built-in transcoder of Orthanc based on DCMTK, by the GDCM transcoder.
+
+The following :ref:`advanced configuration options <configuration>`
+are also available to control transcoding:
+
+* ``BuiltinDecoderTranscoderOrder`` controls the transcoder that is
+  used by Orthanc. It specifies whether the built-in transcoder of
+  Orthanc (that uses DCMTK) is applied before or after the transcoding
+  plugins, or not applied at all. "After" means that the built-in
+  transcoder is applied if all the transcoding plugins have failed to
+  transcode the image.
+
+* ``DicomLossyTranscodingQuality`` controls the quality level of lossy
+  compression (notably for JPEG transcoding).
 
 
 Solutions to avoid transcoding

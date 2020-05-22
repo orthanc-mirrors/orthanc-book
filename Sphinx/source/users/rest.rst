@@ -402,8 +402,10 @@ It is also possible to download a zipped DICOMDIR through::
 Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
 -----------------------------------------------------------------------------
 
-Orthanc can send its DICOM instances to remote Orthanc over HTTP/HTTPS through its Rest API. 
-This process can be triggered by the REST API.
+Orthanc can send its DICOM instances to remote Orthanc servers over
+HTTP/HTTPS. Such servers are referred to as :ref:`Orthanc peers
+<peers>`. This process can be triggered by the REST API, which is
+described in this section.
 
 Configuration
 ^^^^^^^^^^^^^
