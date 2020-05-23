@@ -50,6 +50,7 @@ From University Hospital of Liège
    plugins/wsi.rst
    plugins/worklists-plugin.rst
    plugins/serve-folders.rst
+   plugins/gdcm.rst
 
 .. _plugins-osimis:
    
@@ -62,7 +63,6 @@ From Osimis
 * :ref:`transfers`
 * :ref:`google`    
 * :ref:`python-plugin`    
-* :ref:`gdcm`    
 
 .. _plugins-contributed:
 
