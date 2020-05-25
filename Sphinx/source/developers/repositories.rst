@@ -104,7 +104,7 @@ of our code server using a more recent option than the
 and add the following lines::
 
   [hostsecurity]
-  hg.orthanc-server.com:fingerprints=sha256:A1:75:3A:3F:20:74:C1:A6:C3:16:DD:EC:4C:67:74:C4:70:BE:E8:35:0A:0A:C7:2E:36:1F:49:8B:E2:60:61:73
+  hg.orthanc-server.com:fingerprints=sha256:2C:D2:D1:9F:45:E3:21:85:FE:82:18:47:D4:E5:18:96:64:3A:73:BB:0A:94:EF:8F:3E:A9:3D:DD:F9:7E:0C:DD
   
 .. highlight:: bash
 
