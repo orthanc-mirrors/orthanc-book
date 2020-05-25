@@ -14,7 +14,7 @@ Orthanc project is not on the user interface**.
 
 However, Orthanc comes out-of-the-box with :ref:`Orthanc Explorer
 <orthanc-explorer>`, its default Web user interface. **Orthanc
-Explorer is designed for administrative, low-level purpose.** It is
+Explorer is designed for development, low-level purpose.** It is
 also used by the development team to test the features of Orthanc as
 they get introduced in the REST API. Orthanc Explorer is mainly
 targeted towards an English-speaking technical audience (notably
