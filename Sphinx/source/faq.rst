@@ -3,25 +3,36 @@
 Frequently asked questions
 ==========================
 
-General questions
------------------
+General questions about the project
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
    faq/licensing.rst
+   faq/features.rst
+   faq/scalability.rst
+   faq/security.rst
+   faq/proprietary.rst
+   faq/why-orthanc.rst
+   faq/donations.rst
+
+Questions related to Orthanc and DICOM
+--------------------------------------
+   
+.. toctree::
+   :maxdepth: 1
+
    faq/troubleshooting.rst
    faq/dicom.rst
-   faq/query-retrieve.rst
    faq/compiling.rst
-   faq/scalability.rst
-   faq/features.rst
+   faq/query-retrieve.rst
    faq/rest-samples.rst
-   faq/series-completion.rst
-   faq/proprietary.rst
-   faq/security.rst
-   faq/debugging.rst
    faq/transcoding.rst
+   faq/orthanc-storage.rst
+   faq/authentication.rst
+   faq/debugging.rst
+   faq/crash.rst
 
 Features supported by Orthanc
 -----------------------------
@@ -54,8 +65,5 @@ Specific FAQs
    faq/https.rst
    faq/same-origin.rst
    faq/matlab.rst
-   faq/orthanc-storage.rst
-   faq/authentication.rst
-   faq/crash.rst
+   faq/series-completion.rst
    faq/dcmtk-tricks.rst
-   faq/why-orthanc.rst
