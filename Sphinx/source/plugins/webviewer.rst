@@ -115,8 +115,8 @@ Old advanced options (up to 2.5)
 Up to release 2.5 of the Orthanc Web Viewer plugin, the plugin was
 shipping a decoder of DICOM images using the GDCM library. In May
 2020, the support of GDCM has been :ref:`moved as a separate plugin
-<gdcm>`. As a consequence, releases up to 2.5 had two more advanced
-options, that were removed starting with version 3.0:
+<gdcm>`. As a consequence, releases <= 2.5 had two more advanced
+options, that were removed starting with version 2.6:
   
 * ``EnableGdcm`` specified whether `GDCM
   <https://sourceforge.net/projects/gdcm/>`__ should be used to decode
