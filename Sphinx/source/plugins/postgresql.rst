@@ -243,27 +243,6 @@ Obviously, one must be very cautious when sharing the same database
 between instances of Orthanc. In particular, all these instances
 should share the same configuration.
 
-Furthermore, the core of Orthanc does not currently support the replay
-of database transactions, which is necessary to deal with conflicts
-between several instances of Orthanc that would simultaneously write
-to the database.
-
-As a consequence, as of Orthanc 1.7.0, when connecting multiple
-Orthanc to a single database by setting ``Lock`` to ``false``, there
-should only be one instance of Orthanc acting as a writer and all the
-other instances of Orthanc acting as readers only. Be careful to set
-the option ``SaveJobs`` to ``false`` in the configuration file of all
-the instances of Orthanc acting as readers.
-
-A refactoring is needed to improve the core of Orthanc in that
-respect, for which we are looking for funding/donation from the
-industry. Some issues reported in our bug tracker call for this
-refactoring: `issue 83
-<https://bitbucket.org/sjodogne/orthanc/issues/83/>`__, `issue 121
-<https://bitbucket.org/sjodogne/orthanc/issues/121/>`__, `issue 151
-<https://bitbucket.org/sjodogne/orthanc/issues/151/>`__.
-
-
 
 Keep-alive
 ^^^^^^^^^^
@@ -283,3 +262,10 @@ This is due to a timeout in the PostgreSQL server. Please make sure to
 `enable keep-alive
 <https://dba.stackexchange.com/questions/97534/is-there-a-timeout-option-for-remote-access-to-postgresql-database>`__
 in the configuration of your PostgreSQL server
+
+
+Scalability
+^^^^^^^^^^^
+
+When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalability section 
+<scalability>`

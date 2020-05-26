@@ -162,3 +162,40 @@ memory consumption (for instance, ``MALLOC_MMAP_THRESHOLD_`` would
 bypass arenas for large memory blocks such as DICOM files). Check out
 the `manpage <http://man7.org/linux/man-pages/man3/mallopt.3.html>`__
 of ``mallopt()`` for more information.
+
+
+.. _scalability-limitations:
+
+Known limitations
+-----------------
+
+Exclusive access to the DB
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As of Orthanc 1.7.0, the internal code accessing the DB is still affected
+by limitations induced by the SQLite engine that was the only one originally
+available at the beginning of the project: inside a single Orthanc process,
+there are no concurrent access to the DB.
+
+One solution to avoid this limitation is to have multiple Orthanc accessing
+the same DB (works only for MySQL and PostgreSQL) as presented in this `sample 
+<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/multiple-orthancs-on-same-db/>`__.
+
+Also note that the core of Orthanc does not currently support the replay
+of database transactions, which is necessary to deal with conflicts
+between several instances of Orthanc that would simultaneously write
+to the database.  As a consequence, as of Orthanc 1.7.0, when connecting multiple
+Orthanc to a single database by setting ``Lock`` to ``false``, there
+should only be one instance of Orthanc acting as a writer and all the
+other instances of Orthanc acting as readers only. Be careful to set
+the option ``SaveJobs`` to ``false`` in the configuration file of all
+the instances of Orthanc acting as readers.
+
+A refactoring is needed to improve the core of Orthanc in that
+respect, for which we are looking for funding from the
+industry. Some issues reported in our bug tracker call for this
+refactoring: `issue 83
+<https://bitbucket.org/sjodogne/orthanc/issues/83/>`__, `issue 121
+<https://bitbucket.org/sjodogne/orthanc/issues/121/>`__, `issue 151
+<https://bitbucket.org/sjodogne/orthanc/issues/151/>`__.
+

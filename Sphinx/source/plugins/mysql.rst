@@ -171,3 +171,9 @@ MySQL/MariaDB plugins than to the PostgreSQL plugins (i.e. at most one
 instance of Orthanc writing to the database).  For more information,
 please check out the :ref:`documentation for PostgreSQL
 <postgresql-lock>`.
+
+Scalability
+^^^^^^^^^^^
+
+When configuring your MySQL plugin, ensure you've read the :ref:`scalability section 
+<scalability>`
