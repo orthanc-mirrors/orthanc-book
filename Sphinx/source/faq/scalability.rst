@@ -175,7 +175,7 @@ Exclusive access to the DB
 As of Orthanc 1.7.0, the internal code accessing the DB is still affected
 by limitations induced by the SQLite engine that was the only one originally
 available at the beginning of the project: inside a single Orthanc process,
-there are no concurrent access to the DB.
+there is no concurrent access to the DB.
 
 One solution to avoid this limitation is to have multiple Orthanc accessing
 the same DB (works only for MySQL and PostgreSQL) as presented in this `sample 
@@ -198,4 +198,26 @@ refactoring: `issue 83
 <https://bitbucket.org/sjodogne/orthanc/issues/83/>`__, `issue 121
 <https://bitbucket.org/sjodogne/orthanc/issues/121/>`__, `issue 151
 <https://bitbucket.org/sjodogne/orthanc/issues/151/>`__.
+
+
+Latency
+^^^^^^^
+
+As of Orthanc 1.7.0, Orthanc still performs quite a large number of small
+SQL requests.  A simple request to a route like ``/studies/{id}`` can trigger
+6 SQL queries.
+
+This is not an ideal situation and this might be addressed 
+in a future larger DB refactoring (the most time-consuming queries have already
+been optimized).  Given the large number of round-trips
+between Orthanc and the DB server, it's important that the latency is reduced
+as much as possible.  I.e, if deploying Orthanc in a cloud infrastructure,
+make sure that the DB server and Orthanc VMs are located in the same datacenter.
+
+Typically, a latency of 1-4 ms is expected to have correct performances.  If your
+latency is 20ms, a simple request to ``/studies/{id}`` might spend 120ms in 
+round-trip alone.
+
+
+
 
