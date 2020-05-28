@@ -147,26 +147,20 @@ Pre-compiled binaries for Microsoft Windows `are also available
 
 Beware that one version of the Python plugin can only be run against
 one version of the Python interpreter. This version is clearly
-indicated in the name of the folder.
-
-As of release 1.0, the Orthanc project only provides pre-compiled
-binaries for Microsoft Windows 32bit and Python 2.7. Even though this
-version of Python is not supported anymore, it can still run on all
-the versions of Microsoft Windows that have been released for more
-than 10 years.
+indicated in the filename of the precompiled binaries.
 
 .. highlight:: text
 
-You are of course free to compile the plugin from sources if you need
-a more recent version. You'll have to explicitly specify the path to
-your Python installation while invoking CMake. For instance::
+You are of course free to compile the plugin from sources. You'll have
+to explicitly specify the path to your Python installation while
+invoking CMake. For instance::
 
   C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
                                     -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017"
 
-**Note about debug builds**: usually, building Python modules such as the Python 
+**Note about debug builds**: Usually, building Python modules such as the Python 
 plugin for Orthanc in debug mode (where ``_DEBUG`` is defined) leads to a module 
-(.exe or .dll) that requires a debug build of Python, and debug versions of all
+(``.exe`` or ``.dll``) that requires a debug build of Python, and debug versions of all
 the Python libraries. This is quite cumbersome, for it requires building Python
 on your own or downloading additional debug files.
 
@@ -188,6 +182,9 @@ should you require a full debug build::
 
 Please note that this CMake option only impacts **debug** builds under Windows, 
 when using (any version of) the Microsoft Visual Studio compiler.
+
+The precompiled binaries all use release (i.e. non-debug) versions of Python.
+
 
 Configuration options
 ---------------------
