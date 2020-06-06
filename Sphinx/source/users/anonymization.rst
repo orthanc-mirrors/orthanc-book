@@ -25,7 +25,19 @@ DICOM standard 2008 or 2017c (default). Example::
 It is possible to control how anonymization is achieved by specifying
 a JSON body::
 
-    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{"Replace":{"PatientName":"Hello","0010-1001":"World"},"Keep":["StudyDescription", "SeriesDescription"],"KeepPrivateTags": true, "DicomVersion" : "2017c"}' > Anonymized.dcm
+    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST \
+      --data '{
+                "Replace": {
+                  "PatientName": "Hello",
+                  "0010-1001": "World"
+                },
+                "Keep": [
+                  "StudyDescription", 
+                  "SeriesDescription"
+                ],
+                "KeepPrivateTags": true, 
+                "DicomVersion" : "2017c"
+              }' > Anonymized.dcm
 
 Explanations:
 
@@ -59,7 +71,19 @@ Orthanc allows to modify a set of specified tags in a single DICOM
 instance and to download the resulting anonymized DICOM
 file. Example::
 
-    $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify -X POST -d '{"Replace":{"PatientName":"hello","PatientID":"world"},"Remove":["InstitutionName"],"RemovePrivateTags": true, "Force": true}' > Modified.dcm
+    $ curl -X POST http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify \
+      --data '{
+                "Replace": {
+                  "PatientName":"hello",
+                  "PatientID":"world"
+                },
+                "Remove":[
+                  "InstitutionName"
+                ],
+                "RemovePrivateTags": true, 
+                "Force": true,
+                "Transcode": "1.2.840.10008.1.2.4.70"
+              }' > Modified.dcm
 
 Remarks:
 
@@ -67,6 +91,8 @@ Remarks:
 * The ``Replace`` associative array specifies the substitions to be applied (cf. anonymization).
 * If ``RemovePrivateTags`` is set to ``true``, the private tags
   (i.e. manufacturer-specific tags) are removed.
+* The ``Transcode`` option allows you to define the TransferSyntax
+  of the modified file.
 * The ``Force`` option must be set to ``true``, in order to allow the
   modification of the ``PatientID``, as such a modification of the
   :ref:`DICOM identifiers <dicom-identifiers>` might lead to breaking
