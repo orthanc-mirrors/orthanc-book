@@ -523,7 +523,10 @@ by some manufacturer::
 The ``origin`` argument contains information about which modality has
 issued the request.
 
-Note that the ``IncomingFindRequestFilter`` callback is not applied to
+Note that this callback allows you to modify the incoming request
+but will not modify the list of tags that Orthanc will return.
+
+Also note that the ``IncomingFindRequestFilter`` callback is not applied to
 C-Find requests targeting :ref:`modality worklists
 <worklists-plugin>`. Since Orthanc 1.4.2, the corresponding
 ``IncomingWorklistRequestFilter`` callback can be used to sanitize
@@ -539,6 +542,7 @@ C-FIND requests against worklists::
 
     return query
   end
+
 
 Similarly, the callback ``OutgoingFindRequestFilter(query, modality)``
 is invoked whenever Orthanc acts as a C-Find SCU, which gives the
