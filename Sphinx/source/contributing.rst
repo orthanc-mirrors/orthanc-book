@@ -36,8 +36,8 @@ here are some tasks you can take in charge that would greatly help us:
 * **Maintenance tasks**:
       
   - Report problems together with sample DICOM images and possible
-    workarounds on the `issue tracker
-    <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`_.
+    workarounds on the dedicated `issue tracker
+    <http://bugs.orthanc-server.com/>`_.
   - Package Orthanc and its associated plugins for more UNIX or
     GNU/Linux distributions (e.g. Ubuntu PPA, RHEL, CentOS, openSUSE...).
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed

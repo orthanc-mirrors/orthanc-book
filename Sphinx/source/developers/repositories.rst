@@ -237,7 +237,15 @@ by typing the following commands on their side::
 Issue tracker
 -------------
 
-This is work-in-progress. Orthanc will most probably move to the
-`Roundup issue tracker
-<https://en.wikipedia.org/wiki/Roundup_(issue_tracker)>`__ that is
-notably used by the Python community.
+The `official bug tracker <https://bugs.orthanc-server.com/>`__ of the
+Orthanc project runs thanks to `Bugzilla
+<https://en.wikipedia.org/wiki/Bugzilla>`__.
+
+We have done our best to automatically import most of the history
+from the old BitBucket bug tracker.
+
+Before posting any issue, make sure to carefully, completely read the
+:ref:`page about how to ask support <support>`. In particular, most
+issues should first be discussed on the dedicated `discussion group
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ before
+introducing a bug report.

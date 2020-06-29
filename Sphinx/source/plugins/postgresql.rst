@@ -251,8 +251,7 @@ Keep-alive
 
 After some period of inactivity (users have reported 10 hours), you
 might `experience an error
-<https://bitbucket.org/sjodogne/orthanc/issues/15/postgresql-exceptions-after-time>`__
-such as::
+<https://bugs.orthanc-server.com/show_bug.cgi?id=15>`__ such as::
 
   E0220 03:20:51.562601 PluginsManager.cpp:163] Exception in database back-end: Error in PostgreSQL: server closed the connection unexpectedly.
   This probably means the server terminated abnormally before or while processing the request.

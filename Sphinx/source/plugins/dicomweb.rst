@@ -171,8 +171,8 @@ are processed:
   area <orthanc-storage>`, which gives fully accurate results but
   requires all the individual instances to be read and parsed from the
   filesystem, leading to slow performance (cf. `issue 162
-  <https://bitbucket.org/sjodogne/orthanc/issues/162/dicomweb-metadata-resource-reads-all>`__).
-  This is the default mode.
+  <https://bugs.orthanc-server.com/show_bug.cgi?id=162>`__). This is
+  the default mode.
 
 * If ``MainDicomTags`` mode is used, the plugin will only report the
   main DICOM tags that are indexed by the Orthanc database. The DICOM
@@ -293,7 +293,7 @@ Three important options can be provided for individual remote DICOMweb servers:
   ``ChunkedTransfers`` to ``true`` in Orthanc 1.5.7 and 1.5.8 utilizes
   one CPU at 100%, which results in very low throughput: This issue is
   resolved in Orthanc 1.6.0 (cf. `issue 156
-  <https://bitbucket.org/sjodogne/orthanc/issues/156/>`__ for full
+  <https://bugs.orthanc-server.com/show_bug.cgi?id=156>`__ for full
   explanation).
 
 * ``HasWadoRsUniversalTransferSyntax`` (new in DICOMweb 1.1) must be

@@ -195,9 +195,9 @@ A refactoring is needed to improve the core of Orthanc in that
 respect, for which we are looking for funding from the
 industry. Some issues reported in our bug tracker call for this
 refactoring: `issue 83
-<https://bitbucket.org/sjodogne/orthanc/issues/83/>`__, `issue 121
-<https://bitbucket.org/sjodogne/orthanc/issues/121/>`__, `issue 151
-<https://bitbucket.org/sjodogne/orthanc/issues/151/>`__.
+<https://bugs.orthanc-server.com/show_bug.cgi?id=83>`__, `issue 121
+<https://bugs.orthanc-server.com/show_bug.cgi?id=121>`__, `issue 151
+<https://bugs.orthanc-server.com/show_bug.cgi?id=151>`__.
 
 
 Latency

@@ -241,9 +241,8 @@ Submitting code
 
 Once the CLA onboarding process has succeeded, use `Mercurial
 <https://en.wikipedia.org/wiki/Mercurial>`__ to fork the official
-repository of interest from BitBucket. All the repositories are
-centralized on our `self-hosted Mercurial server
-<https://hg.orthanc-server.com/>`__.
+repository of interest. All the repositories are centralized on our
+`self-hosted Mercurial server <https://hg.orthanc-server.com/>`__.
 
 A :ref:`dedicated page <repositories>` explains how to submit
 :ref:`simple patches <hg-patch>` or :ref:`full branches <hg-bundle>`.

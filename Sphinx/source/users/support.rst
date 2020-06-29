@@ -38,10 +38,10 @@ resources:
    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__ that
    contains our roadmap, as you might be requesting a feature that is
    currently pending in our backlog (i.e. not implemented yet).
-10. Have a look for the issue in the `official bug tracker
-    <https://bitbucket.org/sjodogne/orthanc/issues?status=new&status=open>`__
-    (click on the ``All`` button, as your issue might already been
-    solved).
+10. Look for similar issue in the `official bug tracker
+    <https://bugs.orthanc-server.com/query.cgi>`__ (make sure to
+    select ``All`` in the ``Status`` field, as your issue might
+    already have been solved).
 
 
 Importantly, for all the features that are pending in the ``TODO``
@@ -101,6 +101,6 @@ Using the bug tracker
 
 If you are **sure** that you are reporting a yet unknown bug, you can
 consider directly introducing a `bug report on our issue tracker
-<https://bitbucket.org/sjodogne/orthanc/issues/new>`__. Beware however
+<https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
 As a consequence, it is advised to first use the discussion forum.

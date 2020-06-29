@@ -53,8 +53,9 @@ You can `watch this video tutorial
 to upload files to Orthanc through Orthanc Explorer with Chromium.
 
 **Important:** There is currently a `known issue
-<https://bitbucket.org/sjodogne/orthanc/issues/21/dicom-files-missing-after-uploading-with>`__
-that prevents Mozilla Firefox to correctly upload all DICOM files.
+<https://bugs.orthanc-server.com/show_bug.cgi?id=21>`__ that might
+prevent Mozilla Firefox to correctly upload all DICOM files if using
+drag-and-drop.
 
 
 Uploading through the DICOM protocol
