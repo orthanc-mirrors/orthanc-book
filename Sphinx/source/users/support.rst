@@ -66,6 +66,7 @@ you must provide all the following information:
   about DICOM networking issues, carefully describe the imaging
   modalities into play (including their manufacturers) and your
   network topology.
+* The observed vs. expected results.
 * Full :ref:`configuration files <configuration>`.
 * Full logs as produced by Orthanc in :ref:`verbose mode <log>`.
 * Sample DICOM files.
