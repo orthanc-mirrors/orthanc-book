@@ -165,8 +165,6 @@ help you meet your local regulations (Please check your local regulations).
 
 However, note that, if you're running entirely in a cloud environment, your decryption keys will still 
 be stored on the cloud infrastructure (VM disks - process RAM) and an attacker could still eventually gain access to this keys.  
-Furthermore, in the scope of the `Cloud Act <https://en.wikipedia.org/wiki/CLOUD_Act>`__ , the cloud provider might still have 
-the possibility to retrieve your data and encryption key (while it will still be more complex than with standard encryption at rest).
 
 If Orthanc is running in your infrastructure with the Index DB on your infrastructure, and files are store in the cloud, 
 the master keys will remain on your infrastructure only and there's no way the data stored in the cloud could be decrypted outside your infrastructure.
