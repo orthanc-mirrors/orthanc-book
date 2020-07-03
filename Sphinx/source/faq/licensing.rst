@@ -273,7 +273,7 @@ A :ref:`dedicated page <repositories>` explains how to submit
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository
-  <https://hg.orthanc-server.com/orthanc-tests/file/tip>`__.
+  <https://hg.orthanc-server.com/orthanc-tests/file/default>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

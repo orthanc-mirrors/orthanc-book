@@ -192,7 +192,7 @@ the plugin developer to focus only on the processing of the queried
 instances.
 
 Note that a `sample plugin
-<https://hg.orthanc-server.com/orthanc/file/tip/Plugins/Samples/StorageCommitmentScp>`__
+<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/StorageCommitmentScp>`__
 is also available in the source distribution of Orthanc.
 
            

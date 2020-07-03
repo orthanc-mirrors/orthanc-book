@@ -19,7 +19,7 @@ plugins <https://www.orthanc-server.com/static.php?page=dicomweb>`__.
 
 The full standard is not implemented yet, the supported features are
 `tracked in the repository
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/tip/Status.txt>`__.
+<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Status.txt>`__.
 
 
 Compilation
@@ -48,7 +48,7 @@ available courtesy of `Osimis <https://www.osimis.io/>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/tip/Resources/BuildInstructions.txt>`__.
+<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/BuildInstructions.txt>`__.
 
 
 Installation
@@ -651,12 +651,12 @@ Additional samples
 
 Samples of how to call DICOMweb services from standalone applications
 are available for `Python
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/tip/Resources/Samples/Python>`__
+<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/Samples/Python>`__
 and for `JavaScript
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/tip/Resources/Samples/JavaScript>`__.
+<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/Samples/JavaScript>`__.
 
 Integration tests are `available separately
-<https://hg.orthanc-server.com/orthanc-tests/file/tip/Plugins/DicomWeb/Run.py>`__,
+<https://hg.orthanc-server.com/orthanc-tests/file/default/Plugins/DicomWeb/Run.py>`__,
 and provide samples for more advanced features of the REST API (such
 as dynamically adding/updating/removing remote DICOMweb servers using
 HTTP PUT and DELETE methods).

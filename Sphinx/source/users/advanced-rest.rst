@@ -150,7 +150,7 @@ Given the ID of some job, one can:
 * Retry a job in ``Failed`` state by POST-ing to ``/jobs/.../resubmit``.
 
 The related state machine is depicted in the `implementation notes
-<https://hg.orthanc-server.com/orthanc/raw-file/tip/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
+<https://hg.orthanc-server.com/orthanc/raw-file/default/OrthancServer/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
   
 
 

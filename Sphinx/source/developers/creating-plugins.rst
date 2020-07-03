@@ -26,7 +26,7 @@ Here are some resources about creating C/C++ plugins:
 
 * Sample code for plugins can be found `in the official Orthanc
   repository
-  <https://hg.orthanc-server.com/orthanc/file/default/Plugins/Samples/>`__
+  <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/>`__
   (in the ``Plugins/Samples`` folder).
 
 * A tutorial showing how to implement a basic WADO server is

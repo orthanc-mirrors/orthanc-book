@@ -57,7 +57,7 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -629,7 +629,7 @@ To circumvent this problem, you have 2 possibilities:
    The list of the resources to be sent are given as a JSON array. In
    this case, a single DICOM connection is used. `Sample code is
    available
-   <https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
+   <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
 
    Note that the list of resources to be sent can include the
    :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
@@ -1012,7 +1012,7 @@ sequence number the changes must be returned::
     $ curl 'http://localhost:8042/changes?limit=100&since=922'
 
 A `sample code in the source distribution
-<https://hg.orthanc-server.com/orthanc/file/default/Resources/Samples/Python/ChangesLoop.py>`__
+<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Python/ChangesLoop.py>`__
 shows how to use this Changes API to implement a polling loop.
 
 

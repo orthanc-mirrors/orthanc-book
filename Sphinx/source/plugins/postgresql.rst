@@ -88,7 +88,7 @@ error while invoking CMake that looks like::
 In such a situation, please add your version of PostgreSQL to the
 macro ``PostgreSQL_ADDITIONAL_VERSIONS`` that is defined at the end of
 the `Resources/CMake/PostgreSQLConfiguration.cmake file
-<https://hg.orthanc-server.com/orthanc-databases/file/tip/Resources/CMake/PostgreSQLConfiguration.cmake>`__
+<https://hg.orthanc-server.com/orthanc-databases/file/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__
 in the sources of the project.
   
   

@@ -26,7 +26,7 @@ Orthanc is running to add/remove worklists.
 
 The source code of this sample plugin is `available in the source
 distribution of Orthanc
-<https://hg.orthanc-server.com/orthanc/file/default/Plugins/Samples/ModalityWorklists/>`__
+<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ModalityWorklists/>`__
 (GPLv3+ license).
 
 
@@ -59,7 +59,7 @@ A basic configuration would read as follows::
 
 The folder ``WorklistsDatabase`` of the `source distribution of
 Orthanc
-<https://hg.orthanc-server.com/orthanc/file/default/Plugins/Samples/ModalityWorklists/>`__
+<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ModalityWorklists/>`__
 contains a database of sample worklists, that comes from the DCMTK
 source distribution, as described in the `FAQ entry #37 of the DCMTK
 project <https://forum.dcmtk.org/viewtopic.php?t=84>`__.
@@ -73,7 +73,7 @@ Tutorial
 - Download `DCMTK utilities
   <https://dicom.offis.de/download/dcmtk/release/bin/>`__.
 - Download sample `worklist files
-  <https://hg.orthanc-server.com/orthanc/file/default/Plugins/Samples/ModalityWorklists/>`__
+  <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ModalityWorklists/>`__
   from the Orthanc source code and copy them in a dedicated folder.
 - Generate the :ref:`default configuration of Orthanc <configuration>`.
 - Enable the ModalityWorklist plugin in your configuration file by adding this section::
@@ -130,7 +130,7 @@ How to create a worklist file
   
 - Start with an existing worklist file, some samples of which can be
   found in the `Orthanc source distribution
-  <https://hg.orthanc-server.com/orthanc/file/default/Plugins/Samples/ModalityWorklists/WorklistsDatabase/>`__
+  <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ModalityWorklists/WorklistsDatabase/>`__
   (with ``.wl`` file extensions).
 - The worklist file is a DICOM file. Dump its content as a text file
   using ``dcmdump``::
