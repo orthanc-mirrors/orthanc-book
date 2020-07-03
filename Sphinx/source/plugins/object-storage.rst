@@ -134,6 +134,12 @@ Sample configuration::
   }
 
 
+Sample setups
+-------------
+
+You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/#markdown-header-for-osimisorthanc-pro-image-users>`__ .
+
+
 Client-side encryption
 ----------------------
 
@@ -177,16 +183,16 @@ Technical details
 
 Orthanc saves 2 kind of files: DICOM files and JSON summaries of DICOM files.  Both files contain PHI.
 
-When configuring the plugin, you'll have to provide a `Master Key` that we can also call the `Key Encryption Key` (KEK).
+When configuring the plugin, you'll have to provide a **Master Key** that we can also call the **Key Encryption Key (KEK)**.
 
-For each file being saved, the plugin will generate a new `Data Encryption Key` (DEK).  This DEK, encrypted with the KEK will be pre-pended to the file.
+For each file being saved, the plugin will generate a new **Data Encryption Key (DEK)**.  This DEK, encrypted with the KEK will be pre-pended to the file.
 
 If, at any point, your KEK leaks or you want to rotate your KEKs, you'll be able to use a new one to encrypt new files that are being added 
 and still use the old ones to decrypt data.  You could then eventually start a side script to remove usages of the leaked/obsolete KEKs.
 
 To summarize:
 
-- We use `Crypto++<https://www.cryptopp.com/>`__ to perform all encryptions.  
+- We use `Crypto++ <https://www.cryptopp.com/>`__ to perform all encryptions.  
 - All keys (KEK and DEK) are AES-256 keys.
 - DEKs and IVs are encrypted by KEK using CTR block cipher using a null IV.
 - data is encrypted by DEK using GCM block cipher that will also perform integrity check on the whole file.
