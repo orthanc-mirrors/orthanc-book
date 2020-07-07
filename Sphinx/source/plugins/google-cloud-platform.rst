@@ -57,15 +57,16 @@ on any recent UNIX-like distribution (including GNU/Linux)::
 
 The compilation produces a shared library
 ``OrthancGoogleCloudPlatform`` that contains the GCP
-plugin. Pre-compiled binaries for Microsoft Windows `are available
-<https://www.orthanc-server.com/browse.php?path=/plugin-google-cloud>`__,
-and are included in the `Windows installers
-<https://www.orthanc-server.com/download-windows.php>`__.
+plugin. 
 
 Under the hood, the GCP plugin is built on the top of the official
 `Google Cloud Platform C++ Client Libraries
 <https://github.com/googleapis/google-cloud-cpp>`__.
 
+
+Given this plugin is used to interface with a commercial & proprietary
+service, pre-compiled Windows/Docker binaries are available only for
+companies who have subscribed for a `support contract <https://www.osimis.io/en/services.html#cloud-plugins>`__ at Osimis.
 
 
 Configuration
