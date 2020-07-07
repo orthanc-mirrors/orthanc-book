@@ -36,21 +36,26 @@ separate, custom Web interface on the top of the :ref:`rest`, maybe as
 a `plugin
 <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__. Any
 front-end Web developer could take care of this task using well-known
-JavaScript frameworks (such as Meteor, AngularJS, Ember.js...).
+JavaScript frameworks (such as Angular, Vue.js...).
 
 It is possible that an official plugin that provides a more advanced
 user interface will be developed in the future (provided we find
-funding for this development). In the meantime, you can also contact a
-company that provides **commercial support on the top of Orthanc** and
-that might have developed an advanced user interface. Currently,
-`Osimis <https://www.osimis.io/>`_ is the only company ensuring such
-corporate services, but others might show up in the future. A `contact
-form <https://www.orthanc-server.com/orthanc-pro.php>`_ is available
-on the official Web page of Orthanc.
+funding for this development). In the meantime, you can also contact
+**Osimis**, the commercial partner of the Orthanc project, by using
+the `contact form <https://www.orthanc-server.com/orthanc-pro.php>`_
+that is available on the official Web page of Orthanc.
 
-**Note:** In 2017-2018, a team of Master students from `ULiège
-<https://www.uliege.be/>`__ has done some work about creating a
-revamped version of Orthanc Explorer. Check out the `related
-discussion
-<https://groups.google.com/d/msg/orthanc-users/oOyKTmfs-J0/B6eyBJcvCAAJ>`__
-on the Orthanc Users forum.
+Finally, have a look to the following **related projects**:
+
+* In 2017-2018, a team of Master students from `ULiège
+  <https://www.uliege.be/>`__ has done some work about creating a
+  revamped version of Orthanc Explorer. Check out the `related
+  discussion
+  <https://groups.google.com/d/msg/orthanc-users/oOyKTmfs-J0/B6eyBJcvCAAJ>`__
+  on the Orthanc Users forum.
+
+* The `Orthanc Tools JS <https://github.com/salimkanoun/Orthanc-Tools-JS>`__
+  environment created by Salim Kanoun.
+
+* The `Orthanc Manager <https://github.com/id-05/OrthancManager>`__
+  Android application.
