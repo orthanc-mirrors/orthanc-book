@@ -39,15 +39,14 @@ Adapt the following :ref:`configuration options <configuration>`
 Configuration of Docker images by Osimis
 ----------------------------------------
 
-This section applies if you are using the `Docker images by Osimis
-<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__
+This section applies if you are using the :ref:`osimis/orthanc Docker imag <docker-osimis>`
 to run Orthanc.
 
 Make sure Orthanc has the Dicom Web protocol enabled::
 
-  DW_ENABLED: "true"
+  DICOM_WEB_PLUGIN_ENABLED: "true"
 
 If using Orthanc in a docker container, map the Orthanc DICOMWeb Http Port. Eg in docker-compose file::
 
   ports:
-    - "4242:4242"
+    - "8042:8042"
