@@ -74,14 +74,8 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Financial support**:
 
-  - Buy commercial services:
-
-    + Osimis provides `support packs
-      <https://www.osimis.io/en/services.html>`__ dedicated to Orthanc.
-    + Osimis can be hired to do `custom developments
-      <https://www.orthanc-server.com/orthanc-pro.php>`__ related to medical imaging.
-    + Currently, Osimis is the only company ensuring such corporate
-      services according to an open-source business model, but others
-      might show up in the future. `Please warn us
-      <mailto:s.jodogne@orthanc-labs.com>`__ if your know about another such
-      company!
+  - Osimis provides `support packs and custom development services
+    <https://www.osimis.io/en/services.html>`__ around the Orthanc
+    ecosystem and, more generally, around medical imaging. Buying such
+    professional services is the best way to make the Orthanc project
+    sustainable in the long term.

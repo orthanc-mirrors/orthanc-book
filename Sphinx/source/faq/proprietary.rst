@@ -45,10 +45,6 @@ support, the `GPL license
 Orthanc requires them to **publicly release the source code of this
 derived version of Orthanc**.
 
-Finally, if you need to complement the commercial services of your
-official supplier, please note that you can also contact a company
-that provides **commercial support on the top of Orthanc**. Currently,
-`Osimis <https://www.osimis.io/>`_ is the only company ensuring such
-corporate services, but others might show up in the future. A `contact
-form <https://www.orthanc-server.com/orthanc-pro.php>`_ is available
-on the official Web page of Orthanc.
+Finally, if you need to complement the services of your vendor,
+consider buying the `Orthanc support packs provided by Osimis
+<https://www.osimis.io/en/services.html>`__.
