@@ -84,7 +84,7 @@ You might have to set up a host fingerprint in the Mercurial
 configuration. Add the following lines to your ``~/.hgrc`` file::
 
   [hostfingerprints]
-  hg.orthanc-server.com = 4a:ed:f4:e4:f8:a6:fe:3a:41:10:bf:41:1c:1b:aa:26:59:11:ce:c6
+  hg.orthanc-server.com = 7e:69:42:f2:5d:32:d6:93:7a:a4:ca:1e:3e:8d:92:33:f1:3b:91:62
 
 
 Recent versions of Mercurial
