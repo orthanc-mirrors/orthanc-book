@@ -40,6 +40,21 @@ created a `DICOM store
 <https://cloud.google.com/healthcare/docs/how-tos/dicom>`__.
 
 
+Pre-compiled binaries
+---------------------
+
+This plugin is used to interface Orthanc with a commercial and
+proprietary cloud service that you accept to pay. As a consequence,
+the Orthanc project doesn't freely provide pre-compiled binaries for
+Docker, Windows, Linux or OS X. These pre-compiled binaries do exist,
+but are reserved to the companies who have subscribed to a
+`professional support contract
+<https://www.osimis.io/en/services.html#cloud-plugins>`__ by
+Osimis. Although you are obviously free to compile this plugin by
+yourself (instructions are given below), purchasing such support
+contracts makes the Orthanc project sustainable in the long term, to
+the benefit of the worldwide community of medical imaging.
+
 
 Compilation
 -----------
@@ -62,11 +77,6 @@ plugin.
 Under the hood, the GCP plugin is built on the top of the official
 `Google Cloud Platform C++ Client Libraries
 <https://github.com/googleapis/google-cloud-cpp>`__.
-
-
-Given this plugin is used to interface with a commercial & proprietary
-service, pre-compiled Windows/Docker binaries are available only for
-companies who have subscribed for a `support contract <https://www.osimis.io/en/services.html#cloud-plugins>`__ at Osimis.
 
 
 Configuration
