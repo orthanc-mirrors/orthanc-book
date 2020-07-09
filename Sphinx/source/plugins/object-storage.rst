@@ -121,7 +121,10 @@ Sample configuration::
   	"BucketName": "test-orthanc-s3-plugin",
     "Region" : "eu-central-1",
     "AccessKey" : "AKXXX",
-    "SecretKey" : "RhYYYY"
+    "SecretKey" : "RhYYYY",
+    "Endpoint": "",                 // optional - currently in mainline version only: custom endpoint
+    "ConnectionTimeout": 30,        // optional - currently in mainline version only: connection timeout in seconds
+    "RequestTimeout": 1200          // optional - currently in mainline version only: request timeout in seconds (max time to upload/download a file)
   }
 
 Azure Blob Storage plugin
