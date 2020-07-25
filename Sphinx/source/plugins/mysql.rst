@@ -99,6 +99,9 @@ file::
       "Database" : "orthanc",
       "Username" : "orthanc",
       "Password" : "orthanc",
+      "EnableSsl" : false,     // force SSL connections
+      "SslVerifyServerCertificates": true, // verify server certificates if EnableSsl is true
+      "SslCACertificates": "", // path to CA certificates to validate servers
       "Lock" : true            // See section about Locking
     },
     "Plugins" : [
@@ -114,6 +117,14 @@ its default SQLite back-end and the filesystem storage area.
 **Important 2:** To force a TCP connection on the ``localhost`` in
 UNIX (i.e. to instruct Orthanc not to use UNIX socket), the
 ``UnixSocket`` can be set to the empty string.
+
+**Remark:** To force using a TLS connection, you must set ``EnableSsl``
+to ``true``.  Once ``EnableSsl`` is ``true``, the ``SslVerifyServerCertificates``
+enables the check of server certificates (``true`` by default).
+The CA certificates used to verify the server certificate can be defined
+through ``SslCACertificates``; if not defined or empty, the value of the global
+Orthanc configuration ``HttpsCACertificates`` is used.  These options have been
+introduced in the mainline in July 2020 and have not yet been released.
 
 **Remark:** When using the ``Storage`` MySQL plugin, the DICOM files
 are stored as blobs in the database. This might actually consume more

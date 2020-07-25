@@ -121,8 +121,21 @@ Sample configuration::
   	"BucketName": "test-orthanc-s3-plugin",
     "Region" : "eu-central-1",
     "AccessKey" : "AKXXX",
-    "SecretKey" : "RhYYYY"
+    "SecretKey" : "RhYYYY",
+    "Endpoint": "",                 // optional - currently in mainline version only: custom endpoint
+    "ConnectionTimeout": 30,        // optional - currently in mainline version only: connection timeout in seconds
+    "RequestTimeout": 1200          // optional - currently in mainline version only: request timeout in seconds (max time to upload/download a file)
   }
+
+The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
+
+ "AwsS3Storage" : {
+    "BucketName": "test-orthanc",
+    "Region": "fr-par",
+    "AccessKey": "XXX",
+    "SecretKey": "YYY",
+    "Endpoint": "s3.fr-par.scw.cloud"
+  },
 
 Azure Blob Storage plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^
