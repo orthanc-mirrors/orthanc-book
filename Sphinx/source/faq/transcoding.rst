@@ -88,7 +88,7 @@ levels, as depicted by the green arrows on the following drawing:
   UID of interest. For instance, setting ``IngestTranscoding`` to
   ``1.2.840.10008.1.2.1`` will decompress all the received DICOM
   instances. Conversely, setting it to ``1.2.840.10008.1.2.4.70`` will
-  compress and store images using JPEG-LS (lossless).
+  compress and store images using JPEG Lossless.
 
 * **Decompression while sending instances using the DICOM protocol**.
   Orthanc can be configured to automatically decompress DICOM images
