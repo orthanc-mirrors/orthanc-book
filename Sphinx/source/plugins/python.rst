@@ -240,6 +240,8 @@ The route can then be accessed as::
   $ curl http://localhost:8042/toto
   ok
 
+
+.. _python-changes:
   
 Listening to changes
 ....................
@@ -556,12 +558,88 @@ possible to adapt this script in order to use the DICOM conventions
 about `attribute matching
 <http://dicom.nema.org/medical/dicom/2019e/output/chtml/part04/sect_C.2.2.2.html>`__.
 
-.. highlight:: python
+.. highlight:: bash
 
 Here is a sample call to retrieve all the studies that were last
 updated in 2019 thanks to this Python script::
 
   $ curl http://localhost:8042/tools/find -d '{"Level":"Study","Query":{},"Expand":true,"Metadata":{"LastUpdate":"^2019.*$"}}'
+
+
+.. _python-paging:
+
+Implementing basic paging
+.........................
+
+.. highlight:: python
+
+As explained in the FAQ, the :ref:`Orthanc Explorer interface is
+low-level <improving-interface>`, and is not adapted for
+end-users. One common need is to implement paging of studies, which
+calls for server-side sorting of studies. This can be done using the
+following sample Python plugin that registers a new route
+``/sort-studies`` in the REST API of Orthanc::
+
+ import json
+ import orthanc
+
+ def GetStudyDate(study):
+     if 'StudyDate' in study['MainDicomTags']:
+         return study['MainDicomTags']['StudyDate']
+     else:
+         return ''
+
+ def SortStudiesByDate(output, uri, **request):
+     if request['method'] == 'GET':
+         # Retrieve all the studies
+         studies = json.loads(orthanc.RestApiGet('/studies?expand'))
+
+         # Sort the studies according to the "StudyDate" DICOM tag
+         studies = sorted(studies, key = GetStudyDate)
+
+         # Read the limit/offset arguments provided by the user
+         offset = 0
+         if 'offset' in request['get']:
+             offset = int(request['get']['offset'])
+
+         limit = 0
+         if 'limit' in request['get']:
+             limit = int(request['get']['limit'])
+
+         # Truncate the list of studies
+         if limit == 0:
+             studies = studies[offset : ]
+         else:
+             studies = studies[offset : offset + limit]
+
+         # Return the truncated list of studies
+         output.AnswerBuffer(json.dumps(studies), 'application/json')
+     else:
+         output.SendMethodNotAllowed('GET')
+
+ orthanc.RegisterRestCallback('/sort-studies', SortStudiesByDate)
+
+
+.. highlight:: bash
+
+Here is a sample call to this new REST route, that could be issued by
+any JavaScript framework (the ``json_pp`` command-line pretty-prints a
+JSON file)::
+
+  $ curl http://localhost:8042/sort-studies | json_pp
+
+This route also implement paging (i.e. it can limit and offset the
+returned studies)::
+  
+  $ curl 'http://localhost:8042/sort-studies?offset=2&limit=2' | json_pp
+
+Obviously, this basic sample can be improved in many ways. To improve
+performance, one could for instance cache the result of
+``/studies?expand`` in memory by :ref:`listening to changes
+<python-changes>` in the list of studies
+(cf. ``orthanc.ChangeType.NEW_STUDY`` and
+``orthanc.ChangeType.DELETED``).
+
 
 
 Performance and concurrency
