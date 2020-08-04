@@ -70,34 +70,58 @@ From Osimis
 Index of the contributed plugins
 --------------------------------
 
+C/C++ plugins
+^^^^^^^^^^^^^
+
 * `AWS S3 storage plugin
   <https://github.com/radpointhq/orthanc-s3-storage>`__: This plugin
   by `Radpoint <https://radpoint.pl/>`__ makes Orthanc store its
   DICOM files into an `Amazon S3 bucket
   <https://en.wikipedia.org/wiki/Amazon_S3>`__.
+
 * `DWV Orthanc Plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__: This plugin by
   Yves Martelli is based on `dwv
   <https://github.com/ivmartel/dwv/wiki>`__ and extends Orthanc with a
   Web viewer of DICOM images.
+
 * Another Web viewer is provided courtesy of `Emsy Chan
   <https://groups.google.com/d/msg/orthanc-users/EC5Z2KaM4Hs/MG3KkzhCDAAJ>`__.
+
 * `VPI Reveal <https://www.vpireveal.com/>`__ provides a plugin to
   "write the DICOM records in a normal Windows-readable file hierarchy
   (patient-study-series-DICOM file) at a location called
   ``VPIStorage`` that can then be imported into VPI Reveal."  `Check
   out their source code
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthancVPIRevealPlugin>`__.
+
 * `Doc Cirrus <https://www.doc-cirrus.com/>`__ is working on `MongoDB
   <https://en.wikipedia.org/wiki/MongoDB>`__ database plugins. Check
   out their `source code
   <https://github.com/Doc-Cirrus/orthanc-mongodb>`__ and the
   `associated description
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthanc-mongodb>`__.
+
+Python plugins
+^^^^^^^^^^^^^^
+
+* Julian Hartig maintains a `Python plugin
+  <https://github.com/crispinus2/orthanc-gdt>`__ called
+  ``orthanc-gdt``, in order to glue Orthanc to the `GDT interface most
+  German AIS <https://en.wikipedia.org/wiki/XDT>`__
+  (Arztinformationssysteme - as opposed to e.g. the RIS used by
+  radiologists) use for communicating with external applications and
+  devices. This topic is further discussed on the `Orthanc Users forum
+  <https://groups.google.com/d/msg/orthanc-users/NO7MnWzKsAc/5hEVxymWBQAJ>`__.
+
+  
+Other
+^^^^^
+
 * Check out the `OrthancContributed repository on GitHub
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__, that
   might contain plugins that are not tracked in this list.
 
-*Remark:* Do not hesitate to `contact us
-<https://www.orthanc-server.com/static.php?page=contact>`__ if you have
-developed a plugin so that we can promote it in the list above!
+* **Important:** Do not hesitate to `contact us
+  <https://www.orthanc-server.com/static.php?page=contact>`__ if you
+  have developed a plugin so that we can promote it in the list above!
