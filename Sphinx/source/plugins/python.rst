@@ -567,6 +567,11 @@ updated in 2019 thanks to this Python script::
 Performance and concurrency
 ---------------------------
 
+**Important:** This section only applies to UNIX-like systems. The
+``multiprocessing`` package will not work on Microsoft Windows as the
+latter OS has a different model for `forking processes
+<https://en.wikipedia.org/wiki/Fork_(system_call)>`__.
+
 .. highlight:: python
 
 Let us consider the following sample Python script that makes a
