@@ -91,10 +91,11 @@ here are some tasks you can take in charge that would greatly help us:
     <https://en.wikipedia.org/wiki/Samba_(software)>`__ for Windows)
     or `WebDAV <https://en.wikipedia.org/wiki/WebDAV>`__.
   - Always remember that he **recommended way of contributing to the
-    source code of Orthanc is by creating C/C++/Python plugins**. If
-    the current plugin SDK is insufficient for you to develop some
-    feature as a plugin, do not hesitate to request an extension to
-    the Orthanc SDK on the `mailing list
+    source code of Orthanc is by creating C/C++/Python plugins, or by
+    creating external software that use the REST API**. If the current
+    plugin SDK is insufficient for you to develop some feature as a
+    plugin, do not hesitate to request an extension to the Orthanc SDK
+    on the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
 
 
