@@ -101,8 +101,12 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Financial support**:
 
-  - Osimis provides `support packs and custom development services
-    <https://www.osimis.io/en/services.html>`__ around the Orthanc
-    ecosystem and, more generally, around medical imaging. Buying such
-    professional services is the best way to make the Orthanc project
-    sustainable in the long term.
+  - Osimis provides `support packs and professional development
+    services <https://www.osimis.io/en/services.html>`__ around the
+    Orthanc ecosystem and, more generally, around medical
+    imaging. Buying such professional services is the best way to make
+    the Orthanc project sustainable in the long term.
+  - Similarly, hospitals and practitioners taking advantage of Orthanc
+    are kindly invited to consider `buying Lify by Osimis
+    <https://lify.io/>`__. Lify is a flexible clinical environment
+    that is built on the top of Orthanc.

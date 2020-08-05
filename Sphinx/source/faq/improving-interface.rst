@@ -54,8 +54,22 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/d/msg/orthanc-users/oOyKTmfs-J0/B6eyBJcvCAAJ>`__
   on the Orthanc Users forum.
 
-* The `Orthanc Tools JS <https://github.com/salimkanoun/Orthanc-Tools-JS>`__
-  environment created by Salim Kanoun.
+* `Orthanc Tools <https://github.com/salimkanoun/Orthanc_Tools>`__, a
+  desktop Java interface around the REST API of Orthanc by Salim
+  Kanoun. Orthanc Tools was notably showcased during `OrthancCon 2019
+  <https://www.orthanc-server.com/static.php?page=conference-schedule>`__.
+  
+* `OrthancToolsJS <https://github.com/salimkanoun/Orthanc-Tools-JS>`__
+  is the successor of the now-deprecated Orthanc Tools. This Web
+  interface was also created by Salim Kanoun. For more information,
+  including link to a demo server, `check out the announcement
+  <https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/orthanc-users/L1BqXbD900E/CB8wOnQ_AwAJ>`__
+  on the discussion group.
 
 * The `Orthanc Manager <https://github.com/id-05/OrthancManager>`__
   Android application.
+
+* Last but not least, for medical and hospital audience, our
+  commercial partner Osimis sells an **integrated clinical
+  environment** around Orthanc that is called `Lify
+  <https://lify.io/>`__.
