@@ -63,11 +63,13 @@ Finally, have a look to the following **related projects**:
   is the successor of the now-deprecated Orthanc Tools. This Web
   interface was also created by Salim Kanoun. For more information,
   including link to a demo server, `check out the announcement
-  <https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/orthanc-users/L1BqXbD900E/CB8wOnQ_AwAJ>`__
+  <https://groups.google.com/forum/#!msg/orthanc-users/L1BqXbD900E/CB8wOnQ_AwAJ>`__
   on the discussion group.
 
 * The `Orthanc Manager <https://github.com/id-05/OrthancManager>`__
-  Android application.
+  Android application. `Check out the announcement
+  <https://groups.google.com/forum/#!msg/orthanc-users/ToG4kbhK4Ss/CdFaexyvBwAJ>`__
+  on the discussion group.
 
 * Last but not least, for medical and hospital audience, our
   commercial partner Osimis sells an **integrated clinical
