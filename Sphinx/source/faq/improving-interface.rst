@@ -74,7 +74,7 @@ Finally, have a look to the following **related projects**:
 * Last but not least, as written above, please consider buying the
   `professional development services by Osimis
   <https://www.osimis.io/en/services.html>`__. Osimis can help medical
-  and hospital audience with the deployment of an **integrated
-  clinical environment** around Orthanc. In turn, the money you pay
-  will contribute to make the Orthanc project sustainable in the long
-  term.
+  and hospital audience with the deployment of a **certified,
+  integrated clinical environment** around Orthanc. In turn, the money
+  you pay will contribute to make the Orthanc project sustainable in
+  the long term.
