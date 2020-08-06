@@ -71,7 +71,10 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/forum/#!msg/orthanc-users/ToG4kbhK4Ss/CdFaexyvBwAJ>`__
   on the discussion group.
 
-* Last but not least, for medical and hospital audience, our
-  commercial partner Osimis sells an **integrated clinical
-  environment** around Orthanc that is called `Lify
-  <https://lify.io/>`__.
+* Last but not least, as written above, please consider buying the
+  `professional development services by Osimis
+  <https://www.osimis.io/en/services.html>`__. Osimis can help medical
+  and hospital audience with the deployment of an **integrated
+  clinical environment** around Orthanc. In turn, the money you pay
+  will contribute to make the Orthanc project sustainable in the long
+  term.
