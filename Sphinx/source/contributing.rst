@@ -80,6 +80,10 @@ here are some tasks you can take in charge that would greatly help us:
       and/or `BIDS
       <https://en.wikipedia.org/wiki/Brain_Imaging_Data_Structure>`__,
       notably for neuroimaging.
+    + `Encapsulate a video into a DICOM file
+      <https://stackoverflow.com/questions/28698888/creating-h-264-avc-dicom-file-with-dcmtk/28737338#28737338>`__
+      by calling the REST similarly to the ``/tools/create-dicom``
+      :ref:`route to encapsulate PDF <pdf>`.
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
