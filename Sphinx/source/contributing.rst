@@ -1,8 +1,14 @@
 .. _contributing:
 
+
 Contributing to Orthanc
 =======================
 
+.. toctree::
+   :hidden:
+
+   unanswered-forum.rst
+   
 If you find Orthanc useful and wish to contribute to its development,
 here are some tasks you can take in charge that would greatly help us:
 
@@ -21,6 +27,11 @@ here are some tasks you can take in charge that would greatly help us:
     in your research work.
   - Answer questions posted to the `mailing list
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
+
+    - **Important**: A page list the :ref:`old questions that are not
+      fully answered yet <unanswered_forum>`. Consider answering these
+      topics too!
+    
   - Improve the text of the `Orthanc Book and REST API documentation
     <https://hg.orthanc-server.com/orthanc-book/file/default>`__ (check
     out the instructions provided in the `README file

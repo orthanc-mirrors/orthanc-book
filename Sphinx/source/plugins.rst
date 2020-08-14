@@ -3,6 +3,17 @@
 Plugins
 =======
 
+.. toctree::
+   :hidden:
+
+   plugins/authorization.rst
+   plugins/google-cloud-platform.rst
+   plugins/mysql.rst
+   plugins/object-storage.rst
+   plugins/osimis-webviewer.rst
+   plugins/python.rst
+   plugins/transfers.rst
+
 .. contents::
 
 Overview

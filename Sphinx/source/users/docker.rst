@@ -5,6 +5,12 @@
 Orthanc for Docker
 ==================
 
+.. toctree::
+   :hidden:
+
+   docker-osimis.rst
+   
+
 .. contents::
    :depth: 3
 
