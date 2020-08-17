@@ -34,8 +34,8 @@ using the :ref:`REST API <sending-dicom-images>` of Orthanc.
 Enabling CORS
 -------------
 
-Orthanc does not feature support for `cross-origin resource sharing
-(CORS)
+Orthanc does not feature built-in support for `cross-origin resource
+sharing (CORS)
 <https://en.wikipedia.org/wiki/Cross-origin_resource_sharing>`_.  It
 is however possible to enable it with a nginx reverse proxy. Here is a
 sample configuration for nginx::
