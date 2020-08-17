@@ -125,6 +125,10 @@ Python plugins
   devices. This topic is further discussed on the `Orthanc Users forum
   <https://groups.google.com/d/msg/orthanc-users/NO7MnWzKsAc/5hEVxymWBQAJ>`__.
 
+* Stephen Douglas Scotti maintains a `Python plugin
+  <https://github.com/sscotti/OrthancBrowser>`__ to implement
+  pagination on one Orthanc server.
+
   
 Other
 ^^^^^
