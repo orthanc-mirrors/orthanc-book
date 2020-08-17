@@ -151,10 +151,55 @@ Given the ID of some job, one can:
 
 The related state machine is depicted in the `implementation notes
 <https://hg.orthanc-server.com/orthanc/raw-file/default/OrthancServer/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
+
+
+Example: Asynchronous generation of an archive
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Sucessful jobs are associated with a set of so-called "outputs" that
+can be attached to the job.
+               
+Here is a sample bash session to ask Orthanc to generate a ZIP
+archive, then to download it locally::
+
+  $ curl http://localhost:8042/studies/27f7126f-4f66fb14-03f4081b-f9341db2-53925988/archive -d '{"Asynchronous":true}'
+  {
+    "ID" : "82cc02d1-03fe-41f9-be46-a308d16ea94a",
+    "Path" : "/jobs/82cc02d1-03fe-41f9-be46-a308d16ea94a"
+  }
+  $ curl http://localhost:8042/jobs/82cc02d1-03fe-41f9-be46-a308d16ea94a
+  {
+    "CompletionTime" : "20200817T144700.401777",
+    "Content" : {
+      "Description" : "REST API",
+      "InstancesCount" : 232,
+      "UncompressedSizeMB" : 64
+    },
+    "CreationTime" : "20200817T144658.011824",
+    "EffectiveRuntime" : 2.3879999999999999,
+    "ErrorCode" : 0,
+    "ErrorDescription" : "Success",
+    "ID" : "82cc02d1-03fe-41f9-be46-a308d16ea94a",
+    "Priority" : 0,
+    "Progress" : 100,
+    "State" : "Success",
+    "Timestamp" : "20200817T144705.770825",
+    "Type" : "Archive"
+  }
+  $ curl http://localhost:8042/jobs/82cc02d1-03fe-41f9-be46-a308d16ea94a/archive > a.zip
+
+Note how we retrieve the content of the archive by accessing the
+``archive`` output of the job (check out the virtual method
+``IJob::GetOutput()`` from the `source code
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.7.2/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
+of Orthanc).
+
+As of Orthanc 1.7.2, only the creation of a ZIP or a DICOMDIR archive
+produces such an "output".
+
   
-
-
-
 .. _pdf:
 
 Attaching PDF file as DICOM series
