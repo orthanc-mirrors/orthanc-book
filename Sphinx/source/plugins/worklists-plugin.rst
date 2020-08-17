@@ -51,9 +51,10 @@ A basic configuration would read as follows::
     "Worklists" : {
       "Enable": true,
       "Database": "./WorklistsDatabase",
-      "FilterIssuerAet": false  // Some modalities do not specify 'ScheduledStationAETitle (0040,0001)'
+      "FilterIssuerAet": false, // Some modalities do not specify 'ScheduledStationAETitle (0040,0001)'
                                 // in the C-Find and may receive worklists not related to them.  This option 
                                 // adds an extra filtering based on the AET of the modality issuing the C-Find.
+      "LimitAnswers": 0  // Maximum number of answers to be returned (new in release 1.7.3)
     }
   }
 
