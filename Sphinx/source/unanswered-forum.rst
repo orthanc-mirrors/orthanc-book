@@ -30,7 +30,6 @@ to remove the question from this page.
 Pending questions
 -----------------
 
-* **2020-08-06**: `Advanced authorization plugin dicomweb-plugin issue <https://groups.google.com/g/orthanc-users/c/gwgGJsLvQUk/m/CkiaojrCAgAJ>`__
 * **2020-04-24**: `Auto routing with OnStableStudy <https://groups.google.com/g/orthanc-users/c/GuFqiZtkwtg/m/PGu2fM5LCAAJ>`__
 * **2020-04-13**: `Advanced authorization plugin vs. Remote access <https://groups.google.com/g/orthanc-users/c/m2VM3AhhWok/m/EjVy5_ZFCAAJ>`__
 * **2020-03-28**: `REST Query Remote Modality using DICOM Sequence <https://groups.google.com/g/orthanc-users/c/7o0RNFEtVuA/m/KmpalFxTAwAJ>`__
