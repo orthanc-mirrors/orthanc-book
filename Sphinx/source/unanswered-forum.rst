@@ -43,6 +43,7 @@ Pending questions
 Questions requiring a development
 ---------------------------------
 
+* **2020-08-06**: `Advanced authorization plugin dicomweb-plugin issue <https://groups.google.com/g/orthanc-users/c/gwgGJsLvQUk/m/CkiaojrCAgAJ>`__
 * **2019-10-25**: `Expediting stability of a DICOM study - new API endpoint? <https://groups.google.com/g/orthanc-users/c/kADj2eoELK4/m/xFrc0wfIBgAJ>`__
 * **2019-10-07**: `Timeout too short when connecting to MySQL server resulting in crash <https://groups.google.com/g/orthanc-users/c/rYA4eJzEp7Q/m/teFOHBI6BwAJ>`__
 * **2019-05-14**: `Jobs Engine: Study Details <https://groups.google.com/g/orthanc-users/c/9GCV88GLEzw/m/A8r4cb_UAgAJ>`__
