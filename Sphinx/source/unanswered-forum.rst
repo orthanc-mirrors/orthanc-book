@@ -53,4 +53,5 @@ Waiting for feedback from the original poster
 ---------------------------------------------
 
 * **2020-05-13**: `Contribution - Use default encoding when specific character set value is invalid <https://groups.google.com/g/orthanc-users/c/I78mQbp9nBM/m/amaikWp7CAAJ>`__
+* **2020-03-06**: `Orthanc not working with MySQL 8 <https://groups.google.com/d/msg/orthanc-users/OCFFkm1qm0k/k3rx12UjAwAJ>`__
 * **2018-02-22**: `Dicom modification - removing sequences? <https://groups.google.com/d/msg/orthanc-users/NnbMfH0P0OA/cF-aMKkpAQAJ>`__
