@@ -3,6 +3,12 @@
 Compiling Orthanc
 =================
 
+.. toctree::
+   :hidden:
+
+   compiling-old.rst
+
+   
 Under GNU/Linux
 ---------------
 

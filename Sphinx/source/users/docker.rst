@@ -5,6 +5,12 @@
 Orthanc for Docker
 ==================
 
+.. toctree::
+   :hidden:
+
+   docker-osimis.rst
+   
+
 .. contents::
    :depth: 3
 
@@ -67,7 +73,7 @@ update the Docker image to benefit from the latest features::
 If more stability is required, you can select the official release of
 Orthanc to be run::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.7.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.7.3
 
 Passing additional command-line options (e.g. to make Orthanc verbose)
 can be done as follows (note the ``/etc/orthanc`` option that is
@@ -89,7 +95,7 @@ implementation <dicomweb>`, and its :ref:`whole-slide imaging viewer
 
 Or you can also start a specific version of Orthanc for more stability::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.7.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.7.3
 
 If you have an interest in the :ref:`Python plugin <python-plugin>`,
 you can use the ``orthanc-python`` image. The latter image is a
@@ -97,7 +103,7 @@ heavier version of the ``orthanc-plugins`` image, as it embeds the
 Python 3.7 interpreter. Here is how to start this image::
 
   $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.7.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.7.3
   
 
 Fine-tuning the configuration
@@ -149,7 +155,7 @@ the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
   version: '3.1'  # Secrets are only available since this version of Docker Compose
   services:
     orthanc:
-      image: jodogne/orthanc-plugins:1.7.2
+      image: jodogne/orthanc-plugins:1.7.3
       command: /run/secrets/  # Path to the configuration files (stored as secrets)
       ports:
         - 4242:4242
@@ -188,7 +194,7 @@ persistent by mapping the ``/var/lib/orthanc/db`` folder of the
 container to some path in the filesystem of your Linux host, e.g.::
 
   $ mkdir /tmp/orthanc-db
-  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.7.2 
+  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.7.3 
 
 
 Whole-slide imaging support
@@ -309,4 +315,4 @@ Note that:
 * The build artifacts can be found in folder ``/root/orthanc/Build``.
 
 * This command launches the mainline version. To start a released version,
-  use e.g. ``jodogne/orthanc-debug:1.7.2``.
+  use e.g. ``jodogne/orthanc-debug:1.7.3``.

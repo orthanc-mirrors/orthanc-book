@@ -54,8 +54,27 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/d/msg/orthanc-users/oOyKTmfs-J0/B6eyBJcvCAAJ>`__
   on the Orthanc Users forum.
 
-* The `Orthanc Tools JS <https://github.com/salimkanoun/Orthanc-Tools-JS>`__
-  environment created by Salim Kanoun.
+* `Orthanc Tools <https://github.com/salimkanoun/Orthanc_Tools>`__, a
+  desktop Java interface around the REST API of Orthanc by Salim
+  Kanoun. Orthanc Tools was notably showcased during `OrthancCon 2019
+  <https://www.orthanc-server.com/static.php?page=conference-schedule>`__.
+  
+* `OrthancToolsJS <https://github.com/salimkanoun/Orthanc-Tools-JS>`__
+  is the successor of the now-deprecated Orthanc Tools. This Web
+  interface was also created by Salim Kanoun. For more information,
+  including link to a demo server, `check out the announcement
+  <https://groups.google.com/forum/#!msg/orthanc-users/L1BqXbD900E/CB8wOnQ_AwAJ>`__
+  on the discussion group.
 
 * The `Orthanc Manager <https://github.com/id-05/OrthancManager>`__
-  Android application.
+  Android application. `Check out the announcement
+  <https://groups.google.com/forum/#!msg/orthanc-users/ToG4kbhK4Ss/CdFaexyvBwAJ>`__
+  on the discussion group.
+
+* Last but not least, as written above, please consider buying the
+  `professional development services by Osimis
+  <https://www.osimis.io/en/services.html>`__. Osimis can help medical
+  and hospital audience with the deployment of a **certified,
+  integrated clinical environment** around Orthanc. In turn, the money
+  you pay will contribute to make the Orthanc project sustainable in
+  the long term.
