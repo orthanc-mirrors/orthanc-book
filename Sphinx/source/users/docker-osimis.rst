@@ -229,6 +229,19 @@ Orthanc non-standard defaults::
   }
   
 
+Default lua scripts
+-------------------
+
+Some lua scripts are already loaded in the image but are not configured to 
+be loaded by Orthanc automatically.  You'll have to add them to the ``"LuaScripts"`` 
+configuration if you want to use them.
+
+`/lua-scripts/filter-http-tools-reset.lua <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/filter-http-tools-reset.lua>`__ 
+can be used to regenerate the ``/tmp/orthanc.json`` configuration file that is loaded by Orthanc every time
+you POST to ``/tools/reset``.  Note that it declares an ``IncomingHttpRequestFilter`` 
+callback that might conflict with your scripts.
+
+
 Plugins
 -------
 
