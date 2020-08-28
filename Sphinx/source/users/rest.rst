@@ -417,7 +417,7 @@ You first have to declare the Url of the remote orthanc inside the
 to declare a remote orthanc peer::
 
     ...
-    "Peers" : {
+    "OrthancPeers" : {
       "sample" : [ "http://localhost:8043" ], // short version
       "sample2" : {                           // long version
         "Url" : "http://localhost:8044",
