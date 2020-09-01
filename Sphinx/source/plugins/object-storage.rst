@@ -6,6 +6,11 @@ Cloud Object Storage plugins
 
 .. contents::
 
+Release notes
+-------------
+
+Release notes are available `here
+<https://hg.orthanc-server.com/orthanc-object-storage/file/default/NEWS>`__ 
    
 Introduction
 ------------
@@ -122,9 +127,11 @@ Sample configuration::
     "Region" : "eu-central-1",
     "AccessKey" : "AKXXX",
     "SecretKey" : "RhYYYY",
-    "Endpoint": "",                 // optional - currently in mainline version only: custom endpoint
-    "ConnectionTimeout": 30,        // optional - currently in mainline version only: connection timeout in seconds
-    "RequestTimeout": 1200          // optional - currently in mainline version only: request timeout in seconds (max time to upload/download a file)
+    "Endpoint": "",                           // custom endpoint
+    "ConnectionTimeout": 30,                  // connection timeout in seconds
+    "RequestTimeout": 1200,                   // request timeout in seconds (max time to upload/download a file)
+    "MigrationFromFileSystemEnabled": false,  // see below
+    "StorageStructure": "flat"                // see below
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -144,7 +151,9 @@ Sample configuration::
 
   "AzureBlobStorage" : {
     "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=xxxxxxxxx;AccountKey=yyyyyyyy===;EndpointSuffix=core.windows.net",
-    "ContainerName" : "test-orthanc-storage-plugin"
+    "ContainerName" : "test-orthanc-storage-plugin",
+    "MigrationFromFileSystemEnabled": false,  // see below
+    "StorageStructure": "flat"                // see below
   }
 
 
@@ -155,8 +164,37 @@ Sample configuration::
 
   "GoogleCloudStorage" : {
     "ServiceAccountFile": "/path/to/googleServiceAccountFile.json",
-    "BucketName": "test-orthanc-storage-plugin"
+    "BucketName": "test-orthanc-storage-plugin",
+    "MigrationFromFileSystemEnabled": false,  // see below
+    "StorageStructure": "flat"                // see below
   }
+
+
+Migration & Storage structure
+-----------------------------
+
+The **StorageStructure** configuration allows you to select the way objects are organized
+within the storage (``flat`` or ``legacy``).  
+Unlike traditional file system in which Orthanc uses 2 levels
+of folders, object storages usually have no limit on the number of files per folder and 
+therefore all objects are stored at the root level of the object storage.  This is the
+default ``flat`` behaviour.  Note that, in the ``flat`` mode, an extension `.dcm` or `.json`
+is added to the filename which is not the case in the legacy mode.
+
+The ``legacy`` behaviour mimicks the Orthanc File System convention.  This is actually helpful
+when migrating your data from a file system to an object storage since you can copy all the file
+hierarchy as is.
+
+Note that you can not change this configuration once you've uploaded the first files in Orthanc.
+
+The **MigrationFromFileSystemEnabled** configuration has been for Orthanc to continue working
+while you're migrating your data from the file system to the object storage.  While this option is enabled,
+Orthanc will store all new files into the object storage but will try to read/delete files
+from both the file system and the object storage.
+
+This option can be disabled as soon as all files have been copied from the file system to the 
+object storage.  Note that Orthanc is not copying the files from one storage to the other; you'll
+have to use a standard ``sync`` command from the object-storage provider.
 
 
 Sample setups
@@ -245,14 +283,16 @@ Each key must have a unique id that is a uint32 number.
 Here's a sample configuration file of the `StorageEncryption` section of the plugins::
 
   {
-    "StorageEncryption" : {
-      "Enable": true,
-      "MasterKey": [3, "/path/to/master.key"], // key id - path to the base64 encoded key
-      "PreviousMasterKeys" : [
-          [1, "/path/to/previous1.key"],
-          [2, "/path/to/previous2.key"]
-      ],
-      "MaxConcurrentInputSize" : 1024   // size in MB 
+    "GoogleCloudStorage" : {
+      "StorageEncryption" : {
+        "Enable": true,
+        "MasterKey": [3, "/path/to/master.key"], // key id - path to the base64 encoded key
+        "PreviousMasterKeys" : [
+            [1, "/path/to/previous1.key"],
+            [2, "/path/to/previous2.key"]
+        ],
+        "MaxConcurrentInputSize" : 1024   // size in MB 
+      }
     }
   }
 
