@@ -175,13 +175,13 @@ Migration & Storage structure
 
 The **StorageStructure** configuration allows you to select the way objects are organized
 within the storage (``flat`` or ``legacy``).  
-Unlike traditional file system in which Orthanc uses 2 levels
+Unlike the traditional file system in which Orthanc uses 2 levels
 of folders, object storages usually have no limit on the number of files per folder and 
 therefore all objects are stored at the root level of the object storage.  This is the
 default ``flat`` behaviour.  Note that, in the ``flat`` mode, an extension `.dcm` or `.json`
 is added to the filename which is not the case in the legacy mode.
 
-The ``legacy`` behaviour mimicks the Orthanc File System convention.  This is actually helpful
+The ``legacy`` behaviour mimics the Orthanc File System convention.  This is actually helpful
 when migrating your data from a file system to an object storage since you can copy all the file
 hierarchy as is.
 
