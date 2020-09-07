@@ -130,6 +130,7 @@ Sample configuration::
     "Endpoint": "",                           // custom endpoint
     "ConnectionTimeout": 30,                  // connection timeout in seconds
     "RequestTimeout": 1200,                   // request timeout in seconds (max time to upload/download a file)
+    "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat"                // see below
   }
@@ -152,6 +153,7 @@ Sample configuration::
   "AzureBlobStorage" : {
     "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=xxxxxxxxx;AccountKey=yyyyyyyy===;EndpointSuffix=core.windows.net",
     "ContainerName" : "test-orthanc-storage-plugin",
+    "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat"                // see below
   }
@@ -165,6 +167,7 @@ Sample configuration::
   "GoogleCloudStorage" : {
     "ServiceAccountFile": "/path/to/googleServiceAccountFile.json",
     "BucketName": "test-orthanc-storage-plugin",
+    "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat"                // see below
   }
@@ -185,7 +188,10 @@ The ``legacy`` behaviour mimics the Orthanc File System convention.  This is act
 when migrating your data from a file system to an object storage since you can copy all the file
 hierarchy as is.
 
-Note that you can not change this configuration once you've uploaded the first files in Orthanc.
+The **RootPath** allows you to store the files in another folder as the root level of the
+object storage.
+
+Note that you can not change these configurations once you've uploaded the first files in Orthanc.
 
 The **MigrationFromFileSystemEnabled** configuration has been for Orthanc to continue working
 while you're migrating your data from the file system to the object storage.  While this option is enabled,
