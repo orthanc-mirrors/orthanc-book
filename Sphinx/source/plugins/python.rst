@@ -137,7 +137,16 @@ that can be loaded by properly setting the ``Plugins``
 **Warning:** The shared library is only compatible with the Python
 interpreter whose version corresponds to the value of the
 ``PYTHON_VERSION`` argument that was given to CMake.
-     
+
+**Note for OS X:** As indicated by `Stephen Douglas Scotti
+<https://groups.google.com/g/orthanc-users/c/RnmZKFv8FaY/m/HhvOD2A2CAAJ>`__,
+here is a sample invocation of CMake to force the version of Python to
+be used on OS X::
+
+  $ cmake .. -DPYTHON_VERSION=3.8 -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release \
+          -DPYTHON_LIBRARY=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/lib/libpython3.8.dylib \
+          -DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/include/python3.8/
+  
   
 Microsoft Windows
 .................
