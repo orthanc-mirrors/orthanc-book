@@ -83,6 +83,14 @@ Compile::
   $ cd build/aws
   $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Aws
 
+
+**NB:** If you don't want to use vcpkg, you can use the following
+command (this syntax is not compatible with Ninja yet)::
+
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF ../../orthanc-object-storage/Aws
+  $ make
+
+  
 Azure Blob Storage plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
