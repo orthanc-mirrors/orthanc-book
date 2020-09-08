@@ -202,6 +202,8 @@ This option can be disabled as soon as all files have been copied from the file 
 object storage.  Note that Orthanc is not copying the files from one storage to the other; you'll
 have to use a standard ``sync`` command from the object-storage provider.
 
+A migration script from File System to Azure Blob Storage is available courtesy of `Steve Hawes <https://github.com/jodogne/OrthancContributed/blob/master/Scripts/Migration/2020-09-08-TransferToAzure.sh>`__ .
+
 
 Sample setups
 -------------
