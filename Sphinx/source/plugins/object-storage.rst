@@ -161,9 +161,9 @@ Emulation of AWS S3 using MinIO
 .. highlight:: bash
 
 The `MinIO project <https://min.io/>`__ can be used to emulate AWS S3
-for local testing/prototyping. Here is a sample command to start MinIO
-on your local computer using Docker (evidently, make sure to adapt
-your credentials)::
+for local testing/prototyping. Here is a sample command to start a
+MinIO server on your local computer using Docker (evidently, make sure
+to set different credentials)::
 
   $ docker run -p 9000:9000 \
     -e "MINIO_REGION=eu-west-1" \
@@ -198,7 +198,13 @@ Note that the ``VirtualAddressing`` option must be set to ``false``
 for such a `local setup with MinIO to work
 <https://github.com/aws/aws-sdk-cpp/issues/1425>`__. This option is
 **not** available in releases <= 1.1.0 of the AWS S3 plugin.
-  
+
+**Important:** If you get the cryptic error message
+``SignatureDoesNotMatch The request signature we calculated does not
+match the signature you provided. Check your key and signing
+method.``, this most probably indicates that your access key or your
+secret key doesn't match the credentials that were used while starting
+the MinIO server.
     
 
 Azure Blob Storage plugin
