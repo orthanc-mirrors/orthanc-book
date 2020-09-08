@@ -83,6 +83,14 @@ Compile::
   $ cd build/aws
   $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Aws
 
+
+**NB:** If you don't want to use vcpkg, you can use the following
+command (this syntax is not compatible with Ninja yet)::
+
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF ../../orthanc-object-storage/Aws
+  $ make
+
+
 Azure Blob Storage plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -132,7 +140,8 @@ Sample configuration::
     "RequestTimeout": 1200,                   // request timeout in seconds (max time to upload/download a file)
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat"                // see below
+    "StorageStructure": "flat",               // see below
+    "VirtualAddressing": true                 // see the section related to MinIO
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -143,7 +152,60 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
     "AccessKey": "XXX",
     "SecretKey": "YYY",
     "Endpoint": "s3.fr-par.scw.cloud"
-  },
+  }
+
+
+Emulation of AWS S3 using MinIO
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+The `MinIO project <https://min.io/>`__ can be used to emulate AWS S3
+for local testing/prototyping. Here is a sample command to start a
+MinIO server on your local computer using Docker (evidently, make sure
+to set different credentials)::
+
+  $ docker run -p 9000:9000 \
+    -e "MINIO_REGION=eu-west-1" \
+    -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
+    -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MNG/bPxRfiCYEXAMPLEKEY" \
+    minio/minio server /data
+
+.. highlight:: json
+
+Note that the ``MINIO_REGION`` must be set to an arbitrary region that
+is supported by AWS S3.
+
+You can then open the URL `http://localhost:9000/
+<http://localhost:9000/>`__ with your Web browser to create a bucket,
+say ``my-sample-bucket``.
+
+Here is a corresponding full configuration for Orthanc::
+
+  {
+    "Plugins" : [ <...> ],
+    "AwsS3Storage" : {
+      "BucketName": "my-sample-bucket",
+      "Region" : "eu-west-1",
+      "Endpoint": "http://localhost:9000/",
+      "AccessKey": "AKIAIOSFODNN7EXAMPLE",
+      "SecretKey": "wJalrXUtnFEMI/K7MNG/bPxRfiCYEXAMPLEKEY",
+      "VirtualAddressing" : false
+    }
+  }
+
+Note that the ``VirtualAddressing`` option must be set to ``false``
+for such a `local setup with MinIO to work
+<https://github.com/aws/aws-sdk-cpp/issues/1425>`__. This option is
+**not** available in releases <= 1.1.0 of the AWS S3 plugin.
+
+**Important:** If you get the cryptic error message
+``SignatureDoesNotMatch The request signature we calculated does not
+match the signature you provided. Check your key and signing
+method.``, this most probably indicates that your access key or your
+secret key doesn't match the credentials that were used while starting
+the MinIO server.
+    
 
 Azure Blob Storage plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^
