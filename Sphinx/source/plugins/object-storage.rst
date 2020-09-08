@@ -189,7 +189,7 @@ Here is a corresponding full configuration for Orthanc::
       "Region" : "eu-west-1",
       "Endpoint": "http://localhost:9000/",
       "AccessKey": "AKIAIOSFODNN7EXAMPLE",
-      "SecretKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+      "SecretKey": "wJalrXUtnFEMI/K7MNG/bPxRfiCYEXAMPLEKEY",
       "VirtualAddressing" : false
     }
   }
