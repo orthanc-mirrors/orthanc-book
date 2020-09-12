@@ -71,6 +71,13 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/forum/#!msg/orthanc-users/ToG4kbhK4Ss/CdFaexyvBwAJ>`__
   on the discussion group.
 
+* `Elessar Theme for Orthanc <https://github.com/Terabuck/Elessar>`__
+  by Ludwig Moreno. This PHP project notably provide a green and dark
+  grey theme, and translation in 14 languages. `Check out the full
+  announcement
+  <https://groups.google.com/g/orthanc-users/c/Kkxqx6ZW2yw/m/dFbTuHZHCQAJ>`__
+  on the discussion group.
+
 * Last but not least, as written above, please consider buying the
   `professional development services by Osimis
   <https://www.osimis.io/en/services.html>`__. Osimis can help medical
