@@ -272,6 +272,11 @@ Sample setups
 
 You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/#markdown-header-for-osimisorthanc-pro-image-users>`__ .
 
+Performances
+------------
+
+You'll find some performance comparison between VM SSDs and object-storage `here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/performance-tests/>`__ .
+
 
 Client-side encryption
 ----------------------
