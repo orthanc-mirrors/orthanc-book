@@ -72,7 +72,10 @@ option to ``true``, you should:
 * If Orthanc is put on a server that can be contacted from Internet,
   put Orthanc behind a :ref:`reverse proxy <https>`, and let this
   reverse proxy take care of the HTTPS encryption.
-  
+
+* Enable :ref:`Client certificate authentication <https>` between multiple
+  Orthanc peers.
+
 * Setup rules that define, for each authorized user, which resources
   it can access, and through which HTTP method (GET, POST, DELETE
   and/or PUT). This can be done by defining a :ref:`filter written in

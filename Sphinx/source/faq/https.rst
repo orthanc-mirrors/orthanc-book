@@ -175,3 +175,42 @@ Using this new configuration, the query will succeed::
     "HttpPort" : 8042,
     [...]
   }
+
+
+Securing Orthanc with mutual TLS authentication
+...............................................
+        
+.. highlight:: bash
+               
+Once HTTPS is enabled, Orthanc can also be configured to accept incoming
+connections based on a certificate provided by the client.
+
+Server side, this is configured via::
+
+  {
+    "SslVerifyPeers": true,
+    "SslTrustedClientCertificates": "trustedClientCertificates.pem"
+  }
+
+``SslTrustedClientCertificates`` shall contain a list of certificates
+that are trusted.  This can be a list of individual self-signed certificates
+or this can contain a list of trusted root CAs.
+
+Client side, this is configured via::
+
+  {
+    "OrthancPeers" : {
+      "orthanc-b" : {
+        "Url" : "https://localhost:8043",
+        "CertificateFile" : "client-crt.pem",
+        "CertificateKeyFile" : "client-key.pem",
+        "CertificateKeyPassword": ""
+      }
+    }
+  }
+	  
+Note that the same kind of configuration is also available for 
+:ref:`DICOMweb client <dicomweb-client>`.
+
+An example of such a setup with instructions to generate the
+certificates is available `here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/tls-mutual-auth/>`__ .
