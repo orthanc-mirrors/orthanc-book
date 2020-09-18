@@ -128,7 +128,7 @@ The ``State`` field can be:
   ``ErrorCode`` and ``ErrorDescription`` fields for more information.
 * ``Paused``: The job has been paused.
 * ``Retry``: The job has failed internally, and has been scheduled for
-  re-submission after a delay. As of Orthanc 1.7.3, this feature is not
+  re-submission after a delay. As of Orthanc 1.7.4, this feature is not
   used by any type of job.
 
 In order to wait for the end of an asynchronous call, the caller will
@@ -193,10 +193,10 @@ archive, then to download it locally::
 Note how we retrieve the content of the archive by accessing the
 ``archive`` output of the job (check out the virtual method
 ``IJob::GetOutput()`` from the `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.7.3/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.7.4/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
 of Orthanc).
 
-As of Orthanc 1.7.3, only the creation of a ZIP or a DICOMDIR archive
+As of Orthanc 1.7.4, only the creation of a ZIP or a DICOMDIR archive
 produces such an "output".
 
   
