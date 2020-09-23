@@ -84,7 +84,19 @@ You might have to set up a host fingerprint in the Mercurial
 configuration. Add the following lines to your ``~/.hgrc`` file::
 
   [hostfingerprints]
-  hg.orthanc-server.com = e3:71:4e:c9:2f:b6:ea:b1:74:fb:c1:9e:a4:3e:8f:45:31:b3:04:d3
+  hg.orthanc-server.com = 1B:29:E6:DE:95:7B:6B:21:59:2C:0E:C4:85:B9:64:C9:08:84:9B:98
+  
+.. highlight:: bash
+
+For reference, here is the command that was used to generate this SHA1
+fingerprint (`click here for more information
+<https://wiki.fluidproject.org/display/fluid/Setting+Host+Fingerprints+for+Mercurial>`__)::
+
+  $ openssl s_client -connect hg.orthanc-server.com:443 < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha1 -noout -in /dev/stdin
+
+**Important:** As our certificates are changed periodically, you'll
+have to regularly update your configuration file once Mercurial
+complains about an unexpected fingerprint.
 
 
 Recent versions of Mercurial
@@ -104,12 +116,12 @@ of our code server using a more recent option than the
 and add the following lines::
 
   [hostsecurity]
-  hg.orthanc-server.com:fingerprints=sha256:B9:3B:E5:04:25:F7:11:14:0E:29:1F:65:4F:6D:C8:4F:A2:E5:53:E9:80:1C:2E:EF:02:06:45:96:87:1C:EC:BC
+  hg.orthanc-server.com:fingerprints=sha256:6A:D9:B8:88:C2:96:F1:00:B1:5E:CF:80:BB:CC:23:C5:73:18:D1:7C:7A:7B:10:3E:62:1B:08:87:42:F1:1E:BF
   
 .. highlight:: bash
 
 For reference, here is the command that was used to generate this
-fingerprint (`click here for more information
+SHA256 fingerprint (`click here for more information
 <https://stackoverflow.com/a/56579497/881731>`__)::
 
   $ openssl s_client -connect hg.orthanc-server.com:443 < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha256 -noout -in /dev/stdin
