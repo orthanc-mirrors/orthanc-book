@@ -196,8 +196,14 @@ Note how we retrieve the content of the archive by accessing the
 <https://hg.orthanc-server.com/orthanc/file/Orthanc-1.7.4/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
 of Orthanc).
 
+Here is the corresponding sequence of commands to generate a DICOMDIR
+media::
+
+  $ curl http://localhost:8042/studies/27f7126f-4f66fb14-03f4081b-f9341db2-53925988/media -d '{"Asynchronous":true}'
+  $ curl http://localhost:8042/jobs/6332be8a-0052-44fb-8cc2-ac959aeccad9/archive > a.zip
+
 As of Orthanc 1.7.4, only the creation of a ZIP or a DICOMDIR archive
-produces such an "output".
+produces such "outputs".
 
   
 .. _pdf:
