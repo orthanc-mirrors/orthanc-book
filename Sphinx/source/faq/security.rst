@@ -135,7 +135,7 @@ In general, the DICOM protocol should be disabled if running Orthanc
 on a cloud server, except if you use a VPN (cf. `reference
 <https://groups.google.com/d/msg/orthanc-users/yvHexxG3dTY/7s3A7EHVBAAJ>`__)
 or a SSH tunnel (cf. `reference
-<https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/>`). Favor
+<https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/>`__). Favor
 HTTPS for transfering medical images across sites (see above). You can
 turn off DICOM protocol by setting the configuration option
 ``DicomServerEnabled`` to ``false``.
