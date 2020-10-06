@@ -133,10 +133,12 @@ server, Orthanc also acts as a :ref:`DICOM server <dicom-protocol>`
 
 In general, the DICOM protocol should be disabled if running Orthanc
 on a cloud server, except if you use a VPN (cf. `reference
-<https://groups.google.com/d/msg/orthanc-users/yvHexxG3dTY/7s3A7EHVBAAJ>`__).
-Favor HTTPS for transfering medical images across sites (see
-above). You can turn off DICOM protocol by setting the configuration
-option ``DicomServerEnabled`` to ``false``.
+<https://groups.google.com/d/msg/orthanc-users/yvHexxG3dTY/7s3A7EHVBAAJ>`__)
+or a SSH tunnel (cf. `reference
+<https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/>`). Favor
+HTTPS for transfering medical images across sites (see above). You can
+turn off DICOM protocol by setting the configuration option
+``DicomServerEnabled`` to ``false``.
 
 The DICOM modalities that are known to Orthanc are defined by setting
 the ``DicomModalities`` configuration option. Out-of-the-box, Orthanc
