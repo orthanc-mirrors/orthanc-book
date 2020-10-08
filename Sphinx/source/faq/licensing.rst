@@ -92,7 +92,7 @@ forbidden ("No"), or restricted ("Dual licensing"):
 | is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Creating a :ref:`Python script <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| Creating a :ref:`Python plugin <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
 | code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |
