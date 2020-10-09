@@ -251,7 +251,7 @@ when migrating your data from a file system to an object storage since you can c
 hierarchy as is.
 
 The **RootPath** allows you to store the files in another folder as the root level of the
-object storage.
+object storage.  Note: it shall not start with a ``/``.
 
 Note that you can not change these configurations once you've uploaded the first files in Orthanc.
 
