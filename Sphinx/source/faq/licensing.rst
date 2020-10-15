@@ -103,7 +103,9 @@ forbidden ("No"), or restricted ("Dual licensing")**:
 | plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
 | third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a modified version of the                     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| **For viewers**: Using a modified version of the    | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| :ref:`Orthanc Web Viewer <webviewer>`, of the       |               |       |        |              |                        |                   |
+| :ref:`Osimis Web Viewer <osimis-webviewer>`, of the |               |       |        |              |                        |                   |
 | :ref:`Stone Web Viewer <stone>`, or of the sample   |               |       |        |              |                        |                   |
 | applications of Stone of Orthanc (AGPL license)     |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
