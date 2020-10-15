@@ -44,7 +44,7 @@ teleradiology platforms in developing countries). Unfortunately, the
 GPL does not protect from predatory commercial behaviors over cloud
 platforms because of the so-called "`ASP loophole
 <https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License>`__",
-that does not enforce modified versions of a free and open-source
+that does not enforce derived versions of a free and open-source
 software running on a server to be given back to the community.
 
 For this reason, the plugins that provide scalability-related or
@@ -94,18 +94,18 @@ forbidden ("No"), or restricted ("Dual licensing")**:
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Creating a :ref:`Python plugin <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a modified version of the GPL-licensed        | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
-| code of Orthanc, or using a modified version of     |               |       |        |              |                        |                   |
+| Using a derived version of the GPL-licensed         | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
+| code of Orthanc, or using a derived version of      |               |       |        |              |                        |                   |
 | some GPL-licensed plugin, or reusing their original |               |       |        |              |                        |                   |
 | code in a third-party system                        |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a modified version of some AGPL-licensed      | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| Using a derived version of some AGPL-licensed       | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 | plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
 | third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| **For viewers**: Using a modified version of the    | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| **For viewers**: Using a derived version of the     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
 | :ref:`Orthanc Web Viewer <webviewer>`, of the       |               |       |        |              |                        |                   |
-| :ref:`Osimis Web Viewer <osimis-webviewer>`, of the |               |       |        |              |                        |                   |
+| :ref:`Osimis Web Viewer <osimis_webviewer>`, of the |               |       |        |              |                        |                   |
 | :ref:`Stone Web Viewer <stone>`, or of the sample   |               |       |        |              |                        |                   |
 | applications of Stone of Orthanc (AGPL license)     |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
