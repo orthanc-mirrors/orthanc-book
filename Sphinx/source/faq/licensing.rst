@@ -67,8 +67,8 @@ uses. This is most often a wrong assumption, given that the Orthanc
 server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
-situations, and indicates whether the use is accepted ("Yes"),
-forbidden ("No"), or restricted ("Dual licensing"):
+situations, and indicates whether the use is **accepted ("Yes"),
+forbidden ("No"), or restricted ("Dual licensing")**:
 
 +-----------------------------------------------------+--------------------------------------------------------------------------------------------+
 |                                                     | Mode of distribution of the third-party system, or of the third-party plugin/script        |
@@ -103,7 +103,9 @@ forbidden ("No"), or restricted ("Dual licensing"):
 | plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
 | third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using the :ref:`Stone of Orthanc <stone>` library   | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| Using a modified version of the                     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| :ref:`Stone Web Viewer <stone>`, or of the sample   |               |       |        |              |                        |                   |
+| applications of Stone of Orthanc (AGPL license)     |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 
 **Notes:**
