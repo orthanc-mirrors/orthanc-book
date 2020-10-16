@@ -14,4 +14,5 @@ User's guide
    users/lua.rst
    users/advanced-rest.rst
    users/storage-commitment.rst
+   users/webdav.rst
    users/support.rst

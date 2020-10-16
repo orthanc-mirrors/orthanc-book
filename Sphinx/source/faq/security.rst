@@ -45,7 +45,8 @@ Orthanc:
 * You might also be interested in checking the options related to
   :ref:`performance optimization <scalability>`.
 
-
+       
+.. _security_http:
 
 Securing the HTTP server
 ------------------------
@@ -76,6 +77,9 @@ option to ``true``, you should:
 * Enable :ref:`Client certificate authentication <https>` between multiple
   Orthanc peers.
 
+* Consider turning of the :ref:`embedded WebDAV server <webdav>` by
+  setting configuration option ``WebDavEnabled`` to ``false``.
+  
 * Setup rules that define, for each authorized user, which resources
   it can access, and through which HTTP method (GET, POST, DELETE
   and/or PUT). This can be done by defining a :ref:`filter written in

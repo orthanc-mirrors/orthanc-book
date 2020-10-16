@@ -107,13 +107,6 @@ here are some tasks you can take in charge that would greatly help us:
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
-  - Develop a way to "mount" the content of one Orthanc server as a
-    network drive through the :ref:`REST API <rest>`, using either
-    `FTP <https://en.wikipedia.org/wiki/File_Transfer_Protocol>`__,
-    `FUSE <https://en.wikipedia.org/wiki/Filesystem_in_Userspace>`__
-    (through `Samba
-    <https://en.wikipedia.org/wiki/Samba_(software)>`__ for Windows)
-    or `WebDAV <https://en.wikipedia.org/wiki/WebDAV>`__.
   - Always remember that he **recommended way of contributing to the
     source code of Orthanc is by creating C/C++/Python plugins, or by
     creating external software that use the REST API**. If the current
