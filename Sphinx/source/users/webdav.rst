@@ -184,8 +184,8 @@ again.
 Remote access using Microsoft Windows 10
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Depending on your security settings, `Microsoft Windows 10 might impose
-the use of HTTPS <>`__ in the Orthanc server. First, you must obviously
+Depending on your security settings, Microsoft Windows 10 might impose
+the use of HTTPS in the Orthanc server. First, you must obviously
 configure :ref:`HTTPS security in Orthanc <https>`.
 
 In order to connect successfully to Orthanc WebDAV server using basic
