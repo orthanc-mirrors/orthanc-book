@@ -47,6 +47,14 @@ DVD containing a DICOMDIR) is as simple as a drag-and-drop onto the
            :align: center
            :width: 512
 
+As soon as the DICOM files have been dragged-and-dropped, they are
+progressively ingested by Orthanc. Once a DICOM file has been
+ingested, it is automatically removed from the ``/uploads/`` folder.
+
+Note that it is not possible to rename any file, as this is a virtual
+filesystem that is permanently and transparently reconstructed out of
+the content of the Orthanc database.
+
 
 Server configuration
 --------------------
@@ -218,7 +226,7 @@ When done, you can test the WebDAV connection :
 
 4) Choose custom network location
 
-5) Type the WebDAV address like: ``http://10.10.10.107:8042/webdav/``
+5) Type the WebDAV address like: ``https://10.10.10.107:8042/webdav/``
 
 6) If all goes well, you should be prompted for the basic auth credentials.
 
