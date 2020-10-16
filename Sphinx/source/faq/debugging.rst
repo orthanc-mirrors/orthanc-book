@@ -45,13 +45,13 @@ run on almost any recent GNU/Linux system (generated thanks to the
 to debug Orthanc without compiling from sources. Here is a sample
 debug session::
 
-  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.7.4/Orthanc
+  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.8.0/Orthanc
   $ chmod +x ./Orthanc
   $ gdb ./Orthanc Configuration.json
   (gdb) catch throw
   Catchpoint 1 (throw)
   (gdb) run
-  W0513 15:24:42.374349 main.cpp:1436] Orthanc version: 1.7.4
+  W0513 15:24:42.374349 main.cpp:1436] Orthanc version: 1.8.0
   ---> Reproduce your error case <---
   Thread 15 "Orthanc" hit Catchpoint 1 (exception thrown), 0x00007ffff6de68bd in __cxa_throw () from /usr/lib/x86_64-linux-gnu/libstdc++.so.6
   (gdb) backtrace
