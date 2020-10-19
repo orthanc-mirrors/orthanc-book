@@ -247,6 +247,21 @@ to test the mounting procedure. `Details here
 <http://techgenix.com/EnableBasicAuthforWebDAVonWindows7/>`__
 
 
+Tips for other operating systems
+--------------------------------
+
+Microsoft Windows Server 2012
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. **Install Desktop Experience**: Server manager > Add Features >
+   User Interfaces and Infrastructure > Desktop Experience
+
+2. **Start and set to Automatic WebClient Service**: Services >
+   WebClient > Properties > Set from Manual to Automatic then start it
+   
+`Link to the original post <https://groups.google.com/d/msgid/orthanc-users/3b3c3af1-0413-471e-8f31-0a358632fd6an%40googlegroups.com?utm_medium=email&utm_source=footer>`__
+
+
 
 Debugging WebDAV
 ----------------
