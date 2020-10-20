@@ -268,3 +268,33 @@ Scalability
 
 When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalability section 
 <scalability>`
+
+
+Troubleshooting
+---------------
+
+SCRAM authentication
+^^^^^^^^^^^^^^^^^^^^
+
+The precompiled binaries of the plugins use a stable version of the
+PostgreSQL client (libpq 9.6.1, as of release 3.2). This makes these
+binaries very portable, however they might not be compatible with more
+recent features of PostgreSQL.
+
+In particular, the precompiled binaries are not compatible with `SCRAM
+authentication
+<https://en.wikipedia.org/wiki/Salted_Challenge_Response_Authentication_Mechanism>`__
+that is available since PostgreSQL 10. If you get the error ``psql:
+authentication method 10 not supported``, this indicates that the
+PostgreSQL plugins cannot connect to a PostgreSQL server because SCRAM
+is enabled.
+
+`Ian Smith
+<https://groups.google.com/g/orthanc-users/c/4EH7HpcEnSA/m/a4x6oiucAgAJ>`__
+has reported the following method to disable SCRAM:
+
+1. Drop/delete the ``orthanc`` database and user in PostgreSQL.
+2. Edit the files ``postgresql.conf`` and ``pg_hba.conf`` and change
+   ``scram-sha-256`` to ``md5`` in all cases.
+3. Add the ``orthanc`` user and database in PostgreSQL again.
+4. Restart Orthanc.
