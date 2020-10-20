@@ -97,6 +97,12 @@ presence of large databases:
 * Make sure to read guides about the `tuning of PostgreSQL
   <https://wiki.postgresql.org/wiki/Performance_Optimization>`__.
 
+* Make sure to periodically run the ``VACUUM`` SQL command on the
+  PostgreSQL database in order to `reclaim the storage space
+  <https://www.postgresql.org/docs/current/sql-vacuum.html>`__ that is
+  occupied by rows that have been deleted from the database (e.g. in a
+  cron job).
+
 * You might also be interested in checking the options related to
   :ref:`security <security>`.
 
