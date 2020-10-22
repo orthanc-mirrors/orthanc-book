@@ -68,7 +68,7 @@ server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
 situations, and indicates whether the use is **accepted ("Yes"),
-forbidden ("No"), or restricted ("Dual licensing")**:
+forbidden ("No"), or restricted ("Dual license")**:
 
 +-----------------------------------------------------+--------------------------------------------------------------------------------------------+
 |                                                     | Mode of distribution of the third-party system, or of the third-party plugin/script        |
@@ -80,36 +80,44 @@ forbidden ("No"), or restricted ("Dual licensing")**:
 | Using Orthanc as such, even if some AGPL-licensed   | N/A           | N/A   | N/A    | Yes          | Yes                    | Yes               |
 | plugin is installed                                 |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Calling Orthanc from a third-party application      | Yes           | Yes   | Yes    | Yes          | Yes                    | Yes               |
+| Calling Orthanc from a third-party system           | Yes           | Yes   | Yes    | Yes          | Yes                    | Yes               |
 | (using REST API or DICOM protocol), even if some    |               |       |        |              |                        |                   |
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Creating an Orthanc plugin or a Lua script, that    | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
-| is hosted by an Orthanc server where no             |               |       |        |              |                        |                   |
-| AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
-+-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Creating an Orthanc plugin or a Lua script, that    | No            | Yes   | Yes    | Yes          | Dual licensing         | Dual licensing    |
-| is hosted by an Orthanc server where some           |               |       |        |              |                        |                   |
-| AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
-+-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Creating a :ref:`Python plugin <python-plugin>`     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
-+-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a derived version of the GPL-licensed         | No            | Yes   | Yes    | Yes          | Dual licensing         | Yes               |
+| Creating a :ref:`C/C++ plugin <plugins>`,           |               |       |        |              |                        |                   |
+| creating a :ref:`Lua script <lua>`, or              |               |       |        |              |                        |                   |
+| creating a :ref:`Python plugin <python-plugin>`.    |               |       |        |              |                        |                   |
+| 2 possible cases:                                   |               |       |        |              |                        |                   |
++----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
+|    | Case 1: No AGPL-licensed plugin is in use      | No            | Yes   | Yes    | Yes          | Dual license           | Yes               |
++----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
+|    | Case 2: Some AGPL-licensed plugin is in use    | No            | Yes   | Yes    | Yes          | Dual license           | Dual license      |
++----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
+| Using a derived version of the GPL-licensed         | No            | Yes   | Yes    | Yes          | Dual license           | Yes               |
 | code of Orthanc, or using a derived version of      |               |       |        |              |                        |                   |
 | some GPL-licensed plugin, or reusing their original |               |       |        |              |                        |                   |
 | code in a third-party system                        |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a derived version of some AGPL-licensed       | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| Using a derived version of some AGPL-licensed       | No            | No    | Yes    | Yes          | Dual license           | Dual license      |
 | plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
 | third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| **For viewers**: Using a derived version of the     | No            | No    | Yes    | Yes          | Dual licensing         | Dual licensing    |
+| **For viewers**: Using a derived version of the     | No            | No    | Yes    | Yes          | Dual license           | Dual license      |
 | :ref:`Orthanc Web Viewer <webviewer>`, of the       |               |       |        |              |                        |                   |
 | :ref:`Osimis Web Viewer <osimis_webviewer>`, of the |               |       |        |              |                        |                   |
 | :ref:`Stone Web Viewer <stone>`, or of the sample   |               |       |        |              |                        |                   |
 | applications of Stone of Orthanc (AGPL license)     |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 
+.. raw:: html
+
+   <p align="center">
+     <a href="mailto:info@osimis.io?subject=Request for a dual license">
+       <b>Click here to request a dual license</b>
+     </a>
+   </p>
+
+    
 **Notes:**
 
 * The wording "third-party system" is very broad, as it encompasses
@@ -118,7 +126,7 @@ forbidden ("No"), or restricted ("Dual licensing")**:
   generally any system that takes advantage of Orthanc as a service in
   its global architecture.
 
-* If your use case falls in a "**Dual licensing**" cell, please get in
+* If your use case falls in a "**Dual license**" cell, please get in
   touch with `Osimis <https://www.osimis.io/>`__, the commercial
   partner of the Orthanc project that is the only entity entitled to
   grant a `license exception
