@@ -128,6 +128,10 @@ recommended for security reasons, replace the prefix ``dav://`` by
 Microsoft Windows 7
 ^^^^^^^^^^^^^^^^^^^
 
+First of all, make sure to adapt the value of the registry key
+``BasicAuthLevel``, :ref:`as explained below <webdav_windows_fix>`.
+Otherwise, you might not be able to connect.
+
 This section illustrates how to use WebDAV on a Microsoft Windows 7
 operating system. Obviously, the procedure is very similar for more
 recent versions of Microsoft Windows, and many tutorials are available
@@ -188,13 +192,20 @@ after an upload and cannot access Orthanc anymore. In such situations,
 you'll have to delete the network share and repeat the steps above
 again.
 
+Note that you can find additional information `in the thread about
+WebDAV on the discussion forum
+<https://groups.google.com/g/orthanc-users/c/Iq-Ftv5xGjA/m/68kNcbanAgAJ>`__.
 
-Remote access using Microsoft Windows 10
+
+Secure access using Microsoft Windows 10
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Depending on your security settings, Microsoft Windows 10 might impose
-the use of HTTPS in the Orthanc server. First, you must obviously
-configure :ref:`HTTPS security in Orthanc <https>`.
+First of all, make sure to adapt the value of the registry key
+``BasicAuthLevel``, :ref:`as explained below <webdav_windows_fix>`.
+
+Depending on your security settings, Microsoft Windows 10 might also
+impose the use of HTTPS in the Orthanc server. First, you must
+obviously configure :ref:`HTTPS security in Orthanc <https>`.
 
 In order to connect successfully to Orthanc WebDAV server using basic
 authentication and SSL with self-signed certificate.
@@ -234,21 +245,38 @@ When this is done, the WebDAV location should be mounted at the top of
 the Explorer namespace (next to the C: drive, etc...). Something to
 try if the mount fails:
 
-- open ``regedit.exe``
+
+Tips for other operating systems
+--------------------------------
+
+.. _webdav_windows_fix:
+
+Microsoft Windows 7, 8.x or 10
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you cannot access WebDAV from Microsoft Windows (with version above
+7), as a first step, change the value of the registry key
+``BasicAuthLevel`` within the system registry to value ``2`` (by
+default, it comes with value ``1`` that prevents WebDAV access). Here
+are the steps:
+
+- Open ``regedit.exe``
   
-- open the ``HKLM\SYSTEM\CurrentControlSet\Services\WebClient\Parameters key``
+- Open the ``HKLM\SYSTEM\CurrentControlSet\Services\WebClient\Parameters`` key
   
-- create the ``BasicAuthLevel`` DWORD value if needed
+- Create the ``BasicAuthLevel`` DWORD value if needed
   
-- set the ``BasicAuthLevel`` DWORD value to ``2``
+- Set the ``BasicAuthLevel`` DWORD value to ``2``
 
 This should *not* be required, but was enabled on the PC that was used
 to test the mounting procedure. `Details here
 <http://techgenix.com/EnableBasicAuthforWebDAVonWindows7/>`__
 
+Note that you can find additional information `in the thread about
+WebDAV on the discussion forum
+<https://groups.google.com/g/orthanc-users/c/Iq-Ftv5xGjA/m/68kNcbanAgAJ>`__.
 
-Tips for other operating systems
---------------------------------
+
 
 Microsoft Windows Server 2012
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
