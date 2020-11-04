@@ -18,16 +18,23 @@ Orthanc packages for Debian/Ubuntu
 Introduction
 ------------
 
-Orthanc is available as offical `Debian 
+Orthanc is available as an offical `Debian package
 <https://packages.debian.org/search?keywords=orthanc&searchon=names&exact=1&suite=all&section=all>`__
-and `Ubuntu 
-<https://packages.ubuntu.com/search?keywords=orthanc&searchon=names&suite=all&section=all>`__
-packages.  Most of the official plugins are also available as separate packages.
+that is continuously updated by the Orthanc core developers. This
+implies that Orthanc is also available in the `Debian derivative
+distributions
+<https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based>`__,
+most notably in `Ubuntu
+<https://packages.ubuntu.com/search?keywords=orthanc&searchon=names&suite=all&section=all>`__. Most
+of the official plugins are also available as separate packages.
 
-Note that the installed versions depend on the OS version.  If you absolutely need 
-the latest Orthanc version, you should:
+Note that the installed versions depend on the version of the Debian
+distribution. If you absolutely need the latest Orthanc version, you
+should:
 
-* Use the latest `unstable Debian release <https://wiki.debian.org/DebianUnstable>`__.
+* Use the bleeding-edge `Debian unstable
+  <https://wiki.debian.org/DebianUnstable>`__, or use a Debian-based
+  distro that derives from unstable (such as Kali Linux).
 
 * Use the `LSB binaries <https://lsb.orthanc-server.com/>`__.
 
@@ -35,7 +42,9 @@ the latest Orthanc version, you should:
 
 * :ref:`Compile Orthanc by yourself <compiling>`.
 
-* Advanced users: :ref:`replace the binaries from the package by the LSB binaries <replace-binaries>`.
+* Advanced users: :ref:`replace the binaries from the package by the
+  LSB binaries <lsb-replace-debian-binaries>`.
+  
 
 Installation
 ------------
@@ -83,7 +92,7 @@ Orthanc reads its :ref:`configuration file
 Replacing the package from the service by the LSB binaries
 ----------------------------------------------------------
 
-.. _replace-binaries:
+.. _lsb-replace-debian-binaries:
 
 If you're stuck with an old version of Orthanc, you may try to
 replace the binaries by the LSB binaries.  Note that there might
