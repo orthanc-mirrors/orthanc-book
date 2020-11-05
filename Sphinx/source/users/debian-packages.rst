@@ -5,12 +5,6 @@
 Orthanc packages for Debian/Ubuntu
 ==================================
 
-.. toctree::
-   :hidden:
-
-   docker-osimis.rst
-   
-
 .. contents::
    :depth: 3
 

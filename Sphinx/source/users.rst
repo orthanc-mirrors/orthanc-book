@@ -16,3 +16,11 @@ User's guide
    users/storage-commitment.rst
    users/webdav.rst
    users/support.rst
+
+
+
+.. toctree::
+   :hidden:
+
+   users/debian-packages.rst
+   
