@@ -23,4 +23,4 @@ User's guide
    :hidden:
 
    users/debian-packages.rst
-   
+   users/man-orthanc.rst
