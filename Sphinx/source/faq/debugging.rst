@@ -19,8 +19,8 @@ reported by Orthanc (not in a crash), and for which the :ref:`log
 files in verbose mode <log>` do not provide meaningful information.
 
 **Important reminder:** Most issues with Orthanc can be solved by
-carefully looking at the :ref:`Orthanc logs <log>` in ``--verbose``
-mode!
+carefully looking at the :ref:`Orthanc logs <log>` after starting
+Orthanc with the ``--verbose --trace-dicom`` command-line options!
 
 
 Any system

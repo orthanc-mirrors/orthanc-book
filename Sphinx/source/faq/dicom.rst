@@ -7,7 +7,8 @@ In general, communication problems between two DICOM modalities over a
 computer network are related to the configuration of these
 modalities. As preliminary debugging actions, you should:
 
-* Make sure you use the `most recent version <https://www.orthanc-server.com/download.php>`_ of Orthanc.
+* Make sure you use the `most recent version
+  <https://www.orthanc-server.com/download.php>`_ of Orthanc.
 * Make sure the two computers can "ping" each other.
 * Turn off all the firewalls on the two computers (especially on Microsoft Windows).
 * Make sure the remote computer has `DICOM TLS encryption
@@ -36,8 +37,10 @@ modalities. As preliminary debugging actions, you should:
     options ``LuaScripts`` and ``Plugins`` both to the empty list.
   * ``DicomAssociationCloseDelay`` should be set to ``0``.
 
-* Restart Orthanc with the ``--verbose`` option at command line, and
-  carefully inspect the log. This might provide immediate debugging
+* Restart Orthanc with the ``--verbose --trace-dicom`` options at
+  command line, and carefully inspect the log (the ``trace-dicom``
+  option is new in Orthanc 1.8.1 and provides low-level information
+  from DCMTK). This might provide immediate debugging
   information. Make sure to read :ref:`how to generate an exploitable
   log <log>`.
 * Issue a :ref:`DICOM C-Echo <dicom-echo>` from each modality to make

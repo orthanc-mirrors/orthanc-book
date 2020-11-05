@@ -61,3 +61,5 @@ To obtain more diagnostic, you can use the ``--verbose`` or the
     $ Orthanc ./Configuration.json --verbose
     $ Orthanc ./Configuration.json --trace
 
+To learn more about the Orthanc logs, :ref:`check out the dedicated
+page <log>`.
