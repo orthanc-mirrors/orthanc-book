@@ -360,6 +360,19 @@ Here is a sample Python plugin that routes any :ref:`stable study
   orthanc.RegisterOnChangeCallback(OnChange)
 
 
+Note that, if you want to use an orthanc plugin to transfer the study,
+you should use the ``RestApiPostAfterPlugins()`` method::
+
+  import orthanc
+
+  def OnChange(changeType, level, resourceId):
+      if changeType == orthanc.ChangeType.STABLE_STUDY:
+          print('Stable study: %s' % resourceId)
+          orthanc.RestApiPostAfterPlugins('/dicom-web/servers/sample/store', resourceId)
+
+  orthanc.RegisterOnChangeCallback(OnChange)
+
+
 Rendering a thumbnail using PIL/Pillow
 ......................................
 
