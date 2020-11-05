@@ -25,23 +25,32 @@ to make sure you don't fill your disk with logs.
 Generating an exploitable debug log
 ===================================
 
-By default, Orthanc logs only the `WARNING` and `ERROR` level
-logs.  For your log to be exploitable by the Orthanc community, you must
-generate them with the ``--verbose`` or ``--trace`` to get the `INFO` 
-and `TRACE` information levels.  If you are using
-Orthanc at the command-line, simply add these flags and redirect the
-standard outputs to some log file. 
+.. highlight:: bash
 
-However, if you use packaged versions of Orthanc that runs the server
-in background, you will have to manually start Orthanc. The sections
-below explain how to achieve this goal with the officially supported
-packages.
+By default, the Orthanc logs contain only the ``WARNING`` and
+``ERROR`` information levels. For your logs to be exploitable by the
+Orthanc community, you must include more information by adding the
+``--verbose`` or ``--trace`` command-line options, which will add the
+``INFO`` and ``TRACE`` information levels. If you are starting Orthanc
+from the command-line, simply add these flags and redirect the
+standard outputs to some log file. For instance::
+
+  $ ./Orthanc --trace --logfile=orthanc.log
+
+Note that the Orthanc command-line tool has many other options related
+to logging. Check out the :ref:`full manpage <manpage>`.
+  
+However, if you use packaged versions of Orthanc that starts the
+server in background (such as GNU/Linux packages or the Windows
+installers by Osimis), you will have to manually start Orthanc. The
+sections below explain how to achieve this goal with the officially
+supported packages.
 
 
 Under Windows
 ^^^^^^^^^^^^^
 
-Under Windows, if you used the official installer:
+Under Windows, if you used the official installer by Osimis:
 
 1. Download the `precompiled command-line version
    <https://www.orthanc-server.com/download-windows.php>`__ of Orthanc.
@@ -89,12 +98,65 @@ The command-line to be used is::
 
   $ sudo docker run -a stderr -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc --verbose /etc/orthanc > Orthanc.log 2>&1
 
-Change the log level while Orthanc is running
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  
+Changing the log level while Orthanc is running
+===============================================
 
-Starting from Orthanc 1.6.0, you can also change the log level while Orthanc is running through the Rest API::
+Starting with Orthanc 1.6.0, you can dynamically change the log level
+while Orthanc is running using the :ref:`REST API <rest>`::
   
   $ curl -X PUT http://localhost:8042/tools/log-level -d "verbose"
   $ curl -X PUT http://localhost:8042/tools/log-level -d "trace"
   $ curl -X PUT http://localhost:8042/tools/log-level -d "default"
+
+
+Log categories
+==============
+
+Starting with Orthanc 1.8.1, log messages are associated with a
+**category**. The category indicates the subsystem of Orthanc from
+which the message comes (such as the embedded HTTP server, the DICOM
+communications, Lua scripts...).
+
+It is possible to choose a different log level for each category. This
+can be done when starting Orthanc as follows::
+
+  $ ./Orthanc --verbose-http --trace-dicom
+
+This command would start Orthanc in verbose mode for HTTP-related
+messages, and would enable debug messages related to DICOM. The full
+list of the available log categories (``http``, ``dicom``, ``lua``,
+``plugins``...) can be found in the :ref:`manpage of Orthanc
+<manpage>` or by starting Orthanc with the ``--help`` flag.
+
+It is also possible to dynamically change the log level of a category
+while Orthanc is running by using the :ref:`REST API <rest>`, for
+instance::
+  
+  $ curl -X PUT http://localhost:8042/tools/log-level-http -d "verbose"
+  $ curl -X PUT http://localhost:8042/tools/log-level-dicom -d "trace"
+  $ curl -X PUT http://localhost:8042/tools/log-level-plugins -d "default"
+
+The list of the available log categories is also available through the
+REST API, by inspecting the URIs that are prefixed by
+``/tools/log-level``::
+
+  $ curl http://localhost:8042/tools/
+    [...]
+    "log-level",
+    "log-level-dicom",
+    "log-level-generic",
+    "log-level-http",
+    "log-level-jobs",
+    [...]
+  
+**Remarks:**
+
+* Messages that are not associated with a well-identified category are
+  considered as belonging to the ``generic`` category.
+
+* Using the ``--verbose`` or ``-trace`` command-line options, or
+  changing the value of the ``/tools/log-level`` URI will reset the
+  log level of **all** the categories. Note that the command-line
+  options are applied from left to right.
 
