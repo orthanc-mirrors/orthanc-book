@@ -87,8 +87,10 @@ Compile::
 **NB:** If you don't want to use vcpkg, you can use the following
 command (this syntax is not compatible with Ninja yet)::
 
-  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF ../../orthanc-object-storage/Aws
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF ../../orthanc-object-storage/Aws
   $ make
+
+Crypto++ must be installed (on Ubuntu, run ``sudo apt install libcrypto++-dev``).
 
 
 Azure Blob Storage plugin
