@@ -199,6 +199,9 @@ To fully secure the DICOM protocol, you should:
 
 **Remark:** As of Orthanc 1.8.0, `DICOM TLS encryption
 <https://www.dicomstandard.org/using/security/>`__ is not supported
-yet. We are looking for :ref:`an industrial sponsor <contributing>` to
-get this feature implemented, as it is useful in enterprise and cloud
-environments.
+yet. As a temporary workaround, `it has been reported
+<https://www.digihunch.com/2020/11/medical-imaging-web-server-deployment-pipeline/>`__
+that the "*SSL Termination for TCP Upstream Servers*" feature of nginx
+can be used to emulate DICOM TLS. We are looking for :ref:`an
+industrial sponsor <contributing>` to implement DICOM TLS, as it is
+useful in enterprise and cloud environments.
