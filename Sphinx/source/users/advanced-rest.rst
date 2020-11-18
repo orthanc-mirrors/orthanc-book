@@ -217,12 +217,16 @@ file to Orthanc. The following scripts perform such a *DICOM-ization*;
 They convert the ``HelloWorld2.pdf`` file to base64, then perform a
 ``POST`` request with JSON data containing the converted payload.
 
+Importantly, the ``Parent`` field of the ``POST`` body can be set to
+the :ref:`Orthanc identifier of some study <orthanc-ids>` in order to
+attach the newly-created PDF series to the given parent study.
+
 Using bash:
 
 .. code-block:: bash
 
     # create the json data, with the BASE64 data embedded in it
-    (echo -n '{"Tags" : {"PatientName" : "Benjamino", "Modality" : "CT"},"Content" : "data:application/pdf;base64,'; base64 HelloWorld2.pdf; echo '"}') > /tmp/foo
+    (echo -n '{"Parent": "b6e8436b-c5835b7b-cecc9576-0483e165-ab5c710b", "Tags" : {"Modality" : "CT"}, "Content" : "data:application/pdf;base64,'; base64 HelloWorld2.pdf; echo '"}') > /tmp/foo
 
     # upload it to Orthanc
     cat /tmp/foo | curl -H "Content-Type: application/json" -d @- http://localhost:8042/tools/create-dicom
