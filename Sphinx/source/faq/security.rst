@@ -202,6 +202,7 @@ To fully secure the DICOM protocol, you should:
 yet. As a temporary workaround, `it has been reported
 <https://www.digihunch.com/2020/11/medical-imaging-web-server-deployment-pipeline/>`__
 that the "*SSL Termination for TCP Upstream Servers*" feature of nginx
-can be used to emulate DICOM TLS. We are looking for :ref:`an
-industrial sponsor <contributing>` to implement DICOM TLS, as it is
-useful in enterprise and cloud environments.
+can be used to emulate DICOM TLS. Another option is to use `stunnel
+<https://www.stunnel.org/>`__. We are looking for :ref:`an industrial
+sponsor <contributing>` to implement DICOM TLS in the core of Orthanc,
+as this feature is dedicated to enterprise and cloud environments.
