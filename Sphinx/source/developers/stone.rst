@@ -9,5 +9,5 @@ work-in-progress.
 
 For the time being, documentation is provided through various sample
 applications that can be found in the `source distribution
-<https://hg.orthanc-server.com/orthanc-stone/file/default/OrthancStone/Samples>`__.
+<https://hg.orthanc-server.com/orthanc-stone/file/default/>`__.
 
