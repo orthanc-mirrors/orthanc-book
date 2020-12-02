@@ -1,8 +1,8 @@
 .. _osimis_webviewer:
 
 
-Osimis Web Viewer plugin
-========================
+Osimis Web Viewer plugin (deprecated)
+=====================================
 
 .. contents::
 
@@ -24,11 +24,10 @@ How to get it
 The Osimis Web viewer is part of the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
-For Linux users, you'll find it in the `osimis/orthanc
-<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__
-Docker images or you can download the LSB (Linux Standard Base)
-binaries `here
-<http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.3.1/libOsimisWebViewer.so>`__.
+For GNU/Linux users, you'll find it in the :ref:`osimis/orthanc
+<docker-osimis>` Docker images or you can download the LSB (Linux
+Standard Base) binaries `here
+<http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.4.1/libOsimisWebViewer.so>`__.
 
 The compilation process is quite complex since it requires to build
 first the frontend and then the backend.  All information can be found
@@ -44,9 +43,8 @@ Usage
 On Windows, the plugin is enabled by default and will work
 out-of-the-box.
 
-If you're using the ``osimis/orthanc`` Docker image, you'll have to
-define the WVB_ENABLED `environment variable
-<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages?-OsimisWebViewer>`__
+If you're using the ``osimis/orthanc`` Docker images, you'll have to
+define the ``WVB_ENABLED`` :ref:`environment variable <docker-osimis>`
 to ``true``.
 
 On plain GNU/Linux distributions (i.e. if not using Docker), the
@@ -98,7 +96,7 @@ FAQ
 
   However, the viewer can be used as a communication tool that allows Researchers, Teachers, Technicians, General Practitioner or Patients to visualize medical images for information only.
 
-  Check your local regulations to ensure you’re using it in a legal manner.
+  Check your local regulations to ensure you're using it in a legal manner.
 
 
 - **What video formats are supported by the Osimis Web Viewer ?**

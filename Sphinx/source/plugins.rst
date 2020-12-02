@@ -3,17 +3,6 @@
 Plugins
 =======
 
-.. toctree::
-   :hidden:
-
-   plugins/authorization.rst
-   plugins/google-cloud-platform.rst
-   plugins/mysql.rst
-   plugins/object-storage.rst
-   plugins/osimis-webviewer.rst
-   plugins/python.rst
-   plugins/transfers.rst
-
 .. contents::
 
 Overview
@@ -49,8 +38,8 @@ third-party plugins.  A specific section of the Orthanc Book explains
 Index of the official plugins
 -----------------------------
 
-From University Hospital of Liège
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+From Osimis and University Hospital of Liège
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 1
@@ -62,19 +51,23 @@ From University Hospital of Liège
    plugins/worklists-plugin.rst
    plugins/serve-folders.rst
    plugins/gdcm.rst
+   plugins/stone-webviewer.rst
 
 .. _plugins-osimis:
    
 From Osimis
 ^^^^^^^^^^^
 
-* :ref:`osimis_webviewer`
-* :ref:`mysql`
-* :ref:`authorization`
-* :ref:`transfers`
-* :ref:`google`    
-* :ref:`python-plugin` 
-* :ref:`object-storage`   
+.. toctree::
+   :maxdepth: 1
+
+   plugins/osimis-webviewer.rst
+   plugins/mysql.rst
+   plugins/authorization.rst
+   plugins/transfers.rst
+   plugins/google-cloud-platform.rst    
+   plugins/python.rst 
+   plugins/object-storage.rst   
 
 .. _plugins-contributed:
 
