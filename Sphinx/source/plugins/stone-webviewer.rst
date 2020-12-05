@@ -152,10 +152,11 @@ FAQ
 
 - **What are the future plans?**
 
-  The use of :ref:`Stone of Orthanc library <stone>` gives us a lot of
-  flexibility to implement new advanced features, such as 3D rendering
-  (MPR, reslicing, image fusion...) and DICOM-RT support.
+  The internal use of :ref:`Stone of Orthanc library <stone>` gives us
+  a lot of flexibility to implement new advanced features, such as 3D
+  rendering (MPR, reslicing, image fusion...), DICOM-RT support,
+  creation of annotations/measurements...
 
   We are looking for :ref:`industrial sponsors <contributing>` to
   implement such new features in the Stone Web viewer.
-  
+
