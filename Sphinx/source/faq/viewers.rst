@@ -3,6 +3,10 @@
 What DICOM viewer is compatible with Orthanc?
 =============================================
 
+.. note:: The viewer that is the easiest to use with Orthanc is most
+          probably the `Stone Web viewer
+          <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__.
+  
 Basically, any viewer that supports :ref:`DICOM query/retrieve
 <query-retrieve>` should be compatible with Orthanc.
 
@@ -27,9 +31,13 @@ with Orthanc (do not hesitate to `warn us
 
 Make also sure to check out the following extensions to Orthanc:
 
+* `Stone Web viewer plugin <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__
+  (advanced version of the Orthanc Web viewer).
 * `Orthanc Web viewer plugin <https://www.orthanc-server.com/static.php?page=web-viewer>`__.
-* `Osimis Web viewer plugin (Advanced version of the Orthanc Web viewer)
-  <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
+* `Osimis Web viewer plugin
+  <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__
+  (deprecated, but provides compatibility with Web browsers that do
+  not support `WebAssembly <https://caniuse.com/?search=wasm>`__).
 * `ImageJ extension <https://www.orthanc-server.com/static.php?page=imagej>`__.
 * `Stone of Orthanc <https://www.orthanc-server.com/static.php?page=stone>`__.
 * `dwv-orthanc-plugin
@@ -41,12 +49,6 @@ Very importantly, Marco Barnig independently keeps track of a list of
 `Mobile DICOM Viewers <http://www.web3.lu/mobile-dicom-viewers/>`__
 that are compatible with Orthanc. The Orthanc project is very grateful
 to Marco for this great contribution.
-
-As far as Sébastien Jodogne is concerned, he uses the Orthanc Web viewer
-plugin and the ImageJ extension for simple analysis tasks. For more
-intensive 3D viewing, he uses Ginkgo CADx. Finally, for advanced
-usages (such as PET-CT fusion or contouring), he switches to 3D
-Slicer.
 
 If you face problems when configuring DICOM networking, make sure to
 follow the :ref:`troubleshooting guide <dicom>`.

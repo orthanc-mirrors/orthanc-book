@@ -9,6 +9,7 @@ General questions about the project
 .. toctree::
    :maxdepth: 1
 
+   faq/viewers.rst
    faq/licensing.rst
    faq/features.rst
    faq/scalability.rst
@@ -44,7 +45,6 @@ Features supported by Orthanc
    faq/supported-images.rst
    faq/video.rst
    faq/worklist.rst
-   faq/viewers.rst
    faq/orthanc-dicom-origin.rst
 
 
