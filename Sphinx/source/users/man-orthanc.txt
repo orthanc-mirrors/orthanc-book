@@ -14,22 +14,31 @@ DESCRIPTION
        The  "CONFIGURATION"  argument  can be a single file or a directory. In
        the case of a directory, all the JSON files it contains will be merged.
        If no configuration path is given on the command line, a set of default
-       parameters is used. Please refer to the Orthanc homepage for  the  full
-       instructions about how to use Orthanc <http://www.orthanc-server.com/>.
+       parameters is used. Please refer to  the  Orthanc  Book	for  the  full
+       instructions	   about	how	   to	     use       Orthanc
+       <http://book.orthanc-server.com/>.
+
+       Pay attention to the fact that the order of the options	is  important.
+       Options	are read left to right. In particular, options such as "--ver‐
+       bose" can reset the value of other log-related options that  were  read
+       before.
+
+       The recommended set of options to debug DICOM communications is "--ver‐
+       bose --trace-dicom --logfile=dicom.log"
 
    Command-line options:
        --help display this help and exit
 
        --logdir=[dir]
-	      directory  where	to store the log files (by default, the log is
+	      directory where to store the log files (by default, the  log  is
 	      dumped to stderr)
 
        --logfile=[file]
-	      file where to store the log of Orthanc (by default, the  log  is
+	      file  where  to store the log of Orthanc (by default, the log is
 	      dumped to stderr)
 
        --config=[file]
-	      create  a  sample  configuration	file and exit (if file is "-",
+	      create a sample configuration file and exit (if "file"  is  "-",
 	      dumps to stdout)
 
        --errors
@@ -42,32 +51,73 @@ DESCRIPTION
 	      highest verbosity in logs (for debug)
 
        --upgrade
-	      allow Orthanc to upgrade the version  of	the  database  (beware
-	      that  the database will become incompatible with former versions
+	      allow  Orthanc  to  upgrade  the version of the database (beware
+	      that the database will become incompatible with former  versions
 	      of Orthanc)
 
        --no-jobs
-	      Don't restart the jobs that were stored during the  last	execu‐
+	      Don't  restart  the jobs that were stored during the last execu‐
 	      tion of Orthanc
 
        --version
 	      output version information and exit
 
-   Exit status:
-	      0 if success,
+   Fine-tuning of log categories:
+       --verbose-generic
+	      be verbose in logs of category "generic"
 
-       -1 if error (have a look at the logs).
+       --trace-generic
+	      use highest verbosity for logs of category "generic"
+
+       --verbose-plugins
+	      be verbose in logs of category "plugins"
+
+       --trace-plugins
+	      use highest verbosity for logs of category "plugins"
+
+       --verbose-http
+	      be verbose in logs of category "http"
+
+       --trace-http
+	      use highest verbosity for logs of category "http"
+
+       --verbose-sqlite
+	      be verbose in logs of category "sqlite"
+
+       --trace-sqlite
+	      use highest verbosity for logs of category "sqlite"
+
+       --verbose-dicom
+	      be verbose in logs of category "dicom"
+
+       --trace-dicom use highest verbosity for logs of category "dicom"
+
+       --verbose-jobs
+	      be verbose in logs of category "jobs"
+
+       --trace-jobs
+	      use highest verbosity for logs of category "jobs"
+
+       --verbose-lua be verbose in logs of category "lua"
+
+       --trace-lua
+	      use highest verbosity for logs of category "lua"
+
+   Exit status:
+       0      if success,
+
+       -1     if error (have a look at the logs).
 
 AUTHOR
        Written by Sebastien Jodogne <s.jodogne@orthanc-labs.com>
 
 COPYRIGHT
-       Copyright  ©  2012-2016	Sebastien Jodogne, Medical Physics Department,
+       Copyright © 2012-2016 Sebastien Jodogne,  Medical  Physics  Department,
        University Hospital of Liege (Belgium)
-       Copyright © 2017-2020 Osimis S.A. (Belgium) Licensing GPLv3+:  GNU  GPL
-       version	3  or  later  <http://gnu.org/licenses/gpl.html>, with OpenSSL
+       Copyright  ©  2017-2020 Osimis S.A. (Belgium) Licensing GPLv3+: GNU GPL
+       version 3 or  later  <http://gnu.org/licenses/gpl.html>,  with  OpenSSL
        exception.
-       This is free software: you are free  to	change	and  redistribute  it.
+       This  is  free  software:  you  are free to change and redistribute it.
        There is NO WARRANTY, to the extent permitted by law.
 
-Orthanc 1.8.0			 November 2020			    ORTHANC(1)
+Orthanc 1.8.1			 December 2020			    ORTHANC(1)

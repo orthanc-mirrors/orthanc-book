@@ -58,7 +58,7 @@ Under Windows, if you used the official installer by Osimis:
 2. Stop the Orthanc service. The actual process depends on your
    version of Windows.
 
-3. Copy the just-downloaded ``Orthanc-1.8.0-Release.exe`` together
+3. Copy the just-downloaded ``Orthanc-1.8.1-Release.exe`` together
    with your configuration file (that is by default located in
    ``C:\Orthanc\Configuration.json``) into the same folder
    (e.g. ``C:\Temp``).
@@ -67,7 +67,7 @@ Under Windows, if you used the official installer by Osimis:
    ``Orthanc.log`` file::
 
    $ cd C:\Temp
-   $ Orthanc-1.8.0-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
+   $ Orthanc-1.8.1-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
 
 5. Once the log has been generated (by default, it is available as
    ``C:\Temp\Orthanc.log``), stop Orthanc and possibly restart the
