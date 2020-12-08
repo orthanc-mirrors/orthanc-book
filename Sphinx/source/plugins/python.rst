@@ -718,6 +718,9 @@ Performance and concurrency
 latter OS has a different model for `forking processes
 <https://en.wikipedia.org/wiki/Fork_(system_call)>`__.
 
+Using slave processes
+.....................
+
 .. highlight:: python
 
 Let us consider the following sample Python script that makes a
@@ -837,11 +840,27 @@ Python script: The number of "slave" interpreters can be easily
 changed in the constructor of the ``multiprocessing.Pool`` object, and
 are fully independent of the threads used by the Orthanc server.
 
+Obviously, an in-depth discussion about the ``multiprocessing``
+library is out of the scope of this document. There are many
+references available on Internet. Also, note that ``threading`` is not
+useful here, as Python multithreading is also limited by the GIL, and
+is more targeted at dealing with costly I/O operations or with the
+:ref:`scheduling of commands <python-scheduler>`.
+
+
+Slave processes and the "orthanc" module
+........................................
+
 .. highlight:: python
 
-Very importantly, pay attention to the fact that only the "master"
-Python interpreter has access to the Orthanc SDK. For instance, here
-is how you would parse a DICOM file in a slave process::
+Very importantly, pay attention to the fact that **only the "master"
+Python interpreter has access to the Orthanc SDK**. The "slave"
+processes have no access to the ``orthanc`` module.
+
+You must write your Python plugin so as that all the calls to
+``orthanc`` are moved from the slaves process to the master
+process. For instance, here is how you would parse a DICOM file in a
+slave process::
 
   import pydicom
   import io
@@ -859,12 +878,37 @@ is how you would parse a DICOM file in a slave process::
       
 Communication primitives such as ``multiprocessing.Queue`` are
 available to exchange messages from the "slave" Python interpreters to
-the "master" Python interpreter if further calls to the Orthanc SDK
-are required.
+the "master" Python interpreter for more advanced scenarios.
 
-Obviously, an in-depth discussion about the ``multiprocessing``
-library is out of the scope of this document. There are many
-references available on Internet. Also, note that ``threading`` is not
-useful here, as Python multithreading is also limited by the GIL, and
-is more targeted at dealing with costly I/O operations or with the
-:ref:`scheduling of commands <python-scheduler>`.
+NB: Starting with release 3.0 of the Python plugin, it is possible to
+call the REST API of Orthanc from a slave process in a more direct
+way. The function ``orthanc.GenerateRestApiAuthorizationToken()`` can
+be used to create an authorization token that provides full access to
+the REST API of Orthanc (without have to set credentials in your
+plugin). Any HTTP client library for Python, such as `requests
+<https://requests.readthedocs.io/en/master/>`__, can then be used to
+access the REST API of Orthanc. Here is a minimal example::
+
+  import json
+  import multiprocessing
+  import orthanc
+  import requests
+  import signal
+  
+  TOKEN = orthanc.GenerateRestApiAuthorizationToken()
+  
+  def SlaveProcess():
+      r = requests.get('http://localhost:8042/instances',
+                       headers = { 'Authorization' : TOKEN })
+      return json.dumps(r.json())
+  
+  def Initializer():
+      signal.signal(signal.SIGINT, signal.SIG_IGN)
+  
+  POOL = multiprocessing.Pool(4, initializer = Initializer)
+  
+  def OnRest(output, uri, **request):
+      answer = POOL.apply(SlaveProcess)
+      output.AnswerBuffer(answer, 'text/plain')
+  
+  orthanc.RegisterRestCallback('/computation', OnRest)
