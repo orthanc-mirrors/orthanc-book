@@ -61,13 +61,13 @@ From Osimis
 .. toctree::
    :maxdepth: 1
 
-   plugins/osimis-webviewer.rst
    plugins/mysql.rst
-   plugins/authorization.rst
    plugins/transfers.rst
    plugins/google-cloud-platform.rst    
    plugins/python.rst 
    plugins/object-storage.rst   
+   plugins/osimis-webviewer.rst
+   plugins/authorization.rst
 
 .. _plugins-contributed:
 

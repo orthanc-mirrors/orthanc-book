@@ -710,6 +710,82 @@ studies, with the patient ID, the patient name and the study
 description.
 
 
+.. _python_authorization:
+
+Forbid or allow access to REST resources (authorization)
+........................................................
+
+.. highlight:: python
+
+The following Python script installs a callback that is triggered
+whenever the HTTP server of Orthanc is accessed::
+
+  import orthanc
+  import pprint
+
+  def Filter(uri, **request):
+      print('User trying to access URI: %s' % uri)
+      pprint.pprint(request)
+      return True  # False to forbid access
+
+  orthanc.RegisterIncomingHttpRequestFilter(Filter)
+
+If access is not granted, the ``Filter`` callback must return
+``False``. As a consequence, the HTTP status code would be set to
+``403 Forbidden``. If access is granted, the ``Filter`` must return
+``true``. The ``request`` argument contains more information about the
+request (such as the HTTP headers, the IP address of the caller and
+the GET arguments).
+
+Note that this is similar to the ``IncomingHttpRequestFilter()``
+callback that is available in :ref:`Lua scripts <lua-filter-rest>`.
+
+Thanks to Python, it is extremely easy to call remote Web services for
+authorization. Here is an example using the ``requests`` library::
+
+  import json
+  import orthanc
+  import requests
+
+  def Filter(uri, **request):
+      body = {
+          'uri' : uri,
+          'headers' : request['headers']
+      }
+      r = requests.post('http://localhost:8000/authorize',
+                        data = json.dumps(body))
+      return r.json() ['granted']  # Must be a Boolean
+
+  orthanc.RegisterIncomingHttpRequestFilter(Filter)
+
+.. highlight:: javascript
+
+This filter could be used together with the following Web service
+implemented using `Node.js
+<https://en.wikipedia.org/wiki/Node.js>`__::
+
+  const http = require('http');
+
+  const requestListener = function(req, res) {
+    let body = '';
+      req.on('data', function(chunk) {
+      body += chunk;
+    });
+    req.on('end', function() {
+      console.log(JSON.parse(body));
+      var answer = {
+        'granted' : false  // Forbid access
+      };
+      res.writeHead(200);
+      res.end(JSON.stringify(answer));
+    });
+  }
+
+  http.createServer(requestListener).listen(8000);
+
+  
+
+
 Performance and concurrency
 ---------------------------
 
