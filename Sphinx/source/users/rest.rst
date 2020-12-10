@@ -642,15 +642,18 @@ Performing C-Echo
 To validate the DICOM connectivity between Orthanc and a remote modality,
 you can perform a C-ECHO::
 
-    $ curl -X POST http://localhost:8042/modalities/sample/echo -d ''
+    $ curl -X POST http://localhost:8042/modalities/sample/echo -d '{}'
 
-From Orthanc 1.7.0, you can include an extra ``Timeout`` field.
+From Orthanc 1.7.0, you can include an extra ``Timeout`` field::
 
     $ curl -X POST http://localhost:8042/modalities/sample/echo -d '{ "Timeout": 10 }'
 
 If no ``Timeout`` parameter is specified, the value of the ``DicomScuTimeout``
 configuration is used as a default.  If ``Timeout`` is set to zero, this means 
 no timeout.
+
+NB: A body containing a valid JSON object is needed by
+``/modalities/{id}/echo`` since Orthanc 1.7.0.
 
 
 Performing C-Move
