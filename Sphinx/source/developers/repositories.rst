@@ -199,8 +199,9 @@ command on their side::
 
 NB: If the ``hg export`` command was run on Microsoft Windows, one
 might have to convert the end-of-lines from DOS (CR/LF) to UNIX (LF
-only) using the ``dos2unix`` command, before running ``hg import``.
-Otherwise, errors like ``Hunk #1 FAILED`` might show up.
+only) using the ``dos2unix`` command on the patch file, before running
+``hg import``.  Otherwise, errors like ``Hunk #1 FAILED`` might show
+up.
 
   
 .. _hg-bundle:
