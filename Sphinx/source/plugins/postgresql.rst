@@ -276,10 +276,15 @@ Troubleshooting
 SCRAM authentication
 ^^^^^^^^^^^^^^^^^^^^
 
-The precompiled binaries of the plugins use a stable version of the
-PostgreSQL client (libpq 9.6.1, as of release 3.2). This makes these
-binaries very portable, however they might not be compatible with more
-recent features of PostgreSQL.
+.. note:: This section only applies to releases <= 3.2 of the
+          PostgreSQL plugins. Starting with release 3.3, the plugins
+          use a version of libpq that should support SCRAM
+          authentication.
+
+In the releases 3.2 of the PostgreSQL plugins, the precompiled
+binaries use an old, but stable version of the PostgreSQL client
+(libpq 9.6.1). This makes these binaries very portable, however they
+might not be compatible with more recent features of PostgreSQL.
 
 In particular, the precompiled binaries are not compatible with `SCRAM
 authentication
