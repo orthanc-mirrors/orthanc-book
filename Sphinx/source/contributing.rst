@@ -25,7 +25,7 @@ Contributing to Orthanc
             - Annotations/measurements
             - Internationalization/translations
             - MPR volume rendering
-            - CE certification
+            - Viewer for nuclear medicine and radiotherapy
 
           * **Plugins**:
 
