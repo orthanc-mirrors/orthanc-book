@@ -17,15 +17,16 @@ Contributing to Orthanc
 
           * **Orthanc Core**:
 
-            - DICOM TLS
-            - Improved scalability for PostgreSQL databases
-            
+            - Improved scalability of PostgreSQL databases
+            - :ref:`Improved Web user interface <improving-interface>`
+            - :ref:`DICOM TLS <security>`
+          
           * **Stone Web viewer**:
      
             - Annotations/measurements
             - Internationalization/translations
             - MPR volume rendering
-            - Viewer for nuclear medicine and radiotherapy
+            - Viewer dedicated to nuclear medicine and radiotherapy
 
           * **Plugins**:
 
