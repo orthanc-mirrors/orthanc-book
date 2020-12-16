@@ -26,6 +26,10 @@ Contributing to Orthanc
             - Internationalization/translations
             - MPR volume rendering
             - CE certification
+
+          * **Plugins**:
+
+            - Support of MSSQL databases
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
           want to sponsor these developments.
