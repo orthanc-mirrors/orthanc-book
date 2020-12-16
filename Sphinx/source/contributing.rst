@@ -8,6 +8,27 @@ Contributing to Orthanc
    :hidden:
 
    unanswered-forum.rst
+
+
+.. note:: Here are the main features we would like to get soon
+          implemented as free and open-source code in the Orthanc
+          ecosystem. To make this happen, **we need your financial
+          support**!
+
+          * **Orthanc Core**:
+
+            - DICOM TLS
+            - Scalability of the PostgreSQL database
+            
+          * **Stone Web viewer**:
+     
+            - Annotations/measurements
+            - Internationalization/translations
+            - MPR volume rendering
+            - CE certification
+            
+          Please `get in touch with Osimis <info@osimis.io>`__ if you
+          want to sponsor these developments.
    
 If you find Orthanc useful and wish to contribute to its development,
 here are some tasks you can take in charge that would greatly help us:
