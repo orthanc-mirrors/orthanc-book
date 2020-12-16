@@ -18,7 +18,7 @@ Contributing to Orthanc
           * **Orthanc Core**:
 
             - DICOM TLS
-            - Scalability of the PostgreSQL database
+            - Improved scalability for PostgreSQL databases
             
           * **Stone Web viewer**:
      
