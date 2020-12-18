@@ -90,6 +90,16 @@ levels, as depicted by the green arrows on the following drawing:
   instances. Conversely, setting it to ``1.2.840.10008.1.2.4.70`` will
   compress and store images using JPEG Lossless.
 
+  NB: Starting with Orthanc 1.8.2, the option
+  ``IngestTranscodingOfUncompressed``
+  (resp. ``IngestTranscodingOfCompressed``) is available to control
+  whether the ingest transcoding is applied to uncompressed transfer
+  syntaxes (resp. compressed transfer syntaxes). By "uncompressed"
+  transfer syntaxes, we mean Little Endian Implicit, Little Endian
+  Explicit, or Big Endian Explicit. By default, these options are
+  considered as equal to ``true``, meaning that all the transfer
+  syntaxes are transcoded.
+  
 * **Decompression while sending instances using the DICOM protocol**.
   Orthanc can be configured to automatically decompress DICOM images
   on its outgoing connections, if the remote modality does not support
