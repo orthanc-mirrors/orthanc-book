@@ -197,7 +197,7 @@ To fully secure the DICOM protocol, you should:
   configuration of remote modalities.
   
 
-**Remark:** As of Orthanc 1.8.1, `DICOM TLS encryption
+**Remark:** As of Orthanc 1.8.2, `DICOM TLS encryption
 <https://www.dicomstandard.org/using/security/>`__ is not supported
 yet. As a temporary workaround, `it has been reported
 <https://www.digihunch.com/2020/11/medical-imaging-web-server-deployment-pipeline/>`__
