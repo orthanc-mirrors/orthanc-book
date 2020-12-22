@@ -31,6 +31,7 @@ Contributing to Orthanc
           * **Plugins**:
 
             - Support of MSSQL databases
+            - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Myrth
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
           want to sponsor these developments.
