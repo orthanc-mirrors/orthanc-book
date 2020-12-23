@@ -55,6 +55,10 @@ Note that it is not possible to rename any file, as this is a virtual
 filesystem that is permanently and transparently reconstructed out of
 the content of the Orthanc database.
 
+NB: Starting with Orthanc 1.8.2, ZIP archives can also be added to the
+``/uploads/`` folder. Orthanc will automatically decompress the ZIP
+archive and upload any DICOM file it contains.
+
 
 Server configuration
 --------------------
