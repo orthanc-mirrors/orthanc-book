@@ -27,6 +27,7 @@ Contributing to Orthanc
             - Internationalization/translations
             - MPR volume rendering
             - Viewer dedicated to nuclear medicine and radiotherapy
+            - Rendering of DICOM GSPS
 
           * **Plugins**:
 
