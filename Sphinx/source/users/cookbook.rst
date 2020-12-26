@@ -21,6 +21,11 @@ To obtain the Orthanc binaries, you have several possibilities:
   <debian-packages>`, or for `openSUSE
   <https://software.opensuse.org/search?q=orthanc>`__ (courtesy of
   Axel Braun).
+* On GNU/Linux, use our `LSB binaries
+  <https://lsb.orthanc-server.com/>`__ (Linux Standard Base), that
+  should easily and immediately run on most distributions. Those
+  binaries are statically linked together with all their third-party
+  dependencies.
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#user-content-vagrant>`__.
