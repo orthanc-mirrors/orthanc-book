@@ -18,9 +18,9 @@ To obtain the Orthanc binaries, you have several possibilities:
 * `Download pre-compiled packages <https://www.orthanc-server.com/download.php>`__.
 * :ref:`Use Docker <docker>`.
 * On GNU/Linux, use precompiled packages for :ref:`Debian/Ubuntu
-  <debian-packages>`, or for :ref:`openSUSE
-  <https://software.opensuse.org/search?utf8=%E2%9C%93&baseproject=openSUSE%3ALeap%3A15.2&q=orthanc>`
-  (courtesy of Axel Braun).
+  <debian-packages>`, or for `openSUSE
+  <https://software.opensuse.org/search?q=orthanc>`__ (courtesy of
+  Axel Braun).
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#user-content-vagrant>`__.
