@@ -46,8 +46,8 @@ shows all the way that can be used to generate the same
 configuration in Orthanc.
 
 
-Environmnent variables
-----------------------
+Environment variables
+---------------------
 
 Any part of the Orthanc configuration file can be configured through an
 environment variable.  Now that Orthanc and its plugins have hundreds of
@@ -67,9 +67,9 @@ too long.  That's why we have defined a standard way of naming the variable:
 To find out an environment variable name from an Orthanc setting
 (i.e. ``DicomWeb.StudiesMetadata`` is the ``path`` to a setting):
 
-- everytime a word contains a capital letter, insert an underscore ``_`` in front.
+- whenever a word contains a capital letter, insert an underscore ``_`` in front.
   ``DicomWeb.StudiesMetadata`` now becomes ``Dicom_Web.Studies_Metadata``
-- everytime you go down one level in the json configuration, insert
+- whenever you go down one level in the JSON configuration, insert
   a double underscore ``__``.  ``Dicom_Web.Studies_Metadata`` now becomes
   ``Dicom_Web__Studies_Metadata``
 - capitalize all letters.  ``Dicom_Web__Studies_Metadata`` now becomes
@@ -96,7 +96,7 @@ but can be specified to control the way Orthanc is run.
 - ``NO_JOBS=true`` will start Orthanc with the ``--no-jobs`` option
 - ``UNLOCK=true`` will start Orthanc with the ``--unlock`` option
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
-- ``ORTHANC_JSON`` can be used to pass a json "root" configuration (see below).
+- ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
 
 Configuration files
 -------------------
@@ -128,7 +128,7 @@ Configuration files can also be passed as secrets as shown in this ``docker-comp
       orthanc.secret.json:
         file: orthanc.secret.json
 
-Finaly, a whole configuration file can be passed as a JSON through the ``ORTHANC_JSON`` environment variable::
+Finally, a whole configuration file can be passed as a JSON through the ``ORTHANC_JSON`` environment variable::
 
   version: "3.3"
     services:
@@ -229,10 +229,10 @@ Orthanc non-standard defaults::
   }
   
 
-Default lua scripts
+Default Lua scripts
 -------------------
 
-Some lua scripts are already loaded in the image but are not configured to 
+Some Lua scripts are already loaded in the image but are not configured to 
 be loaded by Orthanc automatically.  You'll have to add them to the ``"LuaScripts"`` 
 configuration if you want to use them.
 
@@ -339,7 +339,7 @@ Below is a list of all plugins, their environment variable and their default con
 |                                                  |                                                  |     }                                                                                              |
 |                                                  |                                                  |   }                                                                                                |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Wsi**                                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |
+| **Whole-slide imaging**                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 | **Osimis cloud** (synchronization plugin)        | ``OSIMIS_CLOUD_PLUGIN_ENABLED``                  |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
@@ -349,4 +349,4 @@ Under the hood
 
 The source code that is used to generate the image can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/Dockerfile>`__.
 
-The python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/generateConfiguration.py>`__
+The Python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/generateConfiguration.py>`__
