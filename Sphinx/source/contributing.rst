@@ -65,10 +65,6 @@ here are some tasks you can take in charge that would greatly help us:
     out the instructions provided in the `README file
     <https://hg.orthanc-server.com/orthanc-book/file/default/README.md>`__,
     and send us a :ref:`simple patch <hg-patch>`).
-  - Pursue the `OpenAPI documentation
-    <https://api.orthanc-server.com/>`__, that is still
-    work-in-progress (`check out its source code
-    <https://hg.orthanc-server.com/orthanc-book/file/default/OpenAPI>`__).
   - Provide documentation and use cases (inside the dedicated `GitHub
     repository <https://github.com/jodogne/OrthancContributed>`_, via
     pull requests).
