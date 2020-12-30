@@ -16,7 +16,7 @@ To install latest version of ReDoc
 Using wget
 ----------
 
-# wget 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js'
+# wget 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.48/bundles/redoc.standalone.js'
 
 
 Using npm
