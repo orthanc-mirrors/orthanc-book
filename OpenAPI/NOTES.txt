@@ -1,5 +1,6 @@
 To test localy
 ==============
+
 # cd OpenAPI
 # python3 -m http.server 8000
 # open http://localhost:8000
@@ -8,6 +9,18 @@ To test localy
 
 To install latest version of ReDoc
 ==================================
+
+!! The old documentation "2019-08-orthanc-openapi.yaml" requires
+   2.0.0-rc.14.
+
+Using wget
+----------
+
+# wget 'https://cdn.jsdelivr.net/npm/redoc@2.0.0-alpha.17/bundles/redoc.standalone.js'
+
+
+Using npm
+---------
 
 # mkdir /tmp/i
 # cd /tmp/i
