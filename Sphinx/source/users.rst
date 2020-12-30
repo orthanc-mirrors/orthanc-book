@@ -8,6 +8,7 @@ User's guide
    users/configuration.rst
    users/docker.rst
    users/rest.rst
+   users/rest-cheatsheet.rst
    users/backup.rst
    users/replication.rst
    users/anonymization.rst
