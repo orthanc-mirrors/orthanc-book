@@ -1101,10 +1101,9 @@ API have not been described:
   <rest-advanced>`.
 * A :ref:`FAQ entry <rest-samples>` lists where you can find more
   advanced samples of the REST API of Orthanc.
-* The full documentation of the REST API is maintained as an online
-  spreadsheet accessible from the `documentation part of the official
-  Web site
-  <https://www.orthanc-server.com/static.php?page=documentation>`__
-  (click on the *Reference of the REST API* button).
-* A documentation of the REST API in the OpenAPI/Swagger format is
-  `available as work-in-progress <https://api.orthanc-server.com/>`__.
+* A :ref:`short reference of the REST API of Orthanc <cheatsheet>` is
+  part of the Orthanc Book.
+* The full documentation of the REST API in the OpenAPI/Swagger format
+  is `available online <https://api.orthanc-server.com/>`__. This
+  reference is automatically generated from the source code of
+  Orthanc.

@@ -11,7 +11,9 @@ Storage area
 DICOM files it receives in a folder called ``OrthancStorage`` on the
 filesystem. Orthanc also associates each incoming DICOM file with a
 JSON file that summarizes all its DICOM tags, which speeds up
-subsequent processing by avoiding a costly DICOM parsing.
+subsequent processing by avoiding a costly DICOM parsing (these
+summaries are refered to as ``DICOM-as-JSON`` :ref:`attachments
+<metadata>`).
 
 More generally, the ``OrthancStorage`` folder contains a set of
 so-called **attachments**, that may correspond to either a DICOM file,
