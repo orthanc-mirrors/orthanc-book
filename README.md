@@ -67,27 +67,17 @@ Contributing to the Book
 REST API of Orthanc
 ===================
 
-Setup
------
+The REST API of Orthanc is now fully documented in the [source code of
+the Orthanc
+server](https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Sources/OrthancRestApi).
+The `--openapi=` and the `--cheatsheet=` command-line options of
+Orthanc automatically generate respectively the [OpenAPI in JSON
+format](https://swagger.io/specification/) and its [quick reference
+(cheatsheet)](https://book.orthanc-server.com/users/rest-cheatsheet.html)
+in CSV format that is designed to be included right into the [Orthanc
+Book](https://hg.orthanc-server.com/orthanc-book/file/default/Sphinx/source/users/rest-cheatsheet.csv).
 
-The REST API of Orthanc is documented according to the
-[OpenAPI specification and in the YAML format](https://en.wikipedia.org/wiki/OpenAPI_Specification).
-
-The source code of the OpenAPI documentation can be found in the file
-[./OpenAPI/orthanc-openapi.yaml](./OpenAPI/orthanc-openapi.yaml)
-within this repository.
-
-Contributing to the OpenAPI
----------------------------
-
- * Make sure to understand the
-   [OpenAPI YAML format](https://swagger.io/specification/).
- * Fork this repository onto your BitBucket account.
- * Edit the content of the
-   [`./OpenAPI/orthanc-openapi.yaml` file](./OpenAPI/orthanc-openapi.yaml).
- * Submit a
-   [pull request](https://confluence.atlassian.com/bitbucket/create-a-pull-request-945541466.html)
-   for review by the Orthanc project.
- * Once the pull request is reviewed and accepted, the continuous
-   integration server of the Orthanc project will automatically
-   publish the new version [online](http://api.orthanc-server.com/).
+In order to contribute to the documentation of the REST API, you can
+[propose a simple
+patch](https://book.orthanc-server.com/developers/repositories.html#simple-patch-import-export)
+to the core of Orthanc to be reviewed by the core maintainers.
