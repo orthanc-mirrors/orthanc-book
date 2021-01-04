@@ -3,7 +3,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/exports``,`GET <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1exports/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1exports/delete>`__,,List exports
 ``/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances/post>`__,,,List the available instances
 ``/instances/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}/delete>`__,,Get information about some instance
-``/instances/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Instance/paths/~1instances~1{id}~1anonymize/post>`__,,,Anonymize instance
+``/instances/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1anonymize/post>`__,,,Anonymize instance
 ``/instances/{id}/attachments``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments/get>`__,,,,List attachments
 ``/instances/{id}/attachments/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1instances~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/put>`__,List operations on attachments
 ``/instances/{id}/attachments/{name}/compress``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
@@ -36,7 +36,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/matlab``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1matlab/get>`__,,,,Decode frame for Matlab
 ``/instances/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata/get>`__,,,,List metadata
 ``/instances/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/put>`__,Get metadata
-``/instances/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Instance/paths/~1instances~1{id}~1modify/post>`__,,,Modify instance
+``/instances/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1modify/post>`__,,,Modify instance
 ``/instances/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1module/get>`__,,,,Get instance module
 ``/instances/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1patient/get>`__,,,,Get parent patient
 ``/instances/{id}/pdf``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1pdf/get>`__,,,,Get embedded PDF

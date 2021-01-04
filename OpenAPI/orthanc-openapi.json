@@ -1,6 +1,6 @@
 {
    "info" : {
-      "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ))",
+      "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
       "version" : "1.8.2"
    },
@@ -414,7 +414,7 @@
                }
             },
             "summary" : "Anonymize instance",
-            "tags" : [ "Instance" ]
+            "tags" : [ "Instances" ]
          }
       },
       "/instances/{id}/attachments" : {
@@ -2246,7 +2246,7 @@
                }
             },
             "summary" : "Modify instance",
-            "tags" : [ "Instance" ]
+            "tags" : [ "Instances" ]
          }
       },
       "/instances/{id}/module" : {
@@ -2975,9 +2975,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "54a098c3-b13d-4650-946d-efbe66430a53",
-                              "645ecb02-7c0e-4465-b767-df873222dcfb",
-                              "7dcebce7-6583-43be-bef3-01b7cb242768",
+                              "207718f7-c920-4b7e-8049-be6519b4a104",
+                              "291c92e5-a40a-47cb-8cb4-2297c9c42f0b",
+                              "4f1ba727-e3a0-4d7f-b5ad-b5a6f7b30053",
                               "..."
                            ]
                         }
@@ -12565,7 +12565,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1609310738535\northanc_count_patients 8 1609310738535\northanc_count_series 26 1609310738535\northanc_count_studies 8 1609310738535\northanc_disk_size_mb 1018.65021 1609310738535\northanc_jobs_completed 10 1609310738535\northanc_jobs_failed 0 1609310738535\northanc_jobs_pending 0 1609310738535\northanc_jobs_running 0 1609310738535\northanc_jobs_success 10 1609310738535\northanc_rest_api_active_requests 1 1609310738534\northanc_rest_api_duration_ms 305 1609310737152\northanc_storage_read_duration_ms 2 1609310732748\northanc_uncompressed_size_mb 1018.65021 1609310738535\n"
+                        "example" : "orthanc_count_instances 2552 1609776242816\northanc_count_patients 8 1609776242816\northanc_count_series 26 1609776242816\northanc_count_studies 8 1609776242816\northanc_disk_size_mb 1018.65021 1609776242816\northanc_jobs_completed 10 1609776242816\northanc_jobs_failed 0 1609776242816\northanc_jobs_pending 0 1609776242816\northanc_jobs_running 0 1609776242816\northanc_jobs_success 10 1609776242816\northanc_rest_api_active_requests 1 1609776242815\northanc_rest_api_duration_ms 2967 1609776236554\northanc_storage_read_duration_ms 60 1609776240969\northanc_uncompressed_size_mb 1018.65021 1609776242816\n"
                      }
                   },
                   "description" : ""
@@ -12584,7 +12584,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20201230T064538",
+                        "example" : "20210104T160402",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -12606,7 +12606,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20201230T064538",
+                        "example" : "20210104T160403",
                         "schema" : {
                            "description" : "The local time"
                         }
