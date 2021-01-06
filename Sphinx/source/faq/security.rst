@@ -206,3 +206,40 @@ can be used to emulate DICOM TLS. Another option is to use `stunnel
 <https://www.stunnel.org/>`__. We are looking for :ref:`an industrial
 sponsor <contributing>` to implement DICOM TLS in the core of Orthanc,
 as this feature is dedicated to enterprise and cloud environments.
+
+
+Securing the storage
+--------------------
+
+In general, for security, Orthanc should store its database index
+(PostgreSQL, SQLite...) and its :ref:`storage area <orthanc-storage>`
+for DICOM files on an `on-premises, self-hosted infrastructure
+<https://en.wikipedia.org/wiki/On-premises_software>`__ with `disk
+encryption <https://en.wikipedia.org/wiki/Disk_encryption>`__.
+
+It is possible to move the storage area to a `cloud-based object
+storage <https://en.wikipedia.org/wiki/Object_storage>`__, by using
+the :ref:`dedicated storage plugins <object-storage>` at the condition
+that :ref:`Orthanc-side encryption is enabled
+<client-side-encryption>`.
+
+
+General remark
+--------------
+
+In any case, make sure to get legal advice that is very specific to
+the legislation of the countries where you are active (for
+illustration, check out the recent debates over the `privacy shield
+<https://en.wikipedia.org/wiki/EU%E2%80%93US_Privacy_Shield>`__ in
+Europe). Make sure to understand the implications of using cloud-based
+object storage, of using virtual machines in the cloud to store health
+data, of using managed database servers (even with
+"encryption-at-rest")...
+
+As a free and open-source project, the Orthanc ecosystem cannot be
+taken as liable for any security breach or data leak in your
+deployments, for any misconfiguration, for any bad handling of
+personal/health data, for any bypassing of regulatory requirements,
+for not being compliant with your local legislation, or for any
+similar stuff: Orthanc is just software, security is your
+responsibility.

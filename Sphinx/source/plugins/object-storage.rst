@@ -280,6 +280,8 @@ Performances
 You'll find some performance comparison between VM SSDs and object-storage `here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/performance-tests/>`__ .
 
 
+.. _client-side-encryption:
+
 Client-side encryption
 ----------------------
 
