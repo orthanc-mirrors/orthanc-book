@@ -223,10 +223,6 @@ the :ref:`dedicated storage plugins <object-storage>` at the condition
 that :ref:`Orthanc-side encryption is enabled
 <client-side-encryption>`.
 
-
-General remark
---------------
-
 In any case, make sure to get legal advice that is very specific to
 the legislation of the countries where you are active (for
 illustration, check out the recent debates over the `privacy shield
