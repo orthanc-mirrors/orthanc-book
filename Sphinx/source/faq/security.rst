@@ -215,13 +215,18 @@ In general, for security, Orthanc should store its database index
 (PostgreSQL, SQLite...) and its :ref:`storage area <orthanc-storage>`
 for DICOM files on an `on-premises, self-hosted infrastructure
 <https://en.wikipedia.org/wiki/On-premises_software>`__ with `disk
-encryption <https://en.wikipedia.org/wiki/Disk_encryption>`__.
+encryption
+<https://en.wikipedia.org/wiki/Disk_encryption>`__. Similarly, Orthanc
+itself should ideally run on your own on-premises infrastructure, and
+not on a virtual machine that is managed by a public cloud solution
+provider.
 
-It is possible to move the storage area to a `cloud-based object
-storage <https://en.wikipedia.org/wiki/Object_storage>`__, by using
-the :ref:`dedicated storage plugins <object-storage>` at the condition
-that :ref:`Orthanc-side encryption is enabled
-<client-side-encryption>`.
+Depending on your jurisdiction, it might be possible to move the
+storage area to a `cloud-based object storage
+<https://en.wikipedia.org/wiki/Object_storage>`__, by using the
+:ref:`dedicated storage plugins <object-storage>`. :ref:`Orthanc-side
+encryption <client-side-encryption>` should be enabled in such a
+situation.
 
 In any case, make sure to get legal advice that is very specific to
 the legislation of the countries where you are active (for
@@ -229,8 +234,8 @@ illustration, check out the recent debates over the `privacy shield
 <https://en.wikipedia.org/wiki/EU%E2%80%93US_Privacy_Shield>`__ in
 Europe). Make sure to understand the implications of using cloud-based
 object storage, of using virtual machines in the cloud to store health
-data, of using managed database servers (even with
-"encryption-at-rest")...
+data, of using managed database servers (even with so-called
+"encryption-at-rest" features)...
 
 As a free and open-source project, the Orthanc ecosystem cannot be
 taken as liable for any security breach or data leak in your
