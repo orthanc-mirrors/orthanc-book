@@ -277,6 +277,19 @@ This sample uploads a DICOM file as soon as Orthanc is started::
     orthanc.RegisterOnChangeCallback(OnChange)
 
 
+
+.. warning::
+   Your callback function will be called synchronously with
+   the core of Orthanc. This implies that deadlocks might emerge if
+   you call other core primitives of Orthanc in your callback (such
+   deadlocks are particular visible in the presence of other plugins
+   or Lua scripts). It is thus strongly advised to avoid any call to
+   the REST API of Orthanc in the callback. If you have to call other
+   primitives of Orthanc, you should make these calls in a separate
+   thread, passing the pending events to be processed through a
+   message queue.
+
+
 Accessing the content of a new instance
 .......................................
 
@@ -305,6 +318,18 @@ Accessing the content of a new instance
 
   orthanc.RegisterOnStoredInstanceCallback(OnStoredInstance)
 
+
+.. warning::
+   Your callback function will be called synchronously with
+   the core of Orthanc. This implies that deadlocks might emerge if
+   you call other core primitives of Orthanc in your callback (such
+   deadlocks are particular visible in the presence of other plugins
+   or Lua scripts). It is thus strongly advised to avoid any call to
+   the REST API of Orthanc in the callback. If you have to call other
+   primitives of Orthanc, you should make these calls in a separate
+   thread, passing the pending events to be processed through a
+   message queue.
+  
 
 Calling pydicom
 ...............
