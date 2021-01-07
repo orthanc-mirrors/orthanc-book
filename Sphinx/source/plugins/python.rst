@@ -289,6 +289,24 @@ This sample uploads a DICOM file as soon as Orthanc is started::
    thread, passing the pending events to be processed through a
    message queue.
 
+Here is the template of a possible solution to avoid such deadlocks by
+relying on the multithreading primitives of Python::
+
+  import orthanc
+  import threading
+
+  def OnChange(changeType, level, resource):
+      # One can safely invoke the "orthanc" module in this function
+      orthanc.LogWarning("Hello world")
+  
+  def _OnChange(changeType, level, resource):
+      # Invoke the actual "OnChange()" function in a separate thread
+      t = threading.Timer(0, function = OnChange, args = (changeType, level, resource))
+      t.start()
+
+  orthanc.RegisterOnChangeCallback(_OnChange)
+
+   
 
 Accessing the content of a new instance
 .......................................
