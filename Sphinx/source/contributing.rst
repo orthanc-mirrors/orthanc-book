@@ -129,6 +129,13 @@ here are some tasks you can take in charge that would greatly help us:
       <https://twitter.com/sjodogne/status/1299632772915625984>`__ to
       import/export such STL files from/to Orthanc.
     + Create a plugin to edit DICOM files (add, update or remove DICOM tags).
+    + Create samples of :ref:`Python plugins <python-plugin>` to take
+      care of HL7 messages, especially for :ref:`merging patients
+      <split-merge>` (which is a `typical HL7 event
+      <https://twitter.com/ZeClint/status/1192086039160086529?s=20>`__
+      to be handled by the PACS, not by the RIS). Reference: Events
+      ``Axx`` of Chapter 3 ("Patient Administration") in the HL7 v2.9
+      specification.
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
