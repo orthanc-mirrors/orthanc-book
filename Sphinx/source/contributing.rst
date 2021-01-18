@@ -128,6 +128,7 @@ here are some tasks you can take in charge that would greatly help us:
       `FreeCAD extension
       <https://twitter.com/sjodogne/status/1299632772915625984>`__ to
       import/export such STL files from/to Orthanc.
+    + Create a plugin to edit DICOM files (add, update or remove DICOM tags).
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
