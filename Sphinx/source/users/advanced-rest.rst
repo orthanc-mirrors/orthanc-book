@@ -258,6 +258,41 @@ You can use the ``/instances/.../pdf`` URI to retrieve an embedded PDF
 file.
 
 
+.. _private-tags:
+
+Creating DICOM instance with private tags
+-----------------------------------------
+
+.. highlight:: json
+
+The ``/tools/create-dicom`` URI can be used to create DICOM instances
+containing private tags. Those private tags must first be defined in
+the ``Dictionary`` configuration option of Orthanc. Importantly, the
+``xxxx,0010`` tag must be defined to register the private creator,
+where ``xxxx`` is the private group of interest. Here is a sample::
+
+  {
+    "Dictionary" : {
+      "0405,0010" : [ "LO", "Private data element", 1, 1, "RawDataStore" ],
+      "0405,1001" : [ "ST", "XML", 1, 1, "RawDataStore" ]
+    }
+  }
+
+Once Orthanc is started using this configuration file, it is possible
+to create a DICOM instance using the following POST body on
+``/tools/create-dicom``::
+
+  {
+    "PrivateCreator" : "RawDataStore",
+    "Tags" :
+    {
+      "PatientName" : "Love^Sarah",
+      "PatientID" : "7",
+      "0405,0010" : "RawDataStore",
+      "0405,1001" : "<xml><test>Testing</test></xml>"
+    }
+  }
+
 
 .. _prometheus:
 
