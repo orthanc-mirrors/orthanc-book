@@ -279,18 +279,17 @@ This sample uploads a DICOM file as soon as Orthanc is started::
 
 
 .. warning::
-   Your callback function will be called synchronously with
-   the core of Orthanc. This implies that deadlocks might emerge if
-   you call other core primitives of Orthanc in your callback (such
-   deadlocks are particular visible in the presence of other plugins
-   or Lua scripts). It is thus strongly advised to avoid any call to
-   the REST API of Orthanc in the callback. If you have to call other
-   primitives of Orthanc, you should make these calls in a separate
-   thread, passing the pending events to be processed through a
-   message queue.
+   In releases <= 3.0 of the Python plugin, deadlocks might emerge if
+   you call other core primitives of Orthanc (such as the REST API) in
+   your callback function. This issue has been `fixed in release 3.1
+   <https://hg.orthanc-server.com/orthanc-python/rev/46fe70776d61>`__.
 
-Here is the template of a possible solution to avoid such deadlocks by
-relying on the multithreading primitives of Python::
+As a **temporary workaround** against such deadlocks in releases <=
+3.0, if you have to call other primitives of Orthanc, you should make
+these calls in a separate thread, passing the pending events to be
+processed through a message queue. Here is the template of a possible
+solution to postpone such deadlocks as much as possible by relying on
+the multithreading primitives of Python::
 
   import orthanc
   import threading
@@ -305,6 +304,12 @@ relying on the multithreading primitives of Python::
       t.start()
 
   orthanc.RegisterOnChangeCallback(_OnChange)
+
+
+Beware that **this workaround is imperfect** and deadlocks have been
+observed even if using it! Make sure to upgrade your plugin to solve
+this issue for good. Note that this temporary workaround is not needed
+in releases >= 3.1 of the plugin.
 
    
 
