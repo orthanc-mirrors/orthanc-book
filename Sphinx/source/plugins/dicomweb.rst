@@ -369,6 +369,24 @@ configuration file has a proper ``Pkcs11`` section)::
     }
   }
 
+Starting with release 1.5 of the DICOMweb plugin, the configuration
+option ``ServersInDatabase`` can be set to ``true`` in order for the
+plugin to **read/write the definitions of the DICOMweb servers
+from/into the database of Orthanc**. This makes the modifications to
+the DICOMweb servers persistent across successive executions of
+Orthanc. If this option is enabled, the REST API must be used on URI
+``/dicom-web/servers/`` (with the GET, DELETE or PUT methods) to
+:ref:`add/update/remove DICOMweb servers
+<dicomweb-additional-samples>`. Here is the syntax to enable this
+feature::
+  
+  {
+    [...]
+    "DicomWeb" : {
+      "ServersInDatabase" : true   // "false" by default
+    }
+  }
+  
 **Remark:** A :ref:`plugin by Osimis <google>` is available to
 dynamically create authenticated connections to Google Cloud Platform.
 
@@ -645,6 +663,7 @@ The ``Synchronous`` and ``Priority`` arguments can be used to
 asynchronously run the request.
 
 
+.. _dicomweb-additional-samples:
 
 Additional samples
 ------------------
