@@ -229,9 +229,10 @@ applications might use the same key to store different user-defined
 between such applications. Similarly, incompatibilities might show up
 for user-defined :ref:`attachments <orthanc-storage>`.
 
-Developers of applications/plugins that use user-defined metadata or
-attachments are therefore kindly invited to complete the **central
-registry** below:
+Developers of applications/plugins that use user-defined metadata,
+attachments or global properties (using
+``OrthancPluginSetGlobalProperty()``) are therefore kindly invited to
+complete the **central registry** below:
 
 * ``Metadata 4200`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version <= 0.7.
 * ``Metadata 4201`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version >= 1.0.
@@ -239,6 +240,7 @@ registry** below:
 * ``Attachment 9998`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store instance information.
 * ``Attachment 9999`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store annotations.
 * ``Attachments 10000-13999`` are used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store reduced quality images.
+* ``Global property 5467`` is used by the Osimis Cloud plugin.
 
 
 Jobs
