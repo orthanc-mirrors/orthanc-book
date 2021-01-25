@@ -134,7 +134,6 @@ decision chart:
 
    * **Europe** :
      
-     * `Alain Mazy <mailto:alain@mazy.be>`__ (English/French, Belgium)
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
