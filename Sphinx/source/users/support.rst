@@ -107,3 +107,56 @@ consider directly introducing a `bug report on our issue tracker
 <https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
 As a consequence, it is advised to first use the discussion forum.
+
+
+.. _support-freelancers:
+
+Finding professional assistance
+-------------------------------
+
+If you face a problem you cannot solve by yourself, please follow this
+decision chart:
+
+1. If you have a **reproducible issue** for which you can provide a
+   :ref:`minimal working example <support-mwe>` using only free and
+   open-source tools, use the `Orthanc Users discussion forum
+   <https://groups.google.com/forum/#!forum/orthanc-users>`__.
+
+2. If you need an **additional feature or a dedicated development**,
+   and if you are ready to pay, `get in touch with Osimis
+   <mailto:orthanc-support@osimis.io>`__, the commercial partner of
+   the Orthanc project.
+
+3. If you are not able to reproduce an issue by yourself, if you are
+   looking for personalized help related to deployments/training/...,
+   or if you need **proximity support in your language/timezone**,
+   here is a list of freelancers:
+
+   * **Europe** :
+     
+     * `Alain Mazy <mailto:alain@mazy.be>`__ (English/French, Belgium)
+     * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
+     * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
+     * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
+
+   * **North America**:
+       
+     * `Gabriel Couture <https://github.com/gacou54/>`__ (French/English, Canada)
+     * `Mohannad Hussain <https://www.linkedin.com/in/mohannadhussain/>`__ (English, Canada)
+
+   * **South America**:
+       
+     * `Claudio Arenas <mailto:dentista.arenas@gmail.com>`__ (Spanish/English, Chile)
+     * `Gustavo Fernandez <https://www.linkedin.com/in/gfernandezguirland/>`__ (Spanish/Portuguese, Uruguay)
+     * `Luiz Eduardo Guida Valmont <https://www.linkedin.com/in/luizvalmont/>`__ (English/Portuguese, Brazil)
+     * `William Sanchez Luis <mailto:williamsanchezluis@gmail.com>`__ (English/Spanish, Venezuela)
+
+   * **Asia**:
+     
+     * `Phong Tran Duc <http://www.itechcorp.com.vn/>`__ (English/Vietnamese, Vietnam)
+     * `Rana Asim Wajid <http://ethosmed.com/>`__ (English/Urdu/Punjabi, Pakistan)
+
+   * **Oceania**:
+     
+     * `James Manner <https://binary.com.au/>`__ (English, Australia)
+
