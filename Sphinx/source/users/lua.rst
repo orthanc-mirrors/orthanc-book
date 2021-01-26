@@ -15,6 +15,9 @@ scripting.
 Many other examples are `available in the source distribution
 <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Lua/>`__.
 
+A more expressive alternative to Lua scripts is provided by
+:ref:`Python plugins <python-plugins>`.
+
 
 Installing a Lua script
 -----------------------
@@ -134,12 +137,14 @@ Some other **resource-related events** are available:
 * ``function OnUpdatedInstance(instanceId)``: Invoked when some
   metadata or some attachment associated with the given instance has
   been updated (new in Orthanc 1.6.0).
-  
-Furthermore, whenever a DICOM association is negotiated for C-Store
-SCP, several callbacks are successively invoked to specify which
-**transfer syntaxes** are accepted for the association. These
-callbacks are listed in `this sample script
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
+
+Furthermore, in versions of Orthanc <= 1.8.2, whenever a DICOM
+association is negotiated for C-Store SCP, several callbacks are
+successively invoked to specify which **transfer syntaxes** are
+accepted for the association. These callbacks are listed in `this
+sample script
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.8.2/OrthancServer/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
+These callbacks were removed in Orthanc 1.9.0.
 
 *Note:* All of these callbacks are guaranteed to be **invoked in
 mutual exclusion**. This implies that Lua scripting in Orthanc does
