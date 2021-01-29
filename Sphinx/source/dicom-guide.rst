@@ -671,8 +671,9 @@ the **DICOM protocol inherently targets the Intranet** of a single
 hospital, not the Internet or the cloud. This protocol might be
 blocked by outbound firewalls, and there is no convention ensuring
 that the AETs are globally unique across all the
-hospitals. Furthermore, even though the DICOM protocol supports TLS
-encryption, this feature is rarely enabled.
+hospitals. Furthermore, even though :ref:`Orthanc supports DICOM TLS
+encryption <dicom-tls>`, this feature is rarely enabled within
+hospitals.
 
 Depending on your application, you might therefore want to leverage
 the **HTTP protocol** in the context of DICOM. Such Web-based

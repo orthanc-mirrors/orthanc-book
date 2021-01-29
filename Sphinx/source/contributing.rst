@@ -19,7 +19,6 @@ Contributing to Orthanc
 
             - Improved scalability of PostgreSQL databases
             - :ref:`Improved Web user interface <improving-interface>`
-            - :ref:`DICOM TLS <security>`
           
           * **Stone Web viewer**:
      

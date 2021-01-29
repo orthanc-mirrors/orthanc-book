@@ -28,6 +28,7 @@ Questions related to Orthanc and DICOM
    faq/dicom.rst
    faq/compiling.rst
    faq/query-retrieve.rst
+   faq/dicom-tls.rst
    faq/rest-samples.rst
    faq/transcoding.rst
    faq/orthanc-storage.rst

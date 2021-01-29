@@ -492,12 +492,16 @@ without actually sending a DICOM resource.::
 Using HTTPS
 ^^^^^^^^^^^
 
-If you're transfering medical data over internet, it is mandatory to use HTTPS.  
+If you're transfering medical data over internet, it is mandatory to
+use HTTPS.
 
-On the server side, we recommend to put Orthanc behing an :ref:`HTTPS server that will take care of the TLS <https>`.
+On the server side, we recommend to put Orthanc behind an :ref:`HTTPS
+server that will take care of the TLS <https>`.
 
-On the client side, in order for the client Orthanc to recognize the server certificate, you'll have to provide a path
-to the CA (certification authority) certificates.  This is done in the configuration file through this configurationg::
+On the client side, in order for the client Orthanc to recognize the
+server certificate, you'll have to provide a path to the CA
+(certification authority) certificates.  This is done in the
+configuration file through this configurationg::
 
     ...
     "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt,

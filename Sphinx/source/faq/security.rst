@@ -197,15 +197,19 @@ To fully secure the DICOM protocol, you should:
   configuration of remote modalities.
   
 
-**Remark:** As of Orthanc 1.8.2, `DICOM TLS encryption
-<https://www.dicomstandard.org/using/security/>`__ is not supported
-yet. As a temporary workaround, `it has been reported
+Starting with Orthanc 1.9.0, `DICOM TLS encryption
+<https://www.dicomstandard.org/using/security/>`__ is supported by
+Orthanc. If you need to share DICOM instances between sites, but if
+you don't want to use DICOMweb or Orthanc peers over HTTPS, you must
+enable :ref:`DICOM TLS in Orthanc <dicom-tls>` to ensure secure
+exchanges.
+
+As a workaround for the releases <= 1.8.2 of Orthanc that don't
+support DICOM TLS, `it has been reported
 <https://www.digihunch.com/2020/11/medical-imaging-web-server-deployment-pipeline/>`__
 that the "*SSL Termination for TCP Upstream Servers*" feature of nginx
 can be used to emulate DICOM TLS. Another option is to use `stunnel
-<https://www.stunnel.org/>`__. We are looking for :ref:`an industrial
-sponsor <contributing>` to implement DICOM TLS in the core of Orthanc,
-as this feature is dedicated to enterprise and cloud environments.
+<https://www.stunnel.org/>`__.
 
 
 Securing the storage
