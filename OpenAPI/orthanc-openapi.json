@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.8.2"
+      "version" : "1.9.0"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -2975,9 +2975,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "207718f7-c920-4b7e-8049-be6519b4a104",
-                              "291c92e5-a40a-47cb-8cb4-2297c9c42f0b",
-                              "4f1ba727-e3a0-4d7f-b5ad-b5a6f7b30053",
+                              "81c46175-8b7d-406d-a47c-89e20f38d0b8",
+                              "8303fec9-f6ca-4d6b-aa09-6976d3e2cabf",
+                              "92cb617b-49bd-4070-86e3-f9ee9cd926b8",
                               "..."
                            ]
                         }
@@ -3343,7 +3343,7 @@
                               "type" : "boolean"
                            },
                            "AllowTranscoding" : {
-                              "description" : "Whether to allow transcoding for operations initiated by this modality (typically, C-GET)",
+                              "description" : "Whether to allow transcoding for operations initiated by this modality. This option applies to Orthanc C-GET SCP and to Orthanc C-STORE SCU. It only has an effect if the global option `EnableTranscoding` is set to `true`.",
                               "type" : "boolean"
                            },
                            "Host" : {
@@ -3357,6 +3357,10 @@
                            "Port" : {
                               "description" : "TCP port of the remote DICOM modality",
                               "type" : "number"
+                           },
+                           "UseDicomTls" : {
+                              "description" : "Whether to use DICOM TLS in the SCU connection initiated by Orthanc (new in Orthanc 1.9.0)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -3736,7 +3740,7 @@
                               "type" : "string"
                            },
                            "LocalAet" : {
-                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option",
+                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
                            },
                            "Permissive" : {
@@ -3821,6 +3825,10 @@
                         "properties" : {
                            "Level" : {
                               "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
+                              "type" : "string"
+                           },
+                           "LocalAet" : {
+                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
                            },
                            "Normalize" : {
@@ -3956,7 +3964,7 @@
                               "type" : "boolean"
                            },
                            "LocalAet" : {
-                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option",
+                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
                            },
                            "MoveOriginatorAet" : {
@@ -6411,7 +6419,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.4"
+                              "Version" : "1.5"
                            }
                         }
                      }
@@ -11565,6 +11573,7 @@
                         "schema" : {
                            "description" : "List of the available operations",
                            "example" : [
+                              "accepted-transfer-syntaxes",
                               "create-archive",
                               "create-dicom",
                               "create-media",
@@ -11591,7 +11600,8 @@
                               "now-local",
                               "reconstruct",
                               "reset",
-                              "shutdown"
+                              "shutdown",
+                              "unknown-sop-class-accepted"
                            ]
                         }
                      }
@@ -11601,6 +11611,62 @@
             },
             "summary" : "List operations",
             "tags" : [ "Other" ]
+         }
+      },
+      "/tools/accepted-transfer-syntaxes" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the list of UIDs of the DICOM transfer syntaxes that are accepted by Orthanc C-STORE SCP. This corresponds to the configuration options `AcceptedTransferSyntaxes` and `XXXTransferSyntaxAccepted`.",
+            "parameters" : [],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the transfer syntax UIDs"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Get accepted transfer syntaxes",
+            "tags" : [ "System" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Set the DICOM transfer syntaxes that accepted by Orthanc C-STORE SCP",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "JSON array containing a list of transfer syntax UIDs to be accepted. Wildcards `?` and `*` are accepted."
+                     }
+                  },
+                  "text/plain" : {
+                     "schema" : {
+                        "description" : "UID of the transfer syntax to be accepted. Wildcards `?` and `*` are accepted."
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the now-accepted transfer syntax UIDs"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Set accepted transfer syntaxes",
+            "tags" : [ "System" ]
          }
       },
       "/tools/create-archive" : {
@@ -11689,6 +11755,10 @@
                            "Content" : {
                               "description" : "This field can be used to embed an image (pixel data) or a PDF inside the created DICOM instance. The PNG image, the JPEG image or the PDF file must be provided using their [data URI scheme encoding](https://en.wikipedia.org/wiki/Data_URI_scheme). This field can possibly contain a JSON array, in which case a DICOM series is created containing one DICOM instance for each item in the `Content` field.",
                               "type" : "string"
+                           },
+                           "Force" : {
+                              "description" : "Avoid the consistency checks for the DICOM tags that enforce the DICOM model of the real-world. You can notably use this flag if you need to manually set the tags `StudyInstanceUID`, `SeriesInstanceUID`, or `SOPInstanceUID`. Be careful with this feature.",
+                              "type" : "boolean"
                            },
                            "InterpretBinaryTags" : {
                               "description" : "If some value in the `Tags` associative array is formatted according to some [data URI scheme encoding](https://en.wikipedia.org/wiki/Data_URI_scheme), whether this value is decoded to a binary value or kept as such (`true` by default)",
@@ -11989,6 +12059,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-ECHO command, in seconds",
                               "type" : "number"
+                           },
+                           "UseDicomTls" : {
+                              "description" : "Whether to use DICOM TLS in the SCU connection initiated by Orthanc (new in Orthanc 1.9.0)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -12565,7 +12639,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1609776242816\northanc_count_patients 8 1609776242816\northanc_count_series 26 1609776242816\northanc_count_studies 8 1609776242816\northanc_disk_size_mb 1018.65021 1609776242816\northanc_jobs_completed 10 1609776242816\northanc_jobs_failed 0 1609776242816\northanc_jobs_pending 0 1609776242816\northanc_jobs_running 0 1609776242816\northanc_jobs_success 10 1609776242816\northanc_rest_api_active_requests 1 1609776242815\northanc_rest_api_duration_ms 2967 1609776236554\northanc_storage_read_duration_ms 60 1609776240969\northanc_uncompressed_size_mb 1018.65021 1609776242816\n"
+                        "example" : "orthanc_count_instances 2552 1611919502191\northanc_count_patients 8 1611919502191\northanc_count_series 26 1611919502191\northanc_count_studies 8 1611919502191\northanc_disk_size_mb 1018.65021 1611919502191\northanc_jobs_completed 4 1611919502191\northanc_jobs_failed 0 1611919502191\northanc_jobs_pending 0 1611919502191\northanc_jobs_running 0 1611919502191\northanc_jobs_success 4 1611919502191\northanc_rest_api_active_requests 1 1611919502191\northanc_rest_api_duration_ms 507 1611919500723\northanc_storage_read_duration_ms 18 1611919500435\northanc_uncompressed_size_mb 1018.65021 1611919502191\n"
                      }
                   },
                   "description" : ""
@@ -12584,7 +12658,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210104T160402",
+                        "example" : "20210129T112502",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -12606,7 +12680,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210104T160403",
+                        "example" : "20210129T112502",
                         "schema" : {
                            "description" : "The local time"
                         }
@@ -12658,6 +12732,49 @@
                }
             },
             "summary" : "Shutdown Orthanc",
+            "tags" : [ "System" ]
+         }
+      },
+      "/tools/unknown-sop-class-accepted" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Shall Orthanc C-STORE SCP accept DICOM instances with an unknown SOP class UID?",
+            "parameters" : [],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "`1` if accepted, `0` if not accepted"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Is unknown SOP class accepted?",
+            "tags" : [ "System" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Set whether Orthanc C-STORE SCP should accept DICOM instances with an unknown SOP class UID",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "text/plain" : {
+                     "schema" : {
+                        "description" : "`1` if accepted, `0` if not accepted"
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Set unknown SOP class accepted",
             "tags" : [ "System" ]
          }
       }

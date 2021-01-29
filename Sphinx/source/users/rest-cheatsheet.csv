@@ -185,6 +185,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/studies/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1statistics/get>`__,,,,Get study statistics
 ``/system``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1system/get>`__,,,,Get system information
 ``/tools``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
+``/tools/accepted-transfer-syntaxes``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
 ``/tools/create-archive``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
 ``/tools/create-dicom``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
 ``/tools/create-media``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
@@ -212,3 +213,4 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/tools/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1reconstruct/post>`__,,,Reconstruct all the index
 ``/tools/reset``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1reset/post>`__,,,Restart Orthanc
 ``/tools/shutdown``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1shutdown/post>`__,,,Shutdown Orthanc
+``/tools/unknown-sop-class-accepted``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/put>`__,Is unknown SOP class accepted?

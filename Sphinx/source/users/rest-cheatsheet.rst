@@ -16,7 +16,7 @@ entry <rest-samples>`.
                :file: ./rest-cheatsheet.csv
                :widths: 10, 2, 2, 2, 2, 10
                         
-NB: Up to Orthanc 1.8.2, this cheat sheet was manually published as an
+NB: Up to Orthanc 1.8.1, this cheat sheet was manually published as an
 `online spreadsheet
 <https://docs.google.com/spreadsheets/d/e/2PACX-1vSBEymDKGZgskFEFF6yzge5JovGHPK_FIbEnW5a6SWUbPkX06tkoObUHh6T1XQhgj-HqFd0AWSnVFOv/pubhtml>`__. This
 spreadsheet is still available online for history purpose, but is now

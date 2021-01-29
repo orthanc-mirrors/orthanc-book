@@ -12,8 +12,7 @@ modalities. As preliminary debugging actions, you should:
 * Make sure the two computers can "ping" each other.
 * Turn off all the firewalls on the two computers (especially on Microsoft Windows).
 * Make sure the remote computer has `DICOM TLS encryption
-  <https://www.dicomstandard.org/using/security/>`__ turned off (this
-  feature is not supported yet as of Orthanc 1.8.2).
+  <https://www.dicomstandard.org/using/security/>`__ turned off.
 * Write down on a paper the following information about each modality:
 
   * its IP address (avoid using symbolic names if possible to troubleshot any DNS problem),
