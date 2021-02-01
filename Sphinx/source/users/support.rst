@@ -159,3 +159,7 @@ decision chart:
      
      * `James Manner <https://binary.com.au/>`__ (English, Australia)
 
+   Get in touch with `Sébastien Jodogne
+   <mailto:s.jodogne@orthanc-labs.com>`__ if you want to be included
+   in this list.
+ 
