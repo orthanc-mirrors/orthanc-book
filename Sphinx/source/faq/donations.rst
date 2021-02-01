@@ -17,10 +17,8 @@ can approach some of the companies offering commercial support for
 Orthanc and engage their services. Doing so creates a healthy
 ecosystem around the project where companies are encouraged to
 contribute their resources to improve the project to create a larger
-pool of potential customers wanting their services. A list of
-`freelancers or volunteers providing custom assistance
-<https://groups.google.com/d/msg/orthanc-users/vWpHWFkYiWI/vB5eRM1WCQAJ>`__
-is available on the Orthanc Users forum.
+pool of potential customers wanting their services. A :ref:`list of
+freelancers <support-freelancers>` is available in this Orthanc Book.
 
 We appreciate **positive feedback** on our project as well. If you are
 on Twitter, send us a tweet to `@OrthancServer
