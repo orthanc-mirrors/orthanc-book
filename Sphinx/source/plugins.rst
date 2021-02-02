@@ -122,6 +122,13 @@ Python plugins
   <https://github.com/sscotti/OrthancBrowser>`__ to implement
   pagination on one Orthanc server.
 
+* Walco van Loon maintains `Orthanc Server Extensions
+  <https://github.com/walkIT-nl/orthanc-server-extensions>`__ as *"A
+  simple Orthanc python plugin based framework to extend Orthanc's
+  feature set with testable python scripts."*. Check out the original
+  announcement on the `Orthanc Users forum
+  <https://groups.google.com/g/orthanc-users/c/q3Tncx3b6os/m/iFLq85fKAgAJ>`__.
+
   
 Other
 ^^^^^
