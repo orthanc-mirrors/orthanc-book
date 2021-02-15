@@ -142,6 +142,8 @@ decision chart:
        
      * `Gabriel Couture <https://github.com/gacou54/>`__ (French/English, Canada)
      * `Mohannad Hussain <https://www.linkedin.com/in/mohannadhussain/>`__ (English, Canada)
+     * `Oliver Tsai <mailto:oliver@futurepacs.com>`__ (English/Spanish/French, Toronto)
+
 
    * **South America**:
        
