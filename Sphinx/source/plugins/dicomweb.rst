@@ -387,6 +387,12 @@ feature::
     }
   }
   
+In forthcoming release 1.6 of the DICOMweb plugin, the ``Timeout``
+field can be added to the definition of a DICOMweb server (in
+``DicomWeb.Servers``) in order to specify a separate HTTP timeout when
+contacting this DICOMweb server. By default, the global value
+``HttpTimeout`` is used.
+
 **Remark:** A :ref:`plugin by Osimis <google>` is available to
 dynamically create authenticated connections to Google Cloud Platform.
 
