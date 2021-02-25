@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.0"
+      "version" : "1.9.1"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -2975,9 +2975,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "81c46175-8b7d-406d-a47c-89e20f38d0b8",
-                              "8303fec9-f6ca-4d6b-aa09-6976d3e2cabf",
-                              "92cb617b-49bd-4070-86e3-f9ee9cd926b8",
+                              "10b2880b-9671-4522-91fa-46ab210a9f24",
+                              "2d308917-d4fc-444f-88ec-3db65e1c85b9",
+                              "410734b8-aadf-4249-a4c0-680b670bf247",
                               "..."
                            ]
                         }
@@ -3838,6 +3838,10 @@
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the C-FIND command and subsequent C-MOVE retrievals, in seconds (new in Orthanc 1.9.1)",
+                              "type" : "number"
                            }
                         }
                      }
@@ -3905,6 +3909,10 @@
                                  "type" : "string"
                               },
                               "type" : "array"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the storage commitment command (new in Orthanc 1.9.1)",
+                              "type" : "number"
                            }
                         }
                      }
@@ -6301,6 +6309,73 @@
             "tags" : [ "Networking" ]
          }
       },
+      "/peers/{id}/store-straight" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Synchronously send the DICOM instance in the POST body to the Orthanc peer whose identifier is provided in URL, without having to first store it locally within Orthanc. This is an alternative to command-line tools such as `curl`.",
+            "parameters" : [
+               {
+                  "description" : "Identifier of the modality of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "requestBody" : {
+               "content" : {
+                  "application/dicom" : {
+                     "schema" : {
+                        "description" : "DICOM instance to be sent"
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "",
+                           "properties" : {
+                              "ID" : {
+                                 "description" : "Orthanc identifier of the DICOM instance in the remote Orthanc peer",
+                                 "type" : "string"
+                              },
+                              "ParentPatient" : {
+                                 "description" : "Orthanc identifier of the parent patient in the remote Orthanc peer",
+                                 "type" : "string"
+                              },
+                              "ParentSeries" : {
+                                 "description" : "Orthanc identifier of the parent series in the remote Orthanc peer",
+                                 "type" : "string"
+                              },
+                              "ParentStudy" : {
+                                 "description" : "Orthanc identifier of the parent study in the remote Orthanc peer",
+                                 "type" : "string"
+                              },
+                              "Path" : {
+                                 "description" : "Path to the DICOM instance in the remote Orthanc server",
+                                 "type" : "string"
+                              },
+                              "Status" : {
+                                 "description" : "Status of the store operation",
+                                 "type" : "string"
+                              }
+                           }
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Straight store to peer",
+            "tags" : [ "Networking" ]
+         }
+      },
       "/peers/{id}/system" : {
          "get" : {
             "deprecated" : false,
@@ -6681,6 +6756,10 @@
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the C-FIND command, in seconds (new in Orthanc 1.9.1)",
+                              "type" : "number"
                            }
                         }
                      }
@@ -6747,6 +6826,10 @@
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the C-FIND command, in seconds (new in Orthanc 1.9.1)",
+                              "type" : "number"
                            }
                         }
                      }
@@ -6813,6 +6896,10 @@
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the C-FIND command, in seconds (new in Orthanc 1.9.1)",
+                              "type" : "number"
                            }
                         }
                      }
@@ -11493,7 +11580,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 9,
+                              "ApiVersion" : 10,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
@@ -11503,7 +11590,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.8.2"
+                              "Version" : "1.9.0"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -12639,7 +12726,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1611919502191\northanc_count_patients 8 1611919502191\northanc_count_series 26 1611919502191\northanc_count_studies 8 1611919502191\northanc_disk_size_mb 1018.65021 1611919502191\northanc_jobs_completed 4 1611919502191\northanc_jobs_failed 0 1611919502191\northanc_jobs_pending 0 1611919502191\northanc_jobs_running 0 1611919502191\northanc_jobs_success 4 1611919502191\northanc_rest_api_active_requests 1 1611919502191\northanc_rest_api_duration_ms 507 1611919500723\northanc_storage_read_duration_ms 18 1611919500435\northanc_uncompressed_size_mb 1018.65021 1611919502191\n"
+                        "example" : "orthanc_count_instances 2552 1614276178478\northanc_count_patients 8 1614276178478\northanc_count_series 26 1614276178478\northanc_count_studies 8 1614276178478\northanc_dicom_cache_count 259 1614206924136\northanc_dicom_cache_size 127.643311 1614206924135\northanc_disk_size_mb 1018.65021 1614276178478\northanc_jobs_completed 10 1614276178478\northanc_jobs_failed 0 1614276178478\northanc_jobs_pending 0 1614276178478\northanc_jobs_running 0 1614276178478\northanc_jobs_success 10 1614276178478\northanc_rest_api_active_requests 1 1614276178477\northanc_rest_api_duration_ms 356 1614276169949\northanc_storage_read_duration_ms 0 1614276176280\northanc_uncompressed_size_mb 1018.65021 1614276178478\n"
                      }
                   },
                   "description" : ""
@@ -12658,7 +12745,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210129T112502",
+                        "example" : "20210225T180258",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -12680,7 +12767,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210129T112502",
+                        "example" : "20210225T180258",
                         "schema" : {
                            "description" : "The local time"
                         }

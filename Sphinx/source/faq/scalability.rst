@@ -54,7 +54,7 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.9.0 at the time of
+* Make sure to use the latest release of Orthanc (1.9.1 at the time of
   writing).
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
@@ -178,7 +178,7 @@ Known limitations
 Exclusive access to the DB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As of Orthanc 1.9.0, the internal code accessing the DB is still affected
+As of Orthanc 1.9.1, the internal code accessing the DB is still affected
 by limitations induced by the SQLite engine that was the only one originally
 available at the beginning of the project: inside a single Orthanc process,
 there is no concurrent access to the DB.
@@ -190,7 +190,7 @@ the same DB (works only for MySQL and PostgreSQL) as presented in this `sample
 Also note that the core of Orthanc does not currently support the replay
 of database transactions, which is necessary to deal with conflicts
 between several instances of Orthanc that would simultaneously write
-to the database.  As a consequence, as of Orthanc 1.9.0, when connecting multiple
+to the database.  As a consequence, as of Orthanc 1.9.1, when connecting multiple
 Orthanc to a single database by setting ``Lock`` to ``false``, there
 should only be one instance of Orthanc acting as a writer and all the
 other instances of Orthanc acting as readers only. Be careful to set
@@ -209,7 +209,7 @@ refactoring: `issue 83
 Latency
 ^^^^^^^
 
-As of Orthanc 1.9.0, Orthanc still performs quite a large number of small
+As of Orthanc 1.9.1, Orthanc still performs quite a large number of small
 SQL requests.  A simple request to a route like ``/studies/{id}`` can trigger
 6 SQL queries.
 

@@ -103,6 +103,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/peers/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/put>`__,List operations on peer
 ``/peers/{id}/configuration``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1configuration/get>`__,,,,Get peer configuration
 ``/peers/{id}/store``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1store/post>`__,,,Send to Orthanc peer
+``/peers/{id}/store-straight``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1store-straight/post>`__,,,Straight store to peer
 ``/peers/{id}/system``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1system/get>`__,,,,Get peer system information
 ``/plugins``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1plugins/get>`__,,,,List plugins
 ``/plugins/explorer.js``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1plugins~1explorer.js/get>`__,,,,JavaScript extensions to Orthanc Explorer
