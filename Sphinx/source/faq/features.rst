@@ -234,11 +234,21 @@ attachments or global properties (using
 ``OrthancPluginSetGlobalProperty()``) are therefore kindly invited to
 complete the **central registry** below:
 
-* ``Attachment 1`` is used by the core of Orthanc to store DICOM instances
-* ``Attachment 2`` was used by Orthanc <= 1.9.0 to cache the :ref:`DICOM-as-JSON information <orthanc-storage>`
-* ``Attachment 3`` is used since Orthanc 1.9.1 to store the DICOM instance, until the ``Pixel Data (7fe0,0010)`` tag,
-  if global configuration option ``StorageCompression`` is ``true``, or if the storage area plugin doesn't support
-  range reads
+* ``Attachment 1`` is used by the core of Orthanc to store the DICOM
+  file associated with one instance.
+* ``Attachment 2`` was used by Orthanc <= 1.9.0 to cache the so-called
+  ``DICOM-as-JSON`` information (as returned by the
+  ``/instances/.../tags`` URI in the :ref:`REST API <rest>`) in order
+  to speed up subsequent requests to the same URI. This attachment is
+  not automatically generated anymore starting with Orthanc 1.9.1, in
+  order to improve performance (creating two files for each DICOM
+  instance has a cost) and consistency (if the DICOM dictionary gets
+  modified in the future).
+* ``Attachment 3`` is used since Orthanc 1.9.1 to store the DICOM
+  instance until the ``Pixel Data (7fe0,0010)`` tag, if the global
+  configuration option ``StorageCompression`` is ``true``, or if the
+  storage area plugin doesn't support range reads. This allows to
+  avoid downloading the full DICOM instance if not necessary.
 * ``Attachment 9997`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store series information.
 * ``Attachment 9998`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store instance information.
 * ``Attachment 9999`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store annotations.

@@ -9,13 +9,9 @@ Storage area
 **By default** (i.e. if no database plugin such as :ref:`PostgreSQL
 <postgresql>` or :ref:`MySQL <mysql>` is used), Orthanc stores all the
 DICOM files it receives in a folder called ``OrthancStorage`` on the
-filesystem. Orthanc also associates each incoming DICOM file with a
-JSON file that summarizes all its DICOM tags, which speeds up
-subsequent processing by avoiding a costly DICOM parsing (these
-summaries are refered to as ``DICOM-as-JSON`` :ref:`attachments
-<metadata>`).
+filesystem.
 
-More generally, the ``OrthancStorage`` folder contains a set of
+More precisely, the ``OrthancStorage`` folder contains a set of
 so-called **attachments**, that may correspond to either a DICOM file,
 a JSON file, or any user-defined file. Internally, each attachment is
 automatically associated with an `universally unique identifier (UUID)
