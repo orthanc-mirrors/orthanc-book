@@ -171,6 +171,16 @@ bypass arenas for large memory blocks such as DICOM files). Check out
 the `manpage <http://man7.org/linux/man-pages/man3/mallopt.3.html>`__
 of ``mallopt()`` for more information.
 
+**Status of the Docker images:**
+
+* The ``jodogne/orthanc`` and ``jodogne/orthanc-plugins`` Docker
+  images automatically set ``MALLOC_ARENA_MAX`` to ``5`` **since
+  release 1.6.1** (cf. `changeset
+  <https://github.com/jodogne/OrthancDocker/commit/bd7e9f4665ce8dd6892f82a148cabe8ebcf1c7d9>`__).
+
+* The ``osimis/orthanc`` images automatically set
+  ``MALLOC_ARENA_MAX`` to ``5`` **since release 20.12.2**.
+
 
 .. _scalability-limitations:
 
