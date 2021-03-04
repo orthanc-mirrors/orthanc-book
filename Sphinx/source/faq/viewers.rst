@@ -24,10 +24,9 @@ with Orthanc (do not hesitate to `warn us
 * `3D Slicer <https://www.slicer.org/>`__.
 * `medInria <https://med.inria.fr/>`__.
 * `Aeskulap <https://github.com/pipelka/aeskulap>`__.
-* `OsiriX <https://www.osirix-viewer.com/>`__ (note however that the
-  openness of this particular software is `currently subject to
-  discussion
-  <https://www.purview.net/blog/an-open-letter-to-the-osirix-community>`__).
+* `Weasis
+  <https://nroduit.github.io/en/basics/customize/integration/#orthanc-web-server>`__
+  (through the :ref:`DICOM web plugin <dicomweb>`).
 
 Make also sure to check out the following extensions to Orthanc:
 
