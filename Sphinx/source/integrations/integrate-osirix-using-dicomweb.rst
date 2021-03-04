@@ -3,6 +3,13 @@
 Integrate Osirix using DICOMWeb
 ===============================
 
+.. note:: The OsiriX team has a blog post entitled "`Installing
+          Orthanc (Open-Source PACS) on Mac
+          <https://www.osirix-viewer.com/installing-orthanc-open-source-pacs-on-mac/>`__"
+          that provides a guide to interface OsiriX with Orthanc
+          through :ref:`DICOMweb <plugin>`.
+
+
 Configuration of Osirix
 -----------------------
 
