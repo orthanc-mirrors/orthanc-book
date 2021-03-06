@@ -261,31 +261,9 @@ A :ref:`dedicated page <repositories>` explains how to submit
 
 **Some words of warning:**
 
-* Please stick to the :ref:`coding style <coding-style>` of Orthanc.
-
 * It is your responsibility to make sure that you have the
   intellectual property over all the source code you commit into
   Orthanc.
-
-* All the contributions will be carefully reviewed. Some contributions
-  may be modified, yet even rejected. A rejection might for instance
-  occur if your contribution does not match the Orthanc roadmap, does
-  not meet our high-quality code standards, or breaks backward
-  compatibility. Please be sure that we warmly welcome and appreciate
-  your contributions, but be aware of the fact that we are quite
-  strict, and that the review process might take time. This is why the
-  recommended way of contributing to Orthanc is always by
-  :ref:`creating contributed plugins <creating-plugins>`.
-
-* Your pull requests should be kept **as small as possible**, and
-  should be focused on one very specific issue or feature. Large
-  architectural changes are reserved for the core development team of
-  Orthanc, as we must follow our `long-term roadmap
-  <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
-
-* Unit testing is mandatory. Integration tests should be submitted to
-  the `dedicated repository
-  <https://hg.orthanc-server.com/orthanc-tests/file/default>`__.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users

@@ -155,13 +155,58 @@ contributions
 <https://www.mercurial-scm.org/wiki/CommunicatingChanges>`__: by
 submitting a patch, or by exchanging a bundle.
 
-Importantly, before any contribution can be accepted into the Orthanc
-repositories, its author must sign a :ref:`CLA <cla>`. This allows
-both the University Hospital of Liège and the Osimis company to act as
-the official guardians of the whole Orthanc ecosystem.
 
-Also, make sure to read our :ref:`FAQ if submitting code
-<submitting_code>`.
+Code quality
+............
+
+* Your code **must follow the C++03 standard** (C++11 is not accepted
+  for maximum cross-platform compatibility on older platforms).
+
+* The continuous integration servers of Osimis check that Orthanc
+  properly compiles on Ubuntu 16.04, on `Linux Standard Base systems
+  <https://refspecs.linuxfoundation.org/lsb.shtml>`__ using the `LSB
+  SDB 5.0.0
+  <http://ftp.linuxfoundation.org/pub/lsb/bundles/released-5.0.0/sdk/>`__,
+  on FreeBSD, on Microsoft Visual Studio 2008 (32 bit), on Microsoft
+  Visual Studio 2015 (64 bit), and on Apple OS X 10.9
+  "Mavericks". Submitted code might have to be adapted to compile on
+  these platforms. Architecture-dependant code should be located in
+  the `Orthanc::Toolbox
+  <https://hg.orthanc-server.com/orthanc/file/default/OrthancFramework/Sources/Toolbox.h>`__
+  and `Orthanc::SystemToolbox
+  <https://hg.orthanc-server.com/orthanc/file/default/OrthancFramework/Sources/SystemToolbox.h>`__
+  static classes.
+
+* Please stick to the :ref:`coding style <coding-style>` of Orthanc.
+
+* Your individual contributions should be kept **as small as
+  possible**, and should be focused on one very specific issue or
+  feature. Large architectural changes are reserved for the core
+  development team of Orthanc, as we must follow our `long-term
+  roadmap
+  <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
+
+* Unit testing is mandatory. Integration tests should be submitted to
+  the `dedicated repository
+  <https://hg.orthanc-server.com/orthanc-tests/file/default>`__.
+
+* All the contributions will be carefully reviewed. Some contributions
+  may be modified, yet even rejected. A rejection might for instance
+  occur if your contribution does not match the Orthanc roadmap, does
+  not meet our high-quality code standards, or breaks backward
+  compatibility. Please be sure that we warmly welcome and appreciate
+  your contributions, but be aware of the fact that we are quite
+  strict, and that the review process might take time. This is why the
+  recommended way of contributing to Orthanc is always by
+  :ref:`creating contributed plugins <creating-plugins>`.
+
+* Importantly, before any contribution can be accepted into the
+  Orthanc repositories, its author must sign a :ref:`CLA <cla>`. This
+  allows both the University Hospital of Liège and the Osimis company
+  to act as the official guardians of the whole Orthanc
+  ecosystem. Another advantage of creating plugins is that signing a
+  CLA is not needed. Make sure to carefully read our :ref:`FAQ about
+  the licensing of submitted code <submitting_code>`.
 
 
 .. _hg-patch:
