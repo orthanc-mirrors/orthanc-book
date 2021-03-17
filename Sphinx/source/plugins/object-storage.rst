@@ -98,7 +98,8 @@ Azure Blob Storage plugin
 
 Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
 
-  $ ./vcpkg install cpprestsdk
+$ ./vcpkg install cryptopp
+$ ./vcpkg install azure-storage-cpp
 
 
 Compile::
@@ -112,8 +113,8 @@ Google Storage plugin
 
 Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
 
-  $ ./vcpkg install google-cloud-cpp
-  $ ./vcpkg install cryptopp
+$ ./vcpkg install cryptopp
+$ ./vcpkg install google-cloud-cpp
 
 Compile::
 
