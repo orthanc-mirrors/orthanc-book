@@ -27,6 +27,11 @@ As for any service running on a computer, you should:
   only trusted computers can contact Orthanc through its REST API 
   or through the DICOM protocol.
 
+* Make sure that the :ref:`configuration files <configuration>`
+  containing confidential information or private keys (typically
+  ``RegisteredUsers``) are only readable by the user that runs
+  Orthanc.
+
 Care must also be taken about some configuration options specific to
 Orthanc:
 
