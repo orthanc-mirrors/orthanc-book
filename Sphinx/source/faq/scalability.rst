@@ -122,6 +122,10 @@ presence of large databases:
   consider setting configuration option ``StudiesMetadata`` to
   ``MainDicomTags``.
 
+* If using PostgreSQL as a managed cloud service by Microsoft Azure,
+  make sure to reduce the verbosity of the logs. If logging is not
+  minimal, Osimis has observed an impact on performance.
+
 
 .. _scalability-memory:
 
