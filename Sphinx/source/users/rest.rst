@@ -477,6 +477,12 @@ Note that the list of resources to be sent can include the
 :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
 studies or series as well.
 
+**Important remark:** Neither the :ref:`metadata <metadata>`, nor the
+:ref:`attachments <attachments>` are transferred between the Orthanc
+peers. This is because metadata and attachments are considered as
+local to one Orthanc server.
+
+
 Testing connectivity with a remote peer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
