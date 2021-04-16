@@ -97,10 +97,15 @@ In spirit, the metadata mechanism is similar to the :ref:`attachment
 mechanism <orthanc-storage>`. However, metadata is stored directly
 inside the database, whereas attachments are stored as separate files
 on the filesystem (the database only stores a reference to the
-attachments). Choosing between metadata and attachments is a matter of
-trade-off: Metadata must be kept small (as a rule of thumb, under 1KB)
-and used if fast access is needed, whereas attachments can be used to
-store arbitrarily large piece of data.
+attachments). Choosing between metadata and attachments is most often
+a matter of trade-off: Metadata must be kept small (as a rule of
+thumb, under 1KB) and used if fast access is needed, whereas
+attachments can be used to store arbitrarily large piece of data.
+
+However, pay attention to the fact that metadata must be UTF-8 strings
+terminated by the ``\0`` character. If you need to store arbitrary
+binary objects, use an attachment or use `Base64 encoding
+<https://en.wikipedia.org/wiki/Base64>`__.
 
 Also note that metadata and attachments are only available for
 resources stored inside Orthanc. Once one DICOM instance leaves the
