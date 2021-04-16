@@ -27,6 +27,9 @@ with Orthanc (do not hesitate to `warn us
 * `Weasis
   <https://nroduit.github.io/en/basics/customize/integration/#orthanc-web-server>`__
   (through the :ref:`DICOM web plugin <dicomweb>`).
+* `Oviyam <http://oviyam.raster.in/>`__ (`instructions are available
+  <https://groups.google.com/g/orthanc-users/c/44Vgl04vO5U/m/Cy-AjpNaCQAJ>`__
+  in the forum).
 
 Make also sure to check out the following extensions to Orthanc:
 
