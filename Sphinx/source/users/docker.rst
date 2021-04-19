@@ -34,7 +34,7 @@ source code of the corresponding Docker images is available on `GitHub
 
 * Our commercial partner `Osimis <https://www.osimis.io>`__ also
   `publishes separated Docker images
-  <https://hub.docker.com/repository/docker/osimis/orthanc>`__.
+  <https://hub.docker.com/r/osimis/orthanc>`__.
   These ``osimis/orthanc`` images are used by the technical team of
   Osimis in order to provide professional support to their customers,
   with a configuration system that can be tuned through environment

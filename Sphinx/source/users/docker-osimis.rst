@@ -27,7 +27,7 @@ Introduction
 
 Our commercial partner `Osimis <https://www.osimis.io>`__ 
 `publishes separated Docker images
-<https://hub.docker.com/repository/docker/osimis/orthanc>`__
+<https://hub.docker.com/r/osimis/orthanc>`__
 that are used by their technical team in order to provide professional 
 support to their customers.
 
