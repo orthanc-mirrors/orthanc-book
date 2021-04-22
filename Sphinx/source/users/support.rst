@@ -132,8 +132,12 @@ decision chart:
    or if you need **proximity support in your language/timezone**,
    here is a list of freelancers:
 
-   * **Europe** :
-     
+   * **Worldwide**:
+   
+     * `Osimis <https://www.osimis.io/en/services.html>`__
+
+   * **Europe**:
+
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
