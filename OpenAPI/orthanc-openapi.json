@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.1"
+      "version" : "1.9.2"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -455,6 +455,15 @@
             "description" : "Delete an attachment associated with the given DICOM instance. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -485,6 +494,15 @@
             "deprecated" : false,
             "description" : "Get the list of the operations that are available for attachments associated with the given instance",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -525,7 +543,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "List operations on attachments",
@@ -535,6 +558,15 @@
             "deprecated" : false,
             "description" : "Attach a file to the given DICOM instance. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the attachment, if this is not the first time this attachment is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -619,6 +651,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given instance. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -647,7 +688,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment (no decompression)",
@@ -659,6 +705,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given instance, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -688,7 +743,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment on disk",
@@ -700,6 +760,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given instance, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -729,7 +798,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment on disk",
@@ -741,6 +815,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given instance",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -770,7 +853,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment",
@@ -782,6 +870,15 @@
             "deprecated" : false,
             "description" : "Test whether the attachment has been stored as a compressed file on the disk.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -811,7 +908,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Is attachment compressed?",
@@ -823,6 +925,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given instance",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -852,7 +963,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment",
@@ -864,6 +980,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given instance",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -893,7 +1018,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment",
@@ -2066,6 +2196,15 @@
             "description" : "Delete some metadata associated with the given DICOM instance. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -2097,6 +2236,15 @@
             "description" : "Get the value of a metadata that is associated with the given instance",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -2125,7 +2273,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the metadata, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get metadata",
@@ -2135,6 +2288,15 @@
             "deprecated" : false,
             "description" : "Set the value of some metadata in the given DICOM instance. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the metadata, if this is not the first time this metadata is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -2975,9 +3137,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "10b2880b-9671-4522-91fa-46ab210a9f24",
-                              "2d308917-d4fc-444f-88ec-3db65e1c85b9",
-                              "410734b8-aadf-4249-a4c0-680b670bf247",
+                              "7a09255e-84f9-4ac8-8f63-81a674ad130e",
+                              "7b065aae-0255-4e51-bdfc-d3273d1c5e78",
+                              "e093b29c-8ac1-4d25-9d9b-2fa73bd408cd",
                               "..."
                            ]
                         }
@@ -4470,6 +4632,15 @@
             "description" : "Delete an attachment associated with the given DICOM patient. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -4500,6 +4671,15 @@
             "deprecated" : false,
             "description" : "Get the list of the operations that are available for attachments associated with the given patient",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4540,7 +4720,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "List operations on attachments",
@@ -4550,6 +4735,15 @@
             "deprecated" : false,
             "description" : "Attach a file to the given DICOM patient. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the attachment, if this is not the first time this attachment is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4634,6 +4828,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given patient. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -4662,7 +4865,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment (no decompression)",
@@ -4674,6 +4882,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given patient, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4703,7 +4920,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment on disk",
@@ -4715,6 +4937,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given patient, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4744,7 +4975,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment on disk",
@@ -4756,6 +4992,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given patient",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4785,7 +5030,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment",
@@ -4797,6 +5047,15 @@
             "deprecated" : false,
             "description" : "Test whether the attachment has been stored as a compressed file on the disk.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4826,7 +5085,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Is attachment compressed?",
@@ -4838,6 +5102,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given patient",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4867,7 +5140,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment",
@@ -4879,6 +5157,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given patient",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4908,7 +5195,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment",
@@ -5448,6 +5740,15 @@
             "description" : "Delete some metadata associated with the given DICOM patient. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -5479,6 +5780,15 @@
             "description" : "Get the value of a metadata that is associated with the given patient",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -5507,7 +5817,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the metadata, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get metadata",
@@ -5517,6 +5832,15 @@
             "deprecated" : false,
             "description" : "Set the value of some metadata in the given DICOM patient. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the metadata, if this is not the first time this metadata is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -7592,6 +7916,15 @@
             "description" : "Delete an attachment associated with the given DICOM series. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -7622,6 +7955,15 @@
             "deprecated" : false,
             "description" : "Get the list of the operations that are available for attachments associated with the given series",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7662,7 +8004,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "List operations on attachments",
@@ -7672,6 +8019,15 @@
             "deprecated" : false,
             "description" : "Attach a file to the given DICOM series. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the attachment, if this is not the first time this attachment is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7756,6 +8112,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given series. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -7784,7 +8149,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment (no decompression)",
@@ -7796,6 +8166,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given series, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7825,7 +8204,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment on disk",
@@ -7837,6 +8221,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given series, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7866,7 +8259,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment on disk",
@@ -7878,6 +8276,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given series",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7907,7 +8314,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment",
@@ -7919,6 +8331,15 @@
             "deprecated" : false,
             "description" : "Test whether the attachment has been stored as a compressed file on the disk.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7948,7 +8369,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Is attachment compressed?",
@@ -7960,6 +8386,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given series",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7989,7 +8424,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment",
@@ -8001,6 +8441,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given series",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -8030,7 +8479,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment",
@@ -8405,6 +8859,15 @@
             "description" : "Delete some metadata associated with the given DICOM series. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -8436,6 +8899,15 @@
             "description" : "Get the value of a metadata that is associated with the given series",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -8464,7 +8936,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the metadata, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get metadata",
@@ -8474,6 +8951,15 @@
             "deprecated" : false,
             "description" : "Set the value of some metadata in the given DICOM series. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the metadata, if this is not the first time this metadata is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -9688,6 +10174,15 @@
             "description" : "Delete an attachment associated with the given DICOM study. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -9718,6 +10213,15 @@
             "deprecated" : false,
             "description" : "Get the list of the operations that are available for attachments associated with the given study",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -9758,7 +10262,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "List operations on attachments",
@@ -9768,6 +10277,15 @@
             "deprecated" : false,
             "description" : "Attach a file to the given DICOM study. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the attachment, if this is not the first time this attachment is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -9852,6 +10370,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given study. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -9880,7 +10407,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment (no decompression)",
@@ -9892,6 +10424,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given study, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -9921,7 +10462,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment on disk",
@@ -9933,6 +10479,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given study, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -9962,7 +10517,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment on disk",
@@ -9974,6 +10534,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given study",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -10003,7 +10572,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get attachment",
@@ -10015,6 +10589,15 @@
             "deprecated" : false,
             "description" : "Test whether the attachment has been stored as a compressed file on the disk.",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -10044,7 +10627,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Is attachment compressed?",
@@ -10056,6 +10644,15 @@
             "deprecated" : false,
             "description" : "Get the MD5 hash of one attachment associated with the given study",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -10085,7 +10682,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get MD5 of attachment",
@@ -10097,6 +10699,15 @@
             "deprecated" : false,
             "description" : "Get the size of one attachment associated with the given study",
             "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -10126,7 +10737,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get size of attachment",
@@ -10756,6 +11372,15 @@
             "description" : "Delete some metadata associated with the given DICOM study. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -10787,6 +11412,15 @@
             "description" : "Get the value of a metadata that is associated with the given study",
             "parameters" : [
                {
+                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -10815,7 +11449,12 @@
                         }
                      }
                   },
-                  "description" : ""
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the metadata, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
                }
             },
             "summary" : "Get metadata",
@@ -10825,6 +11464,15 @@
             "deprecated" : false,
             "description" : "Set the value of some metadata in the given DICOM study. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
+               {
+                  "description" : "Revision of the metadata, if this is not the first time this metadata is set.",
+                  "in" : "header",
+                  "name" : "If-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -11580,7 +12228,8 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 10,
+                              "ApiVersion" : 12,
+                              "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
@@ -11590,12 +12239,16 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.0"
+                              "Version" : "1.9.2"
                            },
                            "properties" : {
                               "ApiVersion" : {
                                  "description" : "Version of the REST API",
                                  "type" : "number"
+                              },
+                              "CheckRevisions" : {
+                                 "description" : "Whether Orthanc handle revisions of metadata and attachments to deal with multiple writers (new in Orthanc 1.9.2)",
+                                 "type" : "boolean"
                               },
                               "DatabaseBackendPlugin" : {
                                  "description" : "Information about the installed database index plugin (`null` if no such plugin is installed)",
@@ -12726,7 +13379,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1614276178478\northanc_count_patients 8 1614276178478\northanc_count_series 26 1614276178478\northanc_count_studies 8 1614276178478\northanc_dicom_cache_count 259 1614206924136\northanc_dicom_cache_size 127.643311 1614206924135\northanc_disk_size_mb 1018.65021 1614276178478\northanc_jobs_completed 10 1614276178478\northanc_jobs_failed 0 1614276178478\northanc_jobs_pending 0 1614276178478\northanc_jobs_running 0 1614276178478\northanc_jobs_success 10 1614276178478\northanc_rest_api_active_requests 1 1614276178477\northanc_rest_api_duration_ms 356 1614276169949\northanc_storage_read_duration_ms 0 1614276176280\northanc_uncompressed_size_mb 1018.65021 1614276178478\n"
+                        "example" : "orthanc_count_instances 2552 1619185717552\northanc_count_patients 8 1619185717552\northanc_count_series 26 1619185717552\northanc_count_studies 8 1619185717552\northanc_dicom_cache_count 58 1619172290641\northanc_dicom_cache_size 50.601326 1619172290641\northanc_disk_size_mb 1018.65021 1619185717552\northanc_jobs_completed 4 1619185717552\northanc_jobs_failed 0 1619185717552\northanc_jobs_pending 0 1619185717552\northanc_jobs_running 0 1619185717552\northanc_jobs_success 4 1619185717552\northanc_rest_api_active_requests 1 1619185717552\northanc_rest_api_duration_ms 4519 1619185710153\northanc_storage_read_duration_ms 0 1619185717053\northanc_uncompressed_size_mb 1018.65021 1619185717552\n"
                      }
                   },
                   "description" : ""
@@ -12745,7 +13398,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210225T180258",
+                        "example" : "20210423T134837",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -12767,7 +13420,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210225T180258",
+                        "example" : "20210423T134837",
                         "schema" : {
                            "description" : "The local time"
                         }
