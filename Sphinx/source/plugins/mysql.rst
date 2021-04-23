@@ -13,6 +13,9 @@ by a MySQL or a MariaDB database.
 For general information, check out the `official homepage of the
 plugins <https://www.orthanc-server.com/static.php?page=mysql>`__.
 
+For information about scalability, make sure to read the section about
+:ref:`multiple writers in large-scale deployments <multiple-writers>`.
+
 **Warning:** According to `this thread on our discussion group
 <https://groups.google.com/d/msg/orthanc-users/yV3LSTh_TjI/Fb4ShaYMBAAJ>`__,
 the MySQL/MariaDB plugins require MySQL 8.x if running on Microsoft
@@ -100,9 +103,12 @@ file::
       "Username" : "orthanc",
       "Password" : "orthanc",
       "EnableSsl" : false,     // force SSL connections
-      "SslVerifyServerCertificates": true, // verify server certificates if EnableSsl is true
-      "SslCACertificates": "", // path to CA certificates to validate servers
-      "Lock" : true            // See section about Locking
+      "SslVerifyServerCertificates": true, // Verify server certificates if EnableSsl is true
+      "SslCACertificates": "",             // Path to CA certificates to validate servers
+      "Lock" : true,                       // See section about Locking
+      "MaximumConnectionRetries" : 10,     // New in release 3.0
+      "ConnectionRetryInterval" : 5,       // New in release 3.0
+      "IndexConnectionsCount" : 1          // New in release 4.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildMySQL/libOrthancMySQLIndex.so",
@@ -163,6 +169,34 @@ Advanced options
 
 Several advanced options are available as well to fine-tune the
 configuration of the MySQL plugins. They are documented below.
+
+
+.. _mysql-multiple-writers:
+
+Multiple writers or connections
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with Orthanc 1.9.2 and MySQL 4.0, it is possible to use
+:ref:`multiple writers or connections in large-scale deployments
+<multiple-writers>`. Here is the list of configuration that control
+this behavior:
+
+* ``Lock`` must be set to ``false`` (cf. :ref:`below <mysql-lock>`)
+
+* ``MaximumConnectionRetries`` governs how many times Orthanc tries to
+  connect to the database, as well as how many times Orthanc replays
+  transactions to deal with collisions between multiple writers.
+
+* ``IndexConnectionsCount`` controls the number of connections from
+  the index plugin to the MySQL database. It is set to ``1`` by
+  default, which corresponds to the old behavior of Orthanc <= 1.9.1.
+
+* ``ConnectionRetryInterval`` is only used when opening one database
+  connection to MySQL.
+
+* As of release 4.0, the MySQL plugin does **not** support yet the
+  :ref:`revision mechanism <revisions>` to protect metadata and
+  attachments from concurrent modifications.
 
 
 Locking

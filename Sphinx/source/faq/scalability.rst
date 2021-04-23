@@ -90,6 +90,20 @@ presence of large databases:
   * ``SaveJobs = false``
   * ``StorageAccessOnFind = Never``
 
+* Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: By default, the
+  PostgreSQL index plugin uses 1 single connection to the PostgreSQL
+  database. You can have multiple connections by setting the
+  ``IndexConnectionsCount`` to a higher value (for instance ``5``) in
+  the ``PostgreSQL`` section of the configuration file. This will
+  improve concurrency. Check out :ref:`the explanation below <multiple-writers>`.
+
+* Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: If you have an
+  hospital-wide VNA deployment, you could consider to deploy multiple
+  Orthanc servers sharing the same PostgreSQL database. A typical
+  scenario is having one "writer" Orthanc server that handles the
+  ingesting of DICOM instances, and multiple "reader" Orthanc servers
+  with features such as DICOMweb or viewers.
+   
 * Make sure to carefully :ref:`read the logs <log>` in ``--verbose``
   mode, especially at the startup of Orthanc. The logs may contain
   very important information regarding performance.
@@ -175,7 +189,11 @@ bypass arenas for large memory blocks such as DICOM files). Check out
 the `manpage <http://man7.org/linux/man-pages/man3/mallopt.3.html>`__
 of ``mallopt()`` for more information.
 
-**Status of the Docker images:**
+**Status:**
+
+* Since **Orthanc 1.8.2**, the global configuration ``MallocArenaMax``
+  automatically sets ``MALLOC_MMAP_THRESHOLD_`` (defaults to ``5``)
+  during the startup of Orthanc.
 
 * The ``jodogne/orthanc`` and ``jodogne/orthanc-plugins`` Docker
   images automatically set ``MALLOC_ARENA_MAX`` to ``5`` **since
@@ -191,55 +209,134 @@ of ``mallopt()`` for more information.
 Known limitations
 -----------------
 
-Exclusive access to the DB
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Exclusive access to the DB in Orthanc <= 1.9.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As of Orthanc 1.9.1, the internal code accessing the DB is still affected
-by limitations induced by the SQLite engine that was the only one originally
-available at the beginning of the project: inside a single Orthanc process,
-there is no concurrent access to the DB.
+Orthanc was originally designed as a mini-DICOM server in 1-to-1
+relation with a SQLite database. Until **Orthanc 1.9.1**, because of
+this original design, the internal code accessing the DB was affected
+by a strong limitation: Inside a single Orthanc process, there was no
+concurrent access to the DB.
 
-One solution to avoid this limitation is to have multiple Orthanc accessing
-the same DB (works only for MySQL and PostgreSQL) as presented in this `sample 
+One solution to avoid this limitation was to have multiple Orthanc
+accessing the same DB (works only for MySQL and PostgreSQL) as
+presented in this `sample
 <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/multiple-orthancs-on-same-db/>`__.
+However, this solution was only robust if there was **one single
+"writer" Orthanc server** (i.e. only one Orthanc was modifying the
+database).  Indeed, the core of Orthanc <= 1.9.1 did not support the
+replay of database transactions, which is necessary to deal with
+conflicts between several instances of Orthanc that would
+simultaneously write to the database.
 
-Also note that the core of Orthanc does not currently support the replay
-of database transactions, which is necessary to deal with conflicts
-between several instances of Orthanc that would simultaneously write
-to the database.  As a consequence, as of Orthanc 1.9.1, when connecting multiple
-Orthanc to a single database by setting ``Lock`` to ``false``, there
-should only be one instance of Orthanc acting as a writer and all the
-other instances of Orthanc acting as readers only. Be careful to set
-the option ``SaveJobs`` to ``false`` in the configuration file of all
-the instances of Orthanc acting as readers.
+Concretely, in Orthanc <= 1.9.1, when connecting multiple Orthanc to a
+single database by setting ``Lock`` to ``false``, there should only be
+one instance of Orthanc acting as a writer and all the other instances
+of Orthanc acting as readers only. Be careful to set the option
+``SaveJobs`` to ``false`` in the configuration file of all the
+instances of Orthanc acting as readers (otherwise the readers would
+also modify the database).
 
-A refactoring is needed to improve the core of Orthanc in that
-respect, for which we are looking for funding from the
-industry. Some issues reported in our bug tracker call for this
-refactoring: `issue 83
-<https://bugs.orthanc-server.com/show_bug.cgi?id=83>`__, `issue 121
-<https://bugs.orthanc-server.com/show_bug.cgi?id=121>`__, `issue 151
-<https://bugs.orthanc-server.com/show_bug.cgi?id=151>`__.
+Some issues reported in our bug tracker are related this limitation:
+`issue 83 <https://bugs.orthanc-server.com/show_bug.cgi?id=83>`__,
+`issue 121 <https://bugs.orthanc-server.com/show_bug.cgi?id=121>`__,
+`issue 151 <https://bugs.orthanc-server.com/show_bug.cgi?id=151>`__.
+
+This limitation has disappeared with Orthanc 1.9.2 and
+PostgreSQL/MySQL plugins 4.0, were the database engine was fully
+rewritten.
+
+
+.. _multiple-writers:
+
+Concurrent accesses to the DB in Orthanc >= 1.9.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In **Orthanc 1.9.2 and PostgreSQL/MySQL plugins 4.0**, the database
+engine of Orthanc was rewritten from scratch to allow multiple
+writers/readers to share the same database. This new feature
+necessitated a full refactoring of the database engine, so as to
+replay transactions in the case of collisions between concurrent
+transactions to the database.
+
+Furthermore, one Orthanc server can also manage several connections to
+PostgreSQL or MySQL, in order to improve performance by adding
+concurrency. Read-only database transactions are also distinguished
+from read-write transactions in order for the database engine to
+further optimize the patterns of access.
+
+Summarizing, the **multiple readers/writers** is now possible. Here
+is a drawing representing a possible deployment:
+
+.. image:: ../images/2021-04-22-MultipleWriters.png
+           :align: center
+           :width: 500px
+
+Care must be taken to the following aspects:
+
+* Orthanc 1.9.2 must be combined with a database plugin that supports
+  multiple writers. This is the case of the PostgreSQL and MySQL
+  plugins with version >= 4.0. The built-in SQLite database **does
+  not** support multiple writers.
+  
+* Concurrent access can result in so-called `non-serializable
+  transactions
+  <https://en.wikipedia.org/wiki/Isolation_(database_systems)#Serializable>`__
+  if two separate database transactions modify the database at the
+  same time (cf. ``ErrorCode_DatabaseCannotSerialize`` in the source
+  code of Orthanc). Orthanc will **automatically replay such
+  transactions** a certain number of times (waiting 100ms more between
+  each retry), until the transactions succeed. The plugins provide an
+  option to control the maximum number of retries. If the maximum
+  number of retries is exceeded, the ``503 Service Unavailable`` HTTP
+  error is raised (server overloaded because of unsuccessful retries
+  of concurrent transactions).
+
+* If a higher-level application **modifies metadata and/or
+  attachments** in the presence of multiple writers, Orthanc provides
+  a :ref:`revision mechanism <revisions>` to prevent concurrent
+  updates.
+
 
 
 Latency
 ^^^^^^^
 
-As of Orthanc 1.9.1, Orthanc still performs quite a large number of small
-SQL requests.  A simple request to a route like ``/studies/{id}`` can trigger
-6 SQL queries.
+For some queries to the database, Orthanc performs several small SQL
+requests. For instance, a request to a route like ``/studies/{id}``
+can trigger 6 SQL queries. Given these round-trips between Orthanc and
+the DB server, it's important for the **network latency to be as small
+as possible**. For instance, if your latency is 20ms, a single request
+to ``/studies/{id}`` might take 120ms. Typically, a latency of 1-4 ms
+is expected to have correct performances.
 
-This is not an ideal situation and this might be addressed 
-in a future larger DB refactoring (the most time-consuming queries have already
-been optimized).  Given the large number of round-trips
-between Orthanc and the DB server, it's important that the latency is reduced
-as much as possible.  I.e, if deploying Orthanc in a cloud infrastructure,
-make sure that the DB server and Orthanc VMs are located in the same datacenter.
+As a consequence, if deploying Orthanc in a cloud infrastructure, make
+sure that the DB server and Orthanc VMs are located in the **same
+datacenter**. Note that most of the time-consuming queries have
+already been optimized, and that future versions of Orthanc SDK might
+aggregate even more SQL requests.
 
-Typically, a latency of 1-4 ms is expected to have correct performances.  If your
-latency is 20ms, a simple request to ``/studies/{id}`` might spend 120ms in 
-round-trip alone.
+Starting with Orthanc 1.9.2, and PostgreSQL/MySQL index plugins 4.0,
+Orthanc can also be configured to handle **multiple connections to the
+database server** by setting the ``IndexConnectionsCount`` to a value
+greater than ``1``. This allows concurrent accesses to the database,
+which avoids to sequentially wait for a database transaction to be
+concluded before starting another one. Having multiple connections
+makes the latency problem much less important.
 
 
+Slow deletions
+^^^^^^^^^^^^^^
 
+Deleting large studies can take some time, because removing a large
+number of files from a filesystem can be an expensive operation (which
+might sound counterintuitive).
 
+It is possible to create an :ref:`storage area plugin
+<creating-plugins>` that delays the actual deletion from the
+filesystem. The plugin would maintain a queue (e.g. as a SQLite
+database) of files to be removed. The actual deletion from the
+filesystem would be done asynchronously in a separate thread.
+
+We are looking for funding from the industry to implement such a
+plugin.

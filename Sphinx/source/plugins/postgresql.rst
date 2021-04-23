@@ -13,6 +13,9 @@ by a PostgreSQL database.
 For general information, check out the `official homepage of the
 plugins <https://www.orthanc-server.com/static.php?page=postgresql>`__.
 
+For information about scalability, make sure to read the section about
+:ref:`multiple writers in large-scale deployments <multiple-writers>`.
+
 
 
 Compilation
@@ -121,7 +124,10 @@ file::
       "Database" : "orthanc",
       "Username" : "orthanc",
       "Password" : "orthanc",
-      "EnableSsl" : false     // New in version 3.0
+      "EnableSsl" : false,               // New in release 3.0
+      "MaximumConnectionRetries" : 10,   // New in release 3.0
+      "ConnectionRetryInterval" : 5,     // New in release 3.0
+      "IndexConnectionsCount" : 1        // New in release 4.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -210,6 +216,35 @@ Several advanced options are available as well to fine-tune the
 configuration of the PostgreSQL plugins. They are documented below.
 
 
+.. _postgresql-multiple-writers:
+
+Multiple writers or connections
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with Orthanc 1.9.2 and PostgreSQL 4.0, it is possible to use
+:ref:`multiple writers or connections in large-scale deployments
+<multiple-writers>`. Here is the list of configuration that control
+this behavior:
+
+* ``Lock`` must be set to ``false`` (cf. :ref:`below <postgresql-lock>`)
+
+* ``MaximumConnectionRetries`` governs how many times Orthanc tries to
+  connect to the database, as well as how many times Orthanc replays
+  transactions to deal with collisions between multiple writers.
+
+* ``IndexConnectionsCount`` controls the number of connections from
+  the index plugin to the PostgreSQL database. It is set to ``1`` by
+  default, which corresponds to the old behavior of Orthanc <= 1.9.1.
+
+* ``ConnectionRetryInterval`` is only used when opening one database
+  connection to PostgreSQL.
+
+* The PostgreSQL plugin supports the :ref:`revision mechanism
+  <revisions>` to protect metadata and attachments from concurrent
+  modifications.
+
+  
+
 .. _postgresql-lock:
 
 Locking
@@ -222,6 +257,7 @@ locks
 <https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADVISORY-LOCKS>`__)
 to prevent other instances of Orthanc from using the same PostgreSQL
 database. If you want several instances of Orthanc to share the same
+database or if you need multiple connections to the PostgreSQL
 database, set the ``Lock`` option to ``false`` in the configuration
 file::
 

@@ -303,3 +303,70 @@ multiple readers/writers must be implemented at a higher level
 (e.g. using a distributed `message-broker system
 <https://en.wikipedia.org/wiki/Message_broker>`__ such as RabbitMQ
 that is fed by an Orthanc plugin).
+
+
+.. _revisions:
+
+Revisions
+---------
+
+.. highlight:: bash
+
+Higher-level applications built on the top of Orthanc might have to
+modify metadata and/or attachments. This can cause concurrency
+problems if multiple clients modify the same metadata/attachment
+simultaneously. To avoid such problems, Orthanc implements a so-called
+**revision mechanism** to protect from concurrent modifications.
+
+The revision mechanism is optional, was introduced in **Orthanc
+1.9.2** and must be enabled by setting :ref:`configuration option
+<configuration>` ``CheckRevision`` to ``true``. It is strongly
+inspired by the `CouchDB API
+<https://docs.couchdb.org/en/stable/api/document/common.html>`__.
+
+When the revision mechanism is enabled, each metadata and attachment
+is associated with a **revision number**. Whenever one sets a metadata
+for the first time using a ``PUT`` query, this revision number can be
+found in the HTTP header ``ETag`` that is reported by Orthanc::
+
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello'
+  [...]
+  < ETag: "0"
+
+Any ``GET`` query will also return the current value of ``ETag``::
+  
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024
+  [...]
+  < ETag: "0"
+
+If one needs to subsequently modify or delete this metadata, the HTTP
+client must set this value of ``ETag`` into the ``If-Match`` HTTP
+header::
+
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 2' -H 'If-Match: 0'
+  [...]
+  < ETag: "1"
+
+Note how this second call has incremented the value of ``ETag``: This
+is the new revision number to be used in future updates. If a bad
+revision number is provided, the HTTP error ``409 Conflict`` is
+generated::
+
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 3' -H 'If-Match: 0'
+  [...]
+  < HTTP/1.1 409 Conflict
+
+Such a ``409`` error must be handled by the higher-level
+application. The revision number must similarly be given if deleting a
+metadata/attachment::
+
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X DELETE -H 'If-Match: 1'
+  [...]
+  < HTTP/1.1 200 OK
+
+Check out the `OpenAPI reference <https://api.orthanc-server.com/>` of
+the REST API of Orthanc for more information.
+
+**Warning:** The database index back-end must support revisions. As of
+writing, only the **PostgreSQL plugin** in versions above 4.0
+implement support for revisions.
