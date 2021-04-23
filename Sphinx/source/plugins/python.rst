@@ -395,7 +395,7 @@ Auto-routing studies
 .. highlight:: python
 
 Here is a sample Python plugin that routes any :ref:`stable study
-<lua-callbacks>` to a modality named ``samples`` (as declared in the
+<stable-resources>` to a modality named ``samples`` (as declared in the
 ``DicomModalities`` configuration option)::
   
   import orthanc

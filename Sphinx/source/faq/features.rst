@@ -269,3 +269,37 @@ Jobs
 
 Check out the :ref:`advanced features of the REST API <jobs>`.
 
+
+
+.. _stable-resources:
+
+Stable resources
+----------------
+
+A DICOM resource (patient, study or series) is referred to as
+**stable** if it has not received any new instance for a certain
+amount of time.
+
+This amount of time is configured by the the option ``StableAge`` in
+the :ref:`configuration file <configuration>`.
+
+When some resource becomes stable, an event is generated as a log
+entry in the ``/changes`` :ref:`URI in the REST API <changes>`, a
+:ref:`Lua callback <lua-callbacks>` is invoked, the callback function
+registered by ``OrthancPluginRegisterOnChangeCallback()`` in
+:ref:`C/C++ plugins <creating-plugins>` is executed, as well as the
+:ref:`Python callback <python-changes>` registered by
+``orthanc.RegisterOnChangeCallback()``.
+
+The ``IsStable`` field is also available to get the status of an
+individual patient/study/series using the REST API of Orthanc.
+
+In the multiple readers/writers scenario enabled since Orthanc 1.9.2,
+each Orthanc server is considered separately: The "stable" information
+is monitored by threads inside the Orthanc process, and is **not**
+shared in the database. In other words, the "stable" information is
+local to the Orthanc server that is queried.  Synchronization between
+multiple readers/writers must be implemented at a higher level
+(e.g. using a distributed `message-broker system
+<https://en.wikipedia.org/wiki/Message_broker>`__ such as RabbitMQ
+that is fed by an Orthanc plugin).
