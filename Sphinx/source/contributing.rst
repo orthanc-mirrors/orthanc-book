@@ -17,7 +17,6 @@ Contributing to Orthanc
 
           * **Orthanc Core**:
 
-            - Improved scalability of PostgreSQL databases
             - :ref:`Improved Web user interface <improving-interface>`
           
           * **Stone Web viewer**:
