@@ -343,7 +343,7 @@ If one needs to subsequently modify or delete this metadata, the HTTP
 client must set this value of ``ETag`` into the ``If-Match`` HTTP
 header::
 
-  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 2' -H 'If-Match: 0'
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 2' -H 'If-Match: "0"'
   [...]
   < ETag: "1"
 
@@ -352,7 +352,7 @@ is the new revision number to be used in future updates. If a bad
 revision number is provided, the HTTP error ``409 Conflict`` is
 generated::
 
-  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 3' -H 'If-Match: 0'
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X PUT -d 'Hello 3' -H 'If-Match: "0"'
   [...]
   < HTTP/1.1 409 Conflict
 
@@ -360,12 +360,12 @@ Such a ``409`` error must be handled by the higher-level
 application. The revision number must similarly be given if deleting a
 metadata/attachment::
 
-  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X DELETE -H 'If-Match: 1'
+  $ curl -v http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/metadata/1024 -X DELETE -H 'If-Match: "1"'
   [...]
   < HTTP/1.1 200 OK
 
-Check out the `OpenAPI reference <https://api.orthanc-server.com/>` of
-the REST API of Orthanc for more information.
+Check out the `OpenAPI reference <https://api.orthanc-server.com/>`__
+of the REST API of Orthanc for more information.
 
 **Warning:** The database index back-end must support revisions. As of
 writing, only the **PostgreSQL plugin** in versions above 4.0
