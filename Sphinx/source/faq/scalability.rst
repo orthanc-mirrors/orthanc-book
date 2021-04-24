@@ -265,8 +265,10 @@ concurrency. Read-only database transactions are also distinguished
 from read-write transactions in order for the database engine to
 further optimize the patterns of access.
 
-Summarizing, the **multiple readers/writers** is now possible. Here
-is a drawing representing a possible deployment:
+Summarizing, the **multiple readers/writers** is now possible. Here is
+a drawing representing a possible deployment with 4 Orthanc servers,
+all sharing the same DICOM images, with some servers handling multiple
+connections to a PostgreSQL database for higher throughput:
 
 .. image:: ../images/2021-04-22-MultipleWriters.png
            :align: center
