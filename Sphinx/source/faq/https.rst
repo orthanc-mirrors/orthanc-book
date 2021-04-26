@@ -74,9 +74,7 @@ following minimal configuration file::
   {
     "SslEnabled" : true,
     "SslCertificate" : "/tmp/certificate.pem"
-  }
-  
-        
+  }      
 
 
 Querying Orthanc using HTTPS
@@ -177,10 +175,10 @@ Using this new configuration, the query will succeed::
   }
 
 
-Securing Orthanc with mutual TLS authentication
-...............................................
+Securing Orthanc peers with mutual TLS authentication
+.....................................................
         
-.. highlight:: bash
+.. highlight:: json
                
 Once HTTPS is enabled, Orthanc can also be configured to accept incoming
 connections based on a certificate provided by the client.
@@ -213,4 +211,48 @@ Note that the same kind of configuration is also available for
 :ref:`DICOMweb client <dicomweb-client>`.
 
 An example of such a setup with instructions to generate the
-certificates is available `here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/tls-mutual-auth/>`__ .
+certificates is available `here
+<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/tls-mutual-auth/>`__.
+
+
+.. _client-certificate-web-browser:
+
+Securing Orthanc with a client certificate and access it using a Web browser
+............................................................................
+
+.. highlight:: bash
+
+Firstly, create a PEM certificate for the Orthanc HTTPS server, and another
+PKCS12 certificate for the client::
+
+  $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout server.key -out server.crt -subj "/C=BE/CN=localhost"
+  $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout client.key -out client.crt -subj "/C=BE/CN=localhost"
+  $ cat server.key server.crt > server.pem
+  $ openssl pkcs12 -export -in client.crt -inkey client.key -out client.p12
+
+In the last step, you'll have to provide a password (that can be
+empty).
+  
+.. highlight:: bash
+
+Secondly, start Orthanc using the following configuration file for Orthanc::
+
+  {
+    "SslEnabled" : true,
+    "SslCertificate" : "server.pem",
+    "SslVerifyPeers": true,
+    "SslTrustedClientCertificates": "client.crt"
+  }
+
+Thirdly, install the PKCS12 client-side certificate ``client.p12`` in
+your Web browser. For instance, check out `these instructions for
+Mozilla Firefox
+<https://security.stackexchange.com/questions/163199/firefox-certificate-can-t-be-installed>`__.
+
+You are then able to access Orthanc using HTTPS encryption, with
+cryptographic identification of a client Web browser. Note that
+because the certificate is self-signed, the Web browser will warn
+about a potential security risk.
+
