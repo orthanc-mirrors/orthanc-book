@@ -68,7 +68,7 @@ Modification of a Single Instance
 ---------------------------------
 
 Orthanc allows to modify a set of specified tags in a single DICOM
-instance and to download the resulting anonymized DICOM
+instance and to download the resulting modified DICOM
 file. Example::
 
     $ curl -X POST http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify \
