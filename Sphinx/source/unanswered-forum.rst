@@ -34,8 +34,6 @@ Pending questions
 * **2020-04-13**: `Advanced authorization plugin vs. Remote access <https://groups.google.com/g/orthanc-users/c/m2VM3AhhWok/m/EjVy5_ZFCAAJ>`__
 * **2020-03-28**: `REST Query Remote Modality using DICOM Sequence <https://groups.google.com/g/orthanc-users/c/7o0RNFEtVuA/m/KmpalFxTAwAJ>`__
 * **2020-03-04**: `Bulk Store SCU question <https://groups.google.com/g/orthanc-users/c/upftCWzl7qc/m/2FFEmXqkAQAJ>`__
-* **2020-02-10**: `Authorisation web service and the AC_AUTHENTICATION_ENABLED variable <https://groups.google.com/g/orthanc-users/c/liOW6BQMbdQ/m/yqfm2B0vFgAJ>`__
-* **2020-02-05**: `TotalDiskSize Disagrees With filesystem du; any way to stop storing json <https://groups.google.com/g/orthanc-users/c/gA-ixbFCjrI/m/NzH3FDS9AQAJ>`__
 * **2019-11-14**: `instance anonymization with consistent PatientID <https://groups.google.com/g/orthanc-users/c/9rIpNHxA4d8/m/dDABlu4LAgAJ>`__  
 * **2018-05-11**: `Web vs API query/retrieve with Orthanc Docker <https://groups.google.com/d/msg/orthanc-users/3g7V7kqr3g0/3i83GIfxBwAJ>`__
 
@@ -43,9 +41,7 @@ Pending questions
 Questions requiring a development
 ---------------------------------
 
-* **2020-08-06**: `Advanced authorization plugin dicomweb-plugin issue <https://groups.google.com/g/orthanc-users/c/gwgGJsLvQUk/m/CkiaojrCAgAJ>`__
 * **2019-10-25**: `Expediting stability of a DICOM study - new API endpoint? <https://groups.google.com/g/orthanc-users/c/kADj2eoELK4/m/xFrc0wfIBgAJ>`__
-* **2019-10-07**: `Timeout too short when connecting to MySQL server resulting in crash <https://groups.google.com/g/orthanc-users/c/rYA4eJzEp7Q/m/teFOHBI6BwAJ>`__
 * **2019-05-14**: `Jobs Engine: Study Details <https://groups.google.com/g/orthanc-users/c/9GCV88GLEzw/m/A8r4cb_UAgAJ>`__
 
 
