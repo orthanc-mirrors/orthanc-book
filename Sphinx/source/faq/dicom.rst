@@ -48,6 +48,8 @@ modalities. As preliminary debugging actions, you should:
   the "Query/Retrieve" page).
 * If the two modalities succeed with C-Echo, but query/retrieve does not
   succeed, please carefully read the :ref:`dicom-move` section.
+* Check out the :ref:`more generic troubleshooting guide
+  <troubleshooting>`.
 
 As a last resort, please contact the `mailing list
 <https://groups.google.com/forum/#!forum/orthanc-users>`_ by sending a
