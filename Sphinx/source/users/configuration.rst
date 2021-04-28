@@ -31,10 +31,11 @@ the default value.  In example, a simple configuration file would be::
         "DicomPort": 104
     }
 
-It's also a very good practice to split your configuration files per topic.
-In example, have a ``dicom.json`` for everything that is related to DICOM,
-a ``http.json`` for all HTTP related configurations, one file per plugin...  
-This is how the configuration files are provided with the Windows Installer.
+It's also a very good practice to split your configuration files per
+topic.  In example, have a ``dicom.json`` for everything that is
+related to DICOM, a ``http.json`` for all HTTP related configurations,
+one file per plugin.  This is how the configuration files are provided
+with the Windows Installer.
 
 Once your configuration file is ready, start Orthanc by giving it the path to the 
 configuration file path as a command-line argument.  If you use multiple configuration
@@ -45,18 +46,29 @@ files, you may provide the path to the folder containing all configuration files
     $ Orthanc ./config/
 
 
-*Remark:* When specifying paths under Microsoft Windows, backslashes
-(i.e. ``\``) should be either escaped by doubling them (as in ``\\``),
-or replaced by forward slashes (as in ``/``).
-*Remark:* When installing Orthanc with the Windows Installer, you won't be
-able to edit your files unless you start your editor with ``Run as administrator``.
-We recommend to edit your configuration file with an editor such as `Notepad++ <https://notepad-plus-plus.org/>`_.  
-It shall warn you that this file can be edited only by an admin, and will suggest you 
-to restart Notepad++ as an admin such that you'll be able to save it.
+**Remark 1:** When specifying paths under Microsoft Windows,
+backslashes (i.e. ``\``) should be either escaped by doubling them (as
+in ``\\``), or replaced by forward slashes (as in ``/``).
 
+**Remark 2:** When installing Orthanc using the Windows installer by
+Osimis, you won't be able to edit your files unless you start your
+editor with ``Run as administrator``. We recommend to edit your
+configuration file with an editor such as `Notepad++
+<https://notepad-plus-plus.org/>`_.  It shall warn you that this file
+can be edited only by an admin, and will suggest you to restart
+Notepad++ as an admin such that you'll be able to save it.
+
+**Remark 3:** The Windows installers by Osimis provide a `Windows
+service <https://en.wikipedia.org/wiki/Windows_service>`__ that
+automatically starts Orthanc during the startup of Microsoft
+Windows. You can control the parameters of the service by typing
+``services.msc`` at a command-line prompt. The Windows service of
+Orthanc will do its best to cleanly stop Orthanc at the shutdown of
+Windows, but `there are some caveats
+<https://bugs.orthanc-server.com/show_bug.cgi?id=48>`__.
  
-To obtain more diagnostic, you can use the ``--verbose`` or the
-``--trace`` options::
+**Remark 4:** To obtain more diagnostic, you can use the ``--verbose``
+or the ``--trace`` options::
 
     $ Orthanc ./Configuration.json --verbose
     $ Orthanc ./Configuration.json --trace
