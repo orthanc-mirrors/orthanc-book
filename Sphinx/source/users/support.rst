@@ -78,9 +78,12 @@ you must provide all the following information:
   software does not help <proprietary>`), and that are preferably
   calls the :ref:`REST API of Orthanc <rest>`. The most useful
   commands are `cURL <https://en.wikipedia.org/wiki/CURL>`__, `DCMTK
-  <https://dicom.offis.de/dcmtk.php.en>`__, `dicom3tools
-  <https://www.dclunie.com/dicom3tools.html>`__, `dcm4che command-line
-  tools <https://www.dcm4che.org/>`__, or Python scripts.
+  <https://dicom.offis.de/dcmtk.php.en>`__ (notably ``storescu``),
+  `dicom3tools <https://www.dclunie.com/dicom3tools.html>`__ (notably
+  ``dciodvfy``), `dcm4che command-line tools
+  <https://www.dcm4che.org/>`__ (notably ``storescu``), `GDCM
+  <http://gdcm.sourceforge.net/>`__ (notably ``gdcmscu``), or Python
+  scripts (notably using ``pydicom``).
 * In the case of DICOM networking problems, the logs from the remote
   modality.
 * If applicable, a screenshot is worth a thousand words.
