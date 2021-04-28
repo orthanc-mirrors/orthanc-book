@@ -48,6 +48,17 @@ Validating DICOM files
   The core team of Orthanc will **only provide support for DICOM files
   that are reported as valid** by ``dciodvfy``.
 
+* Side-note: The default transfer syntax of DICOM is Little Endian
+  Implicit (``1.2.840.10008.1.2``). For DICOM files that include
+  private tags, **we recommend using Little Endian Explicit**
+  (``1.2.840.10008.1.2.1``) instead Little Endian Implicit whenever
+  possible. Instead, in Little Endian Explicit, each DICOM tag has an
+  explicit declaration of its value representation (type), which
+  contrasts with Little Endian Implicit that necessitates to configure
+  the dictionary of private tags to be properly handled in some
+  operations (cf. the ``Dictionary`` :ref:`configuration option
+  <configuration>`).
+  
   
 Orthanc Explorer
 ----------------
@@ -133,13 +144,13 @@ Checking integrity of the storage area
 
 Orthanc stores, in its database, an `MD5 hash
 <https://en.wikipedia.org/wiki/MD5>`_ of the files stored in its
-:ref:`storage area <orthanc-storage>` (that notably contains the DICOM
-files), provided that the ``StoreMD5ForAttachments`` configuration
-option is set to ``true``.
+:ref:`storage area <orthanc-storage>` (which notably includes the
+DICOM files), provided that the ``StoreMD5ForAttachments``
+configuration option is set to ``true``.
 
-This MD5 corresponds to the hash of the stored files in memory, before
-they are written to the disk by Orthanc. This information is safely
-stored inside the database for any incoming file attachment.
+This MD5 corresponds to the hash of the files in memory, before they
+are written to the disk by Orthanc. This information is safely stored
+inside the database for any incoming file attachment.
 
 It is possible to ask Orthanc to check by itself whether some attachment
 file was corrupted (i.e. to check whether the MD5 hash stored in the
