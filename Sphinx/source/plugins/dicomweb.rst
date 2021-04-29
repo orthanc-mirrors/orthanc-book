@@ -350,8 +350,28 @@ password protecting the private key::
     }
   }
 
-Finally, it is also possible to use client authentication with
-hardware security modules and smart cards through `PKCS#11
+
+The definition of a DICOMweb server can also specify the HTTP headers
+to be provided during each request to the remote DICOMweb server. This
+can for instance be useful to set authorization tokens::
+
+  {
+    [...]
+    "DicomWeb" : {
+      "Servers" : {
+        "sample" : {
+          "Url" : "http://localhost:8042/dicom-web/",
+          "HttpHeaders": {
+            "Authorization" : "Bearer HelloWorldToken"
+          }
+        }
+      }
+    }
+  }
+
+
+Finally, it is possible to use client authentication with hardware
+security modules and smart cards through `PKCS#11
 <https://en.wikipedia.org/wiki/PKCS_11>`__ (this feature is only
 available is the core of Orthanc was compiled with the
 ``-DENABLE_PKCS11=ON`` option in CMake, and if the Orthanc
