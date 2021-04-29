@@ -184,3 +184,6 @@ Windows-specific issues
   precompiled command-line versions of Orthanc for Windows 64bit are
   available courtesy of `Osimis
   <https://www.osimis.io/en/download.html>`__.
+
+* Avoid installing Orthanc, its database or its storage area in
+  folders whose names contain **spaces or special characters**.
