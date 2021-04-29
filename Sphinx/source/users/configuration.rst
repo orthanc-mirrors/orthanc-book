@@ -1,8 +1,9 @@
 .. _configuration:
-.. highlight:: bash
 
 Configuration of Orthanc
 ========================
+
+.. highlight:: bash
 
 Configuring Orthanc simply consists in providing a configuration file.
 Orthanc has numerous configuration that are documented in the `default
@@ -20,6 +21,8 @@ The default configuration file would:
 * Create a HTTP server for the REST API that listens on the port 8042.
 * Store the Orthanc database in a folder called ``OrthancStorage``.
 
+.. highlight:: json
+
 However, we recommend that you start from an empty configuration file
 and only specify the options for which you don't wan't to use
 the default value.  In example, a simple configuration file would be::
@@ -36,6 +39,8 @@ topic.  In example, have a ``dicom.json`` for everything that is
 related to DICOM, a ``http.json`` for all HTTP related configurations,
 one file per plugin.  This is how the configuration files are provided
 with the Windows Installer.
+
+.. highlight:: bash
 
 Once your configuration file is ready, start Orthanc by giving it the path to the 
 configuration file path as a command-line argument.  If you use multiple configuration
@@ -75,3 +80,53 @@ or the ``--trace`` options::
 
 To learn more about the Orthanc logs, :ref:`check out the dedicated
 page <log>`.
+
+
+Environment variables
+---------------------
+
+.. highlight:: json
+
+Starting with Orthanc 1.5.0, the configuration file can include the
+value of environment variables. Consider the following configuration::
+
+  {
+    "Name" : "${ORTHANC_NAME}"
+  }
+
+
+.. highlight:: bash
+
+In this case, once Orthanc starts, the configuration option ``Name``
+will be read from the value of the environment variable
+``ORTHANC_NAME``. For instance::
+
+  $ ORTHANC_NAME=Hello ./Orthanc Configuration.json
+  $ curl http://localhost:8042/system
+  {
+    "Name" : "Hello",
+    [...]
+  }
+
+
+.. highlight:: json
+
+It is also possible to set a default value if the environment variable
+is not set. Here is the syntax in the configuration file::
+
+  {
+    "Name" : "${ORTHANC_NAME:-DefaultName}"
+  }
+
+
+.. highlight:: bash
+
+If the environment variable ``ORTHANC_NAME`` is not set, here is the
+result::
+
+  $ ./Orthanc Configuration2.json
+  $ curl http://localhost:8042/system
+  {
+    "Name" : "DefaultName",
+    [...]
+  }
