@@ -1,3 +1,5 @@
+.. _series-completion:
+
 What does the series completion status mean?
 ============================================
 

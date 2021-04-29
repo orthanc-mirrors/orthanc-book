@@ -121,8 +121,8 @@ Here are the main metadata handled by the Orthanc core:
   Orthanc. Similarly, ``LastUpdate`` records, for each
   patient/study/series, the last time a DICOM instance was added to
   this resource.
-* ``RemoteAet`` records the AET of the modality that has sent some
-  DICOM instance to Orthanc.
+* ``RemoteAET`` records the AET of the modality that has sent some
+  DICOM instance to Orthanc using the DICOM protocol.
 * ``ModifiedFrom`` and ``AnonymizedFrom`` hold from which original
   resource, a resource was modified or anonymized. The presence of
   this metadata indicates that the resource is the result of a
@@ -133,11 +133,21 @@ Here are the main metadata handled by the Orthanc core:
 * ``IndexInSeries`` records the expected index of a DICOM instance
   inside its parent series. Conversely, ``ExpectedNumberOfInstances``
   associates to each series, the number of DICOM instances this series
-  is expected to contain.
+  is expected to contain. This information is :ref:`not always
+  available <series-completion>`.
 * Starting with Orthanc 1.2.0, ``TransferSyntax`` and ``SopClassUid``
   respectively stores the transfer syntax UID and the SOP class UID of
   DICOM instances, in order to speed up the access to this
   information.
+* ``RemoteIP`` (new in Orthanc 1.4.0): The IP address of the remote
+  SCU (for REST API and DICOM protocol).
+* ``CalledAET`` (new in Orthanc 1.4.0): The AET that was called by the
+  SCU, which normally matches the AET of Orthanc (for DICOM protocol).
+* ``HttpUsername`` (new in Orthanc 1.4.0): The username that created
+  the instance (for REST API).
+* ``PixelDataOffset`` (new in Orthanc 1.9.1): Offset (in bytes) of the
+  Pixel Data DICOM tag in the DICOM file, if available.
+  
 
 Metadata listed above are set privately by the Orthanc core. They are
 **read-only** from the perspective of the end user, as Orthanc
