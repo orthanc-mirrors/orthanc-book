@@ -87,8 +87,8 @@ presence of large databases:
   * ``LimitFindInstances = 100``
   * ``KeepAlive = true``
   * ``TcpNoDelay = true``
-  * ``SaveJobs = false``
   * ``StorageAccessOnFind = Never``
+  * Consider adding ``SaveJobs = false``
 
 * Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: By default, the
   PostgreSQL index plugin uses 1 single connection to the PostgreSQL
