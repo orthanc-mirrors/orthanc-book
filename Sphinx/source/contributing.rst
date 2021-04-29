@@ -30,7 +30,7 @@ Contributing to Orthanc
           * **Plugins**:
 
             - Support of MSSQL databases
-            - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Myrth
+            - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
           want to sponsor these developments.
@@ -80,6 +80,7 @@ here are some tasks you can take in charge that would greatly help us:
     <https://fedoraproject.org/wiki/EPEL>`__, CentOS, openSUSE...).
   - Take ownership of the now-orphaned `Fedora package
     <https://src.fedoraproject.org/rpms/orthanc>`__.
+  - Take care of :ref:`Debian/Ubuntu backporting <debian-packages>`.
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
     repository, via pull requests.
