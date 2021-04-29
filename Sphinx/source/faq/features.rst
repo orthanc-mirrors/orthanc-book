@@ -221,7 +221,45 @@ the REST API::
 
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/samplePdf -X PUT --data-binary @sample.pdf
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/sampleRaw -X PUT -d 'raw data'
-  
+
+
+DICOM-as-JSON attachments
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the version of Orthanc <= 1.9.0, whenever Orthanc receives a DICOM
+file, it pre-computes a JSON summary of its DICOM tags, and caches
+this JSON file as an attachment to the DICOM instance (accessible at
+the ``/instances/{...}/attachments/dicom-as-json/`` URI). This
+attachment is used as a cache to seep up future accesses to
+``/instances/.../tags``, lookups using ``/tools/find`` or C-FIND
+queries.
+
+This caching might cause issues if the dictionary of DICOM tags is
+subsequently modified, which implies that the cached JSON file does
+not perfectly match the new dictionary.
+
+.. highlight:: bash
+
+Since Orthanc 1.2.0, you can force the re-generation of the cached
+JSON file by DELETE-ing it, for instance::
+
+  $ curl -X DELETE http://localhost:8042/instances/301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832/attachments/dicom-as-json
+
+.. highlight:: text
+
+The next time you open this particular instance with Orthanc Explorer,
+you will see messages in the Orthanc logs (in verbose mode) stating
+that the Orthanc server has reconstructed the JSON summary, which will
+match the new content of the dictionary::
+
+  I0222 08:56:00.923070 FilesystemStorage.cpp:155] Reading attachment "2309c47b-1cbd-4601-89b5-1be1ad80382c" of "DICOM" content type
+  I0222 08:56:00.923394 ServerContext.cpp:401] Reconstructing the missing DICOM-as-JSON summary for instance: 301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832
+  I0222 08:56:00.929117 ServerContext.cpp:540] Adding attachment dicom-as-json to resource 301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832
+  I0222 08:56:00.929425 FilesystemStorage.cpp:118] Creating attachment "3c830b66-8a00-42f0-aa3a-5e37b4a8b5a4" of "JSON summary of DICOM" type (size: 1MB)
+
+These DICOM-as-JSON attachments are not automatically generated
+anymore starting with Orthanc 1.9.1.
+
 
 .. _registry:
 
