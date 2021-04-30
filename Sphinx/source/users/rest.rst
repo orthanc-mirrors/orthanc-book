@@ -433,21 +433,24 @@ to declare a remote orthanc peer::
 .. highlight:: bash
 
 Such a configuration would enable Orthanc to connect to two other
-Orthanc instances that listens on the
-localhost on the port 8043 & 8044. The peers that are known to Orthanc
-can be queried::
+Orthanc instances that listens on the localhost on the ports 8043
+and 8044. The peers that are known to Orthanc can be queried::
 
     $ curl http://localhost:8042/peers?expand
 
-The peers can then be updated through the API too::
+Instead of using the configuration file, peers can be created or
+updated through the REST API using the ``PUT`` method of HTTP::
 
     $ curl -v -X PUT http://localhost:8042/peers/sample -d '{"Url" : "http://127.0.0.1:8043"}'
 
+One peer can also be removed using the ``DELETE`` method as follows::
+    
+    $ curl -v -X DELETE http://localhost:8042/peers/sample
 
-Note that, by default, peers are stored in Orthanc configuration files
-and are updated in Orthanc memory only.  If you want your modifications
-to be persistent, you should configure Orthanc to store its peers
-in the database.  This is done through this configuration::
+Note that, by default, peers are read from the Orthanc configuration
+files and are updated in Orthanc memory only. If you want your
+modifications to be persistent, you should configure Orthanc to store
+its peers in the database.  This is done through this configuration::
 
     ...
     "OrthancPeersInDatabase" : true,
@@ -562,15 +565,20 @@ can be queried::
 
     $ curl http://localhost:8042/modalities?expand
 
-The modalities can then be updated through the API too::
+Instead of using the configuration file, modalities can be created or
+updated through the REST API using the ``PUT`` method of HTTP::
 
     $ curl -v -X PUT http://localhost:8042/modalities/sample -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
 
+One modality can also be removed using the ``DELETE`` method as follows::
+    
+    $ curl -v -X DELETE http://localhost:8042/modalities/sample
 
-Note that, by default, modalities are stored in Orthanc configuration files
-and are updated in Orthanc memory only.  If you want your modifications
-to be persistent, you should configure Orthanc to store its modalities
-in the database.  This is done through this configuration::
+Note that, by default, modalities are read from the Orthanc
+configuration files and are updated in Orthanc memory only. If you
+want your modifications to be persistent, you should configure Orthanc
+to store the modalities in the database.  This is done through this
+configuration::
 
     ...
     "DicomModalitiesInDatabase" : true,
