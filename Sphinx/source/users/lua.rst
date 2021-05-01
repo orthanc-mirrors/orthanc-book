@@ -566,3 +566,24 @@ from Orthanc Explorer)::
 
     return query
   end
+
+
+.. _lua-external-modules:
+
+Using external modules
+----------------------
+
+Starting with Orthanc 1.3.2, it is possible to use external Lua
+modules if Orthanc was compiled with the ``-DENABLE_LUA_MODULES=ON``
+while invoking CMake.
+
+Importantly, the modules and the Orthanc server must use the same
+version of Lua for external modules to be properly loaded.
+
+Check out the Orthanc Users forum for old discussions about this
+topic: `reference 1
+<https://groups.google.com/g/orthanc-users/c/BXfmwU786B0/m/M47slt5GFwAJ>`__,
+`reference 2
+<https://groups.google.com/g/orthanc-users/c/BXfmwU786B0/m/qpVe8UvGAwAJ>`__,
+`reference 3
+<https://groups.google.com/g/orthanc-users/c/LDAN5jA0X8M/m/4zrk0_AaBAAJ>`__.
