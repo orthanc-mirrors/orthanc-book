@@ -25,7 +25,8 @@ To obtain the Orthanc binaries, you have several possibilities:
   <https://lsb.orthanc-server.com/>`__ (Linux Standard Base), that
   should easily and immediately run on most distributions. Those
   binaries are statically linked together with all their third-party
-  dependencies.
+  dependencies. Don't forget to execute ``chmod +x ./Orthanc`` in
+  order to be able to run the main Orthanc executable.
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#user-content-vagrant>`__.
