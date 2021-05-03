@@ -853,8 +853,8 @@ specifying that individual content item::
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
 
 If C-Moves take too long (for example, performing a C-Move of a big
-study), you may run the request in asynchronous fashion, which will
-create a job in Orthanc::
+study), you may run the request in :ref:`asynchronous mode <jobs>`,
+which will create a job in Orthanc::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve \
     --data '{"TargetAet":"Orthanc","Synchronous":false}'
@@ -862,7 +862,9 @@ create a job in Orthanc::
 
 .. highlight:: bash
 
-The answer of this POST request is the job ID taking care of the C-Move::
+The answer of this POST request is the job ID taking care of the
+C-Move command, :ref:`whose status can be monitored <jobs-monitoring>`
+in order to detect failure or completion::
 
   {
       "ID" : "11541b16-e368-41cf-a8e9-3acf4061d238",
