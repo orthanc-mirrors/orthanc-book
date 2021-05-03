@@ -78,6 +78,15 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/g/orthanc-users/c/Kkxqx6ZW2yw/m/dFbTuHZHCQAJ>`__
   on the discussion group.
 
+* `Menba <https://github.com/fidelio33b/menba>`__ is a Web interface
+  built on the top of the REST API of Orthanc. It is written using
+  `Django <https://www.djangoproject.com/>`__ and `Bootstrap
+  <https://getbootstrap.com/>`__, and takes advantage of `Celery
+  <https://docs.celeryproject.org/en/stable/getting-started/introduction.html>`__
+  and `AMQP
+  <https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol>`__
+  to handle the asynchronous tasks.
+
 * Last but not least, as written above, please consider buying the
   `professional development services by Osimis
   <https://www.osimis.io/en/services.html>`__. Osimis can help medical
