@@ -418,3 +418,36 @@ of the REST API of Orthanc for more information.
 **Warning:** The database index back-end must support revisions. As of
 writing, only the **PostgreSQL plugin** in versions above 4.0
 implement support for revisions.
+
+
+Synchronous vs. asynchronous C-MOVE SCP
+---------------------------------------
+
+The :ref:`C-MOVE SCP <dicom-move>` of Orthanc (i.e. the component of
+the Orthanc server that is responsible for routing DICOM instances
+from Orthanc to other modalities) can be configured to run either in
+synchronous or in asynchronous mode, depending on the value of the
+``SynchronousCMove`` :ref:`configuration option <configuration>`:
+
+* In **synchronous mode** (if ``SynchronousCMove`` is ``true``),
+  Orthanc will interleave its C-STORE SCU commands with the C-MOVE
+  instructions received from the remote modality. In other words,
+  Orthanc immediately sends the DICOM instances while it handles the
+  C-MOVE command from the remote modality. This mode is for
+  compatibility with simple DICOM client software that considers that
+  when its C-MOVE SCU is over, it should have received all the
+  instructed DICOM instances. This is the default behavior of Orthanc.
+
+* In **asynchronous mode** (if ``SynchronousCMove`` is ``false``),
+  Orthanc will queue the C-MOVE instructions and :ref:`creates a job
+  <jobs-synchronicity>` that will issue the C-STORE SCU commands
+  afterward. This behavior is typically encountered in hospital-wide
+  PACS systems, but requires the client software to be more complex as
+  it must be handle the delay between its C-MOVE queries and the
+  actual reception of the DICOM instances through C-STORE.
+
+As a consequence, by setting ``SynchronousCMove`` to ``true``, Orthanc
+can be used as a buffer that enables communications between a simple
+C-MOVE client and a hospital-wide PACS. This can be interesting to
+introduce compatibility with specialized image processing
+applications.

@@ -38,6 +38,8 @@ jobs is blocked until some job finishes.
 
 
 
+.. _jobs-synchronicity:
+
 Synchronous vs. asynchronous calls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
