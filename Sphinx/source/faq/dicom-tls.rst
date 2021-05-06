@@ -115,7 +115,7 @@ Let us start Orthanc using the following minimal configuration file::
     }  
   }
 
-.. highlight:: txt
+.. highlight:: text
 
 It is then possible to trigger a secure C-GET SCU request from DCMTK
 to Orthanc as follows::
@@ -126,3 +126,58 @@ to Orthanc as follows::
   I: Sending Echo Request (MsgID 1)
   I: Received Echo Response (Success)
   I: Releasing Association
+
+
+Secure TLS connections without certificate
+------------------------------------------
+
+In Orthanc <= 1.9.2, the remote DICOM modalities are required to
+provide a valide DICOM TLS certificate (which corresponds to the
+default ``--require-peer-cert`` option of the DCMTK command-line
+tools).
+
+Starting from Orthanc 1.9.3, it is possible to allow connections
+to/from remote DICOM modalities that do not provide a DICOM TLS
+certificate (which corresponds to the ``--verify-peer-cert`` option of
+DCMTK). This requires setting the :ref:`configuration option
+<configuration>` ``DicomTlsRemoteCertificateRequired`` of Orthanc to
+``false``.
+
+.. highlight:: bash
+
+As an example, let us generate one single certificate that is
+dedicated to Orthanc::
+
+  $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout orthanc.key -out orthanc.crt -subj "/C=BE/CN=localhost"
+
+
+.. highlight:: json
+
+Let us start Orthanc using the following minimal configuration file::
+
+  {
+    "DicomTlsEnabled" : true,
+    "DicomTlsCertificate" : "orthanc.crt",
+    "DicomTlsPrivateKey" : "orthanc.key",
+    "DicomTlsTrustedCertificates" : "orthanc.crt",
+    "DicomTlsRemoteCertificateRequired" : false
+  }
+
+.. highlight:: text
+
+Note that the ``DicomTlsTrustedCertificates`` is set to a dummy value,
+because this option must always be present. It is then possible to
+connect to Orthanc without SCU certificate as follows::
+
+  $ echoscu -v localhost 4242 --anonymous-tls +cf /tmp/k/orthanc.crt 
+  I: Requesting Association
+  I: Association Accepted (Max Send PDV: 16372)
+  I: Sending Echo Request (MsgID 1)
+  I: Received Echo Response (Success)
+  I: Releasing Association
+
+
+**Remark:** Importantly, if the remote DICOM modality provides an
+invalid DICOM TLS certificate, Orthanc will never accept the
+connection.
