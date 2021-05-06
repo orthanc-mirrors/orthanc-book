@@ -25,6 +25,42 @@ transposed to any programming language that supports both HTTP and
 JSON.
 
 
+.. _curl-windows:
+
+Warning about using cURL from the Windows prompt
+------------------------------------------------
+
+The examples on this page assume that the user is running a bash shell
+on some GNU/Linux distribution. Such a shell has the major advantage
+of having the possibility to use either single-quote or double-quotes
+characters in order to group a set of characters (including spaces) as
+a whole string.
+
+.. highlight:: bash
+
+Unfortunately, the default command-line prompt of Microsoft Windows
+**doesn't support single-quote characters**. If you execute a cURL
+command-line from this page that mixes single-quote and double-quotes,
+you'll have to replace single-quotes by double-quotes, and prefix the
+double-quotes by a backslash character. For instance, consider the
+following command line that works fine on GNU/Linux::
+
+  $ curl -v -X PUT http://localhost:8042/modalities/sample \
+         -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
+
+This call will **not** work on the Microsoft Windows prompt as it
+contains single-quotes. You should adapt this command line as follows
+to run it on Windows::
+
+  $ curl -v -X PUT http://localhost:8042/modalities/sample \
+         -d "{\"AET\" : \"ORTHANCC\", \"Host\": \"127.0.0.1\", \"Port\": 2002}"
+
+As an alternative, consider using a different Windows shell, for
+instance `Windows PowerShell
+<https://fr.wikipedia.org/wiki/Windows_PowerShell>`__ (some examples
+of PowerShell can be found below on this page).
+
+
 .. _sending-dicom-images:
 
 Sending DICOM images
