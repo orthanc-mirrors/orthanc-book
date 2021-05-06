@@ -147,7 +147,7 @@ the related option ``configs`` could in theory be better,
 unfortunately it is only available to `Docker Swarm
 <https://github.com/docker/compose/issues/5110>`__).
 
-.. highlight:: yml
+.. highlight:: yaml
 
 First create the ``docker-compose.yml`` file as follows (this one uses
 the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
@@ -161,7 +161,9 @@ the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
         - 4242:4242
         - 8042:8042
       secrets:
-        - orthanc.json      
+        - orthanc.json
+      environment:
+        - ORTHANC_NAME=HelloWorld
   secrets:
     orthanc.json:
       file: orthanc.json
@@ -172,7 +174,7 @@ Then, place the configuration file ``orthanc.json`` next to the
 ``docker-compose.yml`` file. Here is a minimalist ``orthanc.json``::
 
   {
-    "Name" : "Orthanc in Docker",
+    "Name" : "${ORTHANC_NAME} in Docker Compose",
     "RemoteAccessAllowed" : true
   }
 
@@ -184,7 +186,15 @@ can then be started as follows::
 
   $ docker-compose up
                
+Note how the `environment variable
+<https://docs.docker.com/compose/environment-variables/>`__
+``ORTHANC_NAME`` has been used in order to easily adapt the
+configuration of Orthanc. This results from the fact that Orthanc
+injects :ref:`environment variables <orthanc-environment-variables>`
+once reading the content of its configuration files (since Orthanc
+1.5.0).
 
+  
 Making the Orthanc database persistent
 --------------------------------------
 
@@ -261,7 +271,7 @@ with the default Orthanc configuration file::
   $ docker inspect --format '{{ .NetworkSettings.Ports }}' some-postgres
   $ docker run --rm --entrypoint=cat jodogne/orthanc-plugins /etc/orthanc/orthanc.json > /tmp/orthanc.json
 
-.. highlight:: json
+.. highlight:: text
 
 Add the following section to ``/tmp/orthanc.json`` (adapting the
 values Host and Port to what docker inspect said above)::

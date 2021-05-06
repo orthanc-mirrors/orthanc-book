@@ -82,6 +82,8 @@ To learn more about the Orthanc logs, :ref:`check out the dedicated
 page <log>`.
 
 
+.. _orthanc-environment-variables:
+
 Environment variables
 ---------------------
 
