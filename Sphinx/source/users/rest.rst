@@ -41,9 +41,10 @@ a whole string.
 Unfortunately, the default command-line prompt of Microsoft Windows
 **doesn't support single-quote characters**. If you copy/paste a cURL
 command-line from this page that mixes single-quote and double-quotes,
-you'll have to replace single-quotes by double-quotes, and prefix the
-double-quotes by a backslash character. For instance, consider the
-following command line that works fine on GNU/Linux::
+it won't work as such, and you'll have to replace single-quotes by
+double-quotes, and prefix the double-quotes by a backslash
+character. For instance, consider the following command line that
+works fine on GNU/Linux::
 
   $ curl -v -X PUT http://localhost:8042/modalities/sample \
          -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
