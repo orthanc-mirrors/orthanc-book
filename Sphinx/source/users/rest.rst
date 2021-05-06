@@ -39,7 +39,7 @@ a whole string.
 .. highlight:: bash
 
 Unfortunately, the default command-line prompt of Microsoft Windows
-**doesn't support single-quote characters**. If you execute a cURL
+**doesn't support single-quote characters**. If you copy/paste a cURL
 command-line from this page that mixes single-quote and double-quotes,
 you'll have to replace single-quotes by double-quotes, and prefix the
 double-quotes by a backslash character. For instance, consider the
