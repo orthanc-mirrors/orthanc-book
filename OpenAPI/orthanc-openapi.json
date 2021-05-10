@@ -455,7 +455,7 @@
             "description" : "Delete an attachment associated with the given DICOM instance. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -2196,7 +2196,7 @@
             "description" : "Delete some metadata associated with the given DICOM instance. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -4632,7 +4632,7 @@
             "description" : "Delete an attachment associated with the given DICOM patient. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -5740,7 +5740,7 @@
             "description" : "Delete some metadata associated with the given DICOM patient. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -7916,7 +7916,7 @@
             "description" : "Delete an attachment associated with the given DICOM series. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -8859,7 +8859,7 @@
             "description" : "Delete some metadata associated with the given DICOM series. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -10174,7 +10174,7 @@
             "description" : "Delete an attachment associated with the given DICOM study. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the attachment, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,
@@ -11372,7 +11372,7 @@
             "description" : "Delete some metadata associated with the given DICOM study. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).",
             "parameters" : [
                {
-                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevision` option is `true`.",
+                  "description" : "Revision of the metadata, to check if its content has not changed and can be deleted. This header is mandatory if `CheckRevisions` option is `true`.",
                   "in" : "header",
                   "name" : "If-Match",
                   "required" : false,

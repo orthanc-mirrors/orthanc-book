@@ -368,7 +368,7 @@ simultaneously. To avoid such problems, Orthanc implements a so-called
 
 The revision mechanism is optional, was introduced in **Orthanc
 1.9.2** and must be enabled by setting :ref:`configuration option
-<configuration>` ``CheckRevision`` to ``true``. It is strongly
+<configuration>` ``CheckRevisions`` to ``true``. It is strongly
 inspired by the `CouchDB API
 <https://docs.couchdb.org/en/stable/api/document/common.html>`__.
 
