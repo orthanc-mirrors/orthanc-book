@@ -220,5 +220,14 @@ please check out the :ref:`documentation for PostgreSQL
 Scalability
 ^^^^^^^^^^^
 
-When configuring your MySQL plugin, ensure you've read the :ref:`scalability section 
-<scalability>`
+When configuring your MySQL plugin, ensure you've read the
+:ref:`scalability section <scalability>`
+
+
+Backup
+------
+
+The MySQL plugin uses stored routines (i.e. functions/procedures) that
+are not archived by default by the ``mysqldump`` tool. As a
+consequence, make sure to add the ``--routines`` command-line flag to
+also archive such routines in your backup.
