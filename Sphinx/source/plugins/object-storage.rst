@@ -136,15 +136,16 @@ Sample configuration::
   "AwsS3Storage" : {
   	"BucketName": "test-orthanc-s3-plugin",
     "Region" : "eu-central-1",
-    "AccessKey" : "AKXXX",
-    "SecretKey" : "RhYYYY",
-    "Endpoint": "",                           // custom endpoint
-    "ConnectionTimeout": 30,                  // connection timeout in seconds
-    "RequestTimeout": 1200,                   // request timeout in seconds (max time to upload/download a file)
-    "RootPath": "",                           // see below
-    "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat",               // see below
-    "VirtualAddressing": true                 // see the section related to MinIO
+    "AccessKey" : "AKXXX",                    // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
+    "SecretKey" : "RhYYYY",                   // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
+    "Endpoint": "",                           // optional: custom endpoint
+    "ConnectionTimeout": 30,                  // optional: connection timeout in seconds
+    "RequestTimeout": 1200,                   // optional: request timeout in seconds (max time to upload/download a file)
+    "RootPath": "",                           // optional: see below
+    "MigrationFromFileSystemEnabled": false,  // optional: see below
+    "StorageStructure": "flat",               // optional: see below
+    "VirtualAddressing": true,                // optional: see the section related to MinIO
+    "StorageEncryption" : {}                  // optional: see the section related to encryption
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
