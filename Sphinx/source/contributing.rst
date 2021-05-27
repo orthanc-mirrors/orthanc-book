@@ -18,10 +18,10 @@ Contributing to Orthanc
           * **Orthanc Core**:
 
             - :ref:`Improved Web user interface <improving-interface>`
-          
+            - Support of DICOM C-GET SCU
+   
           * **Stone Web viewer**:
      
-            - Annotations/measurements
             - Internationalization/translations
             - MPR volume rendering
             - Viewer dedicated to nuclear medicine and radiotherapy
@@ -29,7 +29,7 @@ Contributing to Orthanc
 
           * **Plugins**:
 
-            - Support of MSSQL databases
+            - Support of ODBC driver (notably for MSSQL databases)
             - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
