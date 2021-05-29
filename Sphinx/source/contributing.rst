@@ -21,7 +21,8 @@ Contributing to Orthanc
             - Support of DICOM C-GET SCU
    
           * **Stone Web viewer**:
-     
+
+            - Save/load annotations
             - Internationalization/translations
             - MPR volume rendering
             - Viewer dedicated to nuclear medicine and radiotherapy
