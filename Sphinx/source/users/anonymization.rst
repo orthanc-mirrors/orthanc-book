@@ -17,8 +17,9 @@ Anonymization of a Single Instance
 
 Orthanc allows to anonymize a single DICOM instance and to download
 the resulting anonymized DICOM file. Anonymization consists in erasing
-all the tags that are specified in Table E.1-1 from PS 3.15 of the
-DICOM standard 2008 or 2017c (default). Example::
+all the tags that are specified in `Table E.1-1 from PS 3.15
+<http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html#table_E.1-1>`__
+of the DICOM standard 2008, 2017c or 2021b (default). Example::
 
     $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{}' > Anonymized.dcm
 
@@ -58,10 +59,17 @@ Explanations:
   the anonymization process. The default behavior consists in removing
   the private tags, as such tags can contain patient-specific
   information.
-* ``DicomVersion`` specifies which version of the DICOM standard shall be used
-  for anonymization.  Allowed values are ``2008`` and ``2017c`` (default value 
-  if the parameter is absent).  This parameter has been introduced in Orthanc 
-  1.3.0.  In earlier version, the ``2008`` standard was used.
+* ``DicomVersion`` specifies which version of the DICOM standard shall
+  be used for anonymization.  Allowed values are ``2008``, ``2017c``,
+  or ``2021b`` (default value is ``2021b`` if the parameter is
+  absent). This parameter has been introduced in Orthanc 1.3.0. In
+  earlier version, the ``2008`` standard was used.
+
+
+**Implementation:** Internally, the setup of the anonymization
+profiles can be found in the methods ``SetupAnonymizationXXX()`` of
+the class ``Orthanc::DicomModification`` (cf. `source code
+<https://hg.orthanc-server.com/orthanc/file/tip/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
@@ -259,7 +267,7 @@ arguments of this ``/studies/{study}/split`` URI:
 * ``KeepSource`` (Boolean value), if set to ``true``, instructs
   Orthanc to keep a copy of the original series in the source study.
   By default, the original series are deleted from Orthanc.
-
+  
 .. _merge:
 
 Merging
