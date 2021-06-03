@@ -60,10 +60,11 @@ Explanations:
   the private tags, as such tags can contain patient-specific
   information.
 * ``DicomVersion`` specifies which version of the DICOM standard shall
-  be used for anonymization.  Allowed values are ``2008``, ``2017c``,
-  or ``2021b`` (default value is ``2021b`` if the parameter is
-  absent). This parameter has been introduced in Orthanc 1.3.0. In
-  earlier version, the ``2008`` standard was used.
+  be used for anonymization. Allowed values are ``2008``, ``2017c``,
+  or ``2021b`` (new in Orthanc 1.9.4). This parameter has been
+  introduced in Orthanc 1.3.0. In earlier version, the ``2008``
+  standard was used. If the parameter is absent, the highest version
+  that is supported by Orthanc is used.
 
 
 **Implementation:** Internally, the setup of the anonymization
