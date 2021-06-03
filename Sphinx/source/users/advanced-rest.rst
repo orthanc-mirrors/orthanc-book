@@ -77,9 +77,11 @@ executed first. By default, the priority is set to zero.
 
 Despite being more complex to handle, the asynchronous mode is highly
 recommended for jobs whose execution time can last over a dozen of
-seconds (typically, the creation of an archive or a network transfer).
-Indeed, synchronous calls can be affected by timeouts in the HTTP
-protocol if they last too long.
+seconds (typically, the creation of an archive if
+``SynchronousZipStream`` :ref:`configuration option <configuration>`
+is set to ``false``, or a network transfer).  Indeed, synchronous
+calls can be affected by timeouts in the HTTP protocol if they last
+too long.
 
 
 .. _jobs-monitoring:
