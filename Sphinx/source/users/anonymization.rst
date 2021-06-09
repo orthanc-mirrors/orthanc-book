@@ -40,7 +40,7 @@ a JSON body::
                 "DicomVersion" : "2017c"
               }' > Anonymized.dcm
 
-Explanations:
+**Explanations:**
 
 * New UUIDs are automatically generated for the study, the series and
   the instance.
@@ -65,12 +65,21 @@ Explanations:
   introduced in Orthanc 1.3.0. In earlier version, the ``2008``
   standard was used. If the parameter is absent, the highest version
   that is supported by Orthanc is used.
+* ``Remove`` can also be used to provide a list of tags to be manually
+  deleted.
 
+**Important:** Starting with Orthanc 1.9.4, the ``Replace``, ``Keep``
+and ``Remove`` fields can also specify sequences, using the same
+syntax as the ``dcmodify`` command-line tool (wildcards are supported
+as well). Earlier versions were limited to top-level tags in the DICOM
+dataset. Check out the integration test ``test_modify_subsequences``
+for `examples
+<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
 
 **Implementation:** Internally, the setup of the anonymization
 profiles can be found in the methods ``SetupAnonymizationXXX()`` of
 the class ``Orthanc::DicomModification`` (cf. `source code
-<https://hg.orthanc-server.com/orthanc/file/tip/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.3/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
@@ -94,7 +103,7 @@ file. Example::
                 "Transcode": "1.2.840.10008.1.2.4.70"
               }' > Modified.dcm
 
-Remarks:
+**Remarks:**
 
 * The ``Remove`` array specifies the list of the tags to remove.
 * The ``Replace`` associative array specifies the substitions to be applied (cf. anonymization).
@@ -109,7 +118,7 @@ Remarks:
   modification to one of the ``PatientID``, ``StudyInstanceUID``,
   ``SeriesInstanceUID``, and ``SOPInstanceUID`` requires ``Force`` to
   be set to ``true``, in order to prevent any unwanted side effect.     
-
+  
 .. highlight:: json
 
 * To replace a sequence of tags, you may use this syntax:: 
@@ -139,6 +148,16 @@ Remarks:
         ]
       }
     }
+
+
+**Important:** Similarly to anonymization, starting with Orthanc
+1.9.4, the ``Replace``, ``Keep`` and ``Remove`` fields can also
+specify sequences, using the same syntax as the ``dcmodify``
+command-line tool (wildcards are supported as well). Earlier versions
+were limited to top-level tags in the DICOM dataset. Check out the
+integration test ``test_modify_subsequences`` for `examples
+<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
+
 
 .. _study-modification:
 
