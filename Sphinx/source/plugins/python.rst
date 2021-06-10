@@ -834,7 +834,7 @@ implemented using `Node.js
   
 .. _python_create_dicom:
 
-Creating DICOM instances (new in 3.1)
+Creating DICOM instances (new in 3.2)
 .....................................
 
 .. highlight:: python
