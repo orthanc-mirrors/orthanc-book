@@ -923,6 +923,12 @@ reproduces the values provided by the SCU::
   I: (0010,0010) PN [HELLO2-TEST ]                           #  12, 1 PatientName
   I: 
 
+A more realistic Python script could for instance call the route
+``/modalities/{...}/query`` in the :ref:`REST API <rest-find-scu>` of
+Orthanc using ``orthanc.RestApiPost()``, in order to query the content
+a remote modality through a second C-FIND SCU request (this time
+issued by Orthanc as a SCU).
+  
 The C-MOVE SCP can be invoked as follows::
   
   $ movescu localhost 4242 -aem TARGET -aec LL -aet ORTHANC -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4

@@ -756,6 +756,7 @@ To perform a query of a remote modality you must define the modality
 within the :ref:`configuration file <configuration>` (See
 Configuration section under Sending resources to remote modalities).
 
+.. _rest-find-scu:
 
 Performing Queries on Modalities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
