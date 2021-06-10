@@ -222,7 +222,7 @@ REST API::
 
   import orthanc
   import pprint
-
+  
   def OnRest(output, uri, **request):
       pprint.pprint(request)
       print('Accessing uri: %s' % uri)
@@ -260,20 +260,20 @@ Listening to changes
 This sample uploads a DICOM file as soon as Orthanc is started::
 
    import orthanc
-
+   
    def OnChange(changeType, level, resource):
        if changeType == orthanc.ChangeType.ORTHANC_STARTED:
            print('Started')
-
+           
            with open('/tmp/sample.dcm', 'rb') as f:
                orthanc.RestApiPost('/instances', f.read())
-        
+               
         elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
             print('Stopped')
-
+            
         elif changeType == orthanc.ChangeType.NEW_INSTANCE:
             print('A new instance was uploaded: %s' % resource)
-
+            
     orthanc.RegisterOnChangeCallback(OnChange)
 
 
@@ -832,7 +832,45 @@ implemented using `Node.js
   http.createServer(requestListener).listen(8000);
 
   
+.. _python_create_dicom:
 
+Creating DICOM instances (new in 3.1)
+.....................................
+
+.. highlight:: python
+
+The following sample Python script will write on the disk a new DICOM
+instance including the traditional Lena sample image, and will decode
+the single frame of this DICOM instance::
+
+  import json
+  import orthanc
+  
+  def OnChange(changeType, level, resource):
+      if changeType == orthanc.ChangeType.ORTHANC_STARTED:
+          tags = {
+              'SOPClassUID' : '1.2.840.10008.5.1.4.1.1.1',
+              'PatientID' : 'HELLO',
+              'PatientName' : 'WORLD',
+              }
+              
+          with open('Lena.png', 'rb') as f:
+              img = orthanc.UncompressImage(f.read(), orthanc.ImageFormat.PNG)
+              
+          s = orthanc.CreateDicom(json.dumps(tags), img, orthanc.CreateDicomFlags.GENERATE_IDENTIFIERS)
+          
+          with open('/tmp/sample.dcm', 'wb') as f:
+              f.write(s)
+              
+          dicom = orthanc.CreateDicomInstance(s)
+          frame = dicom.GetInstanceDecodedFrame(0)
+          print('Size of the frame: %dx%d' % (frame.GetImageWidth(), frame.GetImageHeight()))
+          
+  orthanc.RegisterOnChangeCallback(OnChange)
+
+
+
+  
 
 Performance and concurrency
 ---------------------------
