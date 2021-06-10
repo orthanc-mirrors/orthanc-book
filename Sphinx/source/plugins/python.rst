@@ -66,7 +66,7 @@ Usage
 Docker
 ......
 
-.. highlight:: json
+.. highlight:: python
 
 The most direct way of starting Orthanc together with the Python
 plugin is through :ref:`Docker <docker>`. Let's create the file
@@ -760,8 +760,8 @@ description.
 
 .. _python_authorization:
 
-Forbid or allow access to REST resources (authorization)
-........................................................
+Forbid or allow access to REST resources (authorization, new in 3.0)
+....................................................................
 
 .. highlight:: python
 
@@ -869,7 +869,85 @@ the single frame of this DICOM instance::
   orthanc.RegisterOnChangeCallback(OnChange)
 
 
+.. _python_dicom_scp:
 
+Handling DICOM SCP requests (new in 3.2)
+........................................
+
+.. highlight:: python
+
+Starting with release 3.2 of the Python plugin, it is possible to
+replace the C-FIND SCP and C-MOVE SCP of Orthanc by a Python
+script. This feature can notably be used to create a custom DICOM
+proxy. Here is a minimal example::
+
+  import json
+  import orthanc
+  import pprint
+  
+  def OnFind(answers, query, issuerAet, calledAet):
+      print('Received incoming C-FIND request from %s:' % issuerAet)
+  
+      answer = {}
+      for i in range(query.GetFindQuerySize()):
+          print('  %s (%04x,%04x) = [%s]' % (query.GetFindQueryTagName(i),
+                                             query.GetFindQueryTagGroup(i),
+                                             query.GetFindQueryTagElement(i),
+                                             query.GetFindQueryValue(i)))
+          answer[query.GetFindQueryTagName(i)] = ('HELLO%d-%s' % (i, query.GetFindQueryValue(i)))
+  
+      answers.FindAddAnswer(orthanc.CreateDicom(
+          json.dumps(answer), None, orthanc.CreateDicomFlags.NONE))
+  
+  def OnMove(**request):
+      orthanc.LogWarning('C-MOVE request to be handled in Python: %s' %
+                         json.dumps(request, indent = 4, sort_keys = True))
+  
+  orthanc.RegisterFindCallback(OnFind)
+  orthanc.RegisterMoveCallback(OnMove)
+
+.. highlight:: text
+  
+In this sample, the C-FIND SCP will send one single answer that
+reproduces the values provided by the SCU::
+
+  $ findscu localhost 4242 -aet ORTHANC -S -k QueryRetrieveLevel=STUDY -k PatientName=TEST -k SeriesDescription=
+  I: ---------------------------
+  I: Find Response: 1 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0008,0052) CS [HELLO0-STUDY]                           #  12, 1 QueryRetrieveLevel
+  I: (0008,103e) LO [HELLO1- ]                               #   8, 1 SeriesDescription
+  I: (0010,0010) PN [HELLO2-TEST ]                           #  12, 1 PatientName
+  I: 
+
+The C-MOVE SCP can be invoked as follows::
+  
+  $ movescu localhost 4242 -aem TARGET -aec LL -aet ORTHANC -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
+
+The C-MOVE request above would print the following information in the
+Orthanc logs::
+
+  W0610 18:30:36.840865 PluginsManager.cpp:168] C-MOVE request to be handled in Python: {
+      "AccessionNumber": "", 
+      "Level": "INSTANCE", 
+      "OriginatorAET": "ORTHANC", 
+      "OriginatorID": 1, 
+      "PatientID": "", 
+      "SOPInstanceUID": "", 
+      "SeriesInstanceUID": "", 
+      "SourceAET": "LL", 
+      "StudyInstanceUID": "1.2.3.4", 
+      "TargetAET": "TARGET"
+  }
+
+It is now up to your Python callback to proces the C-MOVE SCU request,
+for instance by calling the route ``/modalities/{...}/store`` in the
+:ref:`REST API <rest-store-scu>` of Orthanc using
+``orthanc.RestApiPost()``.
+  
   
 
 Performance and concurrency
