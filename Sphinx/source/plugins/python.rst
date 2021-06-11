@@ -16,15 +16,15 @@ This plugin can be used to write :ref:`Orthanc plugins
 instead of the more complex C/C++ programming languages.
 
 Python plugins have access to more features and a more consistent SDK
-than :ref:`Lua scripts <lua>`. The Python API is automatically
-generated from the `Orthanc plugin SDK in C
+than :ref:`Lua scripts <lua>`. The largest part of the Python API is
+automatically generated from the `Orthanc plugin SDK in C
 <https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.3/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
-As of release 2.0 of the plugin, the coverage of the C SDK is about
-75% (119 functions are automatically wrapped in Python out of a total
-of 157 functions in the Orthanc SDK 1.7.2).
+As of release 3.2 of the plugin, the coverage of the C SDK is about
+87% (138 functions are automatically wrapped in Python out of a total
+of 158 functions from the Orthanc SDK 1.8.1).
 
 
 Source code
