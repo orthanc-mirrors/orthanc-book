@@ -215,21 +215,11 @@ Samples
 Extending the REST API
 ......................
 
-.. highlight:: python
-
 Here is a basic Python script that registers two new routes in the
-REST API::
+REST API:
 
-  import orthanc
-  import pprint
-  
-  def OnRest(output, uri, **request):
-      pprint.pprint(request)
-      print('Accessing uri: %s' % uri)
-      output.AnswerBuffer('ok\n', 'text/plain')
-    
-  orthanc.RegisterRestCallback('/(to)(t)o', OnRest)
-  orthanc.RegisterRestCallback('/tata', OnRest)
+.. literalinclude:: python/extending-rest-api.py
+                    :language: python
 
 .. highlight:: json
 
@@ -255,27 +245,10 @@ The route can then be accessed as::
 Listening to changes
 ....................
 
-.. highlight:: python
+This sample uploads a DICOM file as soon as Orthanc is started:
 
-This sample uploads a DICOM file as soon as Orthanc is started::
-
-   import orthanc
-   
-   def OnChange(changeType, level, resource):
-       if changeType == orthanc.ChangeType.ORTHANC_STARTED:
-           print('Started')
-           
-           with open('/tmp/sample.dcm', 'rb') as f:
-               orthanc.RestApiPost('/instances', f.read())
-               
-        elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
-            print('Stopped')
-            
-        elif changeType == orthanc.ChangeType.NEW_INSTANCE:
-            print('A new instance was uploaded: %s' % resource)
-            
-    orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/listening-changes.py
+                    :language: python
 
 
 .. warning::
@@ -289,22 +262,10 @@ As a **temporary workaround** against such deadlocks in releases <=
 these calls in a separate thread, passing the pending events to be
 processed through a message queue. Here is the template of a possible
 solution to postpone such deadlocks as much as possible by relying on
-the multithreading primitives of Python::
+the multithreading primitives of Python:
 
-  import orthanc
-  import threading
-
-  def OnChange(changeType, level, resource):
-      # One can safely invoke the "orthanc" module in this function
-      orthanc.LogWarning("Hello world")
-  
-  def _OnChange(changeType, level, resource):
-      # Invoke the actual "OnChange()" function in a separate thread
-      t = threading.Timer(0, function = OnChange, args = (changeType, level, resource))
-      t.start()
-
-  orthanc.RegisterOnChangeCallback(_OnChange)
-
+.. literalinclude:: python/changes-deadlock-3.0.py
+                    :language: python
 
 Beware that **this workaround is imperfect** and deadlocks have been
 observed even if using it! Make sure to upgrade your plugin to solve
@@ -316,31 +277,8 @@ in releases >= 3.1 of the plugin.
 Accessing the content of a new instance
 .......................................
 
-.. highlight:: python
-
-::
-   
-  import orthanc
-  import json
-  import pprint
-
-  def OnStoredInstance(dicom, instanceId):
-      print('Received instance %s of size %d (transfer syntax %s, SOP class UID %s)' % (
-          instanceId, dicom.GetInstanceSize(),
-          dicom.GetInstanceMetadata('TransferSyntax'),
-          dicom.GetInstanceMetadata('SopClassUid')))
-
-      # Print the origin information
-      if dicom.GetInstanceOrigin() == orthanc.InstanceOrigin.DICOM_PROTOCOL:
-          print('This instance was received through the DICOM protocol')
-      elif dicom.GetInstanceOrigin() == orthanc.InstanceOrigin.REST_API:
-          print('This instance was received through the REST API')
-
-      # Print the DICOM tags
-      pprint.pprint(json.loads(dicom.GetInstanceSimplifiedJson()))
-
-  orthanc.RegisterOnStoredInstanceCallback(OnStoredInstance)
-
+.. literalinclude:: python/accessing-new-instance.py
+                    :language: python
 
 .. warning::
    Your callback function will be called synchronously with
@@ -357,34 +295,16 @@ Accessing the content of a new instance
 Calling pydicom
 ...............
 
-.. highlight:: python
-
 Here is a sample Python plugin that registers a REST callback to dump
 the content of the dataset of one given DICOM instance stored in
-Orthanc, using `pydicom <https://pydicom.github.io/>`__::
-  
-  import io
-  import orthanc
-  import pydicom
+Orthanc, using `pydicom <https://pydicom.github.io/>`__:
 
-  def DecodeInstance(output, uri, **request):
-      if request['method'] == 'GET':
-          # Retrieve the instance ID from the regular expression (*)
-          instanceId = request['groups'][0]
-          # Get the content of the DICOM file
-          f = orthanc.GetDicomForInstance(instanceId)
-          # Parse it using pydicom
-          dicom = pydicom.dcmread(io.BytesIO(f))
-          # Return a string representation the dataset to the caller
-          output.AnswerBuffer(str(dicom), 'text/plain')
-      else:
-          output.SendMethodNotAllowed('GET')
-
-  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+.. literalinclude:: python/pydicom.py
+                    :language: python
 
 .. highlight:: bash
 
-This can be called as follows::
+This callback can be called as follows::
   
   $ curl http://localhost:8042/pydicom/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5
   
@@ -392,68 +312,25 @@ This can be called as follows::
 Auto-routing studies
 ....................
 
-.. highlight:: python
-
 Here is a sample Python plugin that routes any :ref:`stable study
 <stable-resources>` to a modality named ``samples`` (as declared in the
-``DicomModalities`` configuration option)::
+``DicomModalities`` configuration option):
   
-  import orthanc
-
-  def OnChange(changeType, level, resourceId):
-      if changeType == orthanc.ChangeType.STABLE_STUDY:
-          print('Stable study: %s' % resourceId)
-          orthanc.RestApiPost('/modalities/sample/store', resourceId)
-
-  orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/autorouting-1.py
+                    :language: python
 
 Note that, if you want to use an orthanc plugin to transfer the study,
-you should use the ``RestApiPostAfterPlugins()`` method::
+you should use the ``RestApiPostAfterPlugins()`` method:
 
-  import orthanc
-
-  def OnChange(changeType, level, resourceId):
-      if changeType == orthanc.ChangeType.STABLE_STUDY:
-          print('Stable study: %s' % resourceId)
-          orthanc.RestApiPostAfterPlugins('/dicom-web/servers/sample/store', resourceId)
-
-  orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/autorouting-2.py
+                    :language: python
+                               
 
 Rendering a thumbnail using PIL/Pillow
 ......................................
 
-.. highlight:: python
-
-::
-   
-  from PIL import Image
-  import io
-  import orthanc
-
-  def DecodeInstance(output, uri, **request):
-      if request['method'] == 'GET':
-          # Retrieve the instance ID from the regular expression (*)
-          instanceId = request['groups'][0]
-
-          # Render the instance, then open it in Python using PIL/Pillow
-          png = orthanc.RestApiGet('/instances/%s/rendered' % instanceId)
-          image = Image.open(io.BytesIO(png))
-
-          # Downsize the image as a 64x64 thumbnail
-          image.thumbnail((64, 64), Image.ANTIALIAS)
-
-          # Save the thumbnail as JPEG, then send the buffer to the caller
-          jpeg = io.BytesIO()
-          image.save(jpeg, format = "JPEG", quality = 80)
-          jpeg.seek(0)
-          output.AnswerBuffer(jpeg.read(), 'text/plain')
-
-      else:
-          output.SendMethodNotAllowed('GET')
-
-  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+.. literalinclude:: python/pil.py
+                    :language: python
 
 
 .. _python-introspection:
@@ -461,34 +338,14 @@ Rendering a thumbnail using PIL/Pillow
 Inspecting the available API
 ............................
 
-.. highlight:: python
-
 Thanks to Python's introspection primitives, it is possible to inspect
 the API of the ``orthanc`` module in order to dump all the available
-features::
+features:
 
-  import inspect
-  import numbers
-  import orthanc
+.. literalinclude:: python/inspect-api.py
+                    :language: python
 
-  # Loop over the members of the "orthanc" module
-  for (name, obj) in inspect.getmembers(orthanc):
-      if inspect.isroutine(obj):
-          print('Function %s():\n  Documentation: %s\n' % (name, inspect.getdoc(obj)))
-
-      elif inspect.isclass(obj):
-          print('Class %s:\n  Documentation: %s' % (name, inspect.getdoc(obj)))
-
-          # Loop over the members of the class
-          for (subname, subobj) in inspect.getmembers(obj):
-              if isinstance(subobj, numbers.Number):
-                  print('  - Enumeration value %s: %s' % (subname, subobj))
-              elif (not subname.startswith('_') and
-                    inspect.ismethoddescriptor(subobj)):
-                  print('  - Method %s(): %s' % (subname, inspect.getdoc(subobj)))
-          print('')
-
-
+                               
 .. _python-scheduler:
 
 Scheduling a task for periodic execution
