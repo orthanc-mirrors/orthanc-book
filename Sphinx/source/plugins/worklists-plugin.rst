@@ -29,6 +29,10 @@ distribution of Orthanc
 <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ModalityWorklists/>`__
 (GPLv3+ license).
 
+Note that it is possible to reproduce the features of this sample
+using :ref:`Python plugins <python_worklists>`.
+
+
 
 Basic configuration
 -------------------

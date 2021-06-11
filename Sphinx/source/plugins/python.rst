@@ -963,10 +963,11 @@ Handling worklist SCP requests (new in 3.2)
 ...........................................
 
 Starting with release 3.2 of the Python plugin, it is possible to
-answer worklist queries using a Python script. This is especially
-useful to create a bridge between Orthanc, HL7 messages and RIS
-systems. Indeed, Python provides many tools to handle HL7 such as
-`python-hl7 library <https://python-hl7.readthedocs.io/en/latest/>`__.
+answer :ref:`worklist queries <worklist>` using a Python script. This
+is especially useful to easily create a bridge between Orthanc,
+HL7/FHIR messages and RIS systems. Indeed, Python provides many tools
+to handle HL7 such as `python-hl7 library
+<https://python-hl7.readthedocs.io/en/latest/>`__.
 
 The following Python script reproduces features similar to the
 :ref:`sample modality worklists plugin <worklists-plugin>`:
@@ -974,6 +975,37 @@ The following Python script reproduces features similar to the
 .. literalinclude:: python/worklist.py
                     :language: python
 
+.. highlight:: text
+  
+Here is the result of this plugin on a sample call::
+
+  $ findscu -W -k "ScheduledProcedureStepSequence[0].Modality=MR" 127.0.0.1 4242
+  I: ---------------------------
+  I: Find Response: 1 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0040,0100) SQ (Sequence with explicit length #=1)      #  18, 1 ScheduledProcedureStepSequence
+  I:   (fffe,e000) na (Item with explicit length #=1)          #  10, 1 Item
+  I:     (0008,0060) CS [MR]                                     #   2, 1 Modality
+  I:   (fffe,e00d) na (ItemDelimitationItem for re-encoding)   #   0, 0 ItemDelimitationItem
+  I: (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
+  I: 
+  I: ---------------------------
+  I: Find Response: 2 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0040,0100) SQ (Sequence with explicit length #=1)      #  18, 1 ScheduledProcedureStepSequence
+  I:   (fffe,e000) na (Item with explicit length #=1)          #  10, 1 Item
+  I:     (0008,0060) CS [MR]                                     #   2, 1 Modality
+  I:   (fffe,e00d) na (ItemDelimitationItem for re-encoding)   #   0, 0 ItemDelimitationItem
+  I: (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
+  I:
+
+                               
 
 Performance and concurrency
 ---------------------------
