@@ -515,8 +515,9 @@ two functions can be used to do bidirectional conversions between
 Orthanc images and Python images.
 
 Here is a full working example using PIL/Pillow that shows how to
-decode a DICOM instance using Orthanc, then to modify this image using
-PIL, and finally to upload the modified image as a new DICOM instance:
+decode one frame of a DICOM instance using Orthanc, then to modify
+this image using PIL, and finally to upload the modified image as a
+new DICOM instance:
 
 .. literalinclude:: python/pil-conversions.py
                     :language: python
