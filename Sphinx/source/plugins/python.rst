@@ -911,7 +911,7 @@ proxy. Here is a minimal example::
 In this sample, the C-FIND SCP will send one single answer that
 reproduces the values provided by the SCU::
 
-  $ findscu localhost 4242 -aet ORTHANC -S -k QueryRetrieveLevel=STUDY -k PatientName=TEST -k SeriesDescription=
+  $ findscu localhost 4242 -S -k QueryRetrieveLevel=STUDY -k PatientName=TEST -k SeriesDescription=
   I: ---------------------------
   I: Find Response: 1 (Pending)
   I: 
@@ -931,7 +931,7 @@ issued by Orthanc as a SCU).
   
 The C-MOVE SCP can be invoked as follows::
   
-  $ movescu localhost 4242 -aem TARGET -aec LL -aet ORTHANC -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
+  $ movescu localhost 4242 -aem TARGET -aec SOURCE -aet MOVESCU -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
 
 The C-MOVE request above would print the following information in the
 Orthanc logs::
@@ -939,12 +939,12 @@ Orthanc logs::
   W0610 18:30:36.840865 PluginsManager.cpp:168] C-MOVE request to be handled in Python: {
       "AccessionNumber": "", 
       "Level": "INSTANCE", 
-      "OriginatorAET": "ORTHANC", 
+      "OriginatorAET": "MOVESCU", 
       "OriginatorID": 1, 
       "PatientID": "", 
       "SOPInstanceUID": "", 
       "SeriesInstanceUID": "", 
-      "SourceAET": "LL", 
+      "SourceAET": "SOURCE", 
       "StudyInstanceUID": "1.2.3.4", 
       "TargetAET": "TARGET"
   }
