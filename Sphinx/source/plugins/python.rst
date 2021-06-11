@@ -351,35 +351,11 @@ features:
 Scheduling a task for periodic execution
 ........................................
 
-.. highlight:: python
-
 The following Python script will periodically (every second) run the
-function ``Hello()`` thanks to the ``threading`` module::
+function ``Hello()`` thanks to the ``threading`` module:
 
-  import orthanc
-  import threading
-
-  TIMER = None
-
-  def Hello():
-      global TIMER
-      TIMER = None
-      orthanc.LogWarning("In Hello()")
-      # Do stuff...
-      TIMER = threading.Timer(1, Hello)  # Re-schedule after 1 second
-      TIMER.start()
-
-  def OnChange(changeType, level, resource):
-      if changeType == orthanc.ChangeType.ORTHANC_STARTED:
-          orthanc.LogWarning("Starting the scheduler")
-          Hello()
-
-      elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
-          if TIMER != None:
-              orthanc.LogWarning("Stopping the scheduler")
-              TIMER.cancel()
-
-  orthanc.RegisterOnChangeCallback(OnChange)
+.. literalinclude:: python/periodic-execution.py
+                    :language: python
 
 
 .. _python-metadata:
@@ -399,83 +375,11 @@ indexed in the Orthanc database, contrarily to the main DICOM
 tags. Filtering metadata requires a linear search over all the
 matching resources, which induces a cost in the performance.
 
-.. highlight:: python
-
 Nevertheless, here is a full sample Python script that overwrites the
-``/tools/find`` route in order to give access to metadata::
+``/tools/find`` route in order to give access to metadata:
 
-  import json
-  import orthanc
-  import re
-
-  # Get the path in the REST API to the given resource that was returned
-  # by a call to "/tools/find"
-  def GetPath(resource):
-      if resource['Type'] == 'Patient':
-          return '/patients/%s' % resource['ID']
-      elif resource['Type'] == 'Study':
-          return '/studies/%s' % resource['ID']
-      elif resource['Type'] == 'Series':
-          return '/series/%s' % resource['ID']
-      elif resource['Type'] == 'Instance':
-          return '/instances/%s' % resource['ID']
-      else:
-          raise Exception('Unknown resource level')
-
-  def FindWithMetadata(output, uri, **request):
-      # The "/tools/find" route expects a POST method
-      if request['method'] != 'POST':
-          output.SendMethodNotAllowed('POST')
-      else:
-          # Parse the query provided by the user, and backup the "Expand" field
-          query = json.loads(request['body'])       
-
-          if 'Expand' in query:
-              originalExpand = query['Expand']
-          else:
-              originalExpand = False
-
-          # Call the core "/tools/find" route
-          query['Expand'] = True
-          answers = orthanc.RestApiPost('/tools/find', json.dumps(query))
-
-          # Loop over the matching resources
-          filteredAnswers = []
-          for answer in json.loads(answers):
-              try:
-                  # Read the metadata that is associated with the resource
-                  metadata = json.loads(orthanc.RestApiGet('%s/metadata?expand' % GetPath(answer)))
-
-                  # Check whether the metadata matches the regular expressions
-                  # that were provided in the "Metadata" field of the user request
-                  isMetadataMatch = True
-                  if 'Metadata' in query:
-                      for (name, pattern) in query['Metadata'].items():
-                          if name in metadata:
-                              value = metadata[name]
-                          else:
-                              value = ''
-
-                          if re.match(pattern, value) == None:
-                              isMetadataMatch = False
-                              break
-
-                  # If all the metadata matches the provided regular
-                  # expressions, add the resource to the filtered answers
-                  if isMetadataMatch:
-                      if originalExpand:
-                          answer['Metadata'] = metadata
-                          filteredAnswers.append(answer)
-                      else:
-                          filteredAnswers.append(answer['ID'])
-              except:
-                  # The resource was deleted since the call to "/tools/find"
-                  pass
-
-          # Return the filtered answers in the JSON format
-          output.AnswerBuffer(json.dumps(filteredAnswers, indent = 3), 'application/json')
-
-  orthanc.RegisterRestCallback('/tools/find', FindWithMetadata)
+.. literalinclude:: python/filtering-metadata.py
+                    :language: python
 
 
 **Warning:** In the sample above, the filtering of the metadata is
@@ -498,54 +402,15 @@ updated in 2019 thanks to this Python script::
 Implementing basic paging
 .........................
 
-.. highlight:: python
-
 As explained in the FAQ, the :ref:`Orthanc Explorer interface is
 low-level <improving-interface>`, and is not adapted for
 end-users. One common need is to implement paging of studies, which
 calls for server-side sorting of studies. This can be done using the
 following sample Python plugin that registers a new route
-``/sort-studies`` in the REST API of Orthanc::
+``/sort-studies`` in the REST API of Orthanc:
 
- import json
- import orthanc
-
- def GetStudyDate(study):
-     if 'StudyDate' in study['MainDicomTags']:
-         return study['MainDicomTags']['StudyDate']
-     else:
-         return ''
-
- def SortStudiesByDate(output, uri, **request):
-     if request['method'] == 'GET':
-         # Retrieve all the studies
-         studies = json.loads(orthanc.RestApiGet('/studies?expand'))
-
-         # Sort the studies according to the "StudyDate" DICOM tag
-         studies = sorted(studies, key = GetStudyDate)
-
-         # Read the limit/offset arguments provided by the user
-         offset = 0
-         if 'offset' in request['get']:
-             offset = int(request['get']['offset'])
-
-         limit = 0
-         if 'limit' in request['get']:
-             limit = int(request['get']['limit'])
-
-         # Truncate the list of studies
-         if limit == 0:
-             studies = studies[offset : ]
-         else:
-             studies = studies[offset : offset + limit]
-
-         # Return the truncated list of studies
-         output.AnswerBuffer(json.dumps(studies), 'application/json')
-     else:
-         output.SendMethodNotAllowed('GET')
-
- orthanc.RegisterRestCallback('/sort-studies', SortStudiesByDate)
-
+.. literalinclude:: python/paging.py
+                    :language: python
 
 .. highlight:: bash
 
@@ -573,41 +438,12 @@ performance, one could for instance cache the result of
 Creating a Microsoft Excel report
 .................................
 
-.. highlight:: python
-
 As Orthanc plugins have access to any installed Python module, it is
 very easy to implement a server-side plugin that generates a report in
-the Microsoft Excel ``.xls`` format. Here is a working example::
+the Microsoft Excel ``.xls`` format. Here is a working example:
 
- import StringIO
- import json
- import orthanc
- import xlwt 
- 
- def CreateExcelReport(output, uri, **request):
-     if request['method'] != 'GET' :
-         output.SendMethodNotAllowed('GET')
-     else:
-         # Create an Excel writer
-         excel = xlwt.Workbook()
-         sheet = excel.add_sheet('Studies')
- 
-         # Loop over the studies stored in Orthanc
-         row = 0
-         studies = orthanc.RestApiGet('/studies?expand')
-         for study in json.loads(studies):
-             sheet.write(row, 0, study['PatientMainDicomTags'].get('PatientID'))
-             sheet.write(row, 1, study['PatientMainDicomTags'].get('PatientName'))
-             sheet.write(row, 2, study['MainDicomTags'].get('StudyDescription'))
-             row += 1
- 
-         # Serialize the Excel workbook to a string, and return it to the caller
-         # https://stackoverflow.com/a/15649139/881731
-         b = StringIO.StringIO()
-         excel.save(b)       
-         output.AnswerBuffer(b.getvalue(), 'application/vnd.ms-excel')
-
- orthanc.RegisterRestCallback('/report.xls', CreateExcelReport)
+.. literalinclude:: python/excel.py
+                    :language: python
 
 If opening the ``http://localhost:8042/report.xls`` URI, this Python
 will generate a workbook with one sheet that contains the list of
@@ -620,20 +456,12 @@ description.
 Forbid or allow access to REST resources (authorization, new in 3.0)
 ....................................................................
 
-.. highlight:: python
-
 The following Python script installs a callback that is triggered
-whenever the HTTP server of Orthanc is accessed::
+whenever the HTTP server of Orthanc is accessed:
 
-  import orthanc
-  import pprint
+.. literalinclude:: python/authorization-1.py
+                    :language: python
 
-  def Filter(uri, **request):
-      print('User trying to access URI: %s' % uri)
-      pprint.pprint(request)
-      return True  # False to forbid access
-
-  orthanc.RegisterIncomingHttpRequestFilter(Filter)
 
 If access is not granted, the ``Filter`` callback must return
 ``False``. As a consequence, the HTTP status code would be set to
@@ -646,47 +474,19 @@ Note that this is similar to the ``IncomingHttpRequestFilter()``
 callback that is available in :ref:`Lua scripts <lua-filter-rest>`.
 
 Thanks to Python, it is extremely easy to call remote Web services for
-authorization. Here is an example using the ``requests`` library::
+authorization. Here is an example using the ``requests`` library:
 
-  import json
-  import orthanc
-  import requests
-
-  def Filter(uri, **request):
-      body = {
-          'uri' : uri,
-          'headers' : request['headers']
-      }
-      r = requests.post('http://localhost:8000/authorize',
-                        data = json.dumps(body))
-      return r.json() ['granted']  # Must be a Boolean
-
-  orthanc.RegisterIncomingHttpRequestFilter(Filter)
+.. literalinclude:: python/authorization-2.py
+                    :language: python
 
 .. highlight:: javascript
 
 This filter could be used together with the following Web service
 implemented using `Node.js
-<https://en.wikipedia.org/wiki/Node.js>`__::
+<https://en.wikipedia.org/wiki/Node.js>`__:
 
-  const http = require('http');
-
-  const requestListener = function(req, res) {
-    let body = '';
-      req.on('data', function(chunk) {
-      body += chunk;
-    });
-    req.on('end', function() {
-      console.log(JSON.parse(body));
-      var answer = {
-        'granted' : false  // Forbid access
-      };
-      res.writeHead(200);
-      res.end(JSON.stringify(answer));
-    });
-  }
-
-  http.createServer(requestListener).listen(8000);
+.. literalinclude:: python/authorization-node-service.js
+                    :language: javascript
 
   
 .. _python_create_dicom:
@@ -694,36 +494,12 @@ implemented using `Node.js
 Creating DICOM instances (new in 3.2)
 .....................................
 
-.. highlight:: python
-
 The following sample Python script will write on the disk a new DICOM
 instance including the traditional Lena sample image, and will decode
-the single frame of this DICOM instance::
+the single frame of this DICOM instance:
 
-  import json
-  import orthanc
-  
-  def OnChange(changeType, level, resource):
-      if changeType == orthanc.ChangeType.ORTHANC_STARTED:
-          tags = {
-              'SOPClassUID' : '1.2.840.10008.5.1.4.1.1.1',
-              'PatientID' : 'HELLO',
-              'PatientName' : 'WORLD',
-              }
-              
-          with open('Lena.png', 'rb') as f:
-              img = orthanc.UncompressImage(f.read(), orthanc.ImageFormat.PNG)
-              
-          s = orthanc.CreateDicom(json.dumps(tags), img, orthanc.CreateDicomFlags.GENERATE_IDENTIFIERS)
-          
-          with open('/tmp/sample.dcm', 'wb') as f:
-              f.write(s)
-              
-          dicom = orthanc.CreateDicomInstance(s)
-          frame = dicom.GetInstanceDecodedFrame(0)
-          print('Size of the frame: %dx%d' % (frame.GetImageWidth(), frame.GetImageHeight()))
-          
-  orthanc.RegisterOnChangeCallback(OnChange)
+.. literalinclude:: python/create-dicom.py
+                    :language: python
 
 
 .. _python_dicom_scp:
@@ -731,37 +507,14 @@ the single frame of this DICOM instance::
 Handling DICOM SCP requests (new in 3.2)
 ........................................
 
-.. highlight:: python
-
 Starting with release 3.2 of the Python plugin, it is possible to
 replace the C-FIND SCP and C-MOVE SCP of Orthanc by a Python
 script. This feature can notably be used to create a custom DICOM
-proxy. Here is a minimal example::
+proxy. Here is a minimal example:
 
-  import json
-  import orthanc
-  import pprint
-  
-  def OnFind(answers, query, issuerAet, calledAet):
-      print('Received incoming C-FIND request from %s:' % issuerAet)
-  
-      answer = {}
-      for i in range(query.GetFindQuerySize()):
-          print('  %s (%04x,%04x) = [%s]' % (query.GetFindQueryTagName(i),
-                                             query.GetFindQueryTagGroup(i),
-                                             query.GetFindQueryTagElement(i),
-                                             query.GetFindQueryValue(i)))
-          answer[query.GetFindQueryTagName(i)] = ('HELLO%d-%s' % (i, query.GetFindQueryValue(i)))
-  
-      answers.FindAddAnswer(orthanc.CreateDicom(
-          json.dumps(answer), None, orthanc.CreateDicomFlags.NONE))
-  
-  def OnMove(**request):
-      orthanc.LogWarning('C-MOVE request to be handled in Python: %s' %
-                         json.dumps(request, indent = 4, sort_keys = True))
-  
-  orthanc.RegisterFindCallback(OnFind)
-  orthanc.RegisterMoveCallback(OnMove)
+.. literalinclude:: python/dicom-find-move-scp.py
+                    :language: python
+
 
 .. highlight:: text
   
@@ -953,8 +706,6 @@ is more targeted at dealing with costly I/O operations or with the
 
 Slave processes and the "orthanc" module
 ........................................
-
-.. highlight:: python
 
 Very importantly, pay attention to the fact that **only the "master"
 Python interpreter has access to the Orthanc SDK**. The "slave"
