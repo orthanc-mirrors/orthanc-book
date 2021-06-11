@@ -952,9 +952,28 @@ Orthanc logs::
 It is now up to your Python callback to proces the C-MOVE SCU request,
 for instance by calling the route ``/modalities/{...}/store`` in the
 :ref:`REST API <rest-store-scu>` of Orthanc using
-``orthanc.RestApiPost()``.
-  
-  
+``orthanc.RestApiPost()``. It is highly advised to create a Python
+thread to handle the request, in order to avoid blocking Orthanc as
+much as possible.
+
+
+.. _python_worklists:
+
+Handling worklist SCP requests (new in 3.2)
+...........................................
+
+Starting with release 3.2 of the Python plugin, it is possible to
+answer worklist queries using a Python script. This is especially
+useful to create a bridge between Orthanc, HL7 messages and RIS
+systems. Indeed, Python provides many tools to handle HL7 such as
+`python-hl7 library <https://python-hl7.readthedocs.io/en/latest/>`__.
+
+The following Python script reproduces features similar to the
+:ref:`sample modality worklists plugin <worklists-plugin>`:
+
+.. literalinclude:: python/worklist.py
+                    :language: python
+
 
 Performance and concurrency
 ---------------------------
