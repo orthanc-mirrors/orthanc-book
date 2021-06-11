@@ -1018,31 +1018,11 @@ latter OS has a different model for `forking processes
 Using slave processes
 .....................
 
-.. highlight:: python
-
 Let us consider the following sample Python script that makes a
-CPU-intensive computation on a REST callback::
+CPU-intensive computation on a REST callback:
 
-  import math
-  import orthanc
-  import time
-
-  # CPU-intensive computation taking about 4 seconds
-  def SlowComputation():
-      start = time.time()
-      for i in range(1000):
-          for j in range(30000):
-              math.sqrt(float(j))
-      end = time.time()
-      duration = (end - start)
-      return 'computation done in %.03f seconds\n' % duration
-
-  def OnRest(output, uri, **request):
-      answer = SlowComputation()
-      output.AnswerBuffer(answer, 'text/plain')
-
-  orthanc.RegisterRestCallback('/computation', OnRest)
-
+.. literalinclude:: python/multiprocessing-1.py
+                    :language: python
 
 .. highlight:: text
 
@@ -1074,8 +1054,6 @@ callback, only one can proceed at any given time. Note however that
 the GIL only applies to the Python script: The baseline REST API of
 Orthanc is not affected by the GIL.
 
-.. highlight:: python
-
 The solution is to use the `multiprocessing primitives
 <https://docs.python.org/3/library/multiprocessing.html>`__ of Python.
 The "master" Python interpreter that is initially started by the
@@ -1084,39 +1062,10 @@ Orthanc plugin, can start several `children processes
 processes running a separate Python interpreter. This allows to
 offload intensive computations from the "master" Python interpreter of
 Orthanc onto those "slave" interpreters. The ``multiprocessing``
-library is actually quite straightforward to use::
+library is actually quite straightforward to use:
 
-  import math
-  import multiprocessing
-  import orthanc
-  import signal
-  import time
-
-  # CPU-intensive computation taking about 4 seconds
-  # (same code as above)
-  def SlowComputation():
-      start = time.time()
-      for i in range(1000):
-          for j in range(30000):
-              math.sqrt(float(j))
-      end = time.time()
-      duration = (end - start)
-      return 'computation done in %.03f seconds\n' % duration
-
-  # Ignore CTRL+C in the slave processes
-  def Initializer():
-      signal.signal(signal.SIGINT, signal.SIG_IGN)
-
-  # Create a pool of 4 slave Python interpreters
-  POOL = multiprocessing.Pool(4, initializer = Initializer)
-
-  def OnRest(output, uri, **request):
-      # Offload the call to "SlowComputation" onto one slave process.
-      # The GIL is unlocked until the slave sends its answer back.
-      answer = POOL.apply(SlowComputation)
-      output.AnswerBuffer(answer, 'text/plain')
-
-  orthanc.RegisterRestCallback('/computation', OnRest)
+.. literalinclude:: python/multiprocessing-2.py
+                    :language: python
 
 .. highlight:: text
 
@@ -1157,22 +1106,11 @@ processes have no access to the ``orthanc`` module.
 You must write your Python plugin so as that all the calls to
 ``orthanc`` are moved from the slaves process to the master
 process. For instance, here is how you would parse a DICOM file in a
-slave process::
+slave process:
 
-  import pydicom
-  import io
+.. literalinclude:: python/multiprocessing-3.py
+                    :language: python
 
-  def OffloadedDicomParsing(dicom):
-      # No access to the "orthanc" library here, as we are in the slave process
-      dataset = pydicom.dcmread(io.BytesIO(dicom))
-      return str(dataset)
-
-  def OnRest(output, uri, **request):
-      # The call to "orthanc.RestApiGet()" is only possible in the master process
-      dicom = orthanc.RestApiGet('/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/file')
-      answer = POOL.apply(OffloadedDicomParsing, args = (dicom, ))
-      output.AnswerBuffer(answer, 'text/plain')
-      
 Communication primitives such as ``multiprocessing.Queue`` are
 available to exchange messages from the "slave" Python interpreters to
 the "master" Python interpreter for more advanced scenarios.
@@ -1184,28 +1122,7 @@ be used to create an authorization token that provides full access to
 the REST API of Orthanc (without have to set credentials in your
 plugin). Any HTTP client library for Python, such as `requests
 <https://requests.readthedocs.io/en/master/>`__, can then be used to
-access the REST API of Orthanc. Here is a minimal example::
+access the REST API of Orthanc. Here is a minimal example:
 
-  import json
-  import multiprocessing
-  import orthanc
-  import requests
-  import signal
-  
-  TOKEN = orthanc.GenerateRestApiAuthorizationToken()
-  
-  def SlaveProcess():
-      r = requests.get('http://localhost:8042/instances',
-                       headers = { 'Authorization' : TOKEN })
-      return json.dumps(r.json())
-  
-  def Initializer():
-      signal.signal(signal.SIGINT, signal.SIG_IGN)
-  
-  POOL = multiprocessing.Pool(4, initializer = Initializer)
-  
-  def OnRest(output, uri, **request):
-      answer = POOL.apply(SlaveProcess)
-      output.AnswerBuffer(answer, 'text/plain')
-  
-  orthanc.RegisterRestCallback('/computation', OnRest)
+.. literalinclude:: python/multiprocessing-4.py
+                    :language: python
