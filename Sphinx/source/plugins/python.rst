@@ -502,6 +502,26 @@ the single frame of this DICOM instance:
                     :language: python
 
 
+.. _python_pil_conversions:
+
+Conversions between Orthanc and Python images (new in 3.2)
+..........................................................
+
+The Python method ``orthanc.Image.GetImageBuffer()`` returns a copy of
+the memory buffer of an image that is handled Orthanc. Conversely, the
+Python function ``orthanc.CreateImageFromBuffer()`` can be used to
+create an Orthanc image from a Python buffer. Taken together, these
+two functions can be used to do bidirectional conversions between
+Orthanc images and Python images.
+
+Here is a full working example using PIL/Pillow that shows how to
+decode a DICOM instance using Orthanc, then to modify this image using
+PIL, and finally to upload the modified image as a new DICOM instance:
+
+.. literalinclude:: python/pil-conversions.py
+                    :language: python
+
+
 .. _python_dicom_scp:
 
 Handling DICOM SCP requests (new in 3.2)
