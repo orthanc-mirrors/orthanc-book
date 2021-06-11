@@ -479,8 +479,6 @@ authorization. Here is an example using the ``requests`` library:
 .. literalinclude:: python/authorization-2.py
                     :language: python
 
-.. highlight:: javascript
-
 This filter could be used together with the following Web service
 implemented using `Node.js
 <https://en.wikipedia.org/wiki/Node.js>`__:
@@ -489,6 +487,34 @@ implemented using `Node.js
                     :language: javascript
 
   
+.. _python_lookup_dictionary:
+
+Lookup DICOM dictionary (new in 3.2)
+....................................
+
+Python plugins can access the dictionary of the DICOM tags that are
+handled by Orthanc:
+
+.. literalinclude:: python/lookup-dictionary.py
+                    :language: python
+
+.. highlight:: text
+
+Note how Python introspection is used in order to map the values in
+enumeration ``orthanc.ValueRepresentation`` to a string description of
+the value representation. If started, the plugin above would output
+the following information in the Orthanc logs::
+
+  W0611 14:04:08.563957 PluginsManager.cpp:168] Entry in the dictionary: {
+      "Element": 32, 
+      "Group": 16, 
+      "MaxMultiplicity": 1, 
+      "MinMultiplicity": 1, 
+      "ValueRepresentation": 11
+  }
+  W0611 14:04:08.563975 PluginsManager.cpp:168] Name of the value representation: LO
+
+
 .. _python_create_dicom:
 
 Creating DICOM instances (new in 3.2)
