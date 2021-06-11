@@ -20,5 +20,8 @@ def OnMove(**request):
     orthanc.LogWarning('C-MOVE request to be handled in Python: %s' %
                        json.dumps(request, indent = 4, sort_keys = True))
 
+    # To indicate a failure in the processing, you can raise an exception:
+    #   raise Exception('Cannot handle C-MOVE')
+
 orthanc.RegisterFindCallback(OnFind)
 orthanc.RegisterMoveCallback(OnMove)
