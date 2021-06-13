@@ -606,7 +606,7 @@ Orthanc logs::
       "TargetAET": "TARGET"
   }
 
-It is now up to your Python callback to proces the C-MOVE SCU request,
+It is now up to your Python callback to process the C-MOVE SCU request,
 for instance by calling the route ``/modalities/{...}/store`` in the
 :ref:`REST API <rest-store-scu>` of Orthanc using
 ``orthanc.RestApiPost()``. It is highly advised to create a Python
