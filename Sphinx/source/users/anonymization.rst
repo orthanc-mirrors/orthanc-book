@@ -244,6 +244,71 @@ As written above, the anonymization process can be fine-tuned by using
 a JSON body.
 
 
+.. _bulk-modification:
+
+Bulk modification or anonymization
+----------------------------------
+
+Starting with Orthanc 1.9.4, it is possible to use the new routes
+``/tools/bulk-modify`` and ``/tools/bulk-anonymize`` to respectively
+modify or anonymize a set of multiple DICOM resources that are not
+related (i.e. that don't share any parent DICOM resource). A typical
+use case is to modify/anonymize a list of DICOM instances that don't
+belong to the same parent patient/study/series.
+
+.. highlight:: bash
+
+These two routes accept the same arguments as described above, but
+must also be provided with an additional argument ``Resources`` that
+lists the :ref:`Orthanc identifiers <orthanc-ids>` of the resources of
+interest (that may indifferently correspond to patients, studies,
+series or instances). Here are two sample calls::
+
+  $ curl http://localhost:8042/tools/bulk-modify -d '{"Replace":{"SeriesDescription":"HELLO"},"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+  $ curl http://localhost:8042/tools/bulk-anonymize -d '{"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+
+.. highlight:: json
+
+The output of the modification/anonymization lists all the resources
+that have been altered by the call (including their parents). Here is
+the output of the second sample above::
+
+  {
+   "Description" : "REST API",
+   "FailedInstancesCount" : 0,
+   "InstancesCount" : 2,
+   "IsAnonymization" : true,
+   "Resources" : [
+      {
+         "ID" : "04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
+         "Path" : "/instances/04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
+         "Type" : "Instance"
+      },
+      {
+         "ID" : "4e37fce9-6b33b8ba-7bb378e1-abc7e2c4-fca4ade3",
+         "Path" : "/instances/4e37fce9-6b33b8ba-7bb378e1-abc7e2c4-fca4ade3",
+         "Type" : "Instance"
+      },
+      {
+         "ID" : "6438ee62-b58a4788-517931b3-e10321eb-d1ab2613",
+         "Path" : "/series/6438ee62-b58a4788-517931b3-e10321eb-d1ab2613",
+         "Type" : "Series"
+      },
+      {
+         "ID" : "660494fd-1ddd661b-4358d996-ba600e5a-066d94cc",
+         "Path" : "/studies/660494fd-1ddd661b-4358d996-ba600e5a-066d94cc",
+         "Type" : "Study"
+      },
+      {
+         "ID" : "5faa0bf8-8a45520b-3a07e536-fc24f241-f59ae3e1",
+         "Path" : "/patients/5faa0bf8-8a45520b-3a07e536-fc24f241-f59ae3e1",
+         "Type" : "Patient"
+      }
+   ]
+}
+
+  
+
 .. _split-merge: 
 
 Split/merge of DICOM studies
