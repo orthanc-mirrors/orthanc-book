@@ -274,11 +274,11 @@ that have been altered by the call (including their parents). Here is
 the output of the second sample above::
 
   {
-   "Description" : "REST API",
-   "FailedInstancesCount" : 0,
-   "InstancesCount" : 2,
-   "IsAnonymization" : true,
-   "Resources" : [
+    "Description" : "REST API",
+    "FailedInstancesCount" : 0,
+    "InstancesCount" : 2,
+    "IsAnonymization" : true,
+    "Resources" : [
       {
          "ID" : "04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
          "Path" : "/instances/04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
@@ -304,8 +304,8 @@ the output of the second sample above::
          "Path" : "/patients/5faa0bf8-8a45520b-3a07e536-fc24f241-f59ae3e1",
          "Type" : "Patient"
       }
-   ]
-}
+    ]
+  }
 
   
 

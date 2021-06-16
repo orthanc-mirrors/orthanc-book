@@ -1127,6 +1127,20 @@ use the following command-line syntax to delete them::
     $ curl -X DELETE http://localhost:8042/instances/8e289db9-0e1437e1-3ecf395f-d8aae463-f4bb49fe
 
 
+Starting with Orthanc 1.9.4, it is also possible to ``POST`` on the
+new route ``/tools/bulk-delete`` to delete at once a set of multiple
+DICOM resources that are not related (i.e. that don't share any parent
+DICOM resource). A typical use case is to delete a list of DICOM
+instances that don't belong to the same parent patient/study/series.
+The list of the :ref:`Orthanc identifiers <orthanc-ids>` of the
+resources to be deleted (that may indifferently correspond to
+patients, studies, series or instances) must be provided in an
+argument ``Resources`` in the body of the request. Here is a sample
+call::
+
+  $ curl http://localhost:8042/tools/bulk-delete -d '{"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+
+    
 Clearing log of changes
 ^^^^^^^^^^^^^^^^^^^^^^^
 
