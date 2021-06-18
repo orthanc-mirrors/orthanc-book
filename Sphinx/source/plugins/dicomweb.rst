@@ -512,6 +512,9 @@ This page only provides some very basic examples about the use of a
 DICOMweb server. Please check out `the full reference of the DICOMweb
 API <https://www.dicomstandard.org/dicomweb/>`__ for more information.
 
+Also, check out the :ref:`section about additional samples
+<dicomweb-additional-samples>` that notably provides example of
+STOW-RS clients in JavaScript and Python.
 
 
 .. _dicomweb-client:
