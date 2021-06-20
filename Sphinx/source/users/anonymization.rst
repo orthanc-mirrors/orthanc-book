@@ -16,8 +16,9 @@ Anonymization of a Single Instance
 ----------------------------------
 
 Orthanc allows to anonymize a single DICOM instance and to download
-the resulting anonymized DICOM file. Anonymization consists in erasing
-all the tags that are specified in `Table E.1-1 from PS 3.15
+the resulting anonymized DICOM file (without storing the anonymized
+DICOM instance into Orthanc). Anonymization consists in erasing all
+the tags that are specified in `Table E.1-1 from PS 3.15
 <http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html#table_E.1-1>`__
 of the DICOM standard 2008, 2017c or 2021b (default). Example::
 
@@ -86,8 +87,8 @@ Modification of a Single Instance
 ---------------------------------
 
 Orthanc allows to modify a set of specified tags in a single DICOM
-instance and to download the resulting modified DICOM
-file. Example::
+instance and to download the resulting modified DICOM file (without
+storing the modified DICOM instance into Orthanc). Example::
 
     $ curl -X POST http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify \
       --data '{
@@ -199,6 +200,19 @@ Similarly, here is an interaction to modify a study::
       "ID" : "1c3f7bf4-85b4aa20-236e6315-5d450dcc-3c1bcf28",
       "Path" : "/studies/1c3f7bf4-85b4aa20-236e6315-5d450dcc-3c1bcf28"
     }
+
+Pay attention to the fact that Orthanc implements safety checks to
+preserve the :ref:`DICOM model of the real world <model-world>`. These
+checks prevent the modification of some tags that are known to belong
+to a level in the patient/study/series/instance hierarchy that is
+higher than the level that corresponds to the REST API call. For
+instance, the tag ``PatientID`` cannot be modified if using the
+``/studies/{id}/modify`` route (in the latter case, the
+``/patients/{id}/modify`` route must be used, cf. next section). You
+also have to set the ``Force`` argument to ``true`` if modifying one
+of the :ref:`DICOM identifiers tags <orthanc-ids>`
+(i.e. ``PatientID``, ``StudyInstanceUID``, ``SeriesInstanceUID`` and
+``SOPInstanceUID``).
 
 
 Modification of Patients
