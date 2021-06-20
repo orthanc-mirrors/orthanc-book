@@ -260,7 +260,7 @@ object storage.  Note: it shall not start with a ``/``.
 
 Note that you can not change these configurations once you've uploaded the first files in Orthanc.
 
-The **MigrationFromFileSystemEnabled** configuration has been for Orthanc to continue working
+The **MigrationFromFileSystemEnabled** configuration has been introduced for Orthanc to continue working
 while you're migrating your data from the file system to the object storage.  While this option is enabled,
 Orthanc will store all new files into the object storage but will try to read/delete files
 from both the file system and the object storage.
