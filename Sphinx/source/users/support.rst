@@ -142,6 +142,7 @@ decision chart:
    * **Europe**:
 
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
+     * `Benoit Crickboom <orthanc@sleig.be>`__ (French/English, Belgium)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
 
