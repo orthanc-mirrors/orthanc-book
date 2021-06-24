@@ -3127,6 +3127,18 @@
             "description" : "Get the DICOM tags in the specified format. By default, the `full` format is used, which combines hexadecimal tags with human-readable description.",
             "parameters" : [
                {
+                  "description" : "Also include the DICOM tags that are provided in this list, even if their associated value is long",
+                  "in" : "query",
+                  "name" : "ignore-length",
+                  "required" : false,
+                  "schema" : {
+                     "items" : {
+                        "type" : "string"
+                     },
+                     "type" : "array"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -3244,12 +3256,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [
-                              "33043739-94a9-454e-8af6-3093711e64d7",
-                              "425b1738-afef-46eb-84b1-5a0ee9fb63d9",
-                              "92c239a1-918a-419a-bcef-0a8533a7a780",
-                              "..."
-                           ]
+                           "example" : [ "75d0e7b6-718f-427c-9f4e-6dfe17c4a141" ]
                         }
                      }
                   },
@@ -12820,7 +12827,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 12,
+                              "ApiVersion" : 13,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
@@ -12831,7 +12838,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.3"
+                              "Version" : "1.9.4"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14263,7 +14270,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1624520944061\northanc_count_patients 8 1624520944061\northanc_count_series 26 1624520944061\northanc_count_studies 8 1624520944061\northanc_dicom_cache_count 64 1624464718932\northanc_dicom_cache_size 59.926609 1624464718932\northanc_disk_size_mb 1018.65021 1624520944061\northanc_jobs_completed 10 1624520944061\northanc_jobs_failed 0 1624520944061\northanc_jobs_pending 0 1624520944061\northanc_jobs_running 0 1624520944061\northanc_jobs_success 10 1624520944061\northanc_rest_api_active_requests 1 1624520944060\northanc_rest_api_duration_ms 441 1624520942071\northanc_storage_read_duration_ms 18 1624520941704\northanc_uncompressed_size_mb 1018.65021 1624520944061\n"
+                        "example" : "orthanc_count_instances 2552 1624531164533\northanc_count_patients 8 1624531164533\northanc_count_series 26 1624531164533\northanc_count_studies 8 1624531164533\northanc_dicom_cache_count 16 1624531158093\northanc_dicom_cache_size 7.69873428 1624531158093\northanc_disk_size_mb 1018.65021 1624531164533\northanc_jobs_completed 1 1624531164533\northanc_jobs_failed 1 1624531164533\northanc_jobs_pending 0 1624531164533\northanc_jobs_running 0 1624531164533\northanc_jobs_success 0 1624531164533\northanc_rest_api_active_requests 1 1624531164533\northanc_rest_api_duration_ms 328 1624531163032\northanc_storage_read_duration_ms 35 1624531163732\northanc_uncompressed_size_mb 1018.65021 1624531164533\n"
                      }
                   },
                   "description" : ""
@@ -14282,7 +14289,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210624T074904",
+                        "example" : "20210624T103924",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14304,7 +14311,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210624T074904",
+                        "example" : "20210624T103924",
                         "schema" : {
                            "description" : "The local time"
                         }
