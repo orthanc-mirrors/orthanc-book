@@ -106,12 +106,12 @@ do that at your own risk.
 This can be done with this sequence of commands::
 
   $ sudo service orthanc stop
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.3/Orthanc --output-document /usr/sbin/Orthanc
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.4/Orthanc --output-document /usr/sbin/Orthanc
   $ sudo rm -f /usr/share/orthanc/plugins/*.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.3/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.3/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.4/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.4/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
   $
-  $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.3/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
+  $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.6/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
   $ ...
   $ sudo service orthanc restart
 

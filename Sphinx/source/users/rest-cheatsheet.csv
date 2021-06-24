@@ -187,6 +187,10 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/system``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1system/get>`__,,,,Get system information
 ``/tools``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
 ``/tools/accepted-transfer-syntaxes``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
+``/tools/bulk-anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-anonymize/post>`__,,,Anonymize a set of resources
+``/tools/bulk-content``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of instances
+``/tools/bulk-delete``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of instances
+``/tools/bulk-modify``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
 ``/tools/create-archive``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
 ``/tools/create-dicom``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
 ``/tools/create-media``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media

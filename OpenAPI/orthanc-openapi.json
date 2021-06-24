@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.3"
+      "version" : "1.9.4"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -165,12 +165,30 @@
                   }
                },
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Limit the number of results",
                   "in" : "query",
                   "name" : "limit",
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -298,6 +316,24 @@
             "description" : "Get detailed information about the DICOM instance whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -370,7 +406,7 @@
                               "type" : "boolean"
                            },
                            "Keep" : {
-                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization",
+                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -385,14 +421,14 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of additional tags to be removed from the DICOM instances",
+                              "description" : "List of additional tags to be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
                               "type" : "array"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            }
                         }
@@ -1842,21 +1878,21 @@
             "description" : "Get the DICOM tags in the meta-header of the DICOM instance. By default, the `full` format is used, which combines hexadecimal tags with human-readable description.",
             "parameters" : [
                {
-                  "description" : "If present, report the DICOM tags indexed in hexadecimal format",
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
-                  "description" : "If present, report the DICOM tags in human-readable format",
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                   "in" : "query",
                   "name" : "simplify",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
@@ -2371,7 +2407,7 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of tags that must be removed from the DICOM instances",
+                              "description" : "List of tags that must be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -2382,7 +2418,7 @@
                               "type" : "boolean"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Transcode" : {
@@ -2426,6 +2462,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -2496,6 +2550,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the parent patient of the DICOM instance whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
@@ -2766,6 +2838,24 @@
             "description" : "Get detailed information about the parent series of the DICOM instance whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -2827,7 +2917,7 @@
       "/instances/{id}/simplified-tags" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Get the DICOM tags in human-readable format",
+            "description" : "Get the DICOM tags in human-readable format (same as the `/instances/{id}/tags?simplify` route)",
             "parameters" : [
                {
                   "description" : "Also include the DICOM tags that are provided in this list, even if their associated value is long",
@@ -2961,6 +3051,24 @@
             "description" : "Get detailed information about the parent study of the DICOM instance whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -3019,21 +3127,21 @@
             "description" : "Get the DICOM tags in the specified format. By default, the `full` format is used, which combines hexadecimal tags with human-readable description.",
             "parameters" : [
                {
-                  "description" : "If present, report the DICOM tags indexed in hexadecimal format",
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
-                  "description" : "If present, report the DICOM tags in human-readable format (same as the `/instances/{id}/simplified-tags` route)",
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                   "in" : "query",
                   "name" : "simplify",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
@@ -3137,9 +3245,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "28c9f653-b8e3-476c-8237-794905f4711d",
-                              "2fc02948-0e5d-472e-a6d2-2e3af2275cc1",
-                              "3ab8820c-f757-4eb1-8305-4d554c989077",
+                              "33043739-94a9-454e-8af6-3093711e64d7",
+                              "425b1738-afef-46eb-84b1-5a0ee9fb63d9",
+                              "92c239a1-918a-419a-bcef-0a8533a7a780",
                               "..."
                            ]
                         }
@@ -4275,12 +4383,30 @@
                   }
                },
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Limit the number of results",
                   "in" : "query",
                   "name" : "limit",
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -4340,6 +4466,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -4411,7 +4555,7 @@
                               "type" : "boolean"
                            },
                            "Keep" : {
-                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization",
+                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -4434,14 +4578,14 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of additional tags to be removed from the DICOM instances",
+                              "description" : "List of additional tags to be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
                               "type" : "array"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -4541,7 +4685,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Priority" : {
@@ -4549,7 +4693,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -5287,6 +5431,24 @@
             "description" : "Get detailed information about the child instances of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -5395,6 +5557,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -5636,7 +5816,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Extended" : {
@@ -5648,7 +5828,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -5927,7 +6107,7 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of tags that must be removed from the DICOM instances",
+                              "description" : "List of tags that must be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -5938,7 +6118,7 @@
                               "type" : "boolean"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -5996,6 +6176,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -6120,6 +6318,24 @@
             "description" : "Get detailed information about the child series of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -6167,6 +6383,24 @@
             "deprecated" : false,
             "description" : "Extract the DICOM tags whose value is constant across all the child instances of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -6316,6 +6550,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the child studies of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
@@ -6818,7 +7070,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.5"
+                              "Version" : "1.6"
                            }
                         }
                      }
@@ -6921,12 +7173,21 @@
                   }
                },
                {
-                  "description" : "If present and if `expand` is present, format the tags of the answers in human-readable format",
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                   "in" : "query",
                   "name" : "simplify",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
@@ -7003,12 +7264,21 @@
             "description" : "Get the content (DICOM tags) of one answer associated with the query/retrieve operation whose identifier is provided in the URL",
             "parameters" : [
                {
-                  "description" : "If present, format the tags of the answer in human-readable format",
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                   "in" : "query",
                   "name" : "simplify",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
@@ -7418,12 +7688,21 @@
             "description" : "Get the original DICOM filter associated with the query/retrieve operation whose identifier is provided in the URL",
             "parameters" : [
                {
-                  "description" : "If present, format the tags of the DICOM filter in human-readable format",
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                   "in" : "query",
                   "name" : "simplify",
                   "required" : false,
                   "schema" : {
-                     "type" : "string"
+                     "type" : "boolean"
                   }
                },
                {
@@ -7550,12 +7829,30 @@
                   }
                },
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Limit the number of results",
                   "in" : "query",
                   "name" : "limit",
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -7615,6 +7912,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -7695,7 +8010,7 @@
                               "type" : "boolean"
                            },
                            "Keep" : {
-                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization",
+                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -7718,14 +8033,14 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of additional tags to be removed from the DICOM instances",
+                              "description" : "List of additional tags to be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
                               "type" : "array"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -7825,7 +8140,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Priority" : {
@@ -7833,7 +8148,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -8571,6 +8886,24 @@
             "description" : "Get detailed information about the child instances of the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -8627,6 +8960,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -8755,7 +9106,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Extended" : {
@@ -8767,7 +9118,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -9046,7 +9397,7 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of tags that must be removed from the DICOM instances",
+                              "description" : "List of tags that must be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -9057,7 +9408,7 @@
                               "type" : "boolean"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -9115,6 +9466,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -9373,6 +9742,24 @@
             "description" : "Get detailed information about the parent patient of the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -9440,6 +9827,24 @@
             "deprecated" : false,
             "description" : "Extract the DICOM tags whose value is constant across all the child instances of the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -9579,6 +9984,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the parent study of the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
@@ -9795,12 +10218,30 @@
                   }
                },
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Limit the number of results",
                   "in" : "query",
                   "name" : "limit",
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -9860,6 +10301,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -9953,7 +10412,7 @@
                               "type" : "boolean"
                            },
                            "Keep" : {
-                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization",
+                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -9976,14 +10435,14 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of additional tags to be removed from the DICOM instances",
+                              "description" : "List of additional tags to be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
                               "type" : "array"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -10083,7 +10542,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Priority" : {
@@ -10091,7 +10550,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -10829,6 +11288,24 @@
             "description" : "Get detailed information about the child instances of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -10947,6 +11424,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -11188,7 +11683,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Extended" : {
@@ -11200,7 +11695,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -11248,7 +11743,7 @@
       "/studies/{id}/merge" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a new job so as to move some DICOM series into the DICOM study whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#merging",
+            "description" : "Start a new job so as to move some DICOM resources into the DICOM study whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#merging",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -11283,7 +11778,7 @@
                               "type" : "number"
                            },
                            "Resources" : {
-                              "description" : "The list of DICOM resources (patients, studies, series, and/or instances) to be merged into the study of interest (mandatory option)",
+                              "description" : "The list of DICOM resources (studies, series, and/or instances) to be merged into the study of interest (mandatory option)",
                               "items" : {
                                  "type" : "string"
                               },
@@ -11559,7 +12054,7 @@
                               "type" : "string"
                            },
                            "Remove" : {
-                              "description" : "List of tags that must be removed from the DICOM instances",
+                              "description" : "List of tags that must be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "items" : {
                                  "type" : "string"
                               },
@@ -11570,7 +12065,7 @@
                               "type" : "boolean"
                            },
                            "Replace" : {
-                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances",
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
                               "type" : "object"
                            },
                            "Synchronous" : {
@@ -11628,6 +12123,24 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -11757,6 +12270,24 @@
                   }
                },
                {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -11809,6 +12340,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the parent patient of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -11877,6 +12426,24 @@
             "deprecated" : false,
             "description" : "Get detailed information about the child series of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
+               {
+                  "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
                {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
@@ -11987,6 +12554,24 @@
             "description" : "Extract the DICOM tags whose value is constant across all the child instances of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If present, report the DICOM tags in hexadecimal format",
+                  "in" : "query",
+                  "name" : "short",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                  "in" : "query",
+                  "name" : "simplify",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -12043,7 +12628,7 @@
       "/studies/{id}/split" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a new job so as to split the DICOM study whose Orthanc identifier is provided in the URL, by taking some of its children series out of it and putting them into a brand new study (this new study is created by setting the `StudyInstanceUID` tag to a random identifier): https://book.orthanc-server.com/users/anonymization.html#splitting",
+            "description" : "Start a new job so as to split the DICOM study whose Orthanc identifier is provided in the URL, by taking some of its children series or instances out of it and putting them into a brand new study (this new study is created by setting the `StudyInstanceUID` tag to a random identifier): https://book.orthanc-server.com/users/anonymization.html#splitting",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -12065,8 +12650,15 @@
                               "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
                               "type" : "boolean"
                            },
+                           "Instances" : {
+                              "description" : "The list of instances to be separated from the parent study. These instances must all be children of the same source study, that is specified in the URI.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
                            "KeepSource" : {
-                              "description" : "If set to `true`, instructs Orthanc to keep a copy of the original series in the source study. By default, the original series are deleted from Orthanc.",
+                              "description" : "If set to `true`, instructs Orthanc to keep a copy of the original series/instances in the source study. By default, the original series/instances are deleted from Orthanc.",
                               "type" : "boolean"
                            },
                            "Permissive" : {
@@ -12089,7 +12681,7 @@
                               "type" : "object"
                            },
                            "Series" : {
-                              "description" : "The list of series to be separated from the parent study (mandatory option). These series must all be children of the same source study, that is specified in the URI.",
+                              "description" : "The list of series to be separated from the parent study. These series must all be children of the same source study, that is specified in the URI.",
                               "items" : {
                                  "type" : "string"
                               },
@@ -12239,7 +12831,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.2"
+                              "Version" : "1.9.3"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -12314,6 +12906,10 @@
                            "description" : "List of the available operations",
                            "example" : [
                               "accepted-transfer-syntaxes",
+                              "bulk-anonymize",
+                              "bulk-content",
+                              "bulk-delete",
+                              "bulk-modify",
                               "create-archive",
                               "create-dicom",
                               "create-media",
@@ -12409,6 +13005,286 @@
             "tags" : [ "System" ]
          }
       },
+      "/tools/bulk-anonymize" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Start a job that will anonymize all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Asynchronous" : {
+                              "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
+                              "type" : "boolean"
+                           },
+                           "DicomVersion" : {
+                              "description" : "Version of the DICOM standard to be used for anonymization. Check out configuration option `DeidentifyLogsDicomVersion` for possible values.",
+                              "type" : "string"
+                           },
+                           "Force" : {
+                              "description" : "Allow the modification of tags related to DICOM identifiers, at the risk of breaking the DICOM model of the real world",
+                              "type" : "boolean"
+                           },
+                           "Keep" : {
+                              "description" : "List of DICOM tags whose value must not be destroyed by the anonymization. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "KeepPrivateTags" : {
+                              "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
+                              "type" : "boolean"
+                           },
+                           "Permissive" : {
+                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "type" : "boolean"
+                           },
+                           "Priority" : {
+                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "type" : "number"
+                           },
+                           "PrivateCreator" : {
+                              "description" : "The private creator to be used for private tags in `Replace`",
+                              "type" : "string"
+                           },
+                           "Remove" : {
+                              "description" : "List of additional tags to be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "Replace" : {
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
+                              "type" : "object"
+                           },
+                           "Resources" : {
+                              "description" : "List of the Orthanc identifiers of the patients/studies/series/instances of interest.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "Synchronous" : {
+                              "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "The list of all the resources that have been created by this anonymization",
+                           "properties" : {
+                              "ID" : {
+                                 "description" : "In asynchronous mode, identifier of the job",
+                                 "type" : "string"
+                              },
+                              "Path" : {
+                                 "description" : "In asynchronous mode, path to access the job in the REST API",
+                                 "type" : "string"
+                              }
+                           }
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Anonymize a set of resources",
+            "tags" : [ "System" ]
+         }
+      },
+      "/tools/bulk-content" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Get the content all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field, in one single call.",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
+                           "Level" : {
+                              "description" : "This optional argument specifies the level of interest (can be `Patient`, `Study`, `Series` or `Instance`). Orthanc will loop over the items inside `Resources`, and explorer upward or downward in the DICOM hierarchy in order to find the level of interest.",
+                              "type" : "string"
+                           },
+                           "Metadata" : {
+                              "description" : "If set to `true` (default value), the metadata associated with the resources will also be retrieved.",
+                              "type" : "boolean"
+                           },
+                           "Resources" : {
+                              "description" : "List of the Orthanc identifiers of the patients/studies/series/instances of interest.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "Short" : {
+                              "description" : "If set to `true`, report the DICOM tags in hexadecimal format",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Describe a set of instances",
+            "tags" : [ "System" ]
+         }
+      },
+      "/tools/bulk-delete" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Delete all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Resources" : {
+                              "description" : "List of the Orthanc identifiers of the patients/studies/series/instances of interest.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Delete a set of instances",
+            "tags" : [ "System" ]
+         }
+      },
+      "/tools/bulk-modify" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Start a job that will modify all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Asynchronous" : {
+                              "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
+                              "type" : "boolean"
+                           },
+                           "Force" : {
+                              "description" : "Allow the modification of tags related to DICOM identifiers, at the risk of breaking the DICOM model of the real world",
+                              "type" : "boolean"
+                           },
+                           "Keep" : {
+                              "description" : "Keep the original value of the specified tags, to be chosen among the `StudyInstanceUID`, `SeriesInstanceUID` and `SOPInstanceUID` tags. Avoid this feature as much as possible, as this breaks the DICOM model of the real world.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "Permissive" : {
+                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "type" : "boolean"
+                           },
+                           "Priority" : {
+                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "type" : "number"
+                           },
+                           "PrivateCreator" : {
+                              "description" : "The private creator to be used for private tags in `Replace`",
+                              "type" : "string"
+                           },
+                           "Remove" : {
+                              "description" : "List of tags that must be removed from the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "RemovePrivateTags" : {
+                              "description" : "Remove the private tags from the DICOM instances (defaults to `false`)",
+                              "type" : "boolean"
+                           },
+                           "Replace" : {
+                              "description" : "Associative array to change the value of some DICOM tags in the DICOM instances. Starting with Orthanc 1.9.4, paths to subsequences can be provided using the same syntax as the `dcmodify` command-line tool (wildcards are supported as well).",
+                              "type" : "object"
+                           },
+                           "Resources" : {
+                              "description" : "List of the Orthanc identifiers of the patients/studies/series/instances of interest.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "Synchronous" : {
+                              "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
+                              "type" : "boolean"
+                           },
+                           "Transcode" : {
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "type" : "string"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "The list of all the resources that have been altered by this modification",
+                           "properties" : {
+                              "ID" : {
+                                 "description" : "In asynchronous mode, identifier of the job",
+                                 "type" : "string"
+                              },
+                              "Path" : {
+                                 "description" : "In asynchronous mode, path to access the job in the REST API",
+                                 "type" : "string"
+                              }
+                           }
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Modify a set of resources",
+            "tags" : [ "System" ]
+         }
+      },
       "/tools/create-archive" : {
          "post" : {
             "deprecated" : false,
@@ -12421,7 +13297,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Priority" : {
@@ -12436,7 +13312,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -12560,7 +13436,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Extended" : {
@@ -12579,7 +13455,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -12636,7 +13512,7 @@
                         "description" : "",
                         "properties" : {
                            "Asynchronous" : {
-                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background. Prefer this flavor wherever possible.",
+                              "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
                            },
                            "Extended" : {
@@ -12655,7 +13531,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior, but it is *not* be desirable to archive large amount of data, as it might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -12868,6 +13744,10 @@
                               "description" : "Also retrieve the content of the matching resources, not only their Orthanc identifiers",
                               "type" : "boolean"
                            },
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
                            "Level" : {
                               "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
                               "type" : "string"
@@ -12879,6 +13759,10 @@
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
+                           },
+                           "Short" : {
+                              "description" : "If set to `true`, report the DICOM tags in hexadecimal format",
+                              "type" : "boolean"
                            },
                            "Since" : {
                               "description" : "Show only the resources since the provided index (in conjunction with `Limit`)",
@@ -13379,7 +14263,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1620382972570\northanc_count_patients 8 1620382972570\northanc_count_series 26 1620382972570\northanc_count_studies 8 1620382972570\northanc_dicom_cache_count 180 1620341242884\northanc_dicom_cache_size 89.929306 1620341242884\northanc_disk_size_mb 1018.65021 1620382972570\northanc_jobs_completed 10 1620382972570\northanc_jobs_failed 0 1620382972570\northanc_jobs_pending 0 1620382972570\northanc_jobs_running 0 1620382972570\northanc_jobs_success 10 1620382972570\northanc_rest_api_active_requests 1 1620382972570\northanc_rest_api_duration_ms 6078 1620382966006\northanc_storage_read_duration_ms 346 1620382962068\northanc_uncompressed_size_mb 1018.65021 1620382972570\n"
+                        "example" : "orthanc_count_instances 2552 1624520944061\northanc_count_patients 8 1624520944061\northanc_count_series 26 1624520944061\northanc_count_studies 8 1624520944061\northanc_dicom_cache_count 64 1624464718932\northanc_dicom_cache_size 59.926609 1624464718932\northanc_disk_size_mb 1018.65021 1624520944061\northanc_jobs_completed 10 1624520944061\northanc_jobs_failed 0 1624520944061\northanc_jobs_pending 0 1624520944061\northanc_jobs_running 0 1624520944061\northanc_jobs_success 10 1624520944061\northanc_rest_api_active_requests 1 1624520944060\northanc_rest_api_duration_ms 441 1624520942071\northanc_storage_read_duration_ms 18 1624520941704\northanc_uncompressed_size_mb 1018.65021 1624520944061\n"
                      }
                   },
                   "description" : ""
@@ -13398,7 +14282,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210507T102252",
+                        "example" : "20210624T074904",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -13420,7 +14304,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210507T102253",
+                        "example" : "20210624T074904",
                         "schema" : {
                            "description" : "The local time"
                         }
