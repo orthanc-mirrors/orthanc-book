@@ -55,7 +55,7 @@ Here is a generic setup that should provide best performance in the
 presence of large databases:
 
 * Make sure to use the latest release of Orthanc (1.9.4 at the time of
-  writing).
+  writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
   <postgresql>` to store the database index (4.0 at the time of
