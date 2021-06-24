@@ -83,8 +83,11 @@ encryption certificates.
 trusted certificates.
 
 
-Example using DCMTK
--------------------
+Examples
+--------
+
+Using DCMTK
+^^^^^^^^^^^
 
 .. highlight:: bash
 
@@ -117,7 +120,7 @@ Let us start Orthanc using the following minimal configuration file::
 
 .. highlight:: text
 
-It is then possible to trigger a secure C-GET SCU request from DCMTK
+It is then possible to trigger a secure C-ECHO SCU request from DCMTK
 to Orthanc as follows::
 
   $ echoscu -v -aet DCMTK localhost 4242 +tls dcmtk.key dcmtk.crt +cf orthanc.crt 
@@ -127,6 +130,38 @@ to Orthanc as follows::
   I: Received Echo Response (Success)
   I: Releasing Association
 
+
+Using dcm4che
+^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+To use the dcm4che command-line tools instead of DCMTK, the two
+certificates must first be converted from `X.509
+<https://en.wikipedia.org/wiki/X.509>`__ to `PKCS #12
+<https://en.wikipedia.org/wiki/PKCS_12>`__::
+
+  $ openssl pkcs12 -export -out orthanc.p12 -in orthanc.crt -inkey orthanc.key
+  $ openssl pkcs12 -export -out dcm4che.p12 -in dcmtk.crt -inkey dcmtk.key
+
+For this example, you can let the ``Export Password`` as an empty
+string in the two calls above. Then, here is how to trigger a secure
+C-STORE SCU request to send the ``sample.dcm`` file from dcm4che to
+Orthanc::
+
+  $ ~/Downloads/dcm4che-5.23.3/bin/storescu -c ORTHANC@localhost:4242 --tls \
+   --trust-store ./orthanc.p12 --key-store ./dcm4che.p12 --trust-store-pass "" --key-store-pass "" sample.dcm
+
+**Remarks:**
+
+* The empty strings provided to the ``--trust-store-pass`` and
+  ``--key-store-pass`` options correspond to the empty strings
+  provided to ``Export Password``.
+
+* Disclaimer: In this setup, ``orthanc.p12`` contains the private key
+  of the Orthanc server. It is unclear how to remove this private key
+  that should be unknown to the DICOM client for security reasons.
+   
 
 Secure TLS connections without certificate
 ------------------------------------------
