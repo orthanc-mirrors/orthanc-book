@@ -135,7 +135,9 @@ here are some tasks you can take in charge that would greatly help us:
       <https://twitter.com/ZeClint/status/1192086039160086529?s=20>`__
       to be handled by the PACS, not by the RIS). Reference: Events
       ``Axx`` of Chapter 3 ("Patient Administration") in the HL7 v2.9
-      specification.
+      specification. ``ADT`` messages have also been `discussed in the
+      past on the Orthanc forum
+      <https://groups.google.com/g/orthanc-users/c/Spjtcj9vSPo/m/ktUArWxUDQAJ>`__.
     + Create a `DICOM proxy
       <https://groups.google.com/g/orthanc-users/c/15dYEm4Tguw/m/PoldpTOQAQAJ>`__
       (to share a single connection on a PACS by several DICOM
