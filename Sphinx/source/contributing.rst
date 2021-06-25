@@ -141,10 +141,11 @@ here are some tasks you can take in charge that would greatly help us:
     + Create a `DICOM proxy
       <https://groups.google.com/g/orthanc-users/c/15dYEm4Tguw/m/PoldpTOQAQAJ>`__
       (to share a single connection on a PACS by several DICOM
-      clients/viewers), or a DICOMweb proxy (to turn a DICOM-only PACS
-      into a DICOMweb server). This could be done as a :ref:`Python
-      plugin <python-plugin>` by wrapping the C-FIND and C-MOVE
-      callbacks in the Python API.
+      clients/viewers), or a `DICOMweb proxy
+      <https://groups.google.com/g/orthanc-users/c/AQ6qs0TgO6I/m/WxdOVEeKBAAJ>`__
+      (to turn a DICOM-only PACS into a DICOMweb server). This could
+      be done as a :ref:`Python plugin <python-plugin>` by wrapping
+      the C-FIND and C-MOVE callbacks in the Python API.
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
