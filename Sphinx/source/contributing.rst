@@ -150,6 +150,9 @@ here are some tasks you can take in charge that would greatly help us:
       (to turn a DICOM-only PACS into a DICOMweb server). This could
       be done as a :ref:`Python plugin <python-plugin>` by wrapping
       the C-FIND and C-MOVE callbacks in the Python API.
+    + Get involved in the call for ideas by Salim Kanoun about a
+      `DICOM router built on the top of Orthanc
+      <https://groups.google.com/g/orthanc-users/c/tx7E1RQuKIY/m/_GsrRZljBgAJ>`__.
     + Have a look at the TODO file containing our `official roadmap
       <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
