@@ -662,7 +662,40 @@ Here is the result of this plugin on a sample call::
   I: (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
   I:
 
-                               
+
+.. _pynetdicom:
+
+Replacing DICOM SCP of Orthanc by pynetdicom
+............................................
+
+.. highlight:: json
+
+Thanks to Python plugins, it is also possible to replace the built-in
+DICOM SCP of Orthanc by `pynetdicom
+<https://pydicom.github.io/pynetdicom/stable/examples/storage.html>`__
+so as to customize how the DICOM protocol is handled. Firstly, in the
+configuration file, make sure to disable the Orthanc SCP by setting
+``DicomServerEnabled`` to ``false``::
+
+  {
+    "Plugins" : [ "." ],
+    "PythonScript" : "pynetdicom.py",
+    "DicomServerEnabled" : false
+  }
+
+Secondly, here a basic plugin illustrating how to start and stop the
+pynetdicom server, and handle incoming C-STORE requests:
+
+.. literalinclude:: python/pynetdicom.py
+                    :language: python
+
+As can be seen in this listing, whenever the pynetdicom receives an
+incoming C-STORE request, it makes a POST call to the URI
+``/instances`` in the REST API of Orthanc in order to store the
+embedded DICOM dataset into Orthanc. Obviously, one can build more
+complex DICOM servers by handling more messages than C-STORE alone.
+
+  
 
 Performance and concurrency
 ---------------------------
