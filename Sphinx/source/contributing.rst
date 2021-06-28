@@ -80,7 +80,11 @@ here are some tasks you can take in charge that would greatly help us:
     GNU/Linux distributions (e.g. Ubuntu PPA, RHEL/`EPEL
     <https://fedoraproject.org/wiki/EPEL>`__, CentOS, openSUSE...).
   - Take ownership of the now-orphaned `Fedora package
-    <https://src.fedoraproject.org/rpms/orthanc>`__.
+    <https://src.fedoraproject.org/rpms/orthanc>`__. Check out the
+    related `issue 1677806
+    <https://bugzilla.redhat.com/show_bug.cgi?id=1677806>`__ and
+    `issue 1843127
+    <https://bugzilla.redhat.com/show_bug.cgi?id=1843127>`__.
   - Take care of :ref:`Debian/Ubuntu backporting <debian-packages>`.
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
