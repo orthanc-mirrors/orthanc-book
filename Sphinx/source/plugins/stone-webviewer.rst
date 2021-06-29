@@ -32,7 +32,7 @@ For GNU/Linux users, the Stone Web viewer is part of the
 The compilation process is quite complex since it requires using the
 `Emscripten <https://emscripten.org/>`__ compiler toolchain. The full
 build instructions are available in the `source code
-<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.0/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
+<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.1/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
 
 
 Usage
@@ -48,7 +48,7 @@ The ``osimis/orthanc`` :ref:`Docker images <docker-osimis>` are more
 suited to devops need, as they allow to start a minimal Docker
 environment as follows::
 
-  $ docker run -p 4242:4242 -p 8042:8042 -e STONE_WEB_VIEWER_PLUGIN_ENABLED=true -e DICOM_WEB_PLUGIN_ENABLED=true --rm osimis/orthanc:20.12.0
+  $ docker run -p 4242:4242 -p 8042:8042 -e STONE_WEB_VIEWER_PLUGIN_ENABLED=true -e DICOM_WEB_PLUGIN_ENABLED=true --rm osimis/orthanc:21.6.2
 
 
 .. highlight:: json
@@ -93,7 +93,7 @@ Advanced options
 
 The configuration of the Web viewer can be fine-tuned by adapting some
 options in the `configuration file
-<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.0/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
+<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.1/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
 FAQ
 ---
@@ -148,7 +148,7 @@ FAQ
 - **How can I migrate from Osimis Web viewer to Stone Web viewer?**
 
   Full instructions are provided in the `source distribution
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.0/Applications/StoneWebViewer/NOTES.txt>`__.
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.1/Applications/StoneWebViewer/NOTES.txt>`__.
 
 - **What are the future plans?**
 
