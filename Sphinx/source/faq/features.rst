@@ -111,6 +111,7 @@ Also note that metadata and attachments are only available for
 resources stored inside Orthanc. Once one DICOM instance leaves the
 Orthanc ecosystem, its associated metadata and attachments are lost.
 
+.. _metadata-core:
 
 Core metadata
 ^^^^^^^^^^^^^
@@ -136,8 +137,11 @@ Here are the main metadata handled by the Orthanc core:
   is expected to contain. This information is :ref:`not always
   available <series-completion>`.
 * Starting with Orthanc 1.2.0, ``TransferSyntax`` and ``SopClassUid``
-  respectively stores the transfer syntax UID and the SOP class UID of
-  DICOM instances, in order to speed up the access to this
+  respectively stores the `transfer syntax UID
+  <http://dicom.nema.org/medical/dicom/current/output/html/part05.html#chapter_10>`__
+  and the `SOP class UID
+  <http://dicom.nema.org/medical/dicom/current/output/chtml/part02/sect_A.1.html>`__
+  of DICOM instances, in order to speed up the access to this
   information.
 * ``RemoteIP`` (new in Orthanc 1.4.0): The IP address of the remote
   SCU (for REST API and DICOM protocol).

@@ -442,6 +442,33 @@ It is also possible to download a zipped DICOMDIR through::
   $ curl http://localhost:8042/studies/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/media > Study.zip
 
 
+.. _download-pdf-videos:
+
+Downloading PDF or videos
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Given a DICOM instance that embeds a PDF file (typically, one instance
+whose SOP Class UID is ``1.2.840.10008.5.1.4.1.1.104.1`` -
+Encapsulated PDF Storage), the PDF content can be downloaded as
+follows::
+
+  $ curl http://localhost:8042/instances/1915e0cc-c2c1a0fc-12cdd7f5-3ba32114-a97c2c9b/content/0042,0011 > sample.pdf
+
+This corresponds to downloading the raw DICOM tag "Encapsulated
+Document" (0042,0011). Beware that the last byte of the downloaded
+file might correspond to one padding byte, if the source PDF had an
+odd number of bytes.
+
+Similarly, if you know that a DICOM instance :ref:`embeds a video
+<videos>` (which can be tested by checking the :ref:`value of the
+metadata <metadata-core>` corresponding to its transfer syntax UID),
+the raw video can be downloaded as follows::
+
+  $ curl http://localhost:8042/instances/e465dd27-83c96343-96848735-7035a133-1facf1a0/frames/0/raw > sample.mp4
+
+
 .. _peering:
 
 Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
