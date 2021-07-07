@@ -155,7 +155,7 @@ FAQ
   The internal use of :ref:`Stone of Orthanc library <stone>` gives us
   a lot of flexibility to implement new advanced features, such as 3D
   rendering (MPR, reslicing, image fusion...), DICOM-RT support,
-  creation of annotations/measurements, viewer for mobile devices,
+  storage of annotations/measurements, viewer for mobile devices,
   internationalization (translation)...
 
   We are looking for :ref:`industrial sponsors <contributing>` to
