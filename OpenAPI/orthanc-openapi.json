@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.4"
+      "version" : "1.9.5"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3256,7 +3256,12 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [ "75d0e7b6-718f-427c-9f4e-6dfe17c4a141" ]
+                           "example" : [
+                              "2c20c40c-e744-4922-ad0a-367ab6fee696",
+                              "2c89b071-d251-47e1-92af-d5791bce6ebf",
+                              "3811025c-4739-4fa4-8273-b9eff63828bf",
+                              "..."
+                           ]
                         }
                      }
                   },
@@ -3965,7 +3970,21 @@
                "content" : {
                   "application/json" : {
                      "schema" : {
-                        "description" : "Associative array containing the query on the values of the DICOM tags"
+                        "description" : "",
+                        "properties" : {
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
+                           "Query" : {
+                              "description" : "Associative array containing the filter on the values of the DICOM tags",
+                              "type" : "object"
+                           },
+                           "Short" : {
+                              "description" : "If set to `true`, report the DICOM tags in hexadecimal format",
+                              "type" : "boolean"
+                           }
+                        }
                      }
                   }
                }
@@ -4008,10 +4027,6 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
-                           "Asynchronous" : {
-                              "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
-                              "type" : "boolean"
-                           },
                            "Level" : {
                               "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
                               "type" : "string"
@@ -4020,24 +4035,12 @@
                               "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
                            },
-                           "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
-                              "type" : "boolean"
-                           },
-                           "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
-                              "type" : "number"
-                           },
                            "Resources" : {
                               "description" : "List of the Orthanc identifiers of all the DICOM resources to be sent",
                               "items" : {
                                  "type" : "string"
                               },
                               "type" : "array"
-                           },
-                           "Synchronous" : {
-                              "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
-                              "type" : "boolean"
                            },
                            "TargetAet" : {
                               "description" : "Target AET that will be used by the remote DICOM modality as a target for its C-STORE SCU commands, defaults to `DicomAet` configuration option in order to do a simple query/retrieve",
@@ -4054,24 +4057,6 @@
             },
             "responses" : {
                "200" : {
-                  "content" : {
-                     "application/json" : {
-                        "examples" : {},
-                        "schema" : {
-                           "description" : "",
-                           "properties" : {
-                              "ID" : {
-                                 "description" : "In asynchronous mode, identifier of the job",
-                                 "type" : "string"
-                              },
-                              "Path" : {
-                                 "description" : "In asynchronous mode, path to access the job in the REST API",
-                                 "type" : "string"
-                              }
-                           }
-                        }
-                     }
-                  },
                   "description" : ""
                }
             },
@@ -7568,6 +7553,10 @@
                               "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
                               "type" : "boolean"
                            },
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -7575,6 +7564,10 @@
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
                               "type" : "number"
+                           },
+                           "Simplify" : {
+                              "description" : "If set to `true`, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                              "type" : "boolean"
                            },
                            "Synchronous" : {
                               "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
@@ -7764,6 +7757,10 @@
                               "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
                               "type" : "boolean"
                            },
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -7771,6 +7768,10 @@
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
                               "type" : "number"
+                           },
+                           "Simplify" : {
+                              "description" : "If set to `true`, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
+                              "type" : "boolean"
                            },
                            "Synchronous" : {
                               "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
@@ -14270,7 +14271,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1624531164533\northanc_count_patients 8 1624531164533\northanc_count_series 26 1624531164533\northanc_count_studies 8 1624531164533\northanc_dicom_cache_count 16 1624531158093\northanc_dicom_cache_size 7.69873428 1624531158093\northanc_disk_size_mb 1018.65021 1624531164533\northanc_jobs_completed 1 1624531164533\northanc_jobs_failed 1 1624531164533\northanc_jobs_pending 0 1624531164533\northanc_jobs_running 0 1624531164533\northanc_jobs_success 0 1624531164533\northanc_rest_api_active_requests 1 1624531164533\northanc_rest_api_duration_ms 328 1624531163032\northanc_storage_read_duration_ms 35 1624531163732\northanc_uncompressed_size_mb 1018.65021 1624531164533\n"
+                        "example" : "orthanc_count_instances 2552 1625736734245\northanc_count_patients 8 1625736734245\northanc_count_series 26 1625736734245\northanc_count_studies 8 1625736734245\northanc_dicom_cache_count 90 1625666803697\northanc_dicom_cache_size 63.2274284 1625666803697\northanc_disk_size_mb 1018.65021 1625736734245\northanc_jobs_completed 10 1625736734245\northanc_jobs_failed 3 1625736734245\northanc_jobs_pending 0 1625736734245\northanc_jobs_running 0 1625736734245\northanc_jobs_success 7 1625736734245\northanc_rest_api_active_requests 1 1625736734245\northanc_rest_api_duration_ms 345 1625736732718\northanc_storage_read_duration_ms 24 1625736733447\northanc_uncompressed_size_mb 1018.65021 1625736734245\n"
                      }
                   },
                   "description" : ""
@@ -14289,7 +14290,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210624T103924",
+                        "example" : "20210708T093214",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14311,7 +14312,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210624T103924",
+                        "example" : "20210708T093214",
                         "schema" : {
                            "description" : "The local time"
                         }

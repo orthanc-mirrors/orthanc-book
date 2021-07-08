@@ -3,7 +3,7 @@ import PIL.Image
 import PIL.ImageDraw
 import orthanc
 
-URL = 'http://hg.orthanc-server.com/orthanc-tests/raw-file/Orthanc-1.9.4/Database/LenaTwiceWithFragments.dcm'
+URL = 'http://hg.orthanc-server.com/orthanc-tests/raw-file/Orthanc-1.9.5/Database/LenaTwiceWithFragments.dcm'
 USERNAME = ''
 PASSWORD = ''
 

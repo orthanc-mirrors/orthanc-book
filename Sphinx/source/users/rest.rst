@@ -94,7 +94,7 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.4/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.5/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -106,7 +106,7 @@ provides more features than ``ImportDicomFiles.py``. It can notably
 import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2`` archives
 without having to uncompress them first. It also provides more
 comprehensive command-line options. `Check this script out
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.4/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.5/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
     
 
 .. highlight:: perl

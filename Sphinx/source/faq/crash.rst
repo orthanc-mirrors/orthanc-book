@@ -64,13 +64,13 @@ analyzed by any developer of Orthanc. Assuming that the :ref:`plugin
 above <segfault-plugin>` is available as the ``crash.cpp`` file, here
 is a sample debug session::
 
-  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.9.4/Orthanc
+  $ wget https://lsb.orthanc-server.com/orthanc/debug/1.9.5/Orthanc
   $ chmod +x ./Orthanc
   $ gcc -fPIC -shared ./crash.cpp -I ~/orthanc/Plugins/Include -o crash.so
   $ ulimit -c unlimited
   $ echo '{ "Plugins" : ["crash.so"] }' > Configuration.json
   $ rm -f core ; ./Orthanc Configuration.json
-  W0427 15:43:24.215783 main.cpp:1436] Orthanc version: 1.9.4
+  W0427 15:43:24.215783 main.cpp:1436] Orthanc version: 1.9.5
   W0427 15:43:24.215910 main.cpp:1279] Performance warning: Non-release build, runtime debug assertions are turned on
   W0427 15:43:24.217585 OrthancConfiguration.cpp:61] Reading the configuration from: "Configuration.json"
   W0427 15:43:24.254733 main.cpp:700] Loading plugin(s) from: crash.so
