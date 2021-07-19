@@ -83,7 +83,9 @@ discouraged for several reasons:
   that are `explained in the SQLite FAQ
   <https://www.sqlite.org/faq.html#q5>`__. Orthanc will stop if it
   receives the ``SQLITE_BUSY`` status.
-
+* The internal structure of the databases might evolve across
+  successive versions of Orthanc or of the database plugins.
+  
 As a consequence, it is **HIGHLY recommended NOT to directly access**
 the ``OrthancStorage`` folder and the SQLite/MySQL/PostgreSQL
 database. Use the :ref:`REST API <rest>` instead, which contains
