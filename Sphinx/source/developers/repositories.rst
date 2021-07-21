@@ -84,7 +84,7 @@ You might have to set up a host fingerprint in the Mercurial
 configuration. Add the following lines to your ``~/.hgrc`` file::
 
   [hostfingerprints]
-  hg.orthanc-server.com = 72:F4:32:09:0F:F1:67:03:83:44:BF:0B:44:34:9D:B6:C6:0C:6A:32
+  hg.orthanc-server.com = 06:AE:A1:EE:61:74:77:26:F3:D5:5C:AB:91:0E:39:B1:95:7F:00:25
   
 .. highlight:: bash
 
@@ -117,7 +117,7 @@ of our code server using a more recent option than the
 and add the following lines::
 
   [hostsecurity]
-  hg.orthanc-server.com:fingerprints=sha256:74:24:16:D3:C8:22:45:7E:6B:00:6C:63:86:37:9F:A1:B1:04:A7:F4:3C:7E:5A:1A:68:0A:7A:AF:3B:1A:14:52
+  hg.orthanc-server.com:fingerprints=sha256:13:CA:46:BB:84:96:BD:D4:F7:09:94:60:0F:C2:3B:BA:87:E2:33:50:75:ED:0A:44:81:DF:80:EB:44:6B:C5:40
   
 .. highlight:: bash
 
