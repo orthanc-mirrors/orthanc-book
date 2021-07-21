@@ -12,7 +12,7 @@ Orthanc packages for Debian/Ubuntu
 Introduction
 ------------
 
-Orthanc is available as an offical `Debian package
+Orthanc is available as an official `Debian package
 <https://packages.debian.org/search?keywords=orthanc&searchon=names&exact=1&suite=all&section=all>`__
 that is continuously updated by the Orthanc core developers in the
 `Debian Sid/unstable distribution
@@ -106,10 +106,10 @@ do that at your own risk.
 This can be done with this sequence of commands::
 
   $ sudo service orthanc stop
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.5/Orthanc --output-document /usr/sbin/Orthanc
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.6/Orthanc --output-document /usr/sbin/Orthanc
   $ sudo rm -f /usr/share/orthanc/plugins/*.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.5/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.5/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.6/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.6/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
   $
   $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.6/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
   $ ...

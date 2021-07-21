@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.5"
+      "version" : "1.9.6"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3257,9 +3257,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "2c20c40c-e744-4922-ad0a-367ab6fee696",
-                              "2c89b071-d251-47e1-92af-d5791bce6ebf",
-                              "3811025c-4739-4fa4-8273-b9eff63828bf",
+                              "3b2b5734-2181-468c-9fda-e800ff2647da",
+                              "3f656515-d105-4ef5-a6b5-3ac2384181e3",
+                              "43ccf2db-74fe-457e-8537-dca845087574",
                               "..."
                            ]
                         }
@@ -4685,7 +4685,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -5820,7 +5820,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -8156,7 +8156,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -9126,7 +9126,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -10558,7 +10558,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -11703,7 +11703,7 @@
                               "type" : "number"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -12828,7 +12828,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 13,
+                              "ApiVersion" : 14,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
@@ -12839,7 +12839,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.4"
+                              "Version" : "1.9.5"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -13320,7 +13320,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -13463,7 +13463,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -13539,7 +13539,7 @@
                               "type" : "array"
                            },
                            "Synchronous" : {
-                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be prefered for large amount of data, as the creation of the temporary file might lead to network timeouts.",
+                              "description" : "If `true`, create the archive in synchronous mode, which means that the HTTP answer will directly contain the ZIP file. This is the default, easy behavior. However, if global configuration option \"SynchronousZipStream\" is set to \"false\", asynchronous transfers should be preferred for large amount of data, as the creation of the temporary file might lead to network timeouts.",
                               "type" : "boolean"
                            },
                            "Transcode" : {
@@ -14271,7 +14271,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1625736734245\northanc_count_patients 8 1625736734245\northanc_count_series 26 1625736734245\northanc_count_studies 8 1625736734245\northanc_dicom_cache_count 90 1625666803697\northanc_dicom_cache_size 63.2274284 1625666803697\northanc_disk_size_mb 1018.65021 1625736734245\northanc_jobs_completed 10 1625736734245\northanc_jobs_failed 3 1625736734245\northanc_jobs_pending 0 1625736734245\northanc_jobs_running 0 1625736734245\northanc_jobs_success 7 1625736734245\northanc_rest_api_active_requests 1 1625736734245\northanc_rest_api_duration_ms 345 1625736732718\northanc_storage_read_duration_ms 24 1625736733447\northanc_uncompressed_size_mb 1018.65021 1625736734245\n"
+                        "example" : "orthanc_count_instances 2552 1626863153049\northanc_count_patients 8 1626863153049\northanc_count_series 26 1626863153049\northanc_count_studies 8 1626863153049\northanc_dicom_cache_count 83 1626857936800\northanc_dicom_cache_size 61.942482 1626857936800\northanc_disk_size_mb 1018.65021 1626863153049\northanc_jobs_completed 10 1626863153049\northanc_jobs_failed 1 1626863153049\northanc_jobs_pending 0 1626863153049\northanc_jobs_running 0 1626863153049\northanc_jobs_success 9 1626863153049\northanc_rest_api_active_requests 1 1626863153049\northanc_rest_api_duration_ms 385 1626863148654\northanc_storage_read_duration_ms 21 1626863148365\northanc_uncompressed_size_mb 1018.65021 1626863153049\n"
                      }
                   },
                   "description" : ""
@@ -14290,7 +14290,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210708T093214",
+                        "example" : "20210721T102553",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14312,7 +14312,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210708T093214",
+                        "example" : "20210721T102553",
                         "schema" : {
                            "description" : "The local time"
                         }
