@@ -97,7 +97,8 @@ but can be specified to control the way Orthanc is run.
 - ``UNLOCK=true`` will start Orthanc with the ``--unlock`` option
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
 - ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
-
+- ``BEFORE_ORTHANC_STARTUP_SCRIPT`` can be used to `run a custom script <https://groups.google.com/g/orthanc-users/c/EXjTq2ZU1vw/m/02CwW1jzAQAJ>`__ before starting Orthanc.
+  
 Configuration files
 -------------------
 
