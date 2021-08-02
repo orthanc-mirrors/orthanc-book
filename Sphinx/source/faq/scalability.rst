@@ -300,7 +300,7 @@ Care must be taken to the following aspects:
   updates.
 
 * Each Orthanc instance maintains its own list of jobs; therefore, the 
-  `/jobs` route will return only the jobs of the responding Orthanc.
+  ``/jobs`` route will return only the jobs of the responding Orthanc.
 
 
 Latency
