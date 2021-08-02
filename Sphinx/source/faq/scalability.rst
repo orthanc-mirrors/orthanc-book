@@ -299,6 +299,8 @@ Care must be taken to the following aspects:
   a :ref:`revision mechanism <revisions>` to prevent concurrent
   updates.
 
+* Each Orthanc instance maintains its own list of jobs; therefore, the 
+  `/jobs` route will return only the jobs of the responding Orthanc.
 
 
 Latency
