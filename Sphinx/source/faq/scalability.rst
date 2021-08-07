@@ -127,10 +127,21 @@ presence of large databases:
   `Btrfs <https://en.wikipedia.org/wiki/Btrfs>`__ on GNU/Linux
   distributions.
 
-* On GNU/Linux distributions, `LVM (Logical Volume Manager)
-  <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__
-  can be used to dynamically and easily grow the storage area as more
-  space becomes needed.
+* If you need to grow the storage area as more space becomes needed,
+  you can consider the following solutions:
+
+  - Move the storage area to another disk partition, and update the
+    ``StorageDirectory`` :ref:`configuration option <configuration>`
+    accordingly.
+  - :ref:`Replicate <replication>` your current instance of Orthanc
+    onto another instance of Orthanc with a larger storage area.
+  - On GNU/Linux distributions, check out `LVM (Logical Volume Manager)
+    <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__.
+  - On Microsoft Windows, check out the so-called "`Storage Spaces
+    <https://docs.microsoft.com/en-us/windows-server/storage/storage-spaces/overview>`__".
+  - Another approach is to use `MinIO <https://docs.min.io/>`__ in
+    distributed mode in conjunction with the :ref:`AWS S3 plugin
+    <minio>` for Orthanc.
 
 * If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
   consider setting configuration option ``StudiesMetadata`` to

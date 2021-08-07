@@ -159,6 +159,8 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
   }
 
 
+.. _minio:
+  
 Emulation of AWS S3 using MinIO
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
