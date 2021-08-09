@@ -695,7 +695,25 @@ incoming C-STORE request, it makes a POST call to the URI
 embedded DICOM dataset into Orthanc. Obviously, one can build more
 complex DICOM servers by handling more messages than C-STORE alone.
 
-  
+
+.. _python_exception:
+
+Catching exceptions
+...................
+
+Starting with release 3.3 of the Python plugin, the plugin generates a
+Python exception derived from class ``orthanc.OrthancException`` if an
+error is encountered. This exception contains a tuple that provides
+the error code and its textual description.
+
+In releases <= 3.2, the Python plugin raised the `built-in exception
+<https://docs.python.org/3/library/exceptions.html>`__ ``ValueError``.
+
+Here is an example showing how to catch exceptions:
+
+.. literalinclude:: python/exception.py
+                    :language: python
+
 
 Performance and concurrency
 ---------------------------
