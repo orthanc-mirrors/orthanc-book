@@ -715,6 +715,46 @@ Here is an example showing how to catch exceptions:
                     :language: python
 
 
+.. _python_storage_area:
+
+Implementing a custom storage area (new in 3.3)
+...............................................
+
+Starting with release 3.3 of the Python plugin, it is possible to
+replace the built-in storage area of Orthanc (that writes
+:ref:`attachments <metadata>` onto the filesystem in the
+``OrthancStorage`` folder by default), by providing 3 Python callbacks
+to the ``orthanc.RegisterStorageArea()`` function:
+
+* The first callback indicates how to **create** an attachment into
+  the storage area.
+
+* The second callback indicates how to **read** an attachment from the
+  storage area.
+
+* The third callback indicates how to **remove** an attachment out of
+  the storage area.
+
+This feature can be used to quickly and easily interface Orthanc with
+any `object-based storage
+<https://en.wikipedia.org/wiki/Object_storage>`__ technology available
+in Python (such as `Ceph
+<https://en.wikipedia.org/wiki/Ceph_(software)>`__ or AWS S3-like
+tools). The performance will not be as good as a C/C++ native plugin
+(cf. the :ref:`cloud storage <object-storage>`, the :ref:`PostgreSQL
+<postgresql>` and the :ref:`MySQL <mysql>` plugins), but it can be
+used for prototyping or for basic setups.
+
+Here is a full, self-explaining sample:
+
+.. literalinclude:: python/storage-area.py
+                    :language: python
+
+The ``contentType`` can be used to apply a special treatment to some
+types of attachments (typically, DICOM instances). This parameter
+takes its values from the ``orthanc.ContentType`` enumeration.
+
+
 Performance and concurrency
 ---------------------------
 
