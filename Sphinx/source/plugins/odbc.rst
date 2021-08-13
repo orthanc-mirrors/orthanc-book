@@ -30,9 +30,10 @@ on one single database.
 
 That being said, there are multiple use cases for the ODBC plugins:
 
-* Connection to Microsoft SQL Server (MSSQL) is only possible with
-  ODBC. Note that the ODBC plugins were only validated against MSSQL
-  2017 and MSSQL 2019, under GNU/Linux.
+* Connection to Microsoft SQL Server (MSSQL), including Microsoft
+  Azure SQL, is only possible with ODBC. Note that the ODBC plugins
+  were only validated against MSSQL 2017 and MSSQL 2019, under
+  GNU/Linux.
 
 * Contrarily to the built-in SQLite engine and to the MySQL/MariaDB
   index plugin, the ODBC index plugin supports the :ref:`revision
@@ -70,6 +71,7 @@ when to use the ODBC plugins:
 | Database management system   | Recommended index plugin                               |
 +==============================+========================================================+
 | Microsoft SQL server (MSSQL) | ODBC plugin                                            |
+| or Microsoft Azure SQL       |                                                        |
 +------------------------------+--------------------------------------------------------+
 | MySQL (with revisions)       | ODBC plugin                                            |
 +------------------------------+--------------------------------------------------------+
@@ -92,6 +94,7 @@ when to use the ODBC plugins:
 | Filesystem                   | No plugin needed                                       |
 +------------------------------+--------------------------------------------------------+
 | Microsoft SQL server (MSSQL) | ODBC plugin                                            |
+| or Microsoft Azure SQL       |                                                        |
 +------------------------------+--------------------------------------------------------+
 | MySQL                        | :ref:`MySQL plugin <mysql>`                            |
 +------------------------------+--------------------------------------------------------+
@@ -166,8 +169,6 @@ Orthanc <compiling>` have already been installed)::
 Usage
 -----
 
-.. highlight:: json
-
 You of course first have to :ref:`install Orthanc <binaries>`, with a
 version above 0.9.5. You then have to **configure an ODBC data
 source** dedicated to Orthanc. The procedure depends upon your
@@ -192,6 +193,8 @@ operating system:
   Microsoft
   <https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server>`__.
 
+.. highlight:: json
+
 Once Orthanc is installed and the data sources have been defined, you
 must add a section in the :ref:`configuration file <configuration>`
 that specifies the **data source(s) to be used**. You also have to
@@ -206,9 +209,9 @@ adapt the following configuration file::
       "EnableStorage" : true,
       "IndexConnectionString" : "DSN=index",
       "StorageConnectionString" : "DSN=storage",
-      "MaximumConnectionRetries" : 10,  // Optional
-      "ConnectionRetryInterval" : 5,    // Optional
-      "IndexConnectionsCount" : 1       // Optional
+      "MaximumConnectionRetries" : 10,
+      "ConnectionRetryInterval" : 5,
+      "IndexConnectionsCount" : 1
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildOdbc/libOrthancOdbcIndex.so",
@@ -295,7 +298,9 @@ Microsoft SQL Server
 
    Note that there exist `many more configuration options
    <https://docs.microsoft.com/en-us/sql/relational-databases/native-client/applications/using-connection-string-keywords-with-sql-server-native-client>`__
-   for Microsoft SQL Server.
+   for Microsoft SQL Server. In particular, ``Encrypt`` and
+   ``TrustServerCertificate`` and ``Connect Timeout`` can be
+   interesting in the case of a connection to Microsoft Azure SQL.
      
 .. highlight:: json
 
@@ -315,15 +320,31 @@ Microsoft SQL Server
      
    * ``DSN`` corresponds to the name of the entry in ``~/.odbc.ini``.
    * ``Uid`` is the user name in MSSQL (by default, the Docker image uses ``sa``).
-   * ``Pwd`` is the password that has been used when starting Docker.
+   * ``Pwd`` is the password that has been provided in the ``SA_PASSWORD``
+     environment variable when starting Docker.
    * For security reasons, the ``Uid`` and ``Pwd`` parameters cannot
      be set in ``~/.odbc.ini``.
-     
-  
+
+**Remark:** It is actually not necessary to create an entry in
+``~/.odbc.ini``.  All the parameters can indeed be provided directly
+in the connection strings, for instance::
+   
+  {
+    "Odbc" : {
+      "EnableIndex" : true,
+      "EnableStorage" : true,
+      "IndexConnectionString" : "Driver={ODBC Driver 17 for SQL Server};Server=tcp:localhost,1433;Database=orthanctest;Uid=sa;Pwd=MyStrOngPa55word!",
+      "StorageConnectionString" : "Driver={ODBC Driver 17 for SQL Server};Server=tcp:localhost,1433;Database=orthanctest;Uid=sa;Pwd=MyStrOngPa55word!"
+    }
+  }
+
+
 PostgreSQL
 ^^^^^^^^^^
 
 1. Install the ``odbc-postgresql`` package.
+
+.. highlight:: text
 
 2. Create the following sample `unixODBC
    <https://en.wikipedia.org/wiki/UnixODBC>`__ configuration file::
@@ -336,6 +357,8 @@ PostgreSQL
      UserName    = postgres
      Password    = postgres
      Port        = 5432
+
+.. highlight:: json
 
 3. Start Orthanc using the following :ref:`configuration file
    <configuration>` for ODBC::
@@ -357,6 +380,8 @@ MySQL
    <https://dev.mysql.com/downloads/connector/odbc/>`__ (it is not
    packaged for Ubuntu 18.04).
 
+.. highlight:: text
+
 2. Create the following sample `unixODBC
    <https://en.wikipedia.org/wiki/UnixODBC>`__ configuration file::
     
@@ -368,6 +393,8 @@ MySQL
      UID         = root
      PWD         = root
      Port        = 3306
+
+.. highlight:: json
 
 3. Start Orthanc using the following :ref:`configuration file
    <configuration>` for ODBC::
@@ -389,6 +416,8 @@ SQLite
 
 1. Install the ``libsqliteodbc`` package.
 
+.. highlight:: text
+
 2. Create the following sample `unixODBC
    <https://en.wikipedia.org/wiki/UnixODBC>`__ configuration file::
     
@@ -405,6 +434,8 @@ SQLite
    and another for the storage area, because a SQLite database can
    only be opened by one client at once.
      
+.. highlight:: json
+
 3. Start Orthanc using the following :ref:`configuration file
    <configuration>` for ODBC::
      

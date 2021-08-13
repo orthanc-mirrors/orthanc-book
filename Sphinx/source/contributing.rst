@@ -30,7 +30,6 @@ Contributing to Orthanc
 
           * **Plugins**:
 
-            - Support of ODBC driver (notably for MSSQL databases)
             - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
