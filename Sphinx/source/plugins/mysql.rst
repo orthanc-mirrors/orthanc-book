@@ -16,6 +16,12 @@ plugins <https://www.orthanc-server.com/static.php?page=mysql>`__.
 For information about scalability, make sure to read the section about
 :ref:`multiple writers in large-scale deployments <multiple-writers>`.
 
+The source code of the MySQL/MariaDB plugins can be found in the
+``orthanc-databases`` `Mercurial repository
+<https://hg.orthanc-server.com/orthanc-databases/>`__, next to the
+source code of the :ref:`ODBC <odbc>` and :ref:`PostgreSQL
+<postgresql>` plugins.
+
 **Warning:** According to `this thread on our discussion group
 <https://groups.google.com/d/msg/orthanc-users/yV3LSTh_TjI/Fb4ShaYMBAAJ>`__,
 the MySQL/MariaDB plugins require MySQL 8.x if running on Microsoft
@@ -49,7 +55,7 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 Microsoft Windows
 ^^^^^^^^^^^^^^^^^
 
-Pre-compiled binaries for Microsoft Windows `are also available
+Pre-compiled binaries for Microsoft Windows 32bit `are also available
 <https://www.orthanc-server.com/browse.php?path=/plugin-mysql>`__.
 
 

@@ -66,6 +66,7 @@ From Osimis
    plugins/google-cloud-platform.rst    
    plugins/python.rst 
    plugins/object-storage.rst   
+   plugins/odbc.rst
    plugins/osimis-webviewer.rst
    plugins/authorization.rst
 

@@ -16,6 +16,11 @@ plugins <https://www.orthanc-server.com/static.php?page=postgresql>`__.
 For information about scalability, make sure to read the section about
 :ref:`multiple writers in large-scale deployments <multiple-writers>`.
 
+The source code of the PostgreSQL plugins can be found in the
+``orthanc-databases`` `Mercurial repository
+<https://hg.orthanc-server.com/orthanc-databases/>`__, next to the
+source code of the :ref:`ODBC <odbc>` and
+:ref:`MySQL/MariaDB <mysql>` plugins.
 
 
 Compilation
@@ -44,7 +49,7 @@ The compilation will produce 2 shared libraries, each containing one plugin for 
 Microsoft Windows and Apple OS X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pre-compiled binaries for Microsoft Windows `are also available
+Pre-compiled binaries for Microsoft Windows 32bit `are also available
 <https://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
 A package for `Apple's Mac OS X
 <https://www.osimis.io/en/download.html>`__

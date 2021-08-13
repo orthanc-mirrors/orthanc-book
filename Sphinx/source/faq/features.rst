@@ -420,8 +420,8 @@ Check out the `OpenAPI reference <https://api.orthanc-server.com/>`__
 of the REST API of Orthanc for more information.
 
 **Warning:** The database index back-end must support revisions. As of
-writing, only the **PostgreSQL plugin** in versions above 4.0
-implement support for revisions.
+writing, only the **PostgreSQL plugins** in versions above 4.0 and the
+**ODBC plugins** implement support for revisions.
 
 
 Synchronous vs. asynchronous C-MOVE SCP
