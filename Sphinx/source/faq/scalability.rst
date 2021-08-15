@@ -310,9 +310,36 @@ Care must be taken to the following aspects:
   a :ref:`revision mechanism <revisions>` to prevent concurrent
   updates.
 
-* Each Orthanc instance maintains its own list of jobs; therefore, the 
-  ``/jobs`` route will return only the jobs of the responding Orthanc.
+* Thanks to this support of concurrent accesses, it is possible to put
+  a **load balancer** on the top of the REST API of Orthanc. All the
+  DICOM resources (patients, studies, series and instances) are indeed
+  shared by all the instances of Orthanc connected to the same
+  underlying database. As an application, this might be of great help
+  if multiple viewers must connect to Orthanc. In `Kubernetes
+  <https://kubernetes.io/>`__, concurrent accesses also make it
+  possible to manage a set of replicas of Orthanc (e.g. as `deployment
+  <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>`__).
 
+  There are however some caveats if using a load balancer or
+  Kubernetes replicas, notably:
+    
+  - Each Orthanc instance maintains its own list of jobs. Therefore,
+    the ``/jobs`` route will return only the jobs of the responding
+    Orthanc.
+
+  - The ``/modalities`` or the ``/peers`` are also private to each
+    instance of Orthanc in the cluster, as soon as the respective
+    options ``DicomModalitiesInDatabase`` and
+    ``OrthancPeersInDatabase`` are set to ``true``.
+
+  If you need to use such primitives in your application, you have
+  three possibilities: (1) Introduce a distinguished Orthanc server
+  that is responsible to take care of all the jobs (including
+  modalities and peers), (2) create an :ref:`Orthanc plugin <plugins>`
+  (e.g. using :ref:`Python <python-plugin>`) that queries all the
+  Orthanc in the cluster and that aggregates all of their answers,
+  or (3) do the same using a higher-level framework (such as Node.js).
+    
 
 Latency
 ^^^^^^^
