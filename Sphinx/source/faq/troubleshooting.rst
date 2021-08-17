@@ -33,6 +33,15 @@ Startup
   (it also checks for UDP socket using the same port) and Orthanc 1.3.0 might 
   display error messages that where not displayed by previous versions.
 
+* If Orthanc **does not start anymore after a hard shutdown** and if
+  use the :ref:`Orthanc Web viewer plugin <webviewer>`, this might
+  reflect a corruption in the cache of the Web viewer. In such a case,
+  it is safe to remove the folder that contains the cache. By default,
+  this folder is called ``OrthancStorage/WebViewerCache/``
+  (cf. :ref:`configuration option <configuration>` ``CachePath`` in
+  the ``WebViewer`` section). Of course, don't remove the folder
+  ``OrthancStorage/``, as it contains the DICOM files.
+  
   
 Validating DICOM files
 ----------------------
