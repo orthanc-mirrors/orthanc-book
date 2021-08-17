@@ -34,7 +34,7 @@ Startup
   display error messages that where not displayed by previous versions.
 
 * If Orthanc **does not start anymore after a hard shutdown** and if
-  use the :ref:`Orthanc Web viewer plugin <webviewer>`, this might
+  you use the :ref:`Orthanc Web viewer plugin <webviewer>`, this might
   reflect a corruption in the cache of the Web viewer. In such a case,
   it is safe to remove the folder that contains the cache. By default,
   this folder is called ``OrthancStorage/WebViewerCache/``
