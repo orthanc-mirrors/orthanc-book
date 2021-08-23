@@ -29,7 +29,7 @@ to generate a self-signed certificate using the `OpenSSL
   $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
             -keyout orthanc.key -out orthanc.crt -subj "/C=BE/CN=localhost"
 
-Obviously, you have adapt the arguments to your setup (notably the
+Obviously, you must adapt the arguments to your setup (notably the
 ``subj`` argument that generates a certificate for Belgium for the
 server whose DNS address is ``localhost``). This command line will
 generate two files using the `PEM file format
