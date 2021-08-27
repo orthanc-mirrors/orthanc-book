@@ -70,6 +70,16 @@ From Osimis
    plugins/osimis-webviewer.rst
    plugins/authorization.rst
 
+.. _plugins-uclouvain:
+
+From UCLouvain
+^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/tcia.rst
+
 .. _plugins-contributed:
 
 Index of the contributed plugins
