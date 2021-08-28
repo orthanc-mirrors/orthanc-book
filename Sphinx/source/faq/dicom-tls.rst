@@ -86,10 +86,12 @@ trusted certificates.
 <https://forum.dcmtk.org/viewtopic.php?t=5073>`__, which produces the
 errors ``DUL secure transport layer: no suitable signature algorithm``
 (in the DICOM SCP) and ``DUL secure transport layer: sslv3 alert
-handshake failure`` (in the DICOM SCU). Make sure to use either DCMTK
-3.6.2 or DCMTK 3.6.6. In particular, Debian Buster (10) will use DCMTK
-3.6.4 and should be avoided in non-static builds of Orthanc, or if
-using the DCMTK command-line tools.
+handshake failure`` (in the DICOM SCU). This problem is not specific
+to Orthanc, as it also occurs between two command-line tools of the
+DCMTK 3.6.4 suite. Make sure to use either DCMTK 3.6.2 or DCMTK
+3.6.6. In particular, Debian Buster (10) uses DCMTK 3.6.4 and should
+be avoided in non-static builds of Orthanc, or if using the DCMTK
+command-line tools.
 
 
 

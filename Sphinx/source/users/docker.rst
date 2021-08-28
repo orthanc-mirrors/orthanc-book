@@ -30,21 +30,23 @@ source code of the corresponding Docker images is available on `GitHub
   images that are described on this page are always kept in sync with
   the latest releases of the Orthanc project, with a basic
   configuration system that is inherited from the Debian packages
-  (i.e. manual edition of the configuration files).
+  (i.e. manual edition of the configuration files). These images are
+  most useful to **software developers and researchers**.
 
 * Our commercial partner `Osimis <https://www.osimis.io>`__ also
   `publishes separated Docker images
-  <https://hub.docker.com/r/osimis/orthanc>`__.
-  These ``osimis/orthanc`` images are used by the technical team of
-  Osimis in order to provide professional support to their customers,
-  with a configuration system that can be tuned through environment
-  variables (which is very handy if using ``docker-compose``). These
-  images are not necessarily always in sync with the Orthanc project,
-  but they also include the :ref:`plugins edited by Osimis
-  <plugins-osimis>`, notably the Osimis Web viewer (that is much more
-  advanced than the Orthanc Web viewer) and the advanced authorization
-  plugin. A :ref:`specific page <docker-osimis>` is available to describe 
-  how these images should be used.
+  <https://hub.docker.com/r/osimis/orthanc>`__.  These
+  ``osimis/orthanc`` images are used by the technical team of Osimis
+  in order to provide professional support to their customers, with a
+  configuration system that can be tuned through **environment
+  variables** (which is very handy if using ``docker-compose`` or
+  Kubernetes). These images are not necessarily always in sync with
+  the Orthanc project, but they also include the :ref:`plugins edited
+  by Osimis <plugins-osimis>`, notably the Osimis Web viewer (that is
+  much more advanced than the Orthanc Web viewer) and the advanced
+  authorization plugin. A :ref:`specific page <docker-osimis>` is
+  available to describe how these images should be used. These images
+  are targeted at **ops teams**.
 
 **Note for CentOS users:** The Docker environment might be difficult to
 configure on your platform. Hints are available on the `Orthanc Users
