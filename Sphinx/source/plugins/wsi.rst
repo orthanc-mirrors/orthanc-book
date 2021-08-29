@@ -31,7 +31,7 @@ Static linking
 
 The procedure to compile the WSI framework is similar of that for the
 :ref:`core of Orthanc <binaries>`. The following commands should work
-for every UNIX-like distribution (including GNU/Linux)::
+for most UNIX-like distribution (including GNU/Linux)::
 
   # Firstly, compile the command-line tools
   $ mkdir Applications/Build

@@ -29,7 +29,7 @@ Compilation
 
 The procedure to compile this plugin is similar of that for the
 :ref:`core of Orthanc <compiling>`. The following commands should work
-for every UNIX-like distribution (including GNU/Linux)::
+for most UNIX-like distribution (including GNU/Linux)::
 
   $ mkdir Build
   $ cd Build
