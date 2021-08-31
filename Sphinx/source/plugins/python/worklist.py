@@ -3,7 +3,7 @@ import orthanc
 import os
 
 # Path to the directory containing the DICOM worklists
-# https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.6/OrthancServer/Plugins/Samples/ModalityWorklists/WorklistsDatabase
+# https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Plugins/Samples/ModalityWorklists/WorklistsDatabase
 WORKLIST_DIR = '/tmp/WorklistsDatabase'
 
 def OnWorklist(answers, query, issuerAet, calledAet):

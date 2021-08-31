@@ -26,7 +26,7 @@ compatibility matrix:
 Version                           DB v2   DB v3   DB v4   DB v5   DB v6
 ===============================   =====   =====   =====   =====   =====
 Mainline                                  u       u       u       x
-Orthanc 0.9.5 - Orthanc 1.9.6             u       u       u       x
+Orthanc 0.9.5 - Orthanc 1.9.7             u       u       u       x
 Orthanc 0.8.5 - Orthanc 0.9.4             u       u       x
 Orthanc 0.7.3 - Orthanc 0.8.4             u       x
 Orthanc 0.4.0 - Orthanc 0.7.2             x
