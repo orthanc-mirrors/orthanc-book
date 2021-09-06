@@ -134,7 +134,7 @@ AWS S3 plugin
 Sample configuration::
 
   "AwsS3Storage" : {
-  	"BucketName": "test-orthanc-s3-plugin",
+    "BucketName": "test-orthanc-s3-plugin",
     "Region" : "eu-central-1",
     "AccessKey" : "AKXXX",                    // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
     "SecretKey" : "RhYYYY",                   // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
@@ -144,6 +144,7 @@ Sample configuration::
     "RootPath": "",                           // optional: see below
     "MigrationFromFileSystemEnabled": false,  // optional: see below
     "StorageStructure": "flat",               // optional: see below
+    "EnableLegacyUnknownFiles": true,         // optional: see below
     "VirtualAddressing": true,                // optional: see the section related to MinIO
     "StorageEncryption" : {}                  // optional: see the section related to encryption
   }
@@ -224,7 +225,8 @@ Sample configuration::
     "CreateContainerIfNotExists": true,       // available from version 1.2.0
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat"                // see below
+    "StorageStructure": "flat",               // see below
+    "EnableLegacyUnknownFiles": true          // optional: see below
   }
 
 
@@ -238,7 +240,8 @@ Sample configuration::
     "BucketName": "test-orthanc-storage-plugin",
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat"                // see below
+    "StorageStructure": "flat",               // see below
+    "EnableLegacyUnknownFiles": true          // optional: see below
   }
 
 
@@ -273,6 +276,11 @@ have to use a standard ``sync`` command from the object-storage provider.
 
 A migration script from File System to Azure Blob Storage is available courtesy of `Steve Hawes <https://github.com/jodogne/OrthancContributed/blob/master/Scripts/Migration/2020-09-08-TransferToAzure.sh>`__ .
 
+The **EnableLegacyUnknownFiles** configuration has been introduced to allow recent version of the plugins (from 1.3.3)
+continue working with data that was saved with Orthanc version around 1.9.3 and plugins version around 1.2.0 (e.g. osimis/orthanc:21.5.1 docker images).
+With these specific versions, some ``.unk`` files were generated instead of ``.dcm.head`` files.  With this configuration option enabled,
+when reading files, the plugin will try both file extensions.
+If you have ``.unk`` files in your storage, you must enable this configuration.
 
 Sample setups
 -------------
