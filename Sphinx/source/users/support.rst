@@ -94,7 +94,13 @@ you must provide all the following information:
   project. As a consequence, questions regarding OHIF must be asked on
   the `dedicated discussion group
   <https://groups.google.com/g/cornerstone-platform>`__ or on the
-  `dedicated bug tracker <https://github.com/OHIF/Viewers/issues>`__.
+  `dedicated bug tracker
+  <https://github.com/OHIF/Viewers/issues>`__. The core developers of
+  Orthanc will happily fix the :ref:`DICOMweb plugin <dicomweb>`, but
+  it is necessary for the reporter to identify the discrepancy wrt.
+  DICOMweb standard by providing a minimal working example as
+  explained above.
+
 
 All this information is mandatory, as it allows other members of the
 Orthanc community to **reproduce your problem independently of your
