@@ -88,6 +88,13 @@ you must provide all the following information:
   modality.
 * If applicable, a screenshot is worth a thousand words.
 * If you report a crash, if applicable, a :ref:`core file <crash>`.
+* The `OHIF viewer <https://ohif.org/>`__ can `connect to Orthanc
+  <https://docs.ohif.org/history/v1/connecting-to-image-archives/orthanc-with-docker.html>`__
+  using the DICOMweb plugin of Orthanc, but is a fully separate
+  project. As a consequence, questions regarding OHIF must be asked on
+  the `dedicated discussion group
+  <https://groups.google.com/g/cornerstone-platform>`__ or on the
+  `dedicated bug tracker <https://github.com/OHIF/Viewers/issues>`__.
 
 All this information is mandatory, as it allows other members of the
 Orthanc community to **reproduce your problem independently of your
