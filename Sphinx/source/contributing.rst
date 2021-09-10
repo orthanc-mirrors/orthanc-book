@@ -98,6 +98,8 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Coding tasks**:
       
+  - Have a look at the TODO file containing our `official roadmap
+    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   - The Orthanc project will happily accept patches in the core of
     Orthanc and in its associated official plugins. Please read the
     :ref:`dedicated FAQ entry <cla>`.
@@ -152,8 +154,6 @@ here are some tasks you can take in charge that would greatly help us:
     + Get involved in the call for ideas by Salim Kanoun about a
       `DICOM router built on the top of Orthanc
       <https://groups.google.com/g/orthanc-users/c/tx7E1RQuKIY/m/_GsrRZljBgAJ>`__.
-    + Have a look at the TODO file containing our `official roadmap
-      <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   
   - Always remember that he **recommended way of contributing to the
     source code of Orthanc is by creating C/C++/Python plugins, or by
