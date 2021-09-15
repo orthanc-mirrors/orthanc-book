@@ -79,6 +79,7 @@ From UCLouvain
    :maxdepth: 1
 
    plugins/tcia.rst
+   plugins/indexer.rst
 
 .. _plugins-contributed:
 
