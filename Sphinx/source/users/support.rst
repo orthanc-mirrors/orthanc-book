@@ -154,7 +154,7 @@ decision chart:
 
    * **Europe**:
 
-     * `Alain Mazy <alain@mazy.be>`__ (French/English, Belgium)
+     * `Alain Mazy <https://mazy.be/orthanc>`__ (French/English, Belgium)
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Benoit Crickboom <orthanc@sleig.be>`__ (French/English, Belgium)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
