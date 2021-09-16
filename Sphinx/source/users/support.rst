@@ -122,7 +122,9 @@ If you are **sure** that you are reporting a yet unknown bug, you can
 consider directly introducing a `bug report on our issue tracker
 <https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
-As a consequence, it is advised to first use the discussion forum.
+As a consequence, it is strongly advised to use the `discussion forum
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ in the
+first place.
 
 
 .. _support-freelancers:
