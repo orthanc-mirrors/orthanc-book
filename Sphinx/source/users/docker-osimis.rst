@@ -95,6 +95,8 @@ but can be specified to control the way Orthanc is run.
 - ``TRACE_ENABLED=true`` will start Orthanc with the ``--trace`` option
 - ``NO_JOBS=true`` will start Orthanc with the ``--no-jobs`` option
 - ``UNLOCK=true`` will start Orthanc with the ``--unlock`` option
+- ``LOGDIR=/logs`` will start Orthanc with the ``--logdir=/logs`` option (introduced in 21.9.1)
+- ``LOGFILE=/logs`` will start Orthanc with the ``--logfile=/logs/orthanc.log`` option (introduced in 21.9.1)
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
 - ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
 - ``BEFORE_ORTHANC_STARTUP_SCRIPT`` can be used to `run a custom script <https://groups.google.com/g/orthanc-users/c/EXjTq2ZU1vw/m/02CwW1jzAQAJ>`__ before starting Orthanc.
