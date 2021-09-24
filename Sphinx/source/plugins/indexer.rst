@@ -65,7 +65,7 @@ use this plugin::
 
   {
     "Plugins" : [
-      "/home/user/OrthancTcia/Build/libOrthancTcia.so"
+      "/home/user/OrthancIndexer/Build/libOrthancIndexer.so"
     ],
     "Indexer" : {
       "Enable" : true,
@@ -81,3 +81,13 @@ Once Orthanc is started, the folders are transparently synchronized
 without any further interaction. You can start Orthanc with the
 ``--verbose-plugins`` command-line option in order to monitor the
 synchronization process.
+
+Some remarks:
+
+* This plugin cannot be used together with other custom storage area
+  plugins (such as :ref:`cloud object storage <object-storage>`).
+
+* Even if the folder indexer plugin is in use, you can still add other
+  DICOM files using the :ref:`REST API <rest>` or the :ref:`DICOM
+  network protocol <dicom-protocol>`.
+
