@@ -89,5 +89,6 @@ Some remarks:
 
 * Even if the folder indexer plugin is in use, you can still add other
   DICOM files using the :ref:`REST API <rest>` or the :ref:`DICOM
-  network protocol <dicom-protocol>`.
+  network protocol <dicom-protocol>`. Such files would be stored in
+  the ``OrthancStorage`` :ref:`usual folder <orthanc-storage-area>`.
 
