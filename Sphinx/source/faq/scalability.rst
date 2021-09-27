@@ -370,15 +370,19 @@ makes the latency problem much less important.
 Slow deletions
 ^^^^^^^^^^^^^^
 
-Deleting large studies can take some time, because removing a large
+Deleting large studies can take much time, because removing a large
 number of files from a filesystem can be an expensive operation (which
-might sound counterintuitive).
+might sound counter-intuitive). This is especially true with HDD
+drives, that can be much slower than SSD (`an user has reported
+<https://groups.google.com/g/orthanc-users/c/1lga0oFCHN4/m/jF1inrc4AgAJ>`__
+a 20 times speedup by switching from HDD to SSD).
 
-It is possible to create an :ref:`storage area plugin
-<creating-plugins>` that delays the actual deletion from the
-filesystem. The plugin would maintain a queue (e.g. as a SQLite
-database) of files to be removed. The actual deletion from the
-filesystem would be done asynchronously in a separate thread.
+If switching from HDD to SDD is not applicable, it is possible to
+create an :ref:`storage area plugin <creating-plugins>` that delays
+the actual deletion from the filesystem. The plugin would maintain a
+queue (e.g. as a SQLite database) of files to be removed. The actual
+deletion from the filesystem would be done asynchronously in a
+separate thread.
 
 We are looking for funding from the industry to implement such a
 plugin.

@@ -3,6 +3,8 @@
 How does Orthanc store its database?
 ====================================
 
+.. _orthanc-storage-area:
+
 Storage area
 ------------
 
