@@ -196,6 +196,21 @@ For instance::
   RestApiPost('/instances/5af318ac-78fb-47ff-b0b0-0df18b0588e0/anonymize', '{}')
 
 
+Instance modification/routing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Lua engine offers a few function to modify and route DICOM instances.
+:ref:`See this section <lua-auto-routing>`
+
+* ``ModifyInstance(instanceId, replacements, removals, removePrivateTags)``
+  modifies an instance.  Returns the instanceId of the modified instance
+* ``SendToModality(instanceId, modality)`` performs a C-Store to the 
+  target modality.  Returns the instanceId.
+* ``SendToPeer(instanceId, peer)`` sends the instance to a remote Orthanc peer.
+  Returns the instanceId.
+* ``Delete(instanceId)`` deletes the instance.
+
+
 General-purpose functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
