@@ -167,7 +167,7 @@ here are some tasks you can take in charge that would greatly help us:
 * **Financial support**:
 
   - Osimis provides `support packs and professional development
-    services <https://www.osimis.io/en/services.html>`__ around the
+    services <https://osimis.io/en/orthanc-support-contract>`__ around the
     Orthanc ecosystem and, more generally, around medical
     imaging. Buying such professional services is the best way to make
     the Orthanc project sustainable in the long term.

@@ -48,7 +48,7 @@ resources:
 
 Importantly, for all the features that are pending in the ``TODO``
 file, if you are a company, please consider `buying professional
-services <https://www.osimis.io/en/services.html>`__ in order to get
+services <https://osimis.io/en/orthanc-support-contract>`__ in order to get
 the feature implemented faster.
    
    
@@ -148,15 +148,15 @@ decision chart:
 3. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
    or if you need **proximity support in your language/timezone**,
-   here is a list of freelancers:
+   here is a list of freelancers/companies:
 
    * **Worldwide**:
    
-     * `Osimis <https://www.osimis.io/en/services.html>`__
+     * `Osimis <https://osimis.io/en/orthanc-support-contract>`__ (French/English, Belgium)
+     * `Alain Mazy <https://mazy.be/orthanc>`__ (French/English, Belgium)
 
    * **Europe**:
 
-     * `Alain Mazy <https://mazy.be/orthanc>`__ (French/English, Belgium)
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Benoit Crickboom <orthanc@sleig.be>`__ (French/English, Belgium)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)

@@ -37,7 +37,7 @@ the Orthanc project doesn't freely provide pre-compiled binaries for
 Docker, Windows, Linux or OS X. These pre-compiled binaries do exist,
 but are reserved to the companies who have subscribed to a
 `professional support contract
-<https://www.osimis.io/en/services.html#cloud-plugins>`__ by
+<https://osimis.io/en/orthanc-support-contract>`__ by
 Osimis. Although you are obviously free to compile these plugins by
 yourself (instructions are given below), purchasing such support
 contracts makes the Orthanc project sustainable in the long term, to
