@@ -244,6 +244,13 @@ can be used to regenerate the ``/tmp/orthanc.json`` configuration file that is l
 you POST to ``/tools/reset``.  Note that it declares an ``IncomingHttpRequestFilter`` 
 callback that might conflict with your scripts.
 
+Healthcheck probe
+-----------------
+
+In version 21.10.0, the `/probes/test-aliveness.py <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/test-aliveness.py>`__ 
+script has been added in order to perform healthchecks.  Check the doc in the script itself for more details.
+A sample configuration is also available in `this sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/8016d140a237a892db703aac4782307c46732847/docker/tls-mutual-auth/docker-compose.yml#lines-51>`__
+
 
 Plugins
 -------
