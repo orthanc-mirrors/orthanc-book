@@ -13,7 +13,7 @@ Orthanc does not display the PatientName correctly
 If your DICOM files are valid, Orthanc should display all strings correctly both
 in the UI and in the Rest API in which all strings are converted to UTF-8.
 
-However, it might still be useful to understand what's wrong in your files
+However, it might still be useful to understand what's wrong with your files
 such that you can possibly fix your files once they have been stored in Orthanc
 or configure your modality correctly.
 
