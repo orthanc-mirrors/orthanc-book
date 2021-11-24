@@ -338,6 +338,15 @@ in the connection strings, for instance::
     }
   }
 
+**Remark:** On Windows systems, we have noticed that the ODBC drivers character encoding 
+seems to depend on a system level configuration.  This configuration needs to enforce UTF-8.
+Therefore, it is advised to configure the system locale as follow:
+
+.. image:: ../images/odbc-windows-system-locale.png
+           :align: center
+           :width: 600px
+
+|
 
 PostgreSQL
 ^^^^^^^^^^
