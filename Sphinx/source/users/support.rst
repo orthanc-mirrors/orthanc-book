@@ -174,6 +174,7 @@ decision chart:
        
      * `Claudio Arenas <mailto:dentista.arenas@gmail.com>`__ (Spanish/English, Chile)
      * `Gustavo Fernandez <https://www.linkedin.com/in/gfernandezguirland/>`__ (Spanish/Portuguese, Uruguay)
+     * `Iván Kuschevatzky <mailto:ivankuche@gmail.com>`__ (English/Spanish, Argentina)
      * `Luiz Eduardo Guida Valmont <https://www.linkedin.com/in/luizvalmont/>`__ (English/Portuguese, Brazil)
      * `William Sanchez Luis <mailto:williamsanchezluis@gmail.com>`__ (English/Spanish, Venezuela)
 
