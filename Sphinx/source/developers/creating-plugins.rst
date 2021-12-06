@@ -18,8 +18,10 @@ Native Orthanc plugins must use the `plugin SDK
 <https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__.
 As a consequence, an Orthanc plugin will typically be written using C
 or C++, although it is also possible to create native plugins using
-languages that feature compatibility with C headers and with C ABI
-(such as Rust or Objective-C).
+languages that feature compatibility with C headers and with `FFI of
+the C language
+<https://en.wikipedia.org/wiki/Foreign_function_interface>`__ (such as
+Rust or Objective-C).
 
 For developers who are more familiar with Python, it is also possible
 to create plugins using this simpler language. Check out the
@@ -67,7 +69,7 @@ Structure of the plugins
 
 A plugin takes the form of a shared library (``.DLL`` under Windows,
 ``.so`` under GNU/Linux, ``.dylib`` under Apple OS X...) that uses the
-`ABI of the C language
+`FFI of the C language
 <https://en.wikipedia.org/wiki/Application_binary_interface>`__ to
 declare 4 public functions/symbols:
 
