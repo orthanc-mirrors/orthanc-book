@@ -12,15 +12,26 @@ The recommended way of :ref:`contributing to the Orthanc code
 <contributing>` consists in extending it by creating new :ref:`plugins
 <plugins>`.
 
-Orthanc plugins must use the `plugin SDK
-<https://sdk.orthanc-server.com/>`__ and must be written in C or
-C++. They must also fullfil the terms of the `GPLv3 license
-<http://www.gnu.org/licenses/quick-guide-gplv3.en.html>`__ that is
-used by the core of Orthanc.
+Native Orthanc plugins must use the `plugin SDK
+<https://sdk.orthanc-server.com/>`__ whose interface is available as a
+`C header
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__.
+As a consequence, an Orthanc plugin will typically be written using C
+or C++, although it is also possible to create native plugins using
+languages that feature compatibility with C headers and with C ABI
+(such as Rust or Objective-C).
 
 For developers who are more familiar with Python, it is also possible
 to create plugins using this simpler language. Check out the
 :ref:`dedicated Python plugin <python-plugin>`.
+
+Because the C header providing the Orthanc SDK interface is licensed
+using the GPLv3 license, any Orthanc plugin must be licensed either
+under the `GPLv3 license
+<http://www.gnu.org/licenses/quick-guide-gplv3.en.html>`__ that is
+used by the :ref:`core of Orthanc <licensing>`, or under a more
+restrictive license that is compatible with the GPL (typically the
+AGPL).
 
 Here are some resources about creating C/C++ plugins:
 
