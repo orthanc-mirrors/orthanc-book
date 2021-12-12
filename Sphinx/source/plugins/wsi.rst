@@ -86,7 +86,7 @@ Orthanc <compiling>` have already been installed)::
 Usage of the plugin
 -------------------
 
-.. highlight:: json
+.. highlight:: text
 
 You of course first have to :ref:`install Orthanc <compiling>`. Once
 Orthanc is installed, you must change the :ref:`configuration file
@@ -292,6 +292,57 @@ path to the target TIFF file.
 Similarly to the DICOM-izer, the command-line options ``--orthanc``,
 ``--username`` and ``--password`` can be used to specify the
 parameters of your Orthanc server.
+
+
+Interface with Cytomine
+-----------------------
+
+`Cytomine <https://cytomine.be/>`__ is an "*open-source rich internet
+application for collaborative analysis of multi-gigapixel images.*"
+Starting with release 1.1 of the whole-slide imaging framework for
+Orthanc, it is possible to exchange digital pathology images back and
+forth between Orthanc and Cytomine according to the following
+workflow:
+
+.. image:: ../images/2021-12-12-Cytomine.png
+           :align: center
+           :width: 500px
+
+|
+
+As can be seen, ``OrthancWSIDicomizer`` imports the source image from
+Cytomine using its REST API, then puts the converted DICOM instances
+onto Orthanc using its REST API. Here is a minimalist sample call to
+the ``OrthancWSIDicomizer`` command-line tool to convert an image from
+a Cytomine server onto an Orthanc server listening on
+``localhost:8042`` with default parameters ::
+
+  $ ./OrthancWSIDicomizer --cytomine-url=http://XXX --cytomine-image=325 \
+                          --cytomine-public-key=YYY --cytomine-private-key=ZZZ \
+                          --threads=4 --pyramid=1 --username=orthanc --password=orthanc --verbose 
+
+The ``--cytomine-image`` parameter corresponds to the ID of the `Image
+Instance <https://doc.uliege.cytomine.org/dev-guide/api/reference>`__
+of interest. This ID can easily be retrieved from the Web interface of
+Cytomine:
+
+.. image:: ../images/Cytomine.png
+           :align: center
+           :width: 600px
+
+|
+
+The ``--cytomine-public-key`` and ``--cytomine-private-key``
+parameters grant access to the REST API of Cytomine, and can be found
+in the parameters of your account using the Web interface of Cytomine:
+
+.. image:: ../images/CytomineKeys.png
+           :align: center
+           :width: 600px
+
+|
+
+
 
 
 REST API
