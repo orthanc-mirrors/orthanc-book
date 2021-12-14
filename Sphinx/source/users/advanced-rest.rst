@@ -26,11 +26,13 @@ history (the size of this history is controlled by the
 ``JobsHistorySize`` option).
 
 By default, Orthanc saves the jobs into its database (check out the
-``SaveJobs`` option). If Orthanc is stopped then relaunched, the jobs
+``SaveJobs`` option).  Jobs are saved every 10 seconds and when
+Orthanc stops. If Orthanc is stopped then relaunched, the jobs
 whose processing was not finished are automatically put into the queue
-of pending tasks. The command-line option ``--no-jobs`` can also be
-used to prevent the loading of jobs from the database upon the launch
-of Orthanc.
+of pending tasks or resumed if they were being processed when Orthanc
+stopped. The command-line option ``--no-jobs`` can also be used to 
+prevent the loading of jobs from the database upon the launch of 
+Orthanc.
 
 Note that the queue of pending jobs has a maximum size (check out the
 ``LimitJobs`` option). When this limit is reached, the addition of new
