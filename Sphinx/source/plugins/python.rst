@@ -111,8 +111,29 @@ You'll see the following excerpt in the log, which indicates that the Python plu
 `Here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/python/>`__ is a full example
 of a more complex setup using the :ref:`osimis/orthanc <docker-osimis>` images.
 
+
+Microsoft Windows
+.................
+
+Pre-compiled binaries for Microsoft Windows `are also available
+<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+
+Beware that one version of the Python plugin can only be run against
+one version of the Python interpreter. This version is clearly
+indicated in the filename of the precompiled binaries.  
+
+Pay also attention to pick the right 32/64 bits version.  If you are
+running Orthanc 64bits, install Python in 64bits and select the 64bits
+Python plugin too.
+
+When you install Python on your Windows machine, make sure to install
+Python for ``All Users`` and select the ``Add Python to Path`` option.
+
 Compiling from source
 .....................
+
+For GNU/Linux
+^^^^^^^^^^^^^
 
 .. highlight:: bash
 
@@ -148,15 +169,8 @@ be used on OS X::
           -DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/include/python3.8/
   
   
-Microsoft Windows
-.................
-
-Pre-compiled binaries for Microsoft Windows `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
-
-Beware that one version of the Python plugin can only be run against
-one version of the Python interpreter. This version is clearly
-indicated in the filename of the precompiled binaries.
+For Microsoft Windows
+^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: text
 
@@ -164,7 +178,7 @@ You are of course free to compile the plugin from sources. You'll have
 to explicitly specify the path to your Python installation while
 invoking CMake. For instance::
 
-  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=3.8 -DPYTHON_WINDOWS_ROOT=C:/Python38 \
                                     -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017"
 
 **Note about debug builds**: Usually, building Python modules such as the Python 
@@ -185,7 +199,7 @@ system to do so by setting the ``PYTHON_WINDOWS_USE_RELEASE_LIBS`` CMake option,
 that is ``ON`` by default, to ``OFF``. The previous build example would then be,
 should you require a full debug build::
 
-  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=3.8 -DPYTHON_WINDOWS_ROOT=C:/Python38 \
                                     -DSTATIC_BUILD=ON -DPYTHON_WINDOWS_USE_RELEASE_LIBS=OFF \
                                     -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 15 2017"
 
