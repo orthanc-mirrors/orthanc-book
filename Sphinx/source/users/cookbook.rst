@@ -18,9 +18,9 @@ To obtain the Orthanc binaries, you have several possibilities:
 * `Download pre-compiled packages <https://www.orthanc-server.com/download.php>`__.
 * :ref:`Use Docker <docker>`.
 * On GNU/Linux, use precompiled packages for :ref:`Debian/Ubuntu
-  <debian-packages>`, or for `openSUSE
-  <https://software.opensuse.org/search?q=orthanc>`__ (courtesy of
-  Axel Braun).
+  <debian-packages>` (courtesy of DebianMed and Sébastien Jodogne), or
+  for `openSUSE <https://software.opensuse.org/search?q=orthanc>`__
+  (courtesy of Axel Braun).
 * On GNU/Linux, use our `LSB binaries
   <https://lsb.orthanc-server.com/>`__ (Linux Standard Base), that
   should easily and immediately run on most distributions. Those
@@ -30,6 +30,29 @@ To obtain the Orthanc binaries, you have several possibilities:
 * :ref:`Compile Orthanc by yourself <compiling>`.
 * External contributors are also maintaining `Vagrant VM for Orthanc
   <https://github.com/jodogne/OrthancContributed/blob/master/Links.md#user-content-vagrant>`__.
+
+.. highlight:: bash
+
+Furthermore, if you are running Debian 9 (stretch), Debian 10
+(buster), Debian 11 (bullseye), Ubuntu 18.04 LTS (bionic) or Ubuntu
+20.04 LTS (focal) on an **AMD64 architecture**, Sébastien Jodogne
+maintains a **standalone Debian repository** that provides the latest
+versions of the LSB binaries. For instance, here is how to install the
+:ref:`Stone Web viewer <stone_webviewer>` on a barebone Docker setup::
+
+  # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:9
+
+  $ apt update
+  $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
+
+  $ apt install --upgrade ca-certificates
+  $ wget -qO - https://debian.orthanc-labs.com/archive.key | apt-key add -
+  $ apt-add-repository "deb https://debian.orthanc-labs.com/ `grep VERSION_CODENAME /etc/os-release | cut -d'=' -f 2` main"
+
+  $ apt clean && apt update
+  $ apt install orthanc-stone-webviewer
+  $ /etc/init.d/orthanc start
+
 
 
 .. _orthanc-explorer:
