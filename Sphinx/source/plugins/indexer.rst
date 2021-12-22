@@ -11,13 +11,12 @@ This **official** plugin by the `ICTEAM institute of UCLouvain
 to publish filesystems containing medical images as a DICOM modality.
 
 The plugin continuously synchronizes the content of an Orthanc server
-with the content of a filesystem. This way, the filesystem is
-automatically organized according to the :ref:`DICOM model of the real
-world <model-world>`, without any manual intervention. The indexed
-DICOM resources are immediately available in a Web interface and in a
-Web viewer, and can be queried/retrieved by DICOM clients. The DICOM
-files are **not** copied, so this solution has a very small footprint
-in terms of storage requirements.
+with the content of a filesystem, which can then be accessed, through
+Orthanc, based on the :ref:`DICOM model of the real world <model-world>`.
+The indexed DICOM resources are immediately available in a Web
+interface and in a Web viewer, and can be queried/retrieved by DICOM
+clients. The DICOM files are **not** copied, so this solution has a
+very small footprint in terms of storage requirements.
 
 
 Compilation
