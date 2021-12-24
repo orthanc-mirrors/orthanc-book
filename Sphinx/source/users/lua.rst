@@ -199,16 +199,23 @@ For instance::
 Instance modification/routing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Lua engine offers a few function to modify and route DICOM instances.
-:ref:`See this section <lua-auto-routing>`
+The Lua engine offers the following special functions to modify and
+route DICOM instances:
 
 * ``ModifyInstance(instanceId, replacements, removals, removePrivateTags)``
-  modifies an instance.  Returns the instanceId of the modified instance
+  modifies an instance.
 * ``SendToModality(instanceId, modality)`` performs a C-Store to the 
-  target modality.  Returns the instanceId.
+  target modality.
 * ``SendToPeer(instanceId, peer)`` sends the instance to a remote Orthanc peer.
-  Returns the instanceId.
 * ``Delete(instanceId)`` deletes the instance.
+
+:ref:`See this section <lua-auto-routing>` for examples. As can be
+seen in those examples, these special functions can be chained
+together, although they return no explicit value.
+
+Note that these special functions should only be used for basic use
+cases: Calls to the REST API :ref:`should always be favored for
+auto-routing <lua-auto-routing-better>`.
 
 
 General-purpose functions
@@ -453,6 +460,8 @@ would replace the ``StationName`` DICOM tag::
     end
  end
 
+
+.. _lua-auto-routing-better:
 
 Important remarks about auto-routing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
