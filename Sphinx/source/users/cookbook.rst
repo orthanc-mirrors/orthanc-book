@@ -53,6 +53,12 @@ versions of the LSB binaries. For instance, here is how to install the
   $ apt install orthanc-stone-webviewer
   $ /etc/init.d/orthanc start
 
+Note that this standalone Debian repository **does not** contain the
+:ref:`Python plugin <python-plugin>`, as this plugin must be
+dynamically linked against the system-wide version of your Python
+runtime. You should install the ``orthanc-python`` package from your
+native Debian/Ubuntu distribution if available, or compile the plugin
+from sources.
 
 
 .. _orthanc-explorer:
