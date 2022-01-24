@@ -165,7 +165,7 @@ here are some tasks you can take in charge that would greatly help us:
 
 
 * **Financial support**: Buying professional services is the best way
-    to make the Orthanc project sustainable in the long term.
+  to make the Orthanc project sustainable in the long term.
 
   - Osimis provides `support packs and professional development
     services <https://osimis.io/en/orthanc-support-contract>`__ around the
