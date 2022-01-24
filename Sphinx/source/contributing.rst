@@ -164,10 +164,13 @@ here are some tasks you can take in charge that would greatly help us:
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
 
 
-* **Financial support**:
+* **Financial support**: Buying professional services is the best way
+    to make the Orthanc project sustainable in the long term.
 
   - Osimis provides `support packs and professional development
     services <https://osimis.io/en/orthanc-support-contract>`__ around the
     Orthanc ecosystem and, more generally, around medical
-    imaging. Buying such professional services is the best way to make
-    the Orthanc project sustainable in the long term.
+    imaging. 
+
+  - Check out the :ref:`professional services provided by our
+    community <support-freelancers>`.

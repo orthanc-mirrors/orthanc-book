@@ -9,8 +9,8 @@ suggests the developers are working for charity.
 
 If you are a **commercial company** that builds upon the Orthanc
 ecosystem for your own products, please contribute by buying the
-`corporate services provided by Osimis
-<https://osimis.io/en/orthanc-support-contract>`__.
+:ref:`professional services offered by our community
+<support-freelancers>`.
 
 If you want to **help the project financially as an end-user**, you
 can approach some of the companies offering commercial support for
