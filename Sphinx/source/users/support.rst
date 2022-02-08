@@ -140,10 +140,10 @@ decision chart:
    open-source tools, use the `Orthanc Users discussion forum
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
 
-2. If you need an **additional feature or a dedicated development**,
-   and if you are ready to pay, `get in touch with Osimis
+2. If you need an **additional feature implemented in Orthanc**,
+   and if you are ready to pay, get in touch with `Osimis
    <mailto:orthanc-support@osimis.io>`__, the commercial partner of
-   the Orthanc project.
+   the Orthanc project or with `Alain Mazy <https://mazy.be/orthanc>`__.
 
 3. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
