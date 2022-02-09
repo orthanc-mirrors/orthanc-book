@@ -304,7 +304,12 @@ to create a DICOM instance using the following POST body on
     }
   }
 
+Rob Oakes provides more a `detailed explanation about how to use
+private tags with Orthanc
+<https://oak-tree.tech/blog/soandor-orthanc-private-headers>`__ on
+Oak-Tree's homepage.
 
+  
 .. _prometheus:
 
 Instrumentation with Prometheus
