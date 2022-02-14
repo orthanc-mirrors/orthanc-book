@@ -16,9 +16,11 @@ Anonymization of a Single Instance
 ----------------------------------
 
 Orthanc allows to anonymize a single DICOM instance and to download
-the resulting anonymized DICOM file. Anonymization consists in erasing
-all the tags that are specified in Table E.1-1 from PS 3.15 of the
-DICOM standard 2008 or 2017c (default). Example::
+the resulting anonymized DICOM file (without storing the anonymized
+DICOM instance into Orthanc). Anonymization consists in erasing all
+the tags that are specified in `Table E.1-1 from PS 3.15
+<http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html#table_E.1-1>`__
+of the DICOM standard 2008, 2017c or 2021b (default). Example::
 
     $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{}' > Anonymized.dcm
 
@@ -39,7 +41,7 @@ a JSON body::
                 "DicomVersion" : "2017c"
               }' > Anonymized.dcm
 
-Explanations:
+**Explanations:**
 
 * New UUIDs are automatically generated for the study, the series and
   the instance.
@@ -58,18 +60,35 @@ Explanations:
   the anonymization process. The default behavior consists in removing
   the private tags, as such tags can contain patient-specific
   information.
-* ``DicomVersion`` specifies which version of the DICOM standard shall be used
-  for anonymization.  Allowed values are ``2008`` and ``2017c`` (default value 
-  if the parameter is absent).  This parameter has been introduced in Orthanc 
-  1.3.0.  In earlier version, the ``2008`` standard was used.
+* ``DicomVersion`` specifies which version of the DICOM standard shall
+  be used for anonymization. Allowed values are ``2008``, ``2017c``,
+  or ``2021b`` (new in Orthanc 1.9.4). This parameter has been
+  introduced in Orthanc 1.3.0. In earlier version, the ``2008``
+  standard was used. If the parameter is absent, the highest version
+  that is supported by Orthanc is used.
+* ``Remove`` can also be used to provide a list of tags to be manually
+  deleted.
+
+**Important:** Starting with Orthanc 1.9.4, the ``Replace``, ``Keep``
+and ``Remove`` fields can also specify sequences, using the same
+syntax as the ``dcmodify`` command-line tool (wildcards are supported
+as well). Earlier versions were limited to top-level tags in the DICOM
+dataset. Check out the integration test ``test_modify_subsequences``
+for `examples
+<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
+
+**Implementation:** Internally, the setup of the anonymization
+profiles can be found in the methods ``SetupAnonymizationXXX()`` of
+the class ``Orthanc::DicomModification`` (cf. `source code
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
 ---------------------------------
 
 Orthanc allows to modify a set of specified tags in a single DICOM
-instance and to download the resulting anonymized DICOM
-file. Example::
+instance and to download the resulting modified DICOM file (without
+storing the modified DICOM instance into Orthanc). Example::
 
     $ curl -X POST http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/modify \
       --data '{
@@ -85,7 +104,7 @@ file. Example::
                 "Transcode": "1.2.840.10008.1.2.4.70"
               }' > Modified.dcm
 
-Remarks:
+**Remarks:**
 
 * The ``Remove`` array specifies the list of the tags to remove.
 * The ``Replace`` associative array specifies the substitions to be applied (cf. anonymization).
@@ -100,7 +119,7 @@ Remarks:
   modification to one of the ``PatientID``, ``StudyInstanceUID``,
   ``SeriesInstanceUID``, and ``SOPInstanceUID`` requires ``Force`` to
   be set to ``true``, in order to prevent any unwanted side effect.     
-
+  
 .. highlight:: json
 
 * To replace a sequence of tags, you may use this syntax:: 
@@ -130,6 +149,16 @@ Remarks:
         ]
       }
     }
+
+
+**Important:** Similarly to anonymization, starting with Orthanc
+1.9.4, the ``Replace``, ``Keep`` and ``Remove`` fields can also
+specify sequences, using the same syntax as the ``dcmodify``
+command-line tool (wildcards are supported as well). Earlier versions
+were limited to top-level tags in the DICOM dataset. Check out the
+integration test ``test_modify_subsequences`` for `examples
+<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
+
 
 .. _study-modification:
 
@@ -171,6 +200,19 @@ Similarly, here is an interaction to modify a study::
       "ID" : "1c3f7bf4-85b4aa20-236e6315-5d450dcc-3c1bcf28",
       "Path" : "/studies/1c3f7bf4-85b4aa20-236e6315-5d450dcc-3c1bcf28"
     }
+
+Pay attention to the fact that Orthanc implements safety checks to
+preserve the :ref:`DICOM model of the real world <model-world>`. These
+checks prevent the modification of some tags that are known to belong
+to a level in the patient/study/series/instance hierarchy that is
+higher than the level that corresponds to the REST API call. For
+instance, the tag ``PatientID`` cannot be modified if using the
+``/studies/{id}/modify`` route (in the latter case, the
+``/patients/{id}/modify`` route must be used, cf. next section). You
+also have to set the ``Force`` argument to ``true`` if modifying one
+of the :ref:`DICOM identifiers tags <orthanc-ids>`
+(i.e. ``PatientID``, ``StudyInstanceUID``, ``SeriesInstanceUID`` and
+``SOPInstanceUID``).
 
 
 Modification of Patients
@@ -216,6 +258,71 @@ As written above, the anonymization process can be fine-tuned by using
 a JSON body.
 
 
+.. _bulk-modification:
+
+Bulk modification or anonymization
+----------------------------------
+
+Starting with Orthanc 1.9.4, it is possible to use the new routes
+``/tools/bulk-modify`` and ``/tools/bulk-anonymize`` to respectively
+modify or anonymize a set of multiple DICOM resources that are not
+related (i.e. that don't share any parent DICOM resource). A typical
+use case is to modify/anonymize a list of DICOM instances that don't
+belong to the same parent patient/study/series.
+
+.. highlight:: bash
+
+These two routes accept the same arguments as described above, but
+must also be provided with an additional argument ``Resources`` that
+lists the :ref:`Orthanc identifiers <orthanc-ids>` of the resources of
+interest (that may indifferently correspond to patients, studies,
+series or instances). Here are two sample calls::
+
+  $ curl http://localhost:8042/tools/bulk-modify -d '{"Replace":{"SeriesDescription":"HELLO"},"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+  $ curl http://localhost:8042/tools/bulk-anonymize -d '{"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+
+.. highlight:: json
+
+The output of the modification/anonymization lists all the resources
+that have been altered by the call (including their parents). Here is
+the output of the second sample above::
+
+  {
+    "Description" : "REST API",
+    "FailedInstancesCount" : 0,
+    "InstancesCount" : 2,
+    "IsAnonymization" : true,
+    "Resources" : [
+      {
+         "ID" : "04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
+         "Path" : "/instances/04c04806-27b01a5a-08ea66cb-cb36c8b9-ebe62fe3",
+         "Type" : "Instance"
+      },
+      {
+         "ID" : "4e37fce9-6b33b8ba-7bb378e1-abc7e2c4-fca4ade3",
+         "Path" : "/instances/4e37fce9-6b33b8ba-7bb378e1-abc7e2c4-fca4ade3",
+         "Type" : "Instance"
+      },
+      {
+         "ID" : "6438ee62-b58a4788-517931b3-e10321eb-d1ab2613",
+         "Path" : "/series/6438ee62-b58a4788-517931b3-e10321eb-d1ab2613",
+         "Type" : "Series"
+      },
+      {
+         "ID" : "660494fd-1ddd661b-4358d996-ba600e5a-066d94cc",
+         "Path" : "/studies/660494fd-1ddd661b-4358d996-ba600e5a-066d94cc",
+         "Type" : "Study"
+      },
+      {
+         "ID" : "5faa0bf8-8a45520b-3a07e536-fc24f241-f59ae3e1",
+         "Path" : "/patients/5faa0bf8-8a45520b-3a07e536-fc24f241-f59ae3e1",
+         "Type" : "Patient"
+      }
+    ]
+  }
+
+  
+
 .. _split-merge: 
 
 Split/merge of DICOM studies
@@ -259,7 +366,7 @@ arguments of this ``/studies/{study}/split`` URI:
 * ``KeepSource`` (Boolean value), if set to ``true``, instructs
   Orthanc to keep a copy of the original series in the source study.
   By default, the original series are deleted from Orthanc.
-
+  
 .. _merge:
 
 Merging

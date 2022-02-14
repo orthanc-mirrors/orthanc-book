@@ -30,21 +30,23 @@ source code of the corresponding Docker images is available on `GitHub
   images that are described on this page are always kept in sync with
   the latest releases of the Orthanc project, with a basic
   configuration system that is inherited from the Debian packages
-  (i.e. manual edition of the configuration files).
+  (i.e. manual edition of the configuration files). These images are
+  most useful to **software developers and researchers**.
 
 * Our commercial partner `Osimis <https://www.osimis.io>`__ also
   `publishes separated Docker images
-  <https://hub.docker.com/r/osimis/orthanc>`__.
-  These ``osimis/orthanc`` images are used by the technical team of
-  Osimis in order to provide professional support to their customers,
-  with a configuration system that can be tuned through environment
-  variables (which is very handy if using ``docker-compose``). These
-  images are not necessarily always in sync with the Orthanc project,
-  but they also include the :ref:`plugins edited by Osimis
-  <plugins-osimis>`, notably the Osimis Web viewer (that is much more
-  advanced than the Orthanc Web viewer) and the advanced authorization
-  plugin. A :ref:`specific page <docker-osimis>` is available to describe 
-  how these images should be used.
+  <https://hub.docker.com/r/osimis/orthanc>`__.  These
+  ``osimis/orthanc`` images are used by the technical team of Osimis
+  in order to provide professional support to their customers, with a
+  configuration system that can be tuned through **environment
+  variables** (which is very handy if using ``docker-compose`` or
+  Kubernetes). These images are not necessarily always in sync with
+  the Orthanc project, but they also include the :ref:`plugins edited
+  by Osimis <plugins-osimis>`, notably the Osimis Web viewer (that is
+  much more advanced than the Orthanc Web viewer) and the advanced
+  authorization plugin. A :ref:`specific page <docker-osimis>` is
+  available to describe how these images should be used. These images
+  are targeted at **ops teams**.
 
 **Note for CentOS users:** The Docker environment might be difficult to
 configure on your platform. Hints are available on the `Orthanc Users
@@ -73,7 +75,7 @@ update the Docker image to benefit from the latest features::
 If more stability is required, you can select the official release of
 Orthanc to be run::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.9.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.9.7
 
 Passing additional command-line options (e.g. to make Orthanc verbose)
 can be done as follows (note the ``/etc/orthanc`` option that is
@@ -95,7 +97,7 @@ implementation <dicomweb>`, and its :ref:`whole-slide imaging viewer
 
 Or you can also start a specific version of Orthanc for more stability::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.9.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.9.7
 
 If you have an interest in the :ref:`Python plugin <python-plugin>`,
 you can use the ``orthanc-python`` image. The latter image is a
@@ -103,7 +105,7 @@ heavier version of the ``orthanc-plugins`` image, as it embeds the
 Python 3.7 interpreter. Here is how to start this image::
 
   $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.9.2
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.9.7
   
 
 Fine-tuning the configuration
@@ -147,7 +149,7 @@ the related option ``configs`` could in theory be better,
 unfortunately it is only available to `Docker Swarm
 <https://github.com/docker/compose/issues/5110>`__).
 
-.. highlight:: yml
+.. highlight:: yaml
 
 First create the ``docker-compose.yml`` file as follows (this one uses
 the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
@@ -155,13 +157,15 @@ the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
   version: '3.1'  # Secrets are only available since this version of Docker Compose
   services:
     orthanc:
-      image: jodogne/orthanc-plugins:1.9.2
+      image: jodogne/orthanc-plugins:1.9.7
       command: /run/secrets/  # Path to the configuration files (stored as secrets)
       ports:
         - 4242:4242
         - 8042:8042
       secrets:
-        - orthanc.json      
+        - orthanc.json
+      environment:
+        - ORTHANC_NAME=HelloWorld
   secrets:
     orthanc.json:
       file: orthanc.json
@@ -172,7 +176,7 @@ Then, place the configuration file ``orthanc.json`` next to the
 ``docker-compose.yml`` file. Here is a minimalist ``orthanc.json``::
 
   {
-    "Name" : "Orthanc in Docker",
+    "Name" : "${ORTHANC_NAME} in Docker Compose",
     "RemoteAccessAllowed" : true
   }
 
@@ -184,7 +188,15 @@ can then be started as follows::
 
   $ docker-compose up
                
+Note how the `environment variable
+<https://docs.docker.com/compose/environment-variables/>`__
+``ORTHANC_NAME`` has been used in order to easily adapt the
+configuration of Orthanc. This results from the fact that Orthanc
+injects :ref:`environment variables <orthanc-environment-variables>`
+once reading the content of its configuration files (since Orthanc
+1.5.0).
 
+  
 Making the Orthanc database persistent
 --------------------------------------
 
@@ -194,7 +206,7 @@ persistent by mapping the ``/var/lib/orthanc/db`` folder of the
 container to some path in the filesystem of your Linux host, e.g.::
 
   $ mkdir /tmp/orthanc-db
-  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.9.2 
+  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.9.7 
 
 
 Whole-slide imaging support
@@ -261,7 +273,7 @@ with the default Orthanc configuration file::
   $ docker inspect --format '{{ .NetworkSettings.Ports }}' some-postgres
   $ docker run --rm --entrypoint=cat jodogne/orthanc-plugins /etc/orthanc/orthanc.json > /tmp/orthanc.json
 
-.. highlight:: json
+.. highlight:: text
 
 Add the following section to ``/tmp/orthanc.json`` (adapting the
 values Host and Port to what docker inspect said above)::
@@ -315,4 +327,4 @@ Note that:
 * The build artifacts can be found in folder ``/root/orthanc/Build``.
 
 * This command launches the mainline version. To start a released version,
-  use e.g. ``jodogne/orthanc-debug:1.9.2``.
+  use e.g. ``jodogne/orthanc-debug:1.9.7``.

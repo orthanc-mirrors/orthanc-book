@@ -14,6 +14,9 @@ the following :ref:`configuration options <configuration>`:
 * In ``RegisteredUsers``, assign a username and a password to all your
   users.
 
+**Important:** Make sure to read the FAQ about :ref:`how to secure
+Orthanc <security>`.
+  
 Once a user has logged in, she will have full access, in read-write
 mode, to all the features offered by the REST API of Orthanc. This
 built-in mechanism might be of limited usefulness in enterprise
@@ -35,8 +38,10 @@ Depending on your scenario, you can consider the following options:
   `access control lists
   <https://en.wikipedia.org/wiki/Access_control_list>`__.
 * Develop a :ref:`C/C++ plugin <creating-plugins>` that uses the
-  ``OrthancPluginRegisterIncomingHttpRequestFilter()``.  This solution
-  is potentially useful if you wish to integrate with an LDAP server.
+  ``OrthancPluginRegisterIncomingHttpRequestFilter()``, or a
+  :ref:`Python plugin <python_authorization>` that uses
+  ``orthanc.RegisterIncomingHttpRequestFilter()``. This solution is
+  potentially useful if you wish to integrate with an LDAP server.
 * Use Orthanc as a reverse proxy (e.g. behind :ref:`nginx <nginx>`,
   :ref:`Apache <apache>`, or :ref:`Microsoft IIS <iis>`), and use the
   authentication mechanisms of the main Web server.

@@ -196,6 +196,28 @@ For instance::
   RestApiPost('/instances/5af318ac-78fb-47ff-b0b0-0df18b0588e0/anonymize', '{}')
 
 
+Instance modification/routing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Lua engine offers the following special functions to modify and
+route DICOM instances:
+
+* ``ModifyInstance(instanceId, replacements, removals, removePrivateTags)``
+  modifies an instance.
+* ``SendToModality(instanceId, modality)`` performs a C-Store to the 
+  target modality.
+* ``SendToPeer(instanceId, peer)`` sends the instance to a remote Orthanc peer.
+* ``Delete(instanceId)`` deletes the instance.
+
+:ref:`See this section <lua-auto-routing>` for examples. As can be
+seen in those examples, these special functions can be chained
+together, although they return no explicit value.
+
+Note that these special functions should only be used for basic use
+cases: Calls to the REST API :ref:`should always be favored for
+auto-routing <lua-auto-routing-better>`.
+
+
 General-purpose functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -439,6 +461,8 @@ would replace the ``StationName`` DICOM tag::
  end
 
 
+.. _lua-auto-routing-better:
+
 Important remarks about auto-routing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -566,3 +590,24 @@ from Orthanc Explorer)::
 
     return query
   end
+
+
+.. _lua-external-modules:
+
+Using external modules
+----------------------
+
+Starting with Orthanc 1.3.2, it is possible to use external Lua
+modules if Orthanc was compiled with the ``-DENABLE_LUA_MODULES=ON``
+while invoking CMake.
+
+Importantly, the modules and the Orthanc server must use the same
+version of Lua for external modules to be properly loaded.
+
+Check out the Orthanc Users forum for old discussions about this
+topic: `reference 1
+<https://groups.google.com/g/orthanc-users/c/BXfmwU786B0/m/M47slt5GFwAJ>`__,
+`reference 2
+<https://groups.google.com/g/orthanc-users/c/BXfmwU786B0/m/qpVe8UvGAwAJ>`__,
+`reference 3
+<https://groups.google.com/g/orthanc-users/c/LDAN5jA0X8M/m/4zrk0_AaBAAJ>`__.

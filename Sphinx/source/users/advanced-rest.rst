@@ -26,17 +26,21 @@ history (the size of this history is controlled by the
 ``JobsHistorySize`` option).
 
 By default, Orthanc saves the jobs into its database (check out the
-``SaveJobs`` option). If Orthanc is stopped then relaunched, the jobs
+``SaveJobs`` option).  Jobs are saved every 10 seconds and when
+Orthanc stops. If Orthanc is stopped then relaunched, the jobs
 whose processing was not finished are automatically put into the queue
-of pending tasks. The command-line option ``--no-jobs`` can also be
-used to prevent the loading of jobs from the database upon the launch
-of Orthanc.
+of pending tasks or resumed if they were being processed when Orthanc
+stopped. The command-line option ``--no-jobs`` can also be used to 
+prevent the loading of jobs from the database upon the launch of 
+Orthanc.
 
 Note that the queue of pending jobs has a maximum size (check out the
 ``LimitJobs`` option). When this limit is reached, the addition of new
 jobs is blocked until some job finishes.
 
 
+
+.. _jobs-synchronicity:
 
 Synchronous vs. asynchronous calls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -75,9 +79,11 @@ executed first. By default, the priority is set to zero.
 
 Despite being more complex to handle, the asynchronous mode is highly
 recommended for jobs whose execution time can last over a dozen of
-seconds (typically, the creation of an archive or a network transfer).
-Indeed, synchronous calls can be affected by timeouts in the HTTP
-protocol if they last too long.
+seconds (typically, the creation of an archive if
+``SynchronousZipStream`` :ref:`configuration option <configuration>`
+is set to ``false``, or a network transfer).  Indeed, synchronous
+calls can be affected by timeouts in the HTTP protocol if they last
+too long.
 
 
 .. _jobs-monitoring:
@@ -128,13 +134,18 @@ The ``State`` field can be:
   ``ErrorCode`` and ``ErrorDescription`` fields for more information.
 * ``Paused``: The job has been paused.
 * ``Retry``: The job has failed internally, and has been scheduled for
-  re-submission after a delay. As of Orthanc 1.9.2, this feature is not
+  re-submission after a delay. As of Orthanc 1.9.7, this feature is not
   used by any type of job.
 
 In order to wait for the end of an asynchronous call, the caller will
 typically have to poll the ``/jobs/...` URI (i.e. make periodic
 calls), waiting for the ``State`` field to become ``Success`` or
 ``Failure``.
+
+Note that the `integration tests of Orthanc
+<https://hg.orthanc-server.com/orthanc-tests/file/Orthanc-1.9.7/Tests/Toolbox.py>`__
+give an example about how to monitor a job in Python using the REST
+API (cf. function ``MonitorJob()``).
 
 
 .. _jobs-controlling:
@@ -193,7 +204,7 @@ archive, then to download it locally::
 Note how we retrieve the content of the archive by accessing the
 ``archive`` output of the job (check out the virtual method
 ``IJob::GetOutput()`` from the `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.2/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
 of Orthanc).
 
 Here is the corresponding sequence of commands to generate a DICOMDIR
@@ -202,7 +213,7 @@ media::
   $ curl http://localhost:8042/studies/27f7126f-4f66fb14-03f4081b-f9341db2-53925988/media -d '{"Asynchronous":true}'
   $ curl http://localhost:8042/jobs/6332be8a-0052-44fb-8cc2-ac959aeccad9/archive > a.zip
 
-As of Orthanc 1.9.2, only the creation of a ZIP or a DICOMDIR archive
+As of Orthanc 1.9.7, only the creation of a ZIP or a DICOMDIR archive
 produces such "outputs".
 
   
@@ -293,7 +304,12 @@ to create a DICOM instance using the following POST body on
     }
   }
 
+Rob Oakes provides more a `detailed explanation about how to use
+private tags with Orthanc
+<https://oak-tree.tech/blog/soandor-orthanc-private-headers>`__ on
+Oak-Tree's homepage.
 
+  
 .. _prometheus:
 
 Instrumentation with Prometheus

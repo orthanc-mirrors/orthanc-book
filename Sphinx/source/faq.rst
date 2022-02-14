@@ -68,3 +68,4 @@ Specific FAQs
    faq/matlab.rst
    faq/series-completion.rst
    faq/dcmtk-tricks.rst
+   faq/debugging-encodings.rst

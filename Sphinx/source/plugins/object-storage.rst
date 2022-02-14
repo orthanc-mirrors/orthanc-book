@@ -37,7 +37,7 @@ the Orthanc project doesn't freely provide pre-compiled binaries for
 Docker, Windows, Linux or OS X. These pre-compiled binaries do exist,
 but are reserved to the companies who have subscribed to a
 `professional support contract
-<https://www.osimis.io/en/services.html#cloud-plugins>`__ by
+<https://osimis.io/en/orthanc-support-contract>`__ by
 Osimis. Although you are obviously free to compile these plugins by
 yourself (instructions are given below), purchasing such support
 contracts makes the Orthanc project sustainable in the long term, to
@@ -134,17 +134,19 @@ AWS S3 plugin
 Sample configuration::
 
   "AwsS3Storage" : {
-  	"BucketName": "test-orthanc-s3-plugin",
+    "BucketName": "test-orthanc-s3-plugin",
     "Region" : "eu-central-1",
-    "AccessKey" : "AKXXX",
-    "SecretKey" : "RhYYYY",
-    "Endpoint": "",                           // custom endpoint
-    "ConnectionTimeout": 30,                  // connection timeout in seconds
-    "RequestTimeout": 1200,                   // request timeout in seconds (max time to upload/download a file)
-    "RootPath": "",                           // see below
-    "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat",               // see below
-    "VirtualAddressing": true                 // see the section related to MinIO
+    "AccessKey" : "AKXXX",                    // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
+    "SecretKey" : "RhYYYY",                   // optional: if not specified, the plugin will use the default credentials manager (available from version 1.3.0)
+    "Endpoint": "",                           // optional: custom endpoint
+    "ConnectionTimeout": 30,                  // optional: connection timeout in seconds
+    "RequestTimeout": 1200,                   // optional: request timeout in seconds (max time to upload/download a file)
+    "RootPath": "",                           // optional: see below
+    "MigrationFromFileSystemEnabled": false,  // optional: see below
+    "StorageStructure": "flat",               // optional: see below
+    "EnableLegacyUnknownFiles": true,         // optional: see below
+    "VirtualAddressing": true,                // optional: see the section related to MinIO
+    "StorageEncryption" : {}                  // optional: see the section related to encryption
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -158,6 +160,8 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
   }
 
 
+.. _minio:
+  
 Emulation of AWS S3 using MinIO
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -221,7 +225,8 @@ Sample configuration::
     "CreateContainerIfNotExists": true,       // available from version 1.2.0
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat"                // see below
+    "StorageStructure": "flat",               // see below
+    "EnableLegacyUnknownFiles": true          // optional: see below
   }
 
 
@@ -235,7 +240,8 @@ Sample configuration::
     "BucketName": "test-orthanc-storage-plugin",
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
-    "StorageStructure": "flat"                // see below
+    "StorageStructure": "flat",               // see below
+    "EnableLegacyUnknownFiles": true          // optional: see below
   }
 
 
@@ -259,7 +265,7 @@ object storage.  Note: it shall not start with a ``/``.
 
 Note that you can not change these configurations once you've uploaded the first files in Orthanc.
 
-The **MigrationFromFileSystemEnabled** configuration has been for Orthanc to continue working
+The **MigrationFromFileSystemEnabled** configuration has been introduced for Orthanc to continue working
 while you're migrating your data from the file system to the object storage.  While this option is enabled,
 Orthanc will store all new files into the object storage but will try to read/delete files
 from both the file system and the object storage.
@@ -270,6 +276,11 @@ have to use a standard ``sync`` command from the object-storage provider.
 
 A migration script from File System to Azure Blob Storage is available courtesy of `Steve Hawes <https://github.com/jodogne/OrthancContributed/blob/master/Scripts/Migration/2020-09-08-TransferToAzure.sh>`__ .
 
+The **EnableLegacyUnknownFiles** configuration has been introduced to allow recent version of the plugins (from 1.3.3)
+continue working with data that was saved with Orthanc version around 1.9.3 and plugins version around 1.2.0 (e.g. osimis/orthanc:21.5.1 docker images).
+With these specific versions, some ``.unk`` files were generated instead of ``.dcm.head`` files.  With this configuration option enabled,
+when reading files, the plugin will try both file extensions.
+If you have ``.unk`` files in your storage, you must enable this configuration.
 
 Sample setups
 -------------

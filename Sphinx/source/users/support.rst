@@ -48,7 +48,7 @@ resources:
 
 Importantly, for all the features that are pending in the ``TODO``
 file, if you are a company, please consider `buying professional
-services <https://www.osimis.io/en/services.html>`__ in order to get
+services <https://osimis.io/en/orthanc-support-contract>`__ in order to get
 the feature implemented faster.
    
    
@@ -78,13 +78,29 @@ you must provide all the following information:
   software does not help <proprietary>`), and that are preferably
   calls the :ref:`REST API of Orthanc <rest>`. The most useful
   commands are `cURL <https://en.wikipedia.org/wiki/CURL>`__, `DCMTK
-  <https://dicom.offis.de/dcmtk.php.en>`__, `dicom3tools
-  <https://www.dclunie.com/dicom3tools.html>`__, `dcm4che command-line
-  tools <https://www.dcm4che.org/>`__, or Python scripts.
+  <https://dicom.offis.de/dcmtk.php.en>`__ (notably ``storescu``),
+  `dicom3tools <https://www.dclunie.com/dicom3tools.html>`__ (notably
+  ``dciodvfy``), `dcm4che command-line tools
+  <https://www.dcm4che.org/>`__ (notably ``storescu``), `GDCM
+  <http://gdcm.sourceforge.net/>`__ (notably ``gdcmscu``), or Python
+  scripts (notably using ``pydicom``).
 * In the case of DICOM networking problems, the logs from the remote
   modality.
 * If applicable, a screenshot is worth a thousand words.
 * If you report a crash, if applicable, a :ref:`core file <crash>`.
+* The `OHIF viewer <https://ohif.org/>`__ can `connect to Orthanc
+  <https://docs.ohif.org/history/v1/connecting-to-image-archives/orthanc-with-docker.html>`__
+  using the DICOMweb plugin of Orthanc, but is a fully separate
+  project. As a consequence, questions regarding OHIF must be asked on
+  the `dedicated discussion group
+  <https://groups.google.com/g/cornerstone-platform>`__ or on the
+  `dedicated bug tracker
+  <https://github.com/OHIF/Viewers/issues>`__. The core developers of
+  Orthanc will happily fix the :ref:`DICOMweb plugin <dicomweb>`, but
+  it is necessary for the reporter to identify the discrepancy wrt.
+  DICOMweb standard by providing a minimal working example as
+  explained above.
+
 
 All this information is mandatory, as it allows other members of the
 Orthanc community to **reproduce your problem independently of your
@@ -106,7 +122,9 @@ If you are **sure** that you are reporting a yet unknown bug, you can
 consider directly introducing a `bug report on our issue tracker
 <https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
-As a consequence, it is advised to first use the discussion forum.
+As a consequence, it is strongly advised to use the `discussion forum
+<https://groups.google.com/forum/#!forum/orthanc-users>`__ in the
+first place.
 
 
 .. _support-freelancers:
@@ -122,23 +140,25 @@ decision chart:
    open-source tools, use the `Orthanc Users discussion forum
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
 
-2. If you need an **additional feature or a dedicated development**,
-   and if you are ready to pay, `get in touch with Osimis
+2. If you need an **additional feature implemented in Orthanc**,
+   and if you are ready to pay, get in touch with `Osimis
    <mailto:orthanc-support@osimis.io>`__, the commercial partner of
-   the Orthanc project.
+   the Orthanc project or with `Alain Mazy <https://mazy.be/orthanc>`__.
 
 3. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
    or if you need **proximity support in your language/timezone**,
-   here is a list of freelancers:
+   here is a list of freelancers/companies:
 
    * **Worldwide**:
    
-     * `Osimis <https://www.osimis.io/en/services.html>`__
+     * `Osimis <https://osimis.io/en/orthanc-support-contract>`__ (French/English, Belgium)
+     * `Alain Mazy <https://mazy.be/orthanc>`__ (French/English, Belgium)
 
    * **Europe**:
 
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
+     * `Benoit Crickboom <orthanc@sleig.be>`__ (French/English, Belgium)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
 
@@ -147,12 +167,14 @@ decision chart:
      * `Gabriel Couture <https://github.com/gacou54/>`__ (French/English, Canada)
      * `Mohannad Hussain <https://www.linkedin.com/in/mohannadhussain/>`__ (English, Canada)
      * `Oliver Tsai <mailto:oliver@futurepacs.com>`__ (English/Spanish/French, Toronto)
-
+     * `Stephen D. Scotti <mailto:sscotti@sias.dev>`__ (English, USA)
+     * `Yi Lu <https://www.linkedin.com/in/digihunch/>`__ (English, Canada)
 
    * **South America**:
        
      * `Claudio Arenas <mailto:dentista.arenas@gmail.com>`__ (Spanish/English, Chile)
      * `Gustavo Fernandez <https://www.linkedin.com/in/gfernandezguirland/>`__ (Spanish/Portuguese, Uruguay)
+     * `Iván Kuschevatzky <mailto:ivankuche@gmail.com>`__ (English/Spanish, Argentina)
      * `Luiz Eduardo Guida Valmont <https://www.linkedin.com/in/luizvalmont/>`__ (English/Portuguese, Brazil)
      * `William Sanchez Luis <mailto:williamsanchezluis@gmail.com>`__ (English/Spanish, Venezuela)
 

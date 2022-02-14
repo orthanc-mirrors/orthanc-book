@@ -31,3 +31,10 @@ custom MWL plugin, please check the `documentation of the part of the
 Orthanc plugin SDK
 <https://sdk.orthanc-server.com/group__DicomCallbacks.html#ga23080c4e871b8428ede61d9841c10d76>`__
 that is related to the management of worklists.
+
+Custom MWL plugin can also be implemented using :ref:`Python plugins
+<python_worklists>`.  This is especially useful to easily create
+bridges between Orthanc, HL7 messages, RIS systems and `FHIR
+<https://www.hl7.org/fhir/overview.html>`__ stores. Indeed, Python
+provides many tools to handle HL7 or FHIR such as `python-hl7 library
+<https://python-hl7.readthedocs.io/en/latest/>`__.

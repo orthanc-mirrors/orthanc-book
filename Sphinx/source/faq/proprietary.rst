@@ -46,5 +46,5 @@ Orthanc requires them to **publicly release the source code of this
 derived version of Orthanc**.
 
 Finally, if you need to complement the services of your vendor,
-consider buying the `Orthanc support packs provided by Osimis
-<https://www.osimis.io/en/services.html>`__.
+consider buying :ref:`professional services from our community
+<support-freelancers>`.

@@ -370,12 +370,20 @@ For each remote server, you must specify in the following order:
    displayed by :ref:`Orthanc Explorer <orthanc-explorer>` (possibly
    its AET).
 2. The AET of the remote server.
-3. Its IP address or its hostname.
+3. Its IP address.
 4. Its DICOM port (most probably 104, or 4242 if the remote server is
    another instance of Orthanc).
 
 Of course, after any change to the configuration of Orthanc, the
 software must be restarted to take the new parameters into account.
+
+
+**Remark:** The IP address in the ``DicomModalities`` configuration
+option can possibly be replaced by the hostname of the remote modality
+(obtained by DNS). This will work if Orthanc acts as an SCU to this
+remote modality. However, if the remote modality acts as a SCU that
+can contact Orthanc SCP and if the option ``DicomCheckModalityHost``
+is set to ``true``, you are obliged to use an IP address.
 
 
 .. _dicom-echo:
@@ -657,7 +665,7 @@ known ``StudyInstanceUID``::
 
     $ getscu -v localhost 4242 -aec ORTHANC -k "0008,0052=STUDY" -k "0020,000d=1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129"
 
-*Note:* As of Orthanc 1.9.2, Orthanc only implements C-Get as a
+*Note:* As of Orthanc 1.9.7, Orthanc only implements C-Get as a
 service class provider (SCP). Using C-Get as a service class user
 (SCU) is not currently supported in Orthanc.
 

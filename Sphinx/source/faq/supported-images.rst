@@ -10,13 +10,19 @@ Note that the ``UnknownSopClassAccepted`` :ref:`configuration option
 <configuration>` can be set to `true` if interfacing with modalities
 that are producing non-standard SOP classes.
 
-Orthanc Explorer can **display the raw DICOM tags** of any such DICOM
-file (including notably DICOM-SR structured reports).
+Orthanc Explorer can also **display the raw DICOM tags** of any such
+DICOM file.
 
-However, the core engine of Orthanc is not able to **render all of the
-DICOM files as PNG images**. An image that Orthanc cannot decode is
-displayed as "Unsupported" by clicking on the "Preview" buttons of
-Orthanc Explorer. Currently, the core engine of Orthanc can decode:
+For instance, **DICOM-SR and DICOM-RT** instances are supported by
+Orthanc, i.e. such file can be received/stored/retransmitted with
+Orthanc. However, if you need to analyze/create such files, you will
+have to resort on another specialized tool.
+
+As far as pixel data is concerned, the core engine of Orthanc is **not
+able to render all of the DICOM instances as PNG images**. An image
+that Orthanc cannot decode is displayed as "Unsupported" by clicking
+on the "Preview" buttons of Orthanc Explorer. Currently, the core
+engine of Orthanc can decode:
 
 * uncompressed (raw) DICOM files,
 * JPEG DICOM files, and
@@ -25,7 +31,8 @@ Orthanc Explorer. Currently, the core engine of Orthanc can decode:
 The supported photometric interpretations are:
 
 * RGB,
-* Grayscale2.
+* Grayscale2,
+* YUV if dealing with JPEG derivatives.
 
 The Orthanc core supports from 8bpp to 16bpp depth, with integer
 values.  Multiframe (notably cine), uncompressed DICOM instances can

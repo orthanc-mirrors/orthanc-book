@@ -15,6 +15,7 @@ the past or in the FAQ.
 
 Startup
 -------
+
 * If **Orthanc fails to start** with the error "**The TCP port of the DICOM 
   server is privileged or already in use**", this means another software is
   already using the port Orthanc is trying to use.  Usually, this means
@@ -32,6 +33,42 @@ Startup
   (it also checks for UDP socket using the same port) and Orthanc 1.3.0 might 
   display error messages that where not displayed by previous versions.
 
+* If Orthanc **does not start anymore after a hard shutdown** and if
+  you use the :ref:`Orthanc Web viewer plugin <webviewer>`, this might
+  reflect a corruption in the cache of the Web viewer. In such a case,
+  it is safe to remove the folder that contains the cache. By default,
+  this folder is called ``OrthancStorage/WebViewerCache/``
+  (cf. :ref:`configuration option <configuration>` ``CachePath`` in
+  the ``WebViewer`` section). Of course, don't remove the folder
+  ``OrthancStorage/``, as it contains the DICOM files.
+  
+  
+Validating DICOM files
+----------------------
+
+* Invalid DICOM files are often encountered in practice. Such files
+  can cause failures in Orthanc, or can prevent DICOM network
+  transfers. You can validate DICOM files by using the ``dciodvfy``
+  command-line tool (cf. `its documentation
+  <http://dclunie.com/dicom3tools/dciodvfy.html>`__) from the
+  `dicom3tools <https://www.dclunie.com/dicom3tools.html>`__ project
+  by David Clunie.
+
+  The core team of Orthanc will **only provide support for DICOM files
+  that are reported as valid** by ``dciodvfy``.
+
+* Side-note: The default transfer syntax of DICOM is Little Endian
+  Implicit (``1.2.840.10008.1.2``). For DICOM files that include
+  private tags, **we recommend using Little Endian Explicit**
+  (``1.2.840.10008.1.2.1``) instead Little Endian Implicit whenever
+  possible. Instead, in Little Endian Explicit, each DICOM tag has an
+  explicit declaration of its value representation (type), which
+  contrasts with Little Endian Implicit that necessitates to configure
+  the dictionary of private tags to be properly handled in some
+  operations (cf. the ``Dictionary`` :ref:`configuration option
+  <configuration>`).
+  
+  
 Orthanc Explorer
 ----------------
 
@@ -108,21 +145,35 @@ Performance issues
   CMake
   <https://hg.orthanc-server.com/orthanc/file/default/LinuxCompilation.txt>`__.
 
-Checking DICOM file integrity
------------------------------
-Orthanc stores, in its database, an `MD5 hash <https://en.wikipedia.org/wiki/MD5>`_ of the DICOM file contents.
+  
+Checking integrity of the storage area
+--------------------------------------
 
-This MD5 corresponds to the hash of the DICOM file in memory, before it is written to the disk by Orthanc. This information is safely stored inside the database for any incoming DICOM file (provided that the ``StoreMD5ForAttachments`` configuration option is set to ``true``).
+.. highlight:: bash
 
-It ispossible to ask Orthanc to check by itself whether the DICOM file was corrupted (i.e. to check whether the MD5 hash stored in the database corresponds to the hash of the file on the disk):
+Orthanc stores, in its database, an `MD5 hash
+<https://en.wikipedia.org/wiki/MD5>`_ of the files stored in its
+:ref:`storage area <orthanc-storage>` (which notably includes the
+DICOM files), provided that the ``StoreMD5ForAttachments``
+configuration option is set to ``true``.
 
-``curl -X POST http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/verify-md5 -d ''``
+This MD5 corresponds to the hash of the files in memory, before they
+are written to the disk by Orthanc. This information is safely stored
+inside the database for any incoming file attachment.
 
-This MD5 may be different if errors occurred while the DICOM file was initially written to the storage, or if the file contents were tampered with afterwards.
+It is possible to ask Orthanc to check by itself whether some attachment
+file was corrupted (i.e. to check whether the MD5 hash stored in the
+database corresponds to the hash of the file on the disk)::
 
-You can retrieve the stored MD5 hash of a DICOM instance as follows:
+  $ curl -X POST http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/verify-md5 -d ''
 
-``curl http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/md5``
+This MD5 may be different if errors occurred while the DICOM file was
+initially written to the storage, or if the file contents were
+tampered with afterwards.
+
+You can retrieve the stored MD5 hash of a DICOM instance as follows::
+
+  $ curl http://localhost:8042/instances/f257b066-f3992cc4-ca6a5e5f-3f8dcf3a-d4958939/attachments/dicom/md5
 
 Windows-specific issues
 -----------------------
@@ -142,3 +193,6 @@ Windows-specific issues
   precompiled command-line versions of Orthanc for Windows 64bit are
   available courtesy of `Osimis
   <https://www.osimis.io/en/download.html>`__.
+
+* Avoid installing Orthanc, its database or its storage area in
+  folders whose names contain **spaces or special characters**.

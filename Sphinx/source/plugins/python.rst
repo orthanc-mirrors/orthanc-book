@@ -16,15 +16,15 @@ This plugin can be used to write :ref:`Orthanc plugins
 instead of the more complex C/C++ programming languages.
 
 Python plugins have access to more features and a more consistent SDK
-than :ref:`Lua scripts <lua>`. The Python API is automatically
-generated from the `Orthanc plugin SDK in C
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.2/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+than :ref:`Lua scripts <lua>`. The largest part of the Python API is
+automatically generated from the `Orthanc plugin SDK in C
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
-As of release 2.0 of the plugin, the coverage of the C SDK is about
-75% (119 functions are automatically wrapped in Python out of a total
-of 157 functions in the Orthanc SDK 1.7.2).
+As of release 3.2 of the plugin, the coverage of the C SDK is about
+87% (138 functions are automatically wrapped in Python out of a total
+of 158 functions from the Orthanc SDK 1.8.1).
 
 
 Source code
@@ -66,7 +66,7 @@ Usage
 Docker
 ......
 
-.. highlight:: json
+.. highlight:: python
 
 The most direct way of starting Orthanc together with the Python
 plugin is through :ref:`Docker <docker>`. Let's create the file
@@ -111,8 +111,29 @@ You'll see the following excerpt in the log, which indicates that the Python plu
 `Here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/python/>`__ is a full example
 of a more complex setup using the :ref:`osimis/orthanc <docker-osimis>` images.
 
+
+Microsoft Windows
+.................
+
+Pre-compiled binaries for Microsoft Windows `are also available
+<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+
+Beware that one version of the Python plugin can only be run against
+one version of the Python interpreter. This version is clearly
+indicated in the filename of the precompiled binaries.  
+
+Pay also attention to pick the right 32/64 bits version.  If you are
+running Orthanc 64bits, install Python in 64bits and select the 64bits
+Python plugin too.
+
+When you install Python on your Windows machine, make sure to install
+Python for ``All Users`` and select the ``Add Python to Path`` option.
+
 Compiling from source
 .....................
+
+For GNU/Linux
+^^^^^^^^^^^^^
 
 .. highlight:: bash
 
@@ -148,15 +169,8 @@ be used on OS X::
           -DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/include/python3.8/
   
   
-Microsoft Windows
-.................
-
-Pre-compiled binaries for Microsoft Windows `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
-
-Beware that one version of the Python plugin can only be run against
-one version of the Python interpreter. This version is clearly
-indicated in the filename of the precompiled binaries.
+For Microsoft Windows
+^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: text
 
@@ -164,7 +178,7 @@ You are of course free to compile the plugin from sources. You'll have
 to explicitly specify the path to your Python installation while
 invoking CMake. For instance::
 
-  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=3.8 -DPYTHON_WINDOWS_ROOT=C:/Python38 \
                                     -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 15 2017"
 
 **Note about debug builds**: Usually, building Python modules such as the Python 
@@ -185,7 +199,7 @@ system to do so by setting the ``PYTHON_WINDOWS_USE_RELEASE_LIBS`` CMake option,
 that is ``ON`` by default, to ``OFF``. The previous build example would then be,
 should you require a full debug build::
 
-  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=2.7 -DPYTHON_WINDOWS_ROOT=C:/Python27 \
+  C:\orthanc-python\Build> cmake .. -DPYTHON_VERSION=3.8 -DPYTHON_WINDOWS_ROOT=C:/Python38 \
                                     -DSTATIC_BUILD=ON -DPYTHON_WINDOWS_USE_RELEASE_LIBS=OFF \
                                     -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 15 2017"
 
@@ -215,21 +229,11 @@ Samples
 Extending the REST API
 ......................
 
-.. highlight:: python
-
 Here is a basic Python script that registers two new routes in the
-REST API::
+REST API:
 
-  import orthanc
-  import pprint
-
-  def OnRest(output, uri, **request):
-      pprint.pprint(request)
-      print('Accessing uri: %s' % uri)
-      output.AnswerBuffer('ok\n', 'text/plain')
-    
-  orthanc.RegisterRestCallback('/(to)(t)o', OnRest)
-  orthanc.RegisterRestCallback('/tata', OnRest)
+.. literalinclude:: python/extending-rest-api.py
+                    :language: python
 
 .. highlight:: json
 
@@ -255,27 +259,10 @@ The route can then be accessed as::
 Listening to changes
 ....................
 
-.. highlight:: python
+This sample uploads a DICOM file as soon as Orthanc is started:
 
-This sample uploads a DICOM file as soon as Orthanc is started::
-
-   import orthanc
-
-   def OnChange(changeType, level, resource):
-       if changeType == orthanc.ChangeType.ORTHANC_STARTED:
-           print('Started')
-
-           with open('/tmp/sample.dcm', 'rb') as f:
-               orthanc.RestApiPost('/instances', f.read())
-        
-        elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
-            print('Stopped')
-
-        elif changeType == orthanc.ChangeType.NEW_INSTANCE:
-            print('A new instance was uploaded: %s' % resource)
-
-    orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/listening-changes.py
+                    :language: python
 
 
 .. warning::
@@ -289,22 +276,10 @@ As a **temporary workaround** against such deadlocks in releases <=
 these calls in a separate thread, passing the pending events to be
 processed through a message queue. Here is the template of a possible
 solution to postpone such deadlocks as much as possible by relying on
-the multithreading primitives of Python::
+the multithreading primitives of Python:
 
-  import orthanc
-  import threading
-
-  def OnChange(changeType, level, resource):
-      # One can safely invoke the "orthanc" module in this function
-      orthanc.LogWarning("Hello world")
-  
-  def _OnChange(changeType, level, resource):
-      # Invoke the actual "OnChange()" function in a separate thread
-      t = threading.Timer(0, function = OnChange, args = (changeType, level, resource))
-      t.start()
-
-  orthanc.RegisterOnChangeCallback(_OnChange)
-
+.. literalinclude:: python/changes-deadlock-3.0.py
+                    :language: python
 
 Beware that **this workaround is imperfect** and deadlocks have been
 observed even if using it! Make sure to upgrade your plugin to solve
@@ -316,31 +291,8 @@ in releases >= 3.1 of the plugin.
 Accessing the content of a new instance
 .......................................
 
-.. highlight:: python
-
-::
-   
-  import orthanc
-  import json
-  import pprint
-
-  def OnStoredInstance(dicom, instanceId):
-      print('Received instance %s of size %d (transfer syntax %s, SOP class UID %s)' % (
-          instanceId, dicom.GetInstanceSize(),
-          dicom.GetInstanceMetadata('TransferSyntax'),
-          dicom.GetInstanceMetadata('SopClassUid')))
-
-      # Print the origin information
-      if dicom.GetInstanceOrigin() == orthanc.InstanceOrigin.DICOM_PROTOCOL:
-          print('This instance was received through the DICOM protocol')
-      elif dicom.GetInstanceOrigin() == orthanc.InstanceOrigin.REST_API:
-          print('This instance was received through the REST API')
-
-      # Print the DICOM tags
-      pprint.pprint(json.loads(dicom.GetInstanceSimplifiedJson()))
-
-  orthanc.RegisterOnStoredInstanceCallback(OnStoredInstance)
-
+.. literalinclude:: python/accessing-new-instance.py
+                    :language: python
 
 .. warning::
    Your callback function will be called synchronously with
@@ -357,34 +309,16 @@ Accessing the content of a new instance
 Calling pydicom
 ...............
 
-.. highlight:: python
-
 Here is a sample Python plugin that registers a REST callback to dump
 the content of the dataset of one given DICOM instance stored in
-Orthanc, using `pydicom <https://pydicom.github.io/>`__::
-  
-  import io
-  import orthanc
-  import pydicom
+Orthanc, using `pydicom <https://pydicom.github.io/>`__:
 
-  def DecodeInstance(output, uri, **request):
-      if request['method'] == 'GET':
-          # Retrieve the instance ID from the regular expression (*)
-          instanceId = request['groups'][0]
-          # Get the content of the DICOM file
-          f = orthanc.GetDicomForInstance(instanceId)
-          # Parse it using pydicom
-          dicom = pydicom.dcmread(io.BytesIO(f))
-          # Return a string representation the dataset to the caller
-          output.AnswerBuffer(str(dicom), 'text/plain')
-      else:
-          output.SendMethodNotAllowed('GET')
-
-  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+.. literalinclude:: python/pydicom.py
+                    :language: python
 
 .. highlight:: bash
 
-This can be called as follows::
+This callback can be called as follows::
   
   $ curl http://localhost:8042/pydicom/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5
   
@@ -392,68 +326,25 @@ This can be called as follows::
 Auto-routing studies
 ....................
 
-.. highlight:: python
-
 Here is a sample Python plugin that routes any :ref:`stable study
 <stable-resources>` to a modality named ``samples`` (as declared in the
-``DicomModalities`` configuration option)::
+``DicomModalities`` configuration option):
   
-  import orthanc
-
-  def OnChange(changeType, level, resourceId):
-      if changeType == orthanc.ChangeType.STABLE_STUDY:
-          print('Stable study: %s' % resourceId)
-          orthanc.RestApiPost('/modalities/sample/store', resourceId)
-
-  orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/autorouting-1.py
+                    :language: python
 
 Note that, if you want to use an orthanc plugin to transfer the study,
-you should use the ``RestApiPostAfterPlugins()`` method::
+you should use the ``RestApiPostAfterPlugins()`` method:
 
-  import orthanc
-
-  def OnChange(changeType, level, resourceId):
-      if changeType == orthanc.ChangeType.STABLE_STUDY:
-          print('Stable study: %s' % resourceId)
-          orthanc.RestApiPostAfterPlugins('/dicom-web/servers/sample/store', resourceId)
-
-  orthanc.RegisterOnChangeCallback(OnChange)
-
+.. literalinclude:: python/autorouting-2.py
+                    :language: python
+                               
 
 Rendering a thumbnail using PIL/Pillow
 ......................................
 
-.. highlight:: python
-
-::
-   
-  from PIL import Image
-  import io
-  import orthanc
-
-  def DecodeInstance(output, uri, **request):
-      if request['method'] == 'GET':
-          # Retrieve the instance ID from the regular expression (*)
-          instanceId = request['groups'][0]
-
-          # Render the instance, then open it in Python using PIL/Pillow
-          png = orthanc.RestApiGet('/instances/%s/rendered' % instanceId)
-          image = Image.open(io.BytesIO(png))
-
-          # Downsize the image as a 64x64 thumbnail
-          image.thumbnail((64, 64), Image.ANTIALIAS)
-
-          # Save the thumbnail as JPEG, then send the buffer to the caller
-          jpeg = io.BytesIO()
-          image.save(jpeg, format = "JPEG", quality = 80)
-          jpeg.seek(0)
-          output.AnswerBuffer(jpeg.read(), 'text/plain')
-
-      else:
-          output.SendMethodNotAllowed('GET')
-
-  orthanc.RegisterRestCallback('/pydicom/(.*)', DecodeInstance)  # (*)
+.. literalinclude:: python/pil.py
+                    :language: python
 
 
 .. _python-introspection:
@@ -461,68 +352,24 @@ Rendering a thumbnail using PIL/Pillow
 Inspecting the available API
 ............................
 
-.. highlight:: python
-
 Thanks to Python's introspection primitives, it is possible to inspect
 the API of the ``orthanc`` module in order to dump all the available
-features::
+features:
 
-  import inspect
-  import numbers
-  import orthanc
+.. literalinclude:: python/inspect-api.py
+                    :language: python
 
-  # Loop over the members of the "orthanc" module
-  for (name, obj) in inspect.getmembers(orthanc):
-      if inspect.isroutine(obj):
-          print('Function %s():\n  Documentation: %s\n' % (name, inspect.getdoc(obj)))
-
-      elif inspect.isclass(obj):
-          print('Class %s:\n  Documentation: %s' % (name, inspect.getdoc(obj)))
-
-          # Loop over the members of the class
-          for (subname, subobj) in inspect.getmembers(obj):
-              if isinstance(subobj, numbers.Number):
-                  print('  - Enumeration value %s: %s' % (subname, subobj))
-              elif (not subname.startswith('_') and
-                    inspect.ismethoddescriptor(subobj)):
-                  print('  - Method %s(): %s' % (subname, inspect.getdoc(subobj)))
-          print('')
-
-
+                               
 .. _python-scheduler:
 
 Scheduling a task for periodic execution
 ........................................
 
-.. highlight:: python
-
 The following Python script will periodically (every second) run the
-function ``Hello()`` thanks to the ``threading`` module::
+function ``Hello()`` thanks to the ``threading`` module:
 
-  import orthanc
-  import threading
-
-  TIMER = None
-
-  def Hello():
-      global TIMER
-      TIMER = None
-      orthanc.LogWarning("In Hello()")
-      # Do stuff...
-      TIMER = threading.Timer(1, Hello)  # Re-schedule after 1 second
-      TIMER.start()
-
-  def OnChange(changeType, level, resource):
-      if changeType == orthanc.ChangeType.ORTHANC_STARTED:
-          orthanc.LogWarning("Starting the scheduler")
-          Hello()
-
-      elif changeType == orthanc.ChangeType.ORTHANC_STOPPED:
-          if TIMER != None:
-              orthanc.LogWarning("Stopping the scheduler")
-              TIMER.cancel()
-
-  orthanc.RegisterOnChangeCallback(OnChange)
+.. literalinclude:: python/periodic-execution.py
+                    :language: python
 
 
 .. _python-metadata:
@@ -542,83 +389,11 @@ indexed in the Orthanc database, contrarily to the main DICOM
 tags. Filtering metadata requires a linear search over all the
 matching resources, which induces a cost in the performance.
 
-.. highlight:: python
-
 Nevertheless, here is a full sample Python script that overwrites the
-``/tools/find`` route in order to give access to metadata::
+``/tools/find`` route in order to give access to metadata:
 
-  import json
-  import orthanc
-  import re
-
-  # Get the path in the REST API to the given resource that was returned
-  # by a call to "/tools/find"
-  def GetPath(resource):
-      if resource['Type'] == 'Patient':
-          return '/patients/%s' % resource['ID']
-      elif resource['Type'] == 'Study':
-          return '/studies/%s' % resource['ID']
-      elif resource['Type'] == 'Series':
-          return '/series/%s' % resource['ID']
-      elif resource['Type'] == 'Instance':
-          return '/instances/%s' % resource['ID']
-      else:
-          raise Exception('Unknown resource level')
-
-  def FindWithMetadata(output, uri, **request):
-      # The "/tools/find" route expects a POST method
-      if request['method'] != 'POST':
-          output.SendMethodNotAllowed('POST')
-      else:
-          # Parse the query provided by the user, and backup the "Expand" field
-          query = json.loads(request['body'])       
-
-          if 'Expand' in query:
-              originalExpand = query['Expand']
-          else:
-              originalExpand = False
-
-          # Call the core "/tools/find" route
-          query['Expand'] = True
-          answers = orthanc.RestApiPost('/tools/find', json.dumps(query))
-
-          # Loop over the matching resources
-          filteredAnswers = []
-          for answer in json.loads(answers):
-              try:
-                  # Read the metadata that is associated with the resource
-                  metadata = json.loads(orthanc.RestApiGet('%s/metadata?expand' % GetPath(answer)))
-
-                  # Check whether the metadata matches the regular expressions
-                  # that were provided in the "Metadata" field of the user request
-                  isMetadataMatch = True
-                  if 'Metadata' in query:
-                      for (name, pattern) in query['Metadata'].items():
-                          if name in metadata:
-                              value = metadata[name]
-                          else:
-                              value = ''
-
-                          if re.match(pattern, value) == None:
-                              isMetadataMatch = False
-                              break
-
-                  # If all the metadata matches the provided regular
-                  # expressions, add the resource to the filtered answers
-                  if isMetadataMatch:
-                      if originalExpand:
-                          answer['Metadata'] = metadata
-                          filteredAnswers.append(answer)
-                      else:
-                          filteredAnswers.append(answer['ID'])
-              except:
-                  # The resource was deleted since the call to "/tools/find"
-                  pass
-
-          # Return the filtered answers in the JSON format
-          output.AnswerBuffer(json.dumps(filteredAnswers, indent = 3), 'application/json')
-
-  orthanc.RegisterRestCallback('/tools/find', FindWithMetadata)
+.. literalinclude:: python/filtering-metadata.py
+                    :language: python
 
 
 **Warning:** In the sample above, the filtering of the metadata is
@@ -641,54 +416,15 @@ updated in 2019 thanks to this Python script::
 Implementing basic paging
 .........................
 
-.. highlight:: python
-
 As explained in the FAQ, the :ref:`Orthanc Explorer interface is
 low-level <improving-interface>`, and is not adapted for
 end-users. One common need is to implement paging of studies, which
 calls for server-side sorting of studies. This can be done using the
 following sample Python plugin that registers a new route
-``/sort-studies`` in the REST API of Orthanc::
+``/sort-studies`` in the REST API of Orthanc:
 
- import json
- import orthanc
-
- def GetStudyDate(study):
-     if 'StudyDate' in study['MainDicomTags']:
-         return study['MainDicomTags']['StudyDate']
-     else:
-         return ''
-
- def SortStudiesByDate(output, uri, **request):
-     if request['method'] == 'GET':
-         # Retrieve all the studies
-         studies = json.loads(orthanc.RestApiGet('/studies?expand'))
-
-         # Sort the studies according to the "StudyDate" DICOM tag
-         studies = sorted(studies, key = GetStudyDate)
-
-         # Read the limit/offset arguments provided by the user
-         offset = 0
-         if 'offset' in request['get']:
-             offset = int(request['get']['offset'])
-
-         limit = 0
-         if 'limit' in request['get']:
-             limit = int(request['get']['limit'])
-
-         # Truncate the list of studies
-         if limit == 0:
-             studies = studies[offset : ]
-         else:
-             studies = studies[offset : offset + limit]
-
-         # Return the truncated list of studies
-         output.AnswerBuffer(json.dumps(studies), 'application/json')
-     else:
-         output.SendMethodNotAllowed('GET')
-
- orthanc.RegisterRestCallback('/sort-studies', SortStudiesByDate)
-
+.. literalinclude:: python/paging.py
+                    :language: python
 
 .. highlight:: bash
 
@@ -716,41 +452,12 @@ performance, one could for instance cache the result of
 Creating a Microsoft Excel report
 .................................
 
-.. highlight:: python
-
 As Orthanc plugins have access to any installed Python module, it is
 very easy to implement a server-side plugin that generates a report in
-the Microsoft Excel ``.xls`` format. Here is a working example::
+the Microsoft Excel ``.xls`` format. Here is a working example:
 
- import StringIO
- import json
- import orthanc
- import xlwt 
- 
- def CreateExcelReport(output, uri, **request):
-     if request['method'] != 'GET' :
-         output.SendMethodNotAllowed('GET')
-     else:
-         # Create an Excel writer
-         excel = xlwt.Workbook()
-         sheet = excel.add_sheet('Studies')
- 
-         # Loop over the studies stored in Orthanc
-         row = 0
-         studies = orthanc.RestApiGet('/studies?expand')
-         for study in json.loads(studies):
-             sheet.write(row, 0, study['PatientMainDicomTags'].get('PatientID'))
-             sheet.write(row, 1, study['PatientMainDicomTags'].get('PatientName'))
-             sheet.write(row, 2, study['MainDicomTags'].get('StudyDescription'))
-             row += 1
- 
-         # Serialize the Excel workbook to a string, and return it to the caller
-         # https://stackoverflow.com/a/15649139/881731
-         b = StringIO.StringIO()
-         excel.save(b)       
-         output.AnswerBuffer(b.getvalue(), 'application/vnd.ms-excel')
-
- orthanc.RegisterRestCallback('/report.xls', CreateExcelReport)
+.. literalinclude:: python/excel.py
+                    :language: python
 
 If opening the ``http://localhost:8042/report.xls`` URI, this Python
 will generate a workbook with one sheet that contains the list of
@@ -760,23 +467,15 @@ description.
 
 .. _python_authorization:
 
-Forbid or allow access to REST resources (authorization)
-........................................................
-
-.. highlight:: python
+Forbid or allow access to REST resources (authorization, new in 3.0)
+....................................................................
 
 The following Python script installs a callback that is triggered
-whenever the HTTP server of Orthanc is accessed::
+whenever the HTTP server of Orthanc is accessed:
 
-  import orthanc
-  import pprint
+.. literalinclude:: python/authorization-1.py
+                    :language: python
 
-  def Filter(uri, **request):
-      print('User trying to access URI: %s' % uri)
-      pprint.pprint(request)
-      return True  # False to forbid access
-
-  orthanc.RegisterIncomingHttpRequestFilter(Filter)
 
 If access is not granted, the ``Filter`` callback must return
 ``False``. As a consequence, the HTTP status code would be set to
@@ -789,49 +488,301 @@ Note that this is similar to the ``IncomingHttpRequestFilter()``
 callback that is available in :ref:`Lua scripts <lua-filter-rest>`.
 
 Thanks to Python, it is extremely easy to call remote Web services for
-authorization. Here is an example using the ``requests`` library::
+authorization. Here is an example using the ``requests`` library:
 
-  import json
-  import orthanc
-  import requests
-
-  def Filter(uri, **request):
-      body = {
-          'uri' : uri,
-          'headers' : request['headers']
-      }
-      r = requests.post('http://localhost:8000/authorize',
-                        data = json.dumps(body))
-      return r.json() ['granted']  # Must be a Boolean
-
-  orthanc.RegisterIncomingHttpRequestFilter(Filter)
-
-.. highlight:: javascript
+.. literalinclude:: python/authorization-2.py
+                    :language: python
 
 This filter could be used together with the following Web service
 implemented using `Node.js
-<https://en.wikipedia.org/wiki/Node.js>`__::
+<https://en.wikipedia.org/wiki/Node.js>`__:
 
-  const http = require('http');
-
-  const requestListener = function(req, res) {
-    let body = '';
-      req.on('data', function(chunk) {
-      body += chunk;
-    });
-    req.on('end', function() {
-      console.log(JSON.parse(body));
-      var answer = {
-        'granted' : false  // Forbid access
-      };
-      res.writeHead(200);
-      res.end(JSON.stringify(answer));
-    });
-  }
-
-  http.createServer(requestListener).listen(8000);
+.. literalinclude:: python/authorization-node-service.js
+                    :language: javascript
 
   
+.. _python_lookup_dictionary:
+
+Lookup DICOM dictionary (new in 3.2)
+....................................
+
+Python plugins can access the dictionary of the DICOM tags that are
+handled by Orthanc:
+
+.. literalinclude:: python/lookup-dictionary.py
+                    :language: python
+
+.. highlight:: text
+
+Note how Python introspection is used in order to map the values in
+enumeration ``orthanc.ValueRepresentation`` to a string description of
+the value representation. If started, the plugin above would output
+the following information in the Orthanc logs::
+
+  W0611 14:04:08.563957 PluginsManager.cpp:168] Entry in the dictionary: {
+      "Element": 32, 
+      "Group": 16, 
+      "MaxMultiplicity": 1, 
+      "MinMultiplicity": 1, 
+      "ValueRepresentation": 11
+  }
+  W0611 14:04:08.563975 PluginsManager.cpp:168] Name of the value representation: LO
+
+
+.. _python_create_dicom:
+
+Creating DICOM instances (new in 3.2)
+.....................................
+
+The following sample Python script will write on the disk a new DICOM
+instance including the traditional Lena sample image, and will decode
+the single frame of this DICOM instance:
+
+.. literalinclude:: python/create-dicom.py
+                    :language: python
+
+
+.. _python_pil_conversions:
+
+Conversions between Orthanc and Python images (new in 3.2)
+..........................................................
+
+The Python method ``orthanc.Image.GetImageBuffer()`` returns a copy of
+the memory buffer of an image that is handled Orthanc. Conversely, the
+Python function ``orthanc.CreateImageFromBuffer()`` can be used to
+create an Orthanc image from a Python buffer. Taken together, these
+two functions can be used to do bidirectional conversions between
+Orthanc images and Python images.
+
+Here is a full working example using PIL/Pillow that shows how to
+decode one frame of a DICOM instance using Orthanc, then to modify
+this image using PIL, and finally to upload the modified image as a
+new DICOM instance:
+
+.. literalinclude:: python/pil-conversions.py
+                    :language: python
+
+
+.. _python_dicom_scp:
+
+Handling DICOM SCP requests (new in 3.2)
+........................................
+
+Starting with release 3.2 of the Python plugin, it is possible to
+replace the C-FIND SCP and C-MOVE SCP of Orthanc by a Python
+script. This feature can notably be used to create a custom DICOM
+proxy. Here is a minimal example:
+
+.. literalinclude:: python/dicom-find-move-scp.py
+                    :language: python
+
+
+.. highlight:: text
+  
+In this sample, the C-FIND SCP will send one single answer that
+reproduces the values provided by the SCU::
+
+  $ findscu localhost 4242 -S -k QueryRetrieveLevel=STUDY -k PatientName=TEST -k SeriesDescription=
+  I: ---------------------------
+  I: Find Response: 1 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0008,0052) CS [HELLO0-STUDY]                           #  12, 1 QueryRetrieveLevel
+  I: (0008,103e) LO [HELLO1- ]                               #   8, 1 SeriesDescription
+  I: (0010,0010) PN [HELLO2-TEST ]                           #  12, 1 PatientName
+  I: 
+
+A more realistic Python script could for instance call the route
+``/modalities/{...}/query`` in the :ref:`REST API <rest-find-scu>` of
+Orthanc using ``orthanc.RestApiPost()``, in order to query the content
+a remote modality through a second C-FIND SCU request (this time
+issued by Orthanc as a SCU).
+  
+The C-MOVE SCP can be invoked as follows::
+  
+  $ movescu localhost 4242 -aem TARGET -aec SOURCE -aet MOVESCU -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
+
+The C-MOVE request above would print the following information in the
+Orthanc logs::
+
+  W0610 18:30:36.840865 PluginsManager.cpp:168] C-MOVE request to be handled in Python: {
+      "AccessionNumber": "", 
+      "Level": "INSTANCE", 
+      "OriginatorAET": "MOVESCU", 
+      "OriginatorID": 1, 
+      "PatientID": "", 
+      "SOPInstanceUID": "", 
+      "SeriesInstanceUID": "", 
+      "SourceAET": "SOURCE", 
+      "StudyInstanceUID": "1.2.3.4", 
+      "TargetAET": "TARGET"
+  }
+
+It is now up to your Python callback to process the C-MOVE SCU request,
+for instance by calling the route ``/modalities/{...}/store`` in the
+:ref:`REST API <rest-store-scu>` of Orthanc using
+``orthanc.RestApiPost()``. It is highly advised to create a Python
+thread to handle the request, in order to avoid blocking Orthanc as
+much as possible.
+
+
+.. _python_worklists:
+
+Handling worklist SCP requests (new in 3.2)
+...........................................
+
+Starting with release 3.2 of the Python plugin, it is possible to
+answer :ref:`worklist queries <worklist>` using a Python script. This
+is especially useful to easily create a bridge between Orthanc,
+HL7/FHIR messages and RIS systems. Indeed, Python provides many tools
+to handle HL7 such as `python-hl7 library
+<https://python-hl7.readthedocs.io/en/latest/>`__.
+
+The following Python script reproduces features similar to the
+:ref:`sample modality worklists plugin <worklists-plugin>`:
+
+.. literalinclude:: python/worklist.py
+                    :language: python
+
+.. highlight:: text
+  
+Here is the result of this plugin on a sample call::
+
+  $ findscu -W -k "ScheduledProcedureStepSequence[0].Modality=MR" 127.0.0.1 4242
+  I: ---------------------------
+  I: Find Response: 1 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0040,0100) SQ (Sequence with explicit length #=1)      #  18, 1 ScheduledProcedureStepSequence
+  I:   (fffe,e000) na (Item with explicit length #=1)          #  10, 1 Item
+  I:     (0008,0060) CS [MR]                                     #   2, 1 Modality
+  I:   (fffe,e00d) na (ItemDelimitationItem for re-encoding)   #   0, 0 ItemDelimitationItem
+  I: (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
+  I: 
+  I: ---------------------------
+  I: Find Response: 2 (Pending)
+  I: 
+  I: # Dicom-Data-Set
+  I: # Used TransferSyntax: Little Endian Explicit
+  I: (0008,0005) CS [ISO_IR 100]                             #  10, 1 SpecificCharacterSet
+  I: (0040,0100) SQ (Sequence with explicit length #=1)      #  18, 1 ScheduledProcedureStepSequence
+  I:   (fffe,e000) na (Item with explicit length #=1)          #  10, 1 Item
+  I:     (0008,0060) CS [MR]                                     #   2, 1 Modality
+  I:   (fffe,e00d) na (ItemDelimitationItem for re-encoding)   #   0, 0 ItemDelimitationItem
+  I: (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
+  I:
+
+
+.. _pynetdicom:
+
+Replacing DICOM SCP of Orthanc by pynetdicom
+............................................
+
+.. highlight:: json
+
+Thanks to Python plugins, it is also possible to replace the built-in
+DICOM SCP of Orthanc by `pynetdicom
+<https://pydicom.github.io/pynetdicom/stable/examples/storage.html>`__
+so as to customize how the DICOM protocol is handled. Firstly, in the
+configuration file, make sure to disable the Orthanc SCP by setting
+``DicomServerEnabled`` to ``false``::
+
+  {
+    "Plugins" : [ "." ],
+    "PythonScript" : "pynetdicom.py",
+    "DicomServerEnabled" : false
+  }
+
+Secondly, here a basic plugin illustrating how to start and stop the
+pynetdicom server, and handle incoming C-STORE requests:
+
+.. literalinclude:: python/pynetdicom.py
+                    :language: python
+
+As can be seen in this listing, whenever the pynetdicom receives an
+incoming C-STORE request, it makes a POST call to the URI
+``/instances`` in the REST API of Orthanc in order to store the
+embedded DICOM dataset into Orthanc. Obviously, one can build more
+complex DICOM servers by handling more messages than C-STORE alone.
+
+
+.. _python_exception:
+
+Catching exceptions
+...................
+
+Starting with release 3.3 of the Python plugin, the plugin generates a
+Python exception derived from class ``orthanc.OrthancException`` if an
+error is encountered. This exception contains a tuple that provides
+the error code and its textual description.
+
+In releases <= 3.2, the Python plugin raised the `built-in exception
+<https://docs.python.org/3/library/exceptions.html>`__ ``ValueError``.
+
+Here is an example showing how to catch exceptions:
+
+.. literalinclude:: python/exception.py
+                    :language: python
+
+
+.. _python_storage_area:
+
+Implementing a custom storage area (new in 3.3)
+...............................................
+
+Starting with release 3.3 of the Python plugin, it is possible to
+replace the built-in storage area of Orthanc (that writes
+:ref:`attachments <metadata>` onto the filesystem in the
+``OrthancStorage`` folder by default), by providing 3 Python callbacks
+to the ``orthanc.RegisterStorageArea()`` function:
+
+* The first callback indicates how to **create** an attachment into
+  the storage area.
+
+* The second callback indicates how to **read** an attachment from the
+  storage area.
+
+* The third callback indicates how to **remove** an attachment out of
+  the storage area.
+
+This feature can be used to quickly and easily interface Orthanc with
+any `object-based storage
+<https://en.wikipedia.org/wiki/Object_storage>`__ technology available
+in Python (such as `Ceph
+<https://en.wikipedia.org/wiki/Ceph_(software)>`__ or AWS S3-like
+tools). The performance will not be as good as a C/C++ native plugin
+(cf. the :ref:`cloud storage <object-storage>`, the :ref:`PostgreSQL
+<postgresql>` and the :ref:`MySQL <mysql>` plugins), but it can be
+used for prototyping or for basic setups.
+
+Here is a full, self-explaining sample:
+
+.. literalinclude:: python/storage-area.py
+                    :language: python
+
+The ``contentType`` can be used to apply a special treatment to some
+types of attachments (typically, DICOM instances). This parameter
+takes its values from the ``orthanc.ContentType`` enumeration.
+
+
+.. _python_received_instance:
+
+Modifying received instances (new in 3.5 - not released yet)
+............................................................
+
+Starting with release 3.5 of the Python plugin, it is possible to
+modify instances received by Orthanc before they are stored in
+the storage.  This is usually easier to perform modification at this
+stage compared to using the ``/modify`` route once the instances
+has been stored.
+
+.. literalinclude:: python/received-instance-callback.py
+                    :language: python
+
 
 
 Performance and concurrency
@@ -845,31 +796,11 @@ latter OS has a different model for `forking processes
 Using slave processes
 .....................
 
-.. highlight:: python
-
 Let us consider the following sample Python script that makes a
-CPU-intensive computation on a REST callback::
+CPU-intensive computation on a REST callback:
 
-  import math
-  import orthanc
-  import time
-
-  # CPU-intensive computation taking about 4 seconds
-  def SlowComputation():
-      start = time.time()
-      for i in range(1000):
-          for j in range(30000):
-              math.sqrt(float(j))
-      end = time.time()
-      duration = (end - start)
-      return 'computation done in %.03f seconds\n' % duration
-
-  def OnRest(output, uri, **request):
-      answer = SlowComputation()
-      output.AnswerBuffer(answer, 'text/plain')
-
-  orthanc.RegisterRestCallback('/computation', OnRest)
-
+.. literalinclude:: python/multiprocessing-1.py
+                    :language: python
 
 .. highlight:: text
 
@@ -901,8 +832,6 @@ callback, only one can proceed at any given time. Note however that
 the GIL only applies to the Python script: The baseline REST API of
 Orthanc is not affected by the GIL.
 
-.. highlight:: python
-
 The solution is to use the `multiprocessing primitives
 <https://docs.python.org/3/library/multiprocessing.html>`__ of Python.
 The "master" Python interpreter that is initially started by the
@@ -911,39 +840,10 @@ Orthanc plugin, can start several `children processes
 processes running a separate Python interpreter. This allows to
 offload intensive computations from the "master" Python interpreter of
 Orthanc onto those "slave" interpreters. The ``multiprocessing``
-library is actually quite straightforward to use::
+library is actually quite straightforward to use:
 
-  import math
-  import multiprocessing
-  import orthanc
-  import signal
-  import time
-
-  # CPU-intensive computation taking about 4 seconds
-  # (same code as above)
-  def SlowComputation():
-      start = time.time()
-      for i in range(1000):
-          for j in range(30000):
-              math.sqrt(float(j))
-      end = time.time()
-      duration = (end - start)
-      return 'computation done in %.03f seconds\n' % duration
-
-  # Ignore CTRL+C in the slave processes
-  def Initializer():
-      signal.signal(signal.SIGINT, signal.SIG_IGN)
-
-  # Create a pool of 4 slave Python interpreters
-  POOL = multiprocessing.Pool(4, initializer = Initializer)
-
-  def OnRest(output, uri, **request):
-      # Offload the call to "SlowComputation" onto one slave process.
-      # The GIL is unlocked until the slave sends its answer back.
-      answer = POOL.apply(SlowComputation)
-      output.AnswerBuffer(answer, 'text/plain')
-
-  orthanc.RegisterRestCallback('/computation', OnRest)
+.. literalinclude:: python/multiprocessing-2.py
+                    :language: python
 
 .. highlight:: text
 
@@ -975,8 +875,6 @@ is more targeted at dealing with costly I/O operations or with the
 Slave processes and the "orthanc" module
 ........................................
 
-.. highlight:: python
-
 Very importantly, pay attention to the fact that **only the "master"
 Python interpreter has access to the Orthanc SDK**. The "slave"
 processes have no access to the ``orthanc`` module.
@@ -984,22 +882,11 @@ processes have no access to the ``orthanc`` module.
 You must write your Python plugin so as that all the calls to
 ``orthanc`` are moved from the slaves process to the master
 process. For instance, here is how you would parse a DICOM file in a
-slave process::
+slave process:
 
-  import pydicom
-  import io
+.. literalinclude:: python/multiprocessing-3.py
+                    :language: python
 
-  def OffloadedDicomParsing(dicom):
-      # No access to the "orthanc" library here, as we are in the slave process
-      dataset = pydicom.dcmread(io.BytesIO(dicom))
-      return str(dataset)
-
-  def OnRest(output, uri, **request):
-      # The call to "orthanc.RestApiGet()" is only possible in the master process
-      dicom = orthanc.RestApiGet('/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/file')
-      answer = POOL.apply(OffloadedDicomParsing, args = (dicom, ))
-      output.AnswerBuffer(answer, 'text/plain')
-      
 Communication primitives such as ``multiprocessing.Queue`` are
 available to exchange messages from the "slave" Python interpreters to
 the "master" Python interpreter for more advanced scenarios.
@@ -1011,28 +898,7 @@ be used to create an authorization token that provides full access to
 the REST API of Orthanc (without have to set credentials in your
 plugin). Any HTTP client library for Python, such as `requests
 <https://requests.readthedocs.io/en/master/>`__, can then be used to
-access the REST API of Orthanc. Here is a minimal example::
+access the REST API of Orthanc. Here is a minimal example:
 
-  import json
-  import multiprocessing
-  import orthanc
-  import requests
-  import signal
-  
-  TOKEN = orthanc.GenerateRestApiAuthorizationToken()
-  
-  def SlaveProcess():
-      r = requests.get('http://localhost:8042/instances',
-                       headers = { 'Authorization' : TOKEN })
-      return json.dumps(r.json())
-  
-  def Initializer():
-      signal.signal(signal.SIGINT, signal.SIG_IGN)
-  
-  POOL = multiprocessing.Pool(4, initializer = Initializer)
-  
-  def OnRest(output, uri, **request):
-      answer = POOL.apply(SlaveProcess)
-      output.AnswerBuffer(answer, 'text/plain')
-  
-  orthanc.RegisterRestCallback('/computation', OnRest)
+.. literalinclude:: python/multiprocessing-4.py
+                    :language: python

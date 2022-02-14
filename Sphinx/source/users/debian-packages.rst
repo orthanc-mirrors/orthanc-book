@@ -12,11 +12,12 @@ Orthanc packages for Debian/Ubuntu
 Introduction
 ------------
 
-Orthanc is available as an offical `Debian package
+Orthanc is available as an official `Debian package
 <https://packages.debian.org/search?keywords=orthanc&searchon=names&exact=1&suite=all&section=all>`__
-that is continuously updated by the Orthanc core developers. This
-implies that Orthanc is also available in the `Debian derivative
-distributions
+that is continuously updated by the Orthanc core developers in the
+`Debian Sid/unstable distribution
+<https://wiki.debian.org/DebianUnstable>`__. This implies that Orthanc
+is also available in the `Debian derivative distributions
 <https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based>`__,
 most notably in `Ubuntu
 <https://packages.ubuntu.com/search?keywords=orthanc&searchon=names&suite=all&section=all>`__. Most
@@ -38,6 +39,15 @@ should:
 
 * Advanced users: :ref:`replace the binaries from the package by the
   LSB binaries <lsb-replace-debian-binaries>`.
+
+
+**Note about backporting:** Bringing a new version of Orthanc to an
+older Ubuntu/Debian release (typically, a LTS release) is known as
+"backporting". The process for initiating a backport in `Ubuntu
+<https://wiki.ubuntu.com/UbuntuBackports>`__ or in `Debian
+<https://backports.debian.org/>`__ is publicly available, but the core
+developers of Orthanc will not do this packaging task by themselves
+because of a limited bandwidth: You are kindly invited to contribute!
   
 
 Installation
@@ -96,12 +106,12 @@ do that at your own risk.
 This can be done with this sequence of commands::
 
   $ sudo service orthanc stop
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.2/Orthanc --output-document /usr/sbin/Orthanc
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/Orthanc --output-document /usr/sbin/Orthanc
   $ sudo rm -f /usr/share/orthanc/plugins/*.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.2/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.2/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
   $
-  $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.3/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
+  $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.6/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
   $ ...
   $ sudo service orthanc restart
 

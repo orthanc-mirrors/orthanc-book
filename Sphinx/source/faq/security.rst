@@ -163,7 +163,9 @@ To fully secure the DICOM protocol, you should:
   to disallow C-STORE commands from unknown modalities.
 
 * Set the ``DicomCheckModalityHost`` configuration option to ``true``
-  to validate the IP and hostname address of the remote modalities.
+  to validate the IP address of the remote modalities (note that
+  hostnames cannot be used in ``DicomModalities`` when this option is
+  enabled: The ``Host`` values should only contain IP addresses).
 
 * For each modality that is defined in ``DicomModalities``,
   selectively specify what DICOM commands are allowed to be issued by

@@ -1,3 +1,5 @@
+.. _videos:
+
 Does Orthanc support videos?
 ============================
 
@@ -19,6 +21,10 @@ will work fine either with 2D+t or real videos (because Orthanc is a
 <https://en.wikipedia.org/wiki/Vendor_Neutral_Archive>`__). This
 distinction is also discussed in :ref:`another FAQ entry
 <supported-images>`.
+
+It is easy to **extract and download** the raw video embedded in the
+DICOM instance using the :ref:`REST API of Orthanc
+<download-pdf-videos>`.
 
 If you also want to **play** the videos, the :ref:`Osimis Web Viewer
 plugin <osimis_webviewer>` is able to play H.264 (MPEG4) videos and

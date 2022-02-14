@@ -18,10 +18,11 @@ Contributing to Orthanc
           * **Orthanc Core**:
 
             - :ref:`Improved Web user interface <improving-interface>`
-          
+            - Support of DICOM C-GET SCU
+   
           * **Stone Web viewer**:
-     
-            - Annotations/measurements
+
+            - Save/load annotations
             - Internationalization/translations
             - MPR volume rendering
             - Viewer dedicated to nuclear medicine and radiotherapy
@@ -29,8 +30,7 @@ Contributing to Orthanc
 
           * **Plugins**:
 
-            - Support of MSSQL databases
-            - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Myrth
+            - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
           Please `get in touch with Osimis <info@osimis.io>`__ if you
           want to sponsor these developments.
@@ -79,7 +79,12 @@ here are some tasks you can take in charge that would greatly help us:
     GNU/Linux distributions (e.g. Ubuntu PPA, RHEL/`EPEL
     <https://fedoraproject.org/wiki/EPEL>`__, CentOS, openSUSE...).
   - Take ownership of the now-orphaned `Fedora package
-    <https://src.fedoraproject.org/rpms/orthanc>`__.
+    <https://src.fedoraproject.org/rpms/orthanc>`__. Check out the
+    related `issue 1677806
+    <https://bugzilla.redhat.com/show_bug.cgi?id=1677806>`__ and
+    `issue 1843127
+    <https://bugzilla.redhat.com/show_bug.cgi?id=1843127>`__.
+  - Take care of :ref:`Debian/Ubuntu backporting <debian-packages>`.
   - Share your maintenance scripts or sample code inside the "`Orthanc Contributed
     <https://github.com/jodogne/OrthancContributed>`_" public GitHub
     repository, via pull requests.
@@ -93,6 +98,8 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Coding tasks**:
       
+  - Have a look at the TODO file containing our `official roadmap
+    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
   - The Orthanc project will happily accept patches in the core of
     Orthanc and in its associated official plugins. Please read the
     :ref:`dedicated FAQ entry <cla>`.
@@ -133,9 +140,20 @@ here are some tasks you can take in charge that would greatly help us:
       <https://twitter.com/ZeClint/status/1192086039160086529?s=20>`__
       to be handled by the PACS, not by the RIS). Reference: Events
       ``Axx`` of Chapter 3 ("Patient Administration") in the HL7 v2.9
-      specification.
-    + Have a look at the TODO file containing our `official roadmap
-      <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
+      specification. ``ADT`` messages have also been `discussed in the
+      past on the Orthanc forum
+      <https://groups.google.com/g/orthanc-users/c/Spjtcj9vSPo/m/ktUArWxUDQAJ>`__.
+    + Create a `DICOM proxy
+      <https://groups.google.com/g/orthanc-users/c/15dYEm4Tguw/m/PoldpTOQAQAJ>`__
+      (to share a single connection on a PACS by several DICOM
+      clients/viewers), or a `DICOMweb proxy
+      <https://groups.google.com/g/orthanc-users/c/AQ6qs0TgO6I/m/WxdOVEeKBAAJ>`__
+      (to turn a DICOM-only PACS into a DICOMweb server). This could
+      be done as a :ref:`Python plugin <python-plugin>` by wrapping
+      the C-FIND and C-MOVE callbacks in the Python API.
+    + Get involved in the call for ideas by Salim Kanoun about a
+      `DICOM router built on the top of Orthanc
+      <https://groups.google.com/g/orthanc-users/c/tx7E1RQuKIY/m/_GsrRZljBgAJ>`__.
   
   - Always remember that he **recommended way of contributing to the
     source code of Orthanc is by creating C/C++/Python plugins, or by
@@ -146,10 +164,13 @@ here are some tasks you can take in charge that would greatly help us:
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
 
 
-* **Financial support**:
+* **Financial support**: Buying professional services is the best way
+  to make the Orthanc project sustainable in the long term.
 
   - Osimis provides `support packs and professional development
-    services <https://www.osimis.io/en/services.html>`__ around the
+    services <https://osimis.io/en/orthanc-support-contract>`__ around the
     Orthanc ecosystem and, more generally, around medical
-    imaging. Buying such professional services is the best way to make
-    the Orthanc project sustainable in the long term.
+    imaging. 
+
+  - Check out the :ref:`professional services provided by our
+    community <support-freelancers>`.

@@ -29,7 +29,7 @@ Compilation
 
 The procedure to compile this plugin is similar of that for the
 :ref:`core of Orthanc <compiling>`. The following commands should work
-for every UNIX-like distribution (including GNU/Linux)::
+for most UNIX-like distribution (including GNU/Linux)::
 
   $ mkdir Build
   $ cd Build
@@ -350,8 +350,28 @@ password protecting the private key::
     }
   }
 
-Finally, it is also possible to use client authentication with
-hardware security modules and smart cards through `PKCS#11
+
+The definition of a DICOMweb server can also specify the HTTP headers
+to be provided during each request to the remote DICOMweb server. This
+can for instance be useful to set authorization tokens::
+
+  {
+    [...]
+    "DicomWeb" : {
+      "Servers" : {
+        "sample" : {
+          "Url" : "http://localhost:8042/dicom-web/",
+          "HttpHeaders": {
+            "Authorization" : "Bearer HelloWorldToken"
+          }
+        }
+      }
+    }
+  }
+
+
+Finally, it is possible to use client authentication with hardware
+security modules and smart cards through `PKCS#11
 <https://en.wikipedia.org/wiki/PKCS_11>`__ (this feature is only
 available is the core of Orthanc was compiled with the
 ``-DENABLE_PKCS11=ON`` option in CMake, and if the Orthanc
@@ -492,6 +512,9 @@ This page only provides some very basic examples about the use of a
 DICOMweb server. Please check out `the full reference of the DICOMweb
 API <https://www.dicomstandard.org/dicomweb/>`__ for more information.
 
+Also, check out the :ref:`section about additional samples
+<dicomweb-additional-samples>` that notably provides example of
+STOW-RS clients in JavaScript and Python.
 
 
 .. _dicomweb-client:

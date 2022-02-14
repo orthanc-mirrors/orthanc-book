@@ -94,10 +94,12 @@ but can be specified to control the way Orthanc is run.
 - ``VERBOSE_ENABLED=true`` will start Orthanc with the ``--verbose`` option
 - ``TRACE_ENABLED=true`` will start Orthanc with the ``--trace`` option
 - ``NO_JOBS=true`` will start Orthanc with the ``--no-jobs`` option
-- ``UNLOCK=true`` will start Orthanc with the ``--unlock`` option
+- ``LOGDIR=/logs`` will start Orthanc with the ``--logdir=/logs`` option (introduced in 21.9.1)
+- ``LOGFILE=/logs`` will start Orthanc with the ``--logfile=/logs/orthanc.log`` option (introduced in 21.9.1)
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
 - ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
-
+- ``BEFORE_ORTHANC_STARTUP_SCRIPT`` can be used to `run a custom script <https://groups.google.com/g/orthanc-users/c/EXjTq2ZU1vw/m/02CwW1jzAQAJ>`__ before starting Orthanc.
+  
 Configuration files
 -------------------
 
@@ -241,6 +243,13 @@ can be used to regenerate the ``/tmp/orthanc.json`` configuration file that is l
 you POST to ``/tools/reset``.  Note that it declares an ``IncomingHttpRequestFilter`` 
 callback that might conflict with your scripts.
 
+Healthcheck probe
+-----------------
+
+In version 21.10.0, the `/probes/test-aliveness.py <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/test-aliveness.py>`__ 
+script has been added in order to perform healthchecks.  Check the doc in the script itself for more details.
+A sample configuration is also available in `this sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/8016d140a237a892db703aac4782307c46732847/docker/tls-mutual-auth/docker-compose.yml#lines-51>`__
+
 
 Plugins
 -------
@@ -287,7 +296,7 @@ Below is a list of all plugins, their environment variable and their default con
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 | **OrthancWebViewer**                             | ``ORTHANC_WEB_VIEWER_PLUGIN_ENABLED``            |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **StoneWebViewer**                               | ``ORTHANC_STONE_VIEWER_PLUGIN_ENABLED``          |                                                                                                    |
+| **StoneWebViewer**                               | ``STONE_WEB_VIEWER_PLUGIN_ENABLED``              |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 | **OsimisWebViewerBasic**                         | ``OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED``            |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
@@ -339,9 +348,34 @@ Below is a list of all plugins, their environment variable and their default con
 |                                                  |                                                  |     }                                                                                              |
 |                                                  |                                                  |   }                                                                                                |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Whole-slide imaging**                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |
+| **Wsi**                                          | ``WSI_PLUGIN_ENABLED``                           |                                                                                                    |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| **Osimis cloud** (synchronization plugin)        | ``OSIMIS_CLOUD_PLUGIN_ENABLED``                  |                                                                                                    |
+| **Odbc**                                         | ``ODBC_PLUGIN_ENABLED``                          | .. code-block:: json                                                                               |
+|                                                  |                                                  |                                                                                                    |
+|                                                  |                                                  |   {                                                                                                |
+|                                                  |                                                  |     "Odbc": {                                                                                      |
+|                                                  |                                                  |       "EnableIndex": true,                                                                         |
+|                                                  |                                                  |       "EnableStorage": false,                                                                      |
+|                                                  |                                                  |       "IndexConnectionString": "MUST BE DEFINED",                                                  |
+|                                                  |                                                  |       "StorageConnectionString": "MUST BE DEFINED"                                                 |
+|                                                  |                                                  |     }                                                                                              |
+|                                                  |                                                  |   }                                                                                                |
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| **Tcia**                                         | ``TCIA_PLUGIN_ENABLED``                          | .. code-block:: json                                                                               |
+|                                                  |                                                  |                                                                                                    |
+|                                                  |                                                  |   {                                                                                                |
+|                                                  |                                                  |     "Tcia": {                                                                                      |
+|                                                  |                                                  |       "Enable": true                                                                               |
+|                                                  |                                                  |     }                                                                                              |
+|                                                  |                                                  |   }                                                                                                |
++--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
+| **Indexer**                                      | ``INDEXER_PLUGIN_ENABLED``                       | .. code-block:: json                                                                               |
+|                                                  |                                                  |                                                                                                    |
+|                                                  |                                                  |   {                                                                                                |
+|                                                  |                                                  |     "Indexer": {                                                                                   |
+|                                                  |                                                  |       "Enable": true                                                                               |
+|                                                  |                                                  |     }                                                                                              |
+|                                                  |                                                  |   }                                                                                                |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 
 Under the hood

@@ -28,8 +28,10 @@ than Orthanc Explorer**, and/or that integrates more features (such as
 language translations, sorting resources, access control lists,
 tagging images, beautiful layout, tunable anonymization, modification
 of instances, paging if many patients, handling of timeouts,
-login/logout, Web diffusion to patients/physicians...). If you need
-such a more advanced `user experience
+login/logout, Web diffusion to patients/physicians, `calendar to chose
+dates
+<https://groups.google.com/g/orthanc-users/c/LftvnfB2bY0/m/YUB-OPZyAgAJ>`__...). If
+you need such a more advanced `user experience
 <https://en.wikipedia.org/wiki/User_experience>`__ so that Orthanc
 better fits your clinical workflow, you will have to develop a
 separate, custom Web interface on the top of the :ref:`rest`, maybe as
@@ -78,9 +80,18 @@ Finally, have a look to the following **related projects**:
   <https://groups.google.com/g/orthanc-users/c/Kkxqx6ZW2yw/m/dFbTuHZHCQAJ>`__
   on the discussion group.
 
+* `Menba <https://github.com/fidelio33b/menba>`__ is a Web interface
+  built on the top of the REST API of Orthanc. It is written using
+  `Django <https://www.djangoproject.com/>`__ and `Bootstrap
+  <https://getbootstrap.com/>`__, and takes advantage of `Celery
+  <https://docs.celeryproject.org/en/stable/getting-started/introduction.html>`__
+  and `AMQP
+  <https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol>`__
+  to handle the asynchronous tasks.
+
 * Last but not least, as written above, please consider buying the
   `professional development services by Osimis
-  <https://www.osimis.io/en/services.html>`__. Osimis can help medical
+  <https://osimis.io/en/orthanc-support-contract>`__. Osimis can help medical
   and hospital audience with the deployment of a **certified,
   integrated clinical environment** around Orthanc. In turn, the money
   you pay will contribute to make the Orthanc project sustainable in

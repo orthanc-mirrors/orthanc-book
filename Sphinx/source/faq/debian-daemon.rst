@@ -44,12 +44,14 @@ run at startup::
 ----------------
 
 A sample `systemd daemon <https://en.wikipedia.org/wiki/Systemd>`__
-for Orthanc can be found in the official `Fedora package
-<https://src.fedoraproject.org/rpms/orthanc>`__ (now orphaned - please
-consider :ref:`contributing by adopting this package <contributing>`):
+for Orthanc can be found in the official `Debian package
+<https://tracker.debian.org/pkg/orthanc>`_ and in the official `Fedora
+package <https://src.fedoraproject.org/rpms/orthanc/tree/f32>`__ (now
+orphaned - please consider :ref:`contributing by adopting this package
+<contributing>`):
 
 1. Download the `systemd script
-   <https://src.fedoraproject.org/rpms/orthanc/blob/f32/f/orthanc.service>`__,
+   <https://salsa.debian.org/med-team/orthanc/raw/master/debian/orthanc.service>`__,
 2. Adapt some of its variables to reflect the configuration of your
    system,
 3. Copy it as ``/etc/systemd/system/orthanc.service``,

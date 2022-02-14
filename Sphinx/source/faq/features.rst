@@ -111,6 +111,7 @@ Also note that metadata and attachments are only available for
 resources stored inside Orthanc. Once one DICOM instance leaves the
 Orthanc ecosystem, its associated metadata and attachments are lost.
 
+.. _metadata-core:
 
 Core metadata
 ^^^^^^^^^^^^^
@@ -121,8 +122,8 @@ Here are the main metadata handled by the Orthanc core:
   Orthanc. Similarly, ``LastUpdate`` records, for each
   patient/study/series, the last time a DICOM instance was added to
   this resource.
-* ``RemoteAet`` records the AET of the modality that has sent some
-  DICOM instance to Orthanc.
+* ``RemoteAET`` records the AET of the modality that has sent some
+  DICOM instance to Orthanc using the DICOM protocol.
 * ``ModifiedFrom`` and ``AnonymizedFrom`` hold from which original
   resource, a resource was modified or anonymized. The presence of
   this metadata indicates that the resource is the result of a
@@ -133,11 +134,24 @@ Here are the main metadata handled by the Orthanc core:
 * ``IndexInSeries`` records the expected index of a DICOM instance
   inside its parent series. Conversely, ``ExpectedNumberOfInstances``
   associates to each series, the number of DICOM instances this series
-  is expected to contain.
+  is expected to contain. This information is :ref:`not always
+  available <series-completion>`.
 * Starting with Orthanc 1.2.0, ``TransferSyntax`` and ``SopClassUid``
-  respectively stores the transfer syntax UID and the SOP class UID of
-  DICOM instances, in order to speed up the access to this
+  respectively stores the `transfer syntax UID
+  <http://dicom.nema.org/medical/dicom/current/output/html/part05.html#chapter_10>`__
+  and the `SOP class UID
+  <http://dicom.nema.org/medical/dicom/current/output/chtml/part02/sect_A.1.html>`__
+  of DICOM instances, in order to speed up the access to this
   information.
+* ``RemoteIP`` (new in Orthanc 1.4.0): The IP address of the remote
+  SCU (for REST API and DICOM protocol).
+* ``CalledAET`` (new in Orthanc 1.4.0): The AET that was called by the
+  SCU, which normally matches the AET of Orthanc (for DICOM protocol).
+* ``HttpUsername`` (new in Orthanc 1.4.0): The username that created
+  the instance (for REST API).
+* ``PixelDataOffset`` (new in Orthanc 1.9.1): Offset (in bytes) of the
+  Pixel Data DICOM tag in the DICOM file, if available.
+  
 
 Metadata listed above are set privately by the Orthanc core. They are
 **read-only** from the perspective of the end user, as Orthanc
@@ -221,7 +235,45 @@ the REST API::
 
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/samplePdf -X PUT --data-binary @sample.pdf
   $ curl http://localhost:8042/instances/cb855110-5f4da420-ec9dc9cb-2af6a9bb-dcbd180e/attachments/sampleRaw -X PUT -d 'raw data'
-  
+
+
+DICOM-as-JSON attachments
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the version of Orthanc <= 1.9.0, whenever Orthanc receives a DICOM
+file, it pre-computes a JSON summary of its DICOM tags, and caches
+this JSON file as an attachment to the DICOM instance (accessible at
+the ``/instances/{...}/attachments/dicom-as-json/`` URI). This
+attachment is used as a cache to seep up future accesses to
+``/instances/.../tags``, lookups using ``/tools/find`` or C-FIND
+queries.
+
+This caching might cause issues if the dictionary of DICOM tags is
+subsequently modified, which implies that the cached JSON file does
+not perfectly match the new dictionary.
+
+.. highlight:: bash
+
+Since Orthanc 1.2.0, you can force the re-generation of the cached
+JSON file by DELETE-ing it, for instance::
+
+  $ curl -X DELETE http://localhost:8042/instances/301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832/attachments/dicom-as-json
+
+.. highlight:: text
+
+The next time you open this particular instance with Orthanc Explorer,
+you will see messages in the Orthanc logs (in verbose mode) stating
+that the Orthanc server has reconstructed the JSON summary, which will
+match the new content of the dictionary::
+
+  I0222 08:56:00.923070 FilesystemStorage.cpp:155] Reading attachment "2309c47b-1cbd-4601-89b5-1be1ad80382c" of "DICOM" content type
+  I0222 08:56:00.923394 ServerContext.cpp:401] Reconstructing the missing DICOM-as-JSON summary for instance: 301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832
+  I0222 08:56:00.929117 ServerContext.cpp:540] Adding attachment dicom-as-json to resource 301896f2-1416807b-3e05dcce-ff4ce9bb-a6138832
+  I0222 08:56:00.929425 FilesystemStorage.cpp:118] Creating attachment "3c830b66-8a00-42f0-aa3a-5e37b4a8b5a4" of "JSON summary of DICOM" type (size: 1MB)
+
+These DICOM-as-JSON attachments are not automatically generated
+anymore starting with Orthanc 1.9.1.
+
 
 .. _registry:
 
@@ -320,7 +372,7 @@ simultaneously. To avoid such problems, Orthanc implements a so-called
 
 The revision mechanism is optional, was introduced in **Orthanc
 1.9.2** and must be enabled by setting :ref:`configuration option
-<configuration>` ``CheckRevision`` to ``true``. It is strongly
+<configuration>` ``CheckRevisions`` to ``true``. It is strongly
 inspired by the `CouchDB API
 <https://docs.couchdb.org/en/stable/api/document/common.html>`__.
 
@@ -368,5 +420,38 @@ Check out the `OpenAPI reference <https://api.orthanc-server.com/>`__
 of the REST API of Orthanc for more information.
 
 **Warning:** The database index back-end must support revisions. As of
-writing, only the **PostgreSQL plugin** in versions above 4.0
-implement support for revisions.
+writing, only the **PostgreSQL plugins** in versions above 4.0 and the
+**ODBC plugins** implement support for revisions.
+
+
+Synchronous vs. asynchronous C-MOVE SCP
+---------------------------------------
+
+The :ref:`C-MOVE SCP <dicom-move>` of Orthanc (i.e. the component of
+the Orthanc server that is responsible for routing DICOM instances
+from Orthanc to other modalities) can be configured to run either in
+synchronous or in asynchronous mode, depending on the value of the
+``SynchronousCMove`` :ref:`configuration option <configuration>`:
+
+* In **synchronous mode** (if ``SynchronousCMove`` is ``true``),
+  Orthanc will interleave its C-STORE SCU commands with the C-MOVE
+  instructions received from the remote modality. In other words,
+  Orthanc immediately sends the DICOM instances while it handles the
+  C-MOVE command from the remote modality. This mode is for
+  compatibility with simple DICOM client software that considers that
+  when its C-MOVE SCU is over, it should have received all the
+  instructed DICOM instances. This is the default behavior of Orthanc.
+
+* In **asynchronous mode** (if ``SynchronousCMove`` is ``false``),
+  Orthanc will queue the C-MOVE instructions and :ref:`creates a job
+  <jobs-synchronicity>` that will issue the C-STORE SCU commands
+  afterward. This behavior is typically encountered in hospital-wide
+  PACS systems, but requires the client software to be more complex as
+  it must be handle the delay between its C-MOVE queries and the
+  actual reception of the DICOM instances through C-STORE.
+
+As a consequence, by setting ``SynchronousCMove`` to ``true``, Orthanc
+can be used as a buffer that enables communications between a simple
+C-MOVE client and a hospital-wide PACS. This can be interesting to
+introduce compatibility with specialized image processing
+applications.

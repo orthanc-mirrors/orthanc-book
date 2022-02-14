@@ -25,6 +25,43 @@ transposed to any programming language that supports both HTTP and
 JSON.
 
 
+.. _curl-windows:
+
+Warning about using cURL from the Windows prompt
+------------------------------------------------
+
+The examples on this page assume that the user is running a bash shell
+on some GNU/Linux distribution. Such a shell has the major advantage
+of having the possibility to use either single-quote or double-quotes
+characters in order to group a set of characters (including spaces) as
+a whole string.
+
+.. highlight:: bash
+
+Unfortunately, the default command-line prompt of Microsoft Windows
+**doesn't support single-quote characters**. If you copy/paste a cURL
+command-line from this page that mixes single-quote and double-quotes,
+it won't work as such, and you'll have to replace single-quotes by
+double-quotes, and prefix the double-quotes by a backslash
+character. For instance, consider the following command line that
+works fine on GNU/Linux::
+
+  $ curl -v -X PUT http://localhost:8042/modalities/sample \
+         -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
+
+This call will **not** work on the Microsoft Windows prompt as it
+contains single-quotes. You should adapt this command line as follows
+to run it on Windows::
+
+  $ curl -v -X PUT http://localhost:8042/modalities/sample \
+         -d "{\"AET\" : \"ORTHANCC\", \"Host\": \"127.0.0.1\", \"Port\": 2002}"
+
+As an alternative, consider using a different Windows shell, for
+instance `Windows PowerShell
+<https://fr.wikipedia.org/wiki/Windows_PowerShell>`__ (some examples
+of PowerShell can be found below on this page).
+
+
 .. _sending-dicom-images:
 
 Sending DICOM images
@@ -57,12 +94,20 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
     $ python ImportDicomFiles.py localhost 8042 ~/DICOM/
 
+Starting with Orthanc 1.8.1, the source distribution of Orthanc
+includes another Python script named ``OrthancImport.py`` that
+provides more features than ``ImportDicomFiles.py``. It can notably
+import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2`` archives
+without having to uncompress them first. It also provides more
+comprehensive command-line options. `Check this script out
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+    
 
 .. highlight:: perl
 
@@ -397,6 +442,33 @@ It is also possible to download a zipped DICOMDIR through::
   $ curl http://localhost:8042/studies/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/media > Study.zip
 
 
+.. _download-pdf-videos:
+
+Downloading PDF or videos
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Given a DICOM instance that embeds a PDF file (typically, one instance
+whose SOP Class UID is ``1.2.840.10008.5.1.4.1.1.104.1`` -
+Encapsulated PDF Storage), the PDF content can be downloaded as
+follows::
+
+  $ curl http://localhost:8042/instances/1915e0cc-c2c1a0fc-12cdd7f5-3ba32114-a97c2c9b/content/0042,0011 > sample.pdf
+
+This corresponds to downloading the raw DICOM tag "Encapsulated
+Document" (0042,0011). Beware that the last byte of the downloaded
+file might correspond to one padding byte, if the source PDF had an
+odd number of bytes.
+
+Similarly, if you know that a DICOM instance :ref:`embeds a video
+<videos>` (which can be tested by checking the :ref:`value of the
+metadata <metadata-core>` corresponding to its transfer syntax UID),
+the raw video can be downloaded as follows::
+
+  $ curl http://localhost:8042/instances/e465dd27-83c96343-96848735-7035a133-1facf1a0/frames/0/raw > sample.mp4
+
+
 .. _peering:
 
 Sending resources to remote Orthanc over HTTP/HTTPS (through Orthanc peering)
@@ -433,21 +505,24 @@ to declare a remote orthanc peer::
 .. highlight:: bash
 
 Such a configuration would enable Orthanc to connect to two other
-Orthanc instances that listens on the
-localhost on the port 8043 & 8044. The peers that are known to Orthanc
-can be queried::
+Orthanc instances that listens on the localhost on the ports 8043
+and 8044. The peers that are known to Orthanc can be queried::
 
     $ curl http://localhost:8042/peers?expand
 
-The peers can then be updated through the API too::
+Instead of using the configuration file, peers can be created or
+updated through the REST API using the ``PUT`` method of HTTP::
 
     $ curl -v -X PUT http://localhost:8042/peers/sample -d '{"Url" : "http://127.0.0.1:8043"}'
 
+One peer can also be removed using the ``DELETE`` method as follows::
+    
+    $ curl -v -X DELETE http://localhost:8042/peers/sample
 
-Note that, by default, peers are stored in Orthanc configuration files
-and are updated in Orthanc memory only.  If you want your modifications
-to be persistent, you should configure Orthanc to store its peers
-in the database.  This is done through this configuration::
+Note that, by default, peers are read from the Orthanc configuration
+files and are updated in Orthanc memory only. If you want your
+modifications to be persistent, you should configure Orthanc to store
+its peers in the database.  This is done through this configuration::
 
     ...
     "OrthancPeersInDatabase" : true,
@@ -562,15 +637,20 @@ can be queried::
 
     $ curl http://localhost:8042/modalities?expand
 
-The modalities can then be updated through the API too::
+Instead of using the configuration file, modalities can be created or
+updated through the REST API using the ``PUT`` method of HTTP::
 
     $ curl -v -X PUT http://localhost:8042/modalities/sample -d '{"AET" : "ORTHANCC", "Host": "127.0.0.1", "Port": 2002}'
 
+One modality can also be removed using the ``DELETE`` method as follows::
+    
+    $ curl -v -X DELETE http://localhost:8042/modalities/sample
 
-Note that, by default, modalities are stored in Orthanc configuration files
-and are updated in Orthanc memory only.  If you want your modifications
-to be persistent, you should configure Orthanc to store its modalities
-in the database.  This is done through this configuration::
+Note that, by default, modalities are read from the Orthanc
+configuration files and are updated in Orthanc memory only. If you
+want your modifications to be persistent, you should configure Orthanc
+to store the modalities in the database.  This is done through this
+configuration::
 
     ...
     "DicomModalitiesInDatabase" : true,
@@ -703,6 +783,7 @@ To perform a query of a remote modality you must define the modality
 within the :ref:`configuration file <configuration>` (See
 Configuration section under Sending resources to remote modalities).
 
+.. _rest-find-scu:
 
 Performing Queries on Modalities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -845,8 +926,8 @@ specifying that individual content item::
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
 
 If C-Moves take too long (for example, performing a C-Move of a big
-study), you may run the request in asynchronous fashion, which will
-create a job in Orthanc::
+study), you may run the request in :ref:`asynchronous mode <jobs>`,
+which will create a job in Orthanc::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve \
     --data '{"TargetAet":"Orthanc","Synchronous":false}'
@@ -854,7 +935,9 @@ create a job in Orthanc::
 
 .. highlight:: bash
 
-The answer of this POST request is the job ID taking care of the C-Move::
+The answer of this POST request is the job ID taking care of the
+C-Move command, :ref:`whose status can be monitored <jobs-monitoring>`
+in order to detect failure or completion::
 
   {
       "ID" : "11541b16-e368-41cf-a8e9-3acf4061d238",
@@ -869,12 +952,13 @@ Performing Finds within Orthanc
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. highlight:: bash
 
-Performing a find within Orthanc is very similar to using Queries
-against DICOM modalities and the additional options listed above work
-with find also.  When performing a find, you will receive the Orthanc
-ID's of all the matched items within your find. For example if you
-perform a study level find and 5 Studies match you will receive 5
-study level Orthanc ID's in JSON format as a response::
+Performing a find within the local database of Orthanc is very similar
+to using Queries against DICOM modalities and the additional options
+listed above work with find also.  When performing a find, you will
+receive the Orthanc ID's of all the matched items within your
+find. For example if you perform a study level find and 5 Studies
+match you will receive 5 study level Orthanc ID's in JSON format as a
+response::
 
   $ curl --request POST --url http://localhost:8042/tools/find \
     --data '{
@@ -924,6 +1008,18 @@ query will automatically report details about each study::
       "Type" : "Study"
     }
   ]
+
+Here is a sample REST API call to find the Orthanc identifiers of all
+the DICOM series generated by an imaging modality whose "Device Serial
+Number (0018,1000)" DICOM tag is equal to "123"::
+
+  $ curl -X POST http://localhost:8042/tools/find -d '{"Level":"Series","Query":{"DeviceSerialNumber":"123"},"Expand":true}'
+
+If you are interested by a **list of several items** (in this case, in
+a list of serial numbers), just separate them with backslashes as
+would do with DICOM C-FIND::
+
+  $ curl -X POST http://localhost:8042/tools/find -d '{"Level":"Series","Query":{"DeviceSerialNumber":"123\\abc"},"Expand":true}'
 
   
   
@@ -1058,6 +1154,20 @@ use the following command-line syntax to delete them::
     $ curl -X DELETE http://localhost:8042/instances/8e289db9-0e1437e1-3ecf395f-d8aae463-f4bb49fe
 
 
+Starting with Orthanc 1.9.4, it is also possible to ``POST`` on the
+new route ``/tools/bulk-delete`` to delete at once a set of multiple
+DICOM resources that are not related (i.e. that don't share any parent
+DICOM resource). A typical use case is to delete a list of DICOM
+instances that don't belong to the same parent patient/study/series.
+The list of the :ref:`Orthanc identifiers <orthanc-ids>` of the
+resources to be deleted (that may indifferently correspond to
+patients, studies, series or instances) must be provided in an
+argument ``Resources`` in the body of the request. Here is a sample
+call::
+
+  $ curl http://localhost:8042/tools/bulk-delete -d '{"Resources":["b6da0b16-a25ae9e7-1a80fc33-20df01a9-a6f7a1b0","d6634d97-24379e4a-1e68d3af-e6d0451f-e7bcd3d1"]}'
+
+    
 Clearing log of changes
 ^^^^^^^^^^^^^^^^^^^^^^^
 

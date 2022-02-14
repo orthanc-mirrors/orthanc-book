@@ -54,8 +54,8 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.9.2 at the time of
-  writing).
+* Make sure to use the latest release of Orthanc (1.9.7 at the time of
+  writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
   <postgresql>` to store the database index (4.0 at the time of
@@ -87,8 +87,8 @@ presence of large databases:
   * ``LimitFindInstances = 100``
   * ``KeepAlive = true``
   * ``TcpNoDelay = true``
-  * ``SaveJobs = false``
   * ``StorageAccessOnFind = Never``
+  * Consider adding ``SaveJobs = false``
 
 * Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: By default, the
   PostgreSQL index plugin uses 1 single connection to the PostgreSQL
@@ -127,10 +127,21 @@ presence of large databases:
   `Btrfs <https://en.wikipedia.org/wiki/Btrfs>`__ on GNU/Linux
   distributions.
 
-* On GNU/Linux distributions, `LVM (Logical Volume Manager)
-  <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__
-  can be used to dynamically and easily grow the storage area as more
-  space becomes needed.
+* If you need to grow the storage area as more space becomes needed,
+  you can consider the following solutions:
+
+  - Move the storage area to another disk partition, and update the
+    ``StorageDirectory`` :ref:`configuration option <configuration>`
+    accordingly.
+  - :ref:`Replicate <replication>` your current instance of Orthanc
+    onto another instance of Orthanc with a larger storage area.
+  - On GNU/Linux distributions, check out `LVM (Logical Volume Manager)
+    <https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>`__.
+  - On Microsoft Windows, check out the so-called "`Storage Spaces
+    <https://docs.microsoft.com/en-us/windows-server/storage/storage-spaces/overview>`__".
+  - Another approach is to use `MinIO <https://docs.min.io/>`__ in
+    distributed mode in conjunction with the :ref:`AWS S3 plugin
+    <minio>` for Orthanc.
 
 * If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
   consider setting configuration option ``StudiesMetadata`` to
@@ -299,7 +310,36 @@ Care must be taken to the following aspects:
   a :ref:`revision mechanism <revisions>` to prevent concurrent
   updates.
 
+* Thanks to this support of concurrent accesses, it is possible to put
+  a **load balancer** on the top of the REST API of Orthanc. All the
+  DICOM resources (patients, studies, series and instances) are indeed
+  shared by all the instances of Orthanc connected to the same
+  underlying database. As an application, this might be of great help
+  if multiple viewers must connect to Orthanc. In `Kubernetes
+  <https://kubernetes.io/>`__, concurrent accesses also make it
+  possible to manage a set of replicas of Orthanc (e.g. as `deployment
+  <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>`__).
 
+  There are however some caveats if using a load balancer or
+  Kubernetes replicas, notably:
+    
+  - Each Orthanc instance maintains its own list of jobs. Therefore,
+    the ``/jobs`` route will return only the jobs of the responding
+    Orthanc.
+
+  - The ``/modalities`` or the ``/peers`` are also private to each
+    instance of Orthanc in the cluster, as soon as the respective
+    options ``DicomModalitiesInDatabase`` and
+    ``OrthancPeersInDatabase`` are set to ``true``.
+
+  If you need to use such primitives in your application, you have
+  three possibilities: (1) Introduce a distinguished Orthanc server
+  that is responsible to take care of all the jobs (including
+  modalities and peers), (2) create an :ref:`Orthanc plugin <plugins>`
+  (e.g. using :ref:`Python <python-plugin>`) that queries all the
+  Orthanc in the cluster and that aggregates all of their answers,
+  or (3) do the same using a higher-level framework (such as Node.js).
+    
 
 Latency
 ^^^^^^^
@@ -330,15 +370,19 @@ makes the latency problem much less important.
 Slow deletions
 ^^^^^^^^^^^^^^
 
-Deleting large studies can take some time, because removing a large
+Deleting large studies can take much time, because removing a large
 number of files from a filesystem can be an expensive operation (which
-might sound counterintuitive).
+might sound counter-intuitive). This is especially true with HDD
+drives, that can be much slower than SSD (`an user has reported
+<https://groups.google.com/g/orthanc-users/c/1lga0oFCHN4/m/jF1inrc4AgAJ>`__
+a 20 times speedup by switching from HDD to SSD).
 
-It is possible to create an :ref:`storage area plugin
-<creating-plugins>` that delays the actual deletion from the
-filesystem. The plugin would maintain a queue (e.g. as a SQLite
-database) of files to be removed. The actual deletion from the
-filesystem would be done asynchronously in a separate thread.
+If switching from HDD to SDD is not applicable, it is possible to
+create an :ref:`storage area plugin <creating-plugins>` that delays
+the actual deletion from the filesystem. The plugin would maintain a
+queue (e.g. as a SQLite database) of files to be removed. The actual
+deletion from the filesystem would be done asynchronously in a
+separate thread.
 
 We are looking for funding from the industry to implement such a
 plugin.

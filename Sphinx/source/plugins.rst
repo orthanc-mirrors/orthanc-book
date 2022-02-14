@@ -66,8 +66,20 @@ From Osimis
    plugins/google-cloud-platform.rst    
    plugins/python.rst 
    plugins/object-storage.rst   
+   plugins/odbc.rst
    plugins/osimis-webviewer.rst
    plugins/authorization.rst
+
+.. _plugins-uclouvain:
+
+From UCLouvain
+^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/tcia.rst
+   plugins/indexer.rst
 
 .. _plugins-contributed:
 
@@ -118,9 +130,10 @@ Python plugins
   devices. This topic is further discussed on the `Orthanc Users forum
   <https://groups.google.com/d/msg/orthanc-users/NO7MnWzKsAc/5hEVxymWBQAJ>`__.
 
-* Stephen Douglas Scotti maintains a `Python plugin
-  <https://github.com/sscotti/OrthancBrowser>`__ to implement
-  pagination on one Orthanc server.
+* Stephen Douglas Scotti maintains an `integrated Docker package
+  <https://github.com/sscotti/PACS_Integration>`__, that provides a
+  portal application using Laravel (which demonstrates pagination and
+  some other features), and some MPPS and MWL features.
 
 * Walco van Loon maintains `Orthanc Server Extensions
   <https://github.com/walkIT-nl/orthanc-server-extensions>`__ as *"A

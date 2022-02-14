@@ -29,7 +29,7 @@ to generate a self-signed certificate using the `OpenSSL
   $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
             -keyout orthanc.key -out orthanc.crt -subj "/C=BE/CN=localhost"
 
-Obviously, you have adapt the arguments to your setup (notably the
+Obviously, you must adapt the arguments to your setup (notably the
 ``subj`` argument that generates a certificate for Belgium for the
 server whose DNS address is ``localhost``). This command line will
 generate two files using the `PEM file format
@@ -82,9 +82,24 @@ encryption certificates.
 **Remark 2:** Orthanc SCU and Orthanc SCP share the same set of
 trusted certificates.
 
+**Important:** `DCMTK 3.6.4 seems to have an issue with DICOM TLS
+<https://forum.dcmtk.org/viewtopic.php?t=5073>`__, which produces the
+errors ``DUL secure transport layer: no suitable signature algorithm``
+(in the DICOM SCP) and ``DUL secure transport layer: sslv3 alert
+handshake failure`` (in the DICOM SCU). This problem is not specific
+to Orthanc, as it also occurs between two command-line tools of the
+DCMTK 3.6.4 suite. Make sure to use either DCMTK 3.6.2 or DCMTK
+3.6.6. In particular, Debian Buster (10) uses DCMTK 3.6.4 and should
+be avoided in non-static builds of Orthanc, or if using the DCMTK
+command-line tools.
 
-Example using DCMTK
--------------------
+
+
+Examples
+--------
+
+Using DCMTK
+^^^^^^^^^^^
 
 .. highlight:: bash
 
@@ -115,9 +130,9 @@ Let us start Orthanc using the following minimal configuration file::
     }  
   }
 
-.. highlight:: txt
+.. highlight:: text
 
-It is then possible to trigger a secure C-GET SCU request from DCMTK
+It is then possible to trigger a secure C-ECHO SCU request from DCMTK
 to Orthanc as follows::
 
   $ echoscu -v -aet DCMTK localhost 4242 +tls dcmtk.key dcmtk.crt +cf orthanc.crt 
@@ -126,3 +141,90 @@ to Orthanc as follows::
   I: Sending Echo Request (MsgID 1)
   I: Received Echo Response (Success)
   I: Releasing Association
+
+
+Using dcm4che
+^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+To use the dcm4che command-line tools instead of DCMTK, the two
+certificates must first be converted from `X.509
+<https://en.wikipedia.org/wiki/X.509>`__ to `PKCS #12
+<https://en.wikipedia.org/wiki/PKCS_12>`__::
+
+  $ openssl pkcs12 -export -out orthanc.p12 -in orthanc.crt -inkey orthanc.key
+  $ openssl pkcs12 -export -out dcm4che.p12 -in dcmtk.crt -inkey dcmtk.key
+
+For this example, you can let the ``Export Password`` as an empty
+string in the two calls above. Then, here is how to trigger a secure
+C-STORE SCU request to send the ``sample.dcm`` file from dcm4che to
+Orthanc::
+
+  $ ~/Downloads/dcm4che-5.23.3/bin/storescu -c ORTHANC@localhost:4242 --tls \
+   --trust-store ./orthanc.p12 --key-store ./dcm4che.p12 --trust-store-pass "" --key-store-pass "" sample.dcm
+
+**Remarks:**
+
+* The empty strings provided to the ``--trust-store-pass`` and
+  ``--key-store-pass`` options correspond to the empty strings
+  provided to ``Export Password``.
+
+* Disclaimer: In this setup, ``orthanc.p12`` contains the private key
+  of the Orthanc server. It is unclear how to remove this private key
+  that should be unknown to the DICOM client for security reasons.
+   
+
+Secure TLS connections without certificate
+------------------------------------------
+
+In Orthanc <= 1.9.2, the remote DICOM modalities are required to
+provide a valide DICOM TLS certificate (which corresponds to the
+default ``--require-peer-cert`` option of the DCMTK command-line
+tools).
+
+Starting from Orthanc 1.9.3, it is possible to allow connections
+to/from remote DICOM modalities that do not provide a DICOM TLS
+certificate (which corresponds to the ``--verify-peer-cert`` option of
+DCMTK). This requires setting the :ref:`configuration option
+<configuration>` ``DicomTlsRemoteCertificateRequired`` of Orthanc to
+``false``.
+
+.. highlight:: bash
+
+As an example, let us generate one single certificate that is
+dedicated to Orthanc::
+
+  $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout orthanc.key -out orthanc.crt -subj "/C=BE/CN=localhost"
+
+
+.. highlight:: json
+
+Let us start Orthanc using the following minimal configuration file::
+
+  {
+    "DicomTlsEnabled" : true,
+    "DicomTlsCertificate" : "orthanc.crt",
+    "DicomTlsPrivateKey" : "orthanc.key",
+    "DicomTlsTrustedCertificates" : "orthanc.crt",
+    "DicomTlsRemoteCertificateRequired" : false
+  }
+
+.. highlight:: text
+
+Note that the ``DicomTlsTrustedCertificates`` is set to a dummy value,
+because this option must always be present. It is then possible to
+connect to Orthanc without SCU certificate as follows::
+
+  $ echoscu -v localhost 4242 --anonymous-tls +cf /tmp/k/orthanc.crt 
+  I: Requesting Association
+  I: Association Accepted (Max Send PDV: 16372)
+  I: Sending Echo Request (MsgID 1)
+  I: Received Echo Response (Success)
+  I: Releasing Association
+
+
+**Remark:** Importantly, if the remote DICOM modality provides an
+invalid DICOM TLS certificate, Orthanc will never accept the
+connection.

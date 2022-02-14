@@ -3,6 +3,8 @@
 How does Orthanc store its database?
 ====================================
 
+.. _orthanc-storage-area:
+
 Storage area
 ------------
 
@@ -57,9 +59,9 @@ accessing the storage folder are when this is not needed). The SQLite
 database schema is kept as simple as possible, and can be found in the
 following two files of the source code of Orthanc:
 `PrepareDatabase.sql
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.2/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
 and `InstallTrackAttachmentsSize.sql
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.2/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.9.7/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
 
 
 Direct access
@@ -83,7 +85,9 @@ discouraged for several reasons:
   that are `explained in the SQLite FAQ
   <https://www.sqlite.org/faq.html#q5>`__. Orthanc will stop if it
   receives the ``SQLITE_BUSY`` status.
-
+* The internal structure of the databases might evolve across
+  successive versions of Orthanc or of the database plugins.
+  
 As a consequence, it is **HIGHLY recommended NOT to directly access**
 the ``OrthancStorage`` folder and the SQLite/MySQL/PostgreSQL
 database. Use the :ref:`REST API <rest>` instead, which contains
