@@ -121,6 +121,9 @@ option to ``true``, you should:
   Indeed, as explained in the introduction, Orthanc is a microservice
   that is designed to be used within a secured environment.
 
+* Configuration option ``OrthancExplorerEnabled`` should be set to
+  ``false`` in Internet-facing deployments.
+  
 * For advanced scenarios, you might have interest in the
   :ref:`advanced authorization plugin <authorization>`. Similarly,
   developers of :ref:`plugins <plugins>` could be interested by the
