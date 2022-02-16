@@ -285,7 +285,7 @@ If you have ``.unk`` files in your storage, you must enable this configuration.
 Sample setups
 -------------
 
-You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/#markdown-header-for-osimisorthanc-pro-image-users>`__ .
+You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/#markdown-header-for-software-integrators>`__ .
 
 Performances
 ------------

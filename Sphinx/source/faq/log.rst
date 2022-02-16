@@ -52,26 +52,21 @@ Under Windows
 
 Under Windows, if you used the official installer by Osimis:
 
-1. Download the `precompiled command-line version
-   <https://www.orthanc-server.com/download-windows.php>`__ of Orthanc.
-
-2. Stop the Orthanc service. The actual process depends on your
+1. Stop the Orthanc service. The actual process depends on your
    version of Windows.
 
-3. Copy the just-downloaded ``Orthanc-1.9.7-Release.exe`` together
-   with your configuration file (that is by default located in
-   ``C:\Orthanc\Configuration.json``) into the same folder
-   (e.g. ``C:\Temp``).
+2. Make sure you have a ``C:\Temp`` folder available to store the log file.
 
-4. In a command-line shell, manually start Orthanc to generate the
+3. In a command-line shell, manually start Orthanc to generate the
    ``Orthanc.log`` file::
 
-   $ cd C:\Temp
-   $ Orthanc-1.9.7-Release.exe --verbose Configuration.json > Orthanc.log 2<&1
+   $ "C:\Program Files\Orthanc Server\Orthanc.exe" --verbose "C:\Program Files\Orthanc Server\Configuration" > C:\Temp\Orthanc.log 2<&1
 
-5. Once the log has been generated (by default, it is available as
-   ``C:\Temp\Orthanc.log``), stop Orthanc and possibly restart the
-   Orthanc service.
+   This will start Orthanc with exactly the same configuration as your service,
+   but in verbose mode.
+
+4. Once the log has been generated (in ``C:\Temp\Orthanc.log``), stop Orthanc 
+   and possibly restart the Orthanc service.
 
 
 Under Debian GNU/Linux
