@@ -13,7 +13,13 @@ def write_dataset_to_bytes(dataset):
         memory_dataset.seek(0)
         return memory_dataset.read()
 
-def ReceivedInstanceCallback(receivedDicom):
+def ReceivedInstanceCallback(receivedDicom, origin):
+    orthanc.LogWarning('SOURCE: %d' % origin)
+    if origin == orthanc.InstanceOrigin.REST_API:
+        orthanc.LogWarning('DICOM instance received from the REST API')
+    elif origin == orthanc.InstanceOrigin.DICOM_PROTOCOL:
+        orthanc.LogWarning('DICOM instance received from the DICOM protocol')
+    
     dataset = dcmread(BytesIO(receivedDicom))
 
     if dataset.PatientID.startswith('001-'):
