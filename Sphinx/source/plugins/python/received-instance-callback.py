@@ -23,17 +23,17 @@ def ReceivedInstanceCallback(receivedDicom, origin):
 
     if dataset.PatientID.startswith('001-'):
         orthanc.LogWarning('Discard instance')
-        return orthanc.ReceivedInstanceCallbackResult.DISCARD, None
+        return orthanc.ReceivedInstanceAction.DISCARD, None
 
     elif dataset.PatientID.startswith('002-'):
         orthanc.LogWarning('Store source instance as it is')
-        return orthanc.ReceivedInstanceCallbackResult.KEEP_AS_IS, None
+        return orthanc.ReceivedInstanceAction.KEEP_AS_IS, None
 
     else:
         orthanc.LogWarning('Modify the source instance')
         dataset.PatientName = str(dataset.PatientName).upper()
         dataset.PatientID = '002-' + dataset.PatientID
         dataset.InstitutionName = "MY INSTITUTION"
-        return orthanc.ReceivedInstanceCallbackResult.MODIFIED, write_dataset_to_bytes(dataset)
+        return orthanc.ReceivedInstanceAction.MODIFY, write_dataset_to_bytes(dataset)
 
 orthanc.RegisterReceivedInstanceCallback(ReceivedInstanceCallback)

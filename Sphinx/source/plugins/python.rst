@@ -771,10 +771,10 @@ takes its values from the ``orthanc.ContentType`` enumeration.
 
 .. _python_received_instance:
 
-Modifying received instances (new in 3.5 - not released yet)
-............................................................
+Modifying received instances (new in 4.0)
+.........................................
 
-Starting with release 3.5 of the Python plugin, it is possible to
+Starting with release 4.0 of the Python plugin, it is possible to
 modify instances received by Orthanc before they are stored in
 the storage.  This is usually easier to perform modification at this
 stage compared to using the ``/modify`` route once the instances
