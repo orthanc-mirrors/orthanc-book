@@ -11,6 +11,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
 ``/instances/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
 ``/instances/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/instances/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
 ``/instances/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
 ``/instances/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
 ``/instances/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
@@ -25,6 +26,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/frames/{frame}/image-uint16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint16/get>`__,,,,Decode a frame (uint16)
 ``/instances/{id}/frames/{frame}/image-uint8``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint8/get>`__,,,,Decode a frame (uint8)
 ``/instances/{id}/frames/{frame}/matlab``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1matlab/get>`__,,,,Decode frame for Matlab
+``/instances/{id}/frames/{frame}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1numpy/get>`__,,,,Decode frame for numpy
 ``/instances/{id}/frames/{frame}/preview``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1preview/get>`__,,,,Decode a frame (preview)
 ``/instances/{id}/frames/{frame}/raw``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw/get>`__,,,,Access raw frame
 ``/instances/{id}/frames/{frame}/raw.gz``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw.gz/get>`__,,,,Access raw frame (compressed)
@@ -38,6 +40,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/put>`__,Get metadata
 ``/instances/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1modify/post>`__,,,Modify instance
 ``/instances/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1module/get>`__,,,,Get instance module
+``/instances/{id}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1numpy/get>`__,,,,Decode instance for numpy
 ``/instances/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1patient/get>`__,,,,Get parent patient
 ``/instances/{id}/pdf``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1pdf/get>`__,,,,Get embedded PDF
 ``/instances/{id}/preview``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1preview/get>`__,,,,Decode an image (preview)
@@ -81,6 +84,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/patients/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
 ``/patients/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
 ``/patients/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/patients/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
 ``/patients/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
 ``/patients/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
 ``/patients/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
@@ -132,6 +136,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/series/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
 ``/series/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
 ``/series/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/series/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
 ``/series/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
 ``/series/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
 ``/series/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
@@ -144,6 +149,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/series/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/put>`__,Get metadata
 ``/series/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1modify/post>`__,,,Modify series
 ``/series/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1module/get>`__,,,,Get series module
+``/series/{id}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1numpy/get>`__,,,,Decode series for numpy
 ``/series/{id}/ordered-slices``,`(get) <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1ordered-slices/get>`__,,,,*(deprecated)* Order the slices
 ``/series/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1patient/get>`__,,,,Get parent patient
 ``/series/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1reconstruct/post>`__,,,Reconstruct tags of series
@@ -164,6 +170,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/studies/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
 ``/studies/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
 ``/studies/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/studies/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
 ``/studies/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
 ``/studies/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
 ``/studies/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
@@ -188,8 +195,8 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/tools``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
 ``/tools/accepted-transfer-syntaxes``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
 ``/tools/bulk-anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-anonymize/post>`__,,,Anonymize a set of resources
-``/tools/bulk-content``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of instances
-``/tools/bulk-delete``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of instances
+``/tools/bulk-content``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
+``/tools/bulk-delete``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of resources
 ``/tools/bulk-modify``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
 ``/tools/create-archive``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
 ``/tools/create-dicom``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance

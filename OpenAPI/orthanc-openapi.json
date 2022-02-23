@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.9.7"
+      "version" : "1.10.0"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -463,6 +463,15 @@
             "description" : "Get the list of attachments that are associated with the given instance",
             "parameters" : [
                {
+                  "description" : "If present, retrieve the attachments list and their numerical ids",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -905,6 +914,61 @@
             "tags" : [ "Instances" ]
          }
       },
+      "/instances/{id}/attachments/{name}/info" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get all the information about the attachment associated with the given instance",
+            "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the instance of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The name of the attachment, or its index (cf. `UserContentType` configuration option)",
+                  "in" : "path",
+                  "name" : "name",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON object containing the information about the attachment"
+                        }
+                     }
+                  },
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
+               }
+            },
+            "summary" : "Get info about the attachment",
+            "tags" : [ "Instances" ]
+         }
+      },
       "/instances/{id}/attachments/{name}/is-compressed" : {
          "get" : {
             "deprecated" : false,
@@ -1338,6 +1402,7 @@
                               "image-uint16",
                               "image-uint8",
                               "matlab",
+                              "numpy",
                               "preview",
                               "raw",
                               "raw.gz",
@@ -1365,6 +1430,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -1439,6 +1513,15 @@
                   }
                },
                {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Format of the resulting image. Can be `image/png` (default), `image/jpeg` or `image/x-portable-arbitrarymap`",
                   "in" : "header",
                   "name" : "Accept",
@@ -1507,6 +1590,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -1607,6 +1699,65 @@
             "tags" : [ "Instances" ]
          }
       },
+      "/instances/{id}/frames/{frame}/numpy" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Decode one frame of interest from the given DICOM instance, for use with numpy in Python. The numpy array has 3 dimensions: (height, width, color channel).",
+            "parameters" : [
+               {
+                  "description" : "Compress the file as `.npz`",
+                  "in" : "query",
+                  "name" : "compress",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "On grayscale images, apply the rescaling and return floating-point values",
+                  "in" : "query",
+                  "name" : "rescale",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "Index of the frame (starts at `0`)",
+                  "in" : "path",
+                  "name" : "frame",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the DICOM resource of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Numpy file: https://numpy.org/devdocs/reference/generated/numpy.lib.format.html"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Decode frame for numpy",
+            "tags" : [ "Instances" ]
+         }
+      },
       "/instances/{id}/frames/{frame}/preview" : {
          "get" : {
             "deprecated" : false,
@@ -1619,6 +1770,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -1781,6 +1941,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -1977,6 +2146,15 @@
                   }
                },
                {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Format of the resulting image. Can be `image/png` (default), `image/jpeg` or `image/x-portable-arbitrarymap`",
                   "in" : "header",
                   "name" : "Accept",
@@ -2039,6 +2217,15 @@
                   }
                },
                {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Format of the resulting image. Can be `image/png` (default), `image/jpeg` or `image/x-portable-arbitrarymap`",
                   "in" : "header",
                   "name" : "Accept",
@@ -2098,6 +2285,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -2553,6 +2749,56 @@
             "tags" : [ "Instances" ]
          }
       },
+      "/instances/{id}/numpy" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Decode the given DICOM instance, for use with numpy in Python. The numpy array has 4 dimensions: (frame, height, width, color channel).",
+            "parameters" : [
+               {
+                  "description" : "Compress the file as `.npz`",
+                  "in" : "query",
+                  "name" : "compress",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "On grayscale images, apply the rescaling and return floating-point values",
+                  "in" : "query",
+                  "name" : "rescale",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the DICOM resource of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Numpy file: https://numpy.org/devdocs/reference/generated/numpy.lib.format.html"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Decode instance for numpy",
+            "tags" : [ "Instances" ]
+         }
+      },
       "/instances/{id}/patient" : {
          "get" : {
             "deprecated" : false,
@@ -2662,6 +2908,15 @@
                   }
                },
                {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Format of the resulting image. Can be `image/png` (default), `image/jpeg` or `image/x-portable-arbitrarymap`",
                   "in" : "header",
                   "name" : "Accept",
@@ -2754,6 +3009,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "in" : "query",
+                  "name" : "returnUnsupportedImage",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -3265,8 +3529,10 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "0c686aae-1509-4179-a8c5-1824c180bb84",
-                              "f30d99df-3a10-480f-96a9-d0701550f07c"
+                              "14a3cacd-fdf1-42ce-8cbe-7d882b60872b",
+                              "45948a0f-d176-4ca7-9efc-187a5d14f1c7",
+                              "6aae44fb-dacf-4115-ad79-77a323fd340b",
+                              "..."
                            ]
                         }
                      }
@@ -3614,6 +3880,10 @@
                               "description" : "Whether to accept C-FIND SCU commands issued by the remote modality",
                               "type" : "boolean"
                            },
+                           "AllowFindWorklist" : {
+                              "description" : "Whether to accept C-FIND SCU commands for worklists issued by the remote modality",
+                              "type" : "boolean"
+                           },
                            "AllowGet" : {
                               "description" : "Whether to accept C-GET SCU commands issued by the remote modality",
                               "type" : "boolean"
@@ -3690,6 +3960,7 @@
                               "AllowEcho" : true,
                               "AllowEventReport" : true,
                               "AllowFind" : true,
+                              "AllowFindWorklist" : true,
                               "AllowGet" : true,
                               "AllowMove" : true,
                               "AllowNAction" : true,
@@ -4746,6 +5017,15 @@
             "description" : "Get the list of attachments that are associated with the given patient",
             "parameters" : [
                {
+                  "description" : "If present, retrieve the attachments list and their numerical ids",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the patient of interest",
                   "in" : "path",
                   "name" : "id",
@@ -5185,6 +5465,61 @@
                }
             },
             "summary" : "Get attachment",
+            "tags" : [ "Patients" ]
+         }
+      },
+      "/patients/{id}/attachments/{name}/info" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get all the information about the attachment associated with the given patient",
+            "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the patient of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The name of the attachment, or its index (cf. `UserContentType` configuration option)",
+                  "in" : "path",
+                  "name" : "name",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON object containing the information about the attachment"
+                        }
+                     }
+                  },
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
+               }
+            },
+            "summary" : "Get info about the attachment",
             "tags" : [ "Patients" ]
          }
       },
@@ -7007,6 +7342,7 @@
                               "connectivity-checks",
                               "dicom-web",
                               "gdcm",
+                              "indexer",
                               "mysql-index",
                               "mysql-storage",
                               "odbc-index",
@@ -7080,7 +7416,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.6"
+                              "Version" : "1.7"
                            }
                         }
                      }
@@ -8229,6 +8565,15 @@
             "description" : "Get the list of attachments that are associated with the given series",
             "parameters" : [
                {
+                  "description" : "If present, retrieve the attachments list and their numerical ids",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the series of interest",
                   "in" : "path",
                   "name" : "id",
@@ -8668,6 +9013,61 @@
                }
             },
             "summary" : "Get attachment",
+            "tags" : [ "Series" ]
+         }
+      },
+      "/series/{id}/attachments/{name}/info" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get all the information about the attachment associated with the given series",
+            "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the series of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The name of the attachment, or its index (cf. `UserContentType` configuration option)",
+                  "in" : "path",
+                  "name" : "name",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON object containing the information about the attachment"
+                        }
+                     }
+                  },
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
+               }
+            },
+            "summary" : "Get info about the attachment",
             "tags" : [ "Series" ]
          }
       },
@@ -9670,6 +10070,56 @@
             "tags" : [ "Series" ]
          }
       },
+      "/series/{id}/numpy" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Decode the given DICOM series, for use with numpy in Python. The numpy array has 4 dimensions: (frame, height, width, color channel).",
+            "parameters" : [
+               {
+                  "description" : "Compress the file as `.npz`",
+                  "in" : "query",
+                  "name" : "compress",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "On grayscale images, apply the rescaling and return floating-point values",
+                  "in" : "query",
+                  "name" : "rescale",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the DICOM resource of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Numpy file: https://numpy.org/devdocs/reference/generated/numpy.lib.format.html"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Decode series for numpy",
+            "tags" : [ "Series" ]
+         }
+      },
       "/series/{id}/ordered-slices" : {
          "get" : {
             "deprecated" : true,
@@ -10639,6 +11089,15 @@
             "description" : "Get the list of attachments that are associated with the given study",
             "parameters" : [
                {
+                  "description" : "If present, retrieve the attachments list and their numerical ids",
+                  "in" : "query",
+                  "name" : "full",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the study of interest",
                   "in" : "path",
                   "name" : "id",
@@ -11078,6 +11537,61 @@
                }
             },
             "summary" : "Get attachment",
+            "tags" : [ "Studies" ]
+         }
+      },
+      "/studies/{id}/attachments/{name}/info" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get all the information about the attachment associated with the given study",
+            "parameters" : [
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
+                  "in" : "header",
+                  "name" : "If-None-Match",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Orthanc identifier of the study of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The name of the attachment, or its index (cf. `UserContentType` configuration option)",
+                  "in" : "path",
+                  "name" : "name",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON object containing the information about the attachment"
+                        }
+                     }
+                  },
+                  "description" : "",
+                  "headers" : {
+                     "ETag" : {
+                        "description" : "Revision of the attachment, to be used in further `PUT` or `DELETE` operations"
+                     }
+                  }
+               }
+            },
+            "summary" : "Get info about the attachment",
             "tags" : [ "Studies" ]
          }
       },
@@ -12862,7 +13376,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 14,
+                              "ApiVersion" : 15,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
@@ -12873,7 +13387,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.6"
+                              "Version" : "1.9.7"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -13195,7 +13709,7 @@
                   "description" : ""
                }
             },
-            "summary" : "Describe a set of instances",
+            "summary" : "Describe a set of resources",
             "tags" : [ "System" ]
          }
       },
@@ -13227,7 +13741,7 @@
                   "description" : ""
                }
             },
-            "summary" : "Delete a set of instances",
+            "summary" : "Delete a set of resources",
             "tags" : [ "System" ]
          }
       },
@@ -14317,7 +14831,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1630401803782\northanc_count_patients 8 1630401803782\northanc_count_series 26 1630401803782\northanc_count_studies 8 1630401803782\northanc_dicom_cache_count 213 1630393626028\northanc_dicom_cache_size 125.938728 1630393626028\northanc_disk_size_mb 1018.65021 1630401803782\northanc_jobs_completed 2 1630401803782\northanc_jobs_failed 0 1630401803782\northanc_jobs_pending 0 1630401803782\northanc_jobs_running 0 1630401803782\northanc_jobs_success 2 1630401803782\northanc_rest_api_active_requests 1 1630401803781\northanc_rest_api_duration_ms 353 1630401802149\northanc_storage_read_duration_ms 0 1630401797848\northanc_uncompressed_size_mb 1018.65021 1630401803782\n"
+                        "example" : "orthanc_count_instances 2552 1645624991823\northanc_count_patients 8 1645624991823\northanc_count_series 26 1645624991823\northanc_count_studies 8 1645624991823\northanc_dicom_cache_count 215 1645572656584\northanc_dicom_cache_size 89.9329529 1645572656583\northanc_disk_size_mb 1018.65021 1645624991823\northanc_jobs_completed 10 1645624991823\northanc_jobs_failed 4 1645624991823\northanc_jobs_pending 0 1645624991823\northanc_jobs_running 0 1645624991823\northanc_jobs_success 6 1645624991823\northanc_rest_api_active_requests 1 1645624991823\northanc_rest_api_duration_ms 342 1645624990284\northanc_storage_read_duration_ms 8 1645624986257\northanc_uncompressed_size_mb 1018.65021 1645624991823\n"
                      }
                   },
                   "description" : ""
@@ -14336,7 +14850,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210831T092323",
+                        "example" : "20220223T140311",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14358,7 +14872,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20210831T092323",
+                        "example" : "20220223T140311",
                         "schema" : {
                            "description" : "The local time"
                         }
