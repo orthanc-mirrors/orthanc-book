@@ -428,6 +428,69 @@ the generic `PAM format
 Users of Matlab or Octave can find related information :ref:`in the
 dedicated section <matlab>`.
 
+
+.. _download_numpy:
+
+Downloading decoded images from Python
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: python
+
+Starting with Orthanc 1.10.0, it is possible to immediately download
+DICOM instances and DICOM series as numpy arrays (even if they use a
+compressed transfer syntax). This is especially useful for the
+integration within AI (artificial intelligence) pipelines. Here is a
+sample call::
+
+  import io
+  import numpy
+  import requests
+  
+  r = requests.get('https://demo.orthanc-server.com/instances/6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f/numpy')
+  r.raise_for_status()
+  
+  image = numpy.load(io.BytesIO(r.content))
+  print(image.shape)  # (1, 358, 512, 1)
+
+The downloaded numpy array for one single DICOM instance contains
+floating-point values, and has a shape of ``(1, height, width, 1)`` if
+the corresponding instance is grayscale, or ``(1, height, width, 3)``
+if the instance has colors (e.g. in ultrasound images). If applicable,
+the ``Rescale Slope (0028,1053)`` and ``Rescale Intercept
+(0028,1052)`` DICOM tags are applied to the floating-point values.
+
+Similarly, this feature is available at the series level::
+
+  import io
+  import numpy
+  import requests
+  
+  r = requests.get('https://demo.orthanc-server.com/series/dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e/numpy')
+  r.raise_for_status()
+  
+  image = numpy.load(io.BytesIO(r.content))
+  print(image.shape)  # (100, 256, 256, 1)
+
+As can be seen, in the case of a DICOM series, the first dimension of
+the resulting numpy array corresponds to the depth of the series
+(i.e. to its number of 2D slices).
+
+Some options are available for these ``/instances/.../numpy`` and
+``/series/.../numpy`` routes:
+
+* ``?compress=1`` will return a ``.npz`` compressed numpy archive
+  instead of a plain ``.npy`` numpy array. This can be used to reduce
+  the network bandwidth. In such a case, the array of interest is
+  named ``arr_0`` in the ``.npz`` archive, e.g.::
+
+    print(image['arr_0'].shape)
+
+* ``?rescale=0`` will skip the conversion to floating-point values,
+  and will not apply the rescale slope/intercept. This can be useful
+  to reduce the network bandwidth or to receive the original integer
+  values of the voxels.
+
+
 Downloading studies
 ^^^^^^^^^^^^^^^^^^^
 
