@@ -34,9 +34,7 @@ stopped. The command-line option ``--no-jobs`` can also be used to
 prevent the loading of jobs from the database upon the launch of 
 Orthanc.
 
-Note that the queue of pending jobs has a maximum size (check out the
-``LimitJobs`` option). When this limit is reached, the addition of new
-jobs is blocked until some job finishes.
+Note that the queue of pending jobs has no size limit.
 
 
 
