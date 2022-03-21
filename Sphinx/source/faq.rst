@@ -69,3 +69,4 @@ Specific FAQs
    faq/series-completion.rst
    faq/dcmtk-tricks.rst
    faq/debugging-encodings.rst
+   faq/transfer-atomicity.rst

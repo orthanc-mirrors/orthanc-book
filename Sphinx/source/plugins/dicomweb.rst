@@ -591,6 +591,9 @@ WADO-RS `can be found on this site
 Sending DICOM resources to a STOW-RS server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. _dicomweb-stow-rs:
+
+
 .. highlight:: bash
 
 STOW-RS allows to send local DICOM resources to a remote DICOMweb
