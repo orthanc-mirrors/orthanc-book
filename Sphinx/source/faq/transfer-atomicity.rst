@@ -1,7 +1,7 @@
-.. _dcmtk-tricks:
+.. _transfer_atomicity:
 
-How to guarantee study transfer atomicity ?
-=========================================
+How to guarantee study transfer atomicity?
+==========================================
 
 .. contents::
    :depth: 3
@@ -111,13 +111,15 @@ a ``StableStudy`` event might be triggered even if the study was not fully recei
 
 **Note**:
 
-* In earlier Orthanc versions, ``ChunkedTransfers`` was disabled, and the whole study 
-was transmitted in a single HTTP request and parsed only once the full HTTP request 
-had been received.  Therefore, the whole study was stored at once on the destination.
-However, note that ``ChunkedTransfers`` is enabled by default on every Orthanc server 
-but it can be disabled in the client configuration.  Also note that studies bigger than 
-2 GB can not be transferred with ``ChunkedTransfers`` disabled which means it is not 
-recommended to perform transfers with disabled ``ChunkedTransfers``.
+* In earlier Orthanc versions, ``ChunkedTransfers`` was disabled, and
+  the whole study was transmitted in a single HTTP request and parsed
+  only once the full HTTP request had been received.  Therefore, the
+  whole study was stored at once on the destination.  However, note
+  that ``ChunkedTransfers`` is enabled by default on every Orthanc
+  server but it can be disabled in the client configuration.  Also
+  note that studies bigger than 2 GB can not be transferred with
+  ``ChunkedTransfers`` disabled which means it is not recommended to
+  perform transfers with disabled ``ChunkedTransfers``.
 
 
 

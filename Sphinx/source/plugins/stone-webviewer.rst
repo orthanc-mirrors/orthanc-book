@@ -95,6 +95,19 @@ The configuration of the Web viewer can be fine-tuned by adapting some
 options in the `configuration file
 <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.2/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
+
+.. _stone_webviewer_troubleshooting:
+
+Troubleshooting
+---------------
+
+- Users have reported that some versions of Google Chrome and Chromium
+  (notably from the family of releases 97.0.x) don't properly support
+  **drag-and-drop**. If drag-and-drop doesn't work, upgrade your Web
+  browser. You can also replace drag-and-drop by clicking on the "drop a
+  series here" area, then clicking on the series you want to load.
+
+
 FAQ
 ---
 
@@ -160,4 +173,3 @@ FAQ
 
   We are looking for :ref:`industrial sponsors <contributing>` to
   implement such new features in the Stone Web viewer.
-
