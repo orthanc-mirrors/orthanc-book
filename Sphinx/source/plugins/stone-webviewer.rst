@@ -101,11 +101,27 @@ options in the `configuration file
 Troubleshooting
 ---------------
 
-- Users have reported that some versions of Google Chrome and Chromium
-  (notably from the family of releases 97.0.x) don't properly support
-  **drag-and-drop**. If drag-and-drop doesn't work, upgrade your Web
-  browser. You can also replace drag-and-drop by clicking on the "drop a
-  series here" area, then clicking on the series you want to load.
+- `Some users
+  <https://groups.google.com/g/orthanc-users/c/RfQJFgkOUYY/m/d1uGW7APBgAJ>`__
+  have reported that some versions of Google Chrome and Chromium (in
+  particular release 97.0.4692.71) don't properly support
+  **drag-and-drop**. This is *not* an issue in Stone Web viewer, but
+  an issue in Chrome/Chromium (cf. `issue 1284605
+  <https://bugs.chromium.org/p/chromium/issues/detail?id=1284605>`__).
+  This problem can be overcome in 3 different ways:
+
+  1. Upgrade your Web browser (releases >= 98.0.x should run fine).
+
+  2. Replace drag-and-drop by clicking on the "drop a series here"
+     area, then clicking on the series you want to load.
+
+  3. Disable the option "Use system title bar and borders" in the
+     settings of Chrome/Chromium, as depicted in the following
+     screenshot:
+     
+     .. image:: ../images/stone-webviewer-google-issue.png
+           :align: center
+           :width: 800
 
 
 FAQ
