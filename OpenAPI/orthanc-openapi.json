@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.10.0"
+      "version" : "1.10.1"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -583,11 +583,13 @@
                               "compressed-md5",
                               "compressed-size",
                               "data",
+                              "info",
                               "is-compressed",
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5"
+                              "verify-md5",
+                              "uuid"
                            ]
                         }
                      }
@@ -3529,9 +3531,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "14a3cacd-fdf1-42ce-8cbe-7d882b60872b",
-                              "45948a0f-d176-4ca7-9efc-187a5d14f1c7",
-                              "6aae44fb-dacf-4115-ad79-77a323fd340b",
+                              "07436b2f-9d60-431a-a5c3-1aa179b747b5",
+                              "0b6b7498-bcda-457c-95b1-c6616a7f1378",
+                              "12aed87d-c08f-4b27-a29b-41e83ae529a8",
                               "..."
                            ]
                         }
@@ -5137,11 +5139,13 @@
                               "compressed-md5",
                               "compressed-size",
                               "data",
+                              "info",
                               "is-compressed",
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5"
+                              "verify-md5",
+                              "uuid"
                            ]
                         }
                      }
@@ -8685,11 +8689,13 @@
                               "compressed-md5",
                               "compressed-size",
                               "data",
+                              "info",
                               "is-compressed",
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5"
+                              "verify-md5",
+                              "uuid"
                            ]
                         }
                      }
@@ -11209,11 +11215,13 @@
                               "compressed-md5",
                               "compressed-size",
                               "data",
+                              "info",
                               "is-compressed",
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5"
+                              "verify-md5",
+                              "uuid"
                            ]
                         }
                      }
@@ -13376,7 +13384,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 15,
+                              "ApiVersion" : 16,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseVersion" : 6,
@@ -13387,7 +13395,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.9.7"
+                              "Version" : "1.10.0"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14831,7 +14839,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1645624991823\northanc_count_patients 8 1645624991823\northanc_count_series 26 1645624991823\northanc_count_studies 8 1645624991823\northanc_dicom_cache_count 215 1645572656584\northanc_dicom_cache_size 89.9329529 1645572656583\northanc_disk_size_mb 1018.65021 1645624991823\northanc_jobs_completed 10 1645624991823\northanc_jobs_failed 4 1645624991823\northanc_jobs_pending 0 1645624991823\northanc_jobs_running 0 1645624991823\northanc_jobs_success 6 1645624991823\northanc_rest_api_active_requests 1 1645624991823\northanc_rest_api_duration_ms 342 1645624990284\northanc_storage_read_duration_ms 8 1645624986257\northanc_uncompressed_size_mb 1018.65021 1645624991823\n"
+                        "example" : "orthanc_count_instances 2552 1648054911276\northanc_count_patients 8 1648054911276\northanc_count_series 26 1648054911276\northanc_count_studies 8 1648054911276\northanc_dicom_cache_count 501 1647846091296\northanc_dicom_cache_size 127.931984 1647846091296\northanc_disk_size_mb 1018.65021 1648054911276\northanc_jobs_completed 10 1648054911276\northanc_jobs_failed 6 1648054911276\northanc_jobs_pending 0 1648054911276\northanc_jobs_running 0 1648054911276\northanc_jobs_success 4 1648054911276\northanc_rest_api_active_requests 1 1648054911275\northanc_rest_api_duration_ms 368 1648054907876\northanc_storage_read_duration_ms 34 1648054910360\northanc_uncompressed_size_mb 1018.65021 1648054911276\n"
                      }
                   },
                   "description" : ""
@@ -14850,7 +14858,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220223T140311",
+                        "example" : "20220323T170151",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14872,7 +14880,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220223T140311",
+                        "example" : "20220323T170151",
                         "schema" : {
                            "description" : "The local time"
                         }

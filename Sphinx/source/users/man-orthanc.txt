@@ -129,4 +129,4 @@ COPYRIGHT
        This  is  free  software:  you  are free to change and redistribute it.
        There is NO WARRANTY, to the extent permitted by law.
 
-Orthanc 1.10.0			 February 2022			    ORTHANC(1)
+Orthanc 1.10.1			  March 2022			    ORTHANC(1)
