@@ -100,6 +100,10 @@ Advanced options
   <osimis_webviewer>` as well as **advanced features** of the software
   (opening multiple studies, authorization, display of OsiriX
   annotations...).
+
+* Also, check out our `TODO file
+  <https://hg.orthanc-server.com/orthanc-stone/file/default/TODO>`__
+  that is used to track **future features**.
    
 
 .. _stone_webviewer_troubleshooting:
