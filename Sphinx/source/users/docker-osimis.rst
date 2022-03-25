@@ -78,7 +78,7 @@ To find out an environment variable name from an Orthanc setting
   ``ORTHANC__DICOM_WEB__STUDIES_METADATA``
 
 Note that, this automatic rule might fail because of 2 capital letters one after each other in some
-Orthanc settings.  Therefore, there are some `exceptions <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/env-var-non-standards.json>`__ to this rule 
+Orthanc settings.  Therefore, there are some `exceptions <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/env-var-non-standards.json>`__ to this rule 
 that are however quite intuitive.
 
 Special environment variables
@@ -238,7 +238,7 @@ Some Lua scripts are already loaded in the image but are not configured to
 be loaded by Orthanc automatically.  You'll have to add them to the ``"LuaScripts"`` 
 configuration if you want to use them.
 
-`/lua-scripts/filter-http-tools-reset.lua <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/filter-http-tools-reset.lua>`__ 
+`/lua-scripts/filter-http-tools-reset.lua <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/filter-http-tools-reset.lua>`__ 
 can be used to regenerate the ``/tmp/orthanc.json`` configuration file that is loaded by Orthanc every time
 you POST to ``/tools/reset``.  Note that it declares an ``IncomingHttpRequestFilter`` 
 callback that might conflict with your scripts.
@@ -246,7 +246,7 @@ callback that might conflict with your scripts.
 Healthcheck probe
 -----------------
 
-In version 21.10.0, the `/probes/test-aliveness.py <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/test-aliveness.py>`__ 
+In version 21.10.0, the `/probes/test-aliveness.py <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/test-aliveness.py>`__ 
 script has been added in order to perform healthchecks.  Check the doc in the script itself for more details.
 A sample configuration is also available in `this sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/8016d140a237a892db703aac4782307c46732847/docker/tls-mutual-auth/docker-compose.yml#lines-51>`__
 
@@ -381,6 +381,6 @@ Below is a list of all plugins, their environment variable and their default con
 Under the hood
 --------------
 
-The source code that is used to generate the image can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/Dockerfile>`__.
+The source code that is used to generate the image can be found `here <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/Dockerfile>`__.
 
-The Python script that is used at startup can be found `here <https://bitbucket.org/osimis/orthanc-builder/src/master/docker/orthanc/generateConfiguration.py>`__
+The Python script that is used at startup can be found `here <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/generateConfiguration.py>`__
