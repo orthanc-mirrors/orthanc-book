@@ -89,12 +89,18 @@ the interactive demonstration on the `official homepage of the plugin
 Advanced options
 ----------------
 
-.. highlight:: json
+* The configuration of the Web viewer can be fine-tuned by adapting
+  some **advanced options** in the `configuration file
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
-The configuration of the Web viewer can be fine-tuned by adapting some
-options in the `configuration file
-<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
-
+* The source distribution of the Stone Web viewer contains a
+  `NOTES.txt file
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/NOTES.txt>`__
+  that discusses the differences with the :ref:`Osimis Web viewer
+  <osimis_webviewer>` as well as **advanced features** of the software
+  (opening multiple studies, authorization, display of OsiriX
+  annotations...).
+   
 
 .. _stone_webviewer_troubleshooting:
 
