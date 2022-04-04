@@ -78,6 +78,11 @@ presence of large databases:
   than the storage area. This should improve the use of the available
   bandwidth to the disks.
 
+* If your Orthanc instance is performing a lot of IO requests in parallel
+  e.g because many clients are reading/writing DICOM files at the same
+  time, you should consider using an :ref:`object storage <object-storage>` 
+  plugin to store your files.
+
 * The :ref:`Orthanc configuration file <configuration>` should have
   the following values for performance-related options (but make sure
   to understand their implications):
