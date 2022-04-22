@@ -141,9 +141,9 @@ decision chart:
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
 
 2. If you need an **additional feature implemented in Orthanc**,
-   and if you are ready to pay, get in touch with `Osimis
-   <mailto:orthanc-support@osimis.io>`__, the commercial partner of
-   the Orthanc project, or with `Alain Mazy <https://mazy.be/orthanc>`__.
+   and if you are ready to pay, get in touch with the `Orthanc Team <https://orthanc.team>`__
+   or with `Osimis <mailto:orthanc-support@osimis.io>`__, the commercial partner of
+   the Orthanc project for AI related matters.
 
 3. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
@@ -152,13 +152,12 @@ decision chart:
 
    * **Worldwide**:
    
+     * `Orthanc Team (Alain Mazy & Benoît Crickboom) <https://orthanc.team>`__ (French/English, Belgium)
      * `Osimis <https://osimis.io/en/orthanc-support-contract>`__ (French/English, Belgium)
-     * `Alain Mazy <https://mazy.be/orthanc>`__ (French/English, Belgium)
 
    * **Europe**:
 
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
-     * `Benoit Crickboom <orthanc@sleig.be>`__ (French/English, Belgium)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
 
