@@ -36,8 +36,6 @@ Orthanc.
 
 Note that the queue of pending jobs has no size limit.
 
-
-
 .. _jobs-synchronicity:
 
 Synchronous vs. asynchronous calls
@@ -144,6 +142,18 @@ Note that the `integration tests of Orthanc
 <https://hg.orthanc-server.com/orthanc-tests/file/Orthanc-1.10.1/Tests/Toolbox.py>`__
 give an example about how to monitor a job in Python using the REST
 API (cf. function ``MonitorJob()``).
+
+
+.. _jobs-priority:
+
+Jobs priority
+^^^^^^^^^^^^^
+
+When executing jobs, Orthanc will pick the jobs with the highest ``Priority`` 
+from the pending job list. An integer value is a valid ``Priority``.  You may 
+also use negative number to lower the priority below the default one (``0``).
+
+Pending jobs are not ordered in the API response but they are picked up in the right order.
 
 
 .. _jobs-controlling:
