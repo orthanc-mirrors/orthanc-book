@@ -80,6 +80,7 @@ From UCLouvain
 
    plugins/tcia.rst
    plugins/indexer.rst
+   plugins/neuro.rst
 
 .. _plugins-contributed:
 

@@ -115,11 +115,6 @@ here are some tasks you can take in charge that would greatly help us:
       that it manages the worklists (i.e. add/remove items) with a
       REST API or HL7 messages, instead of reading them from some
       folder on the filesystem.
-    + Conversion to/from `NIfTI
-      <https://www.sciencedirect.com/science/article/abs/pii/S0165027016300073?via%3Dihub>`__
-      and/or `BIDS
-      <https://en.wikipedia.org/wiki/Brain_Imaging_Data_Structure>`__,
-      notably for neuroimaging.
     + `Encapsulate a video into a DICOM file
       <https://stackoverflow.com/questions/28698888/creating-h-264-avc-dicom-file-with-dcmtk/28737338#28737338>`__
       by calling some REST route, similarly to the
