@@ -98,16 +98,21 @@ new medical images:
   parameter is :ref:`documented separately <lua-origin>`.
 * ``function OnStablePatient(patientId, tags, metadata)``: Invoked
   whenever a patient has not received any new instance for a certain
-  amount of time (cf. the option ``StableAge`` in the
+  amount of time (cf. :ref:`stable resources <stable-resources>` 
+  and the option ``StableAge`` in the
   :ref:`configuration file <configuration>`). The :ref:`identifier
   <orthanc-ids>` of the patient is provided, together with her DICOM
   tags and her :ref:`metadata <metadata>`.
 * ``function OnStableSeries(seriesId, tags, metadata)``: Invoked
   whenever a series has not received any new instance for a certain
-  amount of time.
+  amount of time (cf. :ref:`stable resources <stable-resources>` 
+  and the option ``StableAge`` in the
+  :ref:`configuration file <configuration>`).
 * ``function OnStableStudy(studyId, tags, metadata)``: Invoked
   whenever a study has not received any new instance for a certain
-  amount of time.
+  amount of time (cf. :ref:`stable resources <stable-resources>` 
+  and the option ``StableAge`` in the
+  :ref:`configuration file <configuration>`).
 * ``function IncomingFindRequestFilter(source, origin)``: Invoked
   whenever Orthanc receives an incoming C-Find query through the DICOM
   protocol. This allows to inspect the content of the C-Find query,
