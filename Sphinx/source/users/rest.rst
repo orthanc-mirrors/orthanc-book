@@ -1094,6 +1094,49 @@ You also have the ability to limit the responses by specifying a limit within th
 
   "Limit":4
 
+.. highlight:: bash
+
+Since Orthanc 1.11.0 (not released yet), you may also request a specific list of tags in the response (like in a C-FIND) even if these
+tags are not stored in the MainDicomTags or if the tags needs to be computed (like ``ModalitiesInStudy``).  This ``RequestedTags`` option is
+available only if you specify ``"Expand": true``::
+
+  $ curl -X POST http://localhost:8042/tools/find -d '
+    {
+      "Level": "Studies",
+      "Expand": true,
+      "Query": {
+        "StudyDate": "20220502"
+      },
+      "RequestedTags": ["PatientName", "PatientID", "StudyDescription", "StudyDate", "StudyInstanceUID", "ModalitiesInStudy", "NumberOfStudyRelatedSeries"]
+    }'
+
+.. highlight:: json
+
+This query will return a response like this one::
+
+  [
+    {
+      "ID" : "8a8cf898-ca27c490-d0c7058c-929d0581-2bbf104d",
+      "IsStable" : true,
+      "LastUpdate" : "20220428T074549",
+      "MainDicomTags" : {
+        "...":"..."
+      },
+      "..." : "...",
+      "RequestedTags" : {
+         "PatientName" : "Patient",
+         "PatientID" : "1",
+         "StudyDescription" : "Description",
+         "StudyDate" : "20220502",
+         "StudyInstanceUID" : "1.2.3",
+         "ModalitiesInStudy" : "CT\\SEG\\SR",
+         "NumberOfStudyRelatedSeries" : "3"
+      },
+      "Series" : [ "93034833-163e42c3-bc9a428b-194620cf-2c5799e5" ],
+      "Type" : "Study"
+   }
+  ]
+
 
 .. _changes:
 

@@ -310,6 +310,7 @@ complete the **central registry** below:
 * ``Attachment 9998`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store instance information.
 * ``Attachment 9999`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store annotations.
 * ``Attachments 10000-13999`` are used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store reduced quality images.
+* ``Global property 1025`` is used by default by the Housekeeper plugin.
 * ``Global property 5467`` is used by the Osimis Cloud plugin.
 * ``Global property 5468`` is used by the :ref:`DICOMweb plugin <dicomweb>` to store the DICOMweb servers into the Orthanc database.
 * ``Metadata 4200`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version <= 0.7.

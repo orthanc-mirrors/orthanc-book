@@ -69,6 +69,7 @@ From Osimis
    plugins/odbc.rst
    plugins/osimis-webviewer.rst
    plugins/authorization.rst
+   plugins/housekeeper.rst
 
 .. _plugins-uclouvain:
 

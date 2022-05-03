@@ -108,7 +108,12 @@ presence of large databases:
   scenario is having one "writer" Orthanc server that handles the
   ingesting of DICOM instances, and multiple "reader" Orthanc servers
   with features such as DICOMweb or viewers.
-   
+
+* From Orthanc 1.11.0 (not released yet): you have the ability to add
+  more :ref:`main DICOM tags <main-dicom-tags>` in the Orthanc Index 
+  to speed up C-Find, ``tools/find``, DICOMWeb QIDO-RS, WADO-RS and 
+  especially WADO-RS Retrieve Metadata.
+
 * Make sure to carefully :ref:`read the logs <log>` in ``--verbose``
   mode, especially at the startup of Orthanc. The logs may contain
   very important information regarding performance.
