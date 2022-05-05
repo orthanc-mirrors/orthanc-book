@@ -57,6 +57,7 @@ Specific FAQs
 
    faq/log.rst
    faq/orthanc-ids.rst
+   faq/main-dicom-tags.rst
    faq/versioning.rst
    faq/debian-daemon.rst
    faq/redhat.rst

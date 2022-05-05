@@ -114,15 +114,20 @@ the Orthanc configuration file::
   {
     [...]
     "DicomWeb" : {
-      "Enable" : true,            // Whether DICOMweb support is enabled
-      "Root" : "/dicom-web/",     // Root URI of the DICOMweb API (for QIDO-RS, STOW-RS and WADO-RS)
-      "EnableWado" : true,        // Whether WADO-URI (previously known as WADO) support is enabled
-      "WadoRoot" : "/wado",       // Root URI of the WADO-URI (aka. WADO) API
-      "Ssl" : false,              // Whether HTTPS should be used for subsequent WADO-RS requests
-      "QidoCaseSensitive" : true, // For QIDO-RS server, whether search is case sensitive (since release 0.5)
-      "Host" : "localhost",       // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
-      "StudiesMetadata" : "Full", // How study-level metadata is retrieved (since release 1.1, cf. section below)
-      "SeriesMetadata" : "Full"   // How series-level metadata is retrieved (since release 1.1, cf. section below)
+      "Enable" : true,             // Whether DICOMweb support is enabled
+      "Root" : "/dicom-web/",      // Root URI of the DICOMweb API (for QIDO-RS, STOW-RS and WADO-RS)
+      "EnableWado" : true,         // Whether WADO-URI (previously known as WADO) support is enabled
+      "WadoRoot" : "/wado",        // Root URI of the WADO-URI (aka. WADO) API
+      "Ssl" : false,               // Whether HTTPS should be used for subsequent WADO-RS requests
+      "QidoCaseSensitive" : true,  // For QIDO-RS server, whether search is case sensitive (since release 0.5)
+      "Host" : "localhost",        // Hard-codes the name of the host for subsequent WADO-RS requests (deprecated)
+      "StudiesMetadata" : "Full",  // How study-level metadata is retrieved (since release 1.1, cf. section below)
+      "SeriesMetadata" : "Full",   // How series-level metadata is retrieved (since release 1.1, cf. section below)
+      "PublicRoot": "/dicom-web/", // The public Root URI of the DICOMweb API in case it is different from "Root".
+                                   // This is useful if, e.g, your Orthanc is behind a reverse-proxy and has another 
+                                   // base endpoint than the "Root" one.  Note that, if using a reverse-proxy, make sure to set the "host"
+                                   // and "proto" correctly in the "Forwarded" HTTP headers.
+                                   // (since release 1.8)
     }
   }
 
@@ -179,7 +184,11 @@ are processed:
   files are not read from the disk, which provides best
   performance. However, this is a small subset of all the tags that
   would be retrieved if using the ``Full`` mode: A DICOMweb viewer
-  might need more tags.
+  might need more tags.  **Important Note:** From Orthanc 1.11.0 and DICOMweb plugin 1.8,
+  you may store more :ref:`MainDicomTags <main-dicom-tags>` in DB.
+  By correctly setting these tags, the ``MainDicomTags`` mode can
+  become faster than the ``Extrapolate`` mode with the same accuracy
+  as the ``Full`` mode.
 
 * If ``Extrapolate`` mode is used, the plugin will read up to 3 DICOM
   instances at random that belong to the study/series of interest. It
