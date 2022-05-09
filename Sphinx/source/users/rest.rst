@@ -94,7 +94,7 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.10.1/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.11.0/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -106,7 +106,7 @@ provides more features than ``ImportDicomFiles.py``. It can notably
 import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2`` archives
 without having to uncompress them first. It also provides more
 comprehensive command-line options. `Check this script out
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.10.1/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.11.0/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
     
 
 .. highlight:: perl
@@ -436,7 +436,7 @@ Downloading decoded images from Python
 
 .. highlight:: python
 
-Starting with Orthanc 1.10.1, it is possible to immediately download
+Starting with Orthanc 1.11.0, it is possible to immediately download
 DICOM instances and DICOM series as numpy arrays (even if they use a
 compressed transfer syntax). This is especially useful for the
 integration within AI (artificial intelligence) pipelines. Here is a
@@ -1096,7 +1096,7 @@ You also have the ability to limit the responses by specifying a limit within th
 
 .. highlight:: bash
 
-Since Orthanc 1.11.0 (not released yet), you may also request a specific list of tags in the response (like in a C-FIND) even if these
+Since Orthanc 1.11.0, you may also request a specific list of tags in the response (like in a C-FIND) even if these
 tags are not stored in the MainDicomTags or if the tags needs to be computed (like ``ModalitiesInStudy``).  This ``RequestedTags`` option is
 available only if you specify ``"Expand": true``::
 

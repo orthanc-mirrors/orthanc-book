@@ -44,7 +44,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1patient/get>`__,,,,Get parent patient
 ``/instances/{id}/pdf``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1pdf/get>`__,,,,Get embedded PDF
 ``/instances/{id}/preview``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1preview/get>`__,,,,Decode an image (preview)
-``/instances/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1reconstruct/post>`__,,,Reconstruct tags of instance
+``/instances/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of instance
 ``/instances/{id}/rendered``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1rendered/get>`__,,,,Render an image
 ``/instances/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1series/get>`__,,,,Get parent series
 ``/instances/{id}/simplified-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1simplified-tags/get>`__,,,,Get human-readable tags
@@ -98,7 +98,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/patients/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1modify/post>`__,,,Modify patient
 ``/patients/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1module/get>`__,,,,Get patient module
 ``/patients/{id}/protected``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1protected/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1protected/put>`__,Is the patient protected against recycling?
-``/patients/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1reconstruct/post>`__,,,Reconstruct tags of patient
+``/patients/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of patient
 ``/patients/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1series/get>`__,,,,Get child series
 ``/patients/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1shared-tags/get>`__,,,,Get shared tags
 ``/patients/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1statistics/get>`__,,,,Get patient statistics
@@ -152,7 +152,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/series/{id}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1numpy/get>`__,,,,Decode series for numpy
 ``/series/{id}/ordered-slices``,`(get) <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1ordered-slices/get>`__,,,,*(deprecated)* Order the slices
 ``/series/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1patient/get>`__,,,,Get parent patient
-``/series/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1reconstruct/post>`__,,,Reconstruct tags of series
+``/series/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of series
 ``/series/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1shared-tags/get>`__,,,,Get shared tags
 ``/series/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1statistics/get>`__,,,,Get series statistics
 ``/series/{id}/study``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1study/get>`__,,,,Get parent study
@@ -186,7 +186,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/studies/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1module/get>`__,,,,Get study module
 ``/studies/{id}/module-patient``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1module-patient/get>`__,,,,Get patient module of study
 ``/studies/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1patient/get>`__,,,,Get parent patient
-``/studies/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1reconstruct/post>`__,,,Reconstruct tags of study
+``/studies/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of study
 ``/studies/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1series/get>`__,,,,Get child series
 ``/studies/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1shared-tags/get>`__,,,,Get shared tags
 ``/studies/{id}/split``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1split/post>`__,,,Split study

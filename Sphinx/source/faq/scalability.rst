@@ -54,7 +54,7 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.10.1 at the time of
+* Make sure to use the latest release of Orthanc (1.11.0 at the time of
   writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
@@ -109,7 +109,7 @@ presence of large databases:
   ingesting of DICOM instances, and multiple "reader" Orthanc servers
   with features such as DICOMweb or viewers.
 
-* From Orthanc 1.11.0 (not released yet): you have the ability to add
+* From Orthanc 1.11.0: you have the ability to add
   more :ref:`main DICOM tags <main-dicom-tags>` in the Orthanc Index 
   to speed up C-Find, ``tools/find``, DICOMWeb QIDO-RS, WADO-RS and 
   especially WADO-RS Retrieve Metadata.

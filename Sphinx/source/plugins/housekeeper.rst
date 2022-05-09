@@ -1,7 +1,7 @@
 .. _housekeeper-plugin:
 
 
-Housekeeper plugin (not released yet)
+Housekeeper plugin (new in Orthanc 1.11.0)
 =========================
 
 This page describes the **official sample plugin** that performs

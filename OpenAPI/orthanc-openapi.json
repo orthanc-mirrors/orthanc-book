@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.10.1"
+      "version" : "1.11.0"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -183,6 +183,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -322,6 +331,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -953,9 +971,16 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON object containing the information about the attachment"
+                           "description" : "JSON object containing the information about the attachment",
+                           "example" : {
+                              "CompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "CompressedSize" : 526970,
+                              "ContentType" : 1,
+                              "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "UncompressedSize" : 526970,
+                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                           }
                         }
                      }
                   },
@@ -2816,6 +2841,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -2969,7 +3003,7 @@
       "/instances/{id}/reconstruct" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Reconstruct the main DICOM tags of the instance whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
+            "description" : "Reconstruct the main DICOM tags in DB of the instance whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the instance of interest",
@@ -2981,12 +3015,27 @@
                   }
                }
             ],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "ReconstructFiles" : {
+                              "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
             "responses" : {
                "200" : {
                   "description" : ""
                }
             },
-            "summary" : "Reconstruct tags of instance",
+            "summary" : "Reconstruct tags & optionally files of instance",
             "tags" : [ "Instances" ]
          }
       },
@@ -3118,6 +3167,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -3334,6 +3392,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -3531,9 +3598,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "07436b2f-9d60-431a-a5c3-1aa179b747b5",
-                              "0b6b7498-bcda-457c-95b1-c6616a7f1378",
-                              "12aed87d-c08f-4b27-a29b-41e83ae529a8",
+                              "3c58e15c-0f44-4f78-9ec0-f1fb7d4baadb",
+                              "653e5b90-f9d1-45b7-94d7-f0f199e85ea5",
+                              "6ab21b1d-739c-427f-b791-5ceaa6861943",
                               "..."
                            ]
                         }
@@ -4672,6 +4739,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -4744,6 +4820,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -4904,6 +4989,15 @@
             "deprecated" : false,
             "description" : "Synchronously create a ZIP archive containing the DICOM patient whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
                   "in" : "query",
@@ -5509,9 +5603,16 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON object containing the information about the attachment"
+                           "description" : "JSON object containing the information about the attachment",
+                           "example" : {
+                              "CompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "CompressedSize" : 526970,
+                              "ContentType" : 1,
+                              "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "UncompressedSize" : 526970,
+                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                           }
                         }
                      }
                   },
@@ -5778,6 +5879,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -6096,6 +6206,15 @@
                   "description" : "If present, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*",
                   "in" : "query",
                   "name" : "extended",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -6636,7 +6755,7 @@
       "/patients/{id}/reconstruct" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Reconstruct the main DICOM tags of the patient whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
+            "description" : "Reconstruct the main DICOM tags in DB of the patient whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the patient of interest",
@@ -6648,12 +6767,27 @@
                   }
                }
             ],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "ReconstructFiles" : {
+                              "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
             "responses" : {
                "200" : {
                   "description" : ""
                }
             },
-            "summary" : "Reconstruct tags of patient",
+            "summary" : "Reconstruct tags & optionally files of patient",
             "tags" : [ "Patients" ]
          }
       },
@@ -6669,6 +6803,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -6902,6 +7045,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -7349,6 +7501,7 @@
                               "indexer",
                               "mysql-index",
                               "mysql-storage",
+                              "neuro",
                               "odbc-index",
                               "odbc-storage",
                               "postgresql-index",
@@ -8213,6 +8366,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -8285,6 +8447,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -8454,6 +8625,15 @@
             "deprecated" : false,
             "description" : "Synchronously create a ZIP archive containing the DICOM series whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
                   "in" : "query",
@@ -9059,9 +9239,16 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON object containing the information about the attachment"
+                           "description" : "JSON object containing the information about the attachment",
+                           "example" : {
+                              "CompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "CompressedSize" : 526970,
+                              "ContentType" : 1,
+                              "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "UncompressedSize" : 526970,
+                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                           }
                         }
                      }
                   },
@@ -9331,6 +9518,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -9481,6 +9677,15 @@
                   "description" : "If present, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*",
                   "in" : "query",
                   "name" : "extended",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -10241,6 +10446,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -10291,7 +10505,7 @@
       "/series/{id}/reconstruct" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Reconstruct the main DICOM tags of the series whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
+            "description" : "Reconstruct the main DICOM tags in DB of the series whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the series of interest",
@@ -10303,12 +10517,27 @@
                   }
                }
             ],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "ReconstructFiles" : {
+                              "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
             "responses" : {
                "200" : {
                   "description" : ""
                }
             },
-            "summary" : "Reconstruct tags of series",
+            "summary" : "Reconstruct tags & optionally files of series",
             "tags" : [ "Series" ]
          }
       },
@@ -10481,6 +10710,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -10726,6 +10964,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -10798,6 +11045,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -10980,6 +11236,15 @@
             "deprecated" : false,
             "description" : "Synchronously create a ZIP archive containing the DICOM study whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
                   "in" : "query",
@@ -11585,9 +11850,16 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON object containing the information about the attachment"
+                           "description" : "JSON object containing the information about the attachment",
+                           "example" : {
+                              "CompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "CompressedSize" : 526970,
+                              "ContentType" : 1,
+                              "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
+                              "UncompressedSize" : 526970,
+                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                           }
                         }
                      }
                   },
@@ -11854,6 +12126,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -12182,6 +12463,15 @@
                   "description" : "If present, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*",
                   "in" : "query",
                   "name" : "extended",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -12914,6 +13204,15 @@
                   }
                },
                {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in hexadecimal format",
                   "in" : "query",
                   "name" : "short",
@@ -12964,7 +13263,7 @@
       "/studies/{id}/reconstruct" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Reconstruct the main DICOM tags of the study whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
+            "description" : "Reconstruct the main DICOM tags in DB of the study whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -12976,12 +13275,27 @@
                   }
                }
             ],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "ReconstructFiles" : {
+                              "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
             "responses" : {
                "200" : {
                   "description" : ""
                }
             },
-            "summary" : "Reconstruct tags of study",
+            "summary" : "Reconstruct tags & optionally files of study",
             "tags" : [ "Studies" ]
          }
       },
@@ -12997,6 +13311,15 @@
                   "required" : false,
                   "schema" : {
                      "type" : "boolean"
+                  }
+               },
+               {
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "in" : "query",
+                  "name" : "requestedTags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                },
                {
@@ -13395,7 +13718,7 @@
                               "Name" : "Orthanc Demo",
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.10.0"
+                              "Version" : "1.10.1"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -13426,13 +13749,25 @@
                                  "description" : "The port to the HTTP server of Orthanc",
                                  "type" : "number"
                               },
+                              "IngestTranscoding" : {
+                                 "description" : "Whether instances are transcoded when ingested into Orthanc (`` if no transcoding is performed) (new in Orthanc 1.11.0)",
+                                 "type" : "string"
+                              },
                               "IsHttpServerSecure" : {
                                  "description" : "Whether the REST API is properly secured (assuming no reverse proxy is in use): https://book.orthanc-server.com/faq/security.html#securing-the-http-server",
                                  "type" : "boolean"
                               },
+                              "MainDicomTags" : {
+                                 "description" : "The list of MainDicomTags saved in DB for each resource level (new in Orthanc 1.11.0)",
+                                 "type" : "object"
+                              },
                               "Name" : {
                                  "description" : "The name of the Orthanc server, cf. the `Name` configuration option",
                                  "type" : "string"
+                              },
+                              "OverwriteInstances" : {
+                                 "description" : "Whether instances are overwritten when re-ingested (new in Orthanc 1.11.0)",
+                                 "type" : "boolean"
                               },
                               "PluginsEnabled" : {
                                  "description" : "Whether Orthanc was built with support for plugins",
@@ -13441,6 +13776,10 @@
                               "StorageAreaPlugin" : {
                                  "description" : "Information about the installed storage area plugin (`null` if no such plugin is installed)",
                                  "type" : "string"
+                              },
+                              "StorageCompression" : {
+                                 "description" : "Whether storage compression is enabled (new in Orthanc 1.11.0)",
+                                 "type" : "boolean"
                               },
                               "Version" : {
                                  "description" : "Version of Orthanc",
@@ -13689,7 +14028,7 @@
                               "type" : "boolean"
                            },
                            "Level" : {
-                              "description" : "This optional argument specifies the level of interest (can be `Patient`, `Study`, `Series` or `Instance`). Orthanc will loop over the items inside `Resources`, and explorer upward or downward in the DICOM hierarchy in order to find the level of interest.",
+                              "description" : "This optional argument specifies the level of interest (can be `Patient`, `Study`, `Series` or `Instance`). Orthanc will loop over the items inside `Resources`, and explore upward or downward in the DICOM hierarchy in order to find the level of interest.",
                               "type" : "string"
                            },
                            "Metadata" : {
@@ -14336,6 +14675,13 @@
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
                            },
+                           "RequestedTags" : {
+                              "description" : "A list of DICOM tags to include in the response (applicable only if \"Expand\" is set to true).  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
                            "Short" : {
                               "description" : "If set to `true`, report the DICOM tags in hexadecimal format",
                               "type" : "boolean"
@@ -14839,7 +15185,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1648054911276\northanc_count_patients 8 1648054911276\northanc_count_series 26 1648054911276\northanc_count_studies 8 1648054911276\northanc_dicom_cache_count 501 1647846091296\northanc_dicom_cache_size 127.931984 1647846091296\northanc_disk_size_mb 1018.65021 1648054911276\northanc_jobs_completed 10 1648054911276\northanc_jobs_failed 6 1648054911276\northanc_jobs_pending 0 1648054911276\northanc_jobs_running 0 1648054911276\northanc_jobs_success 4 1648054911276\northanc_rest_api_active_requests 1 1648054911275\northanc_rest_api_duration_ms 368 1648054907876\northanc_storage_read_duration_ms 34 1648054910360\northanc_uncompressed_size_mb 1018.65021 1648054911276\n"
+                        "example" : "orthanc_count_instances 2552 1652090109246\northanc_count_patients 8 1652090109246\northanc_count_series 26 1652090109246\northanc_count_studies 8 1652090109246\northanc_dicom_cache_count 237 1652086829001\northanc_dicom_cache_size 127.918732 1652086829000\northanc_disk_size_mb 1018.65021 1652090109246\northanc_jobs_completed 10 1652090109246\northanc_jobs_failed 3 1652090109246\northanc_jobs_pending 0 1652090109246\northanc_jobs_running 0 1652090109246\northanc_jobs_success 7 1652090109246\northanc_rest_api_active_requests 1 1652090109245\northanc_rest_api_duration_ms 323 1652090102502\northanc_storage_read_duration_ms 0 1652090099081\northanc_uncompressed_size_mb 1018.65021 1652090109246\n"
                      }
                   },
                   "description" : ""
@@ -14858,7 +15204,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220323T170151",
+                        "example" : "20220509T095509",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -14880,7 +15226,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220323T170151",
+                        "example" : "20220509T095509",
                         "schema" : {
                            "description" : "The local time"
                         }
@@ -14896,8 +15242,23 @@
       "/tools/reconstruct" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Reconstruct the index of all the tags of all the DICOM instances that are stored in Orthanc. This is notably useful after the deletion of resources whose children resources have inconsistent values with their sibling resources. Beware that this is a highly time-consuming operation, as all the DICOM instances will be parsed again, and as all the Orthanc index will be regenerated.",
+            "description" : "Reconstruct the index of all the tags of all the DICOM instances that are stored in Orthanc. This is notably useful after the deletion of resources whose children resources have inconsistent values with their sibling resources. Beware that this is a highly time-consuming operation, as all the DICOM instances will be parsed again, and as all the Orthanc index will be regenerated. If you have a large database to process, it is advised to use the Housekeeper plugin to perform this action resource by resource",
             "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "ReconstructFiles" : {
+                              "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
             "responses" : {
                "200" : {
                   "description" : ""

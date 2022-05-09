@@ -78,7 +78,7 @@ Adding more tags in DB
 
 .. highlight:: json
 
-Since version 1.11.0 (not released yet), it is possible to
+Since version 1.11.0, it is possible to
 customize a list of ``ExtraMainDicomTags`` to include in the DB
 through a new configuration option.
 

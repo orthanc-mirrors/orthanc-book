@@ -151,7 +151,7 @@ Here are the main metadata handled by the Orthanc core:
   the instance (for REST API).
 * ``PixelDataOffset`` (new in Orthanc 1.9.1): Offset (in bytes) of the
   Pixel Data DICOM tag in the DICOM file, if available.
-* ``MainDicomTagsSignature`` (new in Orthanc 1.11.0 - not released yet):
+* ``MainDicomTagsSignature`` (new in Orthanc 1.11.0):
   The list of :ref:`MainDicomTags <main-dicom-tags>` that have been
   saved in DB for this resource.
 

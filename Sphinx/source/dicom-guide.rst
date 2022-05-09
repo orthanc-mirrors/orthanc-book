@@ -665,7 +665,7 @@ known ``StudyInstanceUID``::
 
     $ getscu -v localhost 4242 -aec ORTHANC -k "0008,0052=STUDY" -k "0020,000d=1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129"
 
-*Note:* As of Orthanc 1.10.1, Orthanc only implements C-Get as a
+*Note:* As of Orthanc 1.11.0, Orthanc only implements C-Get as a
 service class provider (SCP). Using C-Get as a service class user
 (SCU) is not currently supported in Orthanc.
 
