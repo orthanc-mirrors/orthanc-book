@@ -14,13 +14,12 @@ DESCRIPTION
        The  "CONFIGURATION"  argument  can be a single file or a directory. In
        the case of a directory, all the JSON files it contains will be merged.
        If no configuration path is given on the command line, a set of default
-       parameters is used. Please refer to  the  Orthanc  Book	for  the  full
-       instructions	   about	how	   to	     use       Orthanc
-       <http://book.orthanc-server.com/>.
+       parameters is used. Please refer to the Orthanc Book for the  full  in‐
+       structions about how to use Orthanc <http://book.orthanc-server.com/>.
 
-       Pay attention to the fact that the order of the options	is  important.
-       Options	are read left to right. In particular, options such as "--ver‐
-       bose" can reset the value of other log-related options that  were  read
+       Pay  attention  to the fact that the order of the options is important.
+       Options are read left to right. In particular, options such as  "--ver‐
+       bose"  can  reset the value of other log-related options that were read
        before.
 
        The recommended set of options to debug DICOM communications is "--ver‐
@@ -30,15 +29,15 @@ DESCRIPTION
        --help display this help and exit
 
        --logdir=[dir]
-	      directory where to store the log files (by default, the  log  is
+	      directory  where	to store the log files (by default, the log is
 	      dumped to stderr)
 
        --logfile=[file]
-	      file  where  to store the log of Orthanc (by default, the log is
+	      file where to store the log of Orthanc (by default, the  log  is
 	      dumped to stderr)
 
        --config=[file]
-	      create a sample configuration file and exit (if "file"  is  "-",
+	      create  a  sample configuration file and exit (if "file" is "-",
 	      dumps to stdout)
 
        --errors
@@ -51,20 +50,20 @@ DESCRIPTION
 	      highest verbosity in logs (for debug)
 
        --upgrade
-	      allow  Orthanc  to  upgrade  the version of the database (beware
-	      that the database will become incompatible with former  versions
+	      allow Orthanc to upgrade the version  of	the  database  (beware
+	      that  the database will become incompatible with former versions
 	      of Orthanc)
 
        --no-jobs
-	      don't  restart  the jobs that were stored during the last execu‐
+	      don't restart the jobs that were stored during the  last	execu‐
 	      tion of Orthanc
 
        --openapi=[file]
-	      write the OpenAPI documentation and  exit  (if  "file"  is  "-",
+	      write  the  OpenAPI  documentation  and  exit (if "file" is "-",
 	      dumps to stdout)
 
        --cheatsheet=[file]
-	      write  the cheat sheet of REST API as CSV and exit (if "file" is
+	      write the cheat sheet of REST API as CSV and exit (if "file"  is
 	      "-", dumps to stdout)
 
        --version
@@ -120,13 +119,13 @@ AUTHOR
        Written by Sebastien Jodogne <s.jodogne@orthanc-labs.com>
 
 COPYRIGHT
-       Copyright © 2012-2016 Sebastien Jodogne,  Medical  Physics  Department,
+       Copyright  ©  2012-2016	Sebastien Jodogne, Medical Physics Department,
        University Hospital of Liege (Belgium)
        Copyright © 2017-2022 Osimis S.A. (Belgium)
-       Copyright  ©  2021-2022	Sebastien  Jodogne, ICTEAM UCLouvain (Belgium)
-       Licensing    GPLv3+:	GNU	GPL	version     3	  or	 later
-       <http://gnu.org/licenses/gpl.html>.
-       This  is  free  software:  you  are free to change and redistribute it.
+       Copyright © 2021-2022 Sebastien Jodogne, ICTEAM UCLouvain (Belgium) Li‐
+       censing	 GPLv3+:  GNU  GPL  version  3	or  later  <http://gnu.org/li‐
+       censes/gpl.html>.
+       This is free software: you are free  to	change	and  redistribute  it.
        There is NO WARRANTY, to the extent permitted by law.
 
-Orthanc 1.10.1			  March 2022			    ORTHANC(1)
+Orthanc 1.11.0			   May 2022			    ORTHANC(1)

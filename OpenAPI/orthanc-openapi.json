@@ -3598,9 +3598,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "3c58e15c-0f44-4f78-9ec0-f1fb7d4baadb",
-                              "653e5b90-f9d1-45b7-94d7-f0f199e85ea5",
-                              "6ab21b1d-739c-427f-b791-5ceaa6861943",
+                              "1d2d3621-c2ff-4fa6-8bf3-11d360041465",
+                              "2e6dec4f-6e3d-4ab4-b6ec-5d8546226e26",
+                              "64763295-3b60-42f7-8609-5e103b46554d",
                               "..."
                            ]
                         }
@@ -15185,7 +15185,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1652090109246\northanc_count_patients 8 1652090109246\northanc_count_series 26 1652090109246\northanc_count_studies 8 1652090109246\northanc_dicom_cache_count 237 1652086829001\northanc_dicom_cache_size 127.918732 1652086829000\northanc_disk_size_mb 1018.65021 1652090109246\northanc_jobs_completed 10 1652090109246\northanc_jobs_failed 3 1652090109246\northanc_jobs_pending 0 1652090109246\northanc_jobs_running 0 1652090109246\northanc_jobs_success 7 1652090109246\northanc_rest_api_active_requests 1 1652090109245\northanc_rest_api_duration_ms 323 1652090102502\northanc_storage_read_duration_ms 0 1652090099081\northanc_uncompressed_size_mb 1018.65021 1652090109246\n"
+                        "example" : "orthanc_count_instances 2552 1652172545153\northanc_count_patients 8 1652172545153\northanc_count_series 26 1652172545153\northanc_count_studies 8 1652172545153\northanc_dicom_cache_count 328 1652151838292\northanc_dicom_cache_size 127.934669 1652151838291\northanc_disk_size_mb 1018.65021 1652172545153\northanc_jobs_completed 10 1652172545153\northanc_jobs_failed 3 1652172545153\northanc_jobs_pending 0 1652172545153\northanc_jobs_running 0 1652172545153\northanc_jobs_success 7 1652172545153\northanc_rest_api_active_requests 1 1652172545145\northanc_rest_api_duration_ms 5004 1652172544064\northanc_storage_read_duration_ms 69 1652172534549\northanc_uncompressed_size_mb 1018.65021 1652172545153\n"
                      }
                   },
                   "description" : ""
@@ -15204,7 +15204,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220509T095509",
+                        "example" : "20220510T084905",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15226,7 +15226,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220509T095509",
+                        "example" : "20220510T084905",
                         "schema" : {
                            "description" : "The local time"
                         }
