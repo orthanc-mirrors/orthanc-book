@@ -202,11 +202,11 @@ Code quality
 
 * Importantly, before any contribution can be accepted into the
   Orthanc repositories, its author must sign a :ref:`CLA <cla>`. This
-  allows both the University Hospital of Liège and the Osimis company
-  to act as the official guardians of the whole Orthanc
-  ecosystem. Another advantage of creating plugins is that signing a
-  CLA is not needed. Make sure to carefully read our :ref:`FAQ about
-  the licensing of submitted code <submitting_code>`.
+  allows the University Hospital of Liège, the Osimis company and
+  UCLouvain university to act as the official guardians of the whole
+  Orthanc ecosystem. Another advantage of creating plugins is that
+  signing a CLA is not needed. Make sure to carefully read our
+  :ref:`FAQ about the licensing of submitted code <submitting_code>`.
 
 
 .. _hg-patch:

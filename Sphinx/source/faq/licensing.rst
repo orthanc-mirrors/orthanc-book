@@ -216,9 +216,9 @@ code of Orthanc can be interfaced with proprietary systems, as those
 are still unfortunately everywhere in the healthcare market. This
 forces us to require all the intellectual property over the source
 code of Orthanc to be centralized, with the University Hospital of
-Liège together with the Osimis company acting as the official
-guardians of the whole Orthanc ecosystem. This centralization also
-enables the dual licensing scheme described above, which in turn
+Liège, the Osimis company and the UCLouvain university acting as the
+official guardians of the whole Orthanc ecosystem. This centralization
+also enables the dual licensing scheme described above, which in turn
 allows Osimis to collect money from the industry in order to fund
 further free and open-source development of the Orthanc ecosystem to
 the benefit of the worldwide community of medical imaging, according
