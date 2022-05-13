@@ -12,8 +12,7 @@ Contributing to Orthanc
 
 .. note:: Here are the main features we would like to get soon
           implemented as free and open-source code in the Orthanc
-          ecosystem. To make this happen, **we need your financial
-          support**!
+          ecosystem. To make this happen, **we need your support**!
 
           * **Orthanc Core**:
 
@@ -32,8 +31,12 @@ Contributing to Orthanc
 
             - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
-          Please `get in touch with the Orthanc Team <info@orthanc.team>`__ if you
-          want to sponsor these developments.
+          Please `get in touch with Sébastien Jodogne's research lab
+          <https://uclouvain.be/fr/repertoires/sebastien.jodogne>`__
+          if you want to use such features in the context of
+          **research projects or scientific publications**, or `get in
+          touch with the Orthanc Team <info@orthanc.team>`__ if you
+          want to **financially sponsor** these developments.
    
 If you find Orthanc useful and wish to contribute to its development,
 here are some tasks you can take in charge that would greatly help us:
@@ -161,6 +164,8 @@ here are some tasks you can take in charge that would greatly help us:
 
 * **Financial support**: 
 
+  - Check out our :ref:`FAQ about donations <donations>`.
+  
   - Since February 2022, you are invited to fund the Orthanc project
     through its `Open Collective <https://opencollective.com/orthanc>`__
     page.  The funds collected there will help us maintain Orthanc,

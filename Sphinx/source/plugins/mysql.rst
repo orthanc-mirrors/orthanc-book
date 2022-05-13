@@ -205,6 +205,8 @@ this behavior:
   attachments from concurrent modifications.
 
 
+.. _mysql-lock:
+  
 Locking
 ^^^^^^^
 

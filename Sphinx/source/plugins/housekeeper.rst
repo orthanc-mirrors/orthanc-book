@@ -2,7 +2,7 @@
 
 
 Housekeeper plugin (new in Orthanc 1.11.0)
-=========================
+==========================================
 
 This page describes the **official sample plugin** that performs
 housekeeping in the Database and Storage.
@@ -11,7 +11,7 @@ When changing some configuration or when upgrading Orthanc, it
 might be usefull to perform housekeeping operations to optmize
 the DB or clean/compress/uncompress the storage.  This can happen e.g:
 
-* when changing the list of indexed :ref:`MainDicomTags <_main-dicom-tags>`
+* when changing the list of indexed :ref:`MainDicomTags <main-dicom-tags>`
 * when changing the ``StorageCompression`` configuration
 * when changing the ``IngestTranscoding`` configuration
 * to remove unnecessary attachments like the ``dicom-as-json`` that were
