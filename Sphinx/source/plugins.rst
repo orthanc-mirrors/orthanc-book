@@ -70,6 +70,7 @@ From Osimis
    plugins/osimis-webviewer.rst
    plugins/authorization.rst
    plugins/housekeeper.rst
+   plugins/orthanc-explorer-2.rst
 
 .. _plugins-uclouvain:
 

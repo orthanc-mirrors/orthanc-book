@@ -17,7 +17,7 @@ Contributing to Orthanc
 
           * **Orthanc Core**:
 
-            - :ref:`Improved Web user interface <improving-interface>`
+            - Continue improving the :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` User Interface
             - Support of DICOM C-GET SCU
    
           * **Stone Web viewer**:
@@ -32,7 +32,7 @@ Contributing to Orthanc
 
             - :ref:`Worklist plugin <worklist>` to interface with REST API, HL7 or Mirth
             
-          Please `get in touch with Osimis <info@osimis.io>`__ if you
+          Please `get in touch with the Orthanc Team <info@orthanc.team>`__ if you
           want to sponsor these developments.
    
 If you find Orthanc useful and wish to contribute to its development,
@@ -159,13 +159,13 @@ here are some tasks you can take in charge that would greatly help us:
     <https://groups.google.com/forum/#!forum/orthanc-users>`_.
 
 
-* **Financial support**: Buying professional services is the best way
-  to make the Orthanc project sustainable in the long term.
+* **Financial support**: 
 
-  - Osimis provides `support packs and professional development
-    services <https://osimis.io/en/orthanc-support-contract>`__ around the
-    Orthanc ecosystem and, more generally, around medical
-    imaging. 
+  - Since February 2022, you are invited to fund the Orthanc project
+    through its `Open Collective <https://opencollective.com/orthanc>`__
+    page.  The funds collected there will help us maintain Orthanc,
+    release new features and answer questions on the Orthanc Users Group.
 
-  - Check out the :ref:`professional services provided by our
+  - Buying professional services is also a good way to make the Orthanc project 
+    sustainable in the long term.  Check out the :ref:`professional services provided by our
     community <support-freelancers>`.

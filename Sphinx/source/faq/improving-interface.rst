@@ -40,14 +40,11 @@ a `plugin
 front-end Web developer could take care of this task using well-known
 JavaScript frameworks (such as Angular, Vue.js...).
 
-It is possible that an official plugin that provides a more advanced
-user interface will be developed in the future (provided we find
-funding for this development). In the meantime, you can also contact
-**Osimis**, the commercial partner of the Orthanc project, by using
-the `contact form <https://www.orthanc-server.com/orthanc-pro.php>`_
-that is available on the official Web page of Orthanc.
+.. note:: Since May 2022, a new :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` 
+          plugin is available to provide a more user-friendly,
+          more configurable and evolutive UI for Orthanc.
 
-Finally, have a look to the following **related projects**:
+Finally, you may also have a look to the following **related projects**:
 
 * In 2017-2018, a team of Master students from `ULiège
   <https://www.uliege.be/>`__ has done some work about creating a
@@ -88,11 +85,3 @@ Finally, have a look to the following **related projects**:
   and `AMQP
   <https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol>`__
   to handle the asynchronous tasks.
-
-* Last but not least, as written above, please consider buying the
-  `professional development services by Osimis
-  <https://osimis.io/en/orthanc-support-contract>`__. Osimis can help medical
-  and hospital audience with the deployment of a **certified,
-  integrated clinical environment** around Orthanc. In turn, the money
-  you pay will contribute to make the Orthanc project sustainable in
-  the long term.
