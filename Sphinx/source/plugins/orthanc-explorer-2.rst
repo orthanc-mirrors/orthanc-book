@@ -77,7 +77,10 @@ e.g::
 
     http://localhost:8042/ui/app/#/filtered-studies?PatientID=00000169
     http://localhost:8042/ui/app/#/filtered-studies?StudyDate=20220512-20220513&ModalitiesInStudy=CR\DX
-    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.826.0.1.3680043.8.498.12876244982176669645076277115728403867
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand=study
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand=series
 
 
 
