@@ -421,7 +421,7 @@ Below is a list of all plugins, their environment variable and their default con
 |                                                  |                                                  |   }                                                                                                |
 +--------------------------------------------------+--------------------------------------------------+----------------------------------------------------------------------------------------------------+
 | **OrthancExplorer2**                             | ``ORTHANC_EXPLORER_2_ENABLED``                   | .. code-block:: json                                                                               |
-|                                                  |                                                  |                                                                                                    |
+|                                                  | Note: enabled by default                         |                                                                                                    |
 |                                                  |                                                  |   {                                                                                                |
 |                                                  |                                                  |     "OrthancExplorer2": {                                                                          |
 |                                                  |                                                  |       "Enable": true,                                                                              |
