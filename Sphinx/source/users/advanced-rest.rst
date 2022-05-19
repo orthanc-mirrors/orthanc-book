@@ -134,7 +134,7 @@ The ``State`` field can be:
   used by any type of job.
 
 In order to wait for the end of an asynchronous call, the caller will
-typically have to poll the ``/jobs/...` URI (i.e. make periodic
+typically have to poll the ``/jobs/...`` URI (i.e. make periodic
 calls), waiting for the ``State`` field to become ``Success`` or
 ``Failure``.
 
