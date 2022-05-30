@@ -1,15 +1,11 @@
 .. _authorization:
 
 
-Advanced authorization plugin (deprecated)
-==========================================
+Advanced authorization plugin
+=============================
 
 .. contents::
 
-.. note:: This plugin is now deprecated and is not maintained anymore.
-          The :ref:`Python plugin <python_authorization>` provides a
-          more intuitive and flexible solution.
-   
 This **official plugin by Osimis** extends Orthanc with an advanced
 authorization mechanism. For each incoming REST request to some URI,
 the plugin will query a Web service to know whether the access is
