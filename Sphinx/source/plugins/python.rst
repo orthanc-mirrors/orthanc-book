@@ -784,6 +784,19 @@ has been stored.
                     :language: python
 
 
+Filtering incoming C-Store instances (new in 4.0)
+.................................................
+
+Starting with release 4.0 of the Python plugin, it is possible to
+filter instances received from C-Store and return a specific error
+code to the sending modality.
+
+This can be used, e.g, to implement a quota per modality or return 
+an ``out-of-resources`` status if the Orthanc storage is almost full.
+
+.. literalinclude:: python/incoming-cstore-filter.py
+                    :language: python
+
 
 Performance and concurrency
 ---------------------------
