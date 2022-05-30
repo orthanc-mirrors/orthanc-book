@@ -81,6 +81,11 @@ is set to ``false``, or a network transfer).  Indeed, synchronous
 calls can be affected by timeouts in the HTTP protocol if they last
 too long.
 
+When generating archives asynchronously, you should take care of 
+the ``MediaArchiveSize`` configuration that defines the maximum
+number of ZIP/media archives that are maintained by Orthanc, as a 
+response to the asynchronous creation of archive.  As of Orthanc
+1.11.0, this value is ``1`` by default !
 
 .. _jobs-monitoring:
 
