@@ -150,6 +150,15 @@ storing the modified DICOM instance into Orthanc). Example::
       }
     }
 
+* To add a Private DICOM tag, you should use this syntax (provided that you have defined an entry ``"7001,0001" : [ "CS", "MyPrivateTag", 1, 1, "MyPrivateCreator"]`` in the ``Dictionary`` configuration)::
+
+    {
+      "Replace" : {
+        "MyPrivateTag" : "Hello"
+      },
+      "PrivateCreator" : "MyPrivateCreator"
+    }
+
 
 **Important:** Similarly to anonymization, starting with Orthanc
 1.9.4, the ``Replace``, ``Keep`` and ``Remove`` fields can also
