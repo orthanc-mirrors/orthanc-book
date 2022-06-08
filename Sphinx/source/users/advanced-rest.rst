@@ -17,7 +17,9 @@ Jobs
 ----
 
 Since Orthanc 1.4.0, a jobs engine is embedded within Orthanc. Jobs
-are high-level tasks to be processed by Orthanc. Jobs are first added
+are high-level tasks to be processed by Orthanc. Jobs can be started
+synchronously or asynchronously (see the section below).  All Jobs,
+no matter how they were started, are first added
 to a queue of pending tasks, and Orthanc will simultaneously execute a
 fixed number of jobs (check out :ref:`configuration option
 <configuration>` ``ConcurrentJobs``). Once the jobs have been
@@ -27,10 +29,11 @@ history (the size of this history is controlled by the
 
 By default, Orthanc saves the jobs into its database (check out the
 ``SaveJobs`` option).  Jobs are saved every 10 seconds and when
-Orthanc stops. If Orthanc is stopped then relaunched, the jobs
-whose processing was not finished are automatically put into the queue
-of pending tasks or resumed if they were being processed when Orthanc
-stopped. The command-line option ``--no-jobs`` can also be used to 
+Orthanc stops. If Orthanc is stopped then relaunched, the jobs whose 
+processing was not finished are automatically put into the queue of 
+pending tasks or resumed if they were being processed when Orthanc stopped, 
+regardless of whether they were started synchronously or asynchronously 
+(see the section below). The command-line option ``--no-jobs`` can also be used to 
 prevent the loading of jobs from the database upon the launch of 
 Orthanc.
 
