@@ -205,15 +205,13 @@ are processed:
   compromise between ``MainDicomTags`` (focus on speed) and ``Full``
   (focus on accuracy).
 
-* If you are using a DICOMweb viewer (such as forthcoming Stone Web
+* If you are using a DICOMweb viewer (such as Stone Web
   viewer or `OHIF viewer
   <https://groups.google.com/d/msg/orthanc-users/y1N5zOFVk0M/a3YMdhNqBwAJ>`__)
   in a setup where performance and accuracy are both important, you
-  should most probably set ``StudiesMetadata`` to ``MainDicomTags``
-  and ``SeriesMetadata`` to ``Full``. Forthcoming Stone Web viewer
-  will probably specify a value for the
-  ``SeriesMetadataExtrapolatedTags`` option to be used for setups
-  where performance is extremely important.
+  should configure :ref:`ExtraMainDicomTags <main-dicom-tags>` and configure
+  ``StudiesMetadata`` to ``MainDicomTags`` and ``SeriesMetadata`` to ``MainDicomTags``
+  as demonstrated in this `sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/stone-viewer/docker-compose.yml>`__.
 
 
 If using the ``Extrapolate`` mode, the predefined tags are provided
