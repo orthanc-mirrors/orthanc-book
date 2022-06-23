@@ -8,8 +8,24 @@ Osimis Orthanc Docker images
 .. contents::
    :depth: 3
 
+.. warning:: 
 
-.. warning:: This documentation applies to ``osimis/orthanc`` images from the ``20.4.2`` version.  
+  Starting from the ``22.6.1`` release, we are providing 2 types of images:
+  
+  - the default image with the usual tag: e.g ``22.6.1``
+  - the full image with a e.g ``22.6.1-full`` tag
+
+  The default image is suitable for 99.9% of users.
+
+  You should use the full image only if you need to use one of these:
+
+  - the Azure Blob storage plugin
+  - the Google Cloud storage plugin
+  - the ODBC plugin with SQL Server (msodbcsql18 is preinstalled)
+
+
+.. warning:: 
+  This documentation applies to ``osimis/orthanc`` images from the ``20.4.2`` version.  
   
   Note that these images have been re-written in April 2020.  The documentation
   for older images is still available `here <https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images#Howtouseosimis/orthancDockerimages>`__
@@ -19,7 +35,7 @@ Osimis Orthanc Docker images
   
   However, if you're still using legacy environment variables, you'll get some warning
   encouraging you to update to the new namings since the backward compatibility
-  might be removed one day (currently planed in June 2021).
+  might be removed at any time.
 
 
 Introduction
