@@ -387,12 +387,8 @@ drives, that can be much slower than SSD (`an user has reported
 <https://groups.google.com/g/orthanc-users/c/1lga0oFCHN4/m/jF1inrc4AgAJ>`__
 a 20 times speedup by switching from HDD to SSD).
 
-If switching from HDD to SDD is not applicable, it is possible to
-create an :ref:`storage area plugin <creating-plugins>` that delays
-the actual deletion from the filesystem. The plugin would maintain a
-queue (e.g. as a SQLite database) of files to be removed. The actual
-deletion from the filesystem would be done asynchronously in a
+If switching from HDD to SDD is not applicable, you may also use 
+the :ref:`Delayed Deletion plugin <delayed-deletion-plugin>` .
+The plugin would maintains a queue of files to be removed. The actual
+deletion from the filesystem is done asynchronously in a
 separate thread.
-
-We are looking for funding from the industry to implement such a
-plugin.

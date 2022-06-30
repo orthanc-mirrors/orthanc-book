@@ -71,6 +71,8 @@ From Osimis
    plugins/authorization.rst
    plugins/housekeeper.rst
    plugins/orthanc-explorer-2.rst
+   plugins/delayed-deletion-plugin.rst
+
 
 .. _plugins-uclouvain:
 
