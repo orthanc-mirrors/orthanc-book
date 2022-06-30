@@ -252,6 +252,12 @@ requests to Web services:
 * ``HttpDelete(url, headers)``
 * ``SetHttpCredentials(username, password)`` can be used to setup the
   HTTP credentials.
+* ``SetHttpTimeout(timeout)`` can be used to configure a timeout (in seconds).
+  When contacting an external webservice, it is recommended to configure a very
+  short timeout not to lock the Lua context for too long.  No other Lua callbacks
+  may be run at the same time which may have a significant impact on Orthanc
+  responsivness in general.
+  
 
 The ``headers`` argument is optional and was added in release
 1.2.1. It allows to set the HTTP headers for the HTTP client request.
@@ -262,6 +268,9 @@ Example::
    local headers = {
       ["content-type"] = "image/png",
    }
+
+   SetHttpCredentials('user', 'pwd')
+   SetHttpTimeout(1)
    HttpPost("http://localhost/my-web-service/instance-preview", preview, headers)
 
 .. _lua-origin:
@@ -596,6 +605,24 @@ from Orthanc Explorer)::
     return query
   end
 
+
+HeartBeat
+---------
+
+.. highlight:: lua
+
+Starting from Orthanc 1.11.1, one can run a Lua callback at regular 
+interval.  This interval is defined in the ``LuaHeartBeatPeriod``
+configuration::
+
+  function OnHeartBeat() 
+    
+    -- ping a webservice to notify that Orthanc is still alive
+    SetHttpCredentials('user', 'pwd')
+    SetHttpTimeout(1)
+    HttpPost("http://localhost/my-web-service/still-alive", "my-id", {})
+
+  end
 
 .. _lua-external-modules:
 
