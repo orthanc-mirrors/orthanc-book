@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.11.0"
+      "version" : "1.11.1"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3598,9 +3598,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "1d2d3621-c2ff-4fa6-8bf3-11d360041465",
-                              "2e6dec4f-6e3d-4ab4-b6ec-5d8546226e26",
-                              "64763295-3b60-42f7-8609-5e103b46554d",
+                              "003e5852-af2b-42af-8190-2e333b8f8bbb",
+                              "1114a97d-0a79-40de-be60-a3af5d4ba680",
+                              "1dec255c-7736-41ec-8560-e1486aa941ce",
                               "..."
                            ]
                         }
@@ -4373,6 +4373,10 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
+                           "Asynchronous" : {
+                              "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
+                              "type" : "boolean"
+                           },
                            "Level" : {
                               "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
                               "type" : "string"
@@ -4381,19 +4385,31 @@
                               "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
                            },
+                           "Permissive" : {
+                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "type" : "boolean"
+                           },
+                           "Priority" : {
+                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "type" : "number"
+                           },
                            "Resources" : {
-                              "description" : "List of the Orthanc identifiers of all the DICOM resources to be sent",
+                              "description" : "List of queries identifying all the DICOM resources to be sent",
                               "items" : {
-                                 "type" : "string"
+                                 "type" : "object"
                               },
                               "type" : "array"
+                           },
+                           "Synchronous" : {
+                              "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
+                              "type" : "boolean"
                            },
                            "TargetAet" : {
                               "description" : "Target AET that will be used by the remote DICOM modality as a target for its C-STORE SCU commands, defaults to `DicomAet` configuration option in order to do a simple query/retrieve",
                               "type" : "string"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-STORE command, in seconds",
+                              "description" : "Timeout for the C-MOVE command, in seconds",
                               "type" : "number"
                            }
                         }
@@ -4403,6 +4419,24 @@
             },
             "responses" : {
                "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "",
+                           "properties" : {
+                              "ID" : {
+                                 "description" : "In asynchronous mode, identifier of the job",
+                                 "type" : "string"
+                              },
+                              "Path" : {
+                                 "description" : "In asynchronous mode, path to access the job in the REST API",
+                                 "type" : "string"
+                              }
+                           }
+                        }
+                     }
+                  },
                   "description" : ""
                }
             },
@@ -13733,6 +13767,10 @@
                                  "description" : "Information about the installed database index plugin (`null` if no such plugin is installed)",
                                  "type" : "string"
                               },
+                              "DatabaseServerIdentifier" : {
+                                 "description" : "ID of the server in the database (when running multiple Orthanc on the same DB)",
+                                 "type" : "string"
+                              },
                               "DatabaseVersion" : {
                                  "description" : "Version of the database: https://book.orthanc-server.com/developers/db-versioning.html",
                                  "type" : "number"
@@ -15185,7 +15223,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1652172545153\northanc_count_patients 8 1652172545153\northanc_count_series 26 1652172545153\northanc_count_studies 8 1652172545153\northanc_dicom_cache_count 328 1652151838292\northanc_dicom_cache_size 127.934669 1652151838291\northanc_disk_size_mb 1018.65021 1652172545153\northanc_jobs_completed 10 1652172545153\northanc_jobs_failed 3 1652172545153\northanc_jobs_pending 0 1652172545153\northanc_jobs_running 0 1652172545153\northanc_jobs_success 7 1652172545153\northanc_rest_api_active_requests 1 1652172545145\northanc_rest_api_duration_ms 5004 1652172544064\northanc_storage_read_duration_ms 69 1652172534549\northanc_uncompressed_size_mb 1018.65021 1652172545153\n"
+                        "example" : "orthanc_count_instances 2552 1656599741752\northanc_count_patients 8 1656599741752\northanc_count_series 26 1656599741752\northanc_count_studies 8 1656599741752\northanc_dicom_cache_count 344 1656589511558\northanc_dicom_cache_size 127.937477 1656589511556\northanc_disk_size_mb 1018.65021 1656599741752\northanc_jobs_completed 10 1656599741752\northanc_jobs_failed 5 1656599741752\northanc_jobs_pending 0 1656599741752\northanc_jobs_running 0 1656599741752\northanc_jobs_success 5 1656599741752\northanc_rest_api_active_requests 1 1656599741751\northanc_rest_api_duration_ms 385 1656599740245\northanc_storage_read_duration_ms 16 1656599738604\northanc_uncompressed_size_mb 1018.65021 1656599741752\n"
                      }
                   },
                   "description" : ""
@@ -15204,7 +15242,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220510T084905",
+                        "example" : "20220630T143541",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15226,7 +15264,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220510T084905",
+                        "example" : "20220630T143541",
                         "schema" : {
                            "description" : "The local time"
                         }

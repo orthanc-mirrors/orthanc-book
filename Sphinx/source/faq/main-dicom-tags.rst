@@ -82,6 +82,11 @@ Since version 1.11.0, it is possible to
 customize a list of ``ExtraMainDicomTags`` to include in the DB
 through a new configuration option.
 
+Since version 1.11.1, it is possible to 
+include sequences in ``ExtraMainDicomTags``.  However, this should be
+considered as an "experimental" feature and you should not store large
+sequences (> 64KB) or sequences containing binary tags.
+
 Below is a sample configuration that is well suited to
 optimize DICOMWeb routes in general, especially when you are using
 a DICOMWeb viewer::
@@ -104,7 +109,8 @@ a DICOMWeb viewer::
         "Series" : [
             "TimezoneOffsetFromUTC",
             "PerformedProcedureStepStartDate",
-            "PerformedProcedureStepStartTime"
+            "PerformedProcedureStepStartTime",
+            "RequestAttributeSequence"
         ],
         "Study": [
             "TimezoneOffsetFromUTC"
