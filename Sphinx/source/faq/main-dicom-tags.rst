@@ -110,7 +110,7 @@ a DICOMWeb viewer::
             "TimezoneOffsetFromUTC",
             "PerformedProcedureStepStartDate",
             "PerformedProcedureStepStartTime",
-            "RequestAttributeSequence"
+            "RequestAttributesSequence"
         ],
         "Study": [
             "TimezoneOffsetFromUTC"
