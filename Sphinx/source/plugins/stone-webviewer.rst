@@ -151,6 +151,29 @@ FAQ
   Check out your local regulations to ensure you're using it in a
   legal manner.
 
+- **Can the Stone Web Viewer display DICOM-SR (structured reports)?**
+
+  The Stone Web viewer doesn't provide built-in support for
+  DICOM-SR. However, it can display DICOM-SR that have been beforehand
+  converted to PDF.
+
+  To this end, you could for instance first use the ``dsr2html``
+  command-line tool that is provided by the `DCMTK project
+  <https://support.dcmtk.org/docs/mod_dcmsr.html>`__ to convert the
+  structured report to HTML, then use a HTML-to-PDF converter such as
+  `wkhtmltopdf <https://wkhtmltopdf.org/>`__, and finally convert the
+  PDF to DICOM using the ``/tools/create-dicom`` route in the `REST
+  API of Orthanc
+  <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__.
+  It would be easy to automate this workflow using a :ref:`Python
+  plugin <python-plugin>`.
+
+  If you have an interest in DICOM-SR, the Orthanc community would
+  love to have access to sample DICOM files that could be used to
+  enhance the support of structured reports in the Stone Web viewer.
+  If you have such sample files, please post them to the `Orthanc
+  Users <https://groups.google.com/g/orthanc-users>`__ discussion
+  forum.
 
 - **What video formats are supported by the Stone Web Viewer?**
 

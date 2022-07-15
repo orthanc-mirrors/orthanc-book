@@ -63,7 +63,7 @@ There are many more options that are documented in the
 Main features you can configure:
 
 - Root URL
-- Whether OE2 becomes the default Orhtanc UI
+- Whether OE2 becomes the default Orthanc UI
 - Configure the side menu
 - Configure the actions available on the resources
 - Configure the columns of the main study list
