@@ -73,6 +73,7 @@ The upload of DICOM files is possible by querying the REST API using
 the following syntax::
 
     $ curl -X POST http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
+    $ curl -X POST http://localhost:8042/instances --data-binary @multiple-files.zip
 
 .. highlight:: json
 
@@ -80,8 +81,11 @@ Orthanc will respond with a JSON file that contain information about
 the location of the stored instance, such as::
 
     {
-      "ID" : "e87da270-c52b-4f2a-b8c6-bae25928d0b0",
-      "Path" : "/instances/e87da270-c52b-4f2a-b8c6-bae25928d0b0",
+      "ID" : "5d4a3991-8a265cb2-da669bea-d8c761af-4a77113a",
+      "ParentPatient" : "69a957ab-57545037-ce9a492a-d0bd89c1-d7e2220d",
+      "ParentSeries" : "87c81b2c-e9f92adf-2dc11d37-399b5214-37275cdb",
+      "ParentStudy" : "1b1cc0c9-c0377071-78e8cd3a-2e382948-a243db42",
+      "Path" : "/instances/5d4a3991-8a265cb2-da669bea-d8c761af-4a77113a",
       "Status" : "Success"
     }
 
