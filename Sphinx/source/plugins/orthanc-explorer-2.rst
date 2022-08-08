@@ -75,12 +75,18 @@ Advanced features
 You may open the OE2 interface directly on a specific study or patient by specifying DICOM Tags directly in the URL.
 e.g::
 
-    http://localhost:8042/ui/app/#/filtered-studies?PatientID=00000169
+    http://localhost:8042/ui/app/#/filtered-studies?PatientID="00000169"
     http://localhost:8042/ui/app/#/filtered-studies?StudyDate=20220512-20220513&ModalitiesInStudy=CR\DX
-    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3
-    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand
-    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand=study
-    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID=1.2.3&expand=series
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"&expand
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"&expand=study
+    http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"&expand=series
+
+By default, OE2 will add a wildcard ``*`` at the beginning and at the end of the search text.  Therefore, searching
+for ``PatientID=1234`` will actually search for ``PatientID=*1234*``.  If you do not want to have these extra wildcards
+added, you should use ``"`` at the beginning and/or at the end of the search text.  Therefore, searching for
+``PatientID="1234"`` will return only the studies whose ``PatientID`` is exactly ``1234``.
+These ``"`` can also be used in the User Interface search fields.
 
 
 
