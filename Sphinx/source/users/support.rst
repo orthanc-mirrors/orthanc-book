@@ -153,7 +153,7 @@ decision chart:
    * **Worldwide**:
    
      * `Orthanc Team (Alain Mazy & Benoît Crickboom) <https://orthanc.team>`__ (French/English, Belgium)
-     * `Osimis <https://osimis.io/en/orthanc-support-contract>`__ (French/English, Belgium)
+     * `Stephen D. Scotti <mailto:sscotti@sias.dev>`__ (English, Austria)
 
    * **Europe**:
 
@@ -166,7 +166,6 @@ decision chart:
      * `Gabriel Couture <https://github.com/gacou54/>`__ (French/English, Canada)
      * `Mohannad Hussain <https://www.linkedin.com/in/mohannadhussain/>`__ (English, Canada)
      * `Oliver Tsai <mailto:oliver@futurepacs.com>`__ (English/Spanish/French, Toronto)
-     * `Stephen D. Scotti <mailto:sscotti@sias.dev>`__ (English, USA)
      * `Yi Lu <https://www.linkedin.com/in/digihunch/>`__ (English, Canada)
 
    * **South America**:
