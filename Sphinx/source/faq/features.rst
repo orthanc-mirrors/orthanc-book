@@ -60,6 +60,12 @@ available all the data related to one patient. Unwillingly losing a
 study/series that is part of the same patient might lead to a loss in
 consistency with respect to the medical history of this patient.
 
+Starting with version 1.11.2, Orthanc also implements another **rejection**
+behaviour when the ``MaximumStorageSize`` or ``MaximumPatientCount`` is 
+reached.  In this case, patients are not recycled but Orthanc rejects new incoming
+data.  Check the ``MaximumStorageMode`` option in the :ref:`Orthanc configuration
+file <configuration>`.
+
 .. _compression:
 
 Compression
