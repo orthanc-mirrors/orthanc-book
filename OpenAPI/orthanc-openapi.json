@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.11.1"
+      "version" : "1.11.2"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3598,9 +3598,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "003e5852-af2b-42af-8190-2e333b8f8bbb",
-                              "1114a97d-0a79-40de-be60-a3af5d4ba680",
-                              "1dec255c-7736-41ec-8560-e1486aa941ce",
+                              "23a80b32-d72d-47cd-93d2-88d12e064ff6",
+                              "2db25003-6758-4509-a828-e74d70773c5e",
+                              "3f1aa2c2-fca5-4d83-bb47-f4eafe85ae24",
                               "..."
                            ]
                         }
@@ -15223,7 +15223,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1656599741752\northanc_count_patients 8 1656599741752\northanc_count_series 26 1656599741752\northanc_count_studies 8 1656599741752\northanc_dicom_cache_count 344 1656589511558\northanc_dicom_cache_size 127.937477 1656589511556\northanc_disk_size_mb 1018.65021 1656599741752\northanc_jobs_completed 10 1656599741752\northanc_jobs_failed 5 1656599741752\northanc_jobs_pending 0 1656599741752\northanc_jobs_running 0 1656599741752\northanc_jobs_success 5 1656599741752\northanc_rest_api_active_requests 1 1656599741751\northanc_rest_api_duration_ms 385 1656599740245\northanc_storage_read_duration_ms 16 1656599738604\northanc_uncompressed_size_mb 1018.65021 1656599741752\n"
+                        "example" : "orthanc_count_instances 2552 1661940227313\northanc_count_patients 8 1661940227313\northanc_count_series 26 1661940227313\northanc_count_studies 8 1661940227313\northanc_dicom_cache_count 587 1661939724041\northanc_dicom_cache_size 127.833656 1661939724040\northanc_disk_size_mb 1018.65021 1661940227313\northanc_jobs_completed 10 1661940227313\northanc_jobs_failed 2 1661940227313\northanc_jobs_pending 0 1661940227313\northanc_jobs_running 0 1661940227313\northanc_jobs_success 8 1661940227313\northanc_rest_api_active_requests 1 1661940227312\northanc_rest_api_duration_ms 3036 1661940225539\northanc_storage_read_duration_ms 57 1661940217477\northanc_uncompressed_size_mb 1018.65021 1661940227313\n"
                      }
                   },
                   "description" : ""
@@ -15242,7 +15242,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220630T143541",
+                        "example" : "20220831T100347",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15264,7 +15264,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20220630T143541",
+                        "example" : "20220831T100347",
                         "schema" : {
                            "description" : "The local time"
                         }
