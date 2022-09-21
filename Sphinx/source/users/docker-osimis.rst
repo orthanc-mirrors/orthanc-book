@@ -115,7 +115,18 @@ but can be specified to control the way Orthanc is run.
 - ``MALLOC_ARENA_MAX=10`` will :ref:`control memory usage <scalability-memory>`
 - ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
 - ``BEFORE_ORTHANC_STARTUP_SCRIPT`` can be used to `run a custom script <https://groups.google.com/g/orthanc-users/c/EXjTq2ZU1vw/m/02CwW1jzAQAJ>`__ before starting Orthanc.
-  
+- ``FORCE_HOST_ID`` and ``GENERATE_HOST_ID_IF_MISSING`` can be used to control the content of /etc/hostid (introduced in 22.9.1). 
+  DCMTK calls gethostid() when generating DICOM UIDs (used, e.g, in modifications/anonymizations).
+  When /etc/hostid is missing, the system tries to generate it from the IP of the system.
+  On some system, in particular circumstances, we have observed that the system performs a DNS query
+  to get the IP of the system.  This DNS can timeout (after multiple with retries) and, in particular cases,
+  we have observed a delay of 40 seconds to generate a single DICOM UID in Orthanc.
+  Therefore, if /etc/hostid is missing, the startup script creates it and fill it with a random number (default behaviour).  
+  This behaviour can still be deactivated by defining ``GENERATE_HOST_ID_IF_MISSING=false``.  
+  The host id can also be forced by defining ``FORCE_HOST_ID``.
+
+
+
 Configuration files
 -------------------
 
