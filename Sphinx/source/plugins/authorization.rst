@@ -52,7 +52,10 @@ instance use the following configuration file::
       "/home/user/OrthancAuthorization/Build/libOrthancAuthorization.so"
     ],
     "Authorization" : {
-      "WebService" : "http://localhost:8000/"
+      "WebService" : "http://localhost:8000/",
+      "WebServiceUsername": "my-user",
+      "WebServicePassword": "my-password",
+      "WebServiceIdentifier": "my-id"
     }
   }
 
@@ -86,7 +89,8 @@ similar to the following one::
     "dicom-uid" : "123ABC",
     "level" : "patient",
     "method" : "get",
-    "orthanc-id" : "6eeded74-75005003-c3ae9738-d4a06a4f-6beedeb8"
+    "orthanc-id" : "6eeded74-75005003-c3ae9738-d4a06a4f-6beedeb8",
+    "identifier": "my-id"
   }
 
 In this example, the user is accessing an URI that is related to some
@@ -109,6 +113,9 @@ JSON body:
   contains its ``SOPInstanceUID``.
 * The ``orthanc-id`` field gives the :ref:`Orthanc identifier
   <orthanc-ids>` of the resource.
+* The ``identifier`` field contains the value of the ``WebServiceIdentifier``
+  configuration or ``null`` if this configuration is not defined.  This allows
+  the WebService to identity which Orthanc instance is calling it (new in v 0.3.0).
 
 When the user accesses a lower-level resource in the DICOM hierarchy
 (a study, a series or an instance), the authorization plugin will
@@ -273,6 +280,9 @@ Here is the list of all the configuration options::
     [...]
     "Authorization" : {
       "WebService" : "http://localhost:8000/",
+      "WebServiceUsername": "my-user",          // new in v 0.3.0
+      "WebServicePassword": "my-password",      // new in v 0.3.0
+      "WebServiceIdentifier": "my-id",          // new in v 0.3.0
       "TokenGetArguments" : [ "user" ],
       "TokenHttpHeaders" : [ "hello" ],
       "UncheckedResources" : [
