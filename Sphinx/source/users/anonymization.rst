@@ -210,15 +210,20 @@ Similarly, here is an interaction to modify a study::
       "Path" : "/studies/1c3f7bf4-85b4aa20-236e6315-5d450dcc-3c1bcf28"
     }
 
-Pay attention to the fact that Orthanc implements safety checks to
+Up to version 1.11.2, Orthanc implemented safety checks to
 preserve the :ref:`DICOM model of the real world <model-world>`. These
-checks prevent the modification of some tags that are known to belong
+checks prevented the modification of some tags that are known to belong
 to a level in the patient/study/series/instance hierarchy that is
 higher than the level that corresponds to the REST API call. For
-instance, the tag ``PatientID`` cannot be modified if using the
+instance, the tag ``PatientID`` could not be modified if using the
 ``/studies/{id}/modify`` route (in the latter case, the
-``/patients/{id}/modify`` route must be used, cf. next section). You
-also have to set the ``Force`` argument to ``true`` if modifying one
+``/patients/{id}/modify`` route had to be used, cf. next section).
+These sanity checks have been loosened in more recent versions and users must
+be very careful to preserve the DICOM model when updating these tags (e.g.
+if you modify the ``PatientID`` at study level, also make sure to modify all other Patient related
+tags (``PatientName``, ``PatientBirthDate``, ...)).
+
+Also note that you have to set the ``Force`` argument to ``true`` if modifying one
 of the :ref:`DICOM identifiers tags <orthanc-ids>`
 (i.e. ``PatientID``, ``StudyInstanceUID``, ``SeriesInstanceUID`` and
 ``SOPInstanceUID``).
