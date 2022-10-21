@@ -263,25 +263,25 @@ When the ``HybridMode`` is set to ``WriteToFileSystem``, it means that new files
 are store on the file system.  When accessing a file, it is first read from the file system
 and, if it is not found on the file system, it is read from the object-storage.
 
-The ``WriteToFileSystem`` hybrid mode is usefull for storing recent files on the file system for 
+The ``WriteToFileSystem`` hybrid mode is useful for storing recent files on the file system for 
 better performance and old files on the object-storage for lower cost and easier backups.
 
 When the ``HybridMode`` is set to ``WriteToObjectStorage``, it means that new files received
 are store on the object storage.  When accessing a file, it is first read from the object storage
 and, if it is not found on the object-storage, it is read from the file system.
 
-The ``WriteToObjectStorage`` hybrid mode is usefull mainly during a migration from file system to
+The ``WriteToObjectStorage`` hybrid mode is useful mainly during a migration from file system to
 object-storage, e.g, if you have deployed a VM in a cloud with local file system storage and want
 to move your files to object-storage without interrupting your service.
 
 Moving files between file-system and object-storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When the ``HybridMode`` is set to ``WriteToFileSystem``, it is sometimes usefull to move old files
-to the object-storage for long term archive or to `pre-fetch`` files from object-storage to file
+When the ``HybridMode`` is set to ``WriteToFileSystem``, it is sometimes useful to move old files
+to the object-storage for long term archive or to `pre-fetch` files from object-storage to file
 system for improved performances e.g when before opening the study in a viewer.
 
-When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is usefull to move file from the
+When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is useful to move file from the
 file system to the object storage to perform a full data migration to object-storage.
 
 To move files from one storage to the other, you should call the plugin Rest API::
@@ -360,13 +360,13 @@ Once you use client-side encryption, you'll basically store packets of meaningle
 So, if an "api-key" leaks or if the storage is misconfigured, packets of bytes will leak but not PHI since
 no one will be able to decrypt them.
 
-Another advantage is that these packets of bytes might eventually not be considered as PHI anymore and eventually 
+Another advantage is that these packets of bytes might eventually not be considered as PHI anymore and potentially 
 help you meet your local regulations (Please check your local regulations).
 
 However, note that, if you're running entirely in a cloud environment, your decryption keys will still 
 be stored on the cloud infrastructure (VM disks - process RAM) and an attacker could still eventually gain access to this keys.  
 
-If Orthanc is running in your infrastructure with the Index DB on your infrastructure, and files are store in the cloud, 
+If Orthanc is running in your infrastructure with the Index DB on your infrastructure, and files are stored in the cloud, 
 the master keys will remain on your infrastructure only and there's no way the data stored in the cloud could be decrypted outside your infrastructure.
 
 Also note that, although the cloud providers also provide client-side encryption, we, as an open-source project, 
