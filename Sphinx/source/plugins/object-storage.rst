@@ -30,6 +30,8 @@ Pre-compiled binaries
 ---------------------
 
 These plugins are provided as part of the ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
+The AWS plugin is available in the default Docker images while the Azure and Google plugins are available
+in the ``-full`` images.
 
 These plugins are used to interface Orthanc with commercial and
 proprietary cloud services that you accept to pay. As a consequence,
