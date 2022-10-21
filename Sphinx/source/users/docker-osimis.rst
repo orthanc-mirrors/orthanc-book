@@ -43,10 +43,7 @@ Introduction
 
 Our commercial partner `Osimis <https://www.osimis.io>`__ 
 `publishes separated Docker images
-<https://hub.docker.com/r/osimis/orthanc>`__
-that are used by their technical team in order to provide professional 
-support to their customers.
-
+<https://hub.docker.com/r/osimis/orthanc>`__.
 These images have been designed to be used with ``docker-compose`` and 
 provide a configuration system through:
 
