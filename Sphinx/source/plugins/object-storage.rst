@@ -15,10 +15,8 @@ Release notes are available `here
 Introduction
 ------------
 
-Osimis freely provides the `source code
-<https://hg.orthanc-server.com/orthanc-object-storage/file/default/>`__ of 3 plugins
-to store the Orthanc files in `Object Storage <https://en.wikipedia.org/wiki/Object_storage>`__
-at the 3 main providers: `AWS <https://aws.amazon.com/s3/>`__, 
+These 3 plugins enable storing the Orthanc files in `Object Storage <https://en.wikipedia.org/wiki/Object_storage>`__
+at the 3 main Cloud providers: `AWS <https://aws.amazon.com/s3/>`__, 
 `Azure <https://azure.microsoft.com/en-us/services/storage/blobs/>`__ & 
 `Google Cloud <https://cloud.google.com/storage>`__
 
@@ -31,14 +29,14 @@ when deploying an application in the cloud.
 Pre-compiled binaries
 ---------------------
 
+These plugins are provided as part of the ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
+
 These plugins are used to interface Orthanc with commercial and
 proprietary cloud services that you accept to pay. As a consequence,
-the Orthanc project doesn't freely provide pre-compiled binaries for
-Docker, Windows, Linux or OS X. These pre-compiled binaries do exist,
-but are reserved to the companies who have subscribed to a
-`professional support contract
-<https://osimis.io/en/orthanc-support-contract>`__ by
-Osimis. Although you are obviously free to compile these plugins by
+the Orthanc project usually doesn't freely update them or fix them unless
+the requester purchases a support contract e.g. at `Orthanc Team <https://orthanc.team>`__.
+
+Although you are obviously free to compile these plugins by
 yourself (instructions are given below), purchasing such support
 contracts makes the Orthanc project sustainable in the long term, to
 the benefit of the worldwide community of medical imaging.
@@ -146,7 +144,8 @@ Sample configuration::
     "StorageStructure": "flat",               // optional: see below
     "EnableLegacyUnknownFiles": true,         // optional: see below
     "VirtualAddressing": true,                // optional: see the section related to MinIO
-    "StorageEncryption" : {}                  // optional: see the section related to encryption
+    "StorageEncryption" : {},                 // optional: see the section related to encryption
+    "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -226,7 +225,9 @@ Sample configuration::
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat",               // see below
-    "EnableLegacyUnknownFiles": true          // optional: see below
+    "EnableLegacyUnknownFiles": true,         // optional: see below
+    "StorageEncryption" : {}                  // optional: see the section related to encryption
+    "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
   }
 
 
@@ -241,12 +242,63 @@ Sample configuration::
     "RootPath": "",                           // see below
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat",               // see below
-    "EnableLegacyUnknownFiles": true          // optional: see below
+    "EnableLegacyUnknownFiles": true,         // optional: see below
+    "StorageEncryption" : {}                  // optional: see the section related to encryption
+    "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
   }
 
 
-Migration & Storage structure
------------------------------
+Migration & Hybrid mode Storage structure
+-----------------------------------------
+
+Since version **2.1.0** of the plugins, an HybridMode as been introduced.
+This mode allows reading/writing files from both/to the file system and the object-storage.
+
+By default, the ``HybridMode`` is ``Disabled``.  This means that the plugins will access
+only the object-storage.
+
+When the ``HybridMode`` is set to ``WriteToFileSystem``, it means that new files received
+are store on the file system.  When accessing a file, it is first read from the file system
+and, if it is not found on the file system, it is read from the object-storage.
+
+The ``WriteToFileSystem`` hybrid mode is usefull for storing recent files on the file system for 
+better performance and old files on the object-storage for lower cost and easier backups.
+
+When the ``HybridMode`` is set to ``WriteToObjectStorage``, it means that new files received
+are store on the object storage.  When accessing a file, it is first read from the object storage
+and, if it is not found on the object-storage, it is read from the file system.
+
+The ``WriteToObjectStorage`` hybrid mode is usefull mainly during a migration from file system to
+object-storage, e.g, if you have deployed a VM in a cloud with local file system storage and want
+to move your files to object-storage without interrupting your service.
+
+Moving files between file-system and object-storage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When the ``HybridMode`` is set to ``WriteToFileSystem``, it is sometimes usefull to move old files
+to the object-storage for long term archive or to `pre-fetch`` files from object-storage to file
+system for improved performances e.g when before opening the study in a viewer.
+
+When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is usefull to move file from the
+file system to the object storage to perform a full data migration to object-storage.
+
+To move files from one storage to the other, you should call the plugin Rest API::
+
+    $ curl -X POST http://localhost:8042/move-storage \
+      --data '{
+                "Resources": ["27f7126f-4f66fb14-03f4081b-f9341db2-53925988"],
+                "TargetStorage": "file-system",
+                "Asynchronous": true,
+                "Priority": 0
+              }'
+
+This call creates a ``MoveStorageJob`` that can then be monitor to the ``/jobs`` route.
+
+The allowed values for ``TargetStorage`` are ``file-system`` or ``object-storage``.
+
+
+Other configuration options
+---------------------------
 
 The **StorageStructure** configuration allows you to select the way objects are organized
 within the storage (``flat`` or ``legacy``).  
@@ -265,16 +317,7 @@ object storage.  Note: it shall not start with a ``/``.
 
 Note that you can not change these configurations once you've uploaded the first files in Orthanc.
 
-The **MigrationFromFileSystemEnabled** configuration has been introduced for Orthanc to continue working
-while you're migrating your data from the file system to the object storage.  While this option is enabled,
-Orthanc will store all new files into the object storage but will try to read/delete files
-from both the file system and the object storage.
-
-This option can be disabled as soon as all files have been copied from the file system to the 
-object storage.  Note that Orthanc is not copying the files from one storage to the other; you'll
-have to use a standard ``sync`` command from the object-storage provider.
-
-A migration script from File System to Azure Blob Storage is available courtesy of `Steve Hawes <https://github.com/jodogne/OrthancContributed/blob/master/Scripts/Migration/2020-09-08-TransferToAzure.sh>`__ .
+The **MigrationFromFileSystemEnabled** configuration has been superseded by the **HybridMode** in v 2.1.0.
 
 The **EnableLegacyUnknownFiles** configuration has been introduced to allow recent version of the plugins (from 1.3.3)
 continue working with data that was saved with Orthanc version around 1.9.3 and plugins version around 1.2.0 (e.g. osimis/orthanc:21.5.1 docker images).
