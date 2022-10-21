@@ -2,8 +2,8 @@
 .. highlight:: bash
 
 
-Orthanc for Docker
-==================
+jodogne/orthanc Docker images
+=============================
 
 .. toctree::
    :hidden:

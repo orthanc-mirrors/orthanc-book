@@ -2,7 +2,7 @@
 .. highlight:: bash
 
 
-Osimis Orthanc Docker images
+osimis/orthanc Docker images
 ============================
 
 .. contents::

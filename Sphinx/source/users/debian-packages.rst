@@ -33,7 +33,7 @@ should:
 
 * Use the `LSB binaries <https://lsb.orthanc-server.com/>`__.
 
-* Use :ref:`Docker <docker>`.
+* Use ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
 
 * :ref:`Compile Orthanc by yourself <compiling>`.
 
