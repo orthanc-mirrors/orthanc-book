@@ -260,14 +260,14 @@ By default, the ``HybridMode`` is ``Disabled``.  This means that the plugins wil
 only the object-storage.
 
 When the ``HybridMode`` is set to ``WriteToFileSystem``, it means that new files received
-are store on the file system.  When accessing a file, it is first read from the file system
+are stored on the file system.  When accessing a file, it is first read from the file system
 and, if it is not found on the file system, it is read from the object-storage.
 
 The ``WriteToFileSystem`` hybrid mode is useful for storing recent files on the file system for 
 better performance and old files on the object-storage for lower cost and easier backups.
 
 When the ``HybridMode`` is set to ``WriteToObjectStorage``, it means that new files received
-are store on the object storage.  When accessing a file, it is first read from the object storage
+are stored on the object storage.  When accessing a file, it is first read from the object storage
 and, if it is not found on the object-storage, it is read from the file system.
 
 The ``WriteToObjectStorage`` hybrid mode is useful mainly during a migration from file system to
