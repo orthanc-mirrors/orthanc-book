@@ -47,10 +47,26 @@ sections below explain how to achieve this goal with the officially
 supported packages.
 
 
+With Orthanc Explorer 2 installed
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you have the :ref:`Orthanc Explorer 2 plugin <orthanc-explorer-2>` 
+enabled, open the settings pane at `http://localhost:8042/ui/app/#/settings
+<http://localhost:8042/ui/app/#/settings>`__ and change the verbose level
+from there without restarting Orthanc:
+
+
+.. image:: ../images/OE2-settings-logs.png
+           :align: center
+           :width: 800px
+
+
+
 Under Windows
 ^^^^^^^^^^^^^
 
-Under Windows, if you used the official installer by Osimis:
+
+if you used the official installer by Osimis:
 
 1. Stop the Orthanc service. The actual process depends on your
    version of Windows.
