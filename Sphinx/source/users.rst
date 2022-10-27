@@ -6,6 +6,7 @@ User's guide
 
    users/cookbook.rst
    users/configuration.rst
+   users/docker.rst
    users/docker-osimis.rst
    users/rest.rst
    users/rest-cheatsheet.rst

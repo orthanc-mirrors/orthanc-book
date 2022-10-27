@@ -16,6 +16,7 @@ Obtaining binaries
 To obtain the Orthanc binaries, you have several possibilities:
 
 * `Download pre-compiled packages <https://www.orthanc-server.com/download.php>`__.
+* Use ``jodogne/orthanc`` :ref:`Docker images <docker>`.
 * Use ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
 * On GNU/Linux, use precompiled packages for :ref:`Debian/Ubuntu
   <debian-packages>` (courtesy of DebianMed and Sébastien Jodogne), or
