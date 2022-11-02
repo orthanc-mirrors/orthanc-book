@@ -32,7 +32,7 @@ For GNU/Linux users, the Stone Web viewer is part of the
 The compilation process is quite complex since it requires using the
 `Emscripten <https://emscripten.org/>`__ compiler toolchain. The full
 build instructions are available in the `source code
-<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
+<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.4/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
 
 
 Usage
@@ -91,11 +91,11 @@ Advanced options
 
 * The configuration of the Web viewer can be fine-tuned by adapting
   some **advanced options** in the `configuration file
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.4/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
 * The source distribution of the Stone Web viewer contains a
   `NOTES.txt file
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/NOTES.txt>`__
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.4/Applications/StoneWebViewer/NOTES.txt>`__
   that discusses the differences with the :ref:`Osimis Web viewer
   <osimis_webviewer>` as well as **advanced features** of the software
   (opening multiple studies, authorization, display of OsiriX
@@ -210,7 +210,7 @@ FAQ
 - **How can I migrate from Osimis Web viewer to Stone Web viewer?**
 
   Full instructions are provided in the `source distribution
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.3/Applications/StoneWebViewer/NOTES.txt>`__.
+  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.4/Applications/StoneWebViewer/NOTES.txt>`__.
 
 - **What are the future plans?**
 
