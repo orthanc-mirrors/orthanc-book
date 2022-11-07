@@ -142,7 +142,14 @@ REST API
 Here is a sample command line to **receive** a patient from the remote
 peer called ``remote``::
 
-  $ curl -v http://localhost:8042/transfers/pull -X POST -d '{"Resources":[{"Level":"Patient","ID":"16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"}],"Compression":"gzip","Peer":"remote"}'
+  $ curl -v -X POST http://localhost:8042/transfers/pull \
+     --data '{
+                "Resources" : [{"Level":"Patient","ID":"16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"}],
+                "Compression" : "gzip",
+                "Peer" : "remote"
+              }'
+
+
 
 Note that several resources from different levels (patient, study,
 series or instances) can be retrieved at once.
@@ -150,7 +157,12 @@ series or instances) can be retrieved at once.
 Conversely, here is a sample command line to **send** the same patient
 to the remote peer ``remote``::
 
-  $ curl -v http://localhost:8042/transfers/send -X POST -d '{"Resources":[{"Level":"Patient","ID":"16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"}],"Compression":"gzip","Peer":"remote"}'
+  $ curl -v -X POST http://localhost:8042/transfers/send \ 
+     --data '{
+              "Resources" : [{"Level":"Patient","ID":"16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"}],
+              "Compression" : "gzip",
+              "Peer" : "remote"
+            }'
 
 The command above is the one that is issued by Orthanc Explorer under
 the hood (see section above).
@@ -239,3 +251,27 @@ plugin. They are listed below::
       "MaxHttpRetries" : 0       // Maximum number of HTTP retries for one bucket
     }
   }
+
+
+Working with load-balancers
+---------------------------
+
+.. highlight:: bash
+  
+If the receiving Orthanc instance is implemented by a cluster of Orthanc instances
+behind a load-balancer, it is very important that all requests relating to a single
+**"push"** transfer target the same Orthanc instance.
+
+In order to achieve this, in your load-balancer, you may use the ``sender-transfer-id`` 
+HTTP header to route the requests.  This header is populated in every outgoing HTTP request.  
+By default, its value is a random uuid.  If required, you may force the value of this
+HTTP header by adding a ``SenderTransferID`` field in the payload when creating
+the transfer::
+
+  $ curl -v -X POST http://localhost:8042/transfers/send \ 
+     --data '{
+              "Resources" : [{"Level":"Patient","ID":"16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"}],
+              "Compression" : "gzip",
+              "Peer" : "remote",
+              "SenderTransferID" : "my-transfer-id"
+            }'
