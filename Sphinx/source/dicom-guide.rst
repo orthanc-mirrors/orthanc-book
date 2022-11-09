@@ -698,7 +698,7 @@ this end, you have two possibilities:
    Explorer <orthanc-explorer>` interface can transparently use this
    peer mechanism to send DICOM files over HTTP(S).
 2. Resort to the `DICOMweb standard
-   <https://www.dicomstandard.org/dicomweb/>`__, that is an extension
+   <https://www.dicomstandard.org/using/dicomweb>`__, that is an extension
    to the DICOM standard specifying how to access the content of a
    remote DICOM server through HTTP(S). Because the peer mechanism is
    bound to Orthanc, DICOMweb offers a less expressive, but more

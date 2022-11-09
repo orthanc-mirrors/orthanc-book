@@ -14,7 +14,7 @@ Osimis freely provides the `source code
 <https://hg.orthanc-server.com/orthanc-gcp/file/default/>`__ of a plugin
 to interface Orthanc with the Healthcare API of `Google Cloud Platform
 (GCP) <https://en.wikipedia.org/wiki/Google_Cloud_Platform>`__ through
-`DICOMweb <https://www.dicomstandard.org/dicomweb/>`__.
+`DICOMweb <https://www.dicomstandard.org/using/dicomweb>`__.
 
 This GCP plugin turns Orthanc into a DICOMweb client connected to GCP
 servers, enabling the upload of DICOM images using STOW-RS, the

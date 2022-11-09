@@ -521,7 +521,7 @@ Other endpoints
 
 This page only provides some very basic examples about the use of a
 DICOMweb server. Please check out `the full reference of the DICOMweb
-API <https://www.dicomstandard.org/dicomweb/>`__ for more information.
+API <https://www.dicomstandard.org/using/dicomweb>`__ for more information.
 
 Also, check out the :ref:`section about additional samples
 <dicomweb-additional-samples>` that notably provides example of
@@ -596,7 +596,7 @@ specified in the ``Arguments`` field. Orthanc will take care of
 
 An user-friendly reference of the features available in QIDO-RS and
 WADO-RS `can be found on this site
-<https://www.dicomstandard.org/dicomweb/>`__.
+<https://www.dicomstandard.org/using/dicomweb>`__.
 
 
 Sending DICOM resources to a STOW-RS server
