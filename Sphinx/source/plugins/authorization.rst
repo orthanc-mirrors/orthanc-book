@@ -285,6 +285,10 @@ Here is the list of all the configuration options::
       "WebServiceIdentifier": "my-id",          // new in v 0.3.0
       "TokenGetArguments" : [ "user" ],
       "TokenHttpHeaders" : [ "hello" ],
+      "StandardConfigurations": [               // new in v 0.4.0
+        "osimis-web-viewer",
+        "stone-webviewer"
+      ],
       "UncheckedResources" : [
         "/series",
         "/instances",
@@ -299,13 +303,27 @@ Here is the list of all the configuration options::
         "/web-viewer/libs/",
         "/wsi/app/"
       ],
-      "UncheckedLevels" : [ "study" ]
+      "CheckedLevel" : "studies",               // new in v 0.4.0
+      "UncheckedLevels" : [ 
+         "patients", 
+         "series",
+         "instances"
+      ]
     }
   }
 
 The following options have been described above: ``WebService``,
 ``TokenGetArguments``, and ``TokenHttpHeaders``. Here are the
 remaining options:
+
+* ``StandardConfigurations`` is a helper configuration to pre-populate
+  ``UncheckedResources``, ``UncheckedFolders``, ``TokenGetArguments``,
+  and ``TokenHttpHeaders`` of well-known plugins.
+  Allowed values are ``osimis-web-viewer``, ``stone-webviewer``.
+
+* ``CheckedLevel`` may replace ``UncheckedLevels`` when authorization
+  is checked only at one level of the DICOM hierarchy.  This is the most
+  common use-case.
 
 * ``UncheckedResources`` specifies a list of resources for which the
   authentication plugin is not triggered, and to which access is
@@ -320,6 +338,22 @@ remaining options:
   service. Think for instance about an authorization mechanism that
   simply associates its studies to a set of granted users: In this case,
   the series and instance levels can be ignored.
+
+
+Here is a minimal configuration for the :ref:`Stone Web viewer <stone_webviewer>`::
+
+  {
+    // disable basic authentication since it is replaced by the authorization plugin
+    "AuthenticationEnabled": false,
+
+    "Authorization" : {
+      "WebService" : "http://localhost:8000/shares/validate",
+      "StandardConfigurations": [
+        "stone-webviewer"
+      ],
+      "CheckedLevel" : "studies"
+    }
+  }
 
 
 .. _orthanc-explorer-authorization:
