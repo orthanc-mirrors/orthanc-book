@@ -192,7 +192,9 @@ are processed:
   you may store more :ref:`MainDicomTags <main-dicom-tags>` in DB.
   By correctly setting these tags, the ``MainDicomTags`` mode can
   become faster than the ``Extrapolate`` mode with the same accuracy
-  as the ``Full`` mode.
+  as the ``Full`` mode.  Note that, if the ``ExtraMainDicomTags`` are not
+  set correctly or have not been collected on all instances, the
+  :ref:`Stone Web viewer <stone_webviewer>` will not work correctly.
 
 * If ``Extrapolate`` mode is used, the plugin will read up to 3 DICOM
   instances at random that belong to the study/series of interest. It
