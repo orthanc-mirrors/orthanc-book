@@ -177,6 +177,10 @@ decision chart:
      * `Luiz Eduardo Guida Valmont <https://www.linkedin.com/in/luizvalmont/>`__ (English/Portuguese, Brazil)
      * `William Sanchez Luis <mailto:williamsanchezluis@gmail.com>`__ (English/Spanish, Venezuela)
 
+   * **Africa**:
+
+     * `Abdrahman Elkafil <mailto:elkafil@nextbehealthcare.com>`__ (English/French/Arabic, Belgium and Morocco)
+
    * **Asia**:
      
      * `Phong Tran Duc <http://www.itechcorp.com.vn/>`__ (English/Vietnamese, Vietnam)
