@@ -171,3 +171,6 @@ REST API, by inspecting the URIs that are prefixed by
   log level of **all** the categories. Note that the command-line
   options are applied from left to right.
 
+* Provided that you have left the ``DeidentifyLogs`` configuration to
+  its ``true`` default value, Orthanc logs will not contain any sensitive
+  patient information.
