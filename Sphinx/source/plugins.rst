@@ -123,6 +123,7 @@ C/C++ plugins
   `associated description
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthanc-mongodb>`__.
 
+
 Python plugins
 ^^^^^^^^^^^^^^
 
@@ -147,6 +148,22 @@ Python plugins
   announcement on the `Orthanc Users forum
   <https://groups.google.com/g/orthanc-users/c/q3Tncx3b6os/m/iFLq85fKAgAJ>`__.
 
+
+Rust plugins
+^^^^^^^^^^^^
+
+As the Rust language can produce shared libraries that are binary
+compatible with the `C ABI
+<https://en.wikipedia.org/wiki/Application_binary_interface>`__, it is
+possible to create plugins using Rust:
+
+* Andrew Webber provides `Rust plugins
+  <https://github.com/andrewwebber/orthanc-rust-plugins>`__ showcasing
+  integration with Orthanc, notably a S3 storage (CRUD) and a change
+  notification. Check out the original announcement on the `Orthanc
+  Users forum
+  <https://groups.google.com/g/orthanc-users/c/bDNBLMqXlEk/m/sGgzS5ZVBwAJ>`__.
+  
   
 Other
 ^^^^^
