@@ -50,8 +50,8 @@ Summary
 |                                                  | * use storage commitment to check which          |                                               |
 |                                                  |   instances are stored on destination            |                                               |
 +--------------------------------------------------+--------------------------------------------------+-----------------------------------------------+
-| **DicomWeb**                                     | * If client receives a 200                       | No                                            |
-|                                                  | * If ``/dicom-web/servers/sample/stow`` returns  |                                               |
+| **DicomWeb**                                     | * If client receives a 200                       | Yes (provided that the client sends a full    |
+|                                                  | * If ``/dicom-web/servers/sample/stow`` returns  | study in a single STOW-RS request             |
 |                                                  |   a 200 or if job is successfull                 |                                               |
 +--------------------------------------------------+--------------------------------------------------+-----------------------------------------------+
 | **Orthanc Rest API**                             | * If every call to ``/instances`` receives a     | No                                            |
@@ -59,7 +59,7 @@ Summary
 |                                                  | * If ``/peers/sample/store`` receives a          |                                               |
 |                                                  |   200 or if job is successfull                   |                                               |
 +--------------------------------------------------+--------------------------------------------------+-----------------------------------------------+
-| **Transfers accelerator plugin**                 | * If ``/transfers/send`` receives a              | Yes (provided that the client sends full      |
+| **Transfers accelerator plugin**                 | * If ``/transfers/send`` receives a              | Yes (provided that the client sends a full    |
 |                                                  |   200 or if job is successfull                   | study)                                        |
 +--------------------------------------------------+--------------------------------------------------+-----------------------------------------------+
 
