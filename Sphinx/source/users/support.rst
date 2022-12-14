@@ -145,7 +145,12 @@ decision chart:
    or with `Osimis <mailto:orthanc-support@osimis.io>`__, the commercial partner of
    the Orthanc project for AI related matters.
 
-3. If you are not able to reproduce an issue by yourself, if you are
+3. If you are part of a **scientific team** and would like to setup a
+   research project using Orthanc, get in touch with `Sébastien
+   Jodogne's research lab <https://www.info.ucl.ac.be/~sjodogne/>`__
+   at the UCLouvain university.
+   
+4. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
    or if you need **proximity support in your language/timezone**,
    here is a list of freelancers/companies:
