@@ -140,15 +140,17 @@ decision chart:
    open-source tools, use the `Orthanc Users discussion forum
    <https://groups.google.com/forum/#!forum/orthanc-users>`__.
 
-2. If you need an **additional feature implemented in Orthanc**,
-   and if you are ready to pay, get in touch with the `Orthanc Team <https://orthanc.team>`__
-   or with `Osimis <mailto:orthanc-support@osimis.io>`__, the commercial partner of
-   the Orthanc project for AI related matters.
+2. If you need an **additional feature implemented in Orthanc**, and
+   if you are ready to pay, get in touch with the `Orthanc Team
+   <https://orthanc.team>`__ or with `Osimis
+   <mailto:orthanc-support@osimis.io>`__, the commercial partners of
+   the Orthanc project.
 
 3. If you are part of a **scientific team** and would like to setup a
-   research project using Orthanc, get in touch with `Sébastien
-   Jodogne's research lab <https://www.info.ucl.ac.be/~sjodogne/>`__
-   at the UCLouvain university.
+   research project using Orthanc, including about AI, get in touch
+   with `Sébastien Jodogne's research lab
+   <https://www.info.ucl.ac.be/~sjodogne/>`__ at the UCLouvain
+   university.
    
 4. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
