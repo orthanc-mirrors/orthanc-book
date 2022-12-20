@@ -184,6 +184,20 @@ Windows-specific issues
   characters. Please try and run Orthanc in a folder with a simple
   name such as ``C:\Orthanc``.
 
+* If you run Orthanc as a Windows service, and if you want to store
+  the Orthanc database (or the :ref:`Orthanc Web Viewer plugin
+  <webviewer>`) onto a shared network drive, you might encounter an
+  error ``boost::filesystem::status: The specified server cannot
+  perform the requested operation``. This probably means that the
+  ``SYSTEM`` account is not allowed to access the **mapped network
+  drive**. The easiest approach to this end consists in configuring
+  the Windows service to **run as user** (instead of the default
+  ``SYSTEM`` account), `as explained in this thread
+  <https://groups.google.com/g/orthanc-users/c/axrJfgA-Enk/m/Zeg3iUPOAwAJ>`__
+  on the Orthanc Users forum (cf. `additional reference
+  <https://docs.microfocus.com/SM/9.61/Hybrid/Content/serversetup/tasks/configure_the_service_manager_service_to_run_as_a_windows_user.htm>`__
+  elsewhere on Internet).
+
 * If **Orthanc crashes when handling one large DICOM file**, this most
   probably indicates a memory allocation error. Indeed, the `official
   Windows binaries
@@ -199,9 +213,11 @@ Windows-specific issues
 
 * If you run Orthanc as a Windows service, with the Python plugin
   enabled, you might have to change your ``PATH`` environment variable
-  for Orthanc to find the Python DLL. The easiest approach to this end
-  consists in configuring the Windows service to **run as user**
+  for Orthanc to **find the Python DLL**. The easiest approach to this
+  end consists in configuring the Windows service to **run as user**
   (instead of the default ``SYSTEM`` account), `as explained in this
   thread
   <https://groups.google.com/g/orthanc-users/c/axrJfgA-Enk/m/Zeg3iUPOAwAJ>`__
-  on the Orthanc Users forum.
+  on the Orthanc Users forum (cf. `additional reference
+  <https://docs.microfocus.com/SM/9.61/Hybrid/Content/serversetup/tasks/configure_the_service_manager_service_to_run_as_a_windows_user.htm>`__
+  elsewhere on Internet).
