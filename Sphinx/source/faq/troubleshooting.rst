@@ -196,3 +196,12 @@ Windows-specific issues
 
 * Avoid installing Orthanc, its database or its storage area in
   folders whose names contain **spaces or special characters**.
+
+* If you run Orthanc as a Windows service, with the Python plugin
+  enabled, you might have to change your ``PATH`` environment variable
+  for Orthanc to find the Python DLL. The easiest approach to this end
+  consists in configuring the Windows service to **run as user**
+  (instead of the default ``SYSTEM`` account), `as explained in this
+  thread
+  <https://groups.google.com/g/orthanc-users/c/axrJfgA-Enk/m/Zeg3iUPOAwAJ>`__
+  on the Orthanc Users forum.
