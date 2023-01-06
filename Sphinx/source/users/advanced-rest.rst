@@ -301,8 +301,8 @@ where ``xxxx`` is the private group of interest. Here is a sample::
 
   {
     "Dictionary" : {
-      "0405,0010" : [ "LO", "PrivateCreatorForMyCompany", 1, 1, "My Company" ],   // reserve 0405,10xx for "MyCompany"
-      "0405,1001" : [ "ST", "MyPrivateXMLTag", 1, 1, "My Company" ]               // all tags from "MyCompany" must start with 0405,10xx 
+      "0405,0010" : [ "LO", "PrivateCreatorForMyCompany", 1, 1, "My Company" ],   // reserve 0405,10xx for "My Company"
+      "0405,1001" : [ "ST", "MyPrivateXMLTag", 1, 1, "My Company" ]               // all tags from "My Company" must start with 0405,10xx 
     }
   }
 
