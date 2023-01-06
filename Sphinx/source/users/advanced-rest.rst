@@ -301,8 +301,8 @@ where ``xxxx`` is the private group of interest. Here is a sample::
 
   {
     "Dictionary" : {
-      "0405,0010" : [ "LO", "Private data element", 1, 1, "RawDataStore" ],
-      "0405,1001" : [ "ST", "XML", 1, 1, "RawDataStore" ]
+      "0405,0010" : [ "LO", "PrivateCreatorForMyCompany", 1, 1, "My Company" ],   // reserve 0405,10xx for "MyCompany"
+      "0405,1001" : [ "ST", "MyPrivateXMLTag", 1, 1, "My Company" ]               // all tags from "MyCompany" must start with 0405,10xx 
     }
   }
 
@@ -311,15 +311,21 @@ to create a DICOM instance using the following POST body on
 ``/tools/create-dicom``::
 
   {
-    "PrivateCreator" : "RawDataStore",
+    "PrivateCreator" : "My Company",                             // private creator here
     "Tags" :
     {
       "PatientName" : "Love^Sarah",
       "PatientID" : "7",
-      "0405,0010" : "RawDataStore",
-      "0405,1001" : "<xml><test>Testing</test></xml>"
+      "PrivateCreatorForMyCompany" : "My Company",               // and here !
+      "MyPrivateXMLTag" : "<xml><test>Testing</test></xml>"
     }
   }
+
+Which then gives this in Orthanc UI:
+
+.. image:: ../images/PrivateTagsInCreateDicom.png
+           :align: center
+           :width: 400px
 
 Rob Oakes provides more a `detailed explanation about how to use
 private tags with Orthanc
