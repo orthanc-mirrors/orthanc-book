@@ -35,6 +35,15 @@ To enable the built-in HTTP server of Orthanc, you need to:
 3. Modify the ``SslEnabled`` and ``SslCertificate`` variables in the
    :ref:`Orthanc configuration file <configuration>`.
 
+**Warning:** If you have installed Orthanc using the official package
+of a GNU/Linux distribution of the Debian family (such as Ubuntu),
+make sure that the ``libssl-dev`` package is installed. Otherwise,
+Orthanc will fail to start with the error message ``The TCP port of
+the HTTP server is privileged or already in use``. This is because
+Civetweb (the embedded HTTP server of Orthanc) cannot find the
+``/usr/lib/x86_64-linux-gnu/libcrypto.so`` shared library (`reference
+<https://groups.google.com/g/orthanc-users/c/5N1K9iniBoA/m/EXiYrKt3BQAJ>`__).
+
         
 Examples
 --------
