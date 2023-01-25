@@ -85,6 +85,10 @@ decompresses the file before sending it back to the external world.
 Compression is controlled by the ``StorageCompression`` option in the
 :ref:`Orthanc configuration file <configuration>`.
 
+Note that the Orthanc distribution comes with the
+``OrthancRecoverCompressedFile`` command-line tool if a system
+administrator needs to recover one attachment compressed by Orthanc.
+
 
 .. _metadata:
 
