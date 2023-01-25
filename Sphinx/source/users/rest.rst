@@ -408,9 +408,11 @@ bits per pixel) that can be opened by any painting software. The
 dynamic range of the pixel data is stretched to the [0..255] range.
 An equivalent JPEG image can be downloaded by setting the `HTTP header
 <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`__
-``Accept`` to ``image/jpeg``::
+``Accept`` to ``image/jpeg``.  By default, the jpeg quality is set to 
+90% but this can be specified in the url::
 
   $ curl -H 'Accept: image/jpeg' http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/preview > Preview.jpg
+  $ curl -H 'Accept: image/jpeg' http://localhost:8042/instances/609665c0-c5198aa2-8632476b-a00e0de0-e9075d94/preview?quality=80 > Preview80.jpg
 
 If you don't want to stretch the dynamic range, and create a 8bpp or
 16bpp PNG image, you can use the following URIs::
