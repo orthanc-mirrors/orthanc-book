@@ -174,6 +174,9 @@ or make sure they happen asynchronously: your webservice should call the
 Orthanc Rest API after it has returned from the endpoint called by
 ``OnHeartBeat``.
 
+Note that these deadlocks won't happen when a lua function calls its own
+Orthanc Rest API using the ``RestApiGet``, ``RestApiPost``, ... functions.
+
 
 .. _lua-rest:
 
