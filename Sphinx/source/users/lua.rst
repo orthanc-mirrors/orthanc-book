@@ -151,12 +151,28 @@ sample script
 <https://hg.orthanc-server.com/orthanc/file/Orthanc-1.8.2/OrthancServer/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
 These callbacks were removed in Orthanc 1.9.0.
 
-*Note:* All of these callbacks are guaranteed to be **invoked in
-mutual exclusion**. This implies that Lua scripting in Orthanc does
-not support any kind of concurrency.
-
 If a callback is specified multiple times in separate scripts, the
 event handler of the latest loaded script is used.
+
+Concurrency and deadlocks
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Orthanc only implements a single Lua context.  Therefore, all these 
+callbacks are guaranteed to be **invoked in mutual exclusion**. 
+This implies that Lua scripting in Orthanc does not support any 
+kind of concurrency but may also lead to some deadlocks.
+
+If a lua function (e.g. ``OnHeartBeat``) performs an HTTP call to an 
+external Rest API (e.g. ``http://myserver.com/orthanc_is_alive.php``)
+which, in turn, calls the Orthanc Rest API (e.g. call ``http://orthanc:8042/system``),
+odds are high that you meet a deadlock because Orthanc, when handling a
+Rest API calls, may try to execute some Lua callbacks (e.g. ``IncomingHttpRequestFilter``) 
+while the Lua context is still blocked inside the ``OnHeartBeat`` function.
+
+To avoid deadlocks, always make sure to avoid such back-and-forth communications
+or make sure they happen asynchronously: your webservice should call the
+Orthanc Rest API after it has returned from the endpoint called by
+``OnHeartBeat``.
 
 
 .. _lua-rest:
