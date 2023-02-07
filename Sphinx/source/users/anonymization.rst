@@ -80,7 +80,7 @@ for `examples
 **Implementation:** Internally, the setup of the anonymization
 profiles can be found in the methods ``SetupAnonymizationXXX()`` of
 the class ``Orthanc::DicomModification`` (cf. `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.11.2/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.11.3/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
@@ -218,8 +218,8 @@ higher than the level that corresponds to the REST API call. For
 instance, the tag ``PatientID`` could not be modified if using the
 ``/studies/{id}/modify`` route (in the latter case, the
 ``/patients/{id}/modify`` route had to be used, cf. next section).
-These sanity checks have been loosened in more recent versions and users must
-be very careful to preserve the DICOM model when updating these tags (e.g.
+These sanity checks have been loosened in more recent versions (starting from 1.11.3)
+and users must be very careful to preserve the DICOM model when updating these tags (e.g.
 if you modify the ``PatientID`` at study level, also make sure to modify all other Patient related
 tags (``PatientName``, ``PatientBirthDate``, ...)).
 
