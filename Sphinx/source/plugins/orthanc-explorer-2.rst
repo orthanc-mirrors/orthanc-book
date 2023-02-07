@@ -72,6 +72,10 @@ Main features you can configure:
 Advanced features
 -----------------
 
+
+Direct access to a selection of studies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 You may open the OE2 interface directly on a specific study or patient by specifying DICOM Tags directly in the URL.
 e.g::
 
@@ -89,17 +93,80 @@ added, you should use ``"`` at the beginning and/or at the end of the search tex
 These ``"`` can also be used in the User Interface search fields.
 
 
+DICOM Modifications
+^^^^^^^^^^^^^^^^^^^
+
+Since version 0.6.0, it is possible to edit some of the DICOM Tags directly in the User Interface.
+:ref:`DICOM Modification <anonymization>` is quite a complex topic that is provided by Orthanc
+Rest API.  The Orthanc Explorer 2 User Interface aims at simplifying its use but is also limiting
+it to common use cases mainly related to correcting errors in Patient and Study DICOM Tags.
+
+At study level, it is possible to:
+
+- Modify a Study
+  
+  - to attach it to another existing patient by providing the ``PatientID`` if e.g. the study was
+    acquired for the wrong patient.
+  - to edit the patient in all its studies if e.g. the ``PatientName`` was misspelled.
+  - correct patient or study tags in this study only if e.g. the ``StudyDescription`` was incorrect.
+
+- Anonymize a Study and possibly provide the anonymized ``PatientID`` or ``PatientName`` to
+  e.g. force it to a specific identifier for a clinical study.
+  
+.. image:: ../images/OE2-modify-study.png
+           :align: center
+           :width: 1000px
+
+|
+
+
+At series level, it is possible to:
+
+- Modify a Series
+  
+  - to move it to another existing study by providing the ``StudyInstanceUID`` if e.g. the operator
+    forgot to switch patient in the modality
+  - to move it to a new study if e.g. the operator forgot to switch patient in the modality
+  - correct series tags in this series only if e.g. the ``SeriesDescription`` was incorrect.
+
+- Anonymize a Series and possibly provide the anonymized ``PatientID`` or ``PatientName`` to
+  e.g. force it to a specific identifier for a clinical study.
+  
+.. image:: ../images/OE2-modify-series.png
+           :align: center
+           :width: 1000px
+
+|
+
+Each time you modify a study, the user interface might propose you 3 modification modes related to
+the handling of the :ref:`DICOM identifiers <dicom-identifiers>` .
+
+- You may modify the original study and have Orthanc generates new ``StudyInstanceUID``, ``SeriesInstanceUID``
+  and ``SOPInstanceUID`` DICOM Tags.  This means the that orthanc identifiers will change and the source
+  study will be deleted.
+- You may keep the original ``StudyInstanceUID``, ``SeriesInstanceUID`` and ``SOPInstanceUID`` DICOM Tags.  
+  This means the that orthanc identifiers will not change (unless you also change the ``PatientID`` and the 
+  study will be modified "in place".
+- You may keep the original study and create a modified copy.  In this case, of course, the new modified copy
+  will have a different orthanc identifiers.
+
+
+.. image:: ../images/OE2-modify-options.png
+           :align: center
+           :width: 700px
+
+|
+
+There are many options related to DICOM Modification in the plugin 
+`default configuration file <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/Plugin/DefaultConfiguration.json>`__.
+Check the ``Modifications`` section and the ``PatientMainTags``, ``StudyMainTags``, ``SeriesMainTags``, ``EnableAnonymization``
+and ``EnableModification`` configurations.
+
+
 
 Roadmap
 -------
 
-Main elements of the roadmap are listed hereunder (not in the order of implementation):
-
-- Multiple language support
-- Mobile friendly
-- Allow edition of DICOM Tags
-- Query-retrieve interface for dicom-web servers & remote DICOM servers
-- Open other viewers from UI (Radiant, Osirix, MedDream, OHIF, ...)
 
 A full list of `ideas` is stored directly in the repository's `TODO <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/TODO>`__
 
