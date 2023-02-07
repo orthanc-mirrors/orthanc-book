@@ -146,7 +146,7 @@ the handling of the :ref:`DICOM identifiers <dicom-identifiers>` .
   study will be deleted.
 - You may keep the original ``StudyInstanceUID``, ``SeriesInstanceUID`` and ``SOPInstanceUID`` DICOM Tags.  
   This means the that orthanc identifiers will not change (unless you also change the ``PatientID`` and the 
-  study will be modified "in place".
+  study will be modified "in place").
 - You may keep the original study and create a modified copy.  In this case, of course, the new modified copy
   will have a different orthanc identifiers.
 
