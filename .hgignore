@@ -3,3 +3,4 @@ Sphinx/build
 Sphinx/env
 .vscode/
 *~
+*.orig
