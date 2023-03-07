@@ -25,7 +25,7 @@ in the filesystem. The backup procedure works as follows:
 
 3. Restart Orthanc.
 
-It is mandatory to stop Orthanc, as the Orthanc core makes the
+It is recommended to stop Orthanc, as the Orthanc core makes the
 assumption that it is the only process to access the SQLite database
 at any time.
 
@@ -61,3 +61,33 @@ well. Please check the official manual about `database backup methods
 Here are some contributed documents:
 
 * `Backup for Windows 10, Orthanc and PostgreSQL plugin <https://blog.goo.ne.jp/wakida_ortho/e/3eb557fd134cf6136d5ba66cf72fd85a>`__ (in Japanese, 2020-02-02).
+
+
+Restoring backups
+-----------------
+
+You should always stop Orthanc while you restore the DB backup.
+You may run Orthanc while the storage (DICOM file) backup is being restored
+but you should expect to have some data unavailable.
+
+Data consistency
+^^^^^^^^^^^^^^^^
+
+If you are running backups on a running system, it is very likely that
+your DB backup won't happen exactly at the same time as your storage backup
+(the DICOM files).  
+
+After you've restored your backup, you'll likely need
+to resend e.g. the last 24 hours data from the modalities to make sure
+the data that was not included in the backup is pushed to Orthanc again.
+When new data is pushed to Orthanc, it is recommended to have the
+``OverwriteInstances`` set to ``true`` to force Orthanc rewrite files for
+instances that were in the DB backup and not on the storage backup.
+
+This kind of recovery might create orphan files in the DICOM storage
+(files that are not referenced by Orthanc anymore).  As of 2023, there
+is no script/procedure available to delete these orphan files.
+
+
+
+
