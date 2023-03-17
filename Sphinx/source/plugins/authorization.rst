@@ -16,19 +16,21 @@ The `source code of this plugin
 <https://hg.orthanc-server.com/orthanc-authorization/file/default>`__ is
 freely available under the terms of the AGPLv3 license.
 
-Binaries
---------
 
-Binaries are available:
+How to get it ?
+---------------
 
-- in the `Windows Installers <https://www.orthanc-server.com/download-windows.php>`__ .
-- in the `MacOS package <https://www.orthanc-server.com/static.php?page=download-mac>`__ .
-- in the :ref:`osimis/orthanc Docker images <docker-osimis>`
+The source code is available on `Mercurial <https://hg.orthanc-server.com/orthanc-authorization/>`__.
 
-Release notes
--------------
+Binaries are included in:
+
+- The `osimis/orthanc Docker image <https://hub.docker.com/r/osimis/orthanc>`__
+- The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
+- The `MacOS packages <https://orthanc.osimis.io/osx/stable/orthancAndPluginsOSX.stable.zip>`__
 
 Release notes are available `here <https://hg.orthanc-server.com/orthanc-authorization/file/tip/NEWS>`__.
+
+Compilation instructions are available below.
 
 
 Usage
@@ -36,8 +38,7 @@ Usage
 
 .. highlight:: json
 
-You of course first have to :ref:`install Orthanc <compiling>`. Once
-Orthanc is installed, you must change the :ref:`configuration file
+Once Orthanc is installed, you must change the :ref:`configuration file
 <configuration>` to tell Orthanc where it can find the plugin: This is
 done by properly modifying the ``Plugins`` option. You could for
 instance use the following configuration file::
