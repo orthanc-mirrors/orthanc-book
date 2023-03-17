@@ -28,7 +28,7 @@ Compilation
 Official releases can be `downloaded from the Orthanc homepage
 <https://www.orthanc-server.com/browse.php?path=/plugin-tcia>`__. As
 an alternative, the `repository containing the source code
-<https://hg.orthanc-server.com/orthanc-tcia/>`__ can be accessed using
+<https://orthanc.uclouvain.be/hg/orthanc-tcia/>`__ can be accessed using
 Mercurial.
 
 The procedure to compile this plugin is similar of that for the
