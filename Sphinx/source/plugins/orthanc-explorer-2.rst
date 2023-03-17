@@ -24,6 +24,8 @@ Note that a major difference between the legacy UI and Orthanc Explorer 2 (OE2)
 is that OE2 works only at the study level, not the patient level.  The main page is
 the study list in which, of course, you can apply a filter to display only the studies of a single patient.
 
+Since version 0.7.0, once connected to `Keycloak <https://www.keycloak.org/>`__ and an external web service, OE2 is able to handle user permissions
+and sharing of links to access a single study.  This is demonstrated in this TBD sample.
 
 How to get it ?
 ---------------
@@ -67,6 +69,7 @@ Main features you can configure:
 - Configure the side menu
 - Configure the actions available on the resources
 - Configure the columns of the main study list
+- Configure `Keycloak <https://www.keycloak.org/>`__ integration and :ref:`authorization plugin <authorization>`
 
 
 Advanced features
@@ -163,12 +166,18 @@ Check the ``Modifications`` section and the ``PatientMainTags``, ``StudyMainTags
 and ``EnableModification`` configurations.
 
 
+Retrieve a study from a distant modality and open the viewer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Roadmap
--------
+If you want to open e.g. the :ref:`Stone Web viewer <stone_webviewer>`:: on a study that is not yet
+stored in Orthanc but that you know that it is stored in a remote modality, you may use this endpoint::
 
+    http://localhost:8042/ui/app/retrieve-and-view?StudyInstanceUID=1.2.3....&modality=pacs@viewer=stone-viewer
 
-A full list of `ideas` is stored directly in the repository's `TODO <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/TODO>`__
+This will first check if the study is already in Orthanc, if not, it will retrieve it from the modality and,
+once the transfer is complete, open the viewer.
+
+This feature has been introduced in v 0.7.0.
 
 
 Bug reports & support
@@ -178,7 +187,7 @@ As usual, you can get support and report issues from the `Orthanc Users group <h
 
 You may also directly introduce bugs or feature requests in `GitHub <https://github.com/orthanc-server/orthanc-explorer-2/issues>`__.
 
-The plugin is currently maintained by Alain Mazy from `Orthanc.team <https://orthanc.team/>`__ who, like many of you, enjoys 
-receiving a salary for his work.  Feel free to hire him if you need a specific feature or bug fixed.
+The plugin is currently maintained by the `Orthanc Team <https://orthanc.team/>`__ who, like many of you, enjoys 
+receiving a salary for his work.  Feel free to hire us if you need a specific feature or bug fixed.
 
 Donations to `Open Collective <https://opencollective.com/orthanc>`__ may also be used to maintain/develop this plugin.
