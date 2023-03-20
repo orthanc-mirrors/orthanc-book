@@ -23,26 +23,19 @@ system/network engineers, `PACS
 managers, medical physicists, and researchers).
 
 **Non-technical audience** (physicists, patients, administrative
-staff...) **might expect an user interface that is more user-friendly
-than Orthanc Explorer**, and/or that integrates more features (such as
-language translations, sorting resources, access control lists,
-tagging images, beautiful layout, tunable anonymization, modification
-of instances, paging if many patients, handling of timeouts,
-login/logout, Web diffusion to patients/physicians, `calendar to chose
-dates
-<https://groups.google.com/g/orthanc-users/c/LftvnfB2bY0/m/YUB-OPZyAgAJ>`__...). If
-you need such a more advanced `user experience
-<https://en.wikipedia.org/wiki/User_experience>`__ so that Orthanc
-better fits your clinical workflow, you will have to develop a
-separate, custom Web interface on the top of the :ref:`rest`, maybe as
-a `plugin
-<https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__. Any
-front-end Web developer could take care of this task using well-known
-JavaScript frameworks (such as Angular, Vue.js...).
+staff...) **shall have a look at** :ref:`Orthanc Explorer 2 <orthanc-explorer-2>`
+**plugin** that provides a more friendly user interface including:
+  
+- translations
+- modification and tunable anonymization
+- configurable interface
 
-.. note:: Since May 2022, a new :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` 
-          plugin is available to provide a more user-friendly,
-          more configurable and evolutive UI for Orthanc.
+Once integrated with the `orthanc-auth-service <https://github.com/orthanc-team/orthanc-auth-service>`__ 
+companion web service, Orthanc Explorer 2 also offers:
+
+- user permissions
+- web diffusion to patients/physicians
+
 
 Finally, you may also have a look to the following **related projects**:
 

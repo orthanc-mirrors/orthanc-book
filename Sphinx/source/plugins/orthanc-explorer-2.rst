@@ -24,8 +24,8 @@ Note that a major difference between the legacy UI and Orthanc Explorer 2 (OE2)
 is that OE2 works only at the study level, not the patient level.  The main page is
 the study list in which, of course, you can apply a filter to display only the studies of a single patient.
 
-Since version 0.7.0, once connected to `Keycloak <https://www.keycloak.org/>`__ and an external web service, OE2 is able to handle user permissions
-and sharing of links to access a single study.  This is demonstrated in this TBD sample.
+Since version 0.7.0, once connected to `Keycloak <https://www.keycloak.org/>`__ and the `orthanc-auth-service <https://github.com/orthanc-team/orthanc-auth-service>`__, 
+OE2 is able to handle user permissions and sharing of links to access a single study.  This is demonstrated in `this sample <https://github.com/orthanc-team/orthanc-auth-service/tree/main/minimal-setup/keycloak>`__.
 
 How to get it ?
 ---------------
@@ -74,6 +74,12 @@ Main features you can configure:
 
 Advanced features
 -----------------
+
+User permissions and web diffusion
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Check the documentation of the `orthanc-auth-service <https://github.com/orthanc-team/orthanc-auth-service>`__ 
+companion web service that provides user permissions and sharing of studies.
 
 
 Direct access to a selection of studies
