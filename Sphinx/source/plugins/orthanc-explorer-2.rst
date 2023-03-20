@@ -172,7 +172,7 @@ Retrieve a study from a distant modality and open the viewer
 If you want to open e.g. the :ref:`Stone Web viewer <stone_webviewer>`:: on a study that is not yet
 stored in Orthanc but that you know that it is stored in a remote modality, you may use this endpoint::
 
-    http://localhost:8042/ui/app/retrieve-and-view?StudyInstanceUID=1.2.3....&modality=pacs@viewer=stone-viewer
+    http://localhost:8042/ui/app/retrieve-and-view.html?StudyInstanceUID=1.2.3....&modality=pacs&viewer=stone-viewer
 
 This will first check if the study is already in Orthanc, if not, it will retrieve it from the modality and,
 once the transfer is complete, open the viewer.
