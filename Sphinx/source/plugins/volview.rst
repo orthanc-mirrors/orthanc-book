@@ -25,8 +25,13 @@ video):
            :target: https://www.youtube.com/watch?v=taQ6TiFJTHE
 |
 
-Starting with its release 0.8.0, the :ref:`Orthanc Explorer 2
-<orthanc-explorer-2>` plugin also provides a button to open VolView.
+Starting with its release 0.8.2, the :ref:`Orthanc Explorer 2
+<orthanc-explorer-2>` plugin also provides a button to open VolView:
+
+
+.. image:: ../images/VolView-OE2.png
+           :align: center
+           :width: 800
 
 Compilation
 -----------
