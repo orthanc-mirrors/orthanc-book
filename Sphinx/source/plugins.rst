@@ -85,6 +85,7 @@ From UCLouvain
    plugins/tcia.rst
    plugins/indexer.rst
    plugins/neuro.rst
+   plugins/volview.rst
 
 .. _plugins-contributed:
 
