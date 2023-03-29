@@ -115,7 +115,9 @@ of a more complex setup using the :ref:`osimis/orthanc <docker-osimis>` images.
 Microsoft Windows
 .................
 
-Pre-compiled binaries for Microsoft Windows `are also available
+Pre-compiled binaries for Microsoft Windows are now part of the 
+`Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
+but not installed by default.  They are also `available here
 <https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
 
 Beware that one version of the Python plugin can only be run against

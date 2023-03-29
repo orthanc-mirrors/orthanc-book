@@ -350,22 +350,26 @@ Prometheus
 the ``/tools/metrics-prometheus`` URI of the REST API. For instance::
 
   $ curl http://localhost:8042/tools/metrics-prometheus
-  orthanc_count_instances 1 1551868380543
-  orthanc_count_patients 1 1551868380543
-  orthanc_count_series 1 1551868380543
-  orthanc_count_studies 1 1551868380543
-  orthanc_disk_size_mb 0.0135002136 1551868380543
-  orthanc_jobs_completed 1 1551868380543
-  orthanc_jobs_failed 0 1551868380543
-  orthanc_jobs_pending 0 1551868380543
-  orthanc_jobs_running 0 1551868380543
-  orthanc_jobs_success 1 1551868380543
-  orthanc_rest_api_active_requests 1 1551868380543
-  orthanc_rest_api_duration_ms 0 1551868094265
-  orthanc_storage_create_duration_ms 0 1551865919315
-  orthanc_storage_read_duration_ms 0 1551865943752
-  orthanc_store_dicom_duration_ms 5 1551865919319
-  orthanc_uncompressed_size_mb 0.0135002136 1551868380543
+  orthanc_count_instances 21741 1680083638028
+  orthanc_count_patients 86 1680083638028
+  orthanc_count_series 239 1680083638028
+  orthanc_count_studies 93 1680083638028
+  orthanc_dicom_cache_count 2 1680083630571
+  orthanc_dicom_cache_size 0.00191688538 1680083630571
+  orthanc_disk_size_mb 16855.9629 1680083638028
+  orthanc_jobs_completed 10 1680083638028
+  orthanc_jobs_failed 0 1680083638028
+  orthanc_jobs_pending 0 1680083638028
+  orthanc_jobs_running 0 1680083638028
+  orthanc_jobs_success 10 1680083638028
+  orthanc_last_change 81062 1680083638028
+  orthanc_rest_api_active_requests 1 1680083638027
+  orthanc_rest_api_duration_ms 77 1680083630549
+  orthanc_storage_create_duration_ms 2 1680083630565
+  orthanc_storage_read_duration_ms 2 1680083630557
+  orthanc_store_dicom_duration_ms 7 1680083630570
+  orthanc_uncompressed_size_mb 16855.9629 1680083638028
+  orthanc_up_time_s 64 1680083638028
 
 
 .. highlight:: bash
