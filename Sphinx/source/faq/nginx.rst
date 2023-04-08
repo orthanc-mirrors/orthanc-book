@@ -95,20 +95,20 @@ expected by Orthanc for the ``public`` user::
        ...
     }
   
-The ``cHVibGljOmhlbGxv`` corresponds to the `Base64 encoding
+The ``cHVibGljOmhlbGxv`` string corresponds to the `Base64 encoding
 <https://en.wikipedia.org/wiki/Base64>`__ of the string
 ``public:hello``, as can be seen using the following bash command
 line::
 
-  $ echo -n 'public:hello' |base64
+  $ echo -n 'public:hello' | base64
   cHVibGljOmhlbGxv
 
 Note that more fine-grained access control can be achieved using
 :ref:`Python plugins <python_authorization>` or the :ref:`advanced
 authorization plugin <authorization>`.
-  
+
 Also, note that the ``admin`` user has full access to the REST API,
-including POST/PUT/DELTE requests.
+including POST/PUT/DELETE requests.
 
 
 .. _nginx-cors:
