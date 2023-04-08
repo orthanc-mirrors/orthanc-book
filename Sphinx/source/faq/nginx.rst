@@ -29,6 +29,85 @@ to allow the uploading of DICOM files larger than the default 1MB if
 using the :ref:`REST API <sending-dicom-images>` of Orthanc.
 
 
+.. _nginx-demo:
+
+Setting up a demo server using nginx
+------------------------------------
+
+It is often needed to setup a demo server through which users can
+access DICOM images, but cannot modify the content of the Orthanc
+database. The easiest solution to this scenario is to place an Orthanc
+server behind a nginx proxy, with a :ref:`Lua script
+<lua-filter-rest>` that only grants read-only access to external
+users.
+
+.. highlight:: json
+               
+To this end, first define two users ``admin`` and ``public`` in the
+:ref:`configuration file <configuration>` of Orthanc::
+
+  {
+    "RemoteAccessAllowed" : true,
+    "AuthenticationEnabled" : true,
+    "RegisteredUsers" : {
+      "admin" : "orthanc",
+      "public" : "hello"
+    },
+    "LuaScripts" : [ "ReadOnly.lua" ]
+  }
+
+
+.. highlight:: lua
+               
+Next, disallow POST/PUT/DELETE requests to the ``public`` using the
+``ReadOnly.lua`` script::
+
+  function IncomingHttpRequestFilter(method, uri, ip, username, httpHeaders)
+    if method == 'GET' then
+      return true
+    elseif username == 'admin' then
+      return true
+    else
+      return false
+    end
+  end
+
+
+.. highlight:: text
+               
+Finally, setup the nginx reverse proxy so that it automatically adds
+the `HTTP basic authentication header
+<https://en.wikipedia.org/wiki/Basic_access_authentication>`__ that is
+expected by Orthanc for the ``public`` user::
+
+    server {
+       listen  80  default_server;
+       ...
+       location  /orthanc/  {
+          proxy_pass http://127.0.0.1:8042;
+          proxy_set_header HOST $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          rewrite /orthanc(.*) $1 break;
+
+          // Use the "public" user with the "hello" password
+          proxy_set_header Authorization "Basic cHVibGljOmhlbGxv";
+       }
+       ...
+    }
+  
+The ``cHVibGljOmhlbGxv`` corresponds to the `Base64 encoding
+<https://en.wikipedia.org/wiki/Base64>`__ of the string
+``public:hello``, as can be seen using the following bash command
+line::
+
+  $ echo -n 'public:hello' |base64
+  cHVibGljOmhlbGxv
+
+Note that more fine-grained access control can be achieved using
+:ref:`Python plugins <python_authorization>` or the :ref:`advanced
+authorization plugin <authorization>`.
+  
+
 .. _nginx-cors:
 
 Enabling CORS
