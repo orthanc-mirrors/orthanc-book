@@ -74,7 +74,7 @@ Next, disallow POST/PUT/DELETE requests to the ``public`` using the
 
 
 .. highlight:: text
-               
+           
 Finally, setup the nginx reverse proxy so that it automatically adds
 the `HTTP basic authentication header
 <https://en.wikipedia.org/wiki/Basic_access_authentication>`__ that is
@@ -107,6 +107,9 @@ Note that more fine-grained access control can be achieved using
 :ref:`Python plugins <python_authorization>` or the :ref:`advanced
 authorization plugin <authorization>`.
   
+Also, note that the ``admin`` user has full access to the REST API,
+including POST/PUT/DELTE requests.
+
 
 .. _nginx-cors:
 
