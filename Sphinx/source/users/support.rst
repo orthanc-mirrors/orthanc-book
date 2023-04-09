@@ -160,13 +160,13 @@ decision chart:
    * **Worldwide**:
    
      * `Orthanc Team (Alain Mazy & Benoît Crickboom) <https://orthanc.team>`__ (French/English, Belgium)
-     * `Stephen D. Scotti <mailto:sscotti@sias.dev>`__ (English, Austria)
 
    * **Europe**:
 
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
+     * `Stephen D. Scotti <https://www.medinformatics.eu>`__ (English, Austria)
 
    * **North America**:
        
