@@ -35,6 +35,8 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/image-int16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-int16/get>`__,,,,Decode an image (int16)
 ``/instances/{id}/image-uint16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint16/get>`__,,,,Decode an image (uint16)
 ``/instances/{id}/image-uint8``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint8/get>`__,,,,Decode an image (uint8)
+``/instances/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels/get>`__,,,,List labels
+``/instances/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/put>`__,Test label
 ``/instances/{id}/matlab``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1matlab/get>`__,,,,Decode frame for Matlab
 ``/instances/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata/get>`__,,,,List metadata
 ``/instances/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/put>`__,Get metadata
@@ -92,6 +94,8 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/patients/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
 ``/patients/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1instances/get>`__,,,,Get child instances
 ``/patients/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/patients/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels/get>`__,,,,List labels
+``/patients/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/put>`__,Test label
 ``/patients/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1media/post>`__,,,Create DICOMDIR media
 ``/patients/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata/get>`__,,,,List metadata
 ``/patients/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/put>`__,Get metadata
@@ -144,6 +148,8 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/series/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
 ``/series/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1instances/get>`__,,,,Get child instances
 ``/series/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/series/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels/get>`__,,,,List labels
+``/series/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/put>`__,Test label
 ``/series/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1media/post>`__,,,Create DICOMDIR media
 ``/series/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata/get>`__,,,,List metadata
 ``/series/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/put>`__,Get metadata
@@ -178,6 +184,8 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/studies/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
 ``/studies/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1instances/get>`__,,,,Get child instances
 ``/studies/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/studies/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels/get>`__,,,,List labels
+``/studies/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/put>`__,Test label
 ``/studies/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1media/post>`__,,,Create DICOMDIR media
 ``/studies/{id}/merge``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1merge/post>`__,,,Merge study
 ``/studies/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata/get>`__,,,,List metadata
@@ -209,6 +217,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/tools/find``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1find/post>`__,,,Look for local resources
 ``/tools/generate-uid``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1generate-uid/get>`__,,,,Generate an identifier
 ``/tools/invalidate-tags``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1invalidate-tags/post>`__,,,Invalidate DICOM-as-JSON summaries
+``/tools/labels``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1labels/get>`__,,,,Get all the used labels
 ``/tools/log-level``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level/put>`__,Get main log level
 ``/tools/log-level-dicom``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-dicom/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-dicom/put>`__,Get log level for `dicom`
 ``/tools/log-level-generic``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-generic/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-generic/put>`__,Get log level for `generic`

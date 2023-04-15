@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.11.3"
+      "version" : "1.12.0"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -1283,7 +1283,7 @@
       "/instances/{id}/export" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Write the DICOM file onto the filesystem where Orthanc is running",
+            "description" : "Write the DICOM file onto the filesystem where Orthanc is running.  This is insecure for Orthanc servers that are remotely accessible since one could overwrite any system file.  Since Orthanc 1.12.0, this route is disabled by default, but can be enabled using the `RestApiWriteToFileSystemEnabled` configuration option.",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the DICOM instance of interest",
@@ -2375,6 +2375,141 @@
             "tags" : [ "Instances" ]
          }
       },
+      "/instances/{id}/labels" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the labels that are associated with the given instance (new in Orthanc 1.12.0)",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the instance of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the names of the labels"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "List labels",
+            "tags" : [ "Instances" ]
+         }
+      },
+      "/instances/{id}/labels/{label}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Remove a label associated with a instance",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the instance of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be removed",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Remove label",
+            "tags" : [ "Instances" ]
+         },
+         "get" : {
+            "deprecated" : false,
+            "description" : "Test whether the instance is associated with the given label",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the instance of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label of interest",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Empty string is returned in the case of presence, error 404 in the case of absence"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Test label",
+            "tags" : [ "Instances" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Associate a label with a instance",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the instance of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be added",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Add label",
+            "tags" : [ "Instances" ]
+         }
+      },
       "/instances/{id}/matlab" : {
          "get" : {
             "deprecated" : false,
@@ -2416,6 +2551,15 @@
                   "description" : "If present, also retrieve the value of the individual metadata",
                   "in" : "query",
                   "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, use the numeric identifier of the metadata instead of its symbolic name",
+                  "in" : "query",
+                  "name" : "numeric",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -3602,9 +3746,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "088d9652-7ca3-4dfc-ba70-8da881f13e7e",
-                              "1461a56a-f046-47c3-bf2c-ad891dff319a",
-                              "4e22e7a9-467f-4957-8ab5-4a86834e66e6",
+                              "0e2b7757-763b-4ef4-8323-fc7625094e39",
+                              "0e6e6562-f56a-485b-9905-4b722e2c5e1d",
+                              "4eee84fe-4248-4683-8506-6f93fb55c60a",
                               "..."
                            ]
                         }
@@ -4642,7 +4786,7 @@
                               "type" : "boolean"
                            },
                            "Port" : {
-                              "description" : "Port that is used for this commands, defaults to `Port` configuration option. Allows you to overwrite the destination port for a specific operation.",
+                              "description" : "Port that is used for this command, defaults to `Port` configuration option. Allows you to overwrite the destination port for a specific operation.",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -6251,6 +6395,141 @@
             "tags" : [ "Patients" ]
          }
       },
+      "/patients/{id}/labels" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the labels that are associated with the given patient (new in Orthanc 1.12.0)",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the patient of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the names of the labels"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "List labels",
+            "tags" : [ "Patients" ]
+         }
+      },
+      "/patients/{id}/labels/{label}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Remove a label associated with a patient",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the patient of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be removed",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Remove label",
+            "tags" : [ "Patients" ]
+         },
+         "get" : {
+            "deprecated" : false,
+            "description" : "Test whether the patient is associated with the given label",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the patient of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label of interest",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Empty string is returned in the case of presence, error 404 in the case of absence"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Test label",
+            "tags" : [ "Patients" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Associate a label with a patient",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the patient of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be added",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Add label",
+            "tags" : [ "Patients" ]
+         }
+      },
       "/patients/{id}/media" : {
          "get" : {
             "deprecated" : false,
@@ -6396,6 +6675,15 @@
                   "description" : "If present, also retrieve the value of the individual metadata",
                   "in" : "query",
                   "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, use the numeric identifier of the metadata instead of its symbolic name",
+                  "in" : "query",
+                  "name" : "numeric",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -7565,6 +7853,7 @@
                               "stone-webviewer",
                               "tcia",
                               "transfers",
+                              "volview",
                               "web-viewer",
                               "worklists",
                               "wsi"
@@ -9726,6 +10015,141 @@
             "tags" : [ "Series" ]
          }
       },
+      "/series/{id}/labels" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the labels that are associated with the given series (new in Orthanc 1.12.0)",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the series of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the names of the labels"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "List labels",
+            "tags" : [ "Series" ]
+         }
+      },
+      "/series/{id}/labels/{label}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Remove a label associated with a series",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the series of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be removed",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Remove label",
+            "tags" : [ "Series" ]
+         },
+         "get" : {
+            "deprecated" : false,
+            "description" : "Test whether the series is associated with the given label",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the series of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label of interest",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Empty string is returned in the case of presence, error 404 in the case of absence"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Test label",
+            "tags" : [ "Series" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Associate a label with a series",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the series of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be added",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Add label",
+            "tags" : [ "Series" ]
+         }
+      },
       "/series/{id}/media" : {
          "get" : {
             "deprecated" : false,
@@ -9871,6 +10295,15 @@
                   "description" : "If present, also retrieve the value of the individual metadata",
                   "in" : "query",
                   "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, use the numeric identifier of the metadata instead of its symbolic name",
+                  "in" : "query",
+                  "name" : "numeric",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -12516,6 +12949,141 @@
             "tags" : [ "Studies" ]
          }
       },
+      "/studies/{id}/labels" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the labels that are associated with the given study (new in Orthanc 1.12.0)",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the study of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the names of the labels"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "List labels",
+            "tags" : [ "Studies" ]
+         }
+      },
+      "/studies/{id}/labels/{label}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Remove a label associated with a study",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the study of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be removed",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Remove label",
+            "tags" : [ "Studies" ]
+         },
+         "get" : {
+            "deprecated" : false,
+            "description" : "Test whether the study is associated with the given label",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the study of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label of interest",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "text/plain" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "Empty string is returned in the case of presence, error 404 in the case of absence"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Test label",
+            "tags" : [ "Studies" ]
+         },
+         "put" : {
+            "deprecated" : false,
+            "description" : "Associate a label with a study",
+            "parameters" : [
+               {
+                  "description" : "Orthanc identifier of the study of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "The label to be added",
+                  "in" : "path",
+                  "name" : "label",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Add label",
+            "tags" : [ "Studies" ]
+         }
+      },
       "/studies/{id}/media" : {
          "get" : {
             "deprecated" : false,
@@ -12741,6 +13309,15 @@
                   "description" : "If present, also retrieve the value of the individual metadata",
                   "in" : "query",
                   "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, use the numeric identifier of the metadata instead of its symbolic name",
+                  "in" : "query",
+                  "name" : "numeric",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -13811,6 +14388,10 @@
                                  "description" : "The port to the DICOM server of Orthanc",
                                  "type" : "number"
                               },
+                              "HasLabels" : {
+                                 "description" : "Whether the database back-end supports labels (new in Orthanc 1.12.0)",
+                                 "type" : "boolean"
+                              },
                               "HttpPort" : {
                                  "description" : "The port to the HTTP server of Orthanc",
                                  "type" : "number"
@@ -13855,6 +14436,10 @@
                                  "description" : "Whether storage compression is enabled (new in Orthanc 1.11.0)",
                                  "type" : "boolean"
                               },
+                              "UserMetadata" : {
+                                 "description" : "The configured UserMetadata (new in Orthanc 1.12.0)",
+                                 "type" : "object"
+                              },
                               "Version" : {
                                  "description" : "Version of Orthanc",
                                  "type" : "string"
@@ -13898,6 +14483,7 @@
                               "find",
                               "generate-uid",
                               "invalidate-tags",
+                              "labels",
                               "log-level",
                               "log-level-dicom",
                               "log-level-generic",
@@ -14690,7 +15276,7 @@
       "/tools/execute-script" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Execute the provided Lua script by the Orthanc server. This is very insecure for Orthanc servers that are remotely accessible, cf. configuration option `ExecuteLuaEnabled`",
+            "description" : "Execute the provided Lua script by the Orthanc server. This is very insecure for Orthanc servers that are remotely accessible.  Since Orthanc 1.5.8, this route is disabled by default and can be enabled thanks to the `ExecuteLuaEnabled` configuration.",
             "parameters" : [],
             "requestBody" : {
                "content" : {
@@ -14740,6 +15326,17 @@
                            "Full" : {
                               "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                               "type" : "boolean"
+                           },
+                           "Labels" : {
+                              "description" : "List of strings specifying which labels to look for in the resources (new in Orthanc 1.12.0)",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "LabelsConstraint" : {
+                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0)",
+                              "type" : "string"
                            },
                            "Level" : {
                               "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
@@ -14833,6 +15430,28 @@
                }
             },
             "summary" : "Invalidate DICOM-as-JSON summaries",
+            "tags" : [ "System" ]
+         }
+      },
+      "/tools/labels" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "List all the labels that are associated with any resource of the Orthanc database",
+            "parameters" : [],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the labels"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Get all the used labels",
             "tags" : [ "System" ]
          }
       },
@@ -15263,7 +15882,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1675430423655\northanc_count_patients 8 1675430423655\northanc_count_series 26 1675430423655\northanc_count_studies 8 1675430423655\northanc_dicom_cache_count 285 1675420129748\northanc_dicom_cache_size 127.721069 1675420129748\northanc_disk_size_mb 1018.65021 1675430423655\northanc_jobs_completed 10 1675430423655\northanc_jobs_failed 0 1675430423655\northanc_jobs_pending 0 1675430423655\northanc_jobs_running 0 1675430423655\northanc_jobs_success 10 1675430423655\northanc_rest_api_active_requests 1 1675430423654\northanc_rest_api_duration_ms 415 1675430412272\northanc_storage_read_duration_ms 0 1675430411860\northanc_uncompressed_size_mb 1018.65021 1675430423655\n"
+                        "example" : "orthanc_count_instances 2552 1681548113397\northanc_count_patients 8 1681548113397\northanc_count_series 26 1681548113397\northanc_count_studies 8 1681548113397\northanc_dicom_cache_count 243 1681494684086\northanc_dicom_cache_size 127.85218 1681494684086\northanc_disk_size_mb 1018.65021 1681548113397\northanc_jobs_completed 10 1681548113397\northanc_jobs_failed 3 1681548113397\northanc_jobs_pending 0 1681548113397\northanc_jobs_running 0 1681548113397\northanc_jobs_success 7 1681548113397\northanc_rest_api_active_requests 1 1681548113396\northanc_rest_api_duration_ms 1517 1681548111639\northanc_storage_read_duration_ms 43 1681548110651\northanc_uncompressed_size_mb 1018.65021 1681548113397\n"
                      }
                   },
                   "description" : ""
@@ -15282,7 +15901,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230203T132024",
+                        "example" : "20230415T084153",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15304,7 +15923,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230203T132025",
+                        "example" : "20230415T084153",
                         "schema" : {
                            "description" : "The local time"
                         }

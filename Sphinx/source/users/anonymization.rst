@@ -80,7 +80,7 @@ for `examples
 **Implementation:** Internally, the setup of the anonymization
 profiles can be found in the methods ``SetupAnonymizationXXX()`` of
 the class ``Orthanc::DicomModification`` (cf. `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.11.3/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.0/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
