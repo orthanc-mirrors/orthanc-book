@@ -539,9 +539,9 @@ once), ``Any`` (to return the resources that are associated with at
 least one of the labels provided in the ``Labels`` field), or ``None``
 (to return the resources that are associated with none of the labels
 provided in the ``Labels`` field). If not provided,
-``LabelsConstraint`` defaults to ``All``. Note that in the if there is
-only one label in the ``Labels`` field, both ``Any`` and ``All`` have
-the same behavior.
+``LabelsConstraint`` defaults to ``All``. Note that if there is only
+one label in the ``Labels`` field, both ``Any`` and ``All`` have the
+same behavior.
 
             
 **Warning:** The database index back-end must implement support for
