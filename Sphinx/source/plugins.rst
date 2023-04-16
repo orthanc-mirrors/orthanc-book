@@ -86,6 +86,7 @@ From UCLouvain
    plugins/indexer.rst
    plugins/neuro.rst
    plugins/volview.rst
+   plugins/multitenant-dicom.rst
 
 .. _plugins-contributed:
 

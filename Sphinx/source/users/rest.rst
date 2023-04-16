@@ -1090,8 +1090,7 @@ would do with DICOM C-FIND::
 
   $ curl -X POST http://localhost:8042/tools/find -d '{"Level":"Series","Query":{"DeviceSerialNumber":"123\\abc"},"Expand":true}'
 
-  
-  
+ 
 Additional Options
 ^^^^^^^^^^^^^^^^^^
 .. highlight:: json
@@ -1142,6 +1141,11 @@ This query will return a response like this one::
       "Type" : "Study"
    }
   ]
+
+
+**Important:** Starting with Orthanc 1.12.0, this route in the REST
+API also provide the ``Labels`` and ``LabelsConstraint`` options to
+bring support for :ref:`labels <labels>`.
 
 
 .. _changes:

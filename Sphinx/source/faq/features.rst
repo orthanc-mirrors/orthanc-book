@@ -433,9 +433,9 @@ metadata/attachment::
 Check out the `OpenAPI reference <https://api.orthanc-server.com/>`__
 of the REST API of Orthanc for more information.
 
-**Warning:** The database index back-end must support revisions. As of
-writing, only the **PostgreSQL plugins** in versions above 4.0 and the
-**ODBC plugins** implement support for revisions.
+**Warning:** The database index back-end must implement support for
+revisions. As of writing, only the **PostgreSQL plugins** in versions
+above 4.0 and the **ODBC plugins** implement support for revisions.
 
 
 Synchronous vs. asynchronous C-MOVE SCP
@@ -469,3 +469,82 @@ can be used as a buffer that enables communications between a simple
 C-MOVE client and a hospital-wide PACS. This can be interesting to
 introduce compatibility with specialized image processing
 applications.
+
+
+.. _labels:
+
+Labels
+------
+
+.. highlight:: text
+
+Orthanc 1.12.0 introduces the concept of **labels**. A label is a
+string that can be attached to any DICOM resource (i.e. patients,
+studies, series, or instances). In contrast with :ref:`metadata
+<metadata>`, labels are not associated with a value, however labels
+are **indexed in the Orthanc database** for efficient lookups.
+
+Labels can notably be used as the building block to implement
+**multi-tenancy**, which means that a single database could be shared
+between different tenants that are distinguished by different labels.
+This idea is illustrated by the :ref:`multitenant DICOM server
+<multitenant-dicom>` sample plugin. A similar approach could be used
+to implement Web interfaces that restrict the resources that are
+accessible to some users by assigning labels to users. Labels are also
+useful in **machine learning** (or deep learning) workflows to
+separate DICOM resources belonging to the training set or to the
+testing set.
+
+The labels attached to one given DICOM resource can be read through
+the REST API::
+
+  $ curl http://localhost:8042/instances/19816330-cb02e1cf-df3a8fe8-bf510623-ccefe9f5/labels
+  $ curl http://localhost:8042/series/3774320f-ccda46d8-69ee8641-9e791cbf-3ecbbcc6/labels
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels
+  $ curl http://localhost:8042/patients/ef9d77db-eb3b2bef-9b31fd3e-bf42ae46-dbdb0cc3/labels
+
+A label can be added to one DICOM resource using the PUT HTTP method,
+and can be removed using the DELETE HTTP method::
+
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels
+  []
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels/hello -X PUT -d ''
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels
+  [ "hello" ]
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels/hello -X DELETE
+  $ curl http://localhost:8042/studies/66c8e41e-ac3a9029-0b85e42a-8195ee0a-92c2e62e/labels
+  []
+  
+The built-in :ref:`Orthanc Explorer <orthanc-explorer>` Web interface
+can be used to display, add, and remove labels.
+
+Once labels are set, the ``/tools/find`` :ref:`route of the REST API
+<rest-find>` of Orthanc can be used to efficiently look for the DICOM
+resources that are associated with given labels. This is done by
+providing the set of labels of interest in the ``Labels`` field, as
+illustrated in the following request::
+
+  $ curl --request POST --url http://localhost:8042/tools/find \
+    --data '{
+              "Level" : "Study",
+              "Labels" : [ "hello" ],
+              "LabelsConstraint" : "All",
+              "Query" : { }
+            }'
+
+The ``LabelsConstraint`` field can be used to control the request over
+the labels. Its value can be ``All`` (to return the resources that are
+associated with all the labels provided in the ``Labels`` field at
+once), ``Any`` (to return the resources that are associated with at
+least one of the labels provided in the ``Labels`` field), or ``None``
+(to return the resources that are associated with none of the labels
+provided in the ``Labels`` field). If not provided,
+``LabelsConstraint`` defaults to ``All``. Note that in the if there is
+only one label in the ``Labels`` field, both ``Any`` and ``All`` have
+the same behavior.
+
+            
+**Warning:** The database index back-end must implement support for
+labels. As of writing, only the **PostgreSQL plugins** in versions
+above 5.0 and the **MySQL plugins** in version above 5.0 implement
+support for labels.
