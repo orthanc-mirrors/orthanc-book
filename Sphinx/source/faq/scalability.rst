@@ -58,7 +58,7 @@ presence of large databases:
   writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
-  <postgresql>` to store the database index (4.0 at the time of
+  <postgresql>` to store the database index (5.0 at the time of
   writing). Make sure that ``EnableIndex`` is set to ``true``.
 
 * Make sure that :ref:`run-time debug assertions <troubleshooting>`
