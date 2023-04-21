@@ -84,7 +84,14 @@ option to ``true``, you should:
 
 * Consider turning of the :ref:`embedded WebDAV server <webdav>` by
   setting configuration option ``WebDavEnabled`` to ``false``.
-  
+
+* Ensure that ``/tools/execute-script`` is disabled by leaving the configuration
+  ``ExecuteLuaEnabled`` to its default ``false`` value.
+
+* Ensure that the REST API can not write to the filesystem (e.g. in the
+  ``/instances/../export`` route) by leaving the configuration
+  ``RestApiWriteToFileSystemEnabled`` to its defualt ``false`` value.
+
 * Setup rules that define, for each authorized user, which resources
   it can access, and through which HTTP method (GET, POST, DELETE
   and/or PUT). This can be done by defining a :ref:`filter written in
