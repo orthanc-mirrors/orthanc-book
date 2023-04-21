@@ -90,7 +90,7 @@ option to ``true``, you should:
 
 * Ensure that the REST API can not write to the filesystem (e.g. in the
   ``/instances/../export`` route) by leaving the configuration
-  ``RestApiWriteToFileSystemEnabled`` to its defualt ``false`` value.
+  ``RestApiWriteToFileSystemEnabled`` to its default ``false`` value.
 
 * Setup rules that define, for each authorized user, which resources
   it can access, and through which HTTP method (GET, POST, DELETE
