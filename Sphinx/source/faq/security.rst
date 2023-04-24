@@ -137,6 +137,13 @@ option to ``true``, you should:
   ``OrthancPluginRegisterIncomingHttpRequestFilter2()`` function
   provided by the Orthanc plugin SDK.
 
+* Don't forget that, if you are using a Database Server to store your
+  index, you can deploy 
+  :ref:`multiple Orthanc instances connected to the same DB <multiple-writers>`.
+  You may therefore have one Orthanc that is public facing with a very strict
+  secure configuration and one Orthanc that is not public facing and less
+  secured that is accessible e.g. only to your backend application or your
+  scripts.
 
 **Remark:** These parameters also apply to the :ref:`DICOMweb server plugin <dicomweb>`.
 
