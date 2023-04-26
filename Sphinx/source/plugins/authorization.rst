@@ -12,10 +12,6 @@ the plugin will query a Web service to know whether the access is
 granted to the user. If access is not granted, the HTTP status code is
 set to ``403`` (Forbidden).
 
-The `source code of this plugin
-<https://hg.orthanc-server.com/orthanc-authorization/file/default>`__ is
-freely available under the terms of the AGPLv3 license.
-
 
 How to get it ?
 ---------------
@@ -73,7 +69,7 @@ Incoming request
 For each HTTP/REST request that Orthanc receives, the plugin will
 issue a set of HTTP ``POST`` requests against the Web service that is
 specified in the configuration file (in the basic configuration file
-above, the Web service listening at ``http://localhost:8000/`` is
+above, the Web service listening at ``http://localhost:8000/tokens/validate`` is
 used). The body of each of those ``POST`` requests is a JSON file
 similar to the following one::
 
@@ -82,7 +78,8 @@ similar to the following one::
     "level" : "patient",
     "method" : "get",
     "orthanc-id" : "6eeded74-75005003-c3ae9738-d4a06a4f-6beedeb8",
-    "server-id": "my-id"
+    "server-id": null,
+    "uri": null
   }
 
 In this example, the user is accessing an URI that is related to some
@@ -237,7 +234,7 @@ The same mechanism can be used if the authentication token is provided
 as some ``GET`` argument by setting the ``TokenGetArguments``
 configuration option::
 
-  # curl http://localhost:8042/patients/6eeded74-75005003-c3ae9738-d4a06a4f-6beedeb8?hello=world
+  # curl http://localhost:8042/patients/6eeded74-75005003-c3ae9738-d4a06a4f-6beedeb8?token=my-token
   {
     "dicom-uid" : "123ABC",
     "level" : "patient",
@@ -270,105 +267,69 @@ The full list of configuration is available `here <https://hg.orthanc-server.com
 Here is the list of all the configuration options::
 
   {
-      "Authorization" : {
-          // The Base URL of the auth webservice.  This is an alias for all 3 next configurations:
-          // // "WebServiceUserProfileUrl" : " ROOT /user/get-profile",
-          // // "WebServiceTokenValidationUrl" : " ROOT /tokens/validate",
-          // // "WebServiceTokenCreationBaseUrl" : " ROOT /tokens/",
-          // // "WebServiceTokenDecoderUrl" : " ROOT /tokens/decode",
-          // You should define it only if your auth webservice implements all 3 routes !
-          // "WebServiceRootUrl" : "http://change-me:8000/",
+    "Authorization" : {
+        // The Base URL of the auth webservice.  This is an alias for all 3 next configurations:
+        // // "WebServiceUserProfileUrl" : " ROOT /user/get-profile",
+        // // "WebServiceTokenValidationUrl" : " ROOT /tokens/validate",
+        // // "WebServiceTokenCreationBaseUrl" : " ROOT /tokens/",
+        // // "WebServiceTokenDecoderUrl" : " ROOT /tokens/decode",
+        // You should define it only if your auth webservice implements all 3 routes !
+        // "WebServiceRootUrl" : "http://change-me:8000/",
 
-          // The URL of the auth webservice route implementing user profile (optional)
-          // (this configuration was previously named "WebService" and its old name is still accepted
-          //  for backward compatibility)
-          // "WebServiceUserProfileUrl" : "http://change-me:8000/user/profile",
+        // The URL of the auth webservice route implementing user profile (optional)
+        // (this configuration was previously named "WebService" and its old name is still accepted
+        //  for backward compatibility)
+        // "WebServiceUserProfileUrl" : "http://change-me:8000/user/profile",
 
-          // The URL of the auth webservice route implementing resource level authorization (optional)
-          // "WebServiceTokenValidationUrl" : "http://change-me:8000/tokens/validate",
+        // The URL of the auth webservice route implementing resource level authorization (optional)
+        // "WebServiceTokenValidationUrl" : "http://change-me:8000/tokens/validate",
 
-          // The Base URL of the auth webservice route to create tokens (optional)
-          // "WebServiceTokenCreationBaseUrl" : "http://change-me:8000/tokens/",
+        // The Base URL of the auth webservice route to create tokens (optional)
+        // "WebServiceTokenCreationBaseUrl" : "http://change-me:8000/tokens/",
 
-          // The URL of the auth webservice route implementing token decoding (optional)
-          // "WebServiceTokenDecoderUrl": "http://change-me:8000/tokens/decode"
+        // The URL of the auth webservice route implementing token decoding (optional)
+        // "WebServiceTokenDecoderUrl": "http://change-me:8000/tokens/decode"
 
-          // The username and password to connect to the webservice (optional)
-          //"WebServiceUsername": "change-me",
-          //"WebServicePassword": "change-me",
-          
-          // An identifier added to the payload of each request to the auth webservice (optional)
-          //"WebServiceIdentifier": "change-me"
+        // The username and password to connect to the webservice (optional)
+        //"WebServiceUsername": "change-me",
+        //"WebServicePassword": "change-me",
+        
+        // An identifier added to the payload of each request to the auth webservice (optional)
+        //"WebServiceIdentifier": "change-me"
 
-          // The name of the HTTP headers that may contain auth tokens
-          //"TokenHttpHeaders" : [],
-          
-          // the name of the GET arguments that may contain auth tokens
-          //"TokenGetArguments" : [],
+        // The name of the HTTP headers that may contain auth tokens
+        //"TokenHttpHeaders" : [],
+        
+        // The name of the GET arguments that may contain auth tokens
+        //"TokenGetArguments" : [],
 
-          // A list of predefined configurations for well-known plugins
-          // "StandardConfigurations": [               // new in v 0.4.0
-          //     "osimis-web-viewer",
-          //     "stone-webviewer",
-          //     "orthanc-explorer-2"
-          // ],
+        // A list of predefined configurations for well-known plugins
+        // "StandardConfigurations": [               // new in v 0.4.0
+        //     "osimis-web-viewer",
+        //     "stone-webviewer",
+        //     "orthanc-explorer-2"
+        // ],
 
-          //"UncheckedResources" : [],
-          //"UncheckedFolders" : [],
-          //"CheckedLevel" : "studies",
-          //"UncheckedLevels" : [],
+        //"UncheckedResources" : [],
+        //"UncheckedFolders" : [],
+        //"CheckedLevel" : "studies",
+        //"UncheckedLevels" : [],
 
-          // Definition of required "user-permissions".  This can be fully customized.
-          // You may define other permissions yourself as long as they match the permissions
-          // provided in the user-profile route implemented by the auth-service.
-          // You may test your regex in https://regex101.com/ by selecting .NET (C#) and removing the leading ^ and trailing $
-          // The default configuration is suitable for Orthanc-Explorer-2 (see TBD sample)
-          "Permissions" : [
-              ["post", "^/auth/tokens/decode$", ""],
-              ["post", "^/tools/lookup$", ""], // currently used to authorize downloads in Stone (to map the StudyInstanceUID into an OrthancID.  Not ideal -> we should define a new API that has the resource ID in the path to be able to check it at resource level) but, on another hand, you do not get any Patient information from this route
+        // Definition of required "user-permissions".  This can be fully customized.
+        // You may define other permissions yourself as long as they match the permissions
+        // provided in the user-profile route implemented by the auth-service.
+        // You may test your regex in https://regex101.com/ by selecting .NET (C#) and removing the leading ^ and trailing $
+        // The default configuration is suitable for Orthanc-Explorer-2 (see https://github.com/orthanc-team/orthanc-auth-service)
+        "Permissions" : [
+            ["post", "^/auth/tokens/decode$", ""],
+            ["post", "^/tools/lookup$", ""], 
 
-              // elemental browsing in OE2
-              ["post", "^/tools/find$", "all|view"],
-              ["get" , "^/(patients|studies|series|instances)/([a-f0-9-]+)$", "all|view"],
-              ["get" , "^/(patients|studies|series|instances)/([a-f0-9-]+)/(studies|study|series|instances)$", "all|view"],
-              ["get" , "^/instances/([a-f0-9-]+)/(tags|header)$", "all|view"],
-              ["get" , "^/statistics$", "all|view"],
-
-              // create links to open viewer or download resources
-              ["put", "^/auth/tokens/(viewer-instant-link|meddream-instant-link)$", "all|view"],
-              ["put", "^/auth/tokens/(download-instant-link)$", "all|download"],
-
-              // share a link to open a study
-              ["put", "^/auth/tokens/(stone-viewer-publication|meddream-viewer-publication|osimis-viewer-publication)$", "all|share"],
-
-              // uploads
-              ["post", "^/instances$", "all|upload"],
-
-              // monitor jobs you have created
-              ["get" , "^/jobs/([a-f0-9-]+)$", "all|send|modify|anonymize|q-r-remote-modalities"],
-
-              // interacting with peers/modalities/dicomweb
-              ["post", "^/(peers|modalities)/(.*)/store$", "all|send"],
-              ["get" , "^/(peers|modalities)$", "all|send|q-r-remote-modalities"],
-              ["post", "^/modalities/(.*)/echo$", "all|send|q-r-remote-modalities"],
-              ["post", "^/modalities/(.*)/query$", "all|q-r-remote-modalities"],
-              ["get", "^/queries/([a-f0-9-]+)/answers$", "all|q-r-remote-modalities"],
-              ["post", "^/modalities/(.*)/move$", "all|q-r-remote-modalities"],
-              ["get" , "^/DICOM_WEB_ROOT/servers$", "all|send|q-r-remote-modalities"],
-              ["get" , "^/DICOM_WEB_ROOT/(servers)/(.*)/stow$", "all|send"],
-
-              // modifications/anonymization
-              ["post", "^/(patients|studies|series|instances)/([a-f0-9-]+)/modify(.*)$", "all|modify"],
-              ["post", "^/(patients|studies|series|instances)/([a-f0-9-]+)/anonymize(.*)$", "all|anonymize"],
-
-              // deletes
-              ["delete" , "^/(patients|studies|series|instances)/([a-f0-9-]+)$", "all|delete"],
-
-              // settings
-              ["put", "^/tools/log-level$", "all|settings"],
-              ["get", "^/tools/log-level$", "all|settings"]
-          ]
-      }
+            // elemental browsing in OE2
+            ["post", "^/tools/find$", "all|view"],
+            ["get" , "^/(patients|studies|series|instances)/([a-f0-9-]+)$", "all|view"],
+            ...
+        ]
+    }
   }
 
 The following options have been described above: ``WebServiceRootUrl``,
@@ -419,7 +380,17 @@ Here is a minimal configuration for the :ref:`Stone Web viewer <stone_webviewer>
 Integration with the Orthanc Explorer 2
 ---------------------------------------
 
-More info to come soon.
+This project contains a `complete example<https://github.com/orthanc-team/orthanc-auth-service>`__ 
+of a Web services integrating with :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` to implement
+user level permissions and sharing of single studies.
+
+This sample also shows how to implement all routes that the webservice might provide:
+
+- ``/tokens/validate`` to validate tokens identifying either a user or granting access to a single resource
+- ``/tokens/{token_type}`` to generate tokens granting access to specific DICOM resources.
+- ``/tokens/decode`` to extract the info from a token
+- ``/user/get-profile`` to return the user profile linked to a given token.  This profile
+  includes a list of permissions.
 
 
 .. _orthanc-explorer-authorization:
