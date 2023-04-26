@@ -114,9 +114,11 @@ option to ``true``, you should:
     end
 
   Very importantly, make sure to protect ``POST`` access to the
-  ``/tools/execute-script`` URI. This URI can indeed be used by a
-  malicious user to execute any system command on the computer as the
-  user that runs Orthanc.
+  ``/tools/execute-script`` and ``/instances/../export`` URIs. 
+  The first URI can indeed be used by a malicious user to execute any 
+  system command on the computer as the user that runs Orthanc.  The second
+  URI can be used by a malicious user to overwrite system files possibly
+  with malicious DICOM files that may lead to execution of system commands.
 
 * Consider implementing a :ref:`higher-level application
   <improving-interface>` (e.g. in PHP, Java, Django...) that takes
