@@ -131,7 +131,8 @@ Here are the main metadata handled by the Orthanc core:
 * ``ReceptionDate`` records when a DICOM instance was received by
   Orthanc. Similarly, ``LastUpdate`` records, for each
   patient/study/series, the last time a DICOM instance was added to
-  this resource.
+  this resource.  Starting with Orthanc 1.12.1, ``LastUpdate`` is also
+  updated when a child resource is deleted.
 * ``RemoteAET`` records the AET of the modality that has sent some
   DICOM instance to Orthanc using the DICOM protocol.
 * ``ModifiedFrom`` and ``AnonymizedFrom`` hold from which original
