@@ -52,9 +52,9 @@ provide a configuration system through:
 - classical configuration files
 - a mix of these options
 
-This `repository <https://bitbucket.org/osimis/orthanc-setup-samples/src>`__
+This `repository <https://github.com/orthanc-server/orthanc-setup-samples/src>`__
 contains lots of examples on how to use these images.  In particular,
-`this example <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/all-usages/docker-compose.yml>`__ 
+`this example <https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/all-usages/docker-compose.yml>`__ 
 shows all the way that can be used to generate the same
 configuration in Orthanc.
 
@@ -272,7 +272,7 @@ Healthcheck probe
 
 In version 21.10.0, the `/probes/test-aliveness.py <https://github.com/orthanc-server/orthanc-builder/blob/master/docker/orthanc/test-aliveness.py>`__ 
 script has been added in order to perform healthchecks.  Check the doc in the script itself for more details.
-A sample configuration is also available in `this sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/8016d140a237a892db703aac4782307c46732847/docker/tls-mutual-auth/docker-compose.yml#lines-51>`__
+A sample configuration is also available in `this sample <https://github.com/orthanc-server/orthanc-setup-samples/src/8016d140a237a892db703aac4782307c46732847/docker/tls-mutual-auth/docker-compose.yml#lines-51>`__
 
 
 Plugins

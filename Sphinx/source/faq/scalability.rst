@@ -242,7 +242,7 @@ concurrent access to the DB.
 One solution to avoid this limitation was to have multiple Orthanc
 accessing the same DB (works only for MySQL and PostgreSQL) as
 presented in this `sample
-<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/multiple-orthancs-on-same-db/>`__.
+<https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/multiple-orthancs-on-same-db/>`__.
 However, this solution was only robust if there was **one single
 "writer" Orthanc server** (i.e. only one Orthanc was modifying the
 database).  Indeed, the core of Orthanc <= 1.9.1 did not support the

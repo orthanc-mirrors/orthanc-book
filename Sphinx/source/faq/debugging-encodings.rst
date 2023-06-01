@@ -29,6 +29,6 @@ In this case, they have most likely been generated on a Windows system by using 
 
 How to solve it ?  It is highly recommended to fix it before Orthanc: in your RIS, worklist server or modality.
 However, if you can not fix it there, you may still try to fix it once the file has been stored in Orthanc.
-You can get inspiration from this `lua script <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/lua-samples/sanitizeInvalidUtf8TagValues.lua>`__ 
+You can get inspiration from this `lua script <https://github.com/orthanc-server/orthanc-setup-samples/src/master/lua-samples/sanitizeInvalidUtf8TagValues.lua>`__ 
 that is fixing invalid UTF-8 characters
 

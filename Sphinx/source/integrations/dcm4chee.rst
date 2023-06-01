@@ -4,6 +4,6 @@ Interface Orthanc and Dcm4Chee
 ==============================
 
 A Docker Compose environment is part of the `Orthanc setup samples
-<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/dcm4chee5/>`__
+<https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/dcm4chee5/>`__
 in order to illustrate how to interface Orthanc with Dcm4Chee 5, using
 either the DICOM protocol or the DICOMweb protocol.

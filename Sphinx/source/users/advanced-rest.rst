@@ -280,7 +280,7 @@ Using powershell:
     Write-Host "The instance can be retrieved in PDF at http://localhost:8042$($reply.Path)/pdf"
 
 And here's another sample  `using python
-<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/python-samples/attach-pdf-to-study.py>`__.
+<https://github.com/orthanc-server/orthanc-setup-samples/src/master/python-samples/attach-pdf-to-study.py>`__.
 
 Please note that the ``/tools/create-dicom`` API call will return the
 Orthanc instance ID of the newly created DICOM resource.

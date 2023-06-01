@@ -334,12 +334,12 @@ If you have ``.unk`` files in your storage, you must enable this configuration.
 Sample setups
 -------------
 
-You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/#markdown-header-for-software-integrators>`__ .
+You'll find sample deployments and more info in the `Orthanc Setup Samples repository <https://github.com/orthanc-server/orthanc-setup-samples/src/master/#markdown-header-for-software-integrators>`__ .
 
 Performances
 ------------
 
-You'll find some performance comparison between VM SSDs and object-storage `here <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/performance-tests/>`__ .
+You'll find some performance comparison between VM SSDs and object-storage `here <https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/performance-tests/>`__ .
 
 
 .. _client-side-encryption:

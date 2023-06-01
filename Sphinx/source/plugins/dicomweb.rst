@@ -213,7 +213,7 @@ are processed:
   in a setup where performance and accuracy are both important, you
   should configure :ref:`ExtraMainDicomTags <main-dicom-tags>` and configure
   ``StudiesMetadata`` to ``MainDicomTags`` and ``SeriesMetadata`` to ``MainDicomTags``
-  as demonstrated in this `sample <https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/stone-viewer/docker-compose.yml>`__.
+  as demonstrated in this `sample <https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/stone-viewer/docker-compose.yml>`__.
 
 
 If using the ``Extrapolate`` mode, the predefined tags are provided

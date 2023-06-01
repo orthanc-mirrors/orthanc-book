@@ -221,7 +221,7 @@ Note that the same kind of configuration is also available for
 
 An example of such a setup with instructions to generate the
 certificates is available `here
-<https://bitbucket.org/osimis/orthanc-setup-samples/src/master/docker/tls-mutual-auth/>`__.
+<https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/tls-mutual-auth/>`__.
 
 
 .. _client-certificate-web-browser:
