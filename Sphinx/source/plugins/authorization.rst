@@ -375,12 +375,12 @@ Here is a minimal configuration for the :ref:`Stone Web viewer <stone_webviewer>
     }
   }
 
-.. _orthanc-explorer-authorization:
+.. _orthanc-explorer-2-authorization:
 
 Integration with the Orthanc Explorer 2
 ---------------------------------------
 
-This project contains a `complete example<https://github.com/orthanc-team/orthanc-auth-service>`__ 
+This project contains a `complete example <https://github.com/orthanc-team/orthanc-auth-service>`__ 
 of a Web services integrating with :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` to implement
 user level permissions and sharing of single studies.
 
