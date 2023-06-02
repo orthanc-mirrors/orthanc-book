@@ -92,6 +92,9 @@ option to ``true``, you should:
   ``/instances/../export`` route) by leaving the configuration
   ``RestApiWriteToFileSystemEnabled`` to its default ``false`` value.
 
+* Make sure to run Orthanc as a non-privileged user with read-write access only 
+  for the storage area.
+
 * Setup rules that define, for each authorized user, which resources
   it can access, and through which HTTP method (GET, POST, DELETE
   and/or PUT). This can be done by defining a :ref:`filter written in
