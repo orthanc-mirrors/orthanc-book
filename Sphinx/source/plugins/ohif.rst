@@ -78,7 +78,7 @@ use this plugin::
 
   {
     "Plugins" : [
-      "/home/user/orthanc-ohif/Build/libOHIF.so"
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so"
     ]
   }
 
@@ -121,8 +121,8 @@ Here is a minimal configuration file to use DICOMweb::
 
   {
     "Plugins" : [
-      "/home/user/orthanc-ohif/Build/libOHIF.so",
-      "/home/user/orthanc-dicomweb/Build/libOHIF.so"
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so",
+      "/home/user/orthanc-dicomweb/Build/libOrthancDicomWeb.so"
     ],
     "OHIF" : {
       "DataSource" : "dicom-web"
@@ -142,7 +142,7 @@ using the ``UserConfiguration`` option as follows::
 
   {
     "Plugins" : [
-      "/home/user/orthanc-ohif/Build/libOHIF.so"
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so"
     ],
     "OHIF" : {
       "UserConfiguration" : "ohif.js"
@@ -184,7 +184,7 @@ configuration file must be used for OHIF to work::
 
   {
     "Plugins" : [
-      "/home/user/orthanc-ohif/Build/libOHIF.so"
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so"
     ],
     "OHIF" : {
       "RouterBasename" : "/imaging/demo/orthanc/ohif/"
@@ -221,7 +221,7 @@ of metadata using the following configuration::
 
   {
     "Plugins" : [
-      "/home/user/orthanc-ohif/Build/libOHIF.so"
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so"
     ],
     "OHIF" : {
       "DataSource" : "dicom-json",
