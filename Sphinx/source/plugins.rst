@@ -82,10 +82,11 @@ From UCLouvain
 .. toctree::
    :maxdepth: 1
 
+   plugins/ohif.rst
+   plugins/volview.rst
    plugins/tcia.rst
    plugins/indexer.rst
    plugins/neuro.rst
-   plugins/volview.rst
    plugins/multitenant-dicom.rst
 
 .. _plugins-contributed:
