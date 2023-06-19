@@ -145,13 +145,13 @@ using the ``UserConfiguration`` option as follows::
       "/home/user/orthanc-ohif/Build/libOHIF.so"
     ],
     "OHIF" : {
-      "UserConfiguration" : "ohif.json"
+      "UserConfiguration" : "ohif.js"
     }
   }
 
 .. highlight:: javascript
 
-A minimal ``ohif.json`` would be::
+A minimal ``ohif.js`` would be::
 
   window.config = {
     extensions: [],
