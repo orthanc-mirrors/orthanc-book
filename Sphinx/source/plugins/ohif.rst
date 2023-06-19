@@ -130,6 +130,45 @@ Here is a minimal configuration file to use DICOMweb::
   }
   
 
+User configuration of OHIF
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: json
+
+OHIF comes with a number of `configuration options
+<https://v3-docs.ohif.org/configuration/configurationfiles/#configuration-options>`__
+that can be fine-tuned by the user. User settings can be injected
+using the ``UserConfiguration`` option as follows::
+
+  {
+    "Plugins" : [
+      "/home/user/orthanc-ohif/Build/libOHIF.so"
+    ],
+    "OHIF" : {
+      "UserConfiguration" : "ohif.json"
+    }
+  }
+
+.. highlight:: javascript
+
+A minimal ``ohif.json`` would be::
+
+  window.config = {
+    extensions: [],
+    modes: []
+  }
+
+Note that the following configuration options will be overridden by
+the OHIF plugin to properly configure the data source and the
+integration with the Orthanc Web server:
+
+* ``window.config.dataSources``
+* ``window.config.defaultDataSourceName``
+* ``window.config.routerBasename``
+* ``window.config.showStudyList`` (set to ``false`` if using the DICOM
+  JSON data source)
+  
+
 Router basename
 ^^^^^^^^^^^^^^^
 
@@ -234,8 +273,8 @@ script that would preload the metadata for the already existing DICOM
 studies, hereby greatly speeding up the first opening of those studies
 as well.
 
-This script would loop over the :ref:`the DICOM studies that are stored
-by Orthanc <rest-access>` using ``GET /studies``. For each study whose
-:ref:`Orthanc identifier <orthanc-identifiers>` is ``id``, the script
-would simply call ``GET /studies/{id}/ohif-dicom-json``.
+This script would loop over the :ref:`the DICOM studies that are
+stored by Orthanc <rest-access>` using ``GET /studies``. For each
+study whose :ref:`Orthanc identifier <orthanc-ids>` is ``id``, the
+script would simply call ``GET /studies/{id}/ohif-dicom-json``.
 
