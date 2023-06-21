@@ -187,6 +187,7 @@ decision chart:
    * **Africa**:
 
      * `Abdrahman Elkafil <mailto:elkafil@nextbehealthcare.com>`__ (English/French/Arabic, Belgium and Morocco)
+     * `Olakunle Dada <mailto:holakunle69@gmail.com>`__ (English/French, Nigeria)
 
    * **Asia**:
      
