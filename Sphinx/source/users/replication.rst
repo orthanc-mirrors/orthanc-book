@@ -72,11 +72,14 @@ Direct access to the filesystem
 The most direct way to replicate an instance of Orthanc consists in
 using the `ImportDicomFiles
 <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
-script of the Orthanc distribution. For instance, the following
-command would recursively explore the content of the
-``OrthancStorage`` folder (where Orthanc stores its DICOM files by
-default), and send each DICOM file inside this folder to the instance
-of Orthanc whose REST API is listening on
+script of the Orthanc distribution. This process can also be used to
+restore the content of an Orthanc server after a corruption of its
+database.
+
+For instance, the following command would recursively explore the
+content of the ``OrthancStorage`` folder (where Orthanc stores its
+DICOM files by default), and send each DICOM file inside this folder
+to the instance of Orthanc whose REST API is listening on
 ``http://192.168.0.2:8042``::
 
     $ python ImportDicomFiles.py 192.168.0.2 8042 OrthancStorage
@@ -97,14 +100,11 @@ This method will only succeed if:
 
 **Important remark:** Because of :ref:`the way Orthanc stores its
 database <orthanc-storage>` on the filesystem, it is *entirely normal*
-that the ``ImportDicomFiles.py`` script ends by saying that only half
-of the DICOM files were properly sent. This is because the JSON
-summaries are not DICOM files, and are thus rejected by the target
-Orthanc server. More information are available `on the discussion
-group
+if the ``ImportDicomFiles.py`` script ends by saying that only half of
+the DICOM files were properly sent. This is because the JSON summaries
+are not DICOM files, and are thus rejected by the target Orthanc
+server. More information are available `on the discussion group
 <https://groups.google.com/d/msg/orthanc-users/Zlhtcpo76qQ/tp8EqaRCAQAJ>`__.
-
-
 
 
 Generic replication

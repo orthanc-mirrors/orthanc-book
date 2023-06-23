@@ -17,7 +17,10 @@ list of free and open-source viewers that are known to be compatible
 with Orthanc (do not hesitate to `warn us
 <mailto:s.jodogne@orthanc-labs.com>`__ about other compatible FOSS):
 
-* `Open Health Imaging Foundation (OHIF) <https://docs.ohif.org/>`__.
+* `Open Health Imaging Foundation (OHIF) <https://docs.ohif.org/>`__,
+  for which an official :ref:`Orthanc plugin <ohif>` is available.
+* `Kitware's VolView <https://volview.kitware.com/>`__, for which an
+  official :ref:`Orthanc plugin <volview>` is available.
 * `Horos <https://horosproject.org/>`__.
 * `Gingko CADx <http://ginkgo-cadx.com/en/>`__ (a
   :ref:`configuration guide <ginkgo-cadx>` is available).

@@ -187,11 +187,13 @@ decision chart:
    * **Africa**:
 
      * `Abdrahman Elkafil <mailto:elkafil@nextbehealthcare.com>`__ (English/French/Arabic, Belgium and Morocco)
+     * `Olakunle Dada <mailto:holakunle69@gmail.com>`__ (English/French, Nigeria)
 
    * **Asia**:
      
      * `Phong Tran Duc <http://www.itechcorp.com.vn/>`__ (English/Vietnamese, Vietnam)
      * `Rana Asim Wajid <http://ethosmed.com/>`__ (English/Urdu/Punjabi, Pakistan)
+     * `Yash Sonalia <mailto:sonaliayash@gmail.com>`__ (English/Hindi/Bengali, India)
 
    * **Oceania**:
      

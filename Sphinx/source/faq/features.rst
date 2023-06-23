@@ -329,6 +329,7 @@ complete the **central registry** below:
 * ``Global property 5468`` is used by the :ref:`DICOMweb plugin <dicomweb>` to store the DICOMweb servers into the Orthanc database.
 * ``Metadata 4200`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version <= 0.7.
 * ``Metadata 4201`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version >= 1.0.
+* ``Metadata 4202`` is used by the :ref:`OHIF plugin <ohif>` to store precomputed information about the DICOM instances.
 
 
 Jobs
