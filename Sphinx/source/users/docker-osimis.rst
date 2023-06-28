@@ -54,7 +54,7 @@ provide a configuration system through:
 
 This `repository <https://github.com/orthanc-server/orthanc-setup-samples/src>`__
 contains lots of examples on how to use these images.  In particular,
-`this example <https://github.com/orthanc-server/orthanc-setup-samples/src/master/docker/all-usages/docker-compose.yml>`__ 
+`this example <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/all-usages/docker-compose.yml>`__ 
 shows all the way that can be used to generate the same
 configuration in Orthanc.
 
