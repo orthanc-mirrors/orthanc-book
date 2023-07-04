@@ -18,7 +18,7 @@ instead of the more complex C/C++ programming languages.
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.0/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 

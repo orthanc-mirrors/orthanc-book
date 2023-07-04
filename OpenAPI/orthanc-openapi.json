@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.0"
+      "version" : "1.12.1"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -372,6 +372,7 @@
                               "FileUuid" : "dc031d9e-ef02-4871-821f-ffe445deb7c2",
                               "ID" : "d94d9a03-3003b047-a4affc69-322313b2-680530a2",
                               "IndexInSeries" : 155,
+                              "Labels" : [],
                               "MainDicomTags" : {
                                  "AcquisitionNumber" : "4",
                                  "ImageOrientationPatient" : "1\\0\\0\\0\\1\\0",
@@ -2394,9 +2395,9 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON array containing the names of the labels"
+                           "description" : "JSON array containing the names of the labels",
+                           "example" : []
                         }
                      }
                   },
@@ -2589,7 +2590,9 @@
                               "TransferSyntax",
                               "SopClassUid",
                               "RemoteIP",
-                              "HttpUsername"
+                              "HttpUsername",
+                              "PixelDataOffset",
+                              "4202"
                            ]
                         }
                      }
@@ -3025,6 +3028,7 @@
                            "example" : {
                               "ID" : "65ce8003-696b2eb6-03adeee7-6561ce8e-3e03f13a",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20200803T131236",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "",
@@ -3368,6 +3372,7 @@
                                  "..."
                               ],
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20200803T131236",
                               "MainDicomTags" : {
                                  "BodyPartExamined" : "CHEST",
@@ -3576,6 +3581,7 @@
                            "example" : {
                               "ID" : "1c379a23-9fd28bba-02b60e5b-850ff34e-4349f09b",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20200803T131236",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "2819497684894126",
@@ -3746,9 +3752,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "0e2b7757-763b-4ef4-8323-fc7625094e39",
-                              "0e6e6562-f56a-485b-9905-4b722e2c5e1d",
-                              "4eee84fe-4248-4683-8506-6f93fb55c60a",
+                              "0d9e3061-0ec4-49ff-966b-7f0dc99ad6e6",
+                              "46fd1fe1-84d4-4dcd-b386-d48f320e98e3",
+                              "723a96f3-b473-45c4-bc49-00e54c1734ca",
                               "..."
                            ]
                         }
@@ -3940,6 +3946,37 @@
          }
       },
       "/jobs/{id}/{key}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Delete the output produced by a job. As of Orthanc 1.12.1, only the jobs that generate a DICOMDIR media or a ZIP archive provide such an output (with `key` equals to `archive`).",
+            "parameters" : [
+               {
+                  "description" : "Identifier of the job of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Name of the output of interest",
+                  "in" : "path",
+                  "name" : "key",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Delete a job output",
+            "tags" : [ "Jobs" ]
+         },
          "get" : {
             "deprecated" : false,
             "description" : "Retrieve some output produced by a job. As of Orthanc 1.8.2, only the jobs that generate a DICOMDIR media or a ZIP archive provide such an output (with `key` equals to `archive`).",
@@ -5053,6 +5090,7 @@
                            "example" : {
                               "ID" : "46e6332c-677825b6-202fcf7c-f787bc5f-7b07c382",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091542",
                               "MainDicomTags" : {
                                  "PatientID" : "SOtNwu",
@@ -6119,12 +6157,7 @@
                                  "FileUuid" : "c14b2b87-53e2-420b-baf9-020cae34fedf",
                                  "ID" : "e3dfd688-80e4743a-29c45f90-371ec4a4-04d18ae5",
                                  "IndexInSeries" : 137,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-96.3193359375\\-249.3193359375\\62",
-                                    "InstanceNumber" : "137",
-                                    "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.54693.30000006053107175587500014881"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -6132,12 +6165,7 @@
                                  "FileUuid" : "27cdb02f-500f-4b37-9ca1-058d8d4f649a",
                                  "ID" : "4fecddf1-518346e4-4f30176b-c453b3d8-65899230",
                                  "IndexInSeries" : 114,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-96.3193359375\\-249.3193359375\\73.5",
-                                    "InstanceNumber" : "114",
-                                    "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.54693.30000006053107175587500014858"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -6145,12 +6173,7 @@
                                  "FileUuid" : "5a6334a8-e050-47e5-8832-531ee62aa9a7",
                                  "ID" : "c9a55bc1-9e98ba4b-bc455dc3-24c4c525-1b171b6c",
                                  "IndexInSeries" : 66,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-96.3193359375\\-249.3193359375\\97.5",
-                                    "InstanceNumber" : "66",
-                                    "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.54693.30000006053107175587500014810"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -6158,12 +6181,7 @@
                                  "FileUuid" : "e6c09e08-8284-4416-a90f-67a7dc9f68f0",
                                  "ID" : "135cca6f-4c099fdd-afc99251-f58a819b-5a0222eb",
                                  "IndexInSeries" : 161,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-96.3193359375\\-249.3193359375\\50",
-                                    "InstanceNumber" : "161",
-                                    "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.54693.30000006053107175587500014905"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -6171,12 +6189,7 @@
                                  "FileUuid" : "9eb33412-d1e9-4bb0-879b-5501db81d574",
                                  "ID" : "719d58b1-2a259486-7cc5919d-68a2bd30-da2cd290",
                                  "IndexInSeries" : 61,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-96.3193359375\\-249.3193359375\\100",
-                                    "InstanceNumber" : "61",
-                                    "SOPInstanceUID" : "1.3.12.2.1107.5.1.4.54693.30000006053107175587500014805"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               "..."
@@ -6414,9 +6427,9 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON array containing the names of the labels"
+                           "description" : "JSON array containing the names of the labels",
+                           "example" : []
                         }
                      }
                   },
@@ -7194,7 +7207,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091542",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               }
                            ]
@@ -7427,6 +7440,7 @@
                               {
                                  "ID" : "e98b9ac7-dd31ac40-ff046cb2-f0400d30-12f81d85",
                                  "IsStable" : true,
+                                 "Labels" : [],
                                  "LastUpdate" : "20180414T091542",
                                  "MainDicomTags" : {
                                     "AccessionNumber" : "0",
@@ -7436,7 +7450,6 @@
                                     "StudyDate" : "20060531",
                                     "{...}" : "..."
                                  },
-                                 "ParentPatient" : "46e6332c-677825b6-202fcf7c-f787bc5f-7b07c382",
                                  "{...}" : "..."
                               }
                            ]
@@ -7838,14 +7851,19 @@
                               "explorer.js",
                               "authorization",
                               "connectivity-checks",
+                              "delayed-deletion",
                               "dicom-web",
                               "gdcm",
+                              "housekeeper",
                               "indexer",
+                              "multitenant-dicom",
                               "mysql-index",
                               "mysql-storage",
                               "neuro",
                               "odbc-index",
                               "odbc-storage",
+                              "ohif",
+                              "orthanc-explorer-2",
                               "postgresql-index",
                               "postgresql-storage",
                               "serve-folders",
@@ -7916,7 +7934,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.7"
+                              "Version" : "1.13"
                            }
                         }
                      }
@@ -8831,6 +8849,7 @@
                               "ID" : "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
                               "Instances" : [ "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f" ],
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091542",
                               "MainDicomTags" : {
                                  "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
@@ -9904,13 +9923,7 @@
                                  "FileUuid" : "9016272a-ee8c-41b2-afc6-dcfe06dd3be8",
                                  "ID" : "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f",
                                  "IndexInSeries" : 1,
-                                 "MainDicomTags" : {
-                                    "ImagePositionPatient" : "0\\-159\\-425.915649",
-                                    "InstanceCreationDate" : "20050927",
-                                    "InstanceCreationTime" : "155030.000000",
-                                    "InstanceNumber" : "1",
-                                    "SOPInstanceUID" : "1.2.840.113704.7.1.1.6632.1127829031.2"
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               }
                            ]
@@ -10034,9 +10047,9 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON array containing the names of the labels"
+                           "description" : "JSON array containing the names of the labels",
+                           "example" : []
                         }
                      }
                   },
@@ -10973,6 +10986,7 @@
                            "example" : {
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091601",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
@@ -11240,6 +11254,7 @@
                            "example" : {
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091601",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
@@ -11575,6 +11590,7 @@
                            "example" : {
                               "ID" : "27f7126f-4f66fb14-03f4081b-f9341db2-53925988",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091532",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "0",
@@ -12663,14 +12679,7 @@
                                  "FileUuid" : "42607af0-e2ca-402a-9cb4-8819a0485dbd",
                                  "ID" : "82cc1a6b-7b05d34e-cd74474b-594f0d43-94f609d8",
                                  "IndexInSeries" : 3,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-118.20798927708\\-118.00763136239\\71.7517339810729",
-                                    "InstanceCreationDate" : "20061201",
-                                    "InstanceCreationTime" : "145313.000000",
-                                    "InstanceNumber" : "3",
-                                    "{...}" : "..."
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -12678,14 +12687,7 @@
                                  "FileUuid" : "f986a0de-cf3b-4acc-a2ca-ce6a5844ec63",
                                  "ID" : "2fbd6d5f-802f6561-b9d8da32-c54ead16-18a208bd",
                                  "IndexInSeries" : 13,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-116.77244740887\\-113.68593889565\\11.9247972592711",
-                                    "InstanceCreationDate" : "20061201",
-                                    "InstanceCreationTime" : "145313.000000",
-                                    "InstanceNumber" : "13",
-                                    "{...}" : "..."
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -12693,14 +12695,7 @@
                                  "FileUuid" : "64cc6dae-228d-4e60-82ea-34c540a09cfb",
                                  "ID" : "4dbca7c1-f6e1a582-b3196370-0151cac8-19caac8e",
                                  "IndexInSeries" : 17,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-116.19823080464\\-111.95726186127\\-12.005976177752",
-                                    "InstanceCreationDate" : "20061201",
-                                    "InstanceCreationTime" : "145313.000000",
-                                    "InstanceNumber" : "17",
-                                    "{...}" : "..."
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -12708,14 +12703,7 @@
                                  "FileUuid" : "06823b17-6217-4534-b318-4de5c9157c74",
                                  "ID" : "98c6f0c7-e6f9812b-d0a9df8a-97eeaa41-fa891d8e",
                                  "IndexInSeries" : 6,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-117.77732664509\\-116.71112352700\\53.8036520108580",
-                                    "InstanceCreationDate" : "20061201",
-                                    "InstanceCreationTime" : "145313.000000",
-                                    "InstanceNumber" : "6",
-                                    "{...}" : "..."
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -12723,14 +12711,7 @@
                                  "FileUuid" : "7012f4ad-e1f7-49a8-95e0-5050227b4090",
                                  "ID" : "c25f4e48-8f7d737e-3dbeafb5-f1563a30-eddf816c",
                                  "IndexInSeries" : 20,
-                                 "MainDicomTags" : {
-                                    "AcquisitionNumber" : "3",
-                                    "ImagePositionPatient" : "-115.76756829186\\-110.66075450272\\-29.954057492315",
-                                    "InstanceCreationDate" : "20061201",
-                                    "InstanceCreationTime" : "145313.000000",
-                                    "InstanceNumber" : "20",
-                                    "{...}" : "..."
-                                 },
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               "..."
@@ -12968,9 +12949,9 @@
                "200" : {
                   "content" : {
                      "application/json" : {
-                        "examples" : {},
                         "schema" : {
-                           "description" : "JSON array containing the names of the labels"
+                           "description" : "JSON array containing the names of the labels",
+                           "example" : []
                         }
                      }
                   },
@@ -13879,6 +13860,7 @@
                            "example" : {
                               "ID" : "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0",
                               "IsStable" : true,
+                              "Labels" : [],
                               "LastUpdate" : "20180414T091532",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19490301",
@@ -13999,7 +13981,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091528",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -14014,7 +13996,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091530",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -14029,7 +14011,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091530",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -14044,7 +14026,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091531",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
@@ -14059,7 +14041,7 @@
                                     "..."
                                  ],
                                  "IsStable" : true,
-                                 "LastUpdate" : "20180414T091531",
+                                 "Labels" : [],
                                  "{...}" : "..."
                               },
                               "..."
@@ -14346,18 +14328,32 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 16,
+                              "ApiVersion" : 20,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
+                              "DatabaseServerIdentifier" : "d67a54ff-aa19a273-ead8ba48-fa279633-f9654ab4",
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
                               "DicomPort" : 4242,
+                              "HasLabels" : true,
                               "HttpPort" : 8042,
+                              "IngestTranscoding" : "",
                               "IsHttpServerSecure" : false,
+                              "MainDicomTags" : {
+                                 "Instance" : "0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330",
+                                 "Patient" : "0010,0010;0010,0020;0010,0030;0010,0040;0010,1000",
+                                 "Series" : "0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000",
+                                 "Study" : "0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060"
+                              },
+                              "MaximumStorageMode" : "Recycle",
+                              "MaximumStorageSize" : 0,
                               "Name" : "Orthanc Demo",
+                              "OverwriteInstances" : false,
                               "PluginsEnabled" : true,
                               "StorageAreaPlugin" : null,
-                              "Version" : "1.10.1"
+                              "StorageCompression" : false,
+                              "UserMetadata" : {},
+                              "Version" : "1.12.0"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14948,7 +14944,7 @@
                         "description" : "",
                         "properties" : {
                            "Content" : {
-                              "description" : "This field can be used to embed an image (pixel data) or a PDF inside the created DICOM instance. The PNG image, the JPEG image or the PDF file must be provided using their [data URI scheme encoding](https://en.wikipedia.org/wiki/Data_URI_scheme). This field can possibly contain a JSON array, in which case a DICOM series is created containing one DICOM instance for each item in the `Content` field.",
+                              "description" : "This field can be used to embed an image (pixel data encoded as PNG or JPEG), a PDF, or a 3D manufactoring model (MTL/OBJ/STL) inside the created DICOM instance. The file to be encapsulated must be provided using its [data URI scheme encoding](https://en.wikipedia.org/wiki/Data_URI_scheme). This field can possibly contain a JSON array, in which case a DICOM series is created containing one DICOM instance for each item in the `Content` field.",
                               "type" : "string"
                            },
                            "Force" : {
@@ -15882,7 +15878,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1681548113397\northanc_count_patients 8 1681548113397\northanc_count_series 26 1681548113397\northanc_count_studies 8 1681548113397\northanc_dicom_cache_count 243 1681494684086\northanc_dicom_cache_size 127.85218 1681494684086\northanc_disk_size_mb 1018.65021 1681548113397\northanc_jobs_completed 10 1681548113397\northanc_jobs_failed 3 1681548113397\northanc_jobs_pending 0 1681548113397\northanc_jobs_running 0 1681548113397\northanc_jobs_success 7 1681548113397\northanc_rest_api_active_requests 1 1681548113396\northanc_rest_api_duration_ms 1517 1681548111639\northanc_storage_read_duration_ms 43 1681548110651\northanc_uncompressed_size_mb 1018.65021 1681548113397\n"
+                        "example" : "orthanc_count_instances 2552 1688489399993\northanc_count_patients 8 1688489399993\northanc_count_series 26 1688489399993\northanc_count_studies 8 1688489399993\northanc_dicom_cache_count 5 1688475481515\northanc_dicom_cache_size 0.636888504 1688475481515\northanc_disk_size_mb 1018.65021 1688489399993\northanc_jobs_completed 10 1688489399993\northanc_jobs_failed 1 1688489399993\northanc_jobs_pending 0 1688489399993\northanc_jobs_running 0 1688489399993\northanc_jobs_success 9 1688489399993\northanc_last_change 5395 1688489399993\northanc_rest_api_active_requests 1 1688489399991\northanc_rest_api_duration_ms 582 1688489398151\northanc_storage_read_duration_ms 17 1688489397639\northanc_uncompressed_size_mb 1018.65021 1688489399993\northanc_up_time_s 172856 1688489399993\n"
                      }
                   },
                   "description" : ""
@@ -15901,7 +15897,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230415T084153",
+                        "example" : "20230704T165000",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15923,7 +15919,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230415T084153",
+                        "example" : "20230704T165000",
                         "schema" : {
                            "description" : "The local time"
                         }

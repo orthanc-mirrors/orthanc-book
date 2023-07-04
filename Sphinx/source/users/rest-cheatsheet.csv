@@ -59,7 +59,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/jobs/{id}/pause``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1pause/post>`__,,,Pause job
 ``/jobs/{id}/resubmit``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1resubmit/post>`__,,,Resubmit job
 ``/jobs/{id}/resume``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1resume/post>`__,,,Resume job
-``/jobs/{id}/{key}``,`GET <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/get>`__,,,,Get job output
+``/jobs/{id}/{key}``,`GET <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/delete>`__,,Get job output
 ``/modalities``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities/get>`__,,,,List DICOM modalities
 ``/modalities/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/put>`__,List operations on modality
 ``/modalities/{id}/configuration``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1configuration/get>`__,,,,Get modality configuration
