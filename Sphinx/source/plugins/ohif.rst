@@ -12,8 +12,11 @@ Orthanc with the `OHIF <https://ohif.org/>`__ extensible Web imaging
 platform.
 
 The plugin greatly simplifies the deployment of OHIF, as it does not
-necessitate the setup of any reverse proxy. It also speeds up the
-loading of 
+necessitate the setup of any reverse proxy.
+
+If you face difficulties in using OHIF, please get in touch with the
+`OHIF community <https://ohif.org/collaborate>`__ in the first place.
+Indeed, the OHIF and Orthanc communities are entirely distinct.
 
 
 Usage
@@ -27,7 +30,7 @@ to view a demo video):
            :align: center
            :width: 800
            :target: https://www.youtube.com/watch?v=-lzddzq9iT4
-|
+ |
 
 
 Compilation
@@ -169,6 +172,8 @@ integration with the Orthanc Web server:
   JSON data source)
   
 
+.. _ohif-router-basename:
+
 Router basename
 ^^^^^^^^^^^^^^^
 
@@ -237,6 +242,47 @@ Note that preloading is only applied to the newly received instances:
 The DICOM instances that were stored in the Orthanc server before the
 installation of the OHIF plugin will only benefit from the
 optimization starting with their second display using OHIF.
+
+
+.. _ohif-https:
+
+HTTPS encryption
+^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+In order to use the :ref:`built-in HTTPS encryption <https-builtin>`
+of Orthanc together with the OHIF plugin, first generate a proper
+X.509 certificate for the ``localhost``::
+
+  $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -subj "/C=BE/CN=localhost" -keyout /tmp/private.key -out /tmp/certificate.crt
+  $ cat /tmp/private.key /tmp/certificate.crt > /tmp/certificate.pem
+
+
+.. highlight:: json
+
+Secondly, create the following configuration file::
+
+  {
+    "Plugins" : [
+      "/home/user/orthanc-ohif/Build/libOrthancOHIF.so"
+    ],
+    "SslEnabled" : true,
+    "SslCertificate" : "/tmp/certificate.pem",
+    "OHIF" : {
+      "DataSource" : "dicom-json",
+      "RouterBasename" : "/ohif/"
+    }
+  }
+
+If more complex scenarios with reverse proxies are involved, make sure
+to properly setup :ref:`CORS in your reverse proxy <nginx-cors>` and
+to :ref:`adapt the router basename <ohif-router-basename>`. If you
+face difficulties, while the simple setup with the built-in HTTPS
+encryption described above works, your issue is related to OHIF, so
+please get in touch with the `OHIF community
+<https://ohif.org/collaborate>`__.
 
 
 For developers
