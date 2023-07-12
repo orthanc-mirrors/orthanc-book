@@ -449,3 +449,9 @@ uncompressed (UID ``1.2.840.10008.1.2`` and friends) or JPEG2k
 lossless (UID ``1.2.840.10008.1.2.4.90``), the plugin will
 transparently re-encode the tile to PNG in order to avoid any
 destructive compression.
+
+NB: Starting with version 2.0 of the WSI plugin, the
+``/wsi/tiles/{id}/{z}/{x}/{y}`` route accepts the ``Accept`` HTTP
+header, which can be used to force the compression of the tile. The
+allowed values for ``Accept`` are: ``image/png``, ``image/jpeg``, and
+``image/jp2`` (which corresponds to JPEG2k).
