@@ -116,6 +116,110 @@ running on our `WSI demonstration server
 <https://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
 
 
+Support of IIIF
+---------------
+
+Starting with its release 2.0, the WSI plugin can act as a data source
+that follows the `IIIF specification
+<https://en.wikipedia.org/wiki/International_Image_Interoperability_Framework>`__. This
+turns Orthanc into a tool to deliver collection of high-resolutions
+images over the web through IIIF, while simultaneously enabling a
+standard, long-term preservation of those collections through `DICOM
+vendor-neutral archiving <https://en.wikipedia.org/wiki/DICOM>`__.
+
+REST API
+^^^^^^^^
+
+The WSI plugin associates each of the **DICOM series** stored by
+Orthanc whose :ref:`Orthanc identifier <orthanc-ids>` is ``seriesId``,
+with a IIIF-compliant `Presentation API 3.0
+<https://iiif.io/api/presentation/3.0/>`__ manifest located at URI
+``/wsi/iiif/series/{seriesId}/manifest.json`` in the Web server of
+Orthanc. In turn, this manifest points to a IIIF-compliant `Image API
+3.0 <https://iiif.io/api/image/3.0/>`__ data source to deliver the
+DICOM series over the web.
+
+Note that this data source is not only available for the whole-slide
+microscopic series, but also for the other types of medical images,
+which enables both telepathology and teleradiology workflows:
+
+* In the case of a whole-slide image, the URI to the IIIF data source
+  is: ``/wsi/iiif/tiles/{seriesId}/info.json``.
+
+* In the case of a regular radiology series, one IIIF data source is
+  associated with each frame of the DICOM series. Indeed, the
+  :ref:`DICOM model of the real-world <model-world>` specifies that a
+  single DICOM series can contain multiple instances, which in turn
+  can contain multiple frames. The URI to the IIIF data source
+  corresponding to one individual frame of interest is:
+  ``/wsi/iiif/frames/{seriesId}/{frameIndex}/info.json``, where
+  ``frameIndex`` is the index of the frame in the DICOM series.  The
+  ``manifest.json`` of the parent DICOM series automatically
+  aggregates all the frames of the series as a single collection.
+
+
+Web user interface
+^^^^^^^^^^^^^^^^^^
+  
+:ref:`Orthanc Explorer <orthanc-explorer>` contains a button to easily
+copy/paste the URL of the IIIF manifest corresponding to a DICOM
+series:
+
+.. image:: ../images/2023-07-13-IIIF.png
+           :align: center
+           :width: 500px
+
+|
+
+Furthermore, as can be seen in the image above, buttons can be enabled
+to test the opening of the IIIF data source using `Mirador
+<https://projectmirador.org/>`__ and/or `OpenSeadragon
+<https://openseadragon.github.io/>`__.
+
+Pay attention to the fact that the assets of Mirador and OpenSeadragon
+(notably JavaScript) are loaded from the `unpkg CDN
+<https://www.unpkg.com/>`__, which necessitates an Internet
+connection. For this reason, these assets are disabled by default.
+
+
+Configuration options
+^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: json
+
+The IIIF features can be configured using the following
+:ref:`configuration file <configuration>` of Orthanc::
+
+  {
+    "Name" : "MyOrthanc",
+    [...]
+    "Plugins" : [
+      "/home/user/orthanc-wsi/ViewerPlugin/Build/libOrthancWSI.so"
+    ],
+    "WholeSlideImaging" : {
+      "EnableIIIF" : true,           // Can be used to disable support of IIIF
+      "OrthancPublicURL" : "http://localhost:8042/",
+      "ServeMirador" : false,        // Whether to show the "Test IIIF in Mirador" button
+      "ServeOpenseadragon" : false,  // Whether to show the "Test IIIF in OpenSeadragon" button
+      "ForcePowersOfTwoScaleFactors" : true   // Can be used to disable the compatibility mode
+    }
+  }
+
+A few remarks:
+  
+* The ``OrthancPublicURL`` option must be adapted if Orthanc is
+  branched behind a :ref:`reverse proxy <nginx>`.
+
+* In the case of a whole-slide image, the
+  ``ForcePowersOfTwoScaleFactors`` option instruct the WSI plugin to
+  only publish the pyramid levels whose scale factors follow a
+  powers-of-two patterns (i.e., 1, 2, 4, 8, 16...). This provides
+  maximum compatibility with viewers (for instance, consider `this
+  issue
+  <https://github.com/openseadragon/openseadragon/issues/2379>`__),
+  but can break a smooth delivery of high-resolution images whose
+  pyramid is irregular. Compatibility mode is enabled by default.
+
 
 Command-line tools
 ------------------

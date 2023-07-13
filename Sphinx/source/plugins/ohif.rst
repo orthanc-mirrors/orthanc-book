@@ -30,7 +30,8 @@ to view a demo video):
            :align: center
            :width: 800
            :target: https://www.youtube.com/watch?v=-lzddzq9iT4
- |
+
+|
 
 
 Compilation
