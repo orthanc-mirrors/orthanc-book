@@ -200,13 +200,16 @@ Code quality
   recommended way of contributing to Orthanc is always by
   :ref:`creating contributed plugins <creating-plugins>`.
 
-* Importantly, before any contribution can be accepted into the
-  Orthanc repositories, its author must sign a :ref:`CLA <cla>`. This
-  allows the University Hospital of Liège, the Osimis company and
-  UCLouvain university to act as the official guardians of the whole
-  Orthanc ecosystem. Another advantage of creating plugins is that
-  signing a CLA is not needed. Make sure to carefully read our
-  :ref:`FAQ about the licensing of submitted code <submitting_code>`.
+* Importantly, before any contribution with significant intellectual
+  property (i.e. if the contribution go beyond a simple patch) can be
+  accepted into the Orthanc repositories, its author must sign a
+  :ref:`CLA <cla>`. This allows the University Hospital of Liège, the
+  Osimis company, and UCLouvain university to act as the official
+  guardians of the whole Orthanc ecosystem. Note that another
+  advantage of creating plugins over submitting core to the core
+  project is that signing a CLA is never needed. Make sure to
+  carefully read our :ref:`FAQ about the licensing of submitted code
+  <submitting_code>`.
 
 
 .. _hg-patch:
@@ -297,6 +300,17 @@ by typing the following commands on their side::
   $ hg unbundle /tmp/contribution.bundle
   $ hg up -c default
   $ hg merge my-user/my-fix
+
+
+.. _hg-submitting:
+
+Submitting contributions
+........................
+
+Contributed patches and bundles must be sent by e-mail, either to
+`Sébastien Jodogne <mailto:sebastien.jodogne@uclouvain.be>`__
+(UCLouvain) or to `Alain Mazy <mailto:am@orthanc.team>`__ (Orthanc
+Team).
   
 
 Issue tracker
