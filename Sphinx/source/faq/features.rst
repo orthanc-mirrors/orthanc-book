@@ -320,6 +320,7 @@ complete the **central registry** below:
   configuration option ``StorageCompression`` is ``true``, or if the
   storage area plugin doesn't support range reads. This allows to
   avoid downloading the full DICOM instance if not necessary.
+* ``Attachment 4301`` is used by the :ref:`DICOMweb plugin <dicomweb>` to cache WADO-RS series metadata (starting from v 1.15 of the plugin).
 * ``Attachment 9997`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store series information.
 * ``Attachment 9998`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store instance information.
 * ``Attachment 9999`` is used by the :ref:`Osimis WebViewer plugin <osimis_webviewer>` to store annotations.

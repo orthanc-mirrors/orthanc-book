@@ -1,8 +1,8 @@
 .. _housekeeper-plugin:
 
 
-Housekeeper plugin (new in Orthanc 1.11.0)
-==========================================
+Housekeeper plugin
+==================
 
 This page describes the **official sample plugin** that performs
 housekeeping in the Database and Storage.
@@ -16,6 +16,7 @@ the DB or clean/compress/uncompress the storage.  This can happen e.g:
 * when changing the ``IngestTranscoding`` configuration
 * to remove unnecessary attachments like the ``dicom-as-json`` that were
   used in Orthanc prior to 1.9.1.
+* when upgrading the :ref:`DICOMweb plugin <dicomweb>` from 1.14 to a later version.
 
 Note that these housekeeping operations are not mandatory.  Orthanc will
 continue to work without these cleanups.  However, running the plugin
@@ -74,7 +75,8 @@ Here's a sample configuration section for this plugin with its default values::
         "StorageCompressionChange": true,
         "MainDicomTagsChange": true,
         "UnnecessaryDicomAsJsonFiles": true,
-        "IngestTranscodingChange": true
+        "IngestTranscodingChange": true,
+        "DicomWebCacheChange": true   // new in 1.12.2
       }
     }
   }
@@ -98,6 +100,10 @@ various operations will happen:
   the plugin will call the ``/studies/.../reconstruct`` route on every study 
   one by one.  Orthanc will read the DICOM tags from the DICOM files again and update 
   their value in the DB.
+
+* if ``DicomWebCacheChange`` is triggered (this happens when upgrading from 
+  the :ref:`DICOMweb plugin <dicomweb>` from 1.14 to a later version), the plugin will call the 
+  ``/studies/../update-dicomweb-cache`` route on every study one by one.
 
 * if any other change is detected, the plugin will again call the ``reconstruct`` route
   but, this time, with the ``ReconstructFiles`` option enabled.  Orthanc will then,

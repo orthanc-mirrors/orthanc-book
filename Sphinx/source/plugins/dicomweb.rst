@@ -179,13 +179,20 @@ are processed:
   instances of the study/series of interest from the :ref:`storage
   area <orthanc-storage>`, which gives fully accurate results but
   requires all the individual instances to be read and parsed from the
-  filesystem, leading to slow performance (cf. `issue 162
-  <https://bugs.orthanc-server.com/show_bug.cgi?id=162>`__). This is
-  the default mode.
+  filesystem, leading to slow performance for earliers version of the plugin.
+  From version 1.15 of the plugin in which we have introduced caching, this mode 
+  is the most accurate and fastest one provided that you have run the 
+  :ref:`Housekeeper plugin <housekeeper-plugin>` on data ingested with prior
+  versions of the plugin - otherwise, the first access to the route might still be
+  slow while populating the cache while later accesses will be much faster.
+
+* Starting from version 1.15 of the plugin and provided that the cache has been
+  populated for all prior studies, you should favor the ``Full`` mode.  The following
+  recommandations are kept for prior version of the plugin only.
 
 * If ``MainDicomTags`` mode is used, the plugin will only report the
   main DICOM tags that are indexed by the Orthanc database. The DICOM
-  files are not read from the disk, which provides best
+  files are not read from the disk, which provides good
   performance. However, this is a small subset of all the tags that
   would be retrieved if using the ``Full`` mode: A DICOMweb viewer
   might need more tags.  **Important Note:** From Orthanc 1.11.0 and DICOMweb plugin 1.8,
@@ -215,11 +222,12 @@ are processed:
   ``StudiesMetadata`` to ``MainDicomTags`` and ``SeriesMetadata`` to ``MainDicomTags``
   as demonstrated in this `sample <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/stone-viewer/docker-compose.yml>`__.
 
-
-If using the ``Extrapolate`` mode, the predefined tags are provided
-using the ``StudiesMetadataExtrapolatedTags`` and
-``SeriesMetadataExtrapolatedTags`` configuration options as follows::
+* If using the ``Extrapolate`` mode, the predefined tags are provided
+  using the ``StudiesMetadataExtrapolatedTags`` and
+  ``SeriesMetadataExtrapolatedTags`` configuration options as follows
   
+Sample configuration for the ``Extrapoate`` mode:: 
+
   {
     [...]
     "DicomWeb" : {
