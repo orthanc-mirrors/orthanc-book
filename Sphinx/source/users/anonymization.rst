@@ -411,3 +411,41 @@ arguments of this ``/studies/{study}/merge`` URI:
 * ``KeepSource`` (Boolean value), if set to ``true``, instructs
   Orthanc to keep the source studies and series.  By default, the
   original resources are deleted from Orthanc.
+
+
+.. _altering-dicom:
+
+Altering the content of a single instance
+-----------------------------------------
+
+People often want to add/remove specific DICOM tags in an existing
+DICOM instance, i.e. to ask ``/instances/{id}/modify`` to keep the
+existing ``SOPInstanceUID (0008,0018)``. This operation is **strongly
+discouraged**, as it **breaks medical traceability** by dropping the
+history of the modifications that were applied to a DICOM
+instance. Furthermore, the altered DICOM instance may be ignored by
+further DICOM software. Indeed, the DICOM standard expects two DICOM
+instances with the same SOP Instance UID to contain exactly the same
+set of DICOM tags. Consequently, a DICOM software could perfectly
+decide to only consider the original version of the DICOM instance.
+
+Consequently, **Orthanc implements safeguards** in its REST API to
+avoid such dangerous situations to occur. That being said, **if you
+understand the risks**, it is possible to bypass those safeguards. The
+trick is to pass both the ``Keep`` and ``Force`` arguments to the
+``/instances/{id}/modify`` call. Here is a sample Python script that
+implements this trick:
+
+.. literalinclude:: anonymization_bypass.py
+                    :language: python
+
+This sample script downloads an altered version of a DICOM instance
+from Orthanc (with the same ``SOPInstanceUID``), then uploads it again
+to Orthanc. By default, Orthanc will ignore the upload of the altered
+DICOM instance and will answer with the ``AlreadyStored`` message,
+because ``SOPInstanceUID`` is already present in the Orthanc database.
+To force the upload of the altered DICOM instance, one can either
+(1) DELETE the instance before POST-ing it again, or (2) set the
+``OverwriteInstances`` :ref:`configuration option <configuration>` of
+Orthanc to ``true``. Both strategies are implemented in the sample
+script.
