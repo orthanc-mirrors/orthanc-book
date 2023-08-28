@@ -642,7 +642,7 @@ HL7/FHIR messages and RIS systems. Indeed, Python provides many tools
 to handle HL7 such as `python-hl7 library
 <https://python-hl7.readthedocs.io/en/latest/>`__.
 
-The following Python script reproduces features similar to the
+The following Python script reproduces features similar to the 
 :ref:`sample modality worklists plugin <worklists-plugin>`:
 
 .. literalinclude:: python/worklist.py
@@ -797,6 +797,19 @@ This can be used, e.g, to implement a quota per modality or return
 an ``out-of-resources`` status if the Orthanc storage is almost full.
 
 .. literalinclude:: python/incoming-cstore-filter.py
+                    :language: python
+
+
+Storage Commitment SCP (new in 4.1)
+...................................
+
+Starting with release 4.1 of the Python plugin, it is possible to
+provide your own implementation of the :ref:`Storage Commitment <storage-commitment>`.
+
+This can be used, e.g, to check that you have backup the orthanc data in a
+long term storage.
+
+.. literalinclude:: python/storage-commitment-default.py
                     :language: python
 
 
