@@ -813,6 +813,37 @@ long term storage.
                     :language: python
 
 
+.. _python_extend_orthanc_explorer:
+
+Extending the Orthanc Explorer interface
+........................................
+
+Here is a sample plugin that adds a new button to Orthanc Explorer
+that triggers a Python function:
+
+.. literalinclude:: python/sample-python-button.py
+                    :language: python
+
+As can be seen in this sample:
+
+* The call to ``orthanc.ExtendOrthancExplorer()`` installs the button
+  with JavaScript code that uses the `jQuery Mobile framework
+  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.1,
+  version 1.1.0 of jQuery Mobile is used in Orthanc Explorer).
+
+* If clicking on the button, a GET call to the REST API is made to
+  ``../execute-python``. The prefix ``../`` stems from the fact that
+  Orthanc Explorer is branched inside the ``app/`` folder of the REST
+  API of Orthanc.
+
+* The GET call to ``../execute-python`` executes the
+  ``ExecutePython()`` callback function that is written in Python.
+
+Note that it is only possible to extend Orthanc Explorer 1, which is
+the built-in Web interface of Orthanc. It is not possible to extend
+the :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` interface.
+
+
 Performance and concurrency
 ---------------------------
 
