@@ -89,7 +89,7 @@ following minimal configuration file::
 Querying Orthanc using HTTPS
 ............................
 
-.. highlight:: txt
+.. highlight:: none
 
 If you contact Orthanc using a HTTP client, you will see that
 encryption is enabled::

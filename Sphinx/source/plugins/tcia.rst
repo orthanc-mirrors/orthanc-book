@@ -50,9 +50,9 @@ Pre-compiled binaries for Microsoft Windows and macOS `are also
 available
 <https://www.orthanc-server.com/browse.php?path=/plugin-tcia>`__.
 
-Furthermore, the ``jodogne/orthanc-plugins`` :ref:`Docker images <docker>`
- and ``osimis/orthanc`` :ref:`Docker images <docker-osimis>` also contain the
-plugin.
+Furthermore, the ``jodogne/orthanc-plugins`` :ref:`Docker images
+<docker>` and ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`
+also contain the plugin.
 
 
 Configuration

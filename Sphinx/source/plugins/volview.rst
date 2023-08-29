@@ -23,6 +23,7 @@ video):
            :align: center
            :width: 800
            :target: https://www.youtube.com/watch?v=taQ6TiFJTHE
+
 |
 
 Starting with its release 0.8.2, the :ref:`Orthanc Explorer 2
