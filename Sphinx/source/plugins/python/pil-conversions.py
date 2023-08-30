@@ -36,7 +36,7 @@ def OnChange(changeType, level, resource):
         # (4) Convert back the modified PIL image to an Orthanc image
         buf = image.tobytes()
         a = orthanc.CreateImageFromBuffer(frame.GetImagePixelFormat(), image.size[0], image.size[1],
-                                          len(buf) / image.size[1], buf)
+                                          len(buf) // image.size[1], buf)
 
         # (5) Create and upload a new DICOM instance with the modified frame
         tags = {
