@@ -1,4 +1,4 @@
-import StringIO
+import io
 import json
 import orthanc
 import xlwt
@@ -20,9 +20,8 @@ def CreateExcelReport(output, uri, **request):
             sheet.write(row, 2, study['MainDicomTags'].get('StudyDescription'))
             row += 1
 
-        # Serialize the Excel workbook to a string, and return it to the caller
-        # https://stackoverflow.com/a/15649139/881731
-        b = StringIO.StringIO()
+        # Serialize the Excel workbook to bytes, and return it to the caller
+        b = io.BytesIO()
         excel.save(b)
         output.AnswerBuffer(b.getvalue(), 'application/vnd.ms-excel')
 
