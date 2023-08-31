@@ -214,7 +214,7 @@ The precompiled binaries all use release (i.e. non-debug) versions of Python.
 Configuration options
 ---------------------
 
-The only two configuration options that are available for this plugin
+The two main configuration options that are available for this plugin
 are the following:
 
 * ``PythonScript`` indicates where the Python script is located.  If
@@ -223,6 +223,32 @@ are the following:
 
 * ``PythonVerbose`` is a Boolean value to make the Python interpreter
   verbose.
+
+Consequently, a minimal :ref:`configuration file <configuration>` for
+Orthanc could be::
+
+  {
+    "Plugins" : [ "." ],
+    "PythonScript" : "my-plugin.py",
+    "PythonVerbose" : false
+  }
+
+Starting with release 4.1 of the Python plugin, it is also possible to
+specify the configuration of the plugin in a dedicated ``Python``
+section as follows::
+
+  {
+    "Plugins" : [ "." ],
+    "Python" : {
+      "Path" : "my-plugin.py",  // Alias for the global "PythonScript" option
+      "Verbose" : false,        // Alias for the global "PythonVerbose" option
+      "DisplayMemoryUsage" : false
+    }
+  }
+
+The option ``Python.DisplayMemoryUsage`` was introduced in release 4.1
+of the plugin. If set to ``true``, Orthanc will display the memory
+usage of the Python interpreter every second.
   
 
 Samples
