@@ -200,7 +200,7 @@ The IIIF features can be configured using the following
       "EnableIIIF" : true,           // Can be used to disable support of IIIF
       "OrthancPublicURL" : "http://localhost:8042/",
       "ServeMirador" : false,        // Whether to show the "Test IIIF in Mirador" button
-      "ServeOpenseadragon" : false,  // Whether to show the "Test IIIF in OpenSeadragon" button
+      "ServeOpenSeadragon" : false,  // Whether to show the "Test IIIF in OpenSeadragon" button
       "ForcePowersOfTwoScaleFactors" : true   // Can be used to disable the compatibility mode
     }
   }
