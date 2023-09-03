@@ -191,6 +191,7 @@ decision chart:
 
    * **Asia**:
      
+     * `Ajay Rana <https://smarthms.in/>`__ (English/Hindi/Punjabi, India)
      * `Phong Tran Duc <http://www.itechcorp.com.vn/>`__ (English/Vietnamese, Vietnam)
      * `Rana Asim Wajid <http://ethosmed.com/>`__ (English/Urdu/Punjabi, Pakistan)
      * `Yash Sonalia <mailto:sonaliayash@gmail.com>`__ (English/Hindi/Bengali, India)
