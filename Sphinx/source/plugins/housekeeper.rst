@@ -127,7 +127,8 @@ Tips
   table.  When running the Housekeeper plugin in a Docker environment, it is mandatory to
   set the ``DatabaseServerIdentifier`` configuration to make sure that an Orthanc container
   keeps the same identifier over multiple runs which should prevent the Housekeeper plugin to 
-  start again from scratch when Orthanc is restarted.
+  start again from scratch when Orthanc is restarted.  If not set explicitely in the configuration, 
+  the ``DatabaseServerIdentifier`` might change from one run to the other.
 
 
 Compilation
