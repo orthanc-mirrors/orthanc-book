@@ -120,6 +120,16 @@ Status
 You can get a progress status of the plugin by calling the ``/housekeeper/status`` API route.
 
 
+Tips
+----
+
+* The housekeeper plugin saves its state in the Orthanc SQL database in the ``ServerProperties``
+  table.  When running the Housekeeper plugin in a Docker environment, it is mandatory to
+  set the ``DatabaseServerIdentifier`` configuration to make sure that an Orthanc container
+  keeps the same identifier over multiple runs which should prevent the Housekeeper plugin to 
+  start again from scratch when Orthanc is restarted.
+
+
 Compilation
 -----------
 
