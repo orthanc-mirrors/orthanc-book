@@ -7,8 +7,8 @@ As a general rule, when you encounter an issue, always make sure that
 you use the `most recent version
 <https://www.orthanc-server.com/download.php>`__ of Orthanc.
 
-Also make a search on the `Orthanc Users discussion group
-<https://groups.google.com/forum/#!forum/orthanc-users>`__, and make a
+Also make a search on the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__, and make a
 search in the present Orthanc Book (there is a search field at the top
 of this page). Your issue might indeed have already been discussed in
 the past or in the FAQ.

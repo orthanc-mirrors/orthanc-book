@@ -51,8 +51,8 @@ modalities. As preliminary debugging actions, you should:
 * Check out the :ref:`more generic troubleshooting guide
   <troubleshooting>`.
 
-As a last resort, please contact the `mailing list
-<https://groups.google.com/forum/#!forum/orthanc-users>`_ by sending a
+As a last resort, please contact the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__ by sending a
 detailed description of your problem, notably:
 
 * What fails: The sending of a file (aka. C-Store SCU), the searching

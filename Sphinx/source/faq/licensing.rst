@@ -266,6 +266,6 @@ A :ref:`dedicated page <repositories>` explains how to submit
   Orthanc.
 
 * In the case of a doubt wrt. a potential contribution, please discuss
-  it on the `Orthanc Users
-  <https://groups.google.com/forum/#!forum/orthanc-users>`__
+  it on the `Orthanc Users discussion forum
+  <https://discourse.orthanc-server.org>`__
   discussion group before starting the actual development.

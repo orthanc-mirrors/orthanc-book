@@ -53,9 +53,8 @@ community under the terms of the AGPL license.
 We suggest you to put the source code of your Python scripts on the
 dedicated `"OrthancContributed" repository on GitHub
 <https://github.com/jodogne/OrthancContributed/tree/master/Plugins>`__,
-and/or to send it to the `Orthanc Users
-<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
-group.
+and/or to send it to the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__.
 
 Check out the :ref:`FAQ about licensing <licensing>` for more context.
 

@@ -54,8 +54,8 @@ here are some tasks you can take in charge that would greatly help us:
   - Cite the `reference paper about Orthanc
     <https://link.springer.com/article/10.1007/s10278-018-0082-y>`__
     in your research work.
-  - Answer questions posted to the `mailing list
-    <https://groups.google.com/forum/#!forum/orthanc-users>`_.
+  - Answer questions posted to the `Orthanc Users discussion forum
+    <https://discourse.orthanc-server.org>`__.
 
     - **Important**: A page list the :ref:`old questions that are not
       fully answered yet <unanswered_forum>`. Consider answering these
@@ -158,8 +158,8 @@ here are some tasks you can take in charge that would greatly help us:
     creating external software that use the REST API**. If the current
     plugin SDK is insufficient for you to develop some feature as a
     plugin, do not hesitate to request an extension to the Orthanc SDK
-    on the `mailing list
-    <https://groups.google.com/forum/#!forum/orthanc-users>`_.
+    on the `Orthanc Users discussion forum
+    <https://discourse.orthanc-server.org>`__.
 
 
 * **Financial support**: 

@@ -19,8 +19,8 @@ and around 50 millions of instances (please `get in touch with us
 <https://www.orthanc-server.com/static.php?page=contact>`__ if you can
 share other testimonials). Other users have even reported more than
 28TB of data. Here are links to some testimonials that were published
-on the `Orthanc Users
-<https://groups.google.com/forum/#!forum/orthanc-users>`__ discussion
+on the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__ discussion
 group: `1
 <https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/KmWnwEijAgAJ>`__,
 `2

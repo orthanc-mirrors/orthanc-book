@@ -29,7 +29,7 @@ resources:
    <faq>` that are already available in the Orthanc Book.
 8. Make a search for similar problem previously discussed in the
    `Orthanc Users discussion forum
-   <https://groups.google.com/forum/#!forum/orthanc-users>`__.
+   <https://discourse.orthanc-server.org>`__.
 9. Check out the ``Pending changes in the mainline`` section of the
    `NEWS file
    <https://hg.orthanc-server.com/orthanc/file/default/NEWS>`__, as
@@ -59,8 +59,8 @@ Discussing a minimal working example
    
 If none of these resources help, you can consider sending a message to
 the `Orthanc Users discussion forum
-<https://groups.google.com/forum/#!forum/orthanc-users>`__. In such a
-situation, you **must** provide a `minimal working example
+<https://discourse.orthanc-server.org>`__. 
+In such a situation, you **must** provide a `minimal working example
 <https://en.wikipedia.org/wiki/Minimal_working_example>`__, which means that
 you must provide all the following information:
 
@@ -122,8 +122,8 @@ If you are **sure** that you are reporting a yet unknown bug, you can
 consider directly introducing a `bug report on our issue tracker
 <https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
-As a consequence, it is strongly advised to use the `discussion forum
-<https://groups.google.com/forum/#!forum/orthanc-users>`__ in the
+As a consequence, it is strongly advised to use the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__ in the
 first place.
 
 
@@ -138,7 +138,7 @@ decision chart:
 1. If you have a **reproducible issue** for which you can provide a
    :ref:`minimal working example <support-mwe>` using only free and
    open-source tools, use the `Orthanc Users discussion forum
-   <https://groups.google.com/forum/#!forum/orthanc-users>`__.
+   <https://discourse.orthanc-server.org>`__.
 
 2. If you need an **additional feature implemented in Orthanc**, and
    if you are ready to pay, get in touch with the `Orthanc Team

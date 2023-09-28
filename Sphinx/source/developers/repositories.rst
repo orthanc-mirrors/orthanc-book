@@ -236,8 +236,8 @@ Once your contribution is done, here is how to export a patch::
 
 Once the patch is ready, you can send the ``/tmp/contribution.patch``
 file to the Orthanc community, e.g. by submitting it onto our official
-`discussion group
-<https://groups.google.com/forum/#!forum/orthanc-users>`__. The core
+`Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__. The core
 developers would reintegrate such a patch by typing the following
 command on their side::
 
@@ -325,6 +325,6 @@ from the old BitBucket bug tracker.
 
 Before posting any issue, make sure to carefully, completely read the
 :ref:`page about how to ask support <support>`. In particular, most
-issues should first be discussed on the dedicated `discussion group
-<https://groups.google.com/forum/#!forum/orthanc-users>`__ before
+issues should first be discussed on the dedicated `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__ before
 introducing a bug report.

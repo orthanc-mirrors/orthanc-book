@@ -17,9 +17,9 @@ medical imaging, the Orthanc project continuously tries and ensures
 best possible compatibility with other FOSS software. To put it in
 other words, we **provide free support for interfacing Orthanc with
 other free and open-source software**. Feel free to discuss
-interoperability problems of Orthanc with other FOSS tools on `our
-discussion group
-<https://groups.google.com/forum/#!forum/orthanc-users>`_, or to
+interoperability problems of Orthanc with other FOSS tools on our `Orthanc 
+Users discussion forum
+<https://discourse.orthanc-server.org>`__, or to
 introduce :ref:`bug reports <support>` detailing how to reproduce your
 problem.
 

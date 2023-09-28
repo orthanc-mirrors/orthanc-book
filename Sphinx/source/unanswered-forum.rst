@@ -10,8 +10,8 @@ Rationale
 ---------
 
 This page lists the questions (since 2018) that are still looking for
-an answer on the `Orthanc Users discussion group
-<https://groups.google.com/forum/#!forum/orthanc-users>`__.
+an answer on the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__.
 
 Threads that are not answered in a satisfying manner after a few weeks
 are indexed here by the core maintainers of Orthanc, in order to avoid

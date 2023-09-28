@@ -60,8 +60,8 @@ debug session::
   ...
 
 If you are unable to analyze such a backtrace by yourself, feel free
-to post your backtrace on the `Orthanc forum
-<https://groups.google.com/forum/#!forum/orthanc-users>`__.
+to post your backtrace on the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__.
 
 **Plugins:** Besides the Orthanc core, debug binaries of the official
 plugins precompiled using the LSB are also available at the following
