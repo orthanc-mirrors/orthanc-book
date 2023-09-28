@@ -3,6 +3,10 @@
 Asking for support
 ==================
 
+.. contents::
+   :depth: 3
+
+
 .. _support-resources:
 
 Analyzing your problem
@@ -111,6 +115,26 @@ In addition, please note that the original author of Orthanc
 (Sébastien Jodogne), as a free software advocate, will only personally
 deal with issues that are reproducible on recent GNU/Linux
 distributions (typically, on Ubuntu 18.04 LTS or through Docker).
+
+
+.. _support-minquality:
+
+Required minimal quality of a message in the Orthanc Users discussion forum
+--------------------------------------------------------
+
+While posting a message on the `Orthanc Users discussion forum
+<https://discourse.orthanc-server.org>`__, you should not be surprised if 
+your message does not get any response if it does not meet these minimal 
+quality requirements:
+
+* Before posting, are you sure you have made everything possible to :ref:`analyze <support-resources>` 
+  and solve the issue by yourself?  This includes, searching the web or the forum 
+  to see if the topic has already been discussed.
+* :ref:`Describe your issue <support-mwe>` with as much details as possible.
+* Review your message as if you were the one who should help you - 
+  would you understand your problem?
+* Be polite and respectful, say ``hello``, and adhere to the `code of conduct 
+  <https://discourse.orthanc-server.org/faq>`__.
 
 
 .. _support-tracker:
