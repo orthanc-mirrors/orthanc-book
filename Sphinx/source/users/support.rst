@@ -191,12 +191,14 @@ decision chart:
      * `Krzysztof Turkiewicz <http://www.deeveeloop.pl/>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
      * `Stephen D. Scotti <https://www.medinformatics.eu>`__ (English, Austria)
+     * `Yannick Lemaréchal <https://github.com/ylemarechal>`__ (French/English, France/Canada)
 
    * **North America**:
        
      * `Gabriel Couture <https://github.com/gacou54/>`__ (French/English, Canada)
      * `Mohannad Hussain <https://www.linkedin.com/in/mohannadhussain/>`__ (English, Canada)
      * `Oliver Tsai <mailto:oliver@futurepacs.com>`__ (English/Spanish/French, Toronto)
+     * `Yannick Lemaréchal <https://github.com/ylemarechal>`__ (French/English, France/Canada)
      * `Yi Lu <https://www.linkedin.com/in/digihunch/>`__ (English, Canada)
 
    * **South America**:
