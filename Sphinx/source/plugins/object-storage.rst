@@ -48,85 +48,6 @@ contracts makes the Orthanc project sustainable in the long term, to
 the benefit of the worldwide community of medical imaging.
 
 
-Compilation
------------
-
-.. highlight:: text
-
-The procedure to compile the plugins is quite similar of that for the
-:ref:`core of Orthanc <compiling>` although they usually require 
-some prerequisites.  The documented procedure has been tested only
-on a Debian Buster machine.
-
-The compilation of each plugin produces a shared library that contains 
-the plugin.
-
-
-AWS S3 plugin
-^^^^^^^^^^^^^
-
-Prerequisites: Compile the AWS C++ SDK::
-
-  $ mkdir ~/aws
-  $ cd ~/aws
-  $ git clone https://github.com/aws/aws-sdk-cpp.git
-  $ 
-  $ mkdir -p ~/aws/builds/aws-sdk-cpp
-  $ cd ~/aws/builds/aws-sdk-cpp
-  $ cmake -DBUILD_ONLY="s3;transfer" ~/aws/aws-sdk-cpp 
-  $ make -j 4 
-  $ make install
-
-Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
-
-  $ ./vcpkg install cryptopp
-
-Compile::
-
-  $ mkdir -p build/aws
-  $ cd build/aws
-  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Aws
-
-
-**NB:** If you don't want to use vcpkg, you can use the following
-command (this syntax is not compatible with Ninja yet)::
-
-  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF ../../orthanc-object-storage/Aws
-  $ make
-
-Crypto++ must be installed (on Ubuntu, run ``sudo apt install libcrypto++-dev``).
-
-
-Azure Blob Storage plugin
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
-
-$ ./vcpkg install cryptopp
-$ ./vcpkg install azure-storage-cpp
-
-
-Compile::
-
-  $ mkdir -p build/azure
-  $ cd build/azure
-  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Azure
-
-Google Storage plugin
-^^^^^^^^^^^^^^^^^^^^^
-
-Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
-
-$ ./vcpkg install cryptopp
-$ ./vcpkg install google-cloud-cpp
-
-Compile::
-
-  $ mkdir -p build/google
-  $ cd build/google
-  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/google
-
-
 Configuration
 -------------
 
@@ -151,7 +72,8 @@ Sample configuration::
     "EnableLegacyUnknownFiles": true,         // optional: see below
     "VirtualAddressing": true,                // optional: see the section related to MinIO
     "StorageEncryption" : {},                 // optional: see the section related to encryption
-    "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
+    "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
+    "UseTransferMode": true                   // optional: see below (available from version 2.3.0)
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -163,6 +85,11 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
     "SecretKey": "YYY",
     "Endpoint": "s3.fr-par.scw.cloud"
   }
+
+
+The **UseTransferMode** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
+This option was introduced in version 2.3.0 and is the default one.  If set to false, the default mode
+is used.
 
 
 .. _minio:
@@ -442,3 +369,82 @@ than 2 times the input, we want to limit the number of threads doing concurrent 
 to the available memory instead of the number of concurrent threads.  Therefore, if you're currently
 ingesting small files, you can have a lot of thread working together while, if you're ingesting large 
 files, threads might have to wait before receiving a "slot" to access the encryption module.
+
+
+Compilation
+-----------
+
+.. highlight:: text
+
+The procedure to compile the plugins is quite similar of that for the
+:ref:`core of Orthanc <compiling>` although they usually require 
+some prerequisites.  The documented procedure has been tested only
+on a Debian Buster machine.
+
+The compilation of each plugin produces a shared library that contains 
+the plugin.
+
+
+AWS S3 plugin
+^^^^^^^^^^^^^
+
+Prerequisites: Compile the AWS C++ SDK::
+
+  $ mkdir ~/aws
+  $ cd ~/aws
+  $ git clone https://github.com/aws/aws-sdk-cpp.git
+  $ 
+  $ mkdir -p ~/aws/builds/aws-sdk-cpp
+  $ cd ~/aws/builds/aws-sdk-cpp
+  $ cmake -DBUILD_ONLY="s3;transfer" ~/aws/aws-sdk-cpp 
+  $ make -j 4 
+  $ make install
+
+Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
+
+  $ ./vcpkg install cryptopp
+
+Compile::
+
+  $ mkdir -p build/aws
+  $ cd build/aws
+  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Aws
+
+
+**NB:** If you don't want to use vcpkg, you can use the following
+command (this syntax is not compatible with Ninja yet)::
+
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF ../../orthanc-object-storage/Aws
+  $ make
+
+Crypto++ must be installed (on Ubuntu, run ``sudo apt install libcrypto++-dev``).
+
+
+Azure Blob Storage plugin
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
+
+$ ./vcpkg install cryptopp
+$ ./vcpkg install azure-storage-cpp
+
+
+Compile::
+
+  $ mkdir -p build/azure
+  $ cd build/azure
+  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/Azure
+
+Google Storage plugin
+^^^^^^^^^^^^^^^^^^^^^
+
+Prerequisites: Install `vcpkg <https://github.com/Microsoft/vcpkg>`__ dependencies::
+
+$ ./vcpkg install cryptopp
+$ ./vcpkg install google-cloud-cpp
+
+Compile::
+
+  $ mkdir -p build/google
+  $ cd build/google
+  $ cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]\scripts\buildsystems\vcpkg.cmake ../../orthanc-object-storage/google
