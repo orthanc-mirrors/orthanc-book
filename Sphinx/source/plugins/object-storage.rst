@@ -73,7 +73,7 @@ Sample configuration::
     "VirtualAddressing": true,                // optional: see the section related to MinIO
     "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
-    "UseTransferMode": true                   // optional: see below (available from version 2.3.0)
+    "UseTransferManager": false               // optional: see below (available from version 2.3.0)
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::
@@ -87,9 +87,8 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
   }
 
 
-The **UseTransferMode** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
-This option was introduced in version 2.3.0 and is the default one.  If set to false, the default mode
-is used.
+The **UseTransferManager** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
+This option was introduced in version 2.3.0.  If set to false (default value), the default "object" mode is used.
 
 
 .. _minio:
