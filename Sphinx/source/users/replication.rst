@@ -71,7 +71,7 @@ Direct access to the filesystem
 
 The most direct way to replicate an instance of Orthanc consists in
 using the `ImportDicomFiles
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`_
 script of the Orthanc distribution. This process can also be used to
 restore the content of an Orthanc server after a corruption of its
 database.
@@ -111,7 +111,7 @@ Generic replication
 -------------------
 
 If you cannot use the first method, you can use the `Replicate
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Python/Replicate.py>`_
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Python/Replicate.py>`_
 script of the Orthanc distribution. This script will use the REST API
 of both the source and target instances of Orthanc. For instance::
 

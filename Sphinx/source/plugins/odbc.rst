@@ -14,7 +14,7 @@ can notably be used to connect Orthanc to Microsoft SQL Server.
 
 The source code of the ODBC plugins can be found in the
 ``orthanc-databases`` `Mercurial repository
-<https://hg.orthanc-server.com/orthanc-databases/>`__, next to the
+<https://orthanc.uclouvain.be/hg/orthanc-databases/>`__, next to the
 source code of the :ref:`PostgreSQL <postgresql>` and
 :ref:`MySQL/MariaDB <mysql>` plugins.
 
@@ -249,7 +249,7 @@ Supported ODBC drivers
 The ODBC plugins for Orthanc are universal, in the sense that they can
 connect to any ODBC driver. However, there are some minor variations
 in the SQL language, that are known as "dialects" in the `source code
-of the plugins <https://hg.orthanc-server.com/orthanc-databases/>`__.
+of the plugins <https://orthanc.uclouvain.be/hg/orthanc-databases/>`__.
 
 As of ODBC plugins 1.0, the supported dialects are Microsoft SQL
 Server, PostgreSQL, MySQL and SQLite. Orthanc auto-detects the dialect

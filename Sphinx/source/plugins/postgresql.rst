@@ -18,7 +18,7 @@ For information about scalability, make sure to read the section about
 
 The source code of the PostgreSQL plugins can be found in the
 ``orthanc-databases`` `Mercurial repository
-<https://hg.orthanc-server.com/orthanc-databases/>`__, next to the
+<https://orthanc.uclouvain.be/hg/orthanc-databases/>`__, next to the
 source code of the :ref:`ODBC <odbc>` and
 :ref:`MySQL/MariaDB <mysql>` plugins.
 
@@ -96,7 +96,7 @@ error while invoking CMake that looks like::
 In such a situation, please add your version of PostgreSQL to the
 macro ``PostgreSQL_ADDITIONAL_VERSIONS`` that is defined at the end of
 the `Resources/CMake/PostgreSQLConfiguration.cmake file
-<https://hg.orthanc-server.com/orthanc-databases/file/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__
+<https://orthanc.uclouvain.be/hg/orthanc-databases/file/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__
 in the sources of the project.
   
   
@@ -292,7 +292,7 @@ Keep-alive
 
 After some period of inactivity (users have reported 10 hours), you
 might `experience an error
-<https://bugs.orthanc-server.com/show_bug.cgi?id=15>`__ such as::
+<https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=15>`__ such as::
 
   E0220 03:20:51.562601 PluginsManager.cpp:163] Exception in database back-end: Error in PostgreSQL: server closed the connection unexpectedly.
   This probably means the server terminated abnormally before or while processing the request.

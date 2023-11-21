@@ -298,7 +298,7 @@ The content of the `DICOM JSON data source
 <https://v3-docs.ohif.org/configuration/datasources/dicom-json/>`__
 for a DICOM study of interest can be retrieved as follows::
 
-  $ curl http://demo.orthanc-server.com/studies/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/ohif-dicom-json
+  $ curl https://orthanc.uclouvain.be/demo/studies/6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715/ohif-dicom-json
 
 This data source is constructed from the :ref:`metadata 4202
 <registry>` associated with the individual DICOM instances of the
@@ -307,7 +307,7 @@ DICOM study. The metadata corresponds to the `Base64 encoding
 debugging, the JSON file associated with a DICOM instance can be
 inspected using::
 
-  $ curl http://demo.orthanc-server.com/instances/1f3c00bd-49df10b7-f416a598-1b3bb5a2-cb791b52/metadata/4202 | base64 -d | gunzip -c
+  $ curl https://orthanc.uclouvain.be/demo/instances/1f3c00bd-49df10b7-f416a598-1b3bb5a2-cb791b52/metadata/4202 | base64 -d | gunzip -c
   
 
 Preloading existing studies

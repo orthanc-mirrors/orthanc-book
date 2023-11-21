@@ -259,9 +259,9 @@ instances of Orthanc acting as readers (otherwise the readers would
 also modify the database).
 
 Some issues reported in our bug tracker are related this limitation:
-`issue 83 <https://bugs.orthanc-server.com/show_bug.cgi?id=83>`__,
-`issue 121 <https://bugs.orthanc-server.com/show_bug.cgi?id=121>`__,
-`issue 151 <https://bugs.orthanc-server.com/show_bug.cgi?id=151>`__.
+`issue 83 <https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=83>`__,
+`issue 121 <https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=121>`__,
+`issue 151 <https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=151>`__.
 
 This limitation has disappeared with Orthanc 1.9.2 and
 PostgreSQL/MySQL plugins 4.0, were the database engine was fully

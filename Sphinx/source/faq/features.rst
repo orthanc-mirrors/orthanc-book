@@ -433,7 +433,7 @@ metadata/attachment::
   [...]
   < HTTP/1.1 200 OK
 
-Check out the `OpenAPI reference <https://api.orthanc-server.com/>`__
+Check out the `OpenAPI reference <https://orthanc.uclouvain.be/api/>`__
 of the REST API of Orthanc for more information.
 
 **Warning:** The database index back-end must implement support for

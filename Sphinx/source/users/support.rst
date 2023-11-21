@@ -36,16 +36,16 @@ resources:
    <https://discourse.orthanc-server.org>`__.
 9. Check out the ``Pending changes in the mainline`` section of the
    `NEWS file
-   <https://hg.orthanc-server.com/orthanc/file/default/NEWS>`__, as
+   <https://orthanc.uclouvain.be/hg/orthanc/file/default/NEWS>`__, as
    your issue might already be solved in the mainline of Orthanc (i.e.
    in the cutting-edge version of Orthanc since the last stable
    official release).
 10. Carefully read the `TODO file
-    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__ that
+    <https://orthanc.uclouvain.be/hg/orthanc/file/default/TODO>`__ that
     contains our roadmap, as you might be requesting a feature that is
     currently pending in our backlog (i.e. not implemented yet).
 11. Look for similar issue in the `official bug tracker
-    <https://bugs.orthanc-server.com/query.cgi>`__ (make sure to
+    <https://orthanc.uclouvain.be/bugs/query.cgi>`__ (make sure to
     select ``All`` in the ``Status`` field, as your issue might
     already have been solved).
 
@@ -144,7 +144,7 @@ Using the bug tracker
 
 If you are **sure** that you are reporting a yet unknown bug, you can
 consider directly introducing a `bug report on our issue tracker
-<https://bugs.orthanc-server.com/enter_bug.cgi>`__. Beware however
+<https://orthanc.uclouvain.be/bugs/enter_bug.cgi>`__. Beware however
 that your issue might be closed if too vague or if not reproducible.
 As a consequence, it is strongly advised to use the `Orthanc Users discussion forum
 <https://discourse.orthanc-server.org>`__ in the

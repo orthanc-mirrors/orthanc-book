@@ -62,9 +62,9 @@ here are some tasks you can take in charge that would greatly help us:
       topics too!
     
   - Improve the text of the `Orthanc Book and REST API documentation
-    <https://hg.orthanc-server.com/orthanc-book/file/default>`__ (check
+    <https://orthanc.uclouvain.be/hg/orthanc-book/file/default>`__ (check
     out the instructions provided in the `README file
-    <https://hg.orthanc-server.com/orthanc-book/file/default/README.md>`__,
+    <https://orthanc.uclouvain.be/hg/orthanc-book/file/default/README.md>`__,
     and send us a :ref:`simple patch <hg-patch>`).
   - Provide documentation and use cases (inside the dedicated `GitHub
     repository <https://github.com/jodogne/OrthancContributed>`_, via
@@ -77,7 +77,7 @@ here are some tasks you can take in charge that would greatly help us:
       
   - Report problems together with sample DICOM images and possible
     workarounds on the dedicated `issue tracker
-    <http://bugs.orthanc-server.com/>`_.
+    <https://orthanc.uclouvain.be/bugs/>`_.
   - Package Orthanc and its associated plugins for more UNIX or
     GNU/Linux distributions (e.g. Ubuntu PPA, RHEL/`EPEL
     <https://fedoraproject.org/wiki/EPEL>`__, CentOS, openSUSE...).
@@ -102,7 +102,7 @@ here are some tasks you can take in charge that would greatly help us:
 * **Coding tasks**:
       
   - Have a look at the TODO file containing our `official roadmap
-    <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
+    <https://orthanc.uclouvain.be/hg/orthanc/file/default/TODO>`__.
   - The Orthanc project will happily accept patches in the core of
     Orthanc and in its associated official plugins. Please read the
     :ref:`dedicated FAQ entry <cla>`.

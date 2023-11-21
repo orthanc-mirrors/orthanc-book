@@ -94,7 +94,7 @@ You can `watch this video tutorial
 to upload files to Orthanc through Orthanc Explorer with Chromium.
 
 **Important:** There is currently a `known issue
-<https://bugs.orthanc-server.com/show_bug.cgi?id=21>`__ that might
+<https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=21>`__ that might
 prevent Mozilla Firefox to correctly upload all DICOM files if using
 drag-and-drop.
 

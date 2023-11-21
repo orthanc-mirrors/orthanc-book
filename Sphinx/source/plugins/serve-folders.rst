@@ -12,7 +12,7 @@ policy <same-origin>` without setting up a reverse proxy.
  
 The source code of this sample plugin is `available in the source
 distribution of Orthanc
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/ServeFolders/>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Plugins/Samples/ServeFolders/>`__
 (GPLv3+ license).
 
 

@@ -11,7 +11,7 @@ Context
 
 The Orthanc server and most of its plugins are versioned using
 `Mercurial <https://en.wikipedia.org/wiki/Mercurial>`__ on a
-`self-hosted server <https://hg.orthanc-server.com/>`__.
+`self-hosted server <https://orthanc.uclouvain.be/hg/>`__.
 
 The Orthanc project started back in 2011, back in a time where
 Mercurial and `Git <https://en.wikipedia.org/wiki/Git>`__ were equally
@@ -63,7 +63,7 @@ Read-only access
 
 Anybody has full read-only access to all of the Orthanc official
 repositories, on our `self-hosted server
-<https://hg.orthanc-server.com/>`__. As the ``hg serve`` tool that is
+<https://orthanc.uclouvain.be/hg/>`__. As the ``hg serve`` tool that is
 used by our Web server tends to be slow, we recommend people to
 locally clone our Mercurial repositories.
 
@@ -72,7 +72,7 @@ locally clone our Mercurial repositories.
 Locally cloning one of those Mercurial repositories (say, the main
 ``orthanc`` repository) is as simple as typing::
 
-  $ hg clone https://hg.orthanc-server.com/orthanc/
+  $ hg clone https://orthanc.uclouvain.be/hg/orthanc/
 
 You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
@@ -172,9 +172,9 @@ Code quality
   "Mavericks". Submitted code might have to be adapted to compile on
   these platforms. Architecture-dependant code should be located in
   the `Orthanc::Toolbox
-  <https://hg.orthanc-server.com/orthanc/file/default/OrthancFramework/Sources/Toolbox.h>`__
+  <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancFramework/Sources/Toolbox.h>`__
   and `Orthanc::SystemToolbox
-  <https://hg.orthanc-server.com/orthanc/file/default/OrthancFramework/Sources/SystemToolbox.h>`__
+  <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancFramework/Sources/SystemToolbox.h>`__
   static classes.
 
 * Please stick to the :ref:`coding style <coding-style>` of Orthanc.
@@ -184,11 +184,11 @@ Code quality
   feature. Large architectural changes are reserved for the core
   development team of Orthanc, as we must follow our `long-term
   roadmap
-  <https://hg.orthanc-server.com/orthanc/file/default/TODO>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc/file/default/TODO>`__.
 
 * Unit testing is mandatory. Integration tests should be submitted to
   the `dedicated repository
-  <https://hg.orthanc-server.com/orthanc-tests/file/default>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-tests/file/default>`__.
 
 * All the contributions will be carefully reviewed. Some contributions
   may be modified, yet even rejected. A rejection might for instance
@@ -281,10 +281,10 @@ add``, ``hg rm``, and ``hg commit``) in the branch
 gathers all your changes against the source repository as follows::
 
   $ hg commit -m 'submitting my fix'
-  $ hg bundle /tmp/contribution.bundle https://hg.orthanc-server.com/orthanc
+  $ hg bundle /tmp/contribution.bundle https://orthanc.uclouvain.be/hg/orthanc
 
 Obviously, make sure to replace
-``https://hg.orthanc-server.com/orthanc`` by the location of the
+``https://orthanc.uclouvain.be/hg/orthanc`` by the location of the
 source repository.
 
 Finally, you can submit the file ``/tmp/contribution.bundle`` to the
@@ -295,7 +295,7 @@ The core developers would reintegrate such a bundle into the mainline
 by typing the following commands on their side::
 
   $ cd /tmp
-  $ hg clone https://hg.orthanc-server.com/orthanc/
+  $ hg clone https://orthanc.uclouvain.be/hg/orthanc/
   $ cd /tmp/orthanc
   $ hg unbundle /tmp/contribution.bundle
   $ hg up -c default
@@ -316,7 +316,7 @@ Team).
 Issue tracker
 -------------
 
-The `official bug tracker <https://bugs.orthanc-server.com/>`__ of the
+The `official bug tracker <https://orthanc.uclouvain.be/bugs/>`__ of the
 Orthanc project runs thanks to `Bugzilla
 <https://en.wikipedia.org/wiki/Bugzilla>`__.
 

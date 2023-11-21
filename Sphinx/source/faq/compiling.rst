@@ -13,7 +13,7 @@ Under GNU/Linux
 ---------------
 
 * Orthanc >= 0.7.1: See the `build instructions
-  <https://hg.orthanc-server.com/orthanc/file/default/LinuxCompilation.txt>`_
+  <https://orthanc.uclouvain.be/hg/orthanc/file/default/LinuxCompilation.txt>`_
   inside the source package.
 * Orthanc <= 0.7.0: See the :ref:`compiling-old`.
 
@@ -36,7 +36,7 @@ Under Microsoft Windows
 -----------------------
 
 See the `build instructions for Windows
-<https://hg.orthanc-server.com/orthanc/file/default/INSTALL>`_ inside
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/INSTALL>`_ inside
 the source package.
 
 Under OS X
@@ -45,7 +45,7 @@ Under OS X
 The mainline of Orthanc can compile under Apple OS X, with the XCode
 compiler, since June 24th, 2014. See the `build instructions for
 Darwin
-<https://hg.orthanc-server.com/orthanc/file/default/DarwinCompilation.txt>`_
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/DarwinCompilation.txt>`_
 inside the source package.
 
 Performance warning
@@ -70,7 +70,7 @@ The build infrastructure of Orthanc is based upon `CMake
 the third-party dependencies directly inside the Orthanc
 executable. This is the meaning of the ``-DSTATIC_BUILD=ON`` option,
 as described in the `INSTALL
-<https://hg.orthanc-server.com/orthanc/file/default/INSTALL>`_ file of Orthanc.
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/INSTALL>`_ file of Orthanc.
 
 Such a static linking is very desirable under Windows, since the
 Orthanc binaries do not depend on any external DLL, which results in a

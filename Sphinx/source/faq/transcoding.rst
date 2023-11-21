@@ -220,7 +220,7 @@ can be invoked from a :ref:`Lua script <lua>` (check out
 ``OrthancPluginRegisterOnStoredInstanceCallback()`` function). A
 sample Lua script that converts every incoming DICOM file to the
 JPEG2k transfer syntax is `part of the Orthanc sources
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__. Note
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Lua/AutomatedJpeg2kCompression.lua>`__. Note
 that this solution makes no sense anymore in Orthanc 1.7.0, as it
 provides built-in support for transcoding.
 

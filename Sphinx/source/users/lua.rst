@@ -13,7 +13,7 @@ script. This page summarizes the possibilities of Orthanc server-side
 scripting.
 
 Many other examples are `available in the source distribution
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Lua/>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Lua/>`__.
 
 A more expressive alternative to Lua scripts is provided by
 :ref:`Python plugins <python-plugin>`.
@@ -118,7 +118,7 @@ new medical images:
   protocol. This allows to inspect the content of the C-Find query,
   and possibly modify it if a patch is needed for some manufacturer. A
   `sample script is available
-  <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Lua/IncomingFindRequestFilter.lua>`__.
 
 Some other **resource-related events** are available:
 
@@ -148,7 +148,7 @@ association is negotiated for C-Store SCP, several callbacks are
 successively invoked to specify which **transfer syntaxes** are
 accepted for the association. These callbacks are listed in `this
 sample script
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.8.2/OrthancServer/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.8.2/OrthancServer/Resources/Samples/Lua/TransferSyntaxEnable.lua>`__.
 These callbacks were removed in Orthanc 1.9.0.
 
 If a callback is specified multiple times in separate scripts, the

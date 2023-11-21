@@ -16,7 +16,7 @@ DESCRIPTION
        If no configuration path is given on the command line, a set of default
        parameters is used. Please refer to  the  Orthanc  Book	for  the  full
        instructions	   about	how	   to	     use       Orthanc
-       <http://book.orthanc-server.com/>.
+       <https://orthanc.uclouvain.be/book/>.
 
        Pay attention to the fact that the order of the options	is  important.
        Options	are read left to right. In particular, options such as "--ver‐

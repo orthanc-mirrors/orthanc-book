@@ -22,7 +22,7 @@ to this end.
 Using JSONlab, the following code will download and display a DICOM image::
 
   SERIES = 'ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6';
-  URL = 'http://demo.orthanc-server.com/';
+  URL = 'https://orthanc.uclouvain.be/demo/';
 
   # Get information about the instances in this DICOM series
   instances = loadjson(urlread([ URL '/series/' SERIES '/instances' ]));
@@ -52,7 +52,7 @@ the raw DICOM file corresponding to one given instance stored in
 Orthanc, then decode this DICOM file using Matlab/Octave::
 
   SERIES = 'ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6';
-  URL = 'http://demo.orthanc-server.com/';
+  URL = 'https://orthanc.uclouvain.be/demo/';
 
   # Get information about the instances in this DICOM series
   instances = loadjson(urlread([ URL '/series/' SERIES '/instances' ]));

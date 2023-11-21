@@ -10,7 +10,7 @@ Release notes
 -------------
 
 Release notes are available `here
-<https://hg.orthanc-server.com/orthanc-object-storage/file/default/NEWS>`__ 
+<https://orthanc.uclouvain.be/hg/orthanc-object-storage/file/default/NEWS>`__ 
    
 Introduction
 ------------

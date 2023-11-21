@@ -75,12 +75,12 @@ syntax as the ``dcmodify`` command-line tool (wildcards are supported
 as well). Earlier versions were limited to top-level tags in the DICOM
 dataset. Check out the integration test ``test_modify_subsequences``
 for `examples
-<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-tests/file/default/Tests/Tests.py>`__.
 
 **Implementation:** Internally, the setup of the anonymization
 profiles can be found in the methods ``SetupAnonymizationXXX()`` of
 the class ``Orthanc::DicomModification`` (cf. `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancFramework/Sources/DicomParsing/DicomModification.cpp>`__).
 
 
 Modification of a Single Instance
@@ -166,7 +166,7 @@ specify sequences, using the same syntax as the ``dcmodify``
 command-line tool (wildcards are supported as well). Earlier versions
 were limited to top-level tags in the DICOM dataset. Check out the
 integration test ``test_modify_subsequences`` for `examples
-<https://hg.orthanc-server.com/orthanc-tests/file/default/Tests/Tests.py>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-tests/file/default/Tests/Tests.py>`__.
 
 
 .. _study-modification:

@@ -8,7 +8,7 @@ Configuration of Orthanc
 Configuring Orthanc simply consists in providing a configuration file.
 Orthanc has numerous configuration that are documented in the `default
 configuration file
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Configuration.json>`_. This
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Configuration.json>`_. This
 file is in the `JSON <https://en.wikipedia.org/wiki/JSON>`_ file
 format. You can generate this file file with the following call::
 
@@ -70,7 +70,7 @@ Windows. You can control the parameters of the service by typing
 ``services.msc`` at a command-line prompt. The Windows service of
 Orthanc will do its best to cleanly stop Orthanc at the shutdown of
 Windows, but `there are some caveats
-<https://bugs.orthanc-server.com/show_bug.cgi?id=48>`__.
+<https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=48>`__.
  
 **Remark 4:** To obtain more diagnostic, you can use the ``--verbose``
 or the ``--trace`` options::

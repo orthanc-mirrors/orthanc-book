@@ -16,7 +16,7 @@ set to ``403`` (Forbidden).
 How to get it ?
 ---------------
 
-The source code is available on `Mercurial <https://hg.orthanc-server.com/orthanc-authorization/>`__.
+The source code is available on `Mercurial <https://orthanc.uclouvain.be/hg/orthanc-authorization/>`__.
 
 Binaries are included in:
 
@@ -24,7 +24,7 @@ Binaries are included in:
 - The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
 - The `MacOS packages <https://orthanc.osimis.io/osx/stable/orthancAndPluginsOSX.stable.zip>`__
 
-Release notes are available `here <https://hg.orthanc-server.com/orthanc-authorization/file/tip/NEWS>`__.
+Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/tip/NEWS>`__.
 
 Compilation instructions are available below.
 
@@ -179,7 +179,7 @@ Here is a description of these two fields:
   the cache entry will never expire.
 
 **Note:** The source code of the plugin contains a `basic example
-<https://hg.orthanc-server.com/orthanc-authorization/file/default/Resources/TestService.js>`__
+<https://orthanc.uclouvain.be/hg/orthanc-authorization/file/default/Resources/TestService.js>`__
 of such a Web service written in node.js.
 
 
@@ -262,7 +262,7 @@ Full configuration
 
 .. highlight:: json
 
-The full list of configuration is available `here <https://hg.orthanc-server.com/orthanc-authorization/file/tip/Plugin/DefaultConfiguration.json>`__.
+The full list of configuration is available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/tip/Plugin/DefaultConfiguration.json>`__.
 
 Here is the list of all the configuration options::
 

@@ -18,7 +18,7 @@ instead of the more complex C/C++ programming languages.
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
@@ -34,7 +34,7 @@ Source code
   <https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
 
 * Link to the `code repository
-  <https://hg.orthanc-server.com/orthanc-python/>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-python/>`__.
 
   
 Licensing
@@ -296,7 +296,7 @@ This sample uploads a DICOM file as soon as Orthanc is started:
    In releases <= 3.0 of the Python plugin, deadlocks might emerge if
    you call other core primitives of Orthanc (such as the REST API) in
    your callback function. This issue has been `fixed in release 3.1
-   <https://hg.orthanc-server.com/orthanc-python/rev/46fe70776d61>`__.
+   <https://orthanc.uclouvain.be/hg/orthanc-python/rev/46fe70776d61>`__.
 
 As a **temporary workaround** against such deadlocks in releases <=
 3.0, if you have to call other primitives of Orthanc, you should make

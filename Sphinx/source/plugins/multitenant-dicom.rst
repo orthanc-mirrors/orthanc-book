@@ -13,7 +13,7 @@ turn Orthanc into a **multitenant DICOM** server using :ref:`labels
 from different DICOM servers, that each provides a different view
 depending on the presence of labels. This plugin available is part of
 the `official source distribution
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Plugins/Samples/MultitenantDicom>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Plugins/Samples/MultitenantDicom>`__
 of Orthanc, starting with Orthanc 1.12.0.
 
 This plugin starts additional DICOM servers, in complement to the main

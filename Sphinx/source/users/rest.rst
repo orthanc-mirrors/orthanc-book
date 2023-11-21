@@ -98,7 +98,7 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -110,7 +110,7 @@ provides more features than ``ImportDicomFiles.py``. It can notably
 import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2`` archives
 without having to uncompress them first. It also provides more
 comprehensive command-line options. `Check this script out
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
     
 
 .. highlight:: perl
@@ -452,7 +452,7 @@ sample call::
   import numpy
   import requests
   
-  r = requests.get('https://demo.orthanc-server.com/instances/6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f/numpy')
+  r = requests.get('https://orthanc.uclouvain.be/demo/instances/6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f/numpy')
   r.raise_for_status()
   
   image = numpy.load(io.BytesIO(r.content))
@@ -471,7 +471,7 @@ Similarly, this feature is available at the series level::
   import numpy
   import requests
   
-  r = requests.get('https://demo.orthanc-server.com/series/dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e/numpy')
+  r = requests.get('https://orthanc.uclouvain.be/demo/series/dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e/numpy')
   r.raise_for_status()
   
   image = numpy.load(io.BytesIO(r.content))
@@ -788,7 +788,7 @@ To circumvent this problem, you have 2 possibilities:
    The list of the resources to be sent are given as a JSON array. In
    this case, a single DICOM connection is used. `Sample code is
    available
-   <https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
+   <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Python/HighPerformanceAutoRouting.py>`__.
 
    Note that the list of resources to be sent can include the
    :ref:`Orthanc identifiers <orthanc-ids>` of entire patients,
@@ -1042,11 +1042,11 @@ response::
 Setting the ``Expand`` field to ``true`` in the POST body of the
 query will automatically report details about each study::
 
-  $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"}}'
+  $ curl https://orthanc.uclouvain.be/demo/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"}}'
   [
     "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0"
   ]
-  $ curl https://demo.orthanc-server.com/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"},"Expand":true}'
+  $ curl https://orthanc.uclouvain.be/demo/tools/find -d '{"Level":"Study","Query":{"PatientName":"KNIX"},"Expand":true}'
   [
     {
       "ID" : "b9c08539-26f93bde-c81ab0d7-bffaf2cb-a4d0bdd0",
@@ -1237,7 +1237,7 @@ sequence number the changes must be returned::
     $ curl 'http://localhost:8042/changes?limit=100&since=922'
 
 A `sample code in the source distribution
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Resources/Samples/Python/ChangesLoop.py>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Python/ChangesLoop.py>`__
 shows how to use this Changes API to implement a polling loop.
 
 
@@ -1340,6 +1340,6 @@ API have not been described:
 * A :ref:`short reference of the REST API of Orthanc <cheatsheet>` is
   part of the Orthanc Book.
 * The full documentation of the REST API in the OpenAPI/Swagger format
-  is `available online <https://api.orthanc-server.com/>`__. This
+  is `available online <https://orthanc.uclouvain.be/api/>`__. This
   reference is automatically generated from the source code of
   Orthanc.

@@ -41,7 +41,7 @@ hospitals.
 
 The actual implementation of the hashing is carried on by the
 `DicomInstanceHasher class
-<https://hg.orthanc-server.com/orthanc/file/default/OrthancFramework/Sources/DicomFormat/DicomInstanceHasher.cpp>`_.
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancFramework/Sources/DicomFormat/DicomInstanceHasher.cpp>`_.
 
 If two different instances have the same Orthanc identifier, only one
 of them is kept. By default, the first instance that was received by

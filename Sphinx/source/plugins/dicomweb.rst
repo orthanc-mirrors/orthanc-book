@@ -19,7 +19,7 @@ plugins <https://www.orthanc-server.com/static.php?page=dicomweb>`__.
 
 The full standard is not implemented yet, the supported features are
 `tracked in the repository
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Status.txt>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-dicomweb/file/default/Status.txt>`__.
 
 
 Compilation
@@ -48,7 +48,7 @@ available courtesy of `Osimis <https://www.osimis.io/>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/BuildInstructions.txt>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-dicomweb/file/default/Resources/BuildInstructions.txt>`__.
 
 
 Installation
@@ -319,7 +319,7 @@ Three important options can be provided for individual remote DICOMweb servers:
   ``ChunkedTransfers`` to ``true`` in Orthanc 1.5.7 and 1.5.8 utilizes
   one CPU at 100%, which results in very low throughput: This issue is
   resolved in Orthanc 1.6.0 (cf. `issue 156
-  <https://bugs.orthanc-server.com/show_bug.cgi?id=156>`__ for full
+  <https://orthanc.uclouvain.be/bugs/show_bug.cgi?id=156>`__ for full
   explanation).
 
 * ``HasWadoRsUniversalTransferSyntax`` (new in DICOMweb 1.1) must be
@@ -458,8 +458,8 @@ provided to use Orthanc as a DICOMweb client. Simply click on the
 
 Here is a direct link to the DICOMweb client running on our demo
 server:
-`https://demo.orthanc-server.com/dicom-web/app/client/index.html
-<https://demo.orthanc-server.com/dicom-web/app/client/index.html>`__
+`https://orthanc.uclouvain.be/demo/dicom-web/app/client/index.html
+<https://orthanc.uclouvain.be/demo/dicom-web/app/client/index.html>`__
 
 
 
@@ -728,12 +728,12 @@ Additional samples
 
 Samples of how to call DICOMweb services from standalone applications
 are available for `Python
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/Samples/Python>`__
+<https://orthanc.uclouvain.be/hg/orthanc-dicomweb/file/default/Resources/Samples/Python>`__
 and for `JavaScript
-<https://hg.orthanc-server.com/orthanc-dicomweb/file/default/Resources/Samples/JavaScript>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-dicomweb/file/default/Resources/Samples/JavaScript>`__.
 
 Integration tests are `available separately
-<https://hg.orthanc-server.com/orthanc-tests/file/default/Plugins/DicomWeb/Run.py>`__,
+<https://orthanc.uclouvain.be/hg/orthanc-tests/file/default/Plugins/DicomWeb/Run.py>`__,
 and provide samples for more advanced features of the REST API (such
 as dynamically adding/updating/removing remote DICOMweb servers using
 HTTP PUT and DELETE methods).

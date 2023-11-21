@@ -6,10 +6,10 @@ DICOM. General information about Orthanc can be found on its
 [official Website](http://www.orthanc-server.com/).
 
 This repository contains the source code of the
-[Orthanc Book](http://book.orthanc-server.com/), that documents how
+[Orthanc Book](https://orthanc.uclouvain.be/book/), that documents how
 Orthanc can be used. It also contains the source code of the
 documentation of the
-[REST API of Orthanc](http://api.orthanc-server.com/). The continuous
+[REST API of Orthanc](https://orthanc.uclouvain.be/api/). The continuous
 integration server (CIS) of Orthanc watches this repository, and
 automatically publishes modifications online.
 
@@ -60,7 +60,7 @@ Contributing to the Book
    for review by the Orthanc project.
  * Once the pull request is reviewed and accepted, the continuous
    integration server of the Orthanc project will automatically
-   publish the new version [online](http://book.orthanc-server.com/).
+   publish the new version [online](https://orthanc.uclouvain.be/book/).
 
 
 
@@ -69,15 +69,15 @@ REST API of Orthanc
 
 The REST API of Orthanc is now fully documented in the [source code of
 the Orthanc
-server](https://hg.orthanc-server.com/orthanc/file/default/OrthancServer/Sources/OrthancRestApi).
+server](https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Sources/OrthancRestApi).
 The `--openapi=` and the `--cheatsheet=` command-line options of
 Orthanc automatically generate respectively the [OpenAPI in JSON
 format](https://swagger.io/specification/) and its [quick reference
-(cheatsheet)](https://book.orthanc-server.com/users/rest-cheatsheet.html)
+(cheatsheet)](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html)
 in CSV format that is designed to be included right into the [Orthanc
-Book](https://hg.orthanc-server.com/orthanc-book/file/default/Sphinx/source/users/rest-cheatsheet.csv).
+Book](https://orthanc.uclouvain.be/hg/orthanc-book/file/default/Sphinx/source/users/rest-cheatsheet.csv).
 
 In order to contribute to the documentation of the REST API, you can
 [propose a simple
-patch](https://book.orthanc-server.com/developers/repositories.html#simple-patch-import-export)
+patch](https://orthanc.uclouvain.be/book/developers/repositories.html#simple-patch-import-export)
 to the core of Orthanc to be reviewed by the core maintainers.

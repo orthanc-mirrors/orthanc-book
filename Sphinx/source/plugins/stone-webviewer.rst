@@ -14,7 +14,7 @@ For general information and a demonstration, check out the `official
 homepage of the plugin
 <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__.
 Also `check out the source code
-<https://hg.orthanc-server.com/orthanc-stone/file/default/Applications/StoneWebViewer>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-stone/file/default/Applications/StoneWebViewer>`__.
 
 
 How to get it
@@ -32,7 +32,7 @@ For GNU/Linux users, the Stone Web viewer is part of the
 The compilation process is quite complex since it requires using the
 `Emscripten <https://emscripten.org/>`__ compiler toolchain. The full
 build instructions are available in the `source code
-<https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
 
 
 Usage
@@ -91,18 +91,18 @@ Advanced options
 
 * The configuration of the Web viewer can be fine-tuned by adapting
   some **advanced options** in the `configuration file
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
 * The source distribution of the Stone Web viewer contains a
   `NOTES.txt file
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/NOTES.txt>`__
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/NOTES.txt>`__
   that discusses the differences with the :ref:`Osimis Web viewer
   <osimis_webviewer>` as well as **advanced features** of the software
   (opening multiple studies, authorization, display of OsiriX
   annotations...).
 
 * Also, check out our `TODO file
-  <https://hg.orthanc-server.com/orthanc-stone/file/default/TODO>`__
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/default/TODO>`__
   that is used to track **future features**.
    
 
@@ -164,7 +164,7 @@ FAQ
   `wkhtmltopdf <https://wkhtmltopdf.org/>`__, and finally convert the
   PDF to DICOM using the ``/tools/create-dicom`` route in the `REST
   API of Orthanc
-  <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__.
+  <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-dicom/post>`__.
   It would be easy to automate this workflow using a :ref:`Python
   plugin <python-plugin>`.
 
@@ -210,7 +210,7 @@ FAQ
 - **How can I migrate from Osimis Web viewer to Stone Web viewer?**
 
   Full instructions are provided in the `source distribution
-  <https://hg.orthanc-server.com/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/NOTES.txt>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.5/Applications/StoneWebViewer/NOTES.txt>`__.
 
 - **What are the future plans?**
 

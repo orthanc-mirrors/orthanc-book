@@ -7,7 +7,7 @@ Old build instructions for GNU/Linux
 This page summarizes the GNU/Linux build instructions that were used
 **up to Orthanc 0.7.0 (inclusive)**.  Instructions for Orthanc above
 0.7.0 can be found directly `inside the source package
-<https://hg.orthanc-server.com/orthanc/file/default/LinuxCompilation.txt>`_.
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/LinuxCompilation.txt>`_.
 
 Static linking
 --------------

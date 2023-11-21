@@ -59,9 +59,9 @@ accessing the storage folder are when this is not needed). The SQLite
 database schema is kept as simple as possible, and can be found in the
 following two files of the source code of Orthanc:
 `PrepareDatabase.sql
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
 and `InstallTrackAttachmentsSize.sql
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
 
 
 Direct access

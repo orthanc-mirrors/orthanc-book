@@ -148,7 +148,7 @@ calls), waiting for the ``State`` field to become ``Success`` or
 ``Failure``.
 
 Note that the `integration tests of Orthanc
-<https://hg.orthanc-server.com/orthanc-tests/file/Orthanc-1.12.1/Tests/Toolbox.py>`__
+<https://orthanc.uclouvain.be/hg/orthanc-tests/file/Orthanc-1.12.1/Tests/Toolbox.py>`__
 give an example about how to monitor a job in Python using the REST
 API (cf. function ``MonitorJob()``).
 
@@ -178,7 +178,7 @@ Given the ID of some job, one can:
 * Retry a job in ``Failed`` state by POST-ing to ``/jobs/.../resubmit``.
 
 The related state machine is depicted in the `implementation notes
-<https://hg.orthanc-server.com/orthanc/raw-file/default/OrthancServer/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/raw-file/default/OrthancServer/Resources/ImplementationNotes/JobsEngineStates.pdf>`__.
 
 
 Example: Asynchronous generation of an archive
@@ -221,7 +221,7 @@ archive, then to download it locally::
 Note how we retrieve the content of the archive by accessing the
 ``archive`` output of the job (check out the virtual method
 ``IJob::GetOutput()`` from the `source code
-<https://hg.orthanc-server.com/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
 of Orthanc).
 
 Here is the corresponding sequence of commands to generate a DICOMDIR

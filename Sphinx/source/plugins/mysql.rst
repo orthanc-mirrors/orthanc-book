@@ -18,7 +18,7 @@ For information about scalability, make sure to read the section about
 
 The source code of the MySQL/MariaDB plugins can be found in the
 ``orthanc-databases`` `Mercurial repository
-<https://hg.orthanc-server.com/orthanc-databases/>`__, next to the
+<https://orthanc.uclouvain.be/hg/orthanc-databases/>`__, next to the
 source code of the :ref:`ODBC <odbc>` and :ref:`PostgreSQL
 <postgresql>` plugins.
 

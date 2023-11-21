@@ -1,237 +1,237 @@
 Path,GET,POST,DELETE,PUT,Summary
-``/changes``,`GET <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1changes/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1changes/delete>`__,,List changes
-``/exports``,`GET <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1exports/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1exports/delete>`__,,List exports
-``/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances/post>`__,,,List the available instances
-``/instances/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}/delete>`__,,Get information about some instance
-``/instances/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1anonymize/post>`__,,,Anonymize instance
-``/instances/{id}/attachments``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments/get>`__,,,,List attachments
-``/instances/{id}/attachments/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1instances~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/put>`__,List operations on attachments
-``/instances/{id}/attachments/{name}/compress``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
-``/instances/{id}/attachments/{name}/compressed-data``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
-``/instances/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
-``/instances/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
-``/instances/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
-``/instances/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
-``/instances/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
-``/instances/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
-``/instances/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
-``/instances/{id}/attachments/{name}/uncompress``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
-``/instances/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
-``/instances/{id}/content``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1content/get>`__,,,,Get raw tag
-``/instances/{id}/export``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1export/post>`__,,,Write DICOM onto filesystem
-``/instances/{id}/file``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1file/get>`__,,,,Download DICOM
-``/instances/{id}/frames``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames/get>`__,,,,List available frames
-``/instances/{id}/frames/{frame}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1instances~1{id}~1frames~1{frame}/get>`__,,,,List operations
-``/instances/{id}/frames/{frame}/image-int16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-int16/get>`__,,,,Decode a frame (int16)
-``/instances/{id}/frames/{frame}/image-uint16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint16/get>`__,,,,Decode a frame (uint16)
-``/instances/{id}/frames/{frame}/image-uint8``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint8/get>`__,,,,Decode a frame (uint8)
-``/instances/{id}/frames/{frame}/matlab``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1matlab/get>`__,,,,Decode frame for Matlab
-``/instances/{id}/frames/{frame}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1numpy/get>`__,,,,Decode frame for numpy
-``/instances/{id}/frames/{frame}/preview``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1preview/get>`__,,,,Decode a frame (preview)
-``/instances/{id}/frames/{frame}/raw``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw/get>`__,,,,Access raw frame
-``/instances/{id}/frames/{frame}/raw.gz``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw.gz/get>`__,,,,Access raw frame (compressed)
-``/instances/{id}/frames/{frame}/rendered``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1rendered/get>`__,,,,Render a frame
-``/instances/{id}/header``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1header/get>`__,,,,Get DICOM meta-header
-``/instances/{id}/image-int16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-int16/get>`__,,,,Decode an image (int16)
-``/instances/{id}/image-uint16``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint16/get>`__,,,,Decode an image (uint16)
-``/instances/{id}/image-uint8``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint8/get>`__,,,,Decode an image (uint8)
-``/instances/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels/get>`__,,,,List labels
-``/instances/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/put>`__,Test label
-``/instances/{id}/matlab``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1matlab/get>`__,,,,Decode frame for Matlab
-``/instances/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata/get>`__,,,,List metadata
-``/instances/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/put>`__,Get metadata
-``/instances/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1modify/post>`__,,,Modify instance
-``/instances/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1module/get>`__,,,,Get instance module
-``/instances/{id}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1numpy/get>`__,,,,Decode instance for numpy
-``/instances/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1patient/get>`__,,,,Get parent patient
-``/instances/{id}/pdf``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1pdf/get>`__,,,,Get embedded PDF
-``/instances/{id}/preview``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1preview/get>`__,,,,Decode an image (preview)
-``/instances/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of instance
-``/instances/{id}/rendered``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1rendered/get>`__,,,,Render an image
-``/instances/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1series/get>`__,,,,Get parent series
-``/instances/{id}/simplified-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1simplified-tags/get>`__,,,,Get human-readable tags
-``/instances/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1statistics/get>`__,,,,Get instance statistics
-``/instances/{id}/study``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1study/get>`__,,,,Get parent study
-``/instances/{id}/tags``,`GET <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1tags/get>`__,,,,Get DICOM tags
-``/jobs``,`GET <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs/get>`__,,,,List jobs
-``/jobs/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}/get>`__,,,,Get job
-``/jobs/{id}/cancel``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1cancel/post>`__,,,Cancel job
-``/jobs/{id}/pause``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1pause/post>`__,,,Pause job
-``/jobs/{id}/resubmit``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1resubmit/post>`__,,,Resubmit job
-``/jobs/{id}/resume``,,`POST <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1resume/post>`__,,,Resume job
-``/jobs/{id}/{key}``,`GET <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/delete>`__,,Get job output
-``/modalities``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities/get>`__,,,,List DICOM modalities
-``/modalities/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/put>`__,List operations on modality
-``/modalities/{id}/configuration``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1configuration/get>`__,,,,Get modality configuration
-``/modalities/{id}/echo``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1echo/post>`__,,,Trigger C-ECHO SCU
-``/modalities/{id}/find``,,`(post) <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find/post>`__,,,*(deprecated)* Hierarchical C-FIND SCU
-``/modalities/{id}/find-instance``,,`(post) <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find-instance/post>`__,,,*(deprecated)* C-FIND SCU for instances
-``/modalities/{id}/find-patient``,,`(post) <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find-patient/post>`__,,,*(deprecated)* C-FIND SCU for patients
-``/modalities/{id}/find-series``,,`(post) <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find-series/post>`__,,,*(deprecated)* C-FIND SCU for series
-``/modalities/{id}/find-study``,,`(post) <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find-study/post>`__,,,*(deprecated)* C-FIND SCU for studies
-``/modalities/{id}/find-worklist``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1find-worklist/post>`__,,,C-FIND SCU for worklist
-``/modalities/{id}/move``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1move/post>`__,,,Trigger C-MOVE SCU
-``/modalities/{id}/query``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1query/post>`__,,,Trigger C-FIND SCU
-``/modalities/{id}/storage-commitment``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1storage-commitment/post>`__,,,Trigger storage commitment request
-``/modalities/{id}/store``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1store/post>`__,,,Trigger C-STORE SCU
-``/modalities/{id}/store-straight``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}~1store-straight/post>`__,,,Straight C-STORE SCU
-``/patients``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients/get>`__,,,,List the available patients
-``/patients/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}/delete>`__,,Get information about some patient
-``/patients/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1anonymize/post>`__,,,Anonymize patient
-``/patients/{id}/archive``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1archive/post>`__,,,Create ZIP archive
-``/patients/{id}/attachments``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments/get>`__,,,,List attachments
-``/patients/{id}/attachments/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1patients~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}/put>`__,List operations on attachments
-``/patients/{id}/attachments/{name}/compress``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
-``/patients/{id}/attachments/{name}/compressed-data``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
-``/patients/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
-``/patients/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
-``/patients/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
-``/patients/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
-``/patients/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
-``/patients/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
-``/patients/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
-``/patients/{id}/attachments/{name}/uncompress``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
-``/patients/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
-``/patients/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1instances/get>`__,,,,Get child instances
-``/patients/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1instances-tags/get>`__,,,,Get tags of instances
-``/patients/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels/get>`__,,,,List labels
-``/patients/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/put>`__,Test label
-``/patients/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1media/post>`__,,,Create DICOMDIR media
-``/patients/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata/get>`__,,,,List metadata
-``/patients/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/put>`__,Get metadata
-``/patients/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1modify/post>`__,,,Modify patient
-``/patients/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1module/get>`__,,,,Get patient module
-``/patients/{id}/protected``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1protected/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1protected/put>`__,Is the patient protected against recycling?
-``/patients/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of patient
-``/patients/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1series/get>`__,,,,Get child series
-``/patients/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1shared-tags/get>`__,,,,Get shared tags
-``/patients/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1statistics/get>`__,,,,Get patient statistics
-``/patients/{id}/studies``,`GET <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1studies/get>`__,,,,Get child studies
-``/peers``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers/get>`__,,,,List Orthanc peers
-``/peers/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/put>`__,List operations on peer
-``/peers/{id}/configuration``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1configuration/get>`__,,,,Get peer configuration
-``/peers/{id}/store``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1store/post>`__,,,Send to Orthanc peer
-``/peers/{id}/store-straight``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1store-straight/post>`__,,,Straight store to peer
-``/peers/{id}/system``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}~1system/get>`__,,,,Get peer system information
-``/plugins``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1plugins/get>`__,,,,List plugins
-``/plugins/explorer.js``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1plugins~1explorer.js/get>`__,,,,JavaScript extensions to Orthanc Explorer
-``/plugins/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1plugins~1{id}/get>`__,,,,Get plugin
-``/queries``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries/get>`__,,,,List query/retrieve operations
-``/queries/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}/delete>`__,,List operations on a query
-``/queries/{id}/answers``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers/get>`__,,,,List answers to a query
-``/queries/{id}/answers/{index}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}/get>`__,,,,List operations on an answer
-``/queries/{id}/answers/{index}/content``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1content/get>`__,,,,Get one answer
-``/queries/{id}/answers/{index}/query-instances``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-instances/post>`__,,,Query the child instances of an answer
-``/queries/{id}/answers/{index}/query-series``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-series/post>`__,,,Query the child series of an answer
-``/queries/{id}/answers/{index}/query-studies``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-studies/post>`__,,,Query the child studies of an answer
-``/queries/{id}/answers/{index}/retrieve``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1retrieve/post>`__,,,Retrieve one answer
-``/queries/{id}/level``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1level/get>`__,,,,Get level of original query
-``/queries/{id}/modality``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1modality/get>`__,,,,Get modality of original query
-``/queries/{id}/query``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1query/get>`__,,,,Get original query arguments
-``/queries/{id}/retrieve``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}~1retrieve/post>`__,,,Retrieve all answers
-``/series``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series/get>`__,,,,List the available series
-``/series/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}/delete>`__,,Get information about some series
-``/series/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1anonymize/post>`__,,,Anonymize series
-``/series/{id}/archive``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1archive/post>`__,,,Create ZIP archive
-``/series/{id}/attachments``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments/get>`__,,,,List attachments
-``/series/{id}/attachments/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1series~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}/put>`__,List operations on attachments
-``/series/{id}/attachments/{name}/compress``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
-``/series/{id}/attachments/{name}/compressed-data``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
-``/series/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
-``/series/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
-``/series/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
-``/series/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
-``/series/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
-``/series/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
-``/series/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
-``/series/{id}/attachments/{name}/uncompress``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
-``/series/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
-``/series/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1instances/get>`__,,,,Get child instances
-``/series/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1instances-tags/get>`__,,,,Get tags of instances
-``/series/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels/get>`__,,,,List labels
-``/series/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/put>`__,Test label
-``/series/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1media/post>`__,,,Create DICOMDIR media
-``/series/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata/get>`__,,,,List metadata
-``/series/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/put>`__,Get metadata
-``/series/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1modify/post>`__,,,Modify series
-``/series/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1module/get>`__,,,,Get series module
-``/series/{id}/numpy``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1numpy/get>`__,,,,Decode series for numpy
-``/series/{id}/ordered-slices``,`(get) <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1ordered-slices/get>`__,,,,*(deprecated)* Order the slices
-``/series/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1patient/get>`__,,,,Get parent patient
-``/series/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of series
-``/series/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1shared-tags/get>`__,,,,Get shared tags
-``/series/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1statistics/get>`__,,,,Get series statistics
-``/series/{id}/study``,`GET <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1study/get>`__,,,,Get parent study
-``/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1statistics/get>`__,,,,Get database statistics
-``/storage-commitment/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1storage-commitment~1{id}/get>`__,,,,Get storage commitment report
-``/storage-commitment/{id}/remove``,,`POST <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1storage-commitment~1{id}~1remove/post>`__,,,Remove after storage commitment
-``/studies``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies/get>`__,,,,List the available studies
-``/studies/{id}``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}/delete>`__,,Get information about some study
-``/studies/{id}/anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1anonymize/post>`__,,,Anonymize study
-``/studies/{id}/archive``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1archive/post>`__,,,Create ZIP archive
-``/studies/{id}/attachments``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments/get>`__,,,,List attachments
-``/studies/{id}/attachments/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1studies~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}/put>`__,List operations on attachments
-``/studies/{id}/attachments/{name}/compress``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
-``/studies/{id}/attachments/{name}/compressed-data``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
-``/studies/{id}/attachments/{name}/compressed-md5``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
-``/studies/{id}/attachments/{name}/compressed-size``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
-``/studies/{id}/attachments/{name}/data``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
-``/studies/{id}/attachments/{name}/info``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
-``/studies/{id}/attachments/{name}/is-compressed``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
-``/studies/{id}/attachments/{name}/md5``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
-``/studies/{id}/attachments/{name}/size``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
-``/studies/{id}/attachments/{name}/uncompress``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
-``/studies/{id}/attachments/{name}/verify-md5``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
-``/studies/{id}/instances``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1instances/get>`__,,,,Get child instances
-``/studies/{id}/instances-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1instances-tags/get>`__,,,,Get tags of instances
-``/studies/{id}/labels``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels/get>`__,,,,List labels
-``/studies/{id}/labels/{label}``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/put>`__,Test label
-``/studies/{id}/media``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1media/post>`__,,,Create DICOMDIR media
-``/studies/{id}/merge``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1merge/post>`__,,,Merge study
-``/studies/{id}/metadata``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata/get>`__,,,,List metadata
-``/studies/{id}/metadata/{name}``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/put>`__,Get metadata
-``/studies/{id}/modify``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1modify/post>`__,,,Modify study
-``/studies/{id}/module``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1module/get>`__,,,,Get study module
-``/studies/{id}/module-patient``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1module-patient/get>`__,,,,Get patient module of study
-``/studies/{id}/patient``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1patient/get>`__,,,,Get parent patient
-``/studies/{id}/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of study
-``/studies/{id}/series``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1series/get>`__,,,,Get child series
-``/studies/{id}/shared-tags``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1shared-tags/get>`__,,,,Get shared tags
-``/studies/{id}/split``,,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1split/post>`__,,,Split study
-``/studies/{id}/statistics``,`GET <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1statistics/get>`__,,,,Get study statistics
-``/system``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1system/get>`__,,,,Get system information
-``/tools``,`GET <https://api.orthanc-server.com/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
-``/tools/accepted-transfer-syntaxes``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
-``/tools/bulk-anonymize``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-anonymize/post>`__,,,Anonymize a set of resources
-``/tools/bulk-content``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
-``/tools/bulk-delete``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of resources
-``/tools/bulk-modify``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
-``/tools/create-archive``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
-``/tools/create-dicom``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
-``/tools/create-media``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
-``/tools/create-media-extended``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1create-media-extended/post>`__,,,Create DICOMDIR media
-``/tools/default-encoding``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1default-encoding/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1default-encoding/put>`__,Get default encoding
-``/tools/dicom-conformance``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1dicom-conformance/get>`__,,,,Get DICOM conformance
-``/tools/dicom-echo``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1dicom-echo/post>`__,,,Trigger C-ECHO SCU
-``/tools/execute-script``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1execute-script/post>`__,,,Execute Lua script
-``/tools/find``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1find/post>`__,,,Look for local resources
-``/tools/generate-uid``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1generate-uid/get>`__,,,,Generate an identifier
-``/tools/invalidate-tags``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1invalidate-tags/post>`__,,,Invalidate DICOM-as-JSON summaries
-``/tools/labels``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1labels/get>`__,,,,Get all the used labels
-``/tools/log-level``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level/put>`__,Get main log level
-``/tools/log-level-dicom``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-dicom/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-dicom/put>`__,Get log level for `dicom`
-``/tools/log-level-generic``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-generic/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-generic/put>`__,Get log level for `generic`
-``/tools/log-level-http``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-http/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-http/put>`__,Get log level for `http`
-``/tools/log-level-jobs``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-jobs/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-jobs/put>`__,Get log level for `jobs`
-``/tools/log-level-lua``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-lua/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-lua/put>`__,Get log level for `lua`
-``/tools/log-level-plugins``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-plugins/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-plugins/put>`__,Get log level for `plugins`
-``/tools/log-level-sqlite``,`GET <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-sqlite/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-sqlite/put>`__,Get log level for `sqlite`
-``/tools/lookup``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1lookup/post>`__,,,Look for DICOM identifiers
-``/tools/metrics``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1metrics/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1metrics/put>`__,Are metrics collected?
-``/tools/metrics-prometheus``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1metrics-prometheus/get>`__,,,,Get usage metrics
-``/tools/now``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1now/get>`__,,,,Get UTC time
-``/tools/now-local``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1now-local/get>`__,,,,Get local time
-``/tools/reconstruct``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1reconstruct/post>`__,,,Reconstruct all the index
-``/tools/reset``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1reset/post>`__,,,Restart Orthanc
-``/tools/shutdown``,,`POST <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1shutdown/post>`__,,,Shutdown Orthanc
-``/tools/unknown-sop-class-accepted``,`GET <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/put>`__,Is unknown SOP class accepted?
+``/changes``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Tracking-changes/paths/~1changes/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1changes/delete>`__,,List changes
+``/exports``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Tracking-changes/paths/~1exports/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Tracking-changes/paths/~1exports/delete>`__,,List exports
+``/instances``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances/post>`__,,,List the available instances
+``/instances/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}/delete>`__,,Get information about some instance
+``/instances/{id}/anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1anonymize/post>`__,,,Anonymize instance
+``/instances/{id}/attachments``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments/get>`__,,,,List attachments
+``/instances/{id}/attachments/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1instances~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}/put>`__,List operations on attachments
+``/instances/{id}/attachments/{name}/compress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
+``/instances/{id}/attachments/{name}/compressed-data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
+``/instances/{id}/attachments/{name}/compressed-md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
+``/instances/{id}/attachments/{name}/compressed-size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
+``/instances/{id}/attachments/{name}/data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/instances/{id}/attachments/{name}/info``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
+``/instances/{id}/attachments/{name}/is-compressed``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
+``/instances/{id}/attachments/{name}/md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
+``/instances/{id}/attachments/{name}/size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
+``/instances/{id}/attachments/{name}/uncompress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
+``/instances/{id}/attachments/{name}/verify-md5``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
+``/instances/{id}/content``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1content/get>`__,,,,Get raw tag
+``/instances/{id}/export``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1export/post>`__,,,Write DICOM onto filesystem
+``/instances/{id}/file``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1file/get>`__,,,,Download DICOM
+``/instances/{id}/frames``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames/get>`__,,,,List available frames
+``/instances/{id}/frames/{frame}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1instances~1{id}~1frames~1{frame}/get>`__,,,,List operations
+``/instances/{id}/frames/{frame}/image-int16``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-int16/get>`__,,,,Decode a frame (int16)
+``/instances/{id}/frames/{frame}/image-uint16``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint16/get>`__,,,,Decode a frame (uint16)
+``/instances/{id}/frames/{frame}/image-uint8``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1image-uint8/get>`__,,,,Decode a frame (uint8)
+``/instances/{id}/frames/{frame}/matlab``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1matlab/get>`__,,,,Decode frame for Matlab
+``/instances/{id}/frames/{frame}/numpy``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1numpy/get>`__,,,,Decode frame for numpy
+``/instances/{id}/frames/{frame}/preview``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1preview/get>`__,,,,Decode a frame (preview)
+``/instances/{id}/frames/{frame}/raw``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw/get>`__,,,,Access raw frame
+``/instances/{id}/frames/{frame}/raw.gz``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1raw.gz/get>`__,,,,Access raw frame (compressed)
+``/instances/{id}/frames/{frame}/rendered``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames~1{frame}~1rendered/get>`__,,,,Render a frame
+``/instances/{id}/header``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1header/get>`__,,,,Get DICOM meta-header
+``/instances/{id}/image-int16``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1image-int16/get>`__,,,,Decode an image (int16)
+``/instances/{id}/image-uint16``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint16/get>`__,,,,Decode an image (uint16)
+``/instances/{id}/image-uint8``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1image-uint8/get>`__,,,,Decode an image (uint8)
+``/instances/{id}/labels``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1labels/get>`__,,,,List labels
+``/instances/{id}/labels/{label}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1labels~1{label}/put>`__,Test label
+``/instances/{id}/matlab``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1matlab/get>`__,,,,Decode frame for Matlab
+``/instances/{id}/metadata``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1metadata/get>`__,,,,List metadata
+``/instances/{id}/metadata/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Instances/paths/~1instances~1{id}~1metadata~1{name}/put>`__,Get metadata
+``/instances/{id}/modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1modify/post>`__,,,Modify instance
+``/instances/{id}/module``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1module/get>`__,,,,Get instance module
+``/instances/{id}/numpy``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1numpy/get>`__,,,,Decode instance for numpy
+``/instances/{id}/patient``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1patient/get>`__,,,,Get parent patient
+``/instances/{id}/pdf``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1pdf/get>`__,,,,Get embedded PDF
+``/instances/{id}/preview``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1preview/get>`__,,,,Decode an image (preview)
+``/instances/{id}/reconstruct``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of instance
+``/instances/{id}/rendered``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1rendered/get>`__,,,,Render an image
+``/instances/{id}/series``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1series/get>`__,,,,Get parent series
+``/instances/{id}/simplified-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1simplified-tags/get>`__,,,,Get human-readable tags
+``/instances/{id}/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1statistics/get>`__,,,,Get instance statistics
+``/instances/{id}/study``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1study/get>`__,,,,Get parent study
+``/instances/{id}/tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1tags/get>`__,,,,Get DICOM tags
+``/jobs``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs/get>`__,,,,List jobs
+``/jobs/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}/get>`__,,,,Get job
+``/jobs/{id}/cancel``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1cancel/post>`__,,,Cancel job
+``/jobs/{id}/pause``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1pause/post>`__,,,Pause job
+``/jobs/{id}/resubmit``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1resubmit/post>`__,,,Resubmit job
+``/jobs/{id}/resume``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1resume/post>`__,,,Resume job
+``/jobs/{id}/{key}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Jobs/paths/~1jobs~1{id}~1{key}/delete>`__,,Get job output
+``/modalities``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities/get>`__,,,,List DICOM modalities
+``/modalities/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1modalities~1{id}/put>`__,List operations on modality
+``/modalities/{id}/configuration``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1configuration/get>`__,,,,Get modality configuration
+``/modalities/{id}/echo``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1echo/post>`__,,,Trigger C-ECHO SCU
+``/modalities/{id}/find``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find/post>`__,,,*(deprecated)* Hierarchical C-FIND SCU
+``/modalities/{id}/find-instance``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-instance/post>`__,,,*(deprecated)* C-FIND SCU for instances
+``/modalities/{id}/find-patient``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-patient/post>`__,,,*(deprecated)* C-FIND SCU for patients
+``/modalities/{id}/find-series``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-series/post>`__,,,*(deprecated)* C-FIND SCU for series
+``/modalities/{id}/find-study``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-study/post>`__,,,*(deprecated)* C-FIND SCU for studies
+``/modalities/{id}/find-worklist``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-worklist/post>`__,,,C-FIND SCU for worklist
+``/modalities/{id}/move``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1move/post>`__,,,Trigger C-MOVE SCU
+``/modalities/{id}/query``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1query/post>`__,,,Trigger C-FIND SCU
+``/modalities/{id}/storage-commitment``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1storage-commitment/post>`__,,,Trigger storage commitment request
+``/modalities/{id}/store``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1store/post>`__,,,Trigger C-STORE SCU
+``/modalities/{id}/store-straight``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1store-straight/post>`__,,,Straight C-STORE SCU
+``/patients``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients/get>`__,,,,List the available patients
+``/patients/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}/delete>`__,,Get information about some patient
+``/patients/{id}/anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1anonymize/post>`__,,,Anonymize patient
+``/patients/{id}/archive``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1archive/post>`__,,,Create ZIP archive
+``/patients/{id}/attachments``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments/get>`__,,,,List attachments
+``/patients/{id}/attachments/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1patients~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}/put>`__,List operations on attachments
+``/patients/{id}/attachments/{name}/compress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
+``/patients/{id}/attachments/{name}/compressed-data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
+``/patients/{id}/attachments/{name}/compressed-md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
+``/patients/{id}/attachments/{name}/compressed-size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
+``/patients/{id}/attachments/{name}/data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/patients/{id}/attachments/{name}/info``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
+``/patients/{id}/attachments/{name}/is-compressed``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
+``/patients/{id}/attachments/{name}/md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
+``/patients/{id}/attachments/{name}/size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
+``/patients/{id}/attachments/{name}/uncompress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
+``/patients/{id}/attachments/{name}/verify-md5``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
+``/patients/{id}/instances``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1instances/get>`__,,,,Get child instances
+``/patients/{id}/instances-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/patients/{id}/labels``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1labels/get>`__,,,,List labels
+``/patients/{id}/labels/{label}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1labels~1{label}/put>`__,Test label
+``/patients/{id}/media``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1media/post>`__,,,Create DICOMDIR media
+``/patients/{id}/metadata``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1metadata/get>`__,,,,List metadata
+``/patients/{id}/metadata/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1metadata~1{name}/put>`__,Get metadata
+``/patients/{id}/modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1modify/post>`__,,,Modify patient
+``/patients/{id}/module``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1module/get>`__,,,,Get patient module
+``/patients/{id}/protected``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1protected/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Patients/paths/~1patients~1{id}~1protected/put>`__,Is the patient protected against recycling?
+``/patients/{id}/reconstruct``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of patient
+``/patients/{id}/series``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1series/get>`__,,,,Get child series
+``/patients/{id}/shared-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1shared-tags/get>`__,,,,Get shared tags
+``/patients/{id}/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1statistics/get>`__,,,,Get patient statistics
+``/patients/{id}/studies``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Patients/paths/~1patients~1{id}~1studies/get>`__,,,,Get child studies
+``/peers``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers/get>`__,,,,List Orthanc peers
+``/peers/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1peers~1{id}/put>`__,List operations on peer
+``/peers/{id}/configuration``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers~1{id}~1configuration/get>`__,,,,Get peer configuration
+``/peers/{id}/store``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers~1{id}~1store/post>`__,,,Send to Orthanc peer
+``/peers/{id}/store-straight``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers~1{id}~1store-straight/post>`__,,,Straight store to peer
+``/peers/{id}/system``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1peers~1{id}~1system/get>`__,,,,Get peer system information
+``/plugins``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1plugins/get>`__,,,,List plugins
+``/plugins/explorer.js``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1plugins~1explorer.js/get>`__,,,,JavaScript extensions to Orthanc Explorer
+``/plugins/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1plugins~1{id}/get>`__,,,,Get plugin
+``/queries``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries/get>`__,,,,List query/retrieve operations
+``/queries/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Networking/paths/~1queries~1{id}/delete>`__,,List operations on a query
+``/queries/{id}/answers``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers/get>`__,,,,List answers to a query
+``/queries/{id}/answers/{index}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}/get>`__,,,,List operations on an answer
+``/queries/{id}/answers/{index}/content``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1content/get>`__,,,,Get one answer
+``/queries/{id}/answers/{index}/query-instances``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-instances/post>`__,,,Query the child instances of an answer
+``/queries/{id}/answers/{index}/query-series``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-series/post>`__,,,Query the child series of an answer
+``/queries/{id}/answers/{index}/query-studies``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-studies/post>`__,,,Query the child studies of an answer
+``/queries/{id}/answers/{index}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1retrieve/post>`__,,,Retrieve one answer
+``/queries/{id}/level``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1level/get>`__,,,,Get level of original query
+``/queries/{id}/modality``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1modality/get>`__,,,,Get modality of original query
+``/queries/{id}/query``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1query/get>`__,,,,Get original query arguments
+``/queries/{id}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1retrieve/post>`__,,,Retrieve all answers
+``/series``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series/get>`__,,,,List the available series
+``/series/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}/delete>`__,,Get information about some series
+``/series/{id}/anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1anonymize/post>`__,,,Anonymize series
+``/series/{id}/archive``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1archive/post>`__,,,Create ZIP archive
+``/series/{id}/attachments``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments/get>`__,,,,List attachments
+``/series/{id}/attachments/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1series~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}/put>`__,List operations on attachments
+``/series/{id}/attachments/{name}/compress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
+``/series/{id}/attachments/{name}/compressed-data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
+``/series/{id}/attachments/{name}/compressed-md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
+``/series/{id}/attachments/{name}/compressed-size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
+``/series/{id}/attachments/{name}/data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/series/{id}/attachments/{name}/info``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
+``/series/{id}/attachments/{name}/is-compressed``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
+``/series/{id}/attachments/{name}/md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
+``/series/{id}/attachments/{name}/size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
+``/series/{id}/attachments/{name}/uncompress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
+``/series/{id}/attachments/{name}/verify-md5``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
+``/series/{id}/instances``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1instances/get>`__,,,,Get child instances
+``/series/{id}/instances-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/series/{id}/labels``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1labels/get>`__,,,,List labels
+``/series/{id}/labels/{label}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1labels~1{label}/put>`__,Test label
+``/series/{id}/media``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1media/post>`__,,,Create DICOMDIR media
+``/series/{id}/metadata``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1metadata/get>`__,,,,List metadata
+``/series/{id}/metadata/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Series/paths/~1series~1{id}~1metadata~1{name}/put>`__,Get metadata
+``/series/{id}/modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1modify/post>`__,,,Modify series
+``/series/{id}/module``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1module/get>`__,,,,Get series module
+``/series/{id}/numpy``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1numpy/get>`__,,,,Decode series for numpy
+``/series/{id}/ordered-slices``,`(get) <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1ordered-slices/get>`__,,,,*(deprecated)* Order the slices
+``/series/{id}/patient``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1patient/get>`__,,,,Get parent patient
+``/series/{id}/reconstruct``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of series
+``/series/{id}/shared-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1shared-tags/get>`__,,,,Get shared tags
+``/series/{id}/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1statistics/get>`__,,,,Get series statistics
+``/series/{id}/study``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1study/get>`__,,,,Get parent study
+``/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1statistics/get>`__,,,,Get database statistics
+``/storage-commitment/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1storage-commitment~1{id}/get>`__,,,,Get storage commitment report
+``/storage-commitment/{id}/remove``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1storage-commitment~1{id}~1remove/post>`__,,,Remove after storage commitment
+``/studies``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies/get>`__,,,,List the available studies
+``/studies/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}/delete>`__,,Get information about some study
+``/studies/{id}/anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1anonymize/post>`__,,,Anonymize study
+``/studies/{id}/archive``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1archive/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1archive/post>`__,,,Create ZIP archive
+``/studies/{id}/attachments``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments/get>`__,,,,List attachments
+``/studies/{id}/attachments/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1studies~1{id}~1attachments~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}/put>`__,List operations on attachments
+``/studies/{id}/attachments/{name}/compress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compress/post>`__,,,Compress attachment
+``/studies/{id}/attachments/{name}/compressed-data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-data/get>`__,,,,Get attachment (no decompression)
+``/studies/{id}/attachments/{name}/compressed-md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-md5/get>`__,,,,Get MD5 of attachment on disk
+``/studies/{id}/attachments/{name}/compressed-size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1compressed-size/get>`__,,,,Get size of attachment on disk
+``/studies/{id}/attachments/{name}/data``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1data/get>`__,,,,Get attachment
+``/studies/{id}/attachments/{name}/info``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1info/get>`__,,,,Get info about the attachment
+``/studies/{id}/attachments/{name}/is-compressed``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1is-compressed/get>`__,,,,Is attachment compressed?
+``/studies/{id}/attachments/{name}/md5``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1md5/get>`__,,,,Get MD5 of attachment
+``/studies/{id}/attachments/{name}/size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
+``/studies/{id}/attachments/{name}/uncompress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
+``/studies/{id}/attachments/{name}/verify-md5``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
+``/studies/{id}/instances``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1instances/get>`__,,,,Get child instances
+``/studies/{id}/instances-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1instances-tags/get>`__,,,,Get tags of instances
+``/studies/{id}/labels``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1labels/get>`__,,,,List labels
+``/studies/{id}/labels/{label}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1labels~1{label}/put>`__,Test label
+``/studies/{id}/media``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1media/get>`__,`POST <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1media/post>`__,,,Create DICOMDIR media
+``/studies/{id}/merge``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1merge/post>`__,,,Merge study
+``/studies/{id}/metadata``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1metadata/get>`__,,,,List metadata
+``/studies/{id}/metadata/{name}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/get>`__,,`DELETE <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/delete>`__,`PUT <https://api.orthanc-server.com/index.html#tag/Studies/paths/~1studies~1{id}~1metadata~1{name}/put>`__,Get metadata
+``/studies/{id}/modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1modify/post>`__,,,Modify study
+``/studies/{id}/module``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1module/get>`__,,,,Get study module
+``/studies/{id}/module-patient``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1module-patient/get>`__,,,,Get patient module of study
+``/studies/{id}/patient``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1patient/get>`__,,,,Get parent patient
+``/studies/{id}/reconstruct``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1reconstruct/post>`__,,,Reconstruct tags & optionally files of study
+``/studies/{id}/series``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1series/get>`__,,,,Get child series
+``/studies/{id}/shared-tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1shared-tags/get>`__,,,,Get shared tags
+``/studies/{id}/split``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1split/post>`__,,,Split study
+``/studies/{id}/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1statistics/get>`__,,,,Get study statistics
+``/system``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1system/get>`__,,,,Get system information
+``/tools``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
+``/tools/accepted-transfer-syntaxes``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
+``/tools/bulk-anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-anonymize/post>`__,,,Anonymize a set of resources
+``/tools/bulk-content``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
+``/tools/bulk-delete``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of resources
+``/tools/bulk-modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
+``/tools/create-archive``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
+``/tools/create-dicom``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
+``/tools/create-media``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
+``/tools/create-media-extended``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media-extended/post>`__,,,Create DICOMDIR media
+``/tools/default-encoding``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1default-encoding/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1default-encoding/put>`__,Get default encoding
+``/tools/dicom-conformance``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1dicom-conformance/get>`__,,,,Get DICOM conformance
+``/tools/dicom-echo``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1dicom-echo/post>`__,,,Trigger C-ECHO SCU
+``/tools/execute-script``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1execute-script/post>`__,,,Execute Lua script
+``/tools/find``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1find/post>`__,,,Look for local resources
+``/tools/generate-uid``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1generate-uid/get>`__,,,,Generate an identifier
+``/tools/invalidate-tags``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1invalidate-tags/post>`__,,,Invalidate DICOM-as-JSON summaries
+``/tools/labels``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1labels/get>`__,,,,Get all the used labels
+``/tools/log-level``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level/put>`__,Get main log level
+``/tools/log-level-dicom``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-dicom/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-dicom/put>`__,Get log level for `dicom`
+``/tools/log-level-generic``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-generic/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-generic/put>`__,Get log level for `generic`
+``/tools/log-level-http``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-http/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-http/put>`__,Get log level for `http`
+``/tools/log-level-jobs``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-jobs/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-jobs/put>`__,Get log level for `jobs`
+``/tools/log-level-lua``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-lua/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-lua/put>`__,Get log level for `lua`
+``/tools/log-level-plugins``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-plugins/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-plugins/put>`__,Get log level for `plugins`
+``/tools/log-level-sqlite``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Logs/paths/~1tools~1log-level-sqlite/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/Logs/paths/~1tools~1log-level-sqlite/put>`__,Get log level for `sqlite`
+``/tools/lookup``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1lookup/post>`__,,,Look for DICOM identifiers
+``/tools/metrics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1metrics/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1metrics/put>`__,Are metrics collected?
+``/tools/metrics-prometheus``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1metrics-prometheus/get>`__,,,,Get usage metrics
+``/tools/now``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1now/get>`__,,,,Get UTC time
+``/tools/now-local``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1now-local/get>`__,,,,Get local time
+``/tools/reconstruct``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1reconstruct/post>`__,,,Reconstruct all the index
+``/tools/reset``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1reset/post>`__,,,Restart Orthanc
+``/tools/shutdown``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1shutdown/post>`__,,,Shutdown Orthanc
+``/tools/unknown-sop-class-accepted``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/get>`__,,,`PUT <https://api.orthanc-server.com/index.html#tag/System/paths/~1tools~1unknown-sop-class-accepted/put>`__,Is unknown SOP class accepted?
