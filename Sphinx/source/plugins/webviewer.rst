@@ -29,7 +29,7 @@ for most UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancWebViewer``
 that contains the Web viewer plugin.  Pre-compiled binaries for
 Microsoft Windows `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-webviewer>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-webviewer/index.html>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution

@@ -39,12 +39,12 @@ for most UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancDicomWeb`` that
 contains the DICOMweb plugin. Pre-compiled binaries for Microsoft
 Windows `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-dicom-web>`__,
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-dicomweb/index.html>`__,
 and are included in the `Windows installers
-<https://www.orthanc-server.com/download-windows.php>`__.  A package
+<https://www.orthanc-server.com/download-windows.php>`__. A package
 for `Apple's Mac OS X
 <https://www.orthanc-server.com/static.php?page=download-mac>`__ is
-available courtesy of `Osimis <https://www.osimis.io/>`__.
+available courtesy of `Orthanc Team <https://orthanc.team/>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution

@@ -27,7 +27,7 @@ release 20.12.0 of the installers).
 For GNU/Linux users, the Stone Web viewer is part of the
 :ref:`official Docker images <docker>`. Precompiled LSB binaries
 (Linux Standard Base) are `available as well
-<https://lsb.orthanc-server.com/stone-webviewer/>`__.
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/stone-web-viewer/index.html>`__.
 
 The compilation process is quite complex since it requires using the
 `Emscripten <https://emscripten.org/>`__ compiler toolchain. The full
@@ -56,10 +56,10 @@ environment as follows::
 On plain GNU/Linux distributions (i.e. if not using Docker), the Stone
 Web viewer will only work with the LSB binaries (Linux Standard Base)
 of the Orthanc server that can be downloaded from `here
-<https://lsb.orthanc-server.com/orthanc/>`__ (this setup will work
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/index.html>`__ (this setup will work
 with most recent GNU/Linux distributions). The Stone Web viewer also
 requires the `DICOMweb plugin
-<https://lsb.orthanc-server.com/plugin-dicom-web/>`__ to be installed.
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-dicomweb/index.html>`__ to be installed.
 
 Once the binaries are installed, you must change the
 :ref:`configuration file <configuration>` to tell Orthanc where it can

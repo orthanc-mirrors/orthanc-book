@@ -23,7 +23,7 @@ To obtain the Orthanc binaries, you have several possibilities:
   for `openSUSE <https://software.opensuse.org/search?q=orthanc>`__
   (courtesy of Axel Braun).
 * On GNU/Linux, use our `LSB binaries
-  <https://lsb.orthanc-server.com/>`__ (Linux Standard Base), that
+  <https://orthanc.uclouvain.be/downloads/linux-standard-base/index.html>`__ (Linux Standard Base), that
   should easily and immediately run on most distributions. Those
   binaries are statically linked together with all their third-party
   dependencies. Don't forget to execute ``chmod +x ./Orthanc`` in

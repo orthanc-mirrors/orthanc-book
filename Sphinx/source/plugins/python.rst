@@ -31,7 +31,7 @@ Source code
 -----------
    
 * Link to the `official releases of this plugin
-  <https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+  <https://orthanc.uclouvain.be/downloads/sources/orthanc-python/index.html>`__.
 
 * Link to the `code repository
   <https://orthanc.uclouvain.be/hg/orthanc-python/>`__.
@@ -115,9 +115,9 @@ Microsoft Windows
 .................
 
 Pre-compiled binaries for Microsoft Windows are now part of the 
-`Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
+`Windows installers <https://www.orthanc-server.com/download-windows.php>`__
 but not installed by default.  They are also `available here
-<https://www.orthanc-server.com/browse.php?path=/plugin-python>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-python/index.html>`__.
 
 Beware that one version of the Python plugin can only be run against
 one version of the Python interpreter. This version is clearly

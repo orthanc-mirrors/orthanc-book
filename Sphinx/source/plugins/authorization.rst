@@ -22,7 +22,7 @@ Binaries are included in:
 
 - The `osimis/orthanc Docker image <https://hub.docker.com/r/osimis/orthanc>`__
 - The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
-- The `MacOS packages <https://orthanc.osimis.io/osx/stable/orthancAndPluginsOSX.stable.zip>`__
+- The `MacOS packages <https://www.orthanc-server.com/static.php?page=download-mac>`__
 
 Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/tip/NEWS>`__.
 

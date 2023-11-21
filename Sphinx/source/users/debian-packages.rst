@@ -31,7 +31,7 @@ should:
   <https://wiki.debian.org/DebianUnstable>`__, or use a Debian-based
   distro that derives from unstable (such as Kali Linux).
 
-* Use the `LSB binaries <https://lsb.orthanc-server.com/>`__.
+* Use the `LSB binaries <https://orthanc.uclouvain.be/downloads/linux-standard-base/index.html>`__.
 
 * Use ``jodogne/orthanc`` :ref:`Docker images <docker>`.
 
@@ -108,12 +108,12 @@ do that at your own risk.
 This can be done with this sequence of commands::
 
   $ sudo service orthanc stop
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.12.1/Orthanc --output-document /usr/sbin/Orthanc
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/Orthanc --output-document /usr/sbin/Orthanc
   $ sudo rm -f /usr/share/orthanc/plugins/*.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.12.1/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
-  $ sudo wget https://lsb.orthanc-server.com/orthanc/1.12.1/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
   $
-  $ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.13/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-dicomweb/1.15/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
   $ ...
   $ sudo service orthanc restart
 

@@ -48,7 +48,7 @@ That being said, there are multiple use cases for the ODBC plugins:
   tags before the pixel data).
 
 * The Linux Standard Base (LSB) `pre-compiled binaries
-  <https://lsb.orthanc-server.com/plugin-odbc/>`__ of the ODBC plugins
+  <https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-odbc/index.html>`__ of the ODBC plugins
   are not compatible with the ``libsqliteodbc`` `Debian/Ubuntu package
   <http://www.ch-werner.de/sqliteodbc/>`__ because the latter package
   was compiled with the ``HAVE_SQLITE3LOADEXTENSION`` flag.
@@ -138,7 +138,7 @@ Microsoft Windows and Apple OS X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows 32bit `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-odbc>`__. A
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-odbc/index.html>`__. A
 package for `Apple's Mac OS X
 <https://www.osimis.io/en/download.html>`__ is available courtesy of
 `Osimis <https://www.osimis.io/>`__.

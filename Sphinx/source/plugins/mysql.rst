@@ -56,7 +56,7 @@ Microsoft Windows
 ^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows 32bit `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-mysql>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-mysql/index.html>`__.
 
 
 Dynamic linking on Ubuntu 16.04

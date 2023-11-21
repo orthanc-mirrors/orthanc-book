@@ -40,7 +40,7 @@ Compilation
 .. highlight:: bash
 
 Official releases can be `downloaded from the Orthanc homepage
-<https://www.orthanc-server.com/browse.php?path=/plugin-volview>`__. As
+<https://orthanc.uclouvain.be/downloads/sources/orthanc-volview/index.html>`__. As
 an alternative, the `repository containing the source code
 <https://orthanc.uclouvain.be/hg/orthanc-volview/>`__ can be accessed using
 Mercurial.
@@ -59,11 +59,10 @@ The compilation will produce a shared library ``libOrthancVolView.so``
 that contains the VolView plugin for Orthanc.
 
 Pre-compiled Linux Standard Base (LSB) binaries `are available for
-download <https://lsb.orthanc-server.com/plugin-volview/>`__.
+download <https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-volview/index.html>`__.
 
-Pre-compiled binaries for Microsoft Windows and macOS `are also
-available
-<https://www.orthanc-server.com/browse.php?path=/plugin-volview>`__.
+Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downloads/windows-32/orthanc-volview/index.html>`__
+and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-volview/index.html>`__ are available as well.
 
 Furthermore, the :ref:`Docker images <docker>`
 ``jodogne/orthanc-plugins`` and ``osimis/orthanc`` also contain the

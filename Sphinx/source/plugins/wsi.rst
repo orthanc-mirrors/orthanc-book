@@ -55,7 +55,7 @@ Microsoft Windows
 ^^^^^^^^^^^^^^^^^
   
 Note that pre-compiled binaries for Microsoft Windows `are available
-<https://www.orthanc-server.com/browse.php?path=/whole-slide-imaging>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-wsi/index.html>`__.
 
 
 Dynamic linking
@@ -113,7 +113,7 @@ Imaging Viewer`` will show up for series corresponding to whole-slide
 images. This button will open the WSI viewer for that particular
 series. This behavior can be seen on the Orthanc Explorer interface
 running on our `WSI demonstration server
-<https://wsi.orthanc-server.com/orthanc/app/explorer.html>`__.
+<https://orthanc.uclouvain.be/wsi-orthanc/app/explorer.html>`__.
 
 
 Support of IIIF

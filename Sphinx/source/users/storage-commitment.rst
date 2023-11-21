@@ -183,7 +183,7 @@ Orthanc plugin <creating-plugins>`.
 
 The custom storage commitment SCP is installed in the Orthanc core by
 using the ``OrthancPluginRegisterStorageCommitmentScpCallback()``
-function of the `plugin SDK <https://sdk.orthanc-server.com/>`__.
+function of the `plugin SDK <https://orthanc.uclouvain.be/sdk/>`__.
 
 Importantly, this primitive frees the plugin developer from manually
 creating the Orthanc jobs. One job is transparently created by the

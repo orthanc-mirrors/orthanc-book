@@ -25,7 +25,7 @@ Compilation
 .. highlight:: bash
 
 Official releases can be `downloaded from the Orthanc homepage
-<https://www.orthanc-server.com/browse.php?path=/plugin-neuro>`__. As
+<https://orthanc.uclouvain.be/downloads/sources/orthanc-neuro/index.html>`__. As
 an alternative, the `repository containing the source code
 <https://orthanc.uclouvain.be/hg/orthanc-neuro/>`__ can be accessed using
 Mercurial.
@@ -43,11 +43,10 @@ The compilation will produce a shared library ``OrthancNeuro`` that
 contains the neuroimaging plugin for Orthanc.
 
 Pre-compiled Linux Standard Base (LSB) binaries `can be downloaded
-<https://lsb.orthanc-server.com/plugin-neuro/>`__.
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-neuro/index.html>`__.
 
-Pre-compiled binaries for Microsoft Windows and macOS `are also
-available
-<https://www.orthanc-server.com/browse.php?path=/plugin-neuro>`__.
+Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downloads/windows-32/orthanc-neuro/index.html>`__
+and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-neuro/index.html>`__ are available as well.
 
 Furthermore, the :ref:`Docker images <docker>`
 ``jodogne/orthanc-plugins`` and ``osimis/orthanc`` also contain the

@@ -50,10 +50,10 @@ Microsoft Windows and Apple OS X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows 32bit `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-postgresql>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-postgresql/index.html>`__.
 A package for `Apple's Mac OS X
-<https://www.osimis.io/en/download.html>`__
-is available courtesy of `Osimis <https://www.osimis.io/>`__.
+<https://www.orthanc-server.com/static.php?page=download-mac>`__
+is available courtesy of `Orthanc Team <https://orthanc.team/>`__.
 
 
 .. _postgresql-ubuntu1604:

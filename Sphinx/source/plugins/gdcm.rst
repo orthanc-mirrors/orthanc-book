@@ -59,7 +59,7 @@ for most UNIX-like distribution (including GNU/Linux)::
 The compilation will produce a shared library ``OrthancGdcm`` that
 contains the GDCM decoder/transcoder plugin. Pre-compiled binaries for
 Microsoft Windows `are also available
-<https://www.orthanc-server.com/browse.php?path=/plugin-gdcm>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-gdcm/index.html>`__.
 
 *Remark:* Some older build instructions are also available in the
 `source distribution
