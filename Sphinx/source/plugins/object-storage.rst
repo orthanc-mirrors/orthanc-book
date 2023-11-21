@@ -73,7 +73,8 @@ Sample configuration::
     "VirtualAddressing": true,                // optional: see the section related to MinIO
     "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
-    "UseTransferManager": false               // optional: see below (available from version 2.3.0)
+    "UseTransferManager": false,              // optional: see below (available from version 2.3.0)
+    "EnableAwsSdkLogs": false                 // optional: include AWS SDK logs in Orthanc logs
   }
 
 The **EndPoint** configuration is used when accessing an S3 compatible cloud provider.  I.e. here is a configuration to store data on Scaleway::

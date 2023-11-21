@@ -395,9 +395,9 @@ may add their own metrics dynamically.
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_count_patients``                             | The number of patients stored in DB                                         | Orthanc DB                                                     |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_dicom_cache_count``                          | The number of DICOM files currently stored in the cache                     | Orthanc DICOM cache                                            |
+| ``orthanc_dicom_cache_count``                          | The number of DICOM files currently stored in the DICOM cache               | Orthanc DICOM cache                                            |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_dicom_cache_size``                           | The size [MB] of all DICOM files currently stored in the cache              | Orthanc DICOM cache                                            |
+| ``orthanc_dicom_cache_size_mb``                        | The size [MB] of all DICOM files currently stored in the DICOM cache        | Orthanc DICOM cache                                            |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_find_scp_duration_ms``                       | The max duration [ms] over the last 10 seconds of a C-Find SCP execution    | Orthanc DICOM protocol server                                  |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
@@ -421,11 +421,15 @@ may add their own metrics dynamically.
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_jobs_failed``                                | The current number of jobs that have failed                                 | Orthanc Jobs engine                                            |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_disk_size_mb``                               | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc storage                                                |
+| ``orthanc_disk_size_mb``                               | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc Storage                                                |
 |                                                        | (possibly compressed size)                                                  |                                                                |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_uncompressed_size_mb``                       | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc storage                                                |
+| ``orthanc_uncompressed_size_mb``                       | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc Storage                                                |
 |                                                        | (uncompressed size)                                                         |                                                                |
++--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
+| ``orthanc_storage_cache_count``                        | The number of files currently stored in the Storage cache                   | Orthanc Storage cache                                          |
++--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
+| ``orthanc_storage_cache_size_mb``                      | The size [MB] of all files currently stored in the Storage cache            | Orthanc Storage cache                                          |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_storage_create_duration_ms``                 | The max duration [ms] over the last 10 seconds to save a file to disk       | Orthanc Storage (default file system storage)                  |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
