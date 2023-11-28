@@ -6,31 +6,43 @@ Osimis Web Viewer plugin (deprecated)
 
 .. contents::
 
+.. warning::
+
+   The Osimis Web viewer is now deprecated and superseded by the
+   :ref:`Stone Web viewer <stone_webviewer>`.
+
 This plugin by Osimis extends Orthanc with a Web viewer of medical
 images, with more advanced features than the basic :ref:`Orthanc Web
 viewer plugin <webviewer>`. The Osimis plugin adds tools for
 measuring, for viewing multiple series, and for split-pane.
 
-For general information and a demonstration, check out the `official
-homepage of the plugin
-<https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
-Also `check out the source code
-<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
+This plugin adds a dedicated button to Orthanc Explorer to open the
+viewer that looks like the following image:
+
+.. image:: ../images/osimis-web-viewer.png
+           :align: center
+           :width: 800
+
+
+
 
 
 How to get it
 -------------
 
+For general information, `check out the source code
+<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
+
 The Osimis Web viewer is part of the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
 For GNU/Linux users, you'll find it in the :ref:`osimis/orthanc
-<docker-osimis>` Docker images or you can download the LSB (Linux
-Standard Base) binaries `here
-<http://orthanc.osimis.io/lsb/plugin-osimis-webviewer/releases/1.4.1/libOsimisWebViewer.so>`__.
+<docker-osimis>` Docker images or you can download precompiled LSB
+(Linux Standard Base) binaries `here
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/osimis-web-viewer/index.html>`__.
 
 The compilation process is quite complex since it requires to build
-first the frontend and then the backend.  All information can be found
+first the frontend and then the backend. All information can be found
 in the `source code
 <https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
 
@@ -72,9 +84,7 @@ configuration file.
 
 Once a :ref:`DICOM study <model-world>` is opened using Orthanc
 Explorer, a yellow button entitled ``Osimis Web Viewer`` will show
-up. It will open the Web viewer for that particular study.  See also
-the interactive demonstration on the `official homepage of the plugin
-<https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__.
+up. It will open the Web viewer for that particular study.
 
 Advanced options
 ----------------

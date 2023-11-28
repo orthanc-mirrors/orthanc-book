@@ -35,8 +35,8 @@ The source code is available on `GitHub <https://github.com/orthanc-server/ortha
 Binaries are included in:
 
 - The `osimis/orthanc Docker image <https://hub.docker.com/r/osimis/orthanc>`__
-- The `Windows Installer <https://orthanc.osimis.io/win-installer/OrthancInstaller-Win64-latest.exe>`__ (only for 64bits platform)
-- The `MacOS packages <https://orthanc.osimis.io/osx/stable/orthancAndPluginsOSX.stable.zip>`__
+- The `Windows Installer <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
+- The `macOS packages <https://orthanc.uclouvain.be/downloads/macos/packages/index.html>`__
 
 Release notes are available `here <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/release-notes.md>`__.
 
