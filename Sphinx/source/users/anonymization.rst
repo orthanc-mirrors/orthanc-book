@@ -20,7 +20,7 @@ the resulting anonymized DICOM file (without storing the anonymized
 DICOM instance into Orthanc). Anonymization consists in erasing all
 the tags that are specified in `Table E.1-1 from PS 3.15
 <http://dicom.nema.org/medical/dicom/current/output/chtml/part15/chapter_E.html#table_E.1-1>`__
-of the DICOM standard 2008, 2017c or 2021b (default). Example::
+of the DICOM standard 2008, 2017c, 2021b, 2023b (default). Example::
 
     $ curl http://localhost:8042/instances/6e67da51-d119d6ae-c5667437-87b9a8a5-0f07c49f/anonymize -X POST -d '{}' > Anonymized.dcm
 
@@ -61,11 +61,11 @@ a JSON body::
   the private tags, as such tags can contain patient-specific
   information.
 * ``DicomVersion`` specifies which version of the DICOM standard shall
-  be used for anonymization. Allowed values are ``2008``, ``2017c``,
-  or ``2021b`` (new in Orthanc 1.9.4). This parameter has been
-  introduced in Orthanc 1.3.0. In earlier version, the ``2008``
-  standard was used. If the parameter is absent, the highest version
-  that is supported by Orthanc is used.
+  be used for anonymization. Allowed values are ``2008``, ``2017c``, 
+  ``2021b`` (new in Orthanc 1.9.4) or ``2023b`` (new in Orthanc 1.12.1). 
+  This parameter has been introduced in Orthanc 1.3.0. In earlier version, 
+  the ``2008`` standard was used. If the parameter is absent, the highest 
+  version that is supported by Orthanc is used.
 * ``Remove`` can also be used to provide a list of tags to be manually
   deleted.
 
