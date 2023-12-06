@@ -166,7 +166,7 @@ REST API, by inspecting the URIs that are prefixed by
 * Messages that are not associated with a well-identified category are
   considered as belonging to the ``generic`` category.
 
-* Using the ``--verbose`` or ``-trace`` command-line options, or
+* Using the ``--verbose`` or ``--trace`` command-line options, or
   changing the value of the ``/tools/log-level`` URI will reset the
   log level of **all** the categories. Note that the command-line
   options are applied from left to right.
@@ -174,3 +174,7 @@ REST API, by inspecting the URIs that are prefixed by
 * Provided that you have left the ``DeidentifyLogs`` configuration to
   its ``true`` default value, Orthanc logs will not contain any sensitive
   patient information.
+
+* Starting from Orthanc 1.12.2, Orthanc is logging the thread name in the
+  logs.  If you need to revert back to the previous format, add the 
+  ``--logs-no-thread`` command line option at startup.
