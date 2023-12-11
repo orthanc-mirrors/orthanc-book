@@ -56,13 +56,13 @@ On Windows, the plugin is enabled by default and will work
 out-of-the-box.
 
 If you're using the ``osimis/orthanc`` Docker images, you'll have to
-define the ``WVB_ENABLED`` :ref:`environment variable <docker-osimis>`
+define the ``OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED`` :ref:`environment variable <docker-osimis>`
 to ``true``.
 
 On plain GNU/Linux distributions (i.e. if not using Docker), the
 Osimis Web viewer will only work with LSB (Linux Standard Base)
 Orthanc binaries that can be downloaded from `here
-<https://lsb.orthanc-server.com/orthanc/>`__ (that will work with most
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/osimis-web-viewer/1.4.2/index.html>`__ (that will work with most
 recent GNU/Linux distributions). Once Orthanc is installed, you must
 change the :ref:`configuration file <configuration>` to tell Orthanc
 where it can find the plugin: This is done by properly modifying the
