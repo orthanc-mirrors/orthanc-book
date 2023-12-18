@@ -33,7 +33,7 @@ the Internet with :ref:`Orthanc peers <peering>`.
 Recycling/Protection
 --------------------
 
-Because of its focus on low-end computers, Orthanc implements **disk
+Because of its focus on low-end computers, Orthanc may implement **disk
 space recycling**: The patient that has been stored for the longest
 time inside Orthanc can be automatically deleted when the disk space
 used by Orthanc grows above a threshold, or when the number of stored
@@ -46,6 +46,12 @@ Recycling is controlled by the ``MaximumStorageSize`` and the
 ``MaximumPatientCount`` options in the :ref:`Orthanc configuration
 file <configuration>`.  Setting both these values to 0 will disable 
 recycling.
+
+Starting with version 1.11.2, Orthanc also implements another **rejection**
+behaviour when the ``MaximumStorageSize`` or ``MaximumPatientCount`` is 
+reached.  In this case, patients are not recycled but Orthanc rejects new incoming
+data.  Check the ``MaximumStorageMode`` option in the :ref:`Orthanc configuration
+file <configuration>`.
 
 It is possible to prevent important data from being automatically
 recycled. This mechanism is called **protection**. Each patient can be
@@ -60,11 +66,11 @@ available all the data related to one patient. Unwillingly losing a
 study/series that is part of the same patient might lead to a loss in
 consistency with respect to the medical history of this patient.
 
-Starting with version 1.11.2, Orthanc also implements another **rejection**
-behaviour when the ``MaximumStorageSize`` or ``MaximumPatientCount`` is 
-reached.  In this case, patients are not recycled but Orthanc rejects new incoming
-data.  Check the ``MaximumStorageMode`` option in the :ref:`Orthanc configuration
-file <configuration>`.
+To protect/unprotect a patient, one must call the ``/patients/../protected`` route:: 
+
+$ curl -X PUT http://localhost:8042/patients/0946fcb6-cf12ab43-bad958c1-bf057ad5-0fc6f54c/protected -d "1"
+$ curl -X PUT http://localhost:8042/patients/0946fcb6-cf12ab43-bad958c1-bf057ad5-0fc6f54c/protected -d "0"
+
 
 .. _compression:
 
