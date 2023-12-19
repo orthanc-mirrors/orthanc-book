@@ -17,7 +17,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/attachments/{name}/size``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1size/get>`__,,,,Get size of attachment
 ``/instances/{id}/attachments/{name}/uncompress``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1uncompress/post>`__,,,Uncompress attachment
 ``/instances/{id}/attachments/{name}/verify-md5``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1attachments~1{name}~1verify-md5/post>`__,,,Verify attachment
-``/instances/{id}/content``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1content/get>`__,,,,Get raw tag
+``/instances/{id}/content/{path}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1content~1{path}/get>`__,,,,Get raw tag
 ``/instances/{id}/export``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1export/post>`__,,,Write DICOM onto filesystem
 ``/instances/{id}/file``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1file/get>`__,,,,Download DICOM
 ``/instances/{id}/frames``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1frames/get>`__,,,,List available frames
@@ -54,7 +54,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/instances/{id}/study``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1study/get>`__,,,,Get parent study
 ``/instances/{id}/tags``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Instances/paths/~1instances~1{id}~1tags/get>`__,,,,Get DICOM tags
 ``/jobs``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs/get>`__,,,,List jobs
-``/jobs/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}/get>`__,,,,Get job
+``/jobs/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}/get>`__,,`DELETE <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}/delete>`__,,Get job
 ``/jobs/{id}/cancel``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1cancel/post>`__,,,Cancel job
 ``/jobs/{id}/pause``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1pause/post>`__,,,Pause job
 ``/jobs/{id}/resubmit``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Jobs/paths/~1jobs~1{id}~1resubmit/post>`__,,,Resubmit job
@@ -206,10 +206,10 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/tools/bulk-content``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
 ``/tools/bulk-delete``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of resources
 ``/tools/bulk-modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
-``/tools/create-archive``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
+``/tools/create-archive``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/get>`__,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
 ``/tools/create-dicom``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
-``/tools/create-media``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
-``/tools/create-media-extended``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media-extended/post>`__,,,Create DICOMDIR media
+``/tools/create-media``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/get>`__,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
+``/tools/create-media-extended``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media-extended/get>`__,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media-extended/post>`__,,,Create DICOMDIR media
 ``/tools/default-encoding``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1default-encoding/get>`__,,,`PUT <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1default-encoding/put>`__,Get default encoding
 ``/tools/dicom-conformance``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1dicom-conformance/get>`__,,,,Get DICOM conformance
 ``/tools/dicom-echo``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1dicom-echo/post>`__,,,Trigger C-ECHO SCU

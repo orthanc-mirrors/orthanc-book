@@ -487,7 +487,7 @@ Labels
 
 .. highlight:: text
 
-Orthanc 1.12.1 introduces the concept of **labels**. A label is a
+Orthanc 1.12.0 introduced the concept of **labels**. A label is a
 string that can be attached to any DICOM resource (i.e. patients,
 studies, series, or instances). In contrast with :ref:`metadata
 <metadata>`, labels are not associated with a value, however labels

@@ -1,8 +1,8 @@
 {
    "info" : {
-      "description" : "This is the full documentation of the [REST API](https://book.orthanc-server.com/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://book.orthanc-server.com/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
+      "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.1"
+      "version" : "1.12.2"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -52,17 +52,17 @@
                               "Changes" : [
                                  {
                                     "ChangeType" : "NewInstance",
-                                    "Date" : "20180414T091510",
-                                    "ID" : "055bfbaf-2aae936c-82ed5a9a-9267f8b7-416a4000",
-                                    "Path" : "/instances/055bfbaf-2aae936c-82ed5a9a-9267f8b7-416a4000",
+                                    "Date" : "20231109T160739",
+                                    "ID" : "26d2e33b-3239a2d5-64f57e0b-d8da59a7-2ef362e7",
+                                    "Path" : "/instances/26d2e33b-3239a2d5-64f57e0b-d8da59a7-2ef362e7",
                                     "ResourceType" : "Instance",
                                     "Seq" : 1
                                  },
                                  {
                                     "ChangeType" : "NewSeries",
-                                    "Date" : "20180414T091510",
-                                    "ID" : "318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
-                                    "Path" : "/series/318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
+                                    "Date" : "20231109T160739",
+                                    "ID" : "1de00990-03680ef4-0be6bd5b-73a7d350-fb46abfa",
+                                    "Path" : "/series/1de00990-03680ef4-0be6bd5b-73a7d350-fb46abfa",
                                     "ResourceType" : "Series",
                                     "Seq" : 2
                                  }
@@ -217,8 +217,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported instances (if `expand` argument is provided)",
                            "example" : [
-                              "055bfbaf-2aae936c-82ed5a9a-9267f8b7-416a4000",
-                              "62dc1ec1-9fc2dd9d-aa66eae1-0db608b1-e17f8ce8"
+                              "26d2e33b-3239a2d5-64f57e0b-d8da59a7-2ef362e7",
+                              "1a0ac939-976cc50b-21c0f6ab-80200f03-c3b813be"
                            ]
                         }
                      }
@@ -368,21 +368,20 @@
                         "schema" : {
                            "description" : "Information about the DICOM instance",
                            "example" : {
-                              "FileSize" : 526744,
-                              "FileUuid" : "dc031d9e-ef02-4871-821f-ffe445deb7c2",
-                              "ID" : "d94d9a03-3003b047-a4affc69-322313b2-680530a2",
-                              "IndexInSeries" : 155,
+                              "FileSize" : 368852,
+                              "FileUuid" : "eec5367e-b460-475c-a808-75343dbf9136",
+                              "ID" : "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f",
+                              "IndexInSeries" : 1,
                               "Labels" : [],
                               "MainDicomTags" : {
-                                 "AcquisitionNumber" : "4",
-                                 "ImageOrientationPatient" : "1\\0\\0\\0\\1\\0",
-                                 "ImagePositionPatient" : "-249.51171875\\-458.51171875\\314",
-                                 "InstanceCreationDate" : "20151217",
-                                 "InstanceCreationTime" : "125204.215000",
-                                 "InstanceNumber" : "155",
-                                 "SOPInstanceUID" : "1.3.6.1.4.1.14519.5.2.1.2193.7172.168997935789297163075628247666"
+                                 "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
+                                 "ImagePositionPatient" : "0\\-159\\-425.915649",
+                                 "InstanceCreationDate" : "20050927",
+                                 "InstanceCreationTime" : "155030.000000",
+                                 "InstanceNumber" : "1",
+                                 "SOPInstanceUID" : "1.2.840.113704.7.1.1.6632.1127829031.2"
                               },
-                              "ParentSeries" : "52f4cb90-29d1d1a2-2ca34edd-4b8851fc-8cb269f2",
+                              "ParentSeries" : "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
                               "Type" : "Instance"
                            }
                         }
@@ -398,7 +397,7 @@
       "/instances/{id}/anonymize" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Download an anonymized version of the DICOM instance whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#anonymization-of-a-single-instance",
+            "description" : "Download an anonymized version of the DICOM instance whose Orthanc identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/anonymization.html#anonymization-of-a-single-instance",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the instance of interest",
@@ -455,7 +454,7 @@
                               "type" : "object"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -510,7 +509,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing the names of the attachments",
-                           "example" : [ "dicom", "dicom-as-json" ]
+                           "example" : [ "dicom" ]
                         }
                      }
                   },
@@ -984,7 +983,7 @@
                               "ContentType" : 1,
                               "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
                               "UncompressedSize" : 526970,
-                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                              "Uuid" : "ada05909-0efc-43fd-b615-c5cafbaeacf8"
                            }
                         }
                      }
@@ -1240,24 +1239,24 @@
             "tags" : [ "Instances" ]
          }
       },
-      "/instances/{id}/content" : {
+      "/instances/{id}/content/{path}" : {
          "get" : {
             "deprecated" : false,
             "description" : "Get the raw content of one DICOM tag in the hierarchy of DICOM dataset",
             "parameters" : [
                {
-                  "description" : "Path to the DICOM tag. This is the interleaving of one DICOM tag, possibly followed by an index for sequences. Sequences are accessible as, for instance, `/0008-1140/1/0008-1150`",
+                  "description" : "Orthanc identifier of the DICOM instance of interest",
                   "in" : "path",
-                  "name" : "...",
+                  "name" : "id",
                   "required" : true,
                   "schema" : {
                      "type" : "string"
                   }
                },
                {
-                  "description" : "Orthanc identifier of the DICOM instance of interest",
+                  "description" : "Path to the DICOM tag. This is the interleaving of one DICOM tag, possibly followed by an index for sequences. Sequences are accessible as, for instance, `/0008-1140/1/0008-1150`",
                   "in" : "path",
-                  "name" : "id",
+                  "name" : "path",
                   "required" : true,
                   "schema" : {
                      "type" : "string"
@@ -1319,6 +1318,15 @@
             "deprecated" : false,
             "description" : "Download one DICOM instance",
             "parameters" : [
+               {
+                  "description" : "If present, the DICOM file will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
+                  "in" : "query",
+                  "name" : "transcode",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "This HTTP header can be set to retrieve the DICOM instance in DICOMweb format",
                   "in" : "header",
@@ -1693,7 +1701,7 @@
       "/instances/{id}/frames/{frame}/matlab" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Decode one frame of interest from the given DICOM instance, and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://book.orthanc-server.com/faq/matlab.html",
+            "description" : "Decode one frame of interest from the given DICOM instance, and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://orthanc.uclouvain.be/book/faq/matlab.html",
             "parameters" : [
                {
                   "description" : "Index of the frame (starts at `0`)",
@@ -2514,7 +2522,7 @@
       "/instances/{id}/matlab" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Decode the first frame of the given DICOM instance., and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://book.orthanc-server.com/faq/matlab.html",
+            "description" : "Decode the first frame of the given DICOM instance., and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://orthanc.uclouvain.be/book/faq/matlab.html",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the DICOM instance of interest",
@@ -2592,6 +2600,7 @@
                               "RemoteIP",
                               "HttpUsername",
                               "PixelDataOffset",
+                              "MainDicomTagsSignature",
                               "4202"
                            ]
                         }
@@ -2751,7 +2760,7 @@
       "/instances/{id}/modify" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Download a modified version of the DICOM instance whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#modification-of-a-single-instance",
+            "description" : "Download a modified version of the DICOM instance whose Orthanc identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/anonymization.html#modification-of-a-single-instance",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the instance of interest",
@@ -2804,7 +2813,7 @@
                               "type" : "object"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -2884,17 +2893,17 @@
                               "0008,0005" : {
                                  "Name" : "SpecificCharacterSet",
                                  "Type" : "String",
-                                 "Value" : "ISO_IR 192"
+                                 "Value" : "ISO_IR 100"
                               },
                               "0008,0012" : {
                                  "Name" : "InstanceCreationDate",
                                  "Type" : "String",
-                                 "Value" : "20151217"
+                                 "Value" : "20050927"
                               },
                               "0008,0013" : {
                                  "Name" : "InstanceCreationTime",
                                  "Type" : "String",
-                                 "Value" : "125204.215000"
+                                 "Value" : "155030.000000"
                               },
                               "0008,0016" : {
                                  "Name" : "SOPClassUID",
@@ -2904,17 +2913,12 @@
                               "0008,0018" : {
                                  "Name" : "SOPInstanceUID",
                                  "Type" : "String",
-                                 "Value" : "1.3.6.1.4.1.14519.5.2.1.2193.7172.168997935789297163075628247666"
+                                 "Value" : "1.2.840.113704.7.1.1.6632.1127829031.2"
                               },
                               "0020,0013" : {
                                  "Name" : "InstanceNumber",
                                  "Type" : "String",
-                                 "Value" : "155"
-                              },
-                              "0028,0303" : {
-                                 "Name" : "LongitudinalTemporalInformationModified",
-                                 "Type" : "String",
-                                 "Value" : "MODIFIED"
+                                 "Value" : "1"
                               }
                            }
                         }
@@ -3026,17 +3030,17 @@
                         "schema" : {
                            "description" : "Information about the parent DICOM patient",
                            "example" : {
-                              "ID" : "65ce8003-696b2eb6-03adeee7-6561ce8e-3e03f13a",
+                              "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20200803T131236",
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
-                                 "PatientBirthDate" : "",
-                                 "PatientID" : "HN_P001",
-                                 "PatientName" : "HN_P001",
-                                 "PatientSex" : "M"
+                                 "PatientBirthDate" : "19910101",
+                                 "PatientID" : "Vafk,T,6",
+                                 "PatientName" : "PHENIX",
+                                 "PatientSex" : ""
                               },
-                              "Studies" : [ "1c379a23-9fd28bba-02b60e5b-850ff34e-4349f09b" ],
+                              "Studies" : [ "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a" ],
                               "Type" : "Patient"
                            }
                         }
@@ -3357,35 +3361,22 @@
                            "description" : "Information about the parent DICOM series",
                            "example" : {
                               "ExpectedNumberOfInstances" : null,
-                              "ID" : "52f4cb90-29d1d1a2-2ca34edd-4b8851fc-8cb269f2",
-                              "Instances" : [
-                                 "ccc7cee2-81566098-5531d590-57b3c148-1787d177",
-                                 "af464afa-bf0c7970-02a3c666-337a8df8-1d955e27",
-                                 "42616941-88cbd2a7-f30ceecb-3f53b658-c641372c",
-                                 "1470f579-11b80cb9-ecf22279-041175d9-d8f3c3ef",
-                                 "373622cf-43a0259b-ebf55c2a-02e5ef32-1a3115f0",
-                                 "72b68848-9729ad79-e8762db4-50d97dd3-f3591322",
-                                 "73e2f25f-aa47b7ba-5d1c6e7b-91b98261-a195316e",
-                                 "c22831de-6ddaa06c-1f877da5-400a8f03-83668321",
-                                 "0c322d30-98af6f31-0bd59c19-99e07f68-317aeb3b",
-                                 "dd69d888-f3065dac-a47c947c-1aed47c8-fc181d11",
-                                 "..."
-                              ],
+                              "ID" : "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
+                              "Instances" : [ "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f" ],
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20200803T131236",
+                              "LastUpdate" : "20231109T160851",
                               "MainDicomTags" : {
-                                 "BodyPartExamined" : "CHEST",
-                                 "ImageOrientationPatient" : "1\\0\\0\\0\\1\\0",
-                                 "Manufacturer" : "SIEMENS",
+                                 "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
+                                 "Manufacturer" : "Philips",
                                  "Modality" : "CT",
-                                 "SeriesDate" : "20091022",
-                                 "SeriesDescription" : "HEAD/NECK  2.0  B30s",
-                                 "SeriesInstanceUID" : "1.3.6.1.4.1.14519.5.2.1.2193.7172.215111709746721743805035350686",
-                                 "SeriesNumber" : "4",
-                                 "SeriesTime" : "173151.203000"
+                                 "PerformedProcedureStepDescription" : "CT2 tête, face, sinus",
+                                 "ProtocolName" : "COU 2 mm/Neck/Sv",
+                                 "SeriesInstanceUID" : "1.2.840.113704.1.111.5692.1127828999.2",
+                                 "SeriesNumber" : "2276",
+                                 "StationName" : "ctrad"
                               },
-                              "ParentStudy" : "1c379a23-9fd28bba-02b60e5b-850ff34e-4349f09b",
+                              "ParentStudy" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "Status" : "Unknown",
                               "Type" : "Series"
                            }
@@ -3477,13 +3468,13 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "DicomDiskSize" : "526744",
+                              "DicomDiskSize" : "368852",
                               "DicomDiskSizeMB" : 0,
-                              "DicomUncompressedSize" : "526744",
+                              "DicomUncompressedSize" : "368852",
                               "DicomUncompressedSizeMB" : 0,
-                              "DiskSize" : "539420",
+                              "DiskSize" : "368852",
                               "DiskSizeMB" : 0,
-                              "UncompressedSize" : "539420",
+                              "UncompressedSize" : "368852",
                               "UncompressedSizeMB" : 0
                            },
                            "properties" : {
@@ -3579,30 +3570,33 @@
                         "schema" : {
                            "description" : "Information about the parent DICOM study",
                            "example" : {
-                              "ID" : "1c379a23-9fd28bba-02b60e5b-850ff34e-4349f09b",
+                              "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20200803T131236",
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
-                                 "AccessionNumber" : "2819497684894126",
-                                 "ReferringPhysicianName" : "",
-                                 "StudyDate" : "20091022",
-                                 "StudyDescription" : "RT^HEAD_NECK (Adult)",
-                                 "StudyID" : "",
-                                 "StudyInstanceUID" : "1.3.6.1.4.1.14519.5.2.1.2193.7172.847236098565581057121195872945",
-                                 "StudyTime" : "172721.327000"
+                                 "AccessionNumber" : "A10011234814",
+                                 "InstitutionName" : "HUG",
+                                 "ReferringPhysicianName" : "CHIR-PED^CHIR-PE",
+                                 "RequestedProcedureDescription" : "CT2 TÊTE, FACE, SINUS",
+                                 "RequestingPhysician" : "KOHLER^Romain",
+                                 "StudyDate" : "20050927",
+                                 "StudyDescription" : "CT2 tête, face, sinus",
+                                 "StudyID" : "1361",
+                                 "StudyInstanceUID" : "2.16.840.1.113669.632.20.1211.10000098591",
+                                 "StudyTime" : "154952.000000"
                               },
-                              "ParentPatient" : "65ce8003-696b2eb6-03adeee7-6561ce8e-3e03f13a",
+                              "ParentPatient" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "PatientMainDicomTags" : {
-                                 "PatientBirthDate" : "",
-                                 "PatientID" : "HN_P001",
-                                 "PatientName" : "HN_P001",
-                                 "PatientSex" : "M"
+                                 "PatientBirthDate" : "19910101",
+                                 "PatientID" : "Vafk,T,6",
+                                 "PatientName" : "PHENIX",
+                                 "PatientSex" : ""
                               },
                               "Series" : [
-                                 "9c7031b2-97909802-c35563e6-168bf0af-5cfbdce4",
-                                 "1d9c4560-6480f3d9-0a4d3654-65715f38-755ad2e0",
-                                 "52f4cb90-29d1d1a2-2ca34edd-4b8851fc-8cb269f2"
+                                 "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d",
+                                 "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
+                                 "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f"
                               ],
                               "Type" : "Study"
                            }
@@ -3752,9 +3746,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "0d9e3061-0ec4-49ff-966b-7f0dc99ad6e6",
-                              "46fd1fe1-84d4-4dcd-b386-d48f320e98e3",
-                              "723a96f3-b473-45c4-bc49-00e54c1734ca",
+                              "0b584e01-3aba-4b18-a428-fce60430f8b8",
+                              "35e9ad9d-1169-4154-b8b1-4c8e0303aa78",
+                              "384de7a4-3be1-4fb9-992a-62e6209969c2",
                               "..."
                            ]
                         }
@@ -3768,9 +3762,31 @@
          }
       },
       "/jobs/{id}" : {
+         "delete" : {
+            "deprecated" : false,
+            "description" : "Delete the job from the jobs history.  Only a completed job can be deleted. If the job has not run or not completed yet, you must cancel it first. If the job has outputs, all outputs will be deleted as well. ",
+            "parameters" : [
+               {
+                  "description" : "Identifier of the job of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Delete a job from history",
+            "tags" : [ "Jobs" ]
+         },
          "get" : {
             "deprecated" : false,
-            "description" : "Retrieve detailed information about the job whose identifier is provided in the URL: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+            "description" : "Retrieve detailed information about the job whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
             "parameters" : [
                {
                   "description" : "Identifier of the job of interest",
@@ -3820,7 +3836,7 @@
       "/jobs/{id}/cancel" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Cancel the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+            "description" : "Cancel the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
             "parameters" : [
                {
                   "description" : "Identifier of the job of interest",
@@ -3852,7 +3868,7 @@
       "/jobs/{id}/pause" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Pause the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+            "description" : "Pause the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
             "parameters" : [
                {
                   "description" : "Identifier of the job of interest",
@@ -3884,7 +3900,7 @@
       "/jobs/{id}/resubmit" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Resubmit the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+            "description" : "Resubmit the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
             "parameters" : [
                {
                   "description" : "Identifier of the job of interest",
@@ -3916,7 +3932,7 @@
       "/jobs/{id}/resume" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Resume the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+            "description" : "Resume the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
             "parameters" : [
                {
                   "description" : "Identifier of the job of interest",
@@ -4237,7 +4253,7 @@
       "/modalities/{id}/echo" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Trigger C-ECHO SCU command against the DICOM modality whose identifier is provided in URL: https://book.orthanc-server.com/users/rest.html#performing-c-echo",
+            "description" : "Trigger C-ECHO SCU command against the DICOM modality whose identifier is provided in URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-c-echo",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -4540,7 +4556,7 @@
       "/modalities/{id}/move" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a C-MOVE SCU command as a job, in order to drive the execution of a sequence of C-STORE commands by some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-c-move",
+            "description" : "Start a C-MOVE SCU command as a job, in order to drive the execution of a sequence of C-STORE commands by some remote DICOM modality whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-c-move",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -4632,7 +4648,7 @@
       "/modalities/{id}/query" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL: https://book.orthanc-server.com/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest",
+            "description" : "Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -4705,7 +4721,7 @@
       "/modalities/{id}/storage-commitment" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Trigger a storage commitment request to some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/storage-commitment.html#storage-commitment-scu",
+            "description" : "Trigger a storage commitment request to some remote DICOM modality whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/storage-commitment.html#storage-commitment-scu",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -4776,7 +4792,7 @@
       "/modalities/{id}/store" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a C-STORE SCU command as a job, in order to send DICOM resources stored locally to some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#rest-store-scu",
+            "description" : "Start a C-STORE SCU command as a job, in order to send DICOM resources stored locally to some remote DICOM modality whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#rest-store-scu",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -4838,7 +4854,7 @@
                               "type" : "array"
                            },
                            "StorageCommitment" : {
-                              "description" : "Whether to chain C-STORE with DICOM storage commitment to validate the success of the transmission: https://book.orthanc-server.com/users/storage-commitment.html#chaining-c-store-with-storage-commitment",
+                              "description" : "Whether to chain C-STORE with DICOM storage commitment to validate the success of the transmission: https://orthanc.uclouvain.be/book/users/storage-commitment.html#chaining-c-store-with-storage-commitment",
                               "type" : "boolean"
                            },
                            "Synchronous" : {
@@ -5004,8 +5020,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported patients (if `expand` argument is provided)",
                            "example" : [
-                              "0946fcb6-cf12ab43-bad958c1-bf057ad5-0fc6f54c",
-                              "da39a3ee-5e6b4b0d-3255bfef-95601890-afd80709"
+                              "da39a3ee-5e6b4b0d-3255bfef-95601890-afd80709",
+                              "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"
                            ]
                         }
                      }
@@ -5091,7 +5107,7 @@
                               "ID" : "46e6332c-677825b6-202fcf7c-f787bc5f-7b07c382",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091542",
+                              "LastUpdate" : "20231109T160830",
                               "MainDicomTags" : {
                                  "PatientID" : "SOtNwu",
                                  "PatientName" : "INCISIX"
@@ -5112,7 +5128,7 @@
       "/patients/{id}/anonymize" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will anonymize all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series",
+            "description" : "Start a job that will anonymize all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#anonymization-of-patients-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the patient of interest",
@@ -5185,7 +5201,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -5235,7 +5251,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -5302,7 +5318,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -5316,7 +5332,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -5847,7 +5863,7 @@
                               "ContentType" : 1,
                               "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
                               "UncompressedSize" : 526970,
-                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                              "Uuid" : "ada05909-0efc-43fd-b615-c5cafbaeacf8"
                            }
                         }
                      }
@@ -6109,6 +6125,15 @@
             "description" : "Get detailed information about the child instances of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child instances",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -6154,41 +6179,41 @@
                            "example" : [
                               {
                                  "FileSize" : 526866,
-                                 "FileUuid" : "c14b2b87-53e2-420b-baf9-020cae34fedf",
-                                 "ID" : "e3dfd688-80e4743a-29c45f90-371ec4a4-04d18ae5",
-                                 "IndexInSeries" : 137,
+                                 "FileUuid" : "ae097e47-5826-4f9d-9ca4-0d262a929c12",
+                                 "ID" : "7ca06aee-5cb2cc11-d4d71cfc-b6cd777b-83b57611",
+                                 "IndexInSeries" : 165,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
                                  "FileSize" : 526870,
-                                 "FileUuid" : "27cdb02f-500f-4b37-9ca1-058d8d4f649a",
-                                 "ID" : "4fecddf1-518346e4-4f30176b-c453b3d8-65899230",
-                                 "IndexInSeries" : 114,
+                                 "FileUuid" : "2098edc6-7c49-43b5-be67-45318c0ef7fc",
+                                 "ID" : "6eeb2475-5b5ba0a3-d39fb207-106beb1e-be3df75a",
+                                 "IndexInSeries" : 124,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 526868,
-                                 "FileUuid" : "5a6334a8-e050-47e5-8832-531ee62aa9a7",
-                                 "ID" : "c9a55bc1-9e98ba4b-bc455dc3-24c4c525-1b171b6c",
-                                 "IndexInSeries" : 66,
+                                 "FileSize" : 526870,
+                                 "FileUuid" : "56f4e359-2c96-4356-a951-02ee363effd7",
+                                 "ID" : "c6ce208f-e9d1447d-84fd8575-b48fac0e-7cd6b065",
+                                 "IndexInSeries" : 122,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 526866,
-                                 "FileUuid" : "e6c09e08-8284-4416-a90f-67a7dc9f68f0",
-                                 "ID" : "135cca6f-4c099fdd-afc99251-f58a819b-5a0222eb",
-                                 "IndexInSeries" : 161,
+                                 "FileSize" : 526864,
+                                 "FileUuid" : "90f60b6d-056b-4d71-82fb-1d8810e3bf7e",
+                                 "ID" : "792409cc-6943e472-65123f4a-b18520da-56db9e95",
+                                 "IndexInSeries" : 95,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 526866,
-                                 "FileUuid" : "9eb33412-d1e9-4bb0-879b-5501db81d574",
-                                 "ID" : "719d58b1-2a259486-7cc5919d-68a2bd30-da2cd290",
-                                 "IndexInSeries" : 61,
+                                 "FileSize" : 526864,
+                                 "FileUuid" : "5fd8c2e8-8825-4a89-9988-75c9c72db157",
+                                 "ID" : "8de7f8ce-56dd2622-55ff7e02-08b67d7b-f7330657",
+                                 "IndexInSeries" : 73,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
@@ -6567,7 +6592,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -6638,7 +6663,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -6652,7 +6677,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -6718,7 +6743,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing the names of the available metadata, or JSON associative array mapping metadata to their values (if `expand` argument is provided)",
-                           "example" : [ "LastUpdate" ]
+                           "example" : [ "LastUpdate", "MainDicomTagsSignature" ]
                         }
                      }
                   },
@@ -6876,7 +6901,7 @@
       "/patients/{id}/modify" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will modify all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series",
+            "description" : "Start a job that will modify all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#modification-of-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the patient of interest",
@@ -6945,7 +6970,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -7086,7 +7111,7 @@
          },
          "put" : {
             "deprecated" : false,
-            "description" : "Check out configuration options `MaximumStorageSize` and `MaximumPatientCount`",
+            "description" : "Protects a patient by sending `1` or `true` in the payload request. Unprotects a patient by sending `0` or `false` in the payload requests. More info: https://orthanc.uclouvain.be/book/faq/features.html#recycling-protection",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the patient of interest",
@@ -7103,7 +7128,7 @@
                   "description" : ""
                }
             },
-            "summary" : "Protect one patient against recycling",
+            "summary" : "Protect/Unprotect a patient against recycling",
             "tags" : [ "Patients" ]
          }
       },
@@ -7152,6 +7177,15 @@
             "description" : "Get detailed information about the child series of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child series",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -7199,11 +7233,11 @@
                                  "ExpectedNumberOfInstances" : null,
                                  "ID" : "52cc572c-3ee31930-c4b6d5e7-16c786dc-97bc209b",
                                  "Instances" : [
-                                    "e3dfd688-80e4743a-29c45f90-371ec4a4-04d18ae5",
-                                    "4fecddf1-518346e4-4f30176b-c453b3d8-65899230",
-                                    "c9a55bc1-9e98ba4b-bc455dc3-24c4c525-1b171b6c",
-                                    "135cca6f-4c099fdd-afc99251-f58a819b-5a0222eb",
-                                    "719d58b1-2a259486-7cc5919d-68a2bd30-da2cd290",
+                                    "7ca06aee-5cb2cc11-d4d71cfc-b6cd777b-83b57611",
+                                    "6eeb2475-5b5ba0a3-d39fb207-106beb1e-be3df75a",
+                                    "c6ce208f-e9d1447d-84fd8575-b48fac0e-7cd6b065",
+                                    "792409cc-6943e472-65123f4a-b18520da-56db9e95",
+                                    "8de7f8ce-56dd2622-55ff7e02-08b67d7b-f7330657",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -7327,10 +7361,10 @@
                               "DicomDiskSizeMB" : 83,
                               "DicomUncompressedSize" : "87460012",
                               "DicomUncompressedSizeMB" : 83,
-                              "DiskSize" : "89640436",
-                              "DiskSizeMB" : 85,
-                              "UncompressedSize" : "89640436",
-                              "UncompressedSizeMB" : 85
+                              "DiskSize" : "87460012",
+                              "DiskSizeMB" : 83,
+                              "UncompressedSize" : "87460012",
+                              "UncompressedSizeMB" : 83
                            },
                            "properties" : {
                               "CountInstances" : {
@@ -7394,6 +7428,15 @@
             "description" : "Get detailed information about the child studies of the DICOM patient whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child studies",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -7441,7 +7484,7 @@
                                  "ID" : "e98b9ac7-dd31ac40-ff046cb2-f0400d30-12f81d85",
                                  "IsStable" : true,
                                  "Labels" : [],
-                                 "LastUpdate" : "20180414T091542",
+                                 "LastUpdate" : "20231109T160830",
                                  "MainDicomTags" : {
                                     "AccessionNumber" : "0",
                                     "InstitutionName" : "dPJ",
@@ -7651,7 +7694,7 @@
       "/peers/{id}/store" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Send DICOM resources stored locally to some remote Orthanc peer whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#sending-one-resource",
+            "description" : "Send DICOM resources stored locally to some remote Orthanc peer whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#sending-one-resource",
             "parameters" : [
                {
                   "description" : "Identifier of the modality of interest",
@@ -7949,7 +7992,7 @@
       "/queries" : {
          "get" : {
             "deprecated" : false,
-            "description" : "List the identifiers of all the query/retrieve operations on DICOM modalities, as initiated by calls to `/modalities/{id}/query`. The length of this list is bounded by the `QueryRetrieveSize` configuration option of Orthanc. https://book.orthanc-server.com/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest",
+            "description" : "List the identifiers of all the query/retrieve operations on DICOM modalities, as initiated by calls to `/modalities/{id}/query`. The length of this list is bounded by the `QueryRetrieveSize` configuration option of Orthanc. https://orthanc.uclouvain.be/book/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest",
             "parameters" : [],
             "responses" : {
                "200" : {
@@ -8394,7 +8437,7 @@
       "/queries/{id}/answers/{index}/retrieve" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a C-MOVE SCU command as a job, in order to retrieve one answer associated with the query/retrieve operation whose identifiers are provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-retrieve-c-move",
+            "description" : "Start a C-MOVE SCU command as a job, in order to retrieve one answer associated with the query/retrieve operation whose identifiers are provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-retrieve-c-move",
             "parameters" : [
                {
                   "description" : "Identifier of the query of interest",
@@ -8607,7 +8650,7 @@
       "/queries/{id}/retrieve" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a C-MOVE SCU command as a job, in order to retrieve all the answers associated with the query/retrieve operation whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-retrieve-c-move",
+            "description" : "Start a C-MOVE SCU command as a job, in order to retrieve all the answers associated with the query/retrieve operation whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-retrieve-c-move",
             "parameters" : [
                {
                   "description" : "Identifier of the query of interest",
@@ -8761,8 +8804,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported series (if `expand` argument is provided)",
                            "example" : [
-                              "318603c5-03e8cffc-a82b6ee1-3ccd3c1e-18d7e3bb",
-                              "7124dba7-09803f33-98b73826-33f14632-ea842d29"
+                              "1de00990-03680ef4-0be6bd5b-73a7d350-fb46abfa",
+                              "a69a10d7-068c5263-8aab53fe-de7af5f2-373a74bd"
                            ]
                         }
                      }
@@ -8850,7 +8893,7 @@
                               "Instances" : [ "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f" ],
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091542",
+                              "LastUpdate" : "20231109T160851",
                               "MainDicomTags" : {
                                  "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
                                  "Manufacturer" : "Philips",
@@ -8878,7 +8921,7 @@
       "/series/{id}/anonymize" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will anonymize all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series",
+            "description" : "Start a job that will anonymize all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#anonymization-of-patients-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the series of interest",
@@ -8951,7 +8994,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -9001,7 +9044,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -9068,7 +9111,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -9082,7 +9125,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -9613,7 +9656,7 @@
                               "ContentType" : 1,
                               "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
                               "UncompressedSize" : 526970,
-                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                              "Uuid" : "ada05909-0efc-43fd-b615-c5cafbaeacf8"
                            }
                         }
                      }
@@ -9875,6 +9918,15 @@
             "description" : "Get detailed information about the child instances of the DICOM series whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child instances",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -9920,7 +9972,7 @@
                            "example" : [
                               {
                                  "FileSize" : 368852,
-                                 "FileUuid" : "9016272a-ee8c-41b2-afc6-dcfe06dd3be8",
+                                 "FileUuid" : "eec5367e-b460-475c-a808-75343dbf9136",
                                  "ID" : "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f",
                                  "IndexInSeries" : 1,
                                  "Labels" : [],
@@ -10187,7 +10239,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -10258,7 +10310,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -10272,7 +10324,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -10338,7 +10390,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing the names of the available metadata, or JSON associative array mapping metadata to their values (if `expand` argument is provided)",
-                           "example" : [ "LastUpdate" ]
+                           "example" : [ "RemoteAET", "LastUpdate", "MainDicomTagsSignature" ]
                         }
                      }
                   },
@@ -10496,7 +10548,7 @@
       "/series/{id}/modify" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will modify all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series",
+            "description" : "Start a job that will modify all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#modification-of-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the series of interest",
@@ -10565,7 +10617,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -10987,7 +11039,7 @@
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091601",
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
                                  "PatientID" : "Vafk,T,6",
@@ -11150,9 +11202,9 @@
                               "DicomDiskSizeMB" : 0,
                               "DicomUncompressedSize" : "368852",
                               "DicomUncompressedSizeMB" : 0,
-                              "DiskSize" : "381000",
+                              "DiskSize" : "368852",
                               "DiskSizeMB" : 0,
-                              "UncompressedSize" : "381000",
+                              "UncompressedSize" : "368852",
                               "UncompressedSizeMB" : 0
                            },
                            "properties" : {
@@ -11255,7 +11307,7 @@
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091601",
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
                                  "InstitutionName" : "HUG",
@@ -11276,8 +11328,8 @@
                                  "PatientSex" : ""
                               },
                               "Series" : [
-                                 "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
                                  "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d",
+                                 "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
                                  "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f"
                               ],
                               "Type" : "Study"
@@ -11304,14 +11356,14 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "CountInstances" : 2552,
-                              "CountPatients" : 8,
-                              "CountSeries" : 26,
-                              "CountStudies" : 8,
-                              "TotalDiskSize" : "1068132148",
-                              "TotalDiskSizeMB" : 1018,
-                              "TotalUncompressedSize" : "1068132148",
-                              "TotalUncompressedSizeMB" : 1018
+                              "CountInstances" : 2352,
+                              "CountPatients" : 7,
+                              "CountSeries" : 23,
+                              "CountStudies" : 7,
+                              "TotalDiskSize" : "881421860",
+                              "TotalDiskSizeMB" : 840,
+                              "TotalUncompressedSize" : "881421860",
+                              "TotalUncompressedSizeMB" : 840
                            },
                            "properties" : {
                               "CountInstances" : {
@@ -11360,7 +11412,7 @@
       "/storage-commitment/{id}" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Get the storage commitment report whose identifier is provided in the URL: https://book.orthanc-server.com/users/storage-commitment.html#storage-commitment-scu",
+            "description" : "Get the storage commitment report whose identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/storage-commitment.html#storage-commitment-scu",
             "parameters" : [
                {
                   "description" : "Identifier of the storage commitment report",
@@ -11416,7 +11468,7 @@
       "/storage-commitment/{id}/remove" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Remove out of Orthanc, the DICOM instances that have been reported to have been properly received the storage commitment report whose identifier is provided in the URL. This is only possible if the `Status` of the storage commitment report is `Success`. https://book.orthanc-server.com/users/storage-commitment.html#removing-the-instances",
+            "description" : "Remove out of Orthanc, the DICOM instances that have been reported to have been properly received the storage commitment report whose identifier is provided in the URL. This is only possible if the `Status` of the storage commitment report is `Success`. https://orthanc.uclouvain.be/book/users/storage-commitment.html#removing-the-instances",
             "parameters" : [
                {
                   "description" : "Identifier of the storage commitment report",
@@ -11504,8 +11556,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported studies (if `expand` argument is provided)",
                            "example" : [
-                              "6c65289b-db2fcb71-7eaf73f4-8e12470c-a4d6d7cf",
-                              "6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715"
+                              "6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715",
+                              "27f7126f-4f66fb14-03f4081b-f9341db2-53925988"
                            ]
                         }
                      }
@@ -11591,7 +11643,7 @@
                               "ID" : "27f7126f-4f66fb14-03f4081b-f9341db2-53925988",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091532",
+                              "LastUpdate" : "20231109T160811",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "0",
                                  "InstitutionName" : "7GEFF0GbzqCNo43Yd0,Ibu,zQSSX",
@@ -11611,13 +11663,13 @@
                                  "PatientSex" : "0000"
                               },
                               "Series" : [
+                                 "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
+                                 "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
+                                 "2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8",
                                  "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
                                  "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e",
-                                 "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0",
                                  "4baa97c7-d53d3d82-a5eb9403-17ef5a77-4e0efb55",
-                                 "2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8",
-                                 "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
-                                 "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf"
+                                 "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0"
                               ],
                               "Type" : "Study"
                            }
@@ -11634,7 +11686,7 @@
       "/studies/{id}/anonymize" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will anonymize all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series",
+            "description" : "Start a job that will anonymize all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#anonymization-of-patients-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -11707,7 +11759,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -11757,7 +11809,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -11824,7 +11876,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -11838,7 +11890,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -12369,7 +12421,7 @@
                               "ContentType" : 1,
                               "UncompressedMD5" : "26f3fad6ca0c355f02d57c7fa6770248",
                               "UncompressedSize" : 526970,
-                              "Uuid" : "b7c99eb7-229f-464e-8f46-6878c8e79e5c"
+                              "Uuid" : "ada05909-0efc-43fd-b615-c5cafbaeacf8"
                            }
                         }
                      }
@@ -12631,6 +12683,15 @@
             "description" : "Get detailed information about the child instances of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child instances",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -12675,42 +12736,42 @@
                            "description" : "JSON array containing information about the child DICOM instances",
                            "example" : [
                               {
-                                 "FileSize" : 527858,
-                                 "FileUuid" : "42607af0-e2ca-402a-9cb4-8819a0485dbd",
-                                 "ID" : "82cc1a6b-7b05d34e-cd74474b-594f0d43-94f609d8",
-                                 "IndexInSeries" : 3,
+                                 "FileSize" : 169478,
+                                 "FileUuid" : "208aca23-40e8-453e-bbb5-630b32612038",
+                                 "ID" : "6059d07c-02ae8c74-9436dc7c-007b4d5d-4c770a30",
+                                 "IndexInSeries" : 19,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 527858,
-                                 "FileUuid" : "f986a0de-cf3b-4acc-a2ca-ce6a5844ec63",
-                                 "ID" : "2fbd6d5f-802f6561-b9d8da32-c54ead16-18a208bd",
-                                 "IndexInSeries" : 13,
+                                 "FileSize" : 169414,
+                                 "FileUuid" : "42ab9bde-ed03-4364-9122-2921c802b85c",
+                                 "ID" : "f5701efb-98170697-404d15f6-59baf69e-4e8ddfae",
+                                 "IndexInSeries" : 21,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 527858,
-                                 "FileUuid" : "64cc6dae-228d-4e60-82ea-34c540a09cfb",
-                                 "ID" : "4dbca7c1-f6e1a582-b3196370-0151cac8-19caac8e",
+                                 "FileSize" : 169478,
+                                 "FileUuid" : "8600a683-34b2-4b10-b33c-5dcfb77f24b6",
+                                 "ID" : "40df6ac1-5ec86316-035ff3c1-07e5c8a8-f6cbd37c",
                                  "IndexInSeries" : 17,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 527858,
-                                 "FileUuid" : "06823b17-6217-4534-b318-4de5c9157c74",
-                                 "ID" : "98c6f0c7-e6f9812b-d0a9df8a-97eeaa41-fa891d8e",
-                                 "IndexInSeries" : 6,
+                                 "FileSize" : 169478,
+                                 "FileUuid" : "cfa27d70-f9d9-47d9-87a2-ccff1e852f7c",
+                                 "ID" : "59ad98a9-7958f687-ed67451f-bb584346-8b6bdb7b",
+                                 "IndexInSeries" : 10,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 527858,
-                                 "FileUuid" : "7012f4ad-e1f7-49a8-95e0-5050227b4090",
-                                 "ID" : "c25f4e48-8f7d737e-3dbeafb5-f1563a30-eddf816c",
-                                 "IndexInSeries" : 20,
+                                 "FileSize" : 169478,
+                                 "FileUuid" : "85eb4c39-0139-4193-8869-064a42e48f7f",
+                                 "ID" : "4cf245ed-6ae18f9e-22e12942-2b9513f2-99a638e5",
+                                 "IndexInSeries" : 7,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
@@ -13089,7 +13150,7 @@
                   }
                },
                {
-                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                  "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
                   "required" : false,
@@ -13160,7 +13221,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -13174,7 +13235,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -13204,7 +13265,7 @@
       "/studies/{id}/merge" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a new job so as to move some DICOM resources into the DICOM study whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#merging",
+            "description" : "Start a new job so as to move some DICOM resources into the DICOM study whose Orthanc identifier is provided in the URL: https://orthanc.uclouvain.be/book/users/anonymization.html#merging",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -13320,7 +13381,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing the names of the available metadata, or JSON associative array mapping metadata to their values (if `expand` argument is provided)",
-                           "example" : [ "LastUpdate" ]
+                           "example" : [ "LastUpdate", "MainDicomTagsSignature" ]
                         }
                      }
                   },
@@ -13478,7 +13539,7 @@
       "/studies/{id}/modify" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a job that will modify all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series",
+            "description" : "Start a job that will modify all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://orthanc.uclouvain.be/book/users/anonymization.html#modification-of-studies-or-series",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -13547,7 +13608,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -13861,7 +13922,7 @@
                               "ID" : "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20180414T091532",
+                              "LastUpdate" : "20231109T160811",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19490301",
                                  "PatientID" : "5Yp0E",
@@ -13926,6 +13987,15 @@
             "description" : "Get detailed information about the child series of the DICOM study whose Orthanc identifier is provided in the URL",
             "parameters" : [
                {
+                  "description" : "If false or missing, only retrieve the list of child series",
+                  "in" : "query",
+                  "name" : "expand",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "If present, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
                   "in" : "query",
                   "name" : "full",
@@ -13971,13 +14041,13 @@
                            "example" : [
                               {
                                  "ExpectedNumberOfInstances" : null,
-                                 "ID" : "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
+                                 "ID" : "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
                                  "Instances" : [
-                                    "ed8aacd6-5d2cfad4-9e1a2f77-edf1cee5-8f3bdde0",
-                                    "7a93b85e-5956dbf9-894c1f27-dc73112f-4cbcda70",
-                                    "065baa49-a7b4e4a0-e7468f1d-e9b5bca8-56316fa2",
-                                    "ca69bc1a-a4fcc0a8-9e6828b0-c816dbaa-240fdc45",
-                                    "edd8ff85-9805d97a-2375f736-40662993-aef40418",
+                                    "c2844203-2847dbbf-9cebc5f8-7c6e430d-46dc6b65",
+                                    "f6581db2-3615fae4-a3ac132f-bbe4aee1-17e20af0",
+                                    "8e098491-cec2ab54-e895deb2-a535f068-54dfa2ff",
+                                    "00330d0f-911e5e8d-1e305bae-e5c53b73-d2a49298",
+                                    "1c492d29-eaee29f4-84b25276-30eeff8b-fd47cb85",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -13986,43 +14056,13 @@
                               },
                               {
                                  "ExpectedNumberOfInstances" : null,
-                                 "ID" : "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e",
+                                 "ID" : "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
                                  "Instances" : [
-                                    "2cd73574-190bb147-0a86bcca-68c75104-d22f09dd",
-                                    "ff95b7c0-d14e3e42-d642eacd-281cb07c-4e0bbc8b",
-                                    "22384bf2-0bbe7bdb-013f6ff2-f7834e9f-3d8754bf",
-                                    "3e50a403-17c8ce10-6e0234e3-a8bed1bf-3dbc54ee",
-                                    "3db0ed84-61a28da4-72a52d5a-3f7daa77-b81ddf17",
-                                    "..."
-                                 ],
-                                 "IsStable" : true,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "ExpectedNumberOfInstances" : null,
-                                 "ID" : "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0",
-                                 "Instances" : [
-                                    "2db53a93-91179cd5-f2080c32-c9b156ec-b8f65fa7",
-                                    "9058e01a-31a7d982-1691e575-a8607d94-29a9aaca",
-                                    "40df6ac1-5ec86316-035ff3c1-07e5c8a8-f6cbd37c",
-                                    "144ca294-6e759cfb-e14e3404-e78a0a29-1dd3273c",
-                                    "3b2a215c-2560d4b0-e3730c07-87d3fa7d-3fef44ed",
-                                    "..."
-                                 ],
-                                 "IsStable" : true,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "ExpectedNumberOfInstances" : null,
-                                 "ID" : "4baa97c7-d53d3d82-a5eb9403-17ef5a77-4e0efb55",
-                                 "Instances" : [
-                                    "9b41ef96-b4031ffc-b1b7ea5d-8a38d55d-fe804601",
-                                    "8137542c-069dd229-d0226fba-f8c571cd-19c7b61a",
-                                    "985681e7-99cd2ce5-f7d79f12-27bfc29f-0e5a4d72",
-                                    "f0b9f0ab-110181f8-ce83a1a2-4d8eb2c9-0b682503",
-                                    "ef13019a-9edf339d-395d8632-558518bf-b82b1b21",
+                                    "af359625-b4989dec-8bf86813-3c7324c3-065ca845",
+                                    "7f4ba1f7-6d0f26e0-2084254d-d0d2a66d-86ba5135",
+                                    "4dbca7c1-f6e1a582-b3196370-0151cac8-19caac8e",
+                                    "e5dca4e6-df508be3-33c2e526-386ca449-101f5a04",
+                                    "5d85c7d5-58bd5d4c-1545b66b-f343dee5-8624943f",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -14033,11 +14073,41 @@
                                  "ExpectedNumberOfInstances" : null,
                                  "ID" : "2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8",
                                  "Instances" : [
-                                    "61eeef27-cb5515a3-0860ab44-90125207-a56e6883",
-                                    "18bc4146-4bb09c43-e4080c80-19bfc186-6b3d7272",
+                                    "3d452ed9-55e92667-3aeaa943-ef7ac7b7-c1d910ba",
+                                    "81cb1a6d-64f63651-d7023a43-28c0b72e-b50075b5",
                                     "00402ce7-ac05c687-4d0839bc-cecd4fad-3d1b7eed",
-                                    "ea902bf2-6dc22ee9-e962333a-7ce2c27f-d684977e",
-                                    "8371936f-4141219a-ca7d69df-0d82697e-271eef91",
+                                    "8c313325-8991e5e0-230eefbf-0787185f-9f247e3d",
+                                    "f9fb8cb4-67023766-442eb9ff-697f66e9-7ccbe176",
+                                    "..."
+                                 ],
+                                 "IsStable" : true,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "ExpectedNumberOfInstances" : null,
+                                 "ID" : "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
+                                 "Instances" : [
+                                    "15aa5488-fdeb2c38-d5e49109-23879aff-83f9acbd",
+                                    "0a3d6e84-30f0133e-8ff54580-f9b49ea9-2bc5c9aa",
+                                    "065baa49-a7b4e4a0-e7468f1d-e9b5bca8-56316fa2",
+                                    "2623949c-6c314b62-824d30cc-79ae73ec-210298a5",
+                                    "c9fcb81d-9644e671-54069338-6b3f01bf-1251713a",
+                                    "..."
+                                 ],
+                                 "IsStable" : true,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "ExpectedNumberOfInstances" : null,
+                                 "ID" : "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e",
+                                 "Instances" : [
+                                    "9012697e-f3940497-8f5c35b9-49e7e62e-9fbf5365",
+                                    "205b7183-17ae9444-1a245339-5f1cad9d-0c8e761e",
+                                    "c22daa01-b9261803-5d3338bd-70bdcc9a-e46a813d",
+                                    "a00470ef-7bd55ce9-a10252de-0b3758ea-75859fd4",
+                                    "17f2e7f4-f66af68b-007ff348-24988949-1778251f",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -14136,7 +14206,7 @@
       "/studies/{id}/split" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a new job so as to split the DICOM study whose Orthanc identifier is provided in the URL, by taking some of its children series or instances out of it and putting them into a brand new study (this new study is created by setting the `StudyInstanceUID` tag to a random identifier): https://book.orthanc-server.com/users/anonymization.html#splitting",
+            "description" : "Start a new job so as to split the DICOM study whose Orthanc identifier is provided in the URL, by taking some of its children series or instances out of it and putting them into a brand new study (this new study is created by setting the `StudyInstanceUID` tag to a random identifier): https://orthanc.uclouvain.be/book/users/anonymization.html#splitting",
             "parameters" : [
                {
                   "description" : "Orthanc identifier of the study of interest",
@@ -14259,10 +14329,10 @@
                               "DicomDiskSizeMB" : 64,
                               "DicomUncompressedSize" : "68153234",
                               "DicomUncompressedSizeMB" : 64,
-                              "DiskSize" : "72203548",
-                              "DiskSizeMB" : 68,
-                              "UncompressedSize" : "72203548",
-                              "UncompressedSizeMB" : 68
+                              "DiskSize" : "68153234",
+                              "DiskSizeMB" : 64,
+                              "UncompressedSize" : "68153234",
+                              "UncompressedSizeMB" : 64
                            },
                            "properties" : {
                               "CountInstances" : {
@@ -14328,17 +14398,17 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 20,
+                              "ApiVersion" : 21,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
-                              "DatabaseServerIdentifier" : "d67a54ff-aa19a273-ead8ba48-fa279633-f9654ab4",
+                              "DatabaseServerIdentifier" : "a67fa91c-20328956-26614107-bbaec3f4-5cbbc6f9",
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
                               "DicomPort" : 4242,
                               "HasLabels" : true,
                               "HttpPort" : 8042,
                               "IngestTranscoding" : "",
-                              "IsHttpServerSecure" : false,
+                              "IsHttpServerSecure" : true,
                               "MainDicomTags" : {
                                  "Instance" : "0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330",
                                  "Patient" : "0010,0010;0010,0020;0010,0030;0010,0040;0010,1000",
@@ -14353,7 +14423,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.0"
+                              "Version" : "1.12.1"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14373,7 +14443,7 @@
                                  "type" : "string"
                               },
                               "DatabaseVersion" : {
-                                 "description" : "Version of the database: https://book.orthanc-server.com/developers/db-versioning.html",
+                                 "description" : "Version of the database: https://orthanc.uclouvain.be/book/developers/db-versioning.html",
                                  "type" : "number"
                               },
                               "DicomAet" : {
@@ -14397,7 +14467,7 @@
                                  "type" : "string"
                               },
                               "IsHttpServerSecure" : {
-                                 "description" : "Whether the REST API is properly secured (assuming no reverse proxy is in use): https://book.orthanc-server.com/faq/security.html#securing-the-http-server",
+                                 "description" : "Whether the REST API is properly secured (assuming no reverse proxy is in use): https://orthanc.uclouvain.be/book/faq/security.html#securing-the-http-server",
                                  "type" : "boolean"
                               },
                               "MainDicomTags" : {
@@ -14637,7 +14707,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -14825,7 +14895,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -14861,6 +14931,37 @@
          }
       },
       "/tools/create-archive" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Create a ZIP archive containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
+            "parameters" : [
+               {
+                  "description" : "A comma separated list of Orthanc resource identifiers to include in the ZIP archive.",
+                  "in" : "query",
+                  "name" : "resources",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, the DICOM files will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
+                  "in" : "query",
+                  "name" : "transcode",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Create ZIP archive",
+            "tags" : [ "System" ]
+         },
          "post" : {
             "deprecated" : false,
             "description" : "Create a ZIP archive containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body",
@@ -14891,7 +14992,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -14905,7 +15006,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -15000,6 +15101,37 @@
          }
       },
       "/tools/create-media" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
+            "parameters" : [
+               {
+                  "description" : "A comma separated list of Orthanc resource identifiers to include in the DICOMDIR media.",
+                  "in" : "query",
+                  "name" : "resources",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, the DICOM files will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
+                  "in" : "query",
+                  "name" : "transcode",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Create DICOMDIR media",
+            "tags" : [ "System" ]
+         },
          "post" : {
             "deprecated" : false,
             "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body",
@@ -15034,7 +15166,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -15048,7 +15180,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -15076,6 +15208,37 @@
          }
       },
       "/tools/create-media-extended" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
+            "parameters" : [
+               {
+                  "description" : "A comma separated list of Orthanc resource identifiers to include in the DICOMDIR media.",
+                  "in" : "query",
+                  "name" : "resources",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If present, the DICOM files will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
+                  "in" : "query",
+                  "name" : "transcode",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : ""
+               }
+            },
+            "summary" : "Create DICOMDIR media",
+            "tags" : [ "System" ]
+         },
          "post" : {
             "deprecated" : false,
             "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body",
@@ -15110,7 +15273,7 @@
                               "type" : "boolean"
                            },
                            "Transcode" : {
-                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://book.orthanc-server.com/faq/transcoding.html",
+                              "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
                            }
                         }
@@ -15124,7 +15287,7 @@
                      "application/json" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://book.orthanc-server.com/users/advanced-rest.html#jobs",
+                           "description" : "In asynchronous mode, information about the job that has been submitted to generate the archive: https://orthanc.uclouvain.be/book/users/advanced-rest.html#jobs",
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the job",
@@ -15303,7 +15466,7 @@
       "/tools/find" : {
          "post" : {
             "deprecated" : false,
-            "description" : "This URI can be used to perform a search on the content of the local Orthanc server, in a way that is similar to querying remote DICOM modalities using C-FIND SCU: https://book.orthanc-server.com/users/rest.html#performing-finds-within-orthanc",
+            "description" : "This URI can be used to perform a search on the content of the local Orthanc server, in a way that is similar to querying remote DICOM modalities using C-FIND SCU: https://orthanc.uclouvain.be/book/users/rest.html#performing-finds-within-orthanc",
             "parameters" : [],
             "requestBody" : {
                "content" : {
@@ -15418,7 +15581,7 @@
       "/tools/invalidate-tags" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Remove all the attachments of the type \"DICOM-as-JSON\" that are associated will all the DICOM instances stored in Orthanc. These summaries will be automatically re-created on the next access. This is notably useful after changes to the `Dictionary` configuration option. https://book.orthanc-server.com/faq/orthanc-storage.html#storage-area",
+            "description" : "Remove all the attachments of the type \"DICOM-as-JSON\" that are associated will all the DICOM instances stored in Orthanc. These summaries will be automatically re-created on the next access. This is notably useful after changes to the `Dictionary` configuration option. https://orthanc.uclouvain.be/book/faq/orthanc-storage.html#storage-area",
             "parameters" : [],
             "responses" : {
                "200" : {
@@ -15872,13 +16035,13 @@
       "/tools/metrics-prometheus" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Get usage metrics of Orthanc in the Prometheus file format (OpenMetrics): https://book.orthanc-server.com/users/advanced-rest.html#instrumentation-with-prometheus",
+            "description" : "Get usage metrics of Orthanc in the Prometheus file format (OpenMetrics): https://orthanc.uclouvain.be/book/users/advanced-rest.html#instrumentation-with-prometheus",
             "parameters" : [],
             "responses" : {
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1688489399993\northanc_count_patients 8 1688489399993\northanc_count_series 26 1688489399993\northanc_count_studies 8 1688489399993\northanc_dicom_cache_count 5 1688475481515\northanc_dicom_cache_size 0.636888504 1688475481515\northanc_disk_size_mb 1018.65021 1688489399993\northanc_jobs_completed 10 1688489399993\northanc_jobs_failed 1 1688489399993\northanc_jobs_pending 0 1688489399993\northanc_jobs_running 0 1688489399993\northanc_jobs_success 9 1688489399993\northanc_last_change 5395 1688489399993\northanc_rest_api_active_requests 1 1688489399991\northanc_rest_api_duration_ms 582 1688489398151\northanc_storage_read_duration_ms 17 1688489397639\northanc_uncompressed_size_mb 1018.65021 1688489399993\northanc_up_time_s 172856 1688489399993\n"
+                        "example" : "orthanc_count_instances 2352 1702975679493\northanc_count_patients 7 1702975679493\northanc_count_series 23 1702975679493\northanc_count_studies 7 1702975679493\northanc_dicom_cache_count 353 1702919989969\northanc_dicom_cache_size 127.878067 1702919989969\northanc_disk_size_mb 840.589417 1702975679493\northanc_jobs_completed 10 1702975679493\northanc_jobs_failed 4 1702975679493\northanc_jobs_pending 0 1702975679493\northanc_jobs_running 0 1702975679493\northanc_jobs_success 6 1702975679493\northanc_last_change 4778 1702975679493\northanc_rest_api_active_requests 1 1702975679493\northanc_rest_api_duration_ms 361 1702975672107\northanc_storage_read_duration_ms 0 1702975473995\northanc_uncompressed_size_mb 840.589417 1702975679493\northanc_up_time_s 605413 1702975679493\n"
                      }
                   },
                   "description" : ""
@@ -15897,7 +16060,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230704T165000",
+                        "example" : "20231219T084759",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -15919,7 +16082,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20230704T165000",
+                        "example" : "20231219T084759",
                         "schema" : {
                            "description" : "The local time"
                         }
@@ -16035,7 +16198,7 @@
    },
    "servers" : [
       {
-         "url" : "https://demo.orthanc-server.com/"
+         "url" : "https://orthanc.uclouvain.be/demo/"
       }
    ]
 }

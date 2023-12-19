@@ -18,7 +18,7 @@ instead of the more complex C/C++ programming languages.
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.1/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.2/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
@@ -853,7 +853,7 @@ As can be seen in this sample:
 
 * The call to ``orthanc.ExtendOrthancExplorer()`` installs the button
   with JavaScript code that uses the `jQuery Mobile framework
-  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.1,
+  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.2,
   version 1.1.0 of jQuery Mobile is used in Orthanc Explorer).
 
 * If clicking on the button, a GET call to the REST API is made to

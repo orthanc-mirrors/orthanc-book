@@ -108,13 +108,13 @@ do that at your own risk.
 This can be done with this sequence of commands::
 
   $ sudo service orthanc stop
-  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/Orthanc --output-document /usr/sbin/Orthanc
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.2/Orthanc --output-document /usr/sbin/Orthanc
   $ sudo chmod +x /usr/sbin/Orthanc
   $ sudo rm -f /usr/share/orthanc/plugins/*.so
-  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
-  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.1/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.2/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc/1.12.2/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
   $
-  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-dicomweb/1.15/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
+  $ sudo wget https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-dicomweb/1.16/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
   $ ...
   $ sudo service orthanc restart
 
