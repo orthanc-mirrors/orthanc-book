@@ -166,7 +166,7 @@ FAQ
   API of Orthanc
   <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-dicom/post>`__.
   It would be easy to automate this workflow using a :ref:`Python
-  plugin <python-plugin>`.
+  plugin <python-plugin>` or a :ref:`Java plugin <java-plugin>`.
 
   If you have an interest in DICOM-SR, the Orthanc community would
   love to have access to sample DICOM files that could be used to

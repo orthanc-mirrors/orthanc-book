@@ -346,9 +346,10 @@ Care must be taken to the following aspects:
   three possibilities: (1) Introduce a distinguished Orthanc server
   that is responsible to take care of all the jobs (including
   modalities and peers), (2) create an :ref:`Orthanc plugin <plugins>`
-  (e.g. using :ref:`Python <python-plugin>`) that queries all the
-  Orthanc in the cluster and that aggregates all of their answers,
-  or (3) do the same using a higher-level framework (such as Node.js).
+  (e.g. using :ref:`Python <python-plugin>` or :ref:`Java
+  <java-plugin>`) that queries all the Orthanc in the cluster and that
+  aggregates all of their answers, or (3) do the same using a
+  higher-level framework (such as Node.js).
     
 
 Latency

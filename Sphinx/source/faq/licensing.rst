@@ -85,8 +85,9 @@ forbidden ("No"), or restricted ("Dual license")**:
 | AGPL-licensed plugin is installed                   |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 | Creating a :ref:`C/C++ plugin <plugins>`,           |               |       |        |              |                        |                   |
-| creating a :ref:`Lua script <lua>`, or              |               |       |        |              |                        |                   |
-| creating a :ref:`Python plugin <python-plugin>`.    |               |       |        |              |                        |                   |
+| creating a :ref:`Lua script <lua>`,                 |               |       |        |              |                        |                   |
+| creating a :ref:`Python plugin <python-plugin>`, or |               |       |        |              |                        |                   |
+| creating a :ref:`Java plugin <java-plugin>`.        |               |       |        |              |                        |                   |
 | 2 possible cases:                                   |               |       |        |              |                        |                   |
 +----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
 |    | Case 1: No AGPL-licensed plugin is in use      | No            | Yes   | Yes    | Yes          | Dual license           | Yes               |

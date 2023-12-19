@@ -88,6 +88,7 @@ From UCLouvain
    plugins/indexer.rst
    plugins/neuro.rst
    plugins/multitenant-dicom.rst
+   plugins/java.rst
 
 .. _plugins-contributed:
 
