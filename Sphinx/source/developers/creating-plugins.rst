@@ -23,9 +23,10 @@ the C language
 <https://en.wikipedia.org/wiki/Foreign_function_interface>`__ (such as
 Rust or Objective-C).
 
-For developers who are more familiar with Python, it is also possible
-to create plugins using this simpler language. Check out the
-:ref:`dedicated Python plugin <python-plugin>`.
+For developers who are more familiar with Python or Java, it is also
+possible to create plugins using either of those simpler
+languages. Check out the :ref:`dedicated Python plugin
+<python-plugin>` or the :ref:`dedicated Java plugin <java-plugin>`.
 
 Because the C header providing the Orthanc SDK interface is licensed
 using the GPLv3 license, any Orthanc plugin must be licensed either

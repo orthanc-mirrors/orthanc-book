@@ -16,7 +16,8 @@ Many other examples are `available in the source distribution
 <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Lua/>`__.
 
 A more expressive alternative to Lua scripts is provided by
-:ref:`Python plugins <python-plugin>`.
+:ref:`Python plugins <python-plugin>` and :ref:`Java plugins
+<java-plugin>`.
 
 
 Installing a Lua script

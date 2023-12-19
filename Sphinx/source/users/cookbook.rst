@@ -56,11 +56,12 @@ viewer <stone_webviewer>` on a barebone Docker setup::
   $ /etc/init.d/orthanc start
 
 Note that this standalone Debian repository **does not** contain the
-:ref:`Python plugin <python-plugin>`, as this plugin must be
-dynamically linked against the system-wide version of your Python
-runtime. You should install the ``orthanc-python`` package from your
-native Debian/Ubuntu distribution if available, or compile the plugin
-from sources.
+:ref:`Python plugin <python-plugin>` and the :ref:`Java plugin
+<java-plugin>`, because these plugins must be dynamically linked
+against the system-wide version of your Python or Java runtime
+environment. You should install the ``orthanc-python`` or
+``orthanc-java`` package from your native Debian/Ubuntu distribution
+if available, or compile the plugin from sources.
 
 
 .. _orthanc-explorer:

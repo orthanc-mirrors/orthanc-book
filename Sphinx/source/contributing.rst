@@ -132,7 +132,7 @@ here are some tasks you can take in charge that would greatly help us:
       <https://twitter.com/sjodogne/status/1299632772915625984>`__ to
       import/export such STL files from/to Orthanc.
     + Create a plugin to edit DICOM files (add, update or remove DICOM tags).
-    + Create samples of :ref:`Python plugins <python-plugin>` to take
+    + Create samples of :ref:`Python plugins <python-plugin>` or :ref:`Java plugins <java-plugin>` to take
       care of HL7 messages, especially for :ref:`merging patients
       <split-merge>` (which is a `typical HL7 event
       <https://twitter.com/ZeClint/status/1192086039160086529?s=20>`__
@@ -147,7 +147,7 @@ here are some tasks you can take in charge that would greatly help us:
       clients/viewers), or a `DICOMweb proxy
       <https://groups.google.com/g/orthanc-users/c/AQ6qs0TgO6I/m/WxdOVEeKBAAJ>`__
       (to turn a DICOM-only PACS into a DICOMweb server). This could
-      be done as a :ref:`Python plugin <python-plugin>` by wrapping
+      be done as a :ref:`Python plugin <python-plugin>` or as a :ref:`Java plugin <java-plugin>` by wrapping
       the C-FIND and C-MOVE callbacks in the Python API.
     + Get involved in the call for ideas by Salim Kanoun about a
       `DICOM router built on the top of Orthanc
