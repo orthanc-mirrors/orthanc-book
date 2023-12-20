@@ -112,8 +112,8 @@ setup**. If we can't reproduce your issue, we can't provide any
 support!
 
 In addition, please note that the original author of Orthanc
-(:ref:`Sébastien Jodogne <https://info.ucl.ac.be/~sjodogne/>`), as a
-free software advocate, will only personally deal with issues that are
+(`Sébastien Jodogne <https://info.ucl.ac.be/~sjodogne/>`__), as a free
+software advocate, will only personally deal with issues that are
 reproducible on recent GNU/Linux distributions (typically, on Ubuntu
 18.04 LTS or through Docker).
 
@@ -121,7 +121,7 @@ reproducible on recent GNU/Linux distributions (typically, on Ubuntu
 .. _support-minquality:
 
 Required minimal quality of a message in the Orthanc Users discussion forum
---------------------------------------------------------
+---------------------------------------------------------------------------
 
 While posting a message on the `Orthanc Users discussion forum
 <https://discourse.orthanc-server.org>`__, you should not be surprised if 
