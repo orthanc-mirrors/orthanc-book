@@ -138,10 +138,9 @@ Microsoft Windows and Apple OS X
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pre-compiled binaries for Microsoft Windows 32bit `are also available
-<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-odbc/index.html>`__. A
-package for `Apple's Mac OS X
-<https://www.osimis.io/en/download.html>`__ is available courtesy of
-`Osimis <https://www.osimis.io/>`__.
+<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-odbc/index.html>`__,
+as well as for `Apple macOS
+<https://orthanc.uclouvain.be/downloads/macos/orthanc-odbc/index.html>`__.
 
 
 .. _odbc-ubuntu1604:

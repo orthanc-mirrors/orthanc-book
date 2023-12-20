@@ -162,7 +162,7 @@ Code quality
 * Your code **must follow the C++03 standard** (C++11 is not accepted
   for maximum cross-platform compatibility on older platforms).
 
-* The continuous integration servers of Osimis check that Orthanc
+* The continuous integration servers at UCLouvain check that Orthanc
   properly compiles on Ubuntu 16.04, on `Linux Standard Base systems
   <https://refspecs.linuxfoundation.org/lsb.shtml>`__ using the `LSB
   SDB 5.0.0

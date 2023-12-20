@@ -63,8 +63,10 @@ presence of large databases:
 
 * Make sure that :ref:`run-time debug assertions <troubleshooting>`
   are turned off. A warning will show in the logs if this is not the
-  case. Note that all pre-built binaries provided by Osimis are
-  correctly configured in that respect.
+  case. Note that all `pre-compiled binaries
+  <https://orthanc.uclouvain.be/downloads/index.html>`__ provided by
+  the Orthanc project are correctly configured in that respect, except
+  if they are explicitly tagged as "debug".
 
 * We suggest to use the default filesystem storage area. Of course,
   make sure that the filesystem is properly backed up, and that

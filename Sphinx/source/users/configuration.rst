@@ -55,15 +55,16 @@ files, you may provide the path to the folder containing all configuration files
 backslashes (i.e. ``\``) should be either escaped by doubling them (as
 in ``\\``), or replaced by forward slashes (as in ``/``).
 
-**Remark 2:** When installing Orthanc using the Windows installer by
-Osimis, you won't be able to edit your files unless you start your
-editor with ``Run as administrator``. We recommend to edit your
-configuration file with an editor such as `Notepad++
-<https://notepad-plus-plus.org/>`_.  It shall warn you that this file
-can be edited only by an admin, and will suggest you to restart
-Notepad++ as an admin such that you'll be able to save it.
+**Remark 2:** When installing Orthanc using the `official Windows
+installers <https://www.orthanc-server.com/download-windows.php>`__,
+you won't be able to edit your files unless you start your editor with
+``Run as administrator``. We recommend to edit your configuration file
+with an editor such as `Notepad++ <https://notepad-plus-plus.org/>`_.
+It shall warn you that this file can be edited only by an admin, and
+will suggest you to restart Notepad++ as an admin such that you'll be
+able to save it.
 
-**Remark 3:** The Windows installers by Osimis provide a `Windows
+**Remark 3:** The official Windows installers include a `Windows
 service <https://en.wikipedia.org/wiki/Windows_service>`__ that
 automatically starts Orthanc during the startup of Microsoft
 Windows. You can control the parameters of the service by typing
