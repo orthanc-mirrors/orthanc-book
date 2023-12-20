@@ -52,8 +52,8 @@ resources:
 
 Importantly, for all the features that are pending in the ``TODO``
 file, if you are a company, please consider `buying professional
-services <https://osimis.io/en/orthanc-support-contract>`__ in order to get
-the feature implemented faster.
+services <http://orthanc.team/>`__ in order to get the feature
+implemented faster.
    
    
 .. _support-mwe:
@@ -112,9 +112,10 @@ setup**. If we can't reproduce your issue, we can't provide any
 support!
 
 In addition, please note that the original author of Orthanc
-(Sébastien Jodogne), as a free software advocate, will only personally
-deal with issues that are reproducible on recent GNU/Linux
-distributions (typically, on Ubuntu 18.04 LTS or through Docker).
+(:ref:`Sébastien Jodogne <https://info.ucl.ac.be/~sjodogne/>`), as a
+free software advocate, will only personally deal with issues that are
+reproducible on recent GNU/Linux distributions (typically, on Ubuntu
+18.04 LTS or through Docker).
 
 
 .. _support-minquality:
@@ -166,15 +167,14 @@ decision chart:
 
 2. If you need an **additional feature implemented in Orthanc**, and
    if you are ready to pay, get in touch with the `Orthanc Team
-   <https://orthanc.team>`__ or with `Osimis
-   <mailto:orthanc-support@osimis.io>`__, the commercial partners of
-   the Orthanc project.
+   <https://orthanc.team>`__, the main commercial partner of the
+   Orthanc project.
 
 3. If you are part of a **scientific team** and would like to setup a
    research project using Orthanc, including about AI, get in touch
-   with `Sébastien Jodogne's research lab
-   <https://www.info.ucl.ac.be/~sjodogne/>`__ at the UCLouvain
-   university.
+   with `Sébastien Jodogne
+   <https://www.info.ucl.ac.be/~sjodogne/>`__'s research lab at the
+   `UCLouvain university <https://orthanc.uclouvain.be/>`__.
    
 4. If you are not able to reproduce an issue by yourself, if you are
    looking for personalized help related to deployments/training/...,
@@ -227,6 +227,6 @@ decision chart:
      * `James Manner <https://binary.com.au/>`__ (English, Australia)
 
    Get in touch with `Sébastien Jodogne
-   <mailto:s.jodogne@orthanc-labs.com>`__ if you want to be included
-   in this list.
+   <mailto:sebastien.jodogne@uclouvain.be>`__ if you want to be
+   included in this list.
  
