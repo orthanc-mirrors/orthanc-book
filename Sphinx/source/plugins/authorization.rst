@@ -12,6 +12,11 @@ the plugin will query a Web service to know whether the access is
 granted to the user. If access is not granted, the HTTP status code is
 set to ``403`` (Forbidden).
 
+**Status:** This plugin was `deprecated
+<https://discourse.orthanc-server.org/t/advanced-authorization-plugin-vs-remote-access/1859/5?u=jodogne>`__
+between 2020 and 2022, but its active development has been resumed
+since May 2022.
+
 
 How to get it ?
 ---------------
