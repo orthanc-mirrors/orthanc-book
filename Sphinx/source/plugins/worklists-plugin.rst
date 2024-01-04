@@ -92,7 +92,7 @@ Tutorial
   for Microsoft Windows)::
   
     "Plugins" : [
-      "OsimisWebViewer.dll",
+      "StoneWebViewer.dll",
       "ModalityWorklists.dll"   // On GNU/Linux, use libModalityWorklists.so
     ],
 

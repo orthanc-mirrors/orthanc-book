@@ -63,8 +63,10 @@ presence of large databases:
 
 * Make sure that :ref:`run-time debug assertions <troubleshooting>`
   are turned off. A warning will show in the logs if this is not the
-  case. Note that all pre-built binaries provided by Osimis are
-  correctly configured in that respect.
+  case. Note that all `pre-compiled binaries
+  <https://orthanc.uclouvain.be/downloads/index.html>`__ provided by
+  the Orthanc project are correctly configured in that respect, except
+  if they are explicitly tagged as "debug".
 
 * We suggest to use the default filesystem storage area. Of course,
   make sure that the filesystem is properly backed up, and that
@@ -337,6 +339,10 @@ Care must be taken to the following aspects:
     the ``/jobs`` route will return only the jobs of the responding
     Orthanc.
 
+  - Similarly, each Orthanc instance maintains its own :ref:`status
+    for the resources it has received <stable-resources>`. Thus, the
+    ``IsStable`` information is local to each Orthanc instance.
+
   - The ``/modalities`` or the ``/peers`` are also private to each
     instance of Orthanc in the cluster, as soon as the respective
     options ``DicomModalitiesInDatabase`` and
@@ -345,11 +351,11 @@ Care must be taken to the following aspects:
   If you need to use such primitives in your application, you have
   three possibilities: (1) Introduce a distinguished Orthanc server
   that is responsible to take care of all the jobs (including
-  modalities and peers), (2) create an :ref:`Orthanc plugin <plugins>`
-  (e.g. using :ref:`Python <python-plugin>` or :ref:`Java
-  <java-plugin>`) that queries all the Orthanc in the cluster and that
-  aggregates all of their answers, or (3) do the same using a
-  higher-level framework (such as Node.js).
+  modalities and peers) and/or to receive all the DICOM instances, (2)
+  create an :ref:`Orthanc plugin <plugins>` (e.g. using :ref:`Python
+  <python-plugin>` or :ref:`Java <java-plugin>`) that queries all the
+  Orthanc in the cluster and that aggregates all of their answers,
+  or (3) do the same using a higher-level framework (such as Node.js).
     
 
 Latency

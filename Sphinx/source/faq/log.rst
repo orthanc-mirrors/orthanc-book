@@ -41,10 +41,10 @@ Note that the Orthanc command-line tool has many other options related
 to logging. Check out the :ref:`full manpage <manpage>`.
   
 However, if you use packaged versions of Orthanc that starts the
-server in background (such as GNU/Linux packages or the Windows
-installers by Osimis), you will have to manually start Orthanc. The
-sections below explain how to achieve this goal with the officially
-supported packages.
+server in background (such as GNU/Linux packages or the `Windows
+installers <https://www.orthanc-server.com/download-windows.php>`__),
+you will have to manually start Orthanc. The sections below explain
+how to achieve this goal with the officially supported packages.
 
 
 With Orthanc Explorer 2 installed
@@ -66,7 +66,8 @@ Under Windows
 ^^^^^^^^^^^^^
 
 
-if you used the official installer by Osimis:
+if you used the `official Windows installers
+<https://www.orthanc-server.com/download-windows.php>`__:
 
 1. Stop the Orthanc service. The actual process depends on your
    version of Windows.

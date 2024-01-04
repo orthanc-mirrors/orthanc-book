@@ -199,14 +199,14 @@ Windows-specific issues
   elsewhere on Internet).
 
 * If **Orthanc crashes when handling one large DICOM file**, this most
-  probably indicates a memory allocation error. Indeed, the `official
-  Windows binaries
-  <https://www.orthanc-server.com/download-windows.php>`__ are compiled
-  using a 32bit compiler. As a consequence, Orthanc only has access to
-  less than 4GB of RAM. If this is an important limitation for you,
-  precompiled command-line versions of Orthanc for Windows 64bit are
-  available courtesy of `Osimis
-  <https://www.osimis.io/en/download.html>`__.
+  probably indicates a memory allocation error. Indeed, some
+  precompiled `official Windows binaries
+  <https://orthanc.uclouvain.be/downloads/windows-32/orthanc/index.html>`__
+  are compiled using a 32bit compiler. As a consequence, Orthanc only
+  has access to less than 4GB of RAM. If this is an important
+  limitation for you, precompiled command-line versions of Orthanc for
+  Windows 64bit are `also available
+  <https://orthanc.uclouvain.be/downloads/windows-64/orthanc/index.html>`__.
 
 * Avoid installing Orthanc, its database or its storage area in
   folders whose names contain **spaces or special characters**.

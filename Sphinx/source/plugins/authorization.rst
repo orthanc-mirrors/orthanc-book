@@ -6,11 +6,16 @@ Advanced authorization plugin
 
 .. contents::
 
-This **official plugin by Osimis** extends Orthanc with an advanced
+This **official plugin** extends Orthanc with an advanced
 authorization mechanism. For each incoming REST request to some URI,
 the plugin will query a Web service to know whether the access is
 granted to the user. If access is not granted, the HTTP status code is
 set to ``403`` (Forbidden).
+
+**Status:** This plugin was `deprecated
+<https://discourse.orthanc-server.org/t/advanced-authorization-plugin-vs-remote-access/1859/5?u=jodogne>`__
+between 2020 and 2022, but its active development has been resumed
+since May 2022.
 
 
 How to get it ?
@@ -398,12 +403,13 @@ This sample also shows how to implement all routes that the webservice might pro
 Integration with the Orthanc Explorer
 -------------------------------------
 
-Starting from Orthanc 1.5.8, you can pass authorization tokens in the url
-search params when opening the Orthanc explorer i.e. 
-http://localhost:8042/app/explorer.html?token=1234.  This token will be 
-included as an HTTP header in every request sent to the Orthanc Rest API.  
-It will also be included in the url search params when opening the Orthanc 
-or Osimis viewer.  
+Starting from Orthanc 1.5.8, you can pass authorization tokens in the
+url search params when opening the Orthanc explorer, i.e.
+``http://localhost:8042/app/explorer.html?token=1234``.  This token
+will be included as an HTTP header in every request sent to the
+Orthanc Rest API. It will also be included in the URL search params
+when opening the Orthanc or :ref:`Osimis Web viewer
+<osimis_webviewer>`.
 
 Only 3 tokens name will be recognized and forwarded: ``token``, ``auth-token``
 and ``authorization``.
