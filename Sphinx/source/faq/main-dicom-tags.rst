@@ -125,6 +125,14 @@ already in Orthanc, you may call the ``/studies/../reconstruct``
 API route or use the  :ref:`Housekeeper plugin <housekeeper-plugin>` 
 to automate this reconstruction process.
 
+*Note :* These ``ExtraMainDicomTags`` are not used when searching
+for resources in Orthanc, they are only used when returning results.
+E.g. if you have added a ``StudyDescription`` at ``Series`` level and perform
+a ``/tools/find`` at ``Series`` level with a filter on the ``StudyDescription``
+tag, Orthanc will still use the ``StudyDescription`` recorded at ``Study`` level during
+the search but will use the ``StudyDescription`` recorded at ``Series`` level when
+returning the responses.
+
 
 Warnings
 ========
