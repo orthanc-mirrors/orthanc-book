@@ -31,7 +31,7 @@ How to get it
 -------------
 
 For general information, `check out the source code
-<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
+<https://github.com/orthanc-team/osimis-webviewer-deprecated>`__.
 
 The Osimis Web viewer is part of the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
@@ -44,7 +44,7 @@ For GNU/Linux users, you'll find it in the :ref:`osimis/orthanc
 The compilation process is quite complex since it requires to build
 first the frontend and then the backend. All information can be found
 in the `source code
-<https://bitbucket.org/osimis/osimis-webviewer-plugin>`__.
+<https://github.com/orthanc-team/osimis-webviewer-deprecated>`__.
 
 
 Usage
@@ -93,7 +93,7 @@ Advanced options
 
 The configuration of the Web viewer can be fine-tuned by adapting some
 options in the `configuration file
-<https://bitbucket.org/osimis/osimis-webviewer-plugin/src/master/doc/default-configuration.json>`__.
+<https://github.com/orthanc-team/osimis-webviewer-deprecated/blob/dev/doc/default-configuration.json>`__.
 
 FAQ
 ---
