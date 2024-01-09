@@ -4,3 +4,4 @@ Sphinx/env
 .vscode/
 *~
 *.orig
+*.pyc

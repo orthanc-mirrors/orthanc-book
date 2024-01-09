@@ -281,6 +281,31 @@ The route can then be accessed as::
   ok
 
 
+Overriding the core REST API
+............................
+
+You may also use a python plugin to replace an existing REST API route:
+
+.. literalinclude:: python/extending-rest-api-2.py
+                    :language: python
+
+
+
+When calling the REST API from a python plugin, you may use e.g. 
+``RestApiPost`` to call the native Orthanc REST API and must
+call ``RestApiPostAfterPlugin`` to call the REST API from plugins.
+
+
+Note however, that, as of Orthanc 1.12.2, the Orthanc plugin SDK
+does not support multiple plugins implementing the same route.
+Orthanc will actually accept e.g a Python plugin that overrides
+a DICOMWeb route but it is impossible to tell which route
+will be called in the end since this depends on the registration 
+order of the plugins that is not deterministic.
+
+
+
+
 .. _python-changes:
   
 Listening to changes
