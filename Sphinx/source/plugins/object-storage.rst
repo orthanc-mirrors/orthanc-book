@@ -245,6 +245,10 @@ The ``legacy`` behaviour mimics the Orthanc File System convention.  This is act
 when migrating your data from a file system to an object storage since you can copy all the file
 hierarchy as is.
 
+*Note* : With AWS S3, there might be `some limitations <https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance.html>`__ 
+on the number of HTTP operations per *prefix*.  Therefore, the ``legacy`` structure might 
+overcome these limitations.  Note that, as of today, no one could confirm it had a real impact on Orthanc.
+
 The **RootPath** allows you to store the files in another folder as the root level of the
 object storage.  Note: it shall not start with a ``/``.
 
