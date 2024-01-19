@@ -327,7 +327,7 @@ can be configured in the ``TransactionMode`` configuration of the ``PostgreSQL``
 - ``SERIALIZABLE`` in which all write transactions are serialized which might lead
   to performance bottlenecks when lots of threads or Orthanc instances are trying
   to write to the same Database.
-- ``READ COMIITED`` that allows multiple threads or Orthanc instances to write at the
+- ``READ COMMITTED`` that allows multiple threads or Orthanc instances to write at the
   same time to the same Database.
 
 *Remark:* This feature is only available in a beta version of both Orthanc and the
