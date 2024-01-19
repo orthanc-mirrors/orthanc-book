@@ -40,6 +40,11 @@ available, without having to :ref:`migrate the database
 *Note 2:* Starting with Orthanc 0.9.5, the option ``--upgrade`` must be provided
 on the command-line to allow Orthanc to upgrade the database schema.
 
+*Note 3:* Each DB plugin like (:ref:`PostgreSQL <postgresql>`,
+:ref:`MySQL <mysql>` or :ref:`ODBC <odbc>`) also maintains its own *revision*
+number.  The DB full version information is therefore the combination
+of the *version* and the *revision*.
+
 
 Early versions (pre-0.3.0)
 --------------------------
