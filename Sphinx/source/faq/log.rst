@@ -106,7 +106,14 @@ Under Debian GNU/Linux
 Under Docker
 ^^^^^^^^^^^^
 
-The command-line to be used is::
+With ``osimis/orthanc`` images, simply define the ``VERBOSE_ENABLED`` environment 
+variable to ``true`` when starting your container and then, run this command to 
+retrieve the logs in a file::
+
+  $ sudo docker logs your_container_name &> /tmp/orthanc.log
+
+
+With ``jodogne/orthanc`` images, use this command line::
 
   $ sudo docker run -a stderr -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc --verbose /etc/orthanc > Orthanc.log 2>&1
 
