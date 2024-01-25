@@ -1011,3 +1011,32 @@ access the REST API of Orthanc. Here is a minimal example:
 
 .. literalinclude:: python/multiprocessing-4.py
                     :language: python
+
+Working with virtual environments
+---------------------------------
+
+By default, Orthanc uses the system-wide Python installation and
+therefore has access to the python modules that have been installed
+system-wide.
+
+As of version 4.1 of the python plugin, there is no built-in support
+for working with a `virtual environment <https://docs.python.org/3/library/venv.html>`__.
+However, you may modify the python path at the very beginning of the script
+to instruct python to look for modules in your environment.
+
+**Example 1**: On a Linux system, consider that you have created a virtual environment in ``/tmp/.venv``
+and you want to use only the modules that have been installed in this virtual environment.
+In this case, you may simply rewrite ``sys.path``:
+
+.. literalinclude:: python/venv-linux.py
+                    :language: python
+
+
+**Example 2**: On a Windows system, consider that you have created a virtual environment in ``C:/tmp/.venv/``.
+Instead of defining ``sys.path`` from scratch, it is possible to simply insert the venv-packages in
+the ``sys.path``.  By adding the ``venv`` to an early index (``0``), any package required by your code 
+will be looked up in the ``venv`` first.  And, as a consequence, if the package is not present, the system-wide 
+installation of that package might be loaded:
+
+.. literalinclude:: python/venv-windows.py
+                    :language: python
