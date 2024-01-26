@@ -354,8 +354,10 @@ remaining options:
   authentication plugin is not triggered, and to which access is
   always granted.
 
-* ``UncheckedFolders`` is similar to ``UncheckedResources`` for folders:
-  Access to all the URIs below the unchecked folders is always granted.
+* ``UncheckedFolders`` specifies a list of root paths for which the 
+  authentication plugin is not triggered when receiving a GET request.
+  This is actually mainly used to grant access to static resources e.g.
+  HTML and JS resources from plugins like :ref:`Orthanc Explorer 2 <orthanc-explorer-2>`.
 
 * ``UncheckedLevels`` allows to specify which levels of the
   :ref:`DICOM hierarchy <model-world>` are ignored by the authorization
