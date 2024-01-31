@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.2"
+      "version" : "1.12.3"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -430,6 +430,10 @@
                               },
                               "type" : "array"
                            },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
+                           },
                            "KeepPrivateTags" : {
                               "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
                               "type" : "boolean"
@@ -610,8 +614,7 @@
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5",
-                              "uuid"
+                              "verify-md5"
                            ]
                         }
                      }
@@ -3746,9 +3749,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "0b584e01-3aba-4b18-a428-fce60430f8b8",
-                              "35e9ad9d-1169-4154-b8b1-4c8e0303aa78",
-                              "384de7a4-3be1-4fb9-992a-62e6209969c2",
+                              "2567f12f-a2dc-4ac6-8990-16335b5a3d5a",
+                              "42251acb-3089-40dd-9263-3d39970342a7",
+                              "7583bd1e-39f9-4564-93ef-602b57185449",
                               "..."
                            ]
                         }
@@ -5165,6 +5168,10 @@
                               },
                               "type" : "array"
                            },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
+                           },
                            "KeepPrivateTags" : {
                               "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
                               "type" : "boolean"
@@ -5490,8 +5497,7 @@
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5",
-                              "uuid"
+                              "verify-md5"
                            ]
                         }
                      }
@@ -7977,7 +7983,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.13"
+                              "Version" : "1.16"
                            }
                         }
                      }
@@ -8958,6 +8964,10 @@
                               },
                               "type" : "array"
                            },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
+                           },
                            "KeepPrivateTags" : {
                               "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
                               "type" : "boolean"
@@ -9283,8 +9293,7 @@
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5",
-                              "uuid"
+                              "verify-md5"
                            ]
                         }
                      }
@@ -11723,6 +11732,10 @@
                               },
                               "type" : "array"
                            },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
+                           },
                            "KeepPrivateTags" : {
                               "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
                               "type" : "boolean"
@@ -12048,8 +12061,7 @@
                               "md5",
                               "size",
                               "uncompress",
-                              "verify-md5",
-                              "uuid"
+                              "verify-md5"
                            ]
                         }
                      }
@@ -14235,6 +14247,10 @@
                               },
                               "type" : "array"
                            },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
+                           },
                            "KeepSource" : {
                               "description" : "If set to `true`, instructs Orthanc to keep a copy of the original series/instances in the source study. By default, the original series/instances are deleted from Orthanc.",
                               "type" : "boolean"
@@ -14398,7 +14414,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 21,
+                              "ApiVersion" : 22,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseServerIdentifier" : "a67fa91c-20328956-26614107-bbaec3f4-5cbbc6f9",
@@ -14423,7 +14439,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.1"
+                              "Version" : "1.12.2"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14663,6 +14679,10 @@
                                  "type" : "string"
                               },
                               "type" : "array"
+                           },
+                           "KeepLabels" : {
+                              "description" : "Keep the labels of all resources level (defaults to `false`)",
+                              "type" : "boolean"
                            },
                            "KeepPrivateTags" : {
                               "description" : "Keep the private tags from the DICOM instances (defaults to `false`)",
@@ -16041,7 +16061,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2352 1702975679493\northanc_count_patients 7 1702975679493\northanc_count_series 23 1702975679493\northanc_count_studies 7 1702975679493\northanc_dicom_cache_count 353 1702919989969\northanc_dicom_cache_size 127.878067 1702919989969\northanc_disk_size_mb 840.589417 1702975679493\northanc_jobs_completed 10 1702975679493\northanc_jobs_failed 4 1702975679493\northanc_jobs_pending 0 1702975679493\northanc_jobs_running 0 1702975679493\northanc_jobs_success 6 1702975679493\northanc_last_change 4778 1702975679493\northanc_rest_api_active_requests 1 1702975679493\northanc_rest_api_duration_ms 361 1702975672107\northanc_storage_read_duration_ms 0 1702975473995\northanc_uncompressed_size_mb 840.589417 1702975679493\northanc_up_time_s 605413 1702975679493\n"
+                        "example" : "orthanc_count_instances 2352 1706706084150\northanc_count_patients 7 1706706084150\northanc_count_series 23 1706706084150\northanc_count_studies 7 1706706084150\northanc_dicom_cache_count 302 1706706084150\northanc_dicom_cache_size_mb 127.904297 1706706084150\northanc_disk_size_mb 840.589417 1706706084150\northanc_jobs_completed 10 1706706084150\northanc_jobs_failed 0 1706706084150\northanc_jobs_pending 0 1706706084150\northanc_jobs_running 0 1706706084150\northanc_jobs_success 10 1706706084150\northanc_last_change 4778 1706706084150\northanc_rest_api_active_requests 1 1706706084150\northanc_rest_api_duration_ms 311 1706706082544\northanc_storage_cache_count 704 1706706084150\northanc_storage_cache_size_mb 127.69693 1706706084150\northanc_storage_read_duration_ms 0 1706706076439\northanc_uncompressed_size_mb 840.589417 1706706084150\northanc_up_time_s 2323485 1706706084150\n"
                      }
                   },
                   "description" : ""
@@ -16060,7 +16080,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20231219T084759",
+                        "example" : "20240131T130124",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16082,7 +16102,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20231219T084759",
+                        "example" : "20240131T130124",
                         "schema" : {
                            "description" : "The local time"
                         }

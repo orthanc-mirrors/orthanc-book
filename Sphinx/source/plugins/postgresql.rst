@@ -343,7 +343,7 @@ We can not guarantee to maintain migration scripts from this temporary schema to
 one.
 
 Upgrades/Downgrades (``pg-transactions`` beta version only)
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 New vesions of the PostgreSQL might modify the DB schema by adding new columns/tables/triggers.
 Upgrades from one revision to the other is always automatic.
@@ -352,7 +352,7 @@ However, if, for some reasons, you would like to reinstall a previous plugin ver
 older plugin might refuse to start because the revision is newer and unknown to it.
 
 Starting from this beta version, we are providing a downgrade script in case you want, e.g,
-to reinstall Orthanc 1.12.2 and PostgreSQL 5.1 (DB schema revision 6.1).
+to reinstall Orthanc 1.12.3 and PostgreSQL 5.1 (DB schema revision 6.1).
 
 To downgrade from the beta to the PostgreSQL 5.1, one might run this procedure::
 
