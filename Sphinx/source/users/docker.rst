@@ -8,7 +8,7 @@ jodogne/orthanc Docker images
 .. toctree::
    :hidden:
 
-   docker-osimis.rst
+   docker-orthancteam.rst
    
 
 .. contents::
@@ -24,7 +24,7 @@ the `DockerHub platform <https://hub.docker.com/u/jodogne/>`__. The
 source code of the corresponding Docker images is available on `GitHub
 <https://github.com/jodogne/OrthancDocker>`__.
 
-**Note about Orthanc vs. Osimis Docker images:** 
+**Note about Orthanc vs. Orthanc Team Docker images:** 
 
 * The ``jodogne/orthanc`` and ``jodogne/orthanc-plugins`` Docker
   images that are described on this page are always kept in sync with
@@ -33,18 +33,15 @@ source code of the corresponding Docker images is available on `GitHub
   (i.e. manual edition of the configuration files). These images are
   most useful to **software developers and researchers**.
 
-* Our commercial partner `Osimis <https://www.osimis.io>`__ also
+* Our commercial partner `Orthanc Team <https://www.osimis.io>`__ also
   `publishes separated Docker images
-  <https://hub.docker.com/r/osimis/orthanc>`__.  These
-  ``osimis/orthanc`` images are used by the technical team of Osimis
-  in order to provide professional support to their customers, with a
+  <https://hub.docker.com/r/orthancteam/orthanc>`__.  These
+  ``orthancteam/orthanc`` images are used by the technical team of 
+  the Orthanc Team company in order to provide professional support 
+  to their customers, with a
   configuration system that can be tuned through **environment
   variables** (which is very handy if using ``docker-compose`` or
-  Kubernetes). These images are not necessarily always in sync with
-  the Orthanc project, but they also include the :ref:`plugins edited
-  by Osimis <plugins-osimis>`, notably the Osimis Web viewer (that is
-  much more advanced than the Orthanc Web viewer) and the advanced
-  authorization plugin. A :ref:`specific page <docker-osimis>` is
+  Kubernetes). A :ref:`specific page <docker-orthancteam>` is
   available to describe how these images should be used. These images
   are targeted at **ops teams**.
 

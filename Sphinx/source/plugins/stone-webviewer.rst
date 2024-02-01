@@ -44,11 +44,11 @@ is enabled by default and will work out-of-the-box.
 
 .. highlight:: bash
 
-The ``osimis/orthanc`` :ref:`Docker images <docker-osimis>` are more
+The ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>` are more
 suited to devops needs, as they allow to start a minimal Docker
 environment as follows::
 
-  $ docker run -p 4242:4242 -p 8042:8042 -e STONE_WEB_VIEWER_PLUGIN_ENABLED=true -e DICOM_WEB_PLUGIN_ENABLED=true --rm osimis/orthanc:21.6.2
+  $ docker run -p 4242:4242 -p 8042:8042 -e STONE_WEB_VIEWER_PLUGIN_ENABLED=true -e DICOM_WEB_PLUGIN_ENABLED=true --rm orthancteam/orthanc:21.6.2
 
 
 .. highlight:: json

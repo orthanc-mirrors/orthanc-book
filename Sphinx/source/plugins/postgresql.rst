@@ -332,7 +332,7 @@ can be configured in the ``TransactionMode`` configuration of the ``PostgreSQL``
 
 *Remark:* This feature is only available in a beta version of both Orthanc and the
 PostgreSQL plugin (``pg-transactions`` branches in the code).  This beta version is
-only available in the ``osimis/orthanc:pg-transactions-unstable`` Docker image.
+only available in the ``orthancteam/orthanc-pre-release:pg-transactions-unstable`` Docker image.
 
 *Remark:* This beta version is really a beta version and **should not be used on a 
 production database**.  It shall only be used on a DB that you can delete or recover.

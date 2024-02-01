@@ -106,7 +106,7 @@ Under Debian GNU/Linux
 Under Docker
 ^^^^^^^^^^^^
 
-With ``osimis/orthanc`` images, simply define the ``VERBOSE_ENABLED`` environment 
+With ``orthancteam/orthanc`` images, simply define the ``VERBOSE_ENABLED`` environment 
 variable to ``true`` when starting your container and then, run this command to 
 retrieve the logs in a file::
 

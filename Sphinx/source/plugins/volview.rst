@@ -65,7 +65,7 @@ Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downl
 and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-volview/index.html>`__ are available as well.
 
 Furthermore, the :ref:`Docker images <docker>`
-``jodogne/orthanc-plugins`` and ``osimis/orthanc`` also contain the
+``jodogne/orthanc-plugins`` and ``orthancteam/orthanc`` also contain the
 plugin. Debian and Ubuntu packages can be found in the
 :ref:`standalone repository <binaries>`
 ``https://debian.orthanc-labs.com/``.

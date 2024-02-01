@@ -50,7 +50,7 @@ Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downl
 and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-tcia/index.html>`__ are available as well.
 
 Furthermore, the ``jodogne/orthanc-plugins`` :ref:`Docker images
-<docker>` and ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`
+<docker>` and ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>`
 also contain the plugin.
 
 

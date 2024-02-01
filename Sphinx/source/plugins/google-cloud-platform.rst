@@ -43,17 +43,8 @@ created a `DICOM store
 Pre-compiled binaries
 ---------------------
 
-This plugin is used to interface Orthanc with a commercial and
-proprietary cloud service that you accept to pay. As a consequence,
-the Orthanc project doesn't freely provide pre-compiled binaries for
-Docker, Windows, Linux or OS X. These pre-compiled binaries do exist,
-but are reserved to the companies who have subscribed to a
-`professional support contract
-<https://osimis.io/en/orthanc-support-contract>`__ by
-Osimis. Although you are obviously free to compile this plugin by
-yourself (instructions are given below), purchasing such support
-contracts makes the Orthanc project sustainable in the long term, to
-the benefit of the worldwide community of medical imaging.
+As of today, there are no known distribution of pre-compiled binaries
+for this plugin.
 
 
 Compilation

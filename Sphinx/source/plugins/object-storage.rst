@@ -29,7 +29,7 @@ when deploying an application in the cloud.
 Pre-compiled binaries
 ---------------------
 
-These 3 plugins are provided as part of the ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
+These 3 plugins are provided as part of the ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>`.
 The AWS plugin is available in the default Docker images while the Azure and Google plugins are available
 in the ``-full`` images.
 
@@ -257,7 +257,7 @@ Note that you can not change these configurations once you've uploaded the first
 The **MigrationFromFileSystemEnabled** configuration has been superseded by the **HybridMode** in v 2.1.0.
 
 The **EnableLegacyUnknownFiles** configuration has been introduced to allow recent version of the plugins (from 1.3.3)
-continue working with data that was saved with Orthanc version around 1.9.3 and plugins version around 1.2.0 (e.g. osimis/orthanc:21.5.1 docker images).
+continue working with data that was saved with Orthanc version around 1.9.3 and plugins version around 1.2.0 (e.g. orthancteam/orthanc:21.5.1 docker images).
 With these specific versions, some ``.unk`` files were generated instead of ``.dcm.head`` files.  With this configuration option enabled,
 when reading files, the plugin will try both file extensions.
 If you have ``.unk`` files in your storage, you must enable this configuration.

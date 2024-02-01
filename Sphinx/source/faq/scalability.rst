@@ -223,7 +223,7 @@ of ``mallopt()`` for more information.
   release 1.6.1** (cf. `changeset
   <https://github.com/jodogne/OrthancDocker/commit/bd7e9f4665ce8dd6892f82a148cabe8ebcf1c7d9>`__).
 
-* The ``osimis/orthanc`` images automatically set
+* The ``orthancteam/orthanc`` images automatically set
   ``MALLOC_ARENA_MAX`` to ``5`` **since release 20.12.2**.
 
 

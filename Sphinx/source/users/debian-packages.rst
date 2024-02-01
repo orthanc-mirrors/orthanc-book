@@ -35,7 +35,7 @@ should:
 
 * Use ``jodogne/orthanc`` :ref:`Docker images <docker>`.
 
-* Use ``osimis/orthanc`` :ref:`Docker images <docker-osimis>`.
+* Use ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>`.
 
 * :ref:`Compile Orthanc by yourself <compiling>`.
 

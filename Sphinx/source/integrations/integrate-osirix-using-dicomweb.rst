@@ -43,10 +43,10 @@ Adapt the following :ref:`configuration options <configuration>`
 
 
 
-Configuration of Docker images by Osimis
+Configuration of Docker images by Orthanc Team
 ----------------------------------------
 
-This section applies if you are using the :ref:`osimis/orthanc Docker imag <docker-osimis>`
+This section applies if you are using the :ref:`orthancteam/orthanc Docker imag <docker-orthancteam>`
 to run Orthanc.
 
 Make sure Orthanc has the Dicom Web protocol enabled::

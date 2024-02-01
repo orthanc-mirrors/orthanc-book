@@ -157,9 +157,6 @@ forbidden ("No"), or restricted ("Dual license")**:
   software license and distribute it with source code in a
   GPL-compliant way."*
 
-* If you deal with medical applications in Europe, note that Osimis
-  sells **CE-approved** versions of a Web viewer plugin.
-
 * You are kindly invited to cite the `reference paper about Orthanc
   <https://link.springer.com/article/10.1007/s10278-018-0082-y>`__
   in your scientific work.

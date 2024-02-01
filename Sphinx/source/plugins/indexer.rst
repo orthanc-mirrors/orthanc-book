@@ -49,7 +49,7 @@ Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downl
 and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-indexer/index.html>`__ available as well.
 
 Furthermore, the :ref:`Docker images <docker>`
-``jodogne/orthanc-plugins`` and ``osimis/orthanc`` also contain the
+``jodogne/orthanc-plugins`` and ``orthancteam/orthanc`` also contain the
 plugin.
 
 

@@ -32,7 +32,7 @@ The source code is available on `Mercurial <https://orthanc.uclouvain.be/hg/orth
 
 Binaries are included in:
 
-- The `osimis/orthanc Docker image <https://hub.docker.com/r/osimis/orthanc>`__
+- The `orthancteam/orthanc Docker image <https://hub.docker.com/r/orthancteam/orthanc>`__
 - The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
 - The `MacOS packages <https://www.orthanc-server.com/static.php?page=download-mac>`__
 

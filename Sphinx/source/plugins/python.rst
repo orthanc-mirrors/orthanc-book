@@ -108,7 +108,7 @@ You'll see the following excerpt in the log, which indicates that the Python plu
 
 
 `Here <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/python/>`__ is a full example
-of a more complex setup using the :ref:`osimis/orthanc <docker-osimis>` images.
+of a more complex setup using the :ref:`orthancteam/orthanc <docker-orthancteam>` images.
 
 
 Microsoft Windows

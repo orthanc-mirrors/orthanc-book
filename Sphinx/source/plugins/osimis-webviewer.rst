@@ -36,8 +36,8 @@ For general information, `check out the source code
 The Osimis Web viewer is part of the `Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__.
 
-For GNU/Linux users, you'll find it in the :ref:`osimis/orthanc
-<docker-osimis>` Docker images or you can download precompiled LSB
+For GNU/Linux users, you'll find it in the :ref:`orthancteam/orthanc
+<docker-orthancteam>` Docker images or you can download precompiled LSB
 (Linux Standard Base) binaries `here
 <https://orthanc.uclouvain.be/downloads/linux-standard-base/osimis-web-viewer/index.html>`__.
 
@@ -55,14 +55,14 @@ Usage
 On Windows, the plugin is enabled by default and will work
 out-of-the-box.
 
-If you're using the ``osimis/orthanc`` Docker images, you'll have to
-define the ``OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED`` :ref:`environment variable <docker-osimis>`
+If you're using the ``orthancteam/orthanc`` Docker images, you'll have to
+define the ``OSIMIS_WEB_VIEWER1_PLUGIN_ENABLED`` :ref:`environment variable <docker-orthancteam>`
 to ``true``.
 
 On plain GNU/Linux distributions (i.e. if not using Docker), the
 Osimis Web viewer will only work with LSB (Linux Standard Base)
 Orthanc binaries that can be downloaded from `here
-<https://orthanc.uclouvain.be/downloads/linux-standard-base/osimis-web-viewer/1.4.2/index.html>`__ (that will work with most
+<https://orthanc.uclouvain.be/downloads/linux-standard-base/osimis-web-viewer/1.4.3/index.html>`__ (that will work with most
 recent GNU/Linux distributions). Once Orthanc is installed, you must
 change the :ref:`configuration file <configuration>` to tell Orthanc
 where it can find the plugin: This is done by properly modifying the

@@ -7,7 +7,7 @@ User's guide
    users/cookbook.rst
    users/configuration.rst
    users/docker.rst
-   users/docker-osimis.rst
+   users/docker-orthancteam.rst
    users/rest.rst
    users/rest-cheatsheet.rst
    users/backup.rst
