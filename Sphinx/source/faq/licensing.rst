@@ -51,11 +51,40 @@ For this reason, the plugins that provide scalability-related or
 cloud-related features (for instance the :ref:`PostgreSQL
 <postgresql>` and :ref:`Web viewer <webviewer>` plugins that are
 necessary for Web applications distributed at a large scale) were
-released under the stronger `AGPLv3+ licence
+released under the stronger `AGPLv3+ license
 <https://www.gnu.org/licenses/why-affero-gpl.en.html>`__.
 This license protects the community of medical imaging by ensuring
 that the features included in Orthanc instances running in remote
 servers are publicly available as well.
+
+The intellectual property over the source code of the Orthanc project
+is now shared by the following entities:
+
+* `University Hospital of Liège
+  <https://fr.wikipedia.org/wiki/Centre_hospitalier_universitaire_de_Li%C3%A8ge>`__,
+  from 2012 to 2016.
+
+* Osimis S.A. that has unfortunately `ceased to exist
+  <https://www.lalibre.be/economie/entreprises-startup/2024/01/30/faute-davoir-pu-se-refinancer-la-medtech-liegeoise-osimis-doit-deposer-le-bilan-UKTOFGACL5GF7APVB5OZUCYCQM/>`__
+  at the end of January 2024, from 2017 to 2024.
+
+* `Orthanc Team SRL <http://orthanc.team/>`__, starting 2024.
+  
+* `UCLouvain university <https://orthanc.uclouvain.be/>`__,
+  starting 2021. UCLouvain contributions since September 1st, 2021 are
+  100% owned by UCLouvain and made available to the benefit of the
+  free and open-source community. No dual licensing is possible on
+  those contributions.
+
+Together, these entities act as the official guardians of the whole
+Orthanc ecosystem. New intellectual property is currently added by the
+following entities:
+
+* `Orthanc Team SRL <http://orthanc.team/>`__.
+  
+* `UCLouvain university <https://orthanc.uclouvain.be/>`__.
+
+* Various individual contributors.
 
 
 Guidelines
@@ -68,7 +97,7 @@ server is a standalone executable, not a software library.
 
 The following table provides a simple summary of the most common
 situations, and indicates whether the use is **accepted ("Yes"),
-forbidden ("No"), or restricted ("Dual license")**:
+forbidden ("No"), or restricted**:
 
 +-----------------------------------------------------+--------------------------------------------------------------------------------------------+
 |                                                     | Mode of distribution of the third-party system, or of the third-party plugin/script        |
@@ -90,33 +119,25 @@ forbidden ("No"), or restricted ("Dual license")**:
 | creating a :ref:`Java plugin <java-plugin>`.        |               |       |        |              |                        |                   |
 | 2 possible cases:                                   |               |       |        |              |                        |                   |
 +----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-|    | Case 1: No AGPL-licensed plugin is in use      | No            | Yes   | Yes    | Yes          | Dual license           | Yes               |
+|    | Case 1: No AGPL-licensed plugin is in use      | No            | Yes   | Yes    | Yes          | Restricted             | Yes               |
 +----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-|    | Case 2: Some AGPL-licensed plugin is in use    | No            | Yes   | Yes    | Yes          | Dual license           | Dual license      |
+|    | Case 2: Some AGPL-licensed plugin is in use    | No            | Yes   | Yes    | Yes          | Restricted             | Restricted        |
 +----+------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a derived version of the GPL-licensed         | No            | Yes   | Yes    | Yes          | Dual license           | Yes               |
+| Using a derived version of the GPL-licensed         | No            | Yes   | Yes    | Yes          | Restricted             | Yes               |
 | code of Orthanc, or using a derived version of      |               |       |        |              |                        |                   |
 | some GPL-licensed plugin, or reusing their original |               |       |        |              |                        |                   |
 | code in a third-party system                        |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| Using a derived version of some AGPL-licensed       | No            | No    | Yes    | Yes          | Dual license           | Dual license      |
+| Using a derived version of some AGPL-licensed       | No            | No    | Yes    | Yes          | Restricted             | Restricted        |
 | plugin, or reusing its original code in a           |               |       |        |              |                        |                   |
 | third-party system                                  |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-| **For viewers**: Using a derived version of the     | No            | No    | Yes    | Yes          | Dual license           | Dual license      |
+| **For viewers**: Using a derived version of the     | No            | No    | Yes    | Yes          | Restricted             | Restricted        |
 | :ref:`Orthanc Web Viewer <webviewer>`, of the       |               |       |        |              |                        |                   |
 | :ref:`Osimis Web Viewer <osimis_webviewer>`, of the |               |       |        |              |                        |                   |
 | :ref:`Stone Web Viewer <stone>`, or of the sample   |               |       |        |              |                        |                   |
 | applications of Stone of Orthanc (AGPL license)     |               |       |        |              |                        |                   |
 +-----------------------------------------------------+---------------+-------+--------+--------------+------------------------+-------------------+
-
-.. raw:: html
-
-   <p align="center">
-     <a href="mailto:info@osimis.io?subject=Request for a dual license">
-       <b>Click here to request a dual license</b>
-     </a>
-   </p>
 
     
 **Notes:**
@@ -126,14 +147,6 @@ forbidden ("No"), or restricted ("Dual license")**:
   heavyweight desktop application, an automated script, or more
   generally any system that takes advantage of Orthanc as a service in
   its global architecture.
-
-* If your use case falls in a "**Dual license**" cell, please get in
-  touch with `Osimis <https://www.osimis.io/>`__, the commercial
-  partner of the Orthanc project that is the only entity entitled to
-  grant a `license exception
-  <https://www.fsf.org/blogs/rms/selling-exceptions>`__ to your
-  company for the Orthanc core and its :ref:`associated official
-  plugins <plugins-official>`.
 
 * If you reuse code from Orthanc or one of its associated plugins, you
   must mention the copyright of the Orthanc project.
@@ -168,6 +181,31 @@ forbidden ("No"), or restricted ("Dual license")**:
   for more legal information.
 
 
+
+Restricted uses
+---------------
+
+If your use case falls in a "**Restricted**" cell, this means that
+your third-party system **must change its license to GPLv3** (or
+AGPLv3 if some AGPL-licensed plugin is in use).
+
+In the past, it has been possible to buy dual licenses from the Osimis
+company, that was the only entity entitled to grant a `license
+exception <https://www.fsf.org/blogs/rms/selling-exceptions>`__ to
+your company for the Orthanc core and its :ref:`associated official
+plugins <plugins-official>`. Nowadays, **dual licensing is no longer
+available and never will be again** on any version of Orthanc that
+ships code owned by UCLouvain.
+
+In particular, the latest version of the Orthanc server that could be
+eligible for dual licensing is Orthanc 1.9.7 that `was released on
+2021-08-31
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/NEWS>`__. All
+the subsequent releases of Orthanc contain code owned by UCLouvain.
+
+
+  
+  
 .. _cla:
 
 Contributing to the code of Orthanc
@@ -195,61 +233,36 @@ internal code:
 
 * **Internal code** refers to source code that only makes sense if
   embedded within the Orthanc core or within one of the official
-  plugins. This includes new features and bugfixes. The way to
+  plugins. This includes new features and bug fixes. The way to
   contribute to the internal code of the Orthanc ecosystem is
   described in the sections below.
 
 
 **Important:** You should always favor the :ref:`creation of a new
-plugin <creating-plugins>` over modifications to the internal code
-(see below)!
+plugin <creating-plugins>` over modifications to the internal code of
+the Orthanc ecosystem if your intellectual property is of importance
+to you.
 
 
 
 Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is necessary for the Orthanc project to make sure that the internal
-code of Orthanc can be interfaced with proprietary systems, as those
-are still unfortunately everywhere in the healthcare market. This
-forces us to require all the intellectual property over the source
-code of Orthanc to be centralized, with the University Hospital of
-Liège, the Osimis company and the UCLouvain university acting as the
-official guardians of the whole Orthanc ecosystem. This centralization
-also enables the dual licensing scheme described above, which in turn
-allows Osimis to collect money from the industry in order to fund
-further free and open-source development of the Orthanc ecosystem to
-the benefit of the worldwide community of medical imaging, according
-to a virtuous cycle.
+Until the end of January 2024, before any code could be accepted into
+the official repositories of Orthanc, the individual code contributors
+had to sign a `Contributor License Agreement (CLA)
+<https://en.wikipedia.org/wiki/Contributor_License_Agreement>`__ to
+transfer their intellectual property to the Osimis company.
 
-As a consequence, before any code can be accepted into the official
-repositories of Orthanc, the individual code contributors must sign a
-`Contributor License Agreement (CLA)
-<https://en.wikipedia.org/wiki/Contributor_License_Agreement>`__. Here
-is the procedure:
-
-1. Download the individual CLA (ICLA) form from the `Orthanc homepage
-   <https://www.orthanc-server.com/resources/2019-02-12-IndividualContributorLicenseAgreementOrthanc.pdf>`__.
-  
-2. Print the document, then write down your signed initials on pages 1
-   and 2, and sign page 3.
-
-3. Return a scanned copy of the document to e-mail ``orthanc-legal@osimis.io``.
-
-4. Wait for confirmation from the Osimis company.
-
-**Important:** This form is only valid for individual contributors
-acting as physical persons. If your company wishes to become
-contributor as a juridical person, please request a Corporate CLA at
-the same e-mail address: ``orthanc-legal@osimis.io``.
-
+Starting February 2024, **no contributor license agreement** is needed
+to submit code to the Orthanc project anymore.
 
 .. _submitting_code:
 
 Submitting code
 ^^^^^^^^^^^^^^^
 
-Once the CLA onboarding process has succeeded, use `Mercurial
+To submit code to the Orthanc project, use `Mercurial
 <https://en.wikipedia.org/wiki/Mercurial>`__ to fork the official
 repository of interest. All the repositories are centralized on our
 `self-hosted Mercurial server <https://orthanc.uclouvain.be/hg/>`__.
@@ -265,5 +278,9 @@ A :ref:`dedicated page <repositories>` explains how to submit
 
 * In the case of a doubt wrt. a potential contribution, please discuss
   it on the `Orthanc Users discussion forum
-  <https://discourse.orthanc-server.org>`__
-  discussion group before starting the actual development.
+  <https://discourse.orthanc-server.org>`__ discussion group before
+  starting the actual development.
+
+* The Orthanc project follows :ref:`high standards of quality
+  <code_quality>`. Beware that your contributions will be rejected if
+  they do not meet our standards.

@@ -160,6 +160,8 @@ contributions
 submitting a patch, or by exchanging a bundle.
 
 
+.. _code_quality:
+
 Code quality
 ............
 
