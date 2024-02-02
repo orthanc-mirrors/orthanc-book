@@ -78,27 +78,6 @@ You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
 richer features than the Web interface.
 
-.. highlight:: text
-
-You might have to set up a host fingerprint in the Mercurial
-configuration. Add the following lines to your ``~/.hgrc`` file::
-
-  [hostfingerprints]
-  hg.orthanc-server.com = 06:AE:A1:EE:61:74:77:26:F3:D5:5C:AB:91:0E:39:B1:95:7F:00:25
-  
-.. highlight:: bash
-
-For reference, here is the command that was used to generate this SHA1
-fingerprint (`click here for more information
-<https://wiki.fluidproject.org/display/fluid/Setting+Host+Fingerprints+for+Mercurial>`__)::
-
-  $ openssl s_client -servername hg.orthanc-server.com -connect hg.orthanc-server.com:443 \
-    < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha1 -noout -in /dev/stdin
-
-**Important:** As our certificates are changed periodically, you'll
-have to regularly update your configuration file once Mercurial
-complains about an unexpected fingerprint.
-
 
 Recent versions of Mercurial
 ............................
@@ -117,7 +96,7 @@ of our code server using a more recent option than the
 and add the following lines::
 
   [hostsecurity]
-  hg.orthanc-server.com:fingerprints=sha256:13:CA:46:BB:84:96:BD:D4:F7:09:94:60:0F:C2:3B:BA:87:E2:33:50:75:ED:0A:44:81:DF:80:EB:44:6B:C5:40
+  orthanc.uclouvain.be:fingerprints=sha256:30:1d:d8:b6:a2:50:23:6a:a1:b7:da:66:b6:aa:2f:fa:59:f3:9d:cd:ed:f8:2c:49:14:57:25:39:84:b9:60:db
   
 .. highlight:: bash
 
@@ -125,9 +104,34 @@ For reference, here is the command that was used to generate this
 SHA256 fingerprint (`click here for more information
 <https://stackoverflow.com/a/56579497/881731>`__)::
 
-  $ openssl s_client -servername hg.orthanc-server.com -connect hg.orthanc-server.com:443 \
+  $ openssl s_client -servername orthanc.uclouvain.be -connect orthanc.uclouvain.be:443 \
     < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha256 -noout -in /dev/stdin
   
+**Important:** As our certificates are changed periodically, you'll
+have to regularly update your configuration file once Mercurial
+complains about an unexpected fingerprint.
+
+
+Old versions of Mercurial
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+For old versions of Mercurial that do not support SHA256, add the
+following lines to your ``~/.hgrc`` file::
+
+  [hostfingerprints]
+  orthanc.uclouvain.be = 69:C0:EF:E7:05:BB:2A:0B:88:EA:E8:00:C6:1A:95:A3:53:74:C1:D4
+
+.. highlight:: bash
+
+For reference, here is the command that was used to generate this SHA1
+fingerprint (`click here for more information
+<https://wiki.fluidproject.org/display/fluid/Setting+Host+Fingerprints+for+Mercurial>`__)::
+
+  $ openssl s_client -servername orthanc.uclouvain.be -connect orthanc.uclouvain.be:443 \
+    < /dev/null 2>/dev/null | openssl x509 -fingerprint -sha1 -noout -in /dev/stdin
+
 
 Write access
 ^^^^^^^^^^^^
@@ -200,16 +204,11 @@ Code quality
   recommended way of contributing to Orthanc is always by
   :ref:`creating contributed plugins <creating-plugins>`.
 
-* Importantly, before any contribution with significant intellectual
-  property (i.e. if the contribution go beyond a simple patch) can be
-  accepted into the Orthanc repositories, its author must sign a
-  :ref:`CLA <cla>`. This allows the University Hospital of Liège, the
-  Osimis company, and UCLouvain university to act as the official
-  guardians of the whole Orthanc ecosystem. Note that another
-  advantage of creating plugins over submitting core to the core
-  project is that signing a CLA is never needed. Make sure to
+* If intellectual property is of importance to you, make sure to
   carefully read our :ref:`FAQ about the licensing of submitted code
-  <submitting_code>`.
+  <submitting_code>`. If you are concerned about intellectual
+  property, consider creating plugins instead of submitting code
+  directly to the core project.
 
 
 .. _hg-patch:
