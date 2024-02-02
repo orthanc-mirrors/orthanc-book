@@ -1025,6 +1025,25 @@ However, you may modify the python path at the very beginning of the script
 to instruct python to look for modules in your environment.
 
 **Example 1**: On a Linux system, consider that you have created a virtual environment in ``/tmp/.venv``
+and, you may just an environment variable to instruct the python interpreter to search for modules into
+your virtual env.  E.g, in a Docker container, you may implement it this way::
+
+  FROM orthancteam/orthanc-pre-release:bookworm
+
+  # this is example is using a virtual env that is not mandatory when using Docker containers
+  # but recommended since python 3.11 and Debian bookworm based images
+  RUN apt-get update && apt install -y python3-venv
+  RUN python3 -m venv /.venv
+
+  RUN /.venv/bin/pip install pydicom
+  ENV PYTHONPATH=/.venv/lib64/python3.11/site-packages/
+
+  RUN mkdir /python
+  COPY * /python/
+
+
+
+**Example 2**: On a Linux system, consider that you have created a virtual environment in ``/tmp/.venv``
 and you want to use only the modules that have been installed in this virtual environment.
 In this case, you may simply rewrite ``sys.path``:
 
