@@ -33,7 +33,7 @@ source code of the corresponding Docker images is available on `GitHub
   (i.e. manual edition of the configuration files). These images are
   most useful to **software developers and researchers**.
 
-* Our commercial partner `Orthanc Team <https://www.osimis.io>`__ also
+* Our commercial partner `Orthanc Team <https://orthanc.team/>`__ also
   `publishes separated Docker images
   <https://hub.docker.com/r/orthancteam/orthanc>`__.  These
   ``orthancteam/orthanc`` images are used by the technical team of 

@@ -439,7 +439,7 @@ field can be added to the definition of a DICOMweb server (in
 contacting this DICOMweb server. By default, the global value
 ``HttpTimeout`` is used.
 
-**Remark:** A :ref:`plugin by Osimis <google>` is available to
+**Remark:** Another :ref:`plugin for Orthanc <google>` is available to
 dynamically create authenticated connections to Google Cloud Platform.
 
 **Important remark:** When querying a DICOMweb server, Orthanc will

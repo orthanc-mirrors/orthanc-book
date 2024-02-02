@@ -1,7 +1,7 @@
 .. _osimis_webviewer:
 
 
-Osimis Web Viewer plugin (deprecated)
+Osimis Web viewer plugin (deprecated)
 =====================================
 
 .. contents::
@@ -11,10 +11,11 @@ Osimis Web Viewer plugin (deprecated)
    The Osimis Web viewer is now deprecated and superseded by the
    :ref:`Stone Web viewer <stone_webviewer>`.
 
-This plugin by Osimis extends Orthanc with a Web viewer of medical
-images, with more advanced features than the basic :ref:`Orthanc Web
-viewer plugin <webviewer>`. The Osimis plugin adds tools for
-measuring, for viewing multiple series, and for split-pane.
+This plugin, originally written by Osimis, extends Orthanc with a Web
+viewer of medical images, with more advanced features than the basic
+:ref:`Orthanc Web viewer plugin <webviewer>`. The Osimis Web viewer
+plugin adds tools for measuring, for viewing multiple series, and for
+split-pane.
 
 This plugin adds a dedicated button to Orthanc Explorer to open the
 viewer that looks like the following image:
@@ -98,27 +99,27 @@ options in the `configuration file
 FAQ
 ---
 
-- **Can I use the Osimis Viewer in a medical environment ?**
+- **Can I use the Osimis Web viewer in a medical environment?**
 
-  The Osimis Viewer is not a Medical Device; it is not CE marked or FDA approved.
+  The Osimis Web viewer is not a Medical Device; it is not CE marked or FDA approved.
 
-  The Osimis Viewer is an open source Viewer that cannot be used for diagnostic or therapeutic purposes.
+  The Osimis Web viewer is an open source Viewer that cannot be used for diagnostic or therapeutic purposes.
 
   However, the viewer can be used as a communication tool that allows Researchers, Teachers, Technicians, General Practitioner or Patients to visualize medical images for information only.
 
   Check your local regulations to ensure you're using it in a legal manner.
 
 
-- **What video formats are supported by the Osimis Web Viewer ?**
+- **What video formats are supported by the Osimis Web viewer?**
 
-  The set of codecs supported by the Osimis Viewer is an intersection
+  The set of codecs supported by the Osimis Web viewer is an intersection
   of the sets of codecs supported by the `DICOM standard
   <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__
   and those supported by the `web browsers
   <https://developer.mozilla.org/en-US/docs/Web/Media/Formats>`__.
   In short, this mostly comes down to just MPEG-4.
   
-- **Where are the annotations stored ?**
+- **Where are the annotations stored?**
 
   Annotations are stored in :ref:`metadata <metadata>` (id ``9999``)
   in a custom format.  Note that annotation storage is disabled by

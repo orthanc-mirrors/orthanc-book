@@ -317,7 +317,7 @@ When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalabilit
 <scalability>`
 
 Transaction modes (``pg-transactions`` beta version only)
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: json
 

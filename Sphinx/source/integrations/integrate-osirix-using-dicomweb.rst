@@ -44,7 +44,7 @@ Adapt the following :ref:`configuration options <configuration>`
 
 
 Configuration of Docker images by Orthanc Team
-----------------------------------------
+----------------------------------------------
 
 This section applies if you are using the :ref:`orthancteam/orthanc Docker image <docker-orthancteam>`
 to run Orthanc.
