@@ -28,12 +28,11 @@ Add the following :ref:`configuration options <configuration>`
   }
 
 
-Configuration of Docker images by Osimis
-----------------------------------------
+Configuration of Docker images by Orthanc Team
+----------------------------------------------
 
-This section applies if you are using the `Docker images by Osimis
-<https://osimis.atlassian.net/wiki/spaces/OKB/pages/26738689/How+to+use+osimis+orthanc+Docker+images>`__
-to run Orthanc.
+This section applies if using the :ref:`Docker images by Orthanc Team
+<docker-orthancteam>` to run Orthanc.
 
 Add Modality through Environmental variable in docker::
 
