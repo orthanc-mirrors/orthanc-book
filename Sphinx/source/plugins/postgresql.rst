@@ -133,7 +133,8 @@ file::
       "MaximumConnectionRetries" : 10,   // New in release 3.0
       "ConnectionRetryInterval" : 5,     // New in release 3.0
       "IndexConnectionsCount" : 1,       // New in release 4.0
-      "TransactionMode": "SERIALIZABLE"  // New in beta version (not released yet)
+      "TransactionMode": "Serializable", // New in release 6.0
+      "EnableVerboseLogs": false         // New in release 6.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -236,7 +237,9 @@ this behavior:
 
 * ``MaximumConnectionRetries`` governs how many times Orthanc tries to
   connect to the database, as well as how many times Orthanc replays
-  transactions to deal with collisions between multiple writers.
+  transactions to deal with collisions between multiple writers in 
+  ``Serializable`` transaction mode or with any transient transaction errors
+  in all transaction modes.
 
 * ``IndexConnectionsCount`` controls the number of connections from
   the index plugin to the PostgreSQL database. It is set to ``1`` by
@@ -245,9 +248,9 @@ this behavior:
 * ``ConnectionRetryInterval`` is only used when opening one database
   connection to PostgreSQL.
 
-* ``TransactionMode`` has been added in the ``pg-transactions`` beta version only.  2 values are
-  allowed: ``SERIALIZABLE`` (that has always been the default mode for Orthanc)
-  and ``READ COMMITTED`` that is available only from this beta version.  See
+* ``TransactionMode`` has been added in the release 6.0.  2 values are
+  allowed: ``Serializable`` (that has always been the default mode for Orthanc)
+  and ``ReadCommitted`` that is available only from release 6.0.  See
   below.
 
 * The PostgreSQL plugin supports the :ref:`revision mechanism
@@ -316,34 +319,23 @@ Scalability
 When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalability section 
 <scalability>`
 
-Transaction modes (``pg-transactions`` beta version only)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Transaction modes (new in version 6.0)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: json
 
-Starting from the current beta version, orthanc supports 2 transaction modes that 
+Starting from the release 6.0 of the plugin and Orthanc 1.12.3, orthanc supports 2 transaction modes that 
 can be configured in the ``TransactionMode`` configuration of the ``PostgreSQL`` plugin:
 
-- ``SERIALIZABLE`` in which all write transactions are serialized which might lead
+- ``Serializable`` in which all write transactions are serialized which might lead
   to performance bottlenecks when lots of threads or Orthanc instances are trying
   to write to the same Database.
-- ``READ COMMITTED`` that allows multiple threads or Orthanc instances to write at the
+- ``ReadCommitted`` that allows multiple threads or Orthanc instances to write at the
   same time to the same Database.
 
-*Remark:* This feature is only available in a beta version of both Orthanc and the
-PostgreSQL plugin (``pg-transactions`` branches in the code).  This beta version is
-only available in the ``orthancteam/orthanc-pre-release:pg-transactions-unstable`` Docker image.
 
-*Remark:* This beta version is really a beta version and **should not be used on a 
-production database**.  It shall only be used on a DB that you can delete or recover.
-The reason why it shall not be used on a production database is because this revision
-modifies the DB schema to a :ref:`version <db-versioning>`/revision ``6.2`` that might be different from the
-final schema of the future release although it will share the same version/revision.
-We can not guarantee to maintain migration scripts from this temporary schema to the final
-one.
-
-Upgrades/Downgrades (``pg-transactions`` beta version only)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Upgrades/Downgrades
+^^^^^^^^^^^^^^^^^^^
 
 New vesions of the PostgreSQL might modify the DB schema by adding new columns/tables/triggers.
 Upgrades from one revision to the other is always automatic.
@@ -351,13 +343,13 @@ Upgrades from one revision to the other is always automatic.
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
 
-Starting from this beta version, we are providing a downgrade script in case you want, e.g,
-to reinstall Orthanc 1.12.3 and PostgreSQL 5.1 (DB schema revision 6.1).
+Starting from version 6.0 of the plugin, we are providing a downgrade script in case you want, e.g,
+to reinstall Orthanc 1.12.3 and PostgreSQL 5.1 (whose DB schema is at revision 1).
 
-To downgrade from the beta to the PostgreSQL 5.1, one might run this procedure::
+To downgrade from revision 2 to revision 1, one might run this procedure::
 
-  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/pg-transactions/PostgreSQL/Plugins/SQL/Downgrades/V6.2ToV6.1.sql
-  $ psql -U postgres -f V6.2ToV6.1.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev2ToRev1.sql
+  $ psql -U postgres -f Rev2ToRev1.sql
 
 
 Troubleshooting

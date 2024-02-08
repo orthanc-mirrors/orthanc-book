@@ -100,7 +100,7 @@ presence of large databases:
 * Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: By default, the
   PostgreSQL index plugin uses 1 single connection to the PostgreSQL
   database. You can have multiple connections by setting the
-  ``IndexConnectionsCount`` to a higher value (for instance ``5``) in
+  ``IndexConnectionsCount`` to a higher value (for instance ``50`` or one per HTTP thread) in
   the ``PostgreSQL`` section of the configuration file. This will
   improve concurrency. Check out :ref:`the explanation below <multiple-writers>`.
 
@@ -110,6 +110,10 @@ presence of large databases:
   scenario is having one "writer" Orthanc server that handles the
   ingesting of DICOM instances, and multiple "reader" Orthanc servers
   with features such as DICOMweb or viewers.
+
+* Since Orthanc 1.12.3 and PostgreSQL plugins 6.0: You may enable
+  the ``ReadCommitted`` transaction mode to allow multiple threads to
+  write in DB at the same time.
 
 * From Orthanc 1.11.0: you have the ability to add
   more :ref:`main DICOM tags <main-dicom-tags>` in the Orthanc Index 
