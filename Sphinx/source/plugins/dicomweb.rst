@@ -87,7 +87,7 @@ remote access to the Orthanc HTTP server::
 
   {
     [...]
-    "RemoteAccessEnabled" : true,
+    "RemoteAccessAllowed" : true,
     [...]
   }
 

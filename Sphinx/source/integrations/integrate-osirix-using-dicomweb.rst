@@ -34,7 +34,7 @@ Adapt the following :ref:`configuration options <configuration>`
 
   {
     "Plugins" : [ /* fill the path to the DICOMweb plugin */ ],
-    "RemoteAccessEnabled" : true,
+    "RemoteAccessAllowed" : true,
     "DicomWeb" : {
       "Enable" : true,
       "Root" : "/dicom-web/"
