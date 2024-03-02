@@ -351,6 +351,29 @@ To downgrade from revision 2 to revision 1, one might run this procedure::
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev2ToRev1.sql
   $ psql -U postgres -f Rev2ToRev1.sql
 
+Note for large databases and multiple Orthanc instances:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+When upgrading from revision 1 to revision 2, the upgrade might take quite some time.  E.g, we have observed the upgrade
+taking 17 minutes on a DB with 300.000 studies and 150 millions instances.  Orthanc will not respond during the upgrade.  Therefore,
+if you have enabled autohealing (automatic restart in case Orthanc is not responsive), you should likely disable it
+during the first start with the PostgreSQL plugin v6.0.
+
+Also note that, if you have multiple containers connected to the same DB, all containers will try to acquire an exclusive lock
+to perform the upgrade of the DB.  Only one of them will actually perform the upgrade.  Also note that you should not perform a
+rolling updates of the Orthanc containers when performing a DB upgrade.  All Orthanc containers should use the same version of the
+plugin, the one that is compatible with the current revision.
+
+Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the update
+manually and then, restart the Orthanc containers with the newest version of the plugin.
+
+To upgrade manually from revision 1 to revision 2, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev1ToRev2.sql
+  $ psql -U postgres -f PrepareIndex.sql
+
 
 Troubleshooting
 ---------------
