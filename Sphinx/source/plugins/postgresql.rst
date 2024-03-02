@@ -364,15 +364,18 @@ to perform the upgrade of the DB.  Only one of them will actually perform the up
 rolling updates of the Orthanc containers when performing a DB upgrade.  All Orthanc containers should use the same version of the
 plugin, the one that is compatible with the current revision.
 
-Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the update
+Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the upgrade
 manually and then, restart the Orthanc containers with the newest version of the plugin.
 
-To upgrade manually from revision 1 to revision 2, one might run this procedure::
+To upgrade manually from revision 1 to revision 2, one might run this procedure on the existing DB::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev1ToRev2.sql
   $ psql -U postgres -f PrepareIndex.sql
+
+This procedure is identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
+
 
 
 Troubleshooting
