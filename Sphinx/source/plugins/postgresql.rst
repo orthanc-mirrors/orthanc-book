@@ -367,7 +367,8 @@ plugin, the one that is compatible with the current revision.
 Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the upgrade
 manually and then, restart the Orthanc containers with the newest version of the plugin.
 
-To upgrade manually from revision 1 to revision 2, one might run this procedure on the existing DB::
+To upgrade manually from revision 1 to revision 2, one might run this procedure on the existing DB (note: make
+sur to select the correct DB and schema (Orthanc is using the default ``public`` shema))::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
