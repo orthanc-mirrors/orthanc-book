@@ -17,6 +17,8 @@ orthancteam/orthanc Docker images
   as well so, even if you are using an old version, you should update the name in your setup.
   The name is the only thing that has changed.  The content and build procedure are identical.
 
+The ``orthancteam/orthanc`` images are updated regularly.  The release notes are available `here <https://github.com/orthanc-server/orthanc-builder/blob/master/release-notes-docker-images.md>`__.
+
 .. warning:: 
 
   Starting from the ``22.6.1`` release, we are providing 2 types of images:
