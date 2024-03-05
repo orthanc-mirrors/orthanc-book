@@ -439,7 +439,8 @@ Here is the list of all the configuration options::
         // "StandardConfigurations": [               // new in v 0.4.0
         //     "osimis-web-viewer",
         //     "stone-webviewer",
-        //     "orthanc-explorer-2"
+        //     "orthanc-explorer-2",
+        //     "ohif"
         // ],
 
         //"UncheckedResources" : [],
