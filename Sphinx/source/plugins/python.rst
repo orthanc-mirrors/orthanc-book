@@ -250,6 +250,11 @@ of the plugin. If set to ``true``, Orthanc will display the memory
 usage of the Python interpreter every second.
   
 
+.. warning::
+   Never call your Python plugin ``orthanc.py``! Otherwise, your plugin will
+   conflict with the ``orthanc`` module that is installed at runtime.
+
+
 Samples
 -------
 
@@ -1051,7 +1056,7 @@ In this case, you may simply rewrite ``sys.path``:
                     :language: python
 
 
-**Example 2**: On a Windows system, consider that you have created a virtual environment in ``C:/tmp/.venv/``.
+**Example 3**: On a Windows system, consider that you have created a virtual environment in ``C:/tmp/.venv/``.
 Instead of defining ``sys.path`` from scratch, it is possible to simply insert the venv-packages in
 the ``sys.path``.  By adding the ``venv`` to an early index (``0``), any package required by your code 
 will be looked up in the ``venv`` first.  And, as a consequence, if the package is not present, the system-wide 
