@@ -276,7 +276,7 @@ requests to Web services:
   When contacting an external webservice, it is recommended to configure a very
   short timeout not to lock the Lua context for too long.  No other Lua callbacks
   may be run at the same time which may have a significant impact on Orthanc
-  responsivness in general.
+  responsivness in general.  This function has been introduced in version 1.11.1.
   
 
 The ``headers`` argument is optional and was added in release
