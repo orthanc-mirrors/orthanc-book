@@ -4,6 +4,8 @@
 Sample Serve Folders plugin
 ===========================
 
+.. contents::
+
 This **official** plugin enables Orthanc to serve additional folders
 from the filesystem using its embedded Web server. This plugin is
 extremely useful when creating new Web applications on the top of the

@@ -1,11 +1,14 @@
 .. _delayed-deletion-plugin:
 
 
-Delayed deletion plugin (new in Orthanc 1.11.1)
-===============================================
+Delayed deletion plugin
+=======================
+
+.. contents::
 
 This page describes the **official sample plugin** that performs
-delayed deletions of storage files.
+delayed deletions of storage files. This plugin was **introduced in
+Orthanc 1.11.1** as part of its official distribution.
 
 On some file systems, the deletion of files can be quite long and therefore,
 a ``DELETE`` request on a study with thousands of instances can last minutes.

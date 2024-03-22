@@ -4,6 +4,8 @@
 Sample Modality Worklists plugin
 ================================
 
+.. contents::
+
 This page describes the **official sample plugin** turning Orthanc
 into a server of DICOM worklists. General information about how
 Orthanc supports DICOM worklists through plugins is explained in the

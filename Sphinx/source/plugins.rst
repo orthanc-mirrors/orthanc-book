@@ -38,57 +38,79 @@ third-party plugins.  A specific section of the Orthanc Book explains
 Index of the official plugins
 -----------------------------
 
-From Osimis and University Hospital of Liège
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Viewers
+^^^^^^^
 
 .. toctree::
    :maxdepth: 1
 
-   plugins/webviewer.rst
-   plugins/dicomweb.rst
-   plugins/postgresql.rst
-   plugins/wsi.rst
-   plugins/worklists-plugin.rst
-   plugins/serve-folders.rst
-   plugins/gdcm.rst
    plugins/stone-webviewer.rst
-
-.. _plugins-osimis:
-   
-From Osimis
-^^^^^^^^^^^
-
-.. toctree::
-   :maxdepth: 1
-
-   plugins/mysql.rst
-   plugins/transfers.rst
-   plugins/google-cloud-platform.rst    
-   plugins/python.rst 
-   plugins/object-storage.rst   
-   plugins/odbc.rst
-   plugins/osimis-webviewer.rst
-   plugins/authorization.rst
-   plugins/housekeeper.rst
    plugins/orthanc-explorer-2.rst
-   plugins/delayed-deletion-plugin.rst
-
-
-.. _plugins-uclouvain:
-
-From UCLouvain
-^^^^^^^^^^^^^^
-
-.. toctree::
-   :maxdepth: 1
-
    plugins/ohif.rst
    plugins/volview.rst
-   plugins/tcia.rst
-   plugins/indexer.rst
+   plugins/osimis-webviewer.rst
+   plugins/webviewer.rst
+
+
+Standards
+^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/dicomweb.rst
+   plugins/worklists-plugin.rst
+   plugins/wsi.rst
    plugins/neuro.rst
-   plugins/multitenant-dicom.rst
+
+
+Databases
+^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/postgresql.rst
+   plugins/mysql.rst
+   plugins/object-storage.rst
+   plugins/google-cloud-platform.rst    
+   plugins/odbc.rst
+
+
+Languages
+^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/python.rst
    plugins/java.rst
+
+
+Artificial intelligence
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/tcia.rst
+   Mammography plugin <https://github.com/jodogne/orthanc-mammography>
+
+Tools
+^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/authorization.rst
+   plugins/delayed-deletion-plugin.rst
+   plugins/gdcm.rst
+   plugins/housekeeper.rst
+   plugins/indexer.rst
+   plugins/multitenant-dicom.rst
+   plugins/serve-folders.rst
+   plugins/transfers.rst
+
 
 .. _plugins-contributed:
 
