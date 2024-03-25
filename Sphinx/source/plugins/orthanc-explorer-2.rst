@@ -62,15 +62,6 @@ The plugin must be configured through a configuration file.  The minimal configu
 There are many more options that are documented in the 
 `default configuration file <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/Plugin/DefaultConfiguration.json>`__.
 
-Main features you can configure:
-
-- Root URL
-- Whether OE2 becomes the default Orthanc UI
-- Configure the side menu
-- Configure the actions available on the resources
-- Configure the columns of the main study list
-- Configure `Keycloak <https://www.keycloak.org/>`__ integration and :ref:`authorization plugin <authorization>`
-
 
 Advanced features
 -----------------
@@ -186,10 +177,35 @@ once the transfer is complete, open the viewer.
 This feature has been introduced in v 0.7.0.
 
 
+Theming the interface
+^^^^^^^^^^^^^^^^^^^^^
+
+Since v 1.3.0, one can chose between 2 default themes: ``dark`` and ``light`` through the ``"Theme"`` configuration.
+
+Furthermore, it is also possible to customize further the UI by providing a custom logo from a file or url.
+
+For advanced users, it is also possible to provide a custom `CSS <https://en.wikipedia.org/wiki/CSS>`__ to customize
+the UI appearance.  You may get inspiration from the default `dark <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/WebApplication/src/assets/css/defaults-dark.css>`__
+and `light <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/WebApplication/src/assets/css/defaults-light.css>`__ CSS::
+
+    {
+      "OrthancExplorer2": {
+        "UiOptions": {
+          "Theme": "light",                                     // or "dark"
+          "CustomCssPath": "/home/my/path/to/custom.css"        // optional customized CSS
+          "CustomLogoUrl": "https://my.company/logo.png",       // optional custom logo from url
+          "CustomLogoPath": "/home/my/path/to/logo.png"         // optional custom logo from file
+        }
+      }
+    }
+
+You'll also find a full sample of OE2 customization `here <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/oe2-custom>`__.
+
+
 Bug reports & support
 ---------------------
 
-As usual, you can get support and report issues from the `Orthanc Users group <https://groups.google.com/g/orthanc-users>`__.
+As usual, you can get support and report issues from the `Orthanc Users group <https://discourse.orthanc-server.org/>`__.
 
 You may also directly introduce bugs or feature requests in `GitHub <https://github.com/orthanc-server/orthanc-explorer-2/issues>`__.
 
