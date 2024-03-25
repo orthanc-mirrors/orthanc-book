@@ -190,11 +190,12 @@ and `light <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/Web
 
     {
       "OrthancExplorer2": {
-        "UiOptions": {
-          "Theme": "light",                                     // or "dark"
-          "CustomCssPath": "/home/my/path/to/custom.css"        // optional customized CSS
-          "CustomLogoUrl": "https://my.company/logo.png",       // optional custom logo from url
-          "CustomLogoPath": "/home/my/path/to/logo.png"         // optional custom logo from file
+        "Theme": "light",                                     // or "dark"
+        "CustomCssPath": "/home/my/path/to/custom.css"        // optional customized CSS
+        "CustomLogoUrl": "https://my.company/logo.png",       // optional custom logo from url
+        "CustomLogoPath": "/home/my/path/to/logo.png",        // optional custom logo from file
+        "UiOptions" : {
+          // ...
         }
       }
     }
