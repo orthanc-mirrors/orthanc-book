@@ -397,6 +397,8 @@ you should use the ``RestApiPostAfterPlugins()`` method:
                     :language: python
                                
 
+.. _python-pil-thumbnail:
+
 Rendering a thumbnail using PIL/Pillow
 ......................................
 
@@ -897,6 +899,25 @@ As can be seen in this sample:
 Note that it is only possible to extend Orthanc Explorer 1, which is
 the built-in Web interface of Orthanc. It is not possible to extend
 the :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` interface.
+
+
+.. _python_mosaic:
+
+Generating a mosaic for a DICOM series
+......................................
+
+Thanks to the fact that Python plugins have access to :ref:`PIL/Pillow
+<python-pil-thumbnail>`, it is quite easy to generate a mosaic from a
+DICOM series:
+
+.. image:: python/mosaic.png
+           :align: center
+           :width: 512
+
+Here is the source code:
+
+.. literalinclude:: python/mosaic.py
+                    :language: python
 
 
 Performance and concurrency
