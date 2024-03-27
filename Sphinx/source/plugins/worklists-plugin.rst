@@ -172,9 +172,26 @@ How to create a worklist file
     (0020,000d) UI [1.2.276.0.7230010.3.2.101]              #  26, 1 StudyInstanceUID
     (0032,1032) PN [SMITH]                                  #   6, 1 RequestingPhysician
     (0032,1060) LO [EXAM6]                                  #   6, 1 RequestedProcedureDescription
+    (0040,0100) SQ (Sequence with explicit length #=1)      # 176, 1 ScheduledProcedureStepSequence
+      (fffe,e000) na (Item with explicit length #=19)         # 168, 1 Item
+        (0008,0060) CS [US]                                     #   2, 1 Modality
+        (0040,0001) AE [AS_AET]                                 #   5, 2 ScheduledStationAETitle
+        (0040,0002) DA [19951015]                               #   8, 1 ScheduledProcedureStepStartDate
+        (0040,0003) TM [085607]                                 #   6, 1 ScheduledProcedureStepStartTime
+        (0040,0006) PN [JOHNSON]                                #   8, 1 ScheduledPerformingPhysicianName
+        (0040,0007) LO [EXAM74]                                 #   6, 1 ScheduledProcedureStepDescription
+        (0040,0009) SH [SPD3445]                                #   8, 1 ScheduledProcedureStepID
+        (0040,0010) SH [STN456]                                 #   6, 1 ScheduledStationName
+        (0040,0011) SH [B34F56]                                 #   6, 1 ScheduledProcedureStepLocation
+        (0040,0012) LO (no value available)                     #   0, 0 PreMedication
+        (0040,0400) LT (no value available)                     #   0, 0 CommentsOnTheScheduledProcedureStep
+      (fffe,e00d) na (ItemDelimitationItem for re-encoding)   #   0, 0 ItemDelimitationItem
+    (fffe,e0dd) na (SequenceDelimitationItem for re-encod.) #   0, 0 SequenceDelimitationItem
     (0040,1001) SH [RP454G234]                              #  10, 1 RequestedProcedureID
     (0040,1003) SH [LOW]                                    #   4, 1 RequestedProcedurePriority
-  
+
+
+
 - Open ``sampleWorklist.txt`` file in a standard text editor so as to
   modify, add or remove some DICOM tags depending on your needs.
 - Generate a new DICOM worklist file from your modified file using
