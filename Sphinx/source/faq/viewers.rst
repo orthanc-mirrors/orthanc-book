@@ -45,7 +45,7 @@ Make also sure to check out the following extensions to Orthanc:
   <https://www.orthanc-server.com/static.php?page=osimis-web-viewer>`__
   (deprecated, but provides compatibility with Web browsers that do
   not support `WebAssembly <https://caniuse.com/?search=wasm>`__).
-* `ImageJ extension <https://www.orthanc-server.com/static.php?page=imagej>`__.
+* :ref:`ImageJ extension <imagej>`.
 * `Stone of Orthanc <https://www.orthanc-server.com/static.php?page=stone>`__.
 * `dwv-orthanc-plugin
   <https://github.com/ivmartel/dwv-orthanc-plugin>`__ by Yves

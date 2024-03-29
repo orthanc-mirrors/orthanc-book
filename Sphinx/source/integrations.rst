@@ -12,3 +12,4 @@ Integrations
    integrations/integrate-osirix-using-dicom.rst
    integrations/integrate-osirix-using-dicomweb.rst
    integrations/dcm4chee.rst
+   integrations/imagej.rst
