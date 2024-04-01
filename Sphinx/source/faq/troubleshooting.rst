@@ -43,6 +43,13 @@ Startup
   ``OrthancStorage/``, as it contains the DICOM files.
   
   
+DICOM networking
+----------------
+
+* The troubleshooting of DICOM network protocol is covered in a
+  :ref:`separate FAQ entry <dicom>`.
+
+
 Validating DICOM files
 ----------------------
 
