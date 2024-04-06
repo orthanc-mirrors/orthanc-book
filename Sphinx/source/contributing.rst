@@ -122,15 +122,10 @@ here are some tasks you can take in charge that would greatly help us:
       <https://stackoverflow.com/questions/28698888/creating-h-264-avc-dicom-file-with-dcmtk/28737338#28737338>`__
       by calling some REST route, similarly to the
       ``/tools/create-dicom`` :ref:`route to encapsulate PDF <pdf>`.
-    + Similarly to video and PDF (cf. item above), `wrap/unwrap a STL
-      (3D mesh) to/from a DICOM file
-      <http://dicom.nema.org/medical/dicom/2020b/output/chtml/part03/sect_A.85.html>`__
-      by calling some REST route. This is notably useful for dentistry
-      (dental implants) or orthopaedics, yet even cutting-edge
-      research about 3D-printing of organs. In complement, provide a
-      `FreeCAD extension
+    + Provide a `FreeCAD extension
       <https://twitter.com/sjodogne/status/1299632772915625984>`__ to
-      import/export such STL files from/to Orthanc.
+      import/export :ref:`DICOM STL <stl-plugin>` files from/to
+      Orthanc.
     + Create a plugin to edit DICOM files (add, update or remove DICOM tags).
     + Create samples of :ref:`Python plugins <python-plugin>` or :ref:`Java plugins <java-plugin>` to take
       care of HL7 messages, especially for :ref:`merging patients
