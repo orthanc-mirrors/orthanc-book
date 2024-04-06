@@ -7,12 +7,12 @@ Sample multitenant DICOM server
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ can be used to
-turn Orthanc into a **multitenant DICOM** server using :ref:`labels
-<labels>`. More precisely, the same Orthanc database can be accessed
-from different DICOM servers, that each provides a different view
-depending on the presence of labels. This plugin available is part of
-the `official source distribution
+<https://orthanc.uclouvain.be/>`__ can be used to turn Orthanc into a
+**multitenant DICOM** server using :ref:`labels <labels>`. More
+precisely, the same Orthanc database can be accessed from different
+DICOM servers, that each provides a different view depending on the
+presence of labels. This plugin available is part of the `official
+source distribution
 <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Plugins/Samples/MultitenantDicom>`__
 of Orthanc, starting with Orthanc 1.12.0.
 

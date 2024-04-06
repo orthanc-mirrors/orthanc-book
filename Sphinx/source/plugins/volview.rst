@@ -7,9 +7,9 @@ Kitware's VolView plugin
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ extends
-Orthanc with `Kitware's VolView <https://volview.kitware.com/>`__ Web
-interface for cinematic volume rendering of DICOM data.
+<https://orthanc.uclouvain.be/>`__ extends Orthanc with `Kitware's
+VolView <https://volview.kitware.com/>`__ Web interface for cinematic
+volume rendering of DICOM data.
 
 **For researchers**: `Please cite this paper
 <https://dial.uclouvain.be/pr/boreal/object/boreal:257257>`__.

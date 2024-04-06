@@ -7,8 +7,8 @@ Neuroimaging plugin
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ extends
-Orthanc with features dedicated for neuroimaging:
+<https://orthanc.uclouvain.be/>`__ extends Orthanc with features
+dedicated for neuroimaging:
 
 * Conversion of DICOM series and DICOM instances to the `NIfTI-1
   <https://en.wikipedia.org/wiki/Neuroimaging_Informatics_Technology_Initiative>`__

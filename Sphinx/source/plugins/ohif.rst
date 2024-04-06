@@ -7,9 +7,8 @@ OHIF plugin
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ extends
-Orthanc with the `OHIF <https://ohif.org/>`__ extensible Web imaging
-platform.
+<https://orthanc.uclouvain.be/>`__ extends Orthanc with the `OHIF
+<https://ohif.org/>`__ extensible Web imaging platform.
 
 The plugin greatly simplifies the deployment of OHIF, as it does not
 necessitate the setup of any reverse proxy.

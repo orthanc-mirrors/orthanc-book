@@ -7,9 +7,9 @@ TCIA plugin
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ extends
-Orthanc with a Web interface that can be used to import open-data
-medical images from `The Cancer Imaging Archive (TCIA)
+<https://orthanc.uclouvain.be/>`__ extends Orthanc with a Web
+interface that can be used to import open-data medical images from
+`The Cancer Imaging Archive (TCIA)
 <https://www.cancerimagingarchive.net/>`__, and serve them immediately
 using Orthanc.
 

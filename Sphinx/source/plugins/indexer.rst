@@ -7,8 +7,8 @@ Folder Indexer plugin
 .. contents::
 
 This **official** plugin by the `ICTEAM institute of UCLouvain
-<https://uclouvain.be/en/research-institutes/icteam>`__ uses Orthanc
-to publish filesystems containing medical images as a DICOM modality.
+<https://orthanc.uclouvain.be/>`__ uses Orthanc to publish filesystems
+containing medical images as a DICOM modality.
 
 The plugin continuously synchronizes the content of an Orthanc server
 with the content of a filesystem, which can then be accessed, through
