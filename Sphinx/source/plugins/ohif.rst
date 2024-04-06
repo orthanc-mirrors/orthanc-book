@@ -18,6 +18,9 @@ If you face difficulties in using OHIF, please get in touch with the
 `OHIF community <https://ohif.org/collaborate>`__ in the first place.
 Indeed, the OHIF and Orthanc communities are entirely distinct.
 
+**For researchers**: `Please cite this paper
+<https://dial.uclouvain.be/pr/boreal/object/boreal:257257>`__.
+
 
 Usage
 -----

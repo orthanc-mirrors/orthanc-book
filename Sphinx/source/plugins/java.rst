@@ -26,6 +26,9 @@ As of release 1.0 of the plugin, the coverage of the C SDK is about
 76% (122 functions are automatically wrapped in Java out of a total of
 160 functions from the Orthanc SDK 1.10.0).
 
+**For researchers**: `Please cite this paper
+<https://doi.org/10.5220/0012384600003657>`__.
+
 
 Source code
 -----------

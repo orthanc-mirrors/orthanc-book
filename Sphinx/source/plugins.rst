@@ -62,6 +62,7 @@ Standards
    plugins/worklists-plugin.rst
    plugins/wsi.rst
    plugins/neuro.rst
+   plugins/stl.rst
 
 
 Databases

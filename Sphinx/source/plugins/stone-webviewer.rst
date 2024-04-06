@@ -10,11 +10,11 @@ This plugin extends Orthanc with a Web viewer of medical images, with
 more advanced features than the basic :ref:`Orthanc Web viewer plugin
 <webviewer>`.
 
-For general information and a demonstration, check out the `official
-homepage of the plugin
+Check out the `demonstration server
 <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__.
-Also `check out the source code
-<https://orthanc.uclouvain.be/hg/orthanc-stone/file/default/Applications/StoneWebViewer>`__.
+
+**For researchers**: `Please cite this paper
+<https://doi.org/10.1007/978-3-031-38854-5_20>`__.
 
 
 How to get it

@@ -11,6 +11,9 @@ This **official** plugin by the `ICTEAM institute of UCLouvain
 Orthanc with `Kitware's VolView <https://volview.kitware.com/>`__ Web
 interface for cinematic volume rendering of DICOM data.
 
+**For researchers**: `Please cite this paper
+<https://dial.uclouvain.be/pr/boreal/object/boreal:257257>`__.
+
 
 Usage
 -----

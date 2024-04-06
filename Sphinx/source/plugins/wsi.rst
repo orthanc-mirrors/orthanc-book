@@ -17,8 +17,11 @@ for whole-slide microscopic imaging (WSI):
 3. Another command-line tool that converts a DICOM series stored
    inside Orthanc, to a standard hierarchical TIFF image.
 
-For general information, check out the `official homepage of the
-framework <https://www.orthanc-server.com/static.php?page=wsi>`__. 
+Check out our `demonstration server
+<https://orthanc.uclouvain.be/wsi/>`__.
+
+**For researchers**: `Please cite this paper
+<https://doi.org/10.5220/0006155100810087>`__.
 
 
 Compilation
