@@ -1,8 +1,8 @@
 .. _stl-plugin:
 
 
-Java plugin for Orthanc
-=======================
+STL plugin for Orthanc
+======================
 
 .. contents::
 
