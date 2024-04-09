@@ -64,7 +64,7 @@ Pre-compiled Linux Standard Base (LSB) binaries `are available for
 download <https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-ohif/index.html>`__.
 
 Pre-compiled binaries for `Microsoft Windows <https://orthanc.uclouvain.be/downloads/windows-32/orthanc-ohif/index.html>`__
-and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-ohif/index.html>` are available as well.
+and `macOS <https://orthanc.uclouvain.be/downloads/macos/orthanc-ohif/index.html>`__ are available as well.
 
 Furthermore, the :ref:`Docker images <docker>`
 ``jodogne/orthanc-plugins`` and ``orthancteam/orthanc`` also contain the
