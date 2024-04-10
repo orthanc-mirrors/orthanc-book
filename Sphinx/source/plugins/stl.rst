@@ -107,8 +107,9 @@ Note how the STL plugin provides two viewers:
   with a small footprint that is directly built using the well-known
   `Three.js library <https://en.wikipedia.org/wiki/Three.js>`__.
 
-* One slightly more advanced Web viewer that corresponds to
-  `Online3DViewer <https://3dviewer.net/>`__ running in `engine mode
+* One slightly more advanced Web viewer that corresponds to `Online 3D
+  Viewer <https://github.com/kovacsv/Online3DViewer>`__ running in
+  `engine mode
   <https://kovacsv.github.io/Online3DViewer/Page_Usage.html>`__.
 
 Here is a screenshot of a rendering using the Online3DViewer embedded
