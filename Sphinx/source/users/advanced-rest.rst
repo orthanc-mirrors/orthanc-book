@@ -233,21 +233,48 @@ media::
 As of Orthanc 1.12.3, only the creation of a ZIP or a DICOMDIR archive
 produces such "outputs".
 
-  
+
+.. _image-dicomization:
+
+DICOM-ization of an image
+-------------------------
+
+JPEG images or PNG images can be converted to DICOM using the
+``/tools/create-dicom`` `route in the REST API
+<https://orthanc.uclouvain.be/api/#tag/System/paths/~1tools~1create-dicom/post>`__. The
+procedure consists in providing Orthanc with the JPEG/PNG content
+using `data URI scheme
+<https://en.wikipedia.org/wiki/Data_URI_scheme>`__. Here is a minimal
+working example in Python 3:
+
+.. literalinclude:: code/image-dicomization.py
+                    :language: python
+
+Evidently, make sure to replace ``data:image/png;base64,%s`` by
+``data:image/jpeg;base64,%s`` if you need to DICOM-ize a JPEG image
+instead of a PNG image.
+
+The call to ``/tools/create-dicom`` will return the Orthanc instance
+ID of the newly created DICOM resource. Orthanc will encode your
+JPEG/PNG using an :ref:`uncompressed transfer syntax
+<dicom-pixel-data>` to ensure maximal compatibility.
+
+Importantly, the ``Parent`` field of the ``POST`` body can be set to
+the :ref:`Orthanc identifier of some study <orthanc-ids>` in order to
+attach the newly-created PDF series to the given parent study.
+
+
 .. _pdf:
 
 Attaching PDF file as DICOM series
 ----------------------------------
 
 Among many different types of data, DICOM files can be used to store
-PDF files. The ``/tools/create-dicom`` URI can be used to upload a PDF
-file to Orthanc. The following scripts perform such a *DICOM-ization*;
-They convert the ``HelloWorld2.pdf`` file to base64, then perform a
+PDF files. Similarly to :ref:`JPEG/PNG <image-dicomization>`, the
+``/tools/create-dicom`` URI can be used to upload a PDF file to
+Orthanc. The following scripts perform such a *DICOM-ization*: They
+convert the ``HelloWorld2.pdf`` file to base64, then perform a
 ``POST`` request with JSON data containing the converted payload.
-
-Importantly, the ``Parent`` field of the ``POST`` body can be set to
-the :ref:`Orthanc identifier of some study <orthanc-ids>` in order to
-attach the newly-created PDF series to the given parent study.
 
 Using bash:
 
@@ -260,7 +287,7 @@ Using bash:
     cat /tmp/foo | curl -H "Content-Type: application/json" -d @- http://localhost:8042/tools/create-dicom
 
 
-Using powershell:
+Using Microsoft PowerShell:
 
 .. code-block:: perl
 
@@ -281,9 +308,6 @@ Using powershell:
 
 And here's another sample  `using python
 <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/python-samples/attach-pdf-to-study.py>`__.
-
-Please note that the ``/tools/create-dicom`` API call will return the
-Orthanc instance ID of the newly created DICOM resource.
 
 You can use the ``/instances/.../pdf`` URI to retrieve an embedded PDF
 file.
