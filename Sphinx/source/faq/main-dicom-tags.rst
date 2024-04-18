@@ -133,6 +133,12 @@ tag, Orthanc will still use the ``StudyDescription`` recorded at ``Study`` level
 the search but will use the ``StudyDescription`` recorded at ``Series`` level when
 returning the responses.
 
+*Note:* You should only include tags from the same or from a higher level:
+E.g. Storing ``StudyDescription`` at ``Series`` level is possible since
+all series are supposed to share the same ``StudyDescription``.  But, adding
+``SeriesDescription`` at ``Study`` level will lead to unpredictible results.
+Orthanc will **not** check that the tags levels are adequate. 
+
 
 Warnings
 ========
