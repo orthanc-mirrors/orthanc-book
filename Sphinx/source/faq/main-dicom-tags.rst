@@ -87,9 +87,78 @@ include sequences in ``ExtraMainDicomTags``.  However, this should be
 considered as an "experimental" feature and you should not store large
 sequences (> 64KB) or sequences containing binary tags.
 
+Here is a sample configuration to optimize C-Find queries at study level
+e.g from OSIRIX/Horos.  They request ``SpecificCharacterSet`` and
+``PerformingPhysicianName`` that are not stored in Orthanc DB by default::
+
+    {
+        "ExtraMainDicomTags" : {
+        "Instance" : [
+        ],
+        "Series" : [
+        ],
+        "Study": [
+            "SpecificCharacterSet",
+            "PerformingPhysicianName"
+        ],
+        "Patient": []
+        }
+    }
+
+
+This configuration will apply only to newly added resources
+in Orthanc.  If you want to apply this change to resources
+already in Orthanc, you may call the ``/studies/../reconstruct``
+API route or use the  :ref:`Housekeeper plugin <housekeeper-plugin>` 
+to automate this reconstruction process.
+
+*Note :* These ``ExtraMainDicomTags`` are not used when searching
+for resources in Orthanc, they are only used when returning results.
+E.g. if you have added a ``StudyDescription`` at ``Series`` level and perform
+a ``/tools/find`` at ``Series`` level with a filter on the ``StudyDescription``
+tag, Orthanc will still use the ``StudyDescription`` recorded at ``Study`` level during
+the search but will use the ``StudyDescription`` recorded at ``Series`` level when
+returning the responses.
+
+*Note:* You should only include tags from the same or from a higher level:
+E.g. Storing ``StudyDescription`` at ``Series`` level is possible since
+all series are supposed to share the same ``StudyDescription``.  But, adding
+``SeriesDescription`` at ``Study`` level will lead to unpredictible results.
+Orthanc will **not** check that the tags levels are adequate. 
+
+*Note:* As of Orthanc 1.12.3, it is not possible to store Private DICOM tags
+in the ``ExtraMainDicomTags``.
+
+
+Warnings
+========
+
+Since Orthanc 1.11.0, Orthanc issues a warning everytime
+it opens a DICOM file to access a DICOM tag that could have
+been saved in DB.
+
+Orthanc will also issue a warning everytime it accesses a resource 
+that has been saved with a ``ExtraMainDicomTags`` configuration that
+is different from the current one inviting you to call the
+``/reconstruct`` route to fix this.
+
+These warnings can be enabled/disabled through this configuration::
+
+    {
+        "Warnings" : {
+            "W001_TagsBeingReadFromStorage": true,
+            "W002_InconsistentDicomTagsInDb": true
+        }
+    }
+
+
+DICOMWeb
+========
+
 Below is a sample configuration that is well suited to
-optimize DICOMWeb routes in general, especially when you are using
-a DICOMWeb viewer::
+optimize DICOMWeb routes in general in case you are using the 
+``MainDicomTags`` metadata mode.  However, note that, from version
+1.15 of the :ref:`DICOMWeb plugin <dicomweb-server-metadata-config>`, you should favor the ``Full`` mode::
 
     {
         "ExtraMainDicomTags" : {
@@ -118,47 +187,3 @@ a DICOMWeb viewer::
         "Patient": []
         }
     }
-
-This configuration will apply only to newly added resources
-in Orthanc.  If you want to apply this change to resources
-already in Orthanc, you may call the ``/studies/../reconstruct``
-API route or use the  :ref:`Housekeeper plugin <housekeeper-plugin>` 
-to automate this reconstruction process.
-
-*Note :* These ``ExtraMainDicomTags`` are not used when searching
-for resources in Orthanc, they are only used when returning results.
-E.g. if you have added a ``StudyDescription`` at ``Series`` level and perform
-a ``/tools/find`` at ``Series`` level with a filter on the ``StudyDescription``
-tag, Orthanc will still use the ``StudyDescription`` recorded at ``Study`` level during
-the search but will use the ``StudyDescription`` recorded at ``Series`` level when
-returning the responses.
-
-*Note:* You should only include tags from the same or from a higher level:
-E.g. Storing ``StudyDescription`` at ``Series`` level is possible since
-all series are supposed to share the same ``StudyDescription``.  But, adding
-``SeriesDescription`` at ``Study`` level will lead to unpredictible results.
-Orthanc will **not** check that the tags levels are adequate. 
-
-
-Warnings
-========
-
-Since Orthanc 1.11.0, Orthanc issues a warning everytime
-it opens a DICOM file to access a DICOM tag that could have
-been saved in DB.
-
-Orthanc will also issue a warning everytime it accesses a resource 
-that has been saved with a ``ExtraMainDicomTags`` configuration that
-is different from the current one inviting you to call the
-``/reconstruct`` route to fix this.
-
-These warnings can be enabled/disabled through this configuration::
-
-    {
-        "Warnings" : {
-            "W001_TagsBeingReadFromStorage": true,
-            "W002_InconsistentDicomTagsInDb": true
-        }
-    }
-
-
