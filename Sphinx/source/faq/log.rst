@@ -66,7 +66,7 @@ Under Windows
 ^^^^^^^^^^^^^
 
 
-if you used the `official Windows installers
+If you used the `official Windows installers
 <https://www.orthanc-server.com/download-windows.php>`__:
 
 1. Stop the Orthanc service. The actual process depends on your
@@ -84,6 +84,14 @@ if you used the `official Windows installers
 
 4. Once the log has been generated (in ``C:\Temp\Orthanc.log``), stop Orthanc 
    and possibly restart the Orthanc service.
+
+
+By default, the Orthanc service will always start in the default ``Warning`` log level.  
+If you want to make it start in ``Verbose`` mode at every start, you should set this Registry
+Key to 1::
+
+   Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Orthanc\Orthanc Server\Verbose
+
 
 
 Under Debian GNU/Linux
