@@ -150,7 +150,7 @@ storing the modified DICOM instance into Orthanc). Example::
       }
     }
 
-* To add a Private DICOM tag, you should use this syntax (provided that you have defined an entry ``"7001,0001" : [ "CS", "MyPrivateTag", 1, 1, "MyPrivateCreator"]`` in the ``Dictionary`` configuration)::
+* To add a Private DICOM tag, you should use this syntax (provided that you have defined 2 entries  ``7001,0010": ["LO", "PrivateCreatorForMy", 1, 1, "MyPrivateCreator"], "7001,1001" : [ "CS", "MyPrivateTag", 1, 1, "MyPrivateCreator"]`` in the ``Dictionary`` configuration)::
 
     {
       "Replace" : {
