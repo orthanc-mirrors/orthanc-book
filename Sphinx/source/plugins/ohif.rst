@@ -21,6 +21,24 @@ Indeed, the OHIF and Orthanc communities are entirely distinct.
 <https://dial.uclouvain.be/pr/boreal/object/boreal:257257>`__.
 
 
+.. _orthanc_vs_ohif:
+
+Orthanc project vs. OHIF project
+--------------------------------
+
+The Orthanc server and the OHIF viewer are **fully separate projects,
+with distinct communities**. The OHIF plugin for Orthanc only aims at
+facilitating the deployment of OHIF through Orthanc.
+
+As a consequence, the OHIF plugin for Orthanc **only packages official
+releases of OHIF**.
+
+Furthermore, any question or issue that is related to OHIF must be
+directly `asked to the OHIF community
+<https://github.com/OHIF/Viewers/issues>`__, *not* to the Orthanc
+discussion group.
+
+
 Usage
 -----
 
