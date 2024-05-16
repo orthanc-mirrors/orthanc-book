@@ -687,6 +687,11 @@ thread to handle the request, in order to avoid blocking Orthanc as
 much as possible.
 
 
+**Note:** In version 4.2, we have introduced a new version of the C-MOVE SCP 
+handler that can be registered through ``orthanc.RegisterMoveCallback2(CreateMoveCallback, GetMoveSizeCallback, ApplyMoveCallback, FreeMoveCallback)``.
+This `DICOM to DICOMWeb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__ demonstrates how it can be used.
+
+
 .. _python_worklists:
 
 Handling worklist SCP requests (new in 3.2)
