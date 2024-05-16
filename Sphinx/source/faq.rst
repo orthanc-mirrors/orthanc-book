@@ -17,6 +17,7 @@ General questions about the project
    faq/proprietary.rst
    faq/why-orthanc.rst
    faq/donations.rst
+   faq/how-do-you-spell-orthanc.rst
 
 Questions related to Orthanc and DICOM
 --------------------------------------
