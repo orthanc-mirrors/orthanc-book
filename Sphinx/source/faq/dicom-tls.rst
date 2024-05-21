@@ -185,10 +185,11 @@ tools).
 
 Starting from Orthanc 1.9.3, it is possible to allow connections
 to/from remote DICOM modalities that do not provide a DICOM TLS
-certificate (which corresponds to the ``--verify-peer-cert`` option of
+certificate (which corresponds to the ``--ignore-peer-cert`` option of
 DCMTK). This requires setting the :ref:`configuration option
 <configuration>` ``DicomTlsRemoteCertificateRequired`` of Orthanc to
-``false``.
+``false``.  Note: between Orthanc 1.9.3 and Orthanc 1.12.3 included, 
+this option was actually equivalent to ``--verify-peer-cert``.
 
 .. highlight:: bash
 
@@ -207,14 +208,12 @@ Let us start Orthanc using the following minimal configuration file::
     "DicomTlsEnabled" : true,
     "DicomTlsCertificate" : "orthanc.crt",
     "DicomTlsPrivateKey" : "orthanc.key",
-    "DicomTlsTrustedCertificates" : "orthanc.crt",
     "DicomTlsRemoteCertificateRequired" : false
   }
 
 .. highlight:: text
 
-Note that the ``DicomTlsTrustedCertificates`` is set to a dummy value,
-because this option must always be present. It is then possible to
+It is then possible to
 connect to Orthanc without SCU certificate as follows::
 
   $ echoscu -v localhost 4242 --anonymous-tls +cf /tmp/k/orthanc.crt 
@@ -223,8 +222,3 @@ connect to Orthanc without SCU certificate as follows::
   I: Sending Echo Request (MsgID 1)
   I: Received Echo Response (Success)
   I: Releasing Association
-
-
-**Remark:** Importantly, if the remote DICOM modality provides an
-invalid DICOM TLS certificate, Orthanc will never accept the
-connection.
