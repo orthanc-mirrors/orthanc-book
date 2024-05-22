@@ -265,3 +265,73 @@ STL instance:
 
 .. literalinclude:: stl/nifti.py
                     :language: python
+
+
+Support for Nexus
+-----------------
+
+Starting with release 1.1, the STL plugin provides support for the
+DICOM-ization of 3D models encoded using the `Nexus file format (.NXZ)
+<https://vcg.isti.cnr.it/nexus/>`__. Nexus provides a way to publish
+large, **textured 3D models** over Internet, with **adaptive
+rendering** depending on the available network bandwidth. Nexus is
+notably popular for the preservation of **cultural heritage**.
+
+
+The plugin ships the static HTML/CSS/JavaScript assets of the official
+Nexus Web viewer, so that it can easily be opened right from Orthanc
+Explorer, as depicted in the following screenshot:
+
+.. image:: stl/nexus.png
+           :align: center
+           :width: 800
+
+
+Internals
+^^^^^^^^^
+
+Because Nexus is not endorsed by the DICOM specification, the plugin
+encapsulates the Nexus file using the `Raw Data IOD
+<https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_A.37.3.html>`__.
+The Nexus file is encoded as the ``(0x4205,0x1001)`` private DICOM
+tag.
+
+
+Configuration
+^^^^^^^^^^^^^
+
+.. highlight:: json
+
+As it is non-standard, support for Nexus must be explicitly enabled in
+the configuration file of Orthanc as follows::
+
+  {
+    "Plugins" : [ "libOrthancSTL.so" ],
+    "STL" : {
+      "EnableNexus" : true
+    }
+  }
+
+
+REST API
+^^^^^^^^
+
+The STL plugin extends the REST API with two routes that are dedicated
+to the handling of Nexus files:
+
+1. ``/stl/create-nexus`` can be used to DICOM-ize a Nexus file. This
+   route is a wrapper around the ``/tools/create-dicom``
+   :ref:`standard route of Orthanc <image-dicomization>`. The Nexus
+   file must be provided as a `Base64 string
+   <https://en.wikipedia.org/wiki/Base64>`__ in the ``Content`` field
+   of the request. Here is a sample Python script::
+
+.. literalinclude:: stl/nexus.py
+                    :language: python
+
+2. ``/instances/{id}/nexus`` provides access to a DICOM-ized Nexus
+   file by decapsulating it from the DICOM instance whose
+   :ref:`Orthanc identifier <orthanc-identifiers>` is
+   ``id``. Importantly, this route supports `HTTP range requests
+   <https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests>`__
+   for adaptive streaming of Nexus models over Internet.
