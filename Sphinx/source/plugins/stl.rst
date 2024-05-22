@@ -271,11 +271,12 @@ Support for Nexus
 -----------------
 
 Starting with release 1.1, the STL plugin provides support for the
-DICOM-ization of 3D models encoded using the `Nexus file format (.NXZ)
-<https://vcg.isti.cnr.it/nexus/>`__. Nexus provides a way to publish
-large, **textured 3D models** over Internet, with **adaptive
-rendering** depending on the available network bandwidth. Nexus is
-notably popular for the preservation of **cultural heritage**.
+DICOM-ization of 3D models encoded using the `Nexus file format (.NXS
+and .NXZ extensions) <https://vcg.isti.cnr.it/nexus/>`__. Nexus
+provides a way to publish large, **textured 3D models** over Internet,
+with **adaptive rendering** depending on the available network
+bandwidth. Nexus is notably popular for the preservation of **cultural
+heritage**.
 
 
 The plugin ships the static HTML/CSS/JavaScript assets of the official
