@@ -214,6 +214,7 @@ decision chart:
 
      * `Abdrahman Elkafil <mailto:elkafil@nextbehealthcare.com>`__ (English/French/Arabic, Belgium and Morocco)
      * `Olakunle Dada <mailto:holakunle69@gmail.com>`__ (English/French, Nigeria)
+     * `Abdulazeez Alao <mailto:abdulazeezalao247@gmail.com>`__ (Nigeria)
 
    * **Asia**:
      
@@ -226,7 +227,8 @@ decision chart:
      
      * `James Manner <https://binary.com.au/>`__ (English, Australia)
 
-   Get in touch with `Sébastien Jodogne
+   Note that the freelancers/companies in this list are not endorsed
+   in any way by the Orthanc project, except for Orthanc Team. Get in
+   touch with `Sébastien Jodogne
    <mailto:sebastien.jodogne@uclouvain.be>`__ if you want to be
    included in this list.
- 
