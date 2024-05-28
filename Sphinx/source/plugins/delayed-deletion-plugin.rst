@@ -62,7 +62,7 @@ generate the name of the SQLite DB.
 Status
 ------
 
-You can get a progress status of the plugin by calling the ``/delayed-deletion/status`` API route.
+You can get a progress status of the plugin by calling the ``/plugins/delayed-deletion/status`` API route.
 
 
 Compilation
