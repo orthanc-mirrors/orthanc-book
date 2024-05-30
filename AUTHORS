@@ -1,21 +1,41 @@
 Orthanc Book - A Lightweight, RESTful DICOM Server
 ==================================================
 
+
+Authors of Orthanc
+------------------
+
 * Sebastien Jodogne <s.jodogne@orthanc-labs.com>
 
-  UCLouvain, ICTeam
-  Belgium
+  Overall design and lead developer.
 
-  Department of Medical Physics
+* Department of Medical Physics
   University Hospital of Liege
+  4000 Liege
   Belgium
 
-* Osimis S.A. <info@osimis.io>
-  Rue des Chasseurs Ardennais 3	
-  4031 Liège 
+* Osimis S.A.
+  Quai Banning 6
+  4000 Liege
   Belgium
 
-* Orthanc community
+* Orthanc Team SRL <info@orthanc.team>
+  Rue Joseph Marchal 14
+  4910 Theux
+  Belgium
+  https://orthanc.team/
+
+* ICTEAM, UCLouvain
+  Place de l'Universite 1
+  1348 Ottignies-Louvain-la-Neuve
+  Belgium
+  https://uclouvain.be/icteam
+
+
+Contributors
+------------
+
+* The Orthanc community
   https://groups.google.com/forum/#!forum/orthanc-users
 
 * Chris McGee <cmcgee@macadamian.com>
