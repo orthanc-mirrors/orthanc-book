@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.3"
+      "version" : "1.12.4"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -183,9 +183,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -334,9 +334,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -2999,9 +2999,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -3180,6 +3180,10 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
+                           "LimitToThisLevelMainDicomTags" : {
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "type" : "boolean"
+                           },
                            "ReconstructFiles" : {
                               "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
                               "type" : "boolean"
@@ -3329,9 +3333,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -3408,6 +3412,15 @@
                         "type" : "string"
                      },
                      "type" : "array"
+                  }
+               },
+               {
+                  "description" : "Whether to read the whole DICOM file from the storage area (new in Orthanc 1.12.4). If set to \"false\" (default value), the DICOM file is read until the pixel data tag (7fe0,0010) to optimize access to storage. Setting the option to \"true\" provides access to the DICOM tags stored after the pixel data tag.",
+                  "in" : "query",
+                  "name" : "whole",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
                   }
                },
                {
@@ -3539,9 +3552,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -3649,6 +3662,15 @@
                   }
                },
                {
+                  "description" : "Whether to read the whole DICOM file from the storage area (new in Orthanc 1.12.4). If set to \"false\" (default value), the DICOM file is read until the pixel data tag (7fe0,0010) to optimize access to storage. Setting the option to \"true\" provides access to the DICOM tags stored after the pixel data tag.",
+                  "in" : "query",
+                  "name" : "whole",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "boolean"
+                  }
+               },
+               {
                   "description" : "Orthanc identifier of the DICOM instance of interest",
                   "in" : "path",
                   "name" : "id",
@@ -3749,9 +3771,9 @@
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
                            "example" : [
-                              "2567f12f-a2dc-4ac6-8990-16335b5a3d5a",
-                              "42251acb-3089-40dd-9263-3d39970342a7",
-                              "7583bd1e-39f9-4564-93ef-602b57185449",
+                              "1ce8c49a-875e-47ee-8235-7287d1b5bd06",
+                              "1d864388-fbd5-47ef-b52c-17f3f9a87344",
+                              "288beb8a-0548-4b72-8d26-92c1b22ad00b",
                               "..."
                            ]
                         }
@@ -4181,12 +4203,20 @@
                               "description" : "Host address of the remote DICOM modality (typically, an IP address)",
                               "type" : "string"
                            },
+                           "LocalAet" : {
+                              "description" : "Whether to override the default DicomAet in the SCU connection initiated by Orthanc to this modality",
+                              "type" : "string"
+                           },
                            "Manufacturer" : {
                               "description" : "Manufacturer of the remote DICOM modality (check configuration option `DicomModalities` for possible values",
                               "type" : "string"
                            },
                            "Port" : {
                               "description" : "TCP port of the remote DICOM modality",
+                              "type" : "number"
+                           },
+                           "Timeout" : {
+                              "description" : "Whether to override the default DicomScuTimeout in the SCU connection initiated by Orthanc to this modality",
                               "type" : "number"
                            },
                            "UseDicomTls" : {
@@ -4989,9 +5019,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -5073,9 +5103,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -6149,9 +6179,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -7159,6 +7189,10 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
+                           "LimitToThisLevelMainDicomTags" : {
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "type" : "boolean"
+                           },
                            "ReconstructFiles" : {
                               "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
                               "type" : "boolean"
@@ -7201,9 +7235,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -7452,9 +7486,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -8776,9 +8810,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -8860,9 +8894,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -9945,9 +9979,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -11011,9 +11045,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -11089,6 +11123,10 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
+                           "LimitToThisLevelMainDicomTags" : {
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "type" : "boolean"
+                           },
                            "ReconstructFiles" : {
                               "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
                               "type" : "boolean"
@@ -11279,9 +11317,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -11531,9 +11569,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -11615,9 +11653,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -12713,9 +12751,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -13897,9 +13935,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -13975,6 +14013,10 @@
                      "schema" : {
                         "description" : "",
                         "properties" : {
+                           "LimitToThisLevelMainDicomTags" : {
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "type" : "boolean"
+                           },
                            "ReconstructFiles" : {
                               "description" : "Also reconstruct the files of the resources (e.g: apply IngestTranscoding, StorageCompression). 'false' by default. (New in Orthanc 1.11.0)",
                               "type" : "boolean"
@@ -14017,9 +14059,9 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requestedTags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
                   "in" : "query",
-                  "name" : "requestedTags",
+                  "name" : "requested-tags",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -14414,7 +14456,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 22,
+                              "ApiVersion" : 23,
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
                               "DatabaseServerIdentifier" : "a67fa91c-20328956-26614107-bbaec3f4-5cbbc6f9",
@@ -14439,7 +14481,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.2"
+                              "Version" : "1.12.3"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -14489,6 +14531,10 @@
                               "MainDicomTags" : {
                                  "description" : "The list of MainDicomTags saved in DB for each resource level (new in Orthanc 1.11.0)",
                                  "type" : "object"
+                              },
+                              "MaximumPatientCount" : {
+                                 "description" : "The configured MaximumPatientCount (new in Orthanc 1.12.4)",
+                                 "type" : "number"
                               },
                               "MaximumStorageMode" : {
                                  "description" : "The configured MaximumStorageMode (new in Orthanc 1.11.3)",
@@ -15422,6 +15468,10 @@
                               "description" : "Host address of the remote DICOM modality (typically, an IP address)",
                               "type" : "string"
                            },
+                           "LocalAet" : {
+                              "description" : "Whether to override the default DicomAet in the SCU connection initiated by Orthanc to this modality",
+                              "type" : "string"
+                           },
                            "Manufacturer" : {
                               "description" : "Manufacturer of the remote DICOM modality (check configuration option `DicomModalities` for possible values",
                               "type" : "string"
@@ -15431,7 +15481,7 @@
                               "type" : "number"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-ECHO command, in seconds",
+                              "description" : "Whether to override the default DicomScuTimeout in the SCU connection initiated by Orthanc to this modality",
                               "type" : "number"
                            },
                            "UseDicomTls" : {
@@ -16061,7 +16111,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2352 1706706084150\northanc_count_patients 7 1706706084150\northanc_count_series 23 1706706084150\northanc_count_studies 7 1706706084150\northanc_dicom_cache_count 302 1706706084150\northanc_dicom_cache_size_mb 127.904297 1706706084150\northanc_disk_size_mb 840.589417 1706706084150\northanc_jobs_completed 10 1706706084150\northanc_jobs_failed 0 1706706084150\northanc_jobs_pending 0 1706706084150\northanc_jobs_running 0 1706706084150\northanc_jobs_success 10 1706706084150\northanc_last_change 4778 1706706084150\northanc_rest_api_active_requests 1 1706706084150\northanc_rest_api_duration_ms 311 1706706082544\northanc_storage_cache_count 704 1706706084150\northanc_storage_cache_size_mb 127.69693 1706706084150\northanc_storage_read_duration_ms 0 1706706076439\northanc_uncompressed_size_mb 840.589417 1706706084150\northanc_up_time_s 2323485 1706706084150\n"
+                        "example" : "orthanc_count_instances 2352 1717611466656\northanc_count_patients 7 1717611466656\northanc_count_series 23 1717611466656\northanc_count_studies 7 1717611466656\northanc_dicom_cache_count 304 1717611466656\northanc_dicom_cache_size_mb 127.931244 1717611466656\northanc_disk_size_mb 840.589417 1717611466656\northanc_jobs_completed 10 1717611466656\northanc_jobs_failed 0 1717611466656\northanc_jobs_pending 0 1717611466656\northanc_jobs_running 0 1717611466656\northanc_jobs_success 10 1717611466656\northanc_last_change 4778 1717611466656\northanc_rest_api_active_requests 1 1717611466656\northanc_rest_api_duration_ms 428 1717611466329\northanc_storage_cache_count 704 1717611466656\northanc_storage_cache_size_mb 127.69693 1717611466656\northanc_storage_read_duration_ms 5 1717611461503\northanc_uncompressed_size_mb 840.589417 1717611466656\northanc_up_time_s 2606700 1717611466656\n"
                      }
                   },
                   "description" : ""
@@ -16080,7 +16130,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20240131T130124",
+                        "example" : "20240605T181746",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16102,7 +16152,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20240131T130124",
+                        "example" : "20240605T181746",
                         "schema" : {
                            "description" : "The local time"
                         }

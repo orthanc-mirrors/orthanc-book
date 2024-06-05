@@ -72,13 +72,13 @@ update the Docker image to benefit from the latest features::
 If more stability is required, you can select the official release of
 Orthanc to be run::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.12.4
 
 Passing additional command-line options (e.g. to make Orthanc verbose)
 can be done as follows (note the ``/etc/orthanc`` option that is
 required for Orthanc to find its configuration files)::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.12.3 /etc/orthanc --verbose
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc:1.12.4 /etc/orthanc --verbose
 
 
 Usage, with plugins enabled
@@ -94,7 +94,7 @@ implementation <dicomweb>`, and its :ref:`whole-slide imaging viewer
 
 Or you can also start a specific version of Orthanc for more stability::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-plugins:1.12.4
 
 If you have an interest in the :ref:`Python plugin <python-plugin>`,
 you can use the ``orthanc-python`` image. The latter image is a
@@ -102,7 +102,7 @@ heavier version of the ``orthanc-plugins`` image, as it embeds the
 Python 3.7 interpreter. Here is how to start this image::
 
   $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python
-  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm jodogne/orthanc-python:1.12.4
   
 
 Fine-tuning the configuration
@@ -116,12 +116,12 @@ modalities Orthanc knows about.
 
 You can generate a custom configuration file for Orthanc as follows::
 
-  $ docker run --rm --entrypoint=cat jodogne/orthanc:1.12.3 /etc/orthanc/orthanc.json > /tmp/orthanc.json
+  $ docker run --rm --entrypoint=cat jodogne/orthanc:1.12.4 /etc/orthanc/orthanc.json > /tmp/orthanc.json
 
 Then, edit the just-generated file ``/tmp/orthanc.json`` and restart
 Orthanc with your updated configuration::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc:1.12.4
 
 *Remark:* These Docker images automatically set the environment
 variable ``MALLOC_ARENA_MAX`` to ``5`` in order to :ref:`control
@@ -154,7 +154,7 @@ the `YAML file format <https://en.wikipedia.org/wiki/YAML>`__)::
   version: '3.1'  # Secrets are only available since this version of Docker Compose
   services:
     orthanc:
-      image: jodogne/orthanc-plugins:1.12.3
+      image: jodogne/orthanc-plugins:1.12.4
       command: /run/secrets/  # Path to the configuration files (stored as secrets)
       ports:
         - 4242:4242
@@ -203,7 +203,7 @@ persistent by mapping the ``/var/lib/orthanc/db`` folder of the
 container to some path in the filesystem of your Linux host, e.g.::
 
   $ mkdir /tmp/orthanc-db
-  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc-db/:/var/lib/orthanc/db/ jodogne/orthanc:1.12.4
 
 
 Whole-slide imaging support
@@ -213,13 +213,13 @@ The ``orthanc-plugins`` image includes support for :ref:`microscopic
 whole-slide imaging (WSI) <wsi>`. For instance, the following command
 will start the WSI viewer plugin transparently together with Orthanc::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm --name orthanc-wsi jodogne/orthanc-plugins:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm --name orthanc-wsi jodogne/orthanc-plugins:1.12.4
 
 Note that we gave the name ``orthanc-wsi`` to this new Docker
 container. Then, the Dicomizer command-line tool can be invoked as
 follows::
 
-  $ docker run -t -i --rm --link=orthanc-wsi:orthanc --entrypoint=OrthancWSIDicomizer -v /tmp/Source.tif:/tmp/Source.tif:ro jodogne/orthanc-plugins:1.12.3 --username=orthanc --password=orthanc --orthanc=http://orthanc:8042/ /tmp/Source.tif
+  $ docker run -t -i --rm --link=orthanc-wsi:orthanc --entrypoint=OrthancWSIDicomizer -v /tmp/Source.tif:/tmp/Source.tif:ro jodogne/orthanc-plugins:1.12.4 --username=orthanc --password=orthanc --orthanc=http://orthanc:8042/ /tmp/Source.tif
 
 This command needs a few explanations:
 
@@ -247,7 +247,7 @@ If you have a source image that is not a hierarchical TIFF, you must
 instruct the Dicomizer to use `OpenSlide <https://openslide.org/>`__
 to decode it by adding the ``--openslide`` option::
 
-  $ docker run -t -i --rm --link=orthanc-wsi:orthanc --entrypoint=OrthancWSIDicomizer -v /tmp/Source.svs:/tmp/Source.svs:ro jodogne/orthanc-plugins:1.12.3 --username=orthanc --password=orthanc --orthanc=http://orthanc:8042/ --openslide=libopenslide.so /tmp/Source.svs
+  $ docker run -t -i --rm --link=orthanc-wsi:orthanc --entrypoint=OrthancWSIDicomizer -v /tmp/Source.svs:/tmp/Source.svs:ro jodogne/orthanc-plugins:1.12.4 --username=orthanc --password=orthanc --orthanc=http://orthanc:8042/ --openslide=libopenslide.so /tmp/Source.svs
 
 
 PostgreSQL and Orthanc inside Docker
@@ -268,7 +268,7 @@ with the default Orthanc configuration file::
 
   $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' some-postgres
   $ docker inspect --format '{{ .NetworkSettings.Ports }}' some-postgres
-  $ docker run --rm --entrypoint=cat jodogne/orthanc-plugins:1.12.3 /etc/orthanc/orthanc.json > /tmp/orthanc.json
+  $ docker run --rm --entrypoint=cat jodogne/orthanc-plugins:1.12.4 /etc/orthanc/orthanc.json > /tmp/orthanc.json
 
 .. highlight:: text
 
@@ -289,7 +289,7 @@ values Host and Port to what docker inspect said above)::
 
 Finally, you can start Orthanc::
 
-  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc-plugins:1.12.3
+  $ docker run -p 4242:4242 -p 8042:8042 --rm -v /tmp/orthanc.json:/etc/orthanc/orthanc.json:ro jodogne/orthanc-plugins:1.12.4
 
 
 Debugging
@@ -300,5 +300,5 @@ Debugging
 For debugging purpose, you can start an interactive bash session as
 follows::
 
-  $ docker run -i -t --rm --entrypoint=bash jodogne/orthanc:1.12.3
-  $ docker run -i -t --rm --entrypoint=bash jodogne/orthanc-plugins:1.12.3
+  $ docker run -i -t --rm --entrypoint=bash jodogne/orthanc:1.12.4
+  $ docker run -i -t --rm --entrypoint=bash jodogne/orthanc-plugins:1.12.4
