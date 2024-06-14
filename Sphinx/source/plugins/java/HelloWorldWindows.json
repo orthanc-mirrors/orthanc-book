@@ -1,0 +1,8 @@
+{
+  "Plugins" : [ "./OrthancJava.dll" ],
+  "Java" : {
+    "Enabled" : true,
+    "Classpath" : "./OrthancJavaSDK.jar;.",
+    "InitializationClass" : "HelloWorld"
+  }
+}
