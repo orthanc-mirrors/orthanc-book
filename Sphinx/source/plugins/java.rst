@@ -102,8 +102,8 @@ developers of Java applications for Orthanc need a set of Java classes
 that provide access to the native functions of the Orthanc plugin SDK.
 
 The Orthanc Java SDK is available in the folder ``JavaSDK`` of the
-source distribution. A cross-platform ``.jar`` file containing the
-Orthanc Java SDK can be compiled as follows::
+source distribution. A ``.jar`` file containing the Orthanc Java SDK
+can be compiled as follows::
 
   $ mkdir BuildJavaSDK
   $ cd BuildJavaSDK
@@ -111,7 +111,13 @@ Orthanc Java SDK can be compiled as follows::
   $ make
 
 This requires a JDK to be installed on your computer. This generates
-the file ``OrthancJavaSDK.jar``.
+the file ``OrthancJavaSDK.jar``. Alternatively, this cross-platform
+``.jar`` library is available in a precompiled form at:
+
+* The `following location
+  <https://orthanc.uclouvain.be/downloads/cross-platform/orthanc-java/index.html>`__
+  (evidently, make sure to download the version that matches your
+  version of the ``libOrthancJava.so|.dll`` shared library).
 
 
 Usage
@@ -188,7 +194,12 @@ Instructions for using the sample FHIR server for Orthanc that is
 described in the `reference paper
 <https://doi.org/10.5220/0012384600003657>`__ can be found in the
 `source distribution
-<https://orthanc.uclouvain.be/hg/orthanc-java/file/default/Samples/FHIR/NOTES.txt>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-java/file/default/Samples/FHIR/>`__.
+
+A precompiled version of the FHIR server is also available at the
+`following location
+<https://orthanc.uclouvain.be/downloads/cross-platform/orthanc-java/index.html>`__.
+
 
 
 Licensing
