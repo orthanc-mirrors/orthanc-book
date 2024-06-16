@@ -286,7 +286,16 @@ Explorer, as depicted in the following screenshot:
 .. image:: stl/nexus.png
            :align: center
            :width: 800
+|
 
+Starting with release 1.2 of the STL plugin, the `3DHOP viewer
+<https://www.3dhop.net/>`__ is also available to render DICOM-ized
+Nexus models:
+
+.. image:: stl/3dhop.png
+           :align: center
+           :width: 800
+                   
 
 Internals
 ^^^^^^^^^
