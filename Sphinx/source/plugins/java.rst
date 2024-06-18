@@ -30,6 +30,19 @@ As of release 1.0 of the plugin, the coverage of the C SDK is about
 <https://doi.org/10.5220/0012384600003657>`__.
 
 
+How to get it ?
+---------------
+
+Binaries are included in:
+
+- The `orthancteam/orthanc Docker image <https://hub.docker.com/r/orthancteam/orthanc>`__
+- The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
+
+Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-java/file/tip/NEWS>`__.
+
+Compilation instructions are available below.
+
+
 Source code
 -----------
 
@@ -157,6 +170,43 @@ of the plugin.
 You can find the full **Javadoc documentation of the Orthanc Java
 SDK** `at the following location
 <https://orthanc.uclouvain.be/javadoc/>`__.
+
+
+Troubleshooting
+---------------
+
+Microsoft Windows
+.................
+
+Pre-compiled binaries for Microsoft Windows are now part of the 
+`Windows installers <https://www.orthanc-server.com/download-windows.php>`__
+but not installed by default.  They are also `available here
+<https://orthanc.uclouvain.be/downloads/windows-64/orthanc-java/index.html>`__.
+
+Pay also attention to pick the right 32/64 bits version.  If you are
+running Orthanc 64bits, install Java in 64bits and select the 64bits
+Java plugin too.
+
+When you install Java on your Windows machine, make sure to add the path to 
+``jvm.dll`` to your ``Path`` environment variable for at ``System`` level, not user level.
+E.g: ``C:\Program Files\Java\jre-1.8\bin\server\``.
+
+If you get the following error::
+  
+  LoadLibrary(C:\Program Files\Orthanc Server\Plugins\OrthancJava.dll) failed: Error 126
+
+This very likely means that OrthancJava.dll can not find the ``jvm.dll``.  Check your system ``Path``.
+
+
+If you get the following errors::
+  
+  LoadLibrary(C:\Program Files\Orthanc Server\Plugins\OrthancJava.dll) failed: Error 193
+  Error while using a shared library (plugin): You are most probably trying to load a 32bit plugin into a 64bit version of Orthanc
+
+This very likely means that Java 32bits has been installed on a 64bits version of Windows.
+
+`Process Monitor <https://learn.microsoft.com/en-us/sysinternals/downloads/procmon>`__ 
+should allow you to debug this type of errors.
 
 
 Examples
