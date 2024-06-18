@@ -81,6 +81,11 @@ that:
   Explorer. Please use Mozilla Firefox, Google Chrome, Apple Safari,
   or `any WebKit-based Web browser <https://en.wikipedia.org/wiki/WebKit>`__.
  
+**Note** that, if you have installed Orthanc through the Windows Installer
+or through a Docker image, you very likely have access to the more user friendly
+:ref:`Orthanc Explorer 2 <orthanc-explorer-2>` interface on 
+http://localhost:8042/ui/app/.
+
 
 Uploading DICOM files
 ---------------------
