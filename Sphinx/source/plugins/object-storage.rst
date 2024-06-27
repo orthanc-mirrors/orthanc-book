@@ -30,13 +30,8 @@ when deploying an application in the cloud.
 Pre-compiled binaries
 ---------------------
 
-These 3 plugins are provided as part of the ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>`.
-The AWS plugin is available in the default Docker images while the Azure and Google plugins are available
-in the ``-full`` images.
-
-The Azure plugin is also available as part of the `Windows Installer
-<https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
-(only for 64bits platform).
+Note about proprietary cloud storage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 These plugins are used to interface Orthanc with commercial and
 proprietary cloud services that you accept to pay. As a consequence,
@@ -48,6 +43,42 @@ Although you are obviously free to compile these plugins by
 yourself (instructions are given below), purchasing such support
 contracts makes the Orthanc project sustainable in the long term, to
 the benefit of the worldwide community of medical imaging.
+
+
+``orthancteam/orthanc`` Docker image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All the 3 plugins are provided as part of the ``orthancteam/orthanc``
+:ref:`Docker images <docker-orthancteam>`. The AWS plugin is available
+in the default Docker images, while the Azure and Google plugins are
+available in the ``-full`` images.
+
+
+AWS S3 plugin
+^^^^^^^^^^^^^
+
+Because the AWS S3 plugin is compatible with free and open-source
+implementations of the S3 protocol (notably MinIO and Ceph), we
+provide pre-compiled binaries of the AWS S3 plugin, which can be found
+at the following locations:
+
+* In the `official Microsoft Windows installers <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__, starting with release 24.6.3.
+* For `Microsoft Windows 32 <https://orthanc.uclouvain.be/downloads/windows-32/orthanc-aws-s3/index.html>`__,
+* For `Microsoft Windows 64 <https://orthanc.uclouvain.be/downloads/windows-64/orthanc-aws-s3/index.html>`__,
+* For `cross-distribution Linux <https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-aws-s3/index.html>`__,
+* In the :ref:`backport Debian repository <binaries>` (notably compatible with Ubuntu 22.04 and 24.04),
+* In the :ref:`jodogne/orthanc Docker images <docker>`,
+* In the :ref:`orthancteam/orthanc Docker images <docker-orthancteam>`.
+
+
+Microsoft Azure plugin
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Azure plugin is also available as part of the `Windows Installer
+<https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
+(only for 64bits platform).
+
+
 
 
 Configuration
@@ -426,7 +457,7 @@ Compile::
 **NB:** If you don't want to use vcpkg, you can use the following
 command (this syntax is not compatible with Ninja yet)::
 
-  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF ../../orthanc-object-storage/Aws
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF -DUSE_SYSTEM_ORTHANC_SDK=OFF ../../orthanc-object-storage/Aws
   $ make
 
 Crypto++ must be installed (on Ubuntu, run ``sudo apt install libcrypto++-dev``).
