@@ -272,10 +272,6 @@ This caching might cause issues if the dictionary of DICOM tags is
 subsequently modified, which implies that the cached JSON file does
 not perfectly match the new dictionary.
 
-Starting from 1.9.0, these files are not necessary anymore.  They can
-possibly be removed by the :ref:`Housekeeper plugin <housekeeper-plugin>`
-to reclaim disk space.
-
 .. highlight:: bash
 
 Since Orthanc 1.2.0, you can force the re-generation of the cached
@@ -296,8 +292,8 @@ match the new content of the dictionary::
   I0222 08:56:00.929425 FilesystemStorage.cpp:118] Creating attachment "3c830b66-8a00-42f0-aa3a-5e37b4a8b5a4" of "JSON summary of DICOM" type (size: 1MB)
 
 These DICOM-as-JSON attachments are not automatically generated
-anymore starting with Orthanc 1.9.1.
-
+anymore starting with Orthanc 1.9.1.  They can possibly be removed 
+by the :ref:`Housekeeper plugin <housekeeper-plugin>` to reclaim disk space.
 
 .. _registry:
 
