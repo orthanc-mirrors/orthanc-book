@@ -264,13 +264,17 @@ In the version of Orthanc <= 1.9.0, whenever Orthanc receives a DICOM
 file, it pre-computes a JSON summary of its DICOM tags, and caches
 this JSON file as an attachment to the DICOM instance (accessible at
 the ``/instances/{...}/attachments/dicom-as-json/`` URI). This
-attachment is used as a cache to seep up future accesses to
+attachment is used as a cache to speed up future accesses to
 ``/instances/.../tags``, lookups using ``/tools/find`` or C-FIND
 queries.
 
 This caching might cause issues if the dictionary of DICOM tags is
 subsequently modified, which implies that the cached JSON file does
 not perfectly match the new dictionary.
+
+Starting from 1.9.0, these files are not necessary anymore.  They can
+possibly be removed by the :ref:`Housekeeper plugin <housekeeper-plugin>`
+to reclaim disk space.
 
 .. highlight:: bash
 
