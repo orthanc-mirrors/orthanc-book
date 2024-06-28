@@ -10,42 +10,75 @@ Release notes
 -------------
 
 Release notes are available `here
-<https://orthanc.uclouvain.be/hg/orthanc-object-storage/file/default/NEWS>`__ 
-   
+<https://orthanc.uclouvain.be/hg/orthanc-object-storage/file/default/NEWS>`__.
+
 Introduction
 ------------
 
-These 3 plugins enable storing the Orthanc files in `Object Storage <https://en.wikipedia.org/wiki/Object_storage>`__
-at the 3 main Cloud providers: `AWS <https://aws.amazon.com/s3/>`__, 
-`Azure <https://azure.microsoft.com/en-us/services/storage/blobs/>`__ & 
-`Google Cloud <https://cloud.google.com/storage>`__
+These 3 plugins enable storing the Orthanc files into `object storage
+<https://en.wikipedia.org/wiki/Object_storage>`__ at the 3 public
+cloud providers: `AWS <https://aws.amazon.com/s3/>`__, `Azure
+<https://azure.microsoft.com/en-us/services/storage/blobs/>`__, and
+`Google Cloud <https://cloud.google.com/storage>`__.
 
-Storing Orthanc files in object storage and your index SQL in a 
-managed database allows you to have a stateless Orthanc that does
-not store any data in its local file system which is highly recommended
+Storing Orthanc files in object storage and your index SQL in a
+managed database allows you to have a stateless Orthanc that does not
+store any data in its local file system, which is highly recommended
 when deploying an application in the cloud.
 
 
 Pre-compiled binaries
 ---------------------
 
-These 3 plugins are provided as part of the ``orthancteam/orthanc`` :ref:`Docker images <docker-orthancteam>`.
-The AWS plugin is available in the default Docker images while the Azure and Google plugins are available
-in the ``-full`` images.
-
-The Azure plugin is also available as part of the `Windows Installer
-<https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
-(only for 64bits platform).
+Note about proprietary cloud storage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 These plugins are used to interface Orthanc with commercial and
 proprietary cloud services that you accept to pay. As a consequence,
-the Orthanc project usually doesn't freely update them or fix them unless
-the requester purchases a support contract e.g. at `Orthanc Team <https://orthanc.team>`__.
+the Orthanc project usually doesn't freely update them or fix them
+unless the requester purchases a support contract, e.g., at `Orthanc
+Team <https://orthanc.team>`__.
 
 Although you are obviously free to compile these plugins by
 yourself (instructions are given below), purchasing such support
 contracts makes the Orthanc project sustainable in the long term, to
 the benefit of the worldwide community of medical imaging.
+
+
+``orthancteam/orthanc`` Docker image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All the 3 plugins are provided as part of the ``orthancteam/orthanc``
+:ref:`Docker images <docker-orthancteam>`. The AWS plugin is available
+in the default Docker images, while the Azure and Google plugins are
+available in the ``-full`` images.
+
+
+AWS S3 plugin
+^^^^^^^^^^^^^
+
+Because the AWS S3 plugin is compatible with free and open-source
+implementations of the S3 protocol (notably MinIO and Ceph), we
+provide pre-compiled binaries of the AWS S3 plugin, which can be found
+at the following locations:
+
+* In the `official Microsoft Windows installers <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__, starting with release 24.6.3.
+* For `Microsoft Windows 32 <https://orthanc.uclouvain.be/downloads/windows-32/orthanc-aws-s3/index.html>`__,
+* For `Microsoft Windows 64 <https://orthanc.uclouvain.be/downloads/windows-64/orthanc-aws-s3/index.html>`__,
+* For `cross-distribution Linux <https://orthanc.uclouvain.be/downloads/linux-standard-base/orthanc-aws-s3/index.html>`__,
+* In the :ref:`backport Debian repository <binaries>` (notably compatible with Ubuntu 22.04 and 24.04),
+* In the :ref:`jodogne/orthanc Docker images <docker>`,
+* In the :ref:`orthancteam/orthanc Docker images <docker-orthancteam>`.
+
+
+Microsoft Azure plugin
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Azure plugin is also available as part of the `Windows Installer
+<https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
+(only for 64bits platform).
+
+
 
 
 Configuration
@@ -90,6 +123,12 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
 
 The **UseTransferManager** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
 This option was introduced in version 2.3.0.  If set to false (default value), the default "object" mode is used.
+
+**Important:** On Microsoft Windows, it is recommended to set the
+environment variable ``AWS_EC2_METADATA_DISABLED`` to ``true`` to
+speed up the initialization of the plugin. The reasons are explained
+in the `AWS official documentation
+<https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html>`__.
 
 
 .. _minio:
@@ -209,7 +248,7 @@ Moving files between file-system and object-storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When the ``HybridMode`` is set to ``WriteToFileSystem``, it is sometimes useful to move old files
-to the object-storage for long term archive or to `pre-fetch` files from object-storage to file
+to the object-storage for long term archive or to "pre-fetch" files from object-storage to file
 system for improved performances e.g when before opening the study in a viewer.
 
 When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is useful to move file from the
@@ -236,12 +275,12 @@ Other configuration options
 The **StorageStructure** configuration allows you to select the way objects are organized
 within the storage (``flat`` or ``legacy``).  
 Unlike the traditional file system in which Orthanc uses 2 levels
-of folders, object storages usually have no limit on the number of files per folder and 
+of folders, an object storage usually has no limit on the number of files per folder and 
 therefore all objects are stored at the root level of the object storage.  This is the
-default ``flat`` behaviour.  Note that, in the ``flat`` mode, an extension `.dcm` or `.json`
+default ``flat`` behavior.  Note that, in the ``flat`` mode, an extension ``.dcm`` or ``.json``
 is added to the filename which is not the case in the legacy mode.
 
-The ``legacy`` behaviour mimics the Orthanc File System convention.  This is actually helpful
+The ``legacy`` behavior mimics the Orthanc File System convention.  This is actually helpful
 when migrating your data from a file system to an object storage since you can copy all the file
 hierarchy as is.
 
@@ -332,7 +371,7 @@ To summarize:
 
 The format of data stored on disk is therefore the following:
 
-- **VERSION HEADER**: 2 bytes: identify the structure of the following data currently `A1`
+- **VERSION HEADER**: 2 bytes: identify the structure of the following data currently ``A1``
 - **MASTER KEY ID**: 4 bytes: a numerical ID of the KEK that was used to encrypt the DEK
 - **EIV**: 32 bytes: IV used by DEK for data encryption; encrypted by KEK
 - **EDEK**: 32 bytes: the DEK encrypted by the KEK.
@@ -348,11 +387,11 @@ AES Keys shall be 32 bytes long (256 bits) and encoded in base64.  Here's a samp
 
   openssl rand -base64 -out /tmp/test.key 32
 
-Each key must have a unique id that is a uint32 number.
+Each key must have a unique id that is a ``uint32`` number.
 
 .. highlight:: json
 
-Here's a sample configuration file of the `StorageEncryption` section of the plugins::
+Here's a sample configuration file of the ``StorageEncryption`` section of the plugins::
 
   {
     "GoogleCloudStorage" : {
@@ -418,7 +457,7 @@ Compile::
 **NB:** If you don't want to use vcpkg, you can use the following
 command (this syntax is not compatible with Ninja yet)::
 
-  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF ../../orthanc-object-storage/Aws
+  $ cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_VCPKG_PACKAGES=OFF -DUSE_SYSTEM_GOOGLE_TEST=OFF -DUSE_SYSTEM_ORTHANC_SDK=OFF ../../orthanc-object-storage/Aws
   $ make
 
 Crypto++ must be installed (on Ubuntu, run ``sudo apt install libcrypto++-dev``).
