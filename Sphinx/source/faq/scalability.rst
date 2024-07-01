@@ -319,7 +319,11 @@ Care must be taken to the following aspects:
   option to control the maximum number of retries. If the maximum
   number of retries is exceeded, the ``503 Service Unavailable`` HTTP
   error is raised (server overloaded because of unsuccessful retries
-  of concurrent transactions).
+  of concurrent transactions).  Note that, since version 6.0 of the PostgreSQL
+  plugin, it is now possible to configure the ``TransactionMode`` to 
+  ``ReadCommitted`` instead of the default ``Serializable`` mode to avoid
+  most of the transactions collisions.  This option is not (yet) available
+  for the MySQL plugin.
 
 * If a higher-level application **modifies metadata and/or
   attachments** in the presence of multiple writers, Orthanc provides
