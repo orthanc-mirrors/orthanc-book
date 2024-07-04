@@ -261,9 +261,14 @@ The option ``Python.AllowThreads`` was introduced in release 4.3 of
 the plugin. If set to ``true``, the Python GIL (`Global Interpreter
 Lock <https://en.wikipedia.org/wiki/Global_interpreter_lock>`__) is
 released during the calls to the native SDK. **This allows multiple
-Python threads to simultaneously access the Orthanc core.** However,
-this might concurrency issues: Make sure that your Python code is
-**thread-safe** before enabling this option!
+Python threads to simultaneously access the Orthanc core.**
+Internally, this corresponds to the ``Py_BEGIN_ALLOW_THREADS``
+`construction of Python
+<https://docs.python.org/3/c-api/init.html#releasing-the-gil-from-extension-code>`__. However,
+this could possibly introduce concurrency issues: Make sure that your
+Python code is **thread-safe** before enabling this option! Indeed,
+different threads must not modify the Python objects that are used
+during a call to the SDK of Orthanc.
 
 
 .. warning::
