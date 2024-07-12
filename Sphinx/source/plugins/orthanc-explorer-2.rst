@@ -35,7 +35,8 @@ The source code is available on `GitHub <https://github.com/orthanc-server/ortha
 Binaries are included in:
 
 - The `orthancteam/orthanc Docker image <https://hub.docker.com/r/orthancteam/orthanc>`__
-- The `Windows Installer <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
+- The :ref:`jodogne/orthanc-plugins Docker image <https://orthanc.uclouvain.be/book/users/docker.html>`
+- The `Windows Installers <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
 - The `macOS packages <https://orthanc.uclouvain.be/downloads/macos/packages/index.html>`__
 
 Release notes are available `here <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/release-notes.md>`__.
