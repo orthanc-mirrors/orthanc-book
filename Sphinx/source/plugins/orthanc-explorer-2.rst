@@ -34,10 +34,13 @@ The source code is available on `GitHub <https://github.com/orthanc-server/ortha
 
 Binaries are included in:
 
-- The `orthancteam/orthanc Docker image <https://hub.docker.com/r/orthancteam/orthanc>`__
-- The `Windows Installer <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__
-- The `macOS packages <https://orthanc.uclouvain.be/downloads/macos/packages/index.html>`__
+- The :ref:`orthancteam/orthanc Docker image <docker-orthancteam>`,
+- The :ref:`jodogne/orthanc-plugins Docker image <docker>`,
+- The `Windows installers <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__,
+- The `macOS packages <https://orthanc.uclouvain.be/downloads/macos/packages/index.html>`__.
 
+Precompiled binaries of the plugin alone are also available for multiple platforms on the `official download site <https://orthanc.uclouvain.be/downloads/index.html>`__.
+  
 Release notes are available `here <https://github.com/orthanc-server/orthanc-explorer-2/blob/master/release-notes.md>`__.
 
 Depending on the configuration, the plugin can replace the default Orthanc UI you are redirected to when accessing orthanc at `http://localhost:8042/ <http://localhost:8042/>`__.

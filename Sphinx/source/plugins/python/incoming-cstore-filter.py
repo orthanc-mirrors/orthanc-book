@@ -1,13 +1,11 @@
-import json
 import orthanc
-
 
 # this script accepts 3 instances from STORESCU and then, rejects the next ones
 
 storeScuInstanceCounter = 0
 
 def FilterIncomingCStoreInstance(receivedDicom):
-    # The list ofvalid status codes for DIMSE C-STORE can be found:
+    # The list of valid status codes for DIMSE C-STORE can be found:
     # https://dicom.nema.org/medical/Dicom/2021e/output/chtml/part04/sect_B.2.3.html
 
     global storeScuInstanceCounter

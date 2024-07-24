@@ -22,9 +22,11 @@ automatically generated from the `Orthanc plugin SDK in C
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
-As of release 3.2 of the plugin, the coverage of the C SDK is about
-87% (138 functions are automatically wrapped in Python out of a total
-of 158 functions from the Orthanc SDK 1.8.1).
+As of release 4.3 of the plugin, **the coverage of the C SDK is about
+85%** (140 functions are automatically wrapped in Python out of a
+total of 165 functions from the Orthanc SDK 1.10.0). Starting with
+release 4.3, the code model that is used to generate the Python
+wrapper is shared with the :ref:`Java wrapper <java-plugin>`.
 
 
 Source code
@@ -35,6 +37,11 @@ Source code
 
 * Link to the `code repository
   <https://orthanc.uclouvain.be/hg/orthanc-python/>`__.
+
+* Link to the `Python interface
+  <https://orthanc.uclouvain.be/downloads/cross-platform/orthanc-python/index.html>`__
+  (cf. :ref:`below <python-code-completion>` for more information
+  about the ``orthanc.pyi`` file).
 
   
 Licensing
@@ -241,7 +248,8 @@ section as follows::
     "Python" : {
       "Path" : "my-plugin.py",  // Alias for the global "PythonScript" option
       "Verbose" : false,        // Alias for the global "PythonVerbose" option
-      "DisplayMemoryUsage" : false
+      "DisplayMemoryUsage" : false,
+      "AllowThreads" : false
     }
   }
 
@@ -249,10 +257,40 @@ The option ``Python.DisplayMemoryUsage`` was introduced in release 4.1
 of the plugin. If set to ``true``, Orthanc will display the memory
 usage of the Python interpreter every second.
   
+The option ``Python.AllowThreads`` was introduced in release 4.3 of
+the plugin. If set to ``true``, the Python GIL (`Global Interpreter
+Lock <https://en.wikipedia.org/wiki/Global_interpreter_lock>`__) is
+released during the calls to the native SDK. **This allows multiple
+Python threads to simultaneously access the Orthanc core.**
+Internally, this corresponds to the ``Py_BEGIN_ALLOW_THREADS``
+`construction of Python
+<https://docs.python.org/3/c-api/init.html#releasing-the-gil-from-extension-code>`__. However,
+this could possibly introduce concurrency issues: Make sure that your
+Python code is **thread-safe** before enabling this option! Indeed,
+different threads must not modify the Python objects that are used
+during a call to the SDK of Orthanc.
+
 
 .. warning::
    Never call your Python plugin ``orthanc.py``! Otherwise, your plugin will
    conflict with the ``orthanc`` module that is installed at runtime.
+
+
+.. _python-code-completion:
+
+Documentation and code completion
+---------------------------------
+
+Starting with release 4.3 of the Python plugin for Orthanc, a `Python
+interface (cf. PEP 484 - Type Hints)
+<https://peps.python.org/pep-0484/>`__ is available. By downloading
+the file ``orthanc.pyi`` `from this location
+<https://orthanc.uclouvain.be/downloads/cross-platform/orthanc-python/index.html>`__
+and putting it in the same folder as your Python script, your IDE will
+provide you code completion, as well as full documentation of the
+Orthanc SDK in the Python language. This file is notably known to work
+with Visual Studio Code and PyCharm.
+
 
 
 Samples
