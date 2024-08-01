@@ -1,7 +1,7 @@
 .. highlight:: bash
 .. _cookbook:
 
-Quickstart
+Quickstart (all platforms)
 ==========
 
 .. contents::
