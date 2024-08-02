@@ -65,7 +65,6 @@ Remember that we have installed all plugins ?  Therefore, you'll have the choice
 * The :ref:`Stone Web viewer <stone_webviewer>`
 * The :ref:`OHIF viewer <ohif>`
 * :ref:`Volview <volview>`
-* The :ref:`Osimis WebViewer plugin <osimis_webviewer>` (now deprecated)
 
 .. image:: ../images/win-quick-start-orthanc-study-list.png
            :align: center
