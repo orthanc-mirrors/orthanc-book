@@ -32,7 +32,7 @@ Step 2: Install Orthanc
 * Accept the license agreement.
 * Choose the installation directory (default ``C:\Program Files\Orthanc Server`` is usually fine).
 * Select the folder in which Orthanc will store its data files (default ``C:\Orthanc`` is usually fine).
-* Select the plugins to install.  Although you might not need all of them, they are all selected by default and this is fine.
+* Select the plugins to install.  Although you might not need all of them, they are all selected by default and this is fine : plugins that are not explicitly enabled do not consume any resources.
 * Complete the installation by following the prompts.
 
 .. image:: ../images/win-quick-start-inst.png
