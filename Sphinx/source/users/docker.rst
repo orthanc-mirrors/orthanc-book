@@ -30,8 +30,11 @@ source code of the corresponding Docker images is available on `GitHub
   images that are described on this page are always kept in sync with
   the latest releases of the Orthanc project, with a basic
   configuration system that is inherited from the Debian packages
-  (i.e. manual edition of the configuration files). These images are
-  most useful to **software developers and researchers**.
+  (i.e., manual edition of the configuration files). This is also
+  where the new experimental features from `Sébastien Jodogne's
+  research team at UCLouvain <https://orthanc.uclouvain.be/>`__ are
+  initially released. These images are most useful to **software
+  developers and researchers**.
 
 * Our commercial partner `Orthanc Team <https://orthanc.team/>`__ also
   `publishes separated Docker images
