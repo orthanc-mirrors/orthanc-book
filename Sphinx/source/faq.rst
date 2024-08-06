@@ -14,6 +14,7 @@ General questions about the project
    faq/features.rst
    faq/scalability.rst
    faq/security.rst
+   faq/mainline-binaries.rst
    faq/proprietary.rst
    faq/why-orthanc.rst
    faq/donations.rst
