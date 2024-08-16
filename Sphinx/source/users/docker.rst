@@ -24,7 +24,13 @@ the `DockerHub platform <https://hub.docker.com/u/jodogne/>`__. The
 source code of the corresponding Docker images is available on `GitHub
 <https://github.com/jodogne/OrthancDocker>`__.
 
-**Note about Orthanc vs. Orthanc Team Docker images:** 
+
+.. _docker-jodogne-vs-orthanc-team:
+
+Orthanc vs. Orthanc Team Docker images
+--------------------------------------
+
+Two different flavors of Docker images for Orthanc are available:
 
 * The ``jodogne/orthanc`` and ``jodogne/orthanc-plugins`` Docker
   images that are described on this page are always kept in sync with
@@ -33,20 +39,23 @@ source code of the corresponding Docker images is available on `GitHub
   (i.e., manual edition of the configuration files). This is also
   where the new experimental features from `Sébastien Jodogne's
   research team at UCLouvain <https://orthanc.uclouvain.be/>`__ are
-  initially released. These images are most useful to **software
-  developers and researchers**.
+  initially released. The binaries used in these images correspond to
+  the Linux Standard Base binaries. The default user interface is the
+  built-in **Orthanc Explorer**. These images are most useful to
+  **software developers and researchers**.
 
 * Our commercial partner `Orthanc Team <https://orthanc.team/>`__ also
-  `publishes separated Docker images
+  `publishes separate Docker images
   <https://hub.docker.com/r/orthancteam/orthanc>`__.  These
-  ``orthancteam/orthanc`` images are used by the technical team of 
-  the Orthanc Team company in order to provide professional support 
-  to their customers, with a
-  configuration system that can be tuned through **environment
-  variables** (which is very handy if using ``docker-compose`` or
-  Kubernetes). A :ref:`specific page <docker-orthancteam>` is
-  available to describe how these images should be used. These images
-  are targeted at **ops teams**.
+  ``orthancteam/orthanc`` images are used by the technical team of the
+  Orthanc Team company in order to provide professional support to
+  their customers, with a configuration system that can be tuned using
+  **environment variables** (which is very handy if using Docker
+  Compose or Kubernetes). The binaries used in these images are
+  compiled from scratch. The default user interface is the **Orthanc
+  Explorer 2** :ref:`plugin <orthanc-explorer-2>`. A :ref:`specific
+  page <docker-orthancteam>` is available to describe how these images
+  should be used. These images are targeted at **ops teams**.
 
 **Note for CentOS users:** The Docker environment might be difficult to
 configure on your platform. Hints are available on the `Orthanc Users
