@@ -49,6 +49,9 @@ provide a configuration system through:
 - classical configuration files
 - a mix of these options
 
+A comparison against the ``jodogne/orthanc`` Docker images :ref:`is
+available <docker-jodogne-vs-orthanc-team>`.
+
 This `repository <https://github.com/orthanc-server/orthanc-setup-samples/src>`__
 contains lots of examples on how to use these images.  In particular,
 `this example <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/all-usages/docker-compose.yml>`__ 
