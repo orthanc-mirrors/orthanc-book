@@ -134,11 +134,14 @@ The advantages of using DICOMweb over the default DICOM JSON are:
 
 * More standard-compliant.
 
+* More robust (e.g. `this issue <https://github.com/OHIF/Viewers/issues/4271#issuecomment-2242873446>`__ only happens with the ``json`` data source)
+
 * The OHIF study list is accessible, notably as a button on the
   welcome screen of Orthanc Explorer. The study list is not available
   if using the DICOM JSON data source.
 
 * No additional space is used in the Orthanc database.
+
   
 Here is a minimal configuration file to use DICOMweb::
 
