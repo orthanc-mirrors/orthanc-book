@@ -198,7 +198,7 @@ Sample configuration::
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat",               // see below
     "EnableLegacyUnknownFiles": true,         // optional: see below
-    "StorageEncryption" : {}                  // optional: see the section related to encryption
+    "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
   }
 
@@ -215,7 +215,7 @@ Sample configuration::
     "MigrationFromFileSystemEnabled": false,  // see below
     "StorageStructure": "flat",               // see below
     "EnableLegacyUnknownFiles": true,         // optional: see below
-    "StorageEncryption" : {}                  // optional: see the section related to encryption
+    "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
   }
 
