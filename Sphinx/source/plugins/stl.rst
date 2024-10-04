@@ -322,6 +322,18 @@ the configuration file of Orthanc as follows::
     }
   }
 
+More advanced configuration options are available::
+
+  {
+    "Plugins" : [ "libOrthancSTL.so" ],
+    "STL" : {
+      "EnableNexus" : true,
+      "3DHOP" : {
+        "CanvasStyle": "background-color: rgb(0,0,0)"  // Change the background of 3DHOP viewer
+      }
+    }
+  }
+
 
 REST API
 ^^^^^^^^
