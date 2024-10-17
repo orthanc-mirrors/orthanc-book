@@ -229,9 +229,9 @@ route DICOM instances:
 
 * ``ModifyInstance(instanceId, replacements, removals, removePrivateTags)``
   modifies an instance.
-* ``SendToModality(instanceId, modality)`` performs a C-Store to the 
+* ``SendToModality(instanceId, modality)`` performs a synchronous C-Store to the 
   target modality.
-* ``SendToPeer(instanceId, peer)`` sends the instance to a remote Orthanc peer.
+* ``SendToPeer(instanceId, peer)`` sends the instance to a remote Orthanc peer synchronously.
 * ``Delete(instanceId)`` deletes the instance.
 
 :ref:`See this section <lua-auto-routing>` for examples. As can be
