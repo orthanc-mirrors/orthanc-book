@@ -52,7 +52,7 @@ provide a configuration system through:
 A comparison against the ``jodogne/orthanc`` Docker images :ref:`is
 available <docker-jodogne-vs-orthanc-team>`.
 
-This `repository <https://github.com/orthanc-server/orthanc-setup-samples/src>`__
+This `repository <https://github.com/orthanc-server/orthanc-setup-samples/>`__
 contains lots of examples on how to use these images.  In particular,
 `this example <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/all-usages/docker-compose.yml>`__ 
 shows all the way that can be used to generate the same
