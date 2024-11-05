@@ -77,7 +77,14 @@ Here's a sample configuration section for this plugin with its default values::
         "UnnecessaryDicomAsJsonFiles": true,
         "IngestTranscodingChange": true,
         "DicomWebCacheChange": true   // new in 1.12.2
-      }
+      },
+
+      // When rebuilding MainDicomTags, limit to a single level of resource
+      // which can greatly improve performances e.g. if you have only updated 
+      // the Study level ExtraMainDicomTags.
+      // Allowed values: "Patient", "Study", "Series", "Instance", "All"
+      "LimitMainDicomTagsReconstructLevel": "All"
+
     }
   }
 
