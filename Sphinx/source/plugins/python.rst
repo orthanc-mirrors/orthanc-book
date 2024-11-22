@@ -15,6 +15,18 @@ This plugin can be used to write :ref:`Orthanc plugins
 <https://en.wikipedia.org/wiki/Python_(programming_language)>`__
 instead of the more complex C/C++ programming languages.
 
+The Orthanc plugins interfaces are exposed in an ``orthanc`` module that you 
+should include in your script through ``import orthanc``.  This
+module is only available when the script is running inside Orthanc.
+It is therefore not possible to execute your script outside of Orthanc.
+If you need to develop a complex plugin, it is advised to split it in
+2
+
+* One part that is independent from the ``orthanc`` module that you can develop
+  and test locally.
+* One small part that is using the ``orthanc`` module and that acts as glue-code
+  between Orthanc and your business logic.
+
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
@@ -290,7 +302,6 @@ and putting it in the same folder as your Python script, your IDE will
 provide you code completion, as well as full documentation of the
 Orthanc SDK in the Python language. This file is notably known to work
 with Visual Studio Code and PyCharm.
-
 
 
 Samples
