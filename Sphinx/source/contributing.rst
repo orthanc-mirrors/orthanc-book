@@ -17,7 +17,6 @@ Contributing to Orthanc
           * **Orthanc Core**:
 
             - Continue improving the :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` User Interface
-            - Support of DICOM C-GET SCU
    
           * **Stone Web viewer**:
 

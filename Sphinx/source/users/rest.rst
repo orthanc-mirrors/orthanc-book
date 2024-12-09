@@ -840,6 +840,28 @@ the modality ``sample`` to another Orthanc whose AET is ``ORTHANCB``::
             }'
 
 
+Performing C-Get (new in Orthanc 1.12.6)
+---------------------------------------
+
+.. highlight:: bash
+
+You can perform a DICOM C-Get to retrieve a specific study from one modality.  
+
+I.e. to move a study whose you know the ``StudyInstanceUID`` from
+the modality ``sample`` to this Orthanc instance::
+
+  $ curl --request POST --url http://localhost:8042/modalities/samples/get \
+    --data '{ 
+              "Level" : "Study", 
+              "Resources" : [ 
+                { 
+                  "StudyInstanceUID": "1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129" 
+                } 
+              ], 
+              "Timeout": 60 
+            }'
+
+
 Performing Query/Retrieve (C-Find) and Find with REST
 -----------------------------------------------------
 
@@ -978,34 +1000,94 @@ listed in this JSON answer in the initial query we would add to the
 POST body: ``"ModalitiesInStudy":""``
 
 
-Performing Retrieve (C-Move)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Performing Retrieve
+^^^^^^^^^^^^^^^^^^^
+
+Starting from Orthanc 1.12.6, you may retrieve resources following
+a C-Find either through C-Move (unique and default method until Orthanc 1.12.5) 
+or through C-Get.
+
+The default retrieve method is defined by the ``"DicomDefaultRetrieveMethod"`` configuration
+whose default value is ``"C-MOVE"`` to keep backward compatibility with prior
+Orthanc versions.
+
+The retrieve method can also be overriden at each modality level in the ``"RetrieveMethod"``
+field of each ``"DicomModalities"`` entry.
+
+Furthermore, when calling the ``/queries/../retrieve`` REST API endpoint, you may specify
+the ``"RetrieveMethod"`` in the payload to force the retrieve method for this specific call.
+
+
+Performing Retrieve (with C-Move)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: bash
 
-You can perform a C-Move to retrieve all studies within the original
-query using a post command and identifying the Modality (named in this 
-example ``Orthanc``), to be one to in the POST contents::
+If ``C-MOVE`` is the default retrieve method, you can perform a C-Move to retrieve all studies within the original
+query using a post command by identifying the target modality AET (named in this 
+example ``ORTHANC``) directly in the POST payload::
 
-  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data Orthanc
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data ORTHANC
 
 You are also able to perform individual C-Moves for a content item by
 specifying that individual content item::
 
-  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data Orthanc
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data ORTHANC
 
-If C-Moves take too long (for example, performing a C-Move of a big
+If a C-Move takes too long (for example, performing a C-Move of a big
 study), you may run the request in :ref:`asynchronous mode <jobs>`,
 which will create a job in Orthanc::
 
   $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve \
-    --data '{"TargetAet":"Orthanc","Synchronous":false}'
+    --data '{ "TargetAet": "ORTHANC", \
+              "RetrieveMethod": "C-MOVE", \
+              "Synchronous": false \
+            }'
 
 
 .. highlight:: bash
 
 The answer of this POST request is the job ID taking care of the
 C-Move command, :ref:`whose status can be monitored <jobs-monitoring>`
+in order to detect failure or completion::
+
+  {
+      "ID" : "11541b16-e368-41cf-a8e9-3acf4061d238",
+      "Path" : "/jobs/11541b16-e368-41cf-a8e9-3acf4061d238"
+  }
+
+
+
+Performing Retrieve (with C-Get)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+If ``C-GET`` is the default retrieve method, you can perform a C-Get to retrieve all studies within the original
+query using a POST command with an empty payload::
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve --data """
+
+
+You are also able to perform individual C-Gets for a content item by
+specifying that individual content item::
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/answers/0/retrieve --data ""
+
+If a C-Get takes too long (for example, performing a C-Get of a big
+study), you may run the request in :ref:`asynchronous mode <jobs>`,
+which will create a job in Orthanc::
+
+  $ curl --request POST --url http://localhost:8042/queries/5af318ac-78fb-47ff-b0b0-0df18b0588e0/retrieve \
+    --data '{ "RetrieveMethod": "C-GET", \
+              "Synchronous": false \
+            }'
+
+
+.. highlight:: bash
+
+The answer of this POST request is the job ID taking care of the
+C-GET command, :ref:`whose status can be monitored <jobs-monitoring>`
 in order to detect failure or completion::
 
   {
