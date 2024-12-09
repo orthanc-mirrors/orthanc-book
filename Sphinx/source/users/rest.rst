@@ -861,6 +861,27 @@ the modality ``sample`` to this Orthanc instance::
               "Timeout": 60 
             }'
 
+**Note:** When initiating the DICOM association to perform a C-Get, Orthanc
+needs to propose the SOP classes that it will accept to receive.  By default,
+Orthanc will propose the 120 most common SOP classes defined in the DCMTK library.
+If you know the resources you are going to retrieve contain uncommon SOP classes,
+you may provide a ``"SOPClassesInStudy"`` field in the payload.  In this case, Orthanc
+will only propose only these SOP classes during the association; provided that they are 
+accepted by Orthanc (see ``"AcceptedSopClasses"/"RejectedSopClasses"`` configurations)::
+
+  $ curl --request POST --url http://localhost:8042/modalities/samples/get \
+    --data '{ 
+              "Level" : "Study", 
+              "Resources" : [ 
+                { 
+                  "StudyInstanceUID": "1.2.840.113543.6.6.4.7.64067529866380271256212683512383713111129",
+                  "SOPClassesInStudy": "1.2.840.10008.5.1.4.34.10\\1.2.840.10008.5.1.4.34.7"
+                } 
+              ], 
+              "Timeout": 60 
+            }'
+
+
 
 Performing Query/Retrieve (C-Find) and Find with REST
 -----------------------------------------------------
