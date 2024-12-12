@@ -840,7 +840,7 @@ the modality ``sample`` to another Orthanc whose AET is ``ORTHANCB``::
             }'
 
 
-Performing C-Get (new in Orthanc 1.12.6)
+Performing C-Get (coming in Orthanc 1.12.6)
 ---------------------------------------
 
 .. highlight:: bash
@@ -883,8 +883,8 @@ accepted by Orthanc (see ``"AcceptedSopClasses"/"RejectedSopClasses"`` configura
 
 
 
-Performing Query/Retrieve (C-Find) and Find with REST
------------------------------------------------------
+Performing Query/Retrieve (C-Find)
+----------------------------------
 
 *Section contributed by Bryan Dearlove*
 
@@ -1079,8 +1079,8 @@ in order to detect failure or completion::
 
 
 
-Performing Retrieve (with C-Get)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Performing Retrieve (with C-Get coming in Orthanc 1.12.6)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: bash
 
@@ -1120,8 +1120,9 @@ in order to detect failure or completion::
 
 .. _rest-find:
 
-Performing Finds within Orthanc
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Finding resources within Orthanc
+--------------------------------
+
 .. highlight:: bash
 
 Performing a find within the local database of Orthanc is very similar
@@ -1194,7 +1195,7 @@ would do with DICOM C-FIND::
   $ curl -X POST http://localhost:8042/tools/find -d '{"Level":"Series","Query":{"DeviceSerialNumber":"123\\abc"},"Expand":true}'
 
  
-Additional Options
+Additional ``/tools/find`` options
 ^^^^^^^^^^^^^^^^^^
 .. highlight:: json
 
@@ -1249,6 +1250,47 @@ This query will return a response like this one::
 **Important:** Starting with Orthanc 1.12.0, this route in the REST
 API also provide the ``Labels`` and ``LabelsConstraint`` options to
 bring support for :ref:`labels <labels>`.
+
+
+Additional ``/tools/find`` options (new in Orthanc 1.12.5)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Starting with Orthanc 1.12.5 and for DB backends supporting the ``ExtendedFind`` 
+extension (SQLite DB and PostgreSQL 7.0+), you also have the ability to 
+order the results, filter by metadata values and precisely define the content of the
+response.  Check the `API documentation <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1find/post>`__ for full details. A full option call will look like::
+
+  $ curl -X POST http://localhost:8042/tools/find -d ' \
+    {
+      "Level": "Studies",
+      "Query": {
+        "StudyDate": "20200101-"
+      },
+      "MetadataQuery": {
+        "my-metadata": "value*"
+      },
+      "OrderBy": [
+        {
+          "Type": "DicomTag",
+          "Key": "StudyDate",
+          "Direction": "ASC"
+        },
+        {
+          "Type": "Metadata",
+          "Key": "my-metadata",
+          "Direction": "DESC"
+        }
+      ],
+      "Labels": ["Toto", "Tutu"],
+      "LabelsConstraint": "Any",
+      "ParentPatient": "93034833-163e42c3-bc9a428b-194620cf-2c5799e5",
+
+      "ResponseContent": ["MainDicomTags", "Metadata", "Children", "Labels", "Attachments"],
+      "RequestedTags": ["PatientName", "PatientID", "StudyDescription", "StudyDate", "StudyInstanceUID", "ModalitiesInStudy", "NumberOfStudyRelatedSeries"]
+    }'
+
 
 
 .. _changes:
@@ -1342,6 +1384,19 @@ sequence number the changes must be returned::
 A `sample code in the source distribution
 <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Python/ChangesLoop.py>`__
 shows how to use this Changes API to implement a polling loop.
+
+Additional ``/changes`` options (new in Orthanc 1.12.5)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: bash
+
+Starting with Orthanc 1.12.5 and for DB backends supporting the ``ExtendedChanges`` 
+extension (SQLite DB and PostgreSQL 7.0+), you also have the ability to filter
+the changes by type and to order them in reverse order.  
+Check the `API documentation <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1changes/get>`__ for full details::
+
+
+    $ curl 'http://localhost:8042/changes?type=StableStudy;NewPatient&to=7584&limit=100'
 
 
 Deleting resources from Orthanc
