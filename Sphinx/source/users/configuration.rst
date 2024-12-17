@@ -8,7 +8,7 @@ Configuration of Orthanc
 Configuring Orthanc simply consists in providing a configuration file.
 Orthanc has numerous configuration that are documented in the `default
 configuration file
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.4/OrthancServer/Resources/Configuration.json>`_. This
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.5/OrthancServer/Resources/Configuration.json>`_. This
 file is in the `JSON <https://en.wikipedia.org/wiki/JSON>`_ file
 format. You can generate this file file with the following call::
 

@@ -206,6 +206,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/tools/bulk-content``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
 ``/tools/bulk-delete``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-delete/post>`__,,,Delete a set of resources
 ``/tools/bulk-modify``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-modify/post>`__,,,Modify a set of resources
+``/tools/count-resources``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1count-resources/post>`__,,,Count local resources
 ``/tools/create-archive``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/get>`__,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-archive/post>`__,,,Create ZIP archive
 ``/tools/create-dicom``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-dicom/post>`__,,,Create one DICOM instance
 ``/tools/create-media``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/get>`__,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1create-media/post>`__,,,Create DICOMDIR media
