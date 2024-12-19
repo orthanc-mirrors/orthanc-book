@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.4"
+      "version" : "1.12.5"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -21,8 +21,17 @@
          },
          "get" : {
             "deprecated" : false,
-            "description" : "Whenever Orthanc receives a new DICOM instance, this event is recorded in the so-called _Changes Log_. This enables remote scripts to react to the arrival of new DICOM resources. A typical application is auto-routing, where an external script waits for a new DICOM instance to arrive into Orthanc, then forward this instance to another modality.",
+            "description" : "Whenever Orthanc receives a new DICOM instance, this event is recorded in the so-called _Changes Log_. This enables remote scripts to react to the arrival of new DICOM resources. A typical application is auto-routing, where an external script waits for a new DICOM instance to arrive into Orthanc, then forward this instance to another modality. Please note that, when resources are deleted, their corresponding change entries are also removed from the Changes Log, which helps ensuring that this log does not grow indefinitely.",
             "parameters" : [
+               {
+                  "description" : "Request only the last change id (this argument must be used alone)",
+                  "in" : "query",
+                  "name" : "last",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
                {
                   "description" : "Limit the number of results",
                   "in" : "query",
@@ -33,12 +42,30 @@
                   }
                },
                {
-                  "description" : "Show only the resources since the provided index",
+                  "description" : "Show only the resources since the provided index excluded",
                   "in" : "query",
                   "name" : "since",
                   "required" : false,
                   "schema" : {
                      "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Show only the resources till the provided index included (only available if your DB backend supports ExtendedChanges)",
+                  "in" : "query",
+                  "name" : "to",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
+                  "description" : "Show only the changes of the provided type (only available if your DB backend supports ExtendedChanges).  Multiple values can be provided and must be separated by a ';'.",
+                  "in" : "query",
+                  "name" : "type",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
                   }
                }
             ],
@@ -68,6 +95,7 @@
                                  }
                               ],
                               "Done" : false,
+                              "First" : 1,
                               "Last" : 2
                            },
                            "properties" : {
@@ -79,8 +107,12 @@
                                  "type" : "array"
                               },
                               "Done" : {
-                                 "description" : "Whether the last reported change is the last of the full history",
+                                 "description" : "Whether the last reported change is the last of the full history.",
                                  "type" : "boolean"
+                              },
+                              "First" : {
+                                 "description" : "The index of the first reported change, its value-1 can be used for the `to` argument in subsequent calls to this route when browsing the changes in reverse order",
+                                 "type" : "number"
                               },
                               "Last" : {
                                  "description" : "The index of the last reported change, can be used for the `since` argument in subsequent calls to this route",
@@ -156,7 +188,7 @@
             "description" : "List the Orthanc identifiers of all the available DICOM instances",
             "parameters" : [
                {
-                  "description" : "If present, retrieve detailed information about the individual instances",
+                  "description" : "If present, retrieve detailed information about the individual resources, not only their Orthanc identifiers",
                   "in" : "query",
                   "name" : "expand",
                   "required" : false,
@@ -183,9 +215,18 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "in" : "query",
+                  "name" : "response-content",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -217,8 +258,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported instances (if `expand` argument is provided)",
                            "example" : [
-                              "26d2e33b-3239a2d5-64f57e0b-d8da59a7-2ef362e7",
-                              "1a0ac939-976cc50b-21c0f6ab-80200f03-c3b813be"
+                              "001a7d82-54008387-7b23ad57-8fb6202a-6d3b305b",
+                              "001b6592-37c2fbe4-2c07c724-ce9607e2-2bd210e8"
                            ]
                         }
                      }
@@ -334,7 +375,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -727,7 +768,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given instance. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -892,7 +942,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given instance",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -2999,7 +3058,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -3036,7 +3095,6 @@
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
                                  "PatientID" : "Vafk,T,6",
@@ -3181,7 +3239,7 @@
                         "description" : "",
                         "properties" : {
                            "LimitToThisLevelMainDicomTags" : {
-                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is useful e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
                               "type" : "boolean"
                            },
                            "ReconstructFiles" : {
@@ -3333,7 +3391,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -3372,7 +3430,6 @@
                               "Instances" : [ "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f" ],
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160851",
                               "MainDicomTags" : {
                                  "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
                                  "Manufacturer" : "Philips",
@@ -3552,7 +3609,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -3589,7 +3646,6 @@
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
                                  "InstitutionName" : "HUG",
@@ -3610,9 +3666,9 @@
                                  "PatientSex" : ""
                               },
                               "Series" : [
-                                 "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d",
+                                 "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f",
                                  "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
-                                 "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f"
+                                 "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d"
                               ],
                               "Type" : "Study"
                            }
@@ -3770,12 +3826,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [
-                              "1ce8c49a-875e-47ee-8235-7287d1b5bd06",
-                              "1d864388-fbd5-47ef-b52c-17f3f9a87344",
-                              "288beb8a-0548-4b72-8d26-92c1b22ad00b",
-                              "..."
-                           ]
+                           "example" : []
                         }
                      }
                   },
@@ -4624,7 +4675,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -4876,7 +4927,7 @@
                               "type" : "number"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -4992,7 +5043,7 @@
             "description" : "List the Orthanc identifiers of all the available DICOM patients",
             "parameters" : [
                {
-                  "description" : "If present, retrieve detailed information about the individual patients",
+                  "description" : "If present, retrieve detailed information about the individual resources, not only their Orthanc identifiers",
                   "in" : "query",
                   "name" : "expand",
                   "required" : false,
@@ -5019,9 +5070,18 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "in" : "query",
+                  "name" : "response-content",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -5053,7 +5113,7 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported patients (if `expand` argument is provided)",
                            "example" : [
-                              "da39a3ee-5e6b4b0d-3255bfef-95601890-afd80709",
+                              "0946fcb6-cf12ab43-bad958c1-bf057ad5-0fc6f54c",
                               "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0"
                            ]
                         }
@@ -5103,7 +5163,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -5215,7 +5275,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -5347,7 +5407,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -5640,7 +5700,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given patient. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -5805,7 +5874,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given patient",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -6179,7 +6257,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -6214,42 +6292,42 @@
                            "description" : "JSON array containing information about the child DICOM instances",
                            "example" : [
                               {
-                                 "FileSize" : 526866,
-                                 "FileUuid" : "ae097e47-5826-4f9d-9ca4-0d262a929c12",
-                                 "ID" : "7ca06aee-5cb2cc11-d4d71cfc-b6cd777b-83b57611",
-                                 "IndexInSeries" : 165,
+                                 "FileSize" : 526868,
+                                 "FileUuid" : "acda3ad0-00b2-40d3-86c0-8805eb051fa6",
+                                 "ID" : "011ead8d-f2508edd-da315604-80b002df-e678b796",
+                                 "IndexInSeries" : 96,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
                                  "FileSize" : 526870,
-                                 "FileUuid" : "2098edc6-7c49-43b5-be67-45318c0ef7fc",
-                                 "ID" : "6eeb2475-5b5ba0a3-d39fb207-106beb1e-be3df75a",
-                                 "IndexInSeries" : 124,
+                                 "FileUuid" : "e2afef9a-75f7-486c-ad05-b36ceb24af46",
+                                 "ID" : "01252811-30d1c47b-a8c03da5-73177742-48495192",
+                                 "IndexInSeries" : 46,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
                                  "FileSize" : 526870,
-                                 "FileUuid" : "56f4e359-2c96-4356-a951-02ee363effd7",
-                                 "ID" : "c6ce208f-e9d1447d-84fd8575-b48fac0e-7cd6b065",
-                                 "IndexInSeries" : 122,
+                                 "FileUuid" : "a348ecf1-186d-46f6-b39f-e493999df8fa",
+                                 "ID" : "04a30982-835a4b0a-3082b997-060f01f5-071a0f8d",
+                                 "IndexInSeries" : 16,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 526864,
-                                 "FileUuid" : "90f60b6d-056b-4d71-82fb-1d8810e3bf7e",
-                                 "ID" : "792409cc-6943e472-65123f4a-b18520da-56db9e95",
-                                 "IndexInSeries" : 95,
+                                 "FileSize" : 526868,
+                                 "FileUuid" : "dcba15cf-a1fd-44bc-bbb3-1a2fb8cac4a1",
+                                 "ID" : "04efd8b9-2ae1f3db-deb0f226-e3267002-6cd8fa3c",
+                                 "IndexInSeries" : 88,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 526864,
-                                 "FileUuid" : "5fd8c2e8-8825-4a89-9988-75c9c72db157",
-                                 "ID" : "8de7f8ce-56dd2622-55ff7e02-08b67d7b-f7330657",
-                                 "IndexInSeries" : 73,
+                                 "FileSize" : 526870,
+                                 "FileUuid" : "a14daac5-ac96-481b-a721-fdcc98ec1376",
+                                 "ID" : "0df992f4-0a841d5c-aeb8cdda-9c1a0573-dbd49c3f",
+                                 "IndexInSeries" : 138,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
@@ -6691,7 +6769,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -6979,7 +7057,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -7190,7 +7268,7 @@
                         "description" : "",
                         "properties" : {
                            "LimitToThisLevelMainDicomTags" : {
-                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is useful e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
                               "type" : "boolean"
                            },
                            "ReconstructFiles" : {
@@ -7235,7 +7313,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -7273,11 +7351,11 @@
                                  "ExpectedNumberOfInstances" : null,
                                  "ID" : "52cc572c-3ee31930-c4b6d5e7-16c786dc-97bc209b",
                                  "Instances" : [
-                                    "7ca06aee-5cb2cc11-d4d71cfc-b6cd777b-83b57611",
-                                    "6eeb2475-5b5ba0a3-d39fb207-106beb1e-be3df75a",
-                                    "c6ce208f-e9d1447d-84fd8575-b48fac0e-7cd6b065",
-                                    "792409cc-6943e472-65123f4a-b18520da-56db9e95",
-                                    "8de7f8ce-56dd2622-55ff7e02-08b67d7b-f7330657",
+                                    "011ead8d-f2508edd-da315604-80b002df-e678b796",
+                                    "01252811-30d1c47b-a8c03da5-73177742-48495192",
+                                    "04a30982-835a4b0a-3082b997-060f01f5-071a0f8d",
+                                    "04efd8b9-2ae1f3db-deb0f226-e3267002-6cd8fa3c",
+                                    "0df992f4-0a841d5c-aeb8cdda-9c1a0573-dbd49c3f",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -7486,7 +7564,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -7765,7 +7843,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -7932,6 +8010,7 @@
                            "description" : "JSON array containing the identifiers of the installed plugins",
                            "example" : [
                               "explorer.js",
+                              "AWS S3 Storage",
                               "authorization",
                               "connectivity-checks",
                               "delayed-deletion",
@@ -7950,6 +8029,7 @@
                               "postgresql-index",
                               "postgresql-storage",
                               "serve-folders",
+                              "stl",
                               "stone-rtviewer",
                               "stone-webviewer",
                               "tcia",
@@ -8017,7 +8097,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.16"
+                              "Version" : "1.17"
                            }
                         }
                      }
@@ -8517,7 +8597,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Simplify" : {
@@ -8721,7 +8801,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Simplify" : {
@@ -8783,7 +8863,7 @@
             "description" : "List the Orthanc identifiers of all the available DICOM series",
             "parameters" : [
                {
-                  "description" : "If present, retrieve detailed information about the individual series",
+                  "description" : "If present, retrieve detailed information about the individual resources, not only their Orthanc identifiers",
                   "in" : "query",
                   "name" : "expand",
                   "required" : false,
@@ -8810,9 +8890,18 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "in" : "query",
+                  "name" : "response-content",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -8844,8 +8933,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported series (if `expand` argument is provided)",
                            "example" : [
-                              "1de00990-03680ef4-0be6bd5b-73a7d350-fb46abfa",
-                              "a69a10d7-068c5263-8aab53fe-de7af5f2-373a74bd"
+                              "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f",
+                              "1d9c4560-6480f3d9-0a4d3654-65715f38-755ad2e0"
                            ]
                         }
                      }
@@ -8894,7 +8983,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -9015,7 +9104,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -9147,7 +9236,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -9440,7 +9529,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given series. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -9605,7 +9703,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given series",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -9979,7 +10086,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -10345,7 +10452,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -10633,7 +10740,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -11045,7 +11152,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -11082,7 +11189,6 @@
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
                                  "PatientID" : "Vafk,T,6",
@@ -11124,7 +11230,7 @@
                         "description" : "",
                         "properties" : {
                            "LimitToThisLevelMainDicomTags" : {
-                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is useful e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
                               "type" : "boolean"
                            },
                            "ReconstructFiles" : {
@@ -11317,7 +11423,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -11354,7 +11460,6 @@
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
                                  "InstitutionName" : "HUG",
@@ -11375,9 +11480,9 @@
                                  "PatientSex" : ""
                               },
                               "Series" : [
-                                 "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d",
+                                 "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f",
                                  "37836232-d13a2350-fa1dedc5-962b31aa-010f8e52",
-                                 "17cc7e52-4f1a3e4d-9182f727-56e9cc71-c037892f"
+                                 "7696013f-4c89c563-2b071693-5d1f97f6-f8ab232d"
                               ],
                               "Type" : "Study"
                            }
@@ -11403,14 +11508,14 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "CountInstances" : 2352,
-                              "CountPatients" : 7,
-                              "CountSeries" : 23,
-                              "CountStudies" : 7,
-                              "TotalDiskSize" : "881421860",
-                              "TotalDiskSizeMB" : 840,
-                              "TotalUncompressedSize" : "881421860",
-                              "TotalUncompressedSizeMB" : 840
+                              "CountInstances" : 2552,
+                              "CountPatients" : 8,
+                              "CountSeries" : 26,
+                              "CountStudies" : 8,
+                              "TotalDiskSize" : "1030997023",
+                              "TotalDiskSizeMB" : 983,
+                              "TotalUncompressedSize" : "1030997023",
+                              "TotalUncompressedSizeMB" : 983
                            },
                            "properties" : {
                               "CountInstances" : {
@@ -11542,7 +11647,7 @@
             "description" : "List the Orthanc identifiers of all the available DICOM studies",
             "parameters" : [
                {
-                  "description" : "If present, retrieve detailed information about the individual studies",
+                  "description" : "If present, retrieve detailed information about the individual resources, not only their Orthanc identifiers",
                   "in" : "query",
                   "name" : "expand",
                   "required" : false,
@@ -11569,9 +11674,18 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "in" : "query",
+                  "name" : "response-content",
                   "required" : false,
                   "schema" : {
                      "type" : "string"
@@ -11603,8 +11717,8 @@
                         "schema" : {
                            "description" : "JSON array containing either the Orthanc identifiers, or detailed information about the reported studies (if `expand` argument is provided)",
                            "example" : [
-                              "6b9e19d9-62094390-5f9ddb01-4a191ae7-9766b715",
-                              "27f7126f-4f66fb14-03f4081b-f9341db2-53925988"
+                              "0dff9280-2375f586-1297870c-4cbd6d1c-527e36e5",
+                              "1c379a23-9fd28bba-02b60e5b-850ff34e-4349f09b"
                            ]
                         }
                      }
@@ -11653,7 +11767,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -11710,13 +11824,13 @@
                                  "PatientSex" : "0000"
                               },
                               "Series" : [
-                                 "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
-                                 "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
+                                 "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0",
                                  "2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8",
-                                 "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
-                                 "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e",
+                                 "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
                                  "4baa97c7-d53d3d82-a5eb9403-17ef5a77-4e0efb55",
-                                 "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0"
+                                 "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
+                                 "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
+                                 "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e"
                               ],
                               "Type" : "Study"
                            }
@@ -11787,7 +11901,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -11919,7 +12033,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -12212,7 +12326,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given study. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -12377,7 +12500,16 @@
             "description" : "Get the (binary) content of one attachment associated with the given study",
             "parameters" : [
                {
-                  "description" : "Optional revision of the metadata, to check if its content has changed",
+                  "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
+                  "in" : "header",
+                  "name" : "Content-Range",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "Optional revision of the attachment, to check if its content has changed",
                   "in" : "header",
                   "name" : "If-None-Match",
                   "required" : false,
@@ -12751,7 +12883,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -12786,42 +12918,42 @@
                            "description" : "JSON array containing information about the child DICOM instances",
                            "example" : [
                               {
-                                 "FileSize" : 169478,
-                                 "FileUuid" : "208aca23-40e8-453e-bbb5-630b32612038",
-                                 "ID" : "6059d07c-02ae8c74-9436dc7c-007b4d5d-4c770a30",
-                                 "IndexInSeries" : 19,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "FileSize" : 169414,
-                                 "FileUuid" : "42ab9bde-ed03-4364-9122-2921c802b85c",
-                                 "ID" : "f5701efb-98170697-404d15f6-59baf69e-4e8ddfae",
-                                 "IndexInSeries" : 21,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "FileSize" : 169478,
-                                 "FileUuid" : "8600a683-34b2-4b10-b33c-5dcfb77f24b6",
-                                 "ID" : "40df6ac1-5ec86316-035ff3c1-07e5c8a8-f6cbd37c",
-                                 "IndexInSeries" : 17,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "FileSize" : 169478,
-                                 "FileUuid" : "cfa27d70-f9d9-47d9-87a2-ccff1e852f7c",
-                                 "ID" : "59ad98a9-7958f687-ed67451f-bb584346-8b6bdb7b",
+                                 "FileSize" : 527852,
+                                 "FileUuid" : "970db5af-4b53-4dca-996d-71bb8b0f9368",
+                                 "ID" : "00330d0f-911e5e8d-1e305bae-e5c53b73-d2a49298",
                                  "IndexInSeries" : 10,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
                               {
-                                 "FileSize" : 169478,
-                                 "FileUuid" : "85eb4c39-0139-4193-8869-064a42e48f7f",
-                                 "ID" : "4cf245ed-6ae18f9e-22e12942-2b9513f2-99a638e5",
-                                 "IndexInSeries" : 7,
+                                 "FileSize" : 134656,
+                                 "FileUuid" : "75528491-8bbb-4877-a783-0cd218f5dacf",
+                                 "ID" : "00402ce7-ac05c687-4d0839bc-cecd4fad-3d1b7eed",
+                                 "IndexInSeries" : 17,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "FileSize" : 142908,
+                                 "FileUuid" : "f4deebe4-32b7-479f-ad5e-4116c34905ff",
+                                 "ID" : "00ffd506-6460663a-cda9bddc-a0090c47-145ba829",
+                                 "IndexInSeries" : 51,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "FileSize" : 527858,
+                                 "FileUuid" : "699e3eae-d074-453f-9758-77d44acdfd4d",
+                                 "ID" : "01a6ffdc-335f82a7-c79360c2-2e6bbc35-d24ca33d",
+                                 "IndexInSeries" : 15,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "FileSize" : 142908,
+                                 "FileUuid" : "7fbf9970-a230-4b6d-84e0-7e6f660e137d",
+                                 "ID" : "0577c66f-25d7cc30-bb763c60-53bb7ba0-72c8b018",
+                                 "IndexInSeries" : 89,
                                  "Labels" : [],
                                  "{...}" : "..."
                               },
@@ -13263,7 +13395,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Synchronous" : {
@@ -13346,7 +13478,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -13631,7 +13763,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -13935,7 +14067,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -13972,7 +14104,6 @@
                               "ID" : "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0",
                               "IsStable" : true,
                               "Labels" : [],
-                              "LastUpdate" : "20231109T160811",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19490301",
                                  "PatientID" : "5Yp0E",
@@ -14014,7 +14145,7 @@
                         "description" : "",
                         "properties" : {
                            "LimitToThisLevelMainDicomTags" : {
-                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is usefull e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
+                              "description" : "Only reconstruct this level MainDicomTags by re-reading them from a random child instance of the resource. This option is much faster than a full reconstruct and is useful e.g. if you have modified the 'ExtraMainDicomTags' at the Study level to optimize the speed of some C-Find. 'false' by default. (New in Orthanc 1.12.4)",
                               "type" : "boolean"
                            },
                            "ReconstructFiles" : {
@@ -14059,7 +14190,7 @@
                   }
                },
                {
-                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return ",
+                  "description" : "If present, list the DICOM Tags you want to list in the response.  This argument is a semi-column separated list of DICOM Tags identifiers; e.g: 'requested-tags=0010,0010;PatientBirthDate'.  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
                   "in" : "query",
                   "name" : "requested-tags",
                   "required" : false,
@@ -14095,28 +14226,13 @@
                            "example" : [
                               {
                                  "ExpectedNumberOfInstances" : null,
-                                 "ID" : "ae164c84-e5bd0366-ba937a6d-65414092-f294d6b6",
+                                 "ID" : "1e2c125c-411b8e86-3f4fe68e-a7584dd3-c6da78f0",
                                  "Instances" : [
-                                    "c2844203-2847dbbf-9cebc5f8-7c6e430d-46dc6b65",
-                                    "f6581db2-3615fae4-a3ac132f-bbe4aee1-17e20af0",
-                                    "8e098491-cec2ab54-e895deb2-a535f068-54dfa2ff",
-                                    "00330d0f-911e5e8d-1e305bae-e5c53b73-d2a49298",
-                                    "1c492d29-eaee29f4-84b25276-30eeff8b-fd47cb85",
-                                    "..."
-                                 ],
-                                 "IsStable" : true,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "ExpectedNumberOfInstances" : null,
-                                 "ID" : "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
-                                 "Instances" : [
-                                    "af359625-b4989dec-8bf86813-3c7324c3-065ca845",
-                                    "7f4ba1f7-6d0f26e0-2084254d-d0d2a66d-86ba5135",
-                                    "4dbca7c1-f6e1a582-b3196370-0151cac8-19caac8e",
-                                    "e5dca4e6-df508be3-33c2e526-386ca449-101f5a04",
-                                    "5d85c7d5-58bd5d4c-1545b66b-f343dee5-8624943f",
+                                    "08ff3a1a-c8fb57d9-4e24d9cb-2ed22b80-0ff7461e",
+                                    "144ca294-6e759cfb-e14e3404-e78a0a29-1dd3273c",
+                                    "24ea828f-4bb7e2c9-81ad498d-613f5370-257d9bf4",
+                                    "2db53a93-91179cd5-f2080c32-c9b156ec-b8f65fa7",
+                                    "3ad70bbe-bc51faff-860461d2-44745ccf-0ebbbbc8",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -14127,11 +14243,41 @@
                                  "ExpectedNumberOfInstances" : null,
                                  "ID" : "2ac1316d-3e432022-62eabff2-c59f5475-9b1ac3f8",
                                  "Instances" : [
-                                    "3d452ed9-55e92667-3aeaa943-ef7ac7b7-c1d910ba",
-                                    "81cb1a6d-64f63651-d7023a43-28c0b72e-b50075b5",
                                     "00402ce7-ac05c687-4d0839bc-cecd4fad-3d1b7eed",
-                                    "8c313325-8991e5e0-230eefbf-0787185f-9f247e3d",
-                                    "f9fb8cb4-67023766-442eb9ff-697f66e9-7ccbe176",
+                                    "08a2d286-90c63258-2d3de665-81fb63e0-c1ab4430",
+                                    "12ac4ec9-c77cf495-49bb19c2-406ca427-a6a7a49d",
+                                    "18bc4146-4bb09c43-e4080c80-19bfc186-6b3d7272",
+                                    "1d429ccb-bdcc78a1-7d129d6a-ba4966ed-fe4dbd87",
+                                    "..."
+                                 ],
+                                 "IsStable" : true,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "ExpectedNumberOfInstances" : null,
+                                 "ID" : "3ca69615-fcd4a4fb-e5f2cc9d-9c7a49a5-add98bbf",
+                                 "Instances" : [
+                                    "01a6ffdc-335f82a7-c79360c2-2e6bbc35-d24ca33d",
+                                    "13d42bfa-7488b98e-5f4b7f2c-e4f16d52-04e55924",
+                                    "1f223623-a9af0a3a-a05f9703-bce0f692-9e7e26d0",
+                                    "1fe1c0ec-4ef1f887-564443f4-2ca0c4a1-08b2376e",
+                                    "2fbd6d5f-802f6561-b9d8da32-c54ead16-18a208bd",
+                                    "..."
+                                 ],
+                                 "IsStable" : true,
+                                 "Labels" : [],
+                                 "{...}" : "..."
+                              },
+                              {
+                                 "ExpectedNumberOfInstances" : null,
+                                 "ID" : "4baa97c7-d53d3d82-a5eb9403-17ef5a77-4e0efb55",
+                                 "Instances" : [
+                                    "23f1307c-25e6d5fa-73de34cb-8ee02fa0-15ac4cc5",
+                                    "35095224-b89d1134-dfd23fcc-ffa43d4b-853b142d",
+                                    "3ef0864e-3d8d9b45-ee823ede-0c1d21ee-c9a40185",
+                                    "4368e7c1-33f7303d-5fc9fcc6-6e5fde31-6959b209",
+                                    "4476310e-ecf6744a-a5a54925-16b65d9f-9dfe7054",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -14142,26 +14288,11 @@
                                  "ExpectedNumberOfInstances" : null,
                                  "ID" : "635faa23-fd8378ee-d03bce29-ee47c2fb-a65c5509",
                                  "Instances" : [
-                                    "15aa5488-fdeb2c38-d5e49109-23879aff-83f9acbd",
-                                    "0a3d6e84-30f0133e-8ff54580-f9b49ea9-2bc5c9aa",
                                     "065baa49-a7b4e4a0-e7468f1d-e9b5bca8-56316fa2",
-                                    "2623949c-6c314b62-824d30cc-79ae73ec-210298a5",
-                                    "c9fcb81d-9644e671-54069338-6b3f01bf-1251713a",
-                                    "..."
-                                 ],
-                                 "IsStable" : true,
-                                 "Labels" : [],
-                                 "{...}" : "..."
-                              },
-                              {
-                                 "ExpectedNumberOfInstances" : null,
-                                 "ID" : "dc0216d2-a406a5ad-31ef7a78-113ae9d9-29939f9e",
-                                 "Instances" : [
-                                    "9012697e-f3940497-8f5c35b9-49e7e62e-9fbf5365",
-                                    "205b7183-17ae9444-1a245339-5f1cad9d-0c8e761e",
-                                    "c22daa01-b9261803-5d3338bd-70bdcc9a-e46a813d",
-                                    "a00470ef-7bd55ce9-a10252de-0b3758ea-75859fd4",
-                                    "17f2e7f4-f66af68b-007ff348-24988949-1778251f",
+                                    "0a3d6e84-30f0133e-8ff54580-f9b49ea9-2bc5c9aa",
+                                    "139c2f68-f6fb3237-8fc4658a-ef0027c6-89178eb7",
+                                    "15aa5488-fdeb2c38-d5e49109-23879aff-83f9acbd",
+                                    "182763f1-037c0d53-de86eba5-05f1d0b6-b1141618",
                                     "..."
                                  ],
                                  "IsStable" : true,
@@ -14302,7 +14433,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Remove" : {
@@ -14456,10 +14587,14 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 23,
+                              "ApiVersion" : 26,
+                              "Capabilities" : {
+                                 "HasExtendedChanges" : true,
+                                 "HasExtendedFind" : true
+                              },
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
-                              "DatabaseServerIdentifier" : "a67fa91c-20328956-26614107-bbaec3f4-5cbbc6f9",
+                              "DatabaseServerIdentifier" : "3d10366d-2038f306-f066fd6f-2648bdad-882aac90",
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
                               "DicomPort" : 4242,
@@ -14470,23 +14605,29 @@
                               "MainDicomTags" : {
                                  "Instance" : "0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330",
                                  "Patient" : "0010,0010;0010,0020;0010,0030;0010,0040;0010,1000",
-                                 "Series" : "0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000",
-                                 "Study" : "0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060"
+                                 "Series" : "0008,0021;0008,0031;0008,0060;0008,0070;0008,0201;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0244;0040,0245;0040,0254;0040,0275;0054,0081;0054,0101;0054,1000",
+                                 "Study" : "0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,0201;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060"
                               },
+                              "MaximumPatientCount" : 0,
                               "MaximumStorageMode" : "Recycle",
                               "MaximumStorageSize" : 0,
                               "Name" : "Orthanc Demo",
                               "OverwriteInstances" : false,
                               "PluginsEnabled" : true,
+                              "ReadOnly" : false,
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.3"
+                              "Version" : "1.12.5"
                            },
                            "properties" : {
                               "ApiVersion" : {
                                  "description" : "Version of the REST API",
                                  "type" : "number"
+                              },
+                              "Capabilities" : {
+                                 "description" : "Whether the back-end supports optional features like 'HasExtendedChanges', 'HasExtendedFind' (new in Orthanc 1.12.5) ",
+                                 "type" : "object"
                               },
                               "CheckRevisions" : {
                                  "description" : "Whether Orthanc handle revisions of metadata and attachments to deal with multiple writers (new in Orthanc 1.9.2)",
@@ -14556,6 +14697,10 @@
                                  "description" : "Whether Orthanc was built with support for plugins",
                                  "type" : "boolean"
                               },
+                              "ReadOnly" : {
+                                 "description" : "Whether Orthanc is running in read only mode (new in Orthanc 1.12.5)",
+                                 "type" : "boolean"
+                              },
                               "StorageAreaPlugin" : {
                                  "description" : "Information about the installed storage area plugin (`null` if no such plugin is installed)",
                                  "type" : "string"
@@ -14600,6 +14745,7 @@
                               "bulk-content",
                               "bulk-delete",
                               "bulk-modify",
+                              "count-resources",
                               "create-archive",
                               "create-dicom",
                               "create-media",
@@ -14743,7 +14889,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -14927,7 +15073,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -14996,6 +15142,82 @@
             "tags" : [ "System" ]
          }
       },
+      "/tools/count-resources" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "This URI can be used to count the resources that are matching criteria on the content of the local Orthanc server, in a way that is similar to tools/find",
+            "parameters" : [],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Full" : {
+                              "description" : "If set to `true`, report the DICOM tags in full format (tags indexed by their hexadecimal format, associated with their symbolic name and their value)",
+                              "type" : "boolean"
+                           },
+                           "Labels" : {
+                              "description" : "List of strings specifying which labels to look for in the resources (new in Orthanc 1.12.0)",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "LabelsConstraint" : {
+                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0)",
+                              "type" : "string"
+                           },
+                           "Level" : {
+                              "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
+                              "type" : "string"
+                           },
+                           "MetadataQuery" : {
+                              "description" : "Associative array containing the filter on the values of the metadata (new in Orthanc 1.12.5)",
+                              "type" : "object"
+                           },
+                           "ParentPatient" : {
+                              "description" : "Limit the reported resources to descendants of this patient (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
+                           "ParentSeries" : {
+                              "description" : "Limit the reported resources to descendants of this series (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
+                           "ParentStudy" : {
+                              "description" : "Limit the reported resources to descendants of this study (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
+                           "Query" : {
+                              "description" : "Associative array containing the filter on the values of the DICOM tags",
+                              "type" : "object"
+                           },
+                           "Short" : {
+                              "description" : "If set to `true`, report the DICOM tags in hexadecimal format",
+                              "type" : "boolean"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "A JSON object with the `Count` of matching resources"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Count local resources",
+            "tags" : [ "System" ]
+         }
+      },
       "/tools/create-archive" : {
          "get" : {
             "deprecated" : false,
@@ -15043,7 +15265,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -15217,7 +15439,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -15324,7 +15546,7 @@
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The lower the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -15549,7 +15771,7 @@
                               "type" : "boolean"
                            },
                            "Expand" : {
-                              "description" : "Also retrieve the content of the matching resources, not only their Orthanc identifiers",
+                              "description" : "If set to \"true\", retrieve detailed information about the individual resources, not only their Orthanc identifiers",
                               "type" : "boolean"
                            },
                            "Full" : {
@@ -15575,12 +15797,42 @@
                               "description" : "Limit the number of reported resources",
                               "type" : "number"
                            },
+                           "MetadataQuery" : {
+                              "description" : "Associative array containing the filter on the values of the metadata (new in Orthanc 1.12.5)",
+                              "type" : "object"
+                           },
+                           "OrderBy" : {
+                              "description" : "Array of associative arrays containing the requested ordering (new in Orthanc 1.12.5)",
+                              "items" : {
+                                 "type" : "object"
+                              },
+                              "type" : "array"
+                           },
+                           "ParentPatient" : {
+                              "description" : "Limit the reported resources to descendants of this patient (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
+                           "ParentSeries" : {
+                              "description" : "Limit the reported resources to descendants of this series (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
+                           "ParentStudy" : {
+                              "description" : "Limit the reported resources to descendants of this study (new in Orthanc 1.12.5)",
+                              "type" : "string"
+                           },
                            "Query" : {
                               "description" : "Associative array containing the filter on the values of the DICOM tags",
                               "type" : "object"
                            },
                            "RequestedTags" : {
                               "description" : "A list of DICOM tags to include in the response (applicable only if \"Expand\" is set to true).  The tags requested tags are returned in the 'RequestedTags' field in the response.  Note that, if you are requesting tags that are not listed in the Main Dicom Tags stored in DB, building the response might be slow since Orthanc will need to access the DICOM files.  If not specified, Orthanc will return all Main Dicom Tags to keep backward compatibility with Orthanc prior to 1.11.0.",
+                              "items" : {
+                                 "type" : "string"
+                              },
+                              "type" : "array"
+                           },
+                           "ResponseContent" : {
+                              "description" : "Defines the content of response for each returned resource. (this field, if present, overrides the \"Expand\" field).  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.(new in Orthanc 1.12.5)",
                               "items" : {
                                  "type" : "string"
                               },
@@ -16111,7 +16363,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2352 1717611466656\northanc_count_patients 7 1717611466656\northanc_count_series 23 1717611466656\northanc_count_studies 7 1717611466656\northanc_dicom_cache_count 304 1717611466656\northanc_dicom_cache_size_mb 127.931244 1717611466656\northanc_disk_size_mb 840.589417 1717611466656\northanc_jobs_completed 10 1717611466656\northanc_jobs_failed 0 1717611466656\northanc_jobs_pending 0 1717611466656\northanc_jobs_running 0 1717611466656\northanc_jobs_success 10 1717611466656\northanc_last_change 4778 1717611466656\northanc_rest_api_active_requests 1 1717611466656\northanc_rest_api_duration_ms 428 1717611466329\northanc_storage_cache_count 704 1717611466656\northanc_storage_cache_size_mb 127.69693 1717611466656\northanc_storage_read_duration_ms 5 1717611461503\northanc_uncompressed_size_mb 840.589417 1717611466656\northanc_up_time_s 2606700 1717611466656\n"
+                        "example" : "orthanc_count_instances 2552 1734457526026\northanc_count_patients 8 1734457526026\northanc_count_series 26 1734457526026\northanc_count_studies 8 1734457526026\northanc_dicom_cache_count 1 1734457526026\northanc_dicom_cache_size_mb 0.502557755 1734457526026\northanc_disk_size_mb 983.235352 1734457526026\northanc_jobs_completed 0 1734457526026\northanc_jobs_failed 0 1734457526026\northanc_jobs_pending 0 1734457526026\northanc_jobs_running 0 1734457526026\northanc_jobs_success 0 1734457526026\northanc_last_change 5191 1734457526026\northanc_rest_api_active_requests 1 1734457526026\northanc_rest_api_duration_ms 640 1734457524331\northanc_storage_cache_count 400 1734457526026\northanc_storage_cache_hit_count 3631 1734457525744\northanc_storage_cache_miss_count 400 1734456760031\northanc_storage_cache_size_mb 3.17403412 1734457526026\northanc_storage_read_bytes 3328216 1734456760031\northanc_storage_read_duration_ms 10 1734456759865\northanc_uncompressed_size_mb 983.235352 1734457526026\northanc_up_time_s 1376 1734457526026\n"
                      }
                   },
                   "description" : ""
@@ -16130,7 +16382,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20240605T181746",
+                        "example" : "20241217T174526",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16152,7 +16404,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20240605T181746",
+                        "example" : "20241217T174526",
                         "schema" : {
                            "description" : "The local time"
                         }
