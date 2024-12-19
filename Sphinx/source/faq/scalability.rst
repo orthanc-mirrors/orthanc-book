@@ -14,11 +14,10 @@ instances can be stored by Orthanc?"*
 The source code of Orthanc imposes no such hard limit by itself.
 
 At the time of writing, we know that Orthanc is being used in
-production in hospitals with more than 15TB of data, 125,000 studies
-and around 50 millions of instances (please `get in touch with us
+production in hospitals with more than 65TB of data, 340,000 studies
+and around 150 millions of instances (please `get in touch with us
 <https://www.orthanc-server.com/static.php?page=contact>`__ if you can
-share other testimonials). Other users have even reported more than
-28TB of data. Here are links to some testimonials that were published
+share other testimonials). Here are links to some testimonials that were published
 on the `Orthanc Users discussion forum
 <https://discourse.orthanc-server.org>`__ discussion
 group: `1
@@ -58,7 +57,7 @@ presence of large databases:
   writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
-  <postgresql>` to store the database index (5.0 at the time of
+  <postgresql>` to store the database index (7.0 at the time of
   writing). Make sure that ``EnableIndex`` is set to ``true``.
 
 * Make sure that :ref:`run-time debug assertions <troubleshooting>`
@@ -90,19 +89,21 @@ presence of large databases:
   to understand their implications):
   
   * ``StorageCompression = false``
-  * ``LimitFindResults = 100``
-  * ``LimitFindInstances = 100``
   * ``KeepAlive = true``
   * ``TcpNoDelay = true``
   * ``StorageAccessOnFind = Never``
   * Consider adding ``SaveJobs = false``
+  * To prevent users from performing searches that would return the whole
+    Orthanc database and therefore consume a lot of resources on the DB server,
+    consider adding limits to ``LimitFindResults`` and ``LimitFindInstances``.
 
-* Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: By default, the
+* If you are using a postgreSQL plugin between v 4.0 and v 6.2, by default, the
   PostgreSQL index plugin uses 1 single connection to the PostgreSQL
   database. You can have multiple connections by setting the
   ``IndexConnectionsCount`` to a higher value (for instance ``50`` or one per HTTP thread) in
   the ``PostgreSQL`` section of the configuration file. This will
   improve concurrency. Check out :ref:`the explanation below <multiple-writers>`.
+  From v 7.0, the default is set to ``50``.
 
 * Since Orthanc 1.9.2 and PostgreSQL plugins 4.0: If you have an
   hospital-wide VNA deployment, you could consider to deploy multiple
@@ -113,7 +114,7 @@ presence of large databases:
 
 * Since Orthanc 1.12.3 and PostgreSQL plugins 6.0: You may enable
   the ``ReadCommitted`` transaction mode to allow multiple threads to
-  write in DB at the same time.
+  write in DB at the same time.  From v 7.0, this is the default configuration.
 
 * From Orthanc 1.11.0: you have the ability to add
   more :ref:`main DICOM tags <main-dicom-tags>` in the Orthanc Index 
@@ -159,13 +160,9 @@ presence of large databases:
     distributed mode in conjunction with the :ref:`AWS S3 plugin
     <minio>` for Orthanc.
 
-* If using the :ref:`DICOMweb server plugin <dicomweb-server-config>`,
-  consider setting configuration option ``StudiesMetadata`` to
-  ``MainDicomTags``.
-
 * If using PostgreSQL as a managed cloud service by Microsoft Azure,
   make sure to reduce the verbosity of the logs. If logging is not
-  minimal, Osimis has observed an impact on performance.
+  minimal, we have observed an impact on performance.
 
 
 .. _scalability-memory:
@@ -369,7 +366,7 @@ Care must be taken to the following aspects:
 Latency
 ^^^^^^^
 
-For some queries to the database, Orthanc performs several small SQL
+Up to v 6.2, for some queries to the database, Orthanc performs several small SQL
 requests. For instance, a request to a route like ``/studies/{id}``
 can trigger 6 SQL queries. Given these round-trips between Orthanc and
 the DB server, it's important for the **network latency to be as small
@@ -380,8 +377,8 @@ is expected to have correct performances.
 As a consequence, if deploying Orthanc in a cloud infrastructure, make
 sure that the DB server and Orthanc VMs are located in the **same
 datacenter**. Note that most of the time-consuming queries have
-already been optimized, and that future versions of Orthanc SDK might
-aggregate even more SQL requests.
+already been optimized in v 6.0 and a huge improvement has been implemented
+in v 7.0.
 
 Starting with Orthanc 1.9.2, and PostgreSQL/MySQL index plugins 4.0,
 Orthanc can also be configured to handle **multiple connections to the

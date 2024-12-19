@@ -16,89 +16,24 @@ plugins <https://www.orthanc-server.com/static.php?page=postgresql>`__.
 For information about scalability, make sure to read the section about
 :ref:`multiple writers in large-scale deployments <multiple-writers>`.
 
-The source code of the PostgreSQL plugins can be found in the
-``orthanc-databases`` `Mercurial repository
-<https://orthanc.uclouvain.be/hg/orthanc-databases/>`__, next to the
-source code of the :ref:`ODBC <odbc>` and
-:ref:`MySQL/MariaDB <mysql>` plugins.
 
+How to get it ?
+---------------
 
-Compilation
------------
+The source code is available on `Mercurial <https://orthanc.uclouvain.be/hg/orthanc-databases/>`__, 
+next to the source code of the :ref:`ODBC <odbc>` and :ref:`MySQL/MariaDB <mysql>` plugins.
 
-Static linking
-^^^^^^^^^^^^^^
+Binaries are included in:
 
-.. highlight:: text
+- The :ref:`orthancteam/orthanc Docker image <docker-orthancteam>`,
+- The :ref:`jodogne/orthanc-plugins Docker image <docker>`,
+- The `Windows installers <https://orthanc.uclouvain.be/downloads/windows-64/installers/index.html>`__,
+- The `macOS packages <https://orthanc.uclouvain.be/downloads/macos/packages/index.html>`__.
 
-The procedure to compile these plugins is similar to that for the
-:ref:`core of Orthanc <compiling>`. The following commands should work
-for most UNIX-like distribution (including GNU/Linux)::
-
-  $ mkdir BuildPostgreSQL
-  $ cd BuildPostgreSQL
-  $ cmake ../PostgreSQL -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
-  $ make
-
-The compilation will produce 2 shared libraries, each containing one plugin for Orthanc:
-
-* ``OrthancPostgreSQLIndex`` replaces the default SQLite index of Orthanc by PostgreSQL. 
-* ``OrthancPostgreSQLStorage`` makes Orthanc store the DICOM files it receives into PostgreSQL. 
-
+Precompiled binaries of the plugin alone are also available for multiple platforms on the `official download site <https://orthanc.uclouvain.be/downloads/index.html>`__.
   
-Microsoft Windows and Apple OS X
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-databases/file/default/PostgreSQL/NEWS>`__.
 
-Pre-compiled binaries for Microsoft Windows 32bit `are also available
-<https://orthanc.uclouvain.be/downloads/windows-32/orthanc-postgresql/index.html>`__.
-A package for `Apple's Mac OS X
-<https://www.orthanc-server.com/static.php?page=download-mac>`__
-is available courtesy of `Orthanc Team <https://orthanc.team/>`__.
-
-
-.. _postgresql-ubuntu1604:
-
-Dynamic linking on Ubuntu 16.04
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. highlight:: text
-
-If static linking is not desired, here are build instructions for
-Ubuntu 16.04 (provided build dependencies for the :ref:`core of
-Orthanc <compiling>` have already been installed)::
-
-  $ sudo apt-get install libpq-dev postgresql-server-dev-all
-  $ mkdir BuildPostgreSQL
-  $ cd BuildPostgreSQL
-  $ cmake ../PostgreSQL -DCMAKE_BUILD_TYPE=Release \
-                        -DALLOW_DOWNLOADS=ON \
-                        -DUSE_SYSTEM_GOOGLE_TEST=OFF \
-                        -DUSE_SYSTEM_ORTHANC_SDK=OFF
-  $ make
-
-
-.. _postgresql-cmake:
-  
-Dynamic linking on other GNU/Linux distributions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. highlight:: text
-
-The build instructions should always be very similar to those for
-:ref:`Ubuntu 16.04 <postgresql-ubuntu1604>`. One difficulty that could
-however arise is that it is possible that the CMake environment that
-is shipped with the GNU/Linux distribution cannot locate a recent
-version of the development headers for PostgreSQL. This leads to an
-error while invoking CMake that looks like::
-
-  -- Could NOT find PostgreSQL (missing: PostgreSQL_TYPE_INCLUDE_DIR)
-
-In such a situation, please add your version of PostgreSQL to the
-macro ``PostgreSQL_ADDITIONAL_VERSIONS`` that is defined at the end of
-the `Resources/CMake/PostgreSQLConfiguration.cmake file
-<https://orthanc.uclouvain.be/hg/orthanc-databases/file/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__
-in the sources of the project.
-  
   
 Usage
 -----
@@ -243,16 +178,16 @@ this behavior:
   in all transaction modes.
 
 * ``IndexConnectionsCount`` controls the number of connections from
-  the index plugin to the PostgreSQL database. It is set to ``1`` by
-  default, which corresponds to the old behavior of Orthanc <= 1.9.1.
+  the index plugin to the PostgreSQL database. Starting from v7.0, it is set to ``50`` by
+  default.
 
 * ``ConnectionRetryInterval`` is only used when opening one database
   connection to PostgreSQL.
 
 * ``TransactionMode`` has been added in the release 6.0.  2 values are
-  allowed: ``Serializable`` (that has always been the default mode for Orthanc)
-  and ``ReadCommitted`` that is available only from release 6.0.  See
-  below.
+  allowed: ``Serializable`` (that was the default value up to version 6.2)
+  and ``ReadCommitted`` that is available only from release 6.0 and is the default
+  value starting from version 7.0.  See below.
 
 * The PostgreSQL plugin supports the :ref:`revision mechanism
   <revisions>` to protect metadata and attachments from concurrent
@@ -330,35 +265,53 @@ can be configured in the ``TransactionMode`` configuration of the ``PostgreSQL``
 
 - ``Serializable`` in which all write transactions are serialized which might lead
   to performance bottlenecks when lots of threads or Orthanc instances are trying
-  to write to the same Database.
+  to write to the same Database.  This was the default setting up to release 6.2.
 - ``ReadCommitted`` that allows multiple threads or Orthanc instances to write at the
-  same time to the same Database.
+  same time to the same Database.  This is the default setting starting from release 7.0.
 
 
 Upgrades/Downgrades
 ^^^^^^^^^^^^^^^^^^^
 
 New vesions of the PostgreSQL might modify the DB schema by adding new columns/tables/triggers.
-Upgrades from one revision to the other is always automatic.
+
++---------------------------+-------------------------------------------+
+| Plugin version            | Schema revision                           |
++===========================+===========================================+
+| before 5.1                | no revision                               |
++---------------------------+-------------------------------------------+
+| 5.1                       | 1                                         |
++---------------------------+-------------------------------------------+
+| 6.0 - 6.2                 | 2                                         |
++---------------------------+-------------------------------------------+
+| from 7.0                  | 3                                         |
++---------------------------+-------------------------------------------+
+
+Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
+from e.g plugin 3.3 to 7.0, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
 
-Starting from version 6.0 of the plugin, we are providing a downgrade script in case you want, e.g,
-to reinstall Orthanc 1.12.3 and PostgreSQL 5.1 (whose DB schema is at revision 1).
+To downgrade from revision 3 to revision 2, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev3ToRev2.sql
+  $ psql -U postgres -f Rev3ToRev2.sql
 
 To downgrade from revision 2 to revision 1, one might run this procedure::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev2ToRev1.sql
   $ psql -U postgres -f Rev2ToRev1.sql
 
+
 Note for large databases and multiple Orthanc instances:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-When upgrading from revision 1 to revision 2, the upgrade might take quite some time.  E.g, we have observed the upgrade
-taking 17 minutes on a DB with 300.000 studies and 150 millions instances.  Orthanc will not respond during the upgrade.  Therefore,
+When upgrading from one revision to another, the upgrade might take quite some time.  E.g, we have observed the upgrade
+taking 17 minutes on a DB with 300.000 studies and 150 millions instances when upgrading from revision 1 to 2 and multiple minutes
+when upgrading from revision 2 to 3.  Orthanc will not respond during the upgrade.  Therefore,
 if you have enabled autohealing (automatic restart in case Orthanc is not responsive), you should likely disable it
-during the first start with the PostgreSQL plugin v6.0.
+during the first start with the PostgreSQL plugin v6.0 or v7.0 which will apply these migrations.
 
 Also note that, if you have multiple containers connected to the same DB, all containers will try to acquire an exclusive lock
 to perform the upgrade of the DB.  Only one of them will actually perform the upgrade.  Also note that you should not perform a
@@ -376,8 +329,14 @@ sur to select the correct DB and schema (Orthanc is using the default ``public``
   $ psql -U postgres -f Rev1ToRev2.sql
   $ psql -U postgres -f PrepareIndex.sql
 
-This procedure is identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
+To upgrade manually from revision 2 to revision 3::
 
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev2ToRev3.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev2ToRev3.sql
+  $ psql -U postgres -f PrepareIndex.sql
+
+These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
 
 
 Troubleshooting
@@ -413,3 +372,70 @@ has reported the following method to disable SCRAM:
    ``scram-sha-256`` to ``md5`` in all cases.
 3. Add the ``orthanc`` user and database in PostgreSQL again.
 4. Restart Orthanc.
+
+
+Compilation
+-----------
+
+Static linking
+^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+The procedure to compile these plugins is similar to that for the
+:ref:`core of Orthanc <compiling>`. The following commands should work
+for most UNIX-like distribution (including GNU/Linux)::
+
+  $ mkdir BuildPostgreSQL
+  $ cd BuildPostgreSQL
+  $ cmake ../PostgreSQL -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+  $ make
+
+The compilation will produce 2 shared libraries, each containing one plugin for Orthanc:
+
+* ``OrthancPostgreSQLIndex`` replaces the default SQLite index of Orthanc by PostgreSQL. 
+* ``OrthancPostgreSQLStorage`` makes Orthanc store the DICOM files it receives into PostgreSQL. 
+
+  
+.. _postgresql-ubuntu1604:
+
+Dynamic linking on Ubuntu 16.04
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+If static linking is not desired, here are build instructions for
+Ubuntu 16.04 (provided build dependencies for the :ref:`core of
+Orthanc <compiling>` have already been installed)::
+
+  $ sudo apt-get install libpq-dev postgresql-server-dev-all
+  $ mkdir BuildPostgreSQL
+  $ cd BuildPostgreSQL
+  $ cmake ../PostgreSQL -DCMAKE_BUILD_TYPE=Release \
+                        -DALLOW_DOWNLOADS=ON \
+                        -DUSE_SYSTEM_GOOGLE_TEST=OFF \
+                        -DUSE_SYSTEM_ORTHANC_SDK=OFF
+  $ make
+
+
+.. _postgresql-cmake:
+  
+Dynamic linking on other GNU/Linux distributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: text
+
+The build instructions should always be very similar to those for
+:ref:`Ubuntu 16.04 <postgresql-ubuntu1604>`. One difficulty that could
+however arise is that it is possible that the CMake environment that
+is shipped with the GNU/Linux distribution cannot locate a recent
+version of the development headers for PostgreSQL. This leads to an
+error while invoking CMake that looks like::
+
+  -- Could NOT find PostgreSQL (missing: PostgreSQL_TYPE_INCLUDE_DIR)
+
+In such a situation, please add your version of PostgreSQL to the
+macro ``PostgreSQL_ADDITIONAL_VERSIONS`` that is defined at the end of
+the `Resources/CMake/PostgreSQLConfiguration.cmake file
+<https://orthanc.uclouvain.be/hg/orthanc-databases/file/default/Resources/CMake/PostgreSQLConfiguration.cmake>`__
+in the sources of the project.
