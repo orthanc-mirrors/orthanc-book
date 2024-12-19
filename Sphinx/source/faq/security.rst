@@ -68,9 +68,11 @@ such attacks from the outside world. However, as soon as external
 access is granted by setting the ``RemoteAccessAllowed`` configuration
 option to ``true``, you should:
 
-* Set ``AuthenticationEnabled`` to ``true`` to force the users to
-  authenticate. The authorized users are listed in the option
-  ``RegisteredUsers``.
+* Check that ``AuthenticationEnabled`` is set to ``true`` to force the 
+  users to authenticate. The authorized users are listed in the option
+  ``RegisteredUsers``.  Note that, if the option ``AuthenticationEnabled`` 
+  is not provided, the authentication will be enabled as soon 
+  as ``RemoteAccessAllowed`` is enabled.
 
 * Enable :ref:`HTTPS encryption <https>` to prevent the stealing of
   medical data or passwords, even on the Intranet.

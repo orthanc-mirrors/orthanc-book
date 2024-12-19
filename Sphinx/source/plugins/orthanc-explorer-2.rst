@@ -89,6 +89,10 @@ e.g::
     http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"&expand=study
     http://localhost:8042/ui/app/#/filtered-studies?StudyInstanceUID="1.2.3"&expand=series
 
+And, from OE2 1.7.0, when working with SQLite or PostgreSQL 7.0+, you may also define the ordering::
+
+    http://localhost:8042/ui/app/#/filtered-studies?StudyDate=20231213-20241213&order-by=DicomTag,StudyDate,ASC;DicomTag,PatientName,ASC;Metadata,LastUpdate,DESC
+
 By default, OE2 will add a wildcard ``*`` at the beginning and at the end of the search text.  Therefore, searching
 for ``PatientID=1234`` will actually search for ``PatientID=*1234*``.  If you do not want to have these extra wildcards
 added, you should use ``"`` at the beginning and/or at the end of the search text.  Therefore, searching for

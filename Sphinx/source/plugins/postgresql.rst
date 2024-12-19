@@ -132,9 +132,10 @@ file::
       "EnableSsl" : false,               // New in release 3.0
       "MaximumConnectionRetries" : 10,   // New in release 3.0
       "ConnectionRetryInterval" : 5,     // New in release 3.0
-      "IndexConnectionsCount" : 1,       // New in release 4.0
-      "TransactionMode": "Serializable", // New in release 6.0
-      "EnableVerboseLogs": false         // New in release 6.0
+      "IndexConnectionsCount" : 50,      // New in release 4.0 - new default value in 7.0
+      "TransactionMode": "ReadCommitted",// New in release 6.0 - new default value in 7.0
+      "EnableVerboseLogs": false,        // New in release 6.0
+      "HousekeepingInterval": 1          // New in release 7.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
