@@ -160,6 +160,20 @@ which enables both telepathology and teleradiology workflows:
   ``manifest.json`` of the parent DICOM series automatically
   aggregates all the frames of the series as a single collection.
 
+Starting with release 3.0, the WSI plugin can also generate
+multi-resolution pyramids on-the-fly from the frames of a DICOM
+instance:
+
+* The IIIF Presentation manifest is located at URI
+  ``/wsi/iiif/frames-pyramids/{instanceId}/{frameNumber}/manifest.json``,
+  where ``instanceId`` is the :ref:`Orthanc identifier <orthanc-ids>`
+  of the DICOM instance of interest, and ``frameNumber`` is the index
+  of the frame of interest in the instance (the first frame has an
+  index of zero).
+
+* The corresponding IIIF Image data source is located at URI 
+  ``/wsi/iiif/frames-pyramids/{instanceId}/{frameNumber}/index.json``.
+  
 
 Web user interface
 ^^^^^^^^^^^^^^^^^^
@@ -172,8 +186,6 @@ series:
            :align: center
            :width: 500px
 
-|
-
 Furthermore, as can be seen in the image above, buttons can be enabled
 to test the opening of the IIIF data source using `Mirador
 <https://projectmirador.org/>`__ and/or `OpenSeadragon
@@ -182,7 +194,19 @@ to test the opening of the IIIF data source using `Mirador
 Pay attention to the fact that the assets of Mirador and OpenSeadragon
 (notably JavaScript) are loaded from the `unpkg CDN
 <https://www.unpkg.com/>`__, which necessitates an Internet
-connection. For this reason, these assets are disabled by default.
+connection. For this reason, these assets are disabled by
+default. They can be enabled by setting the options ``ServeMirador``
+and ``ServeOpenSeadragon`` to ``true`` in the configuration section
+``WholeSlideImaging`` of Orthanc.
+
+Starting with release 3.0, similar buttons can be found at the
+instance level to access the IIIF manifest and data source
+corresponding to the multi-resolution pyramid generated on-the-fly
+from the **first** frame of the DICOM instance:
+
+.. image:: ../images/2024-12-27-IIIF.png
+           :align: center
+           :width: 500px
 
 
 Configuration options
@@ -521,6 +545,8 @@ can as usual be retrieved using the core :ref:`REST API <rest>` of
 Orthanc.
 
 
+.. _wsi-individual-tiles:
+
 Decoding the individual tiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -562,3 +588,63 @@ NB: Starting with version 2.0 of the WSI plugin, the
 header, which can be used to force the compression of the tile. The
 allowed values for ``Accept`` are: ``image/png``, ``image/jpeg``, and
 ``image/jp2`` (which corresponds to JPEG2k).
+
+
+On-the-fly multi-resolution pyramids
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with release 3.0, the WSI plugin can generate
+**multi-resolution pyramids on-the-fly**, directly from the frames of
+a DICOM instance, without having to call the ``OrthancWSIDicomizer``
+command-line tool. Whenever deep zoom is requested for one frame in
+one DICOM instance, a pyramid is dynamically generated and cached in
+RAM server-side.
+
+This feature can be used to serve large images over
+Internet with a responsive user interface. The corresponding Web
+viewer in Orthanc Explorer is referred to as **deep zoom**.
+
+The REST API associated with this feature is similar to the
+multi-resolution pyramids associated with the "VL Whole Slide
+Microscopy Image IOD", as pre-computed by ``OrthancWSIDicomizer``:
+
+* Information about the pyramid is located at URI
+  ``/wsi/frames-pyramids/{instanceId}/{frameNumber}``, where
+  ``instanceId`` is the :ref:`Orthanc identifier <orthanc-ids>` of the
+  DICOM instance of interest, and ``frameNumber`` is the index of the
+  frame of interest in the instance (the first frame has an index of
+  zero). For instance::
+
+   {
+     "BackgroundColor" : "#000000",
+     "FrameNumber" : 0,
+     "ID" : "fb1b7e92-47c2bbb8-ee4b3eef-1a38f17e-3dbdb2a9",
+     "Resolutions" : [ 1, 2, 4, 8, 16 ],
+     "Sizes" : [
+       [ 2240, 4480 ],
+       [ 1120, 2240 ],
+       [ 560, 1120 ],
+       [ 280, 560 ],
+       [ 140, 280 ]
+     ],
+     "TilesCount" : [
+       [ 5, 9 ],
+       [ 3, 5 ],
+       [ 2, 3 ],
+       [ 1, 2 ],
+       [ 1, 1 ]
+     ],
+     "TilesSizes" : [
+       [ 512, 512 ],
+       [ 512, 512 ],
+       [ 512, 512 ],
+       [ 512, 512 ],
+       [ 512, 512 ]
+     ],
+     "TotalHeight" : 4480,
+     "TotalWidth" : 2240
+    }
+
+* The individual tiles can in turn be accessed at URI:
+  ``/wsi/frames-tiles/{instanceId}/{frameNumber}/{z}/{x}/{y}``, using
+  the :ref:`same conventions <wsi-individual-tiles>` as for precomputed pyramids.
