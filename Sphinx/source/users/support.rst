@@ -204,6 +204,7 @@ decision chart:
    * **South America**:
        
      * `Claudio Arenas <mailto:dentista.arenas@gmail.com>`__ (Spanish/English, Chile)
+     * `Emilio Huaman <https://www.linkedin.com/in/emilio-alberto-huaman-vega-39719b22a/>`__ (English/Spanish, Perú)
      * `Fernando Sánchez <https://integraper.com/?page_id=529>`__ (English/Spanish, Peru)
      * `Gustavo Fernandez <https://www.linkedin.com/in/gfernandezguirland/>`__ (Spanish/Portuguese, Uruguay)
      * `Iván Kuschevatzky <mailto:ivankuche@gmail.com>`__ (English/Spanish, Argentina)
