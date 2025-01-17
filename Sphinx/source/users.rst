@@ -9,21 +9,6 @@ User's guide
    users/configuration.rst
    users/docker.rst
    users/docker-orthancteam.rst
-   users/rest.rst
-   users/rest-cheatsheet.rst
-   users/backup.rst
-   users/replication.rst
-   users/anonymization.rst
-   users/lua.rst
-   users/advanced-rest.rst
-   users/storage-commitment.rst
+   plugins/stone-webviewer-quick-start.rst
    users/webdav.rst
    users/support.rst
-
-
-
-.. toctree::
-   :hidden:
-
-   users/debian-packages.rst
-   users/man-orthanc.rst

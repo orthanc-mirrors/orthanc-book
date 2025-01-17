@@ -20,6 +20,7 @@ Contents
    users.rst
    dicom-guide.rst
    plugins.rst
+   technical.rst
    developers.rst
    integrations.rst
    faq.rst
