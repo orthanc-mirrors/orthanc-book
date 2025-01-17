@@ -1,6 +1,6 @@
 The Orthanc Book is licensed under Creative Commons CC-BY-SA 4.0.
 
 (c) Copyright 2015-2025, University Hospital of Liège, Osimis, Orthanc
-Team SRL, UCLouvain ICTEAM, and the Orthanc community.
+Team SRL, ICTEAM UCLouvain, and the Orthanc community.
 
 https://creativecommons.org/licenses/by-sa/4.0/legalcode
