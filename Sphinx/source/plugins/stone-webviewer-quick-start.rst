@@ -85,7 +85,7 @@ Use one of these:
 Manage windowing
 ................
 
-Click-drag to change the Hounsfield winnowing level and modify the
+Click-drag to change the Hounsfield windowing level and modify the
 contrast/brightness of the image. The viewer comes with a series of
 windowing presets for lung, bone,... that are configured at
 installation. The viewer will also suggest presets that are stored in
