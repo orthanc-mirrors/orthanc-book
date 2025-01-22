@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.5"
+      "version" : "1.12.6"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3826,7 +3826,12 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : []
+                           "example" : [
+                              "232686ae-c32e-4ee5-bf78-67b2897f3cf2",
+                              "5916f08a-583b-41cd-be61-85fa66f650e2",
+                              "5c4425ed-19ac-449a-bc92-22cce3b5894a",
+                              "..."
+                           ]
                         }
                      }
                   },
@@ -4634,6 +4639,94 @@
                }
             },
             "summary" : "C-FIND SCU for worklist",
+            "tags" : [ "Networking" ]
+         }
+      },
+      "/modalities/{id}/get" : {
+         "post" : {
+            "deprecated" : false,
+            "description" : "Start a C-GET SCU command as a job, in order to retrieve DICOM resources from a remote DICOM modality whose identifier is provided in the URL: ",
+            "parameters" : [
+               {
+                  "description" : "Identifier of the modality of interest",
+                  "in" : "path",
+                  "name" : "id",
+                  "required" : true,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               }
+            ],
+            "requestBody" : {
+               "content" : {
+                  "application/json" : {
+                     "schema" : {
+                        "description" : "",
+                        "properties" : {
+                           "Asynchronous" : {
+                              "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
+                              "type" : "boolean"
+                           },
+                           "LocalAet" : {
+                              "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
+                              "type" : "string"
+                           },
+                           "Permissive" : {
+                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "type" : "boolean"
+                           },
+                           "Priority" : {
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "type" : "number"
+                           },
+                           "Query" : {
+                              "description" : "A query object identifying all the DICOM resources to be retrieved",
+                              "type" : "object"
+                           },
+                           "Resources" : {
+                              "description" : "List of queries identifying all the DICOM resources to be sent.  Usage of wildcards is prohibited and the query shall only contain DICOM ID tags.  Additionally, you may provide SOPClassesInStudy to limit the scope of the DICOM negotiation to certain SOPClassUID or to present uncommon SOPClassUID during the DICOM negotation.  By default, Orhanc will propose the most 120 common SOPClassUIDs.",
+                              "items" : {
+                                 "type" : "object"
+                              },
+                              "type" : "array"
+                           },
+                           "Synchronous" : {
+                              "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
+                              "type" : "boolean"
+                           },
+                           "Timeout" : {
+                              "description" : "Timeout for the C-GET command, in seconds",
+                              "type" : "number"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "",
+                           "properties" : {
+                              "ID" : {
+                                 "description" : "In asynchronous mode, identifier of the job",
+                                 "type" : "string"
+                              },
+                              "Path" : {
+                                 "description" : "In asynchronous mode, path to access the job in the REST API",
+                                 "type" : "string"
+                              }
+                           }
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Trigger C-GET SCU",
             "tags" : [ "Networking" ]
          }
       },
@@ -8097,7 +8190,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.17"
+                              "Version" : "1.18"
                            }
                         }
                      }
@@ -8557,7 +8650,7 @@
       "/queries/{id}/answers/{index}/retrieve" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Start a C-MOVE SCU command as a job, in order to retrieve one answer associated with the query/retrieve operation whose identifiers are provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-retrieve-c-move",
+            "description" : "Start a C-MOVE or a C-GET SCU command as a job, in order to retrieve one answer associated with the query/retrieve operation whose identifiers are provided in the URL: https://orthanc.uclouvain.be/book/users/rest.html#performing-retrieve-c-move",
             "parameters" : [
                {
                   "description" : "Identifier of the query of interest",
@@ -8599,6 +8692,10 @@
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
+                           },
+                           "RetrieveMethod" : {
+                              "description" : "Force usage of C-MOVE or C-GET to retrieve the resource.  If note defined in the payload, the retrieve method is defined in the DicomDefaultRetrieveMethod configuration or in DicomModalities->..->RetrieveMethod",
+                              "type" : "string"
                            },
                            "Simplify" : {
                               "description" : "If set to `true`, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
@@ -8649,7 +8746,7 @@
                   "description" : ""
                }
             },
-            "summary" : "Retrieve one answer",
+            "summary" : "Retrieve one answer with a C-MOVE or a C-GET SCU",
             "tags" : [ "Networking" ]
          }
       },
@@ -8804,6 +8901,10 @@
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
+                           "RetrieveMethod" : {
+                              "description" : "Force usage of C-MOVE or C-GET to retrieve the resource.  If note defined in the payload, the retrieve method is defined in the DicomDefaultRetrieveMethod configuration or in DicomModalities->..->RetrieveMethod",
+                              "type" : "string"
+                           },
                            "Simplify" : {
                               "description" : "If set to `true`, report the DICOM tags in human-readable format (using the symbolic name of the tags)",
                               "type" : "boolean"
@@ -8853,7 +8954,7 @@
                   "description" : ""
                }
             },
-            "summary" : "Retrieve all answers",
+            "summary" : "Retrieve all answers with C-MOVE SCU",
             "tags" : [ "Networking" ]
          }
       },
@@ -14645,6 +14746,10 @@
                                  "description" : "Version of the database: https://orthanc.uclouvain.be/book/developers/db-versioning.html",
                                  "type" : "number"
                               },
+                              "DefaultRetrieveMethod" : {
+                                 "description" : "The DefaultRetrieveMethod configuration",
+                                 "type" : "string"
+                              },
                               "DicomAet" : {
                                  "description" : "The DICOM AET of Orthanc",
                                  "type" : "string"
@@ -14740,6 +14845,7 @@
                         "schema" : {
                            "description" : "List of the available operations",
                            "example" : [
+                              "accepted-sop-classes",
                               "accepted-transfer-syntaxes",
                               "bulk-anonymize",
                               "bulk-content",
@@ -14784,6 +14890,28 @@
             },
             "summary" : "List operations",
             "tags" : [ "Other" ]
+         }
+      },
+      "/tools/accepted-sop-classes" : {
+         "get" : {
+            "deprecated" : false,
+            "description" : "Get the list of SOP Class UIDs that are accepted by Orthanc C-STORE SCP. This corresponds to the configuration options `AcceptedSopClasses` and `RejectedSopClasses`.",
+            "parameters" : [],
+            "responses" : {
+               "200" : {
+                  "content" : {
+                     "application/json" : {
+                        "examples" : {},
+                        "schema" : {
+                           "description" : "JSON array containing the SOP Class UIDs"
+                        }
+                     }
+                  },
+                  "description" : ""
+               }
+            },
+            "summary" : "Get accepted SOPClassUID",
+            "tags" : [ "System" ]
          }
       },
       "/tools/accepted-transfer-syntaxes" : {
@@ -16363,7 +16491,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1734457526026\northanc_count_patients 8 1734457526026\northanc_count_series 26 1734457526026\northanc_count_studies 8 1734457526026\northanc_dicom_cache_count 1 1734457526026\northanc_dicom_cache_size_mb 0.502557755 1734457526026\northanc_disk_size_mb 983.235352 1734457526026\northanc_jobs_completed 0 1734457526026\northanc_jobs_failed 0 1734457526026\northanc_jobs_pending 0 1734457526026\northanc_jobs_running 0 1734457526026\northanc_jobs_success 0 1734457526026\northanc_last_change 5191 1734457526026\northanc_rest_api_active_requests 1 1734457526026\northanc_rest_api_duration_ms 640 1734457524331\northanc_storage_cache_count 400 1734457526026\northanc_storage_cache_hit_count 3631 1734457525744\northanc_storage_cache_miss_count 400 1734456760031\northanc_storage_cache_size_mb 3.17403412 1734457526026\northanc_storage_read_bytes 3328216 1734456760031\northanc_storage_read_duration_ms 10 1734456759865\northanc_uncompressed_size_mb 983.235352 1734457526026\northanc_up_time_s 1376 1734457526026\n"
+                        "example" : "orthanc_count_instances 2552 1737550438096\northanc_count_patients 8 1737550438096\northanc_count_series 26 1737550438096\northanc_count_studies 8 1737550438096\northanc_dicom_cache_count 257 1737550438096\northanc_dicom_cache_size_mb 127.976852 1737550438096\northanc_disk_size_mb 983.235352 1737550438096\northanc_jobs_completed 10 1737550438096\northanc_jobs_failed 0 1737550438096\northanc_jobs_pending 0 1737550438096\northanc_jobs_running 0 1737550438096\northanc_jobs_success 10 1737550438096\northanc_last_change 5191 1737550438096\northanc_rest_api_active_requests 1 1737550438095\northanc_rest_api_duration_ms 638 1737550436472\northanc_storage_cache_count 585 1737550438096\northanc_storage_cache_hit_count 27370 1737550437898\northanc_storage_cache_miss_count 39978 1737550432959\northanc_storage_cache_size_mb 127.623787 1737550438096\northanc_storage_read_bytes 10544352600 1737550432959\northanc_storage_read_duration_ms 0 1737550431427\northanc_uncompressed_size_mb 983.235352 1737550438096\northanc_up_time_s 334518 1737550438096\n"
                      }
                   },
                   "description" : ""
@@ -16382,7 +16510,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20241217T174526",
+                        "example" : "20250122T125358",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16404,7 +16532,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20241217T174526",
+                        "example" : "20250122T125358",
                         "schema" : {
                            "description" : "The local time"
                         }

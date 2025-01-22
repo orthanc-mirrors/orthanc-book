@@ -70,6 +70,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/modalities/{id}/find-series``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-series/post>`__,,,*(deprecated)* C-FIND SCU for series
 ``/modalities/{id}/find-study``,,`(post) <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-study/post>`__,,,*(deprecated)* C-FIND SCU for studies
 ``/modalities/{id}/find-worklist``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1find-worklist/post>`__,,,C-FIND SCU for worklist
+``/modalities/{id}/get``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1get/post>`__,,,Trigger C-GET SCU
 ``/modalities/{id}/move``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1move/post>`__,,,Trigger C-MOVE SCU
 ``/modalities/{id}/query``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1query/post>`__,,,Trigger C-FIND SCU
 ``/modalities/{id}/storage-commitment``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1modalities~1{id}~1storage-commitment/post>`__,,,Trigger storage commitment request
@@ -124,11 +125,11 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/queries/{id}/answers/{index}/query-instances``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-instances/post>`__,,,Query the child instances of an answer
 ``/queries/{id}/answers/{index}/query-series``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-series/post>`__,,,Query the child series of an answer
 ``/queries/{id}/answers/{index}/query-studies``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1query-studies/post>`__,,,Query the child studies of an answer
-``/queries/{id}/answers/{index}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1retrieve/post>`__,,,Retrieve one answer
+``/queries/{id}/answers/{index}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1answers~1{index}~1retrieve/post>`__,,,Retrieve one answer with a C-MOVE or a C-GET SCU
 ``/queries/{id}/level``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1level/get>`__,,,,Get level of original query
 ``/queries/{id}/modality``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1modality/get>`__,,,,Get modality of original query
 ``/queries/{id}/query``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1query/get>`__,,,,Get original query arguments
-``/queries/{id}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1retrieve/post>`__,,,Retrieve all answers
+``/queries/{id}/retrieve``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Networking/paths/~1queries~1{id}~1retrieve/post>`__,,,Retrieve all answers with C-MOVE SCU
 ``/series``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series/get>`__,,,,List the available series
 ``/series/{id}``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}/get>`__,,`DELETE <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}/delete>`__,,Get information about some series
 ``/series/{id}/anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/Series/paths/~1series~1{id}~1anonymize/post>`__,,,Anonymize series
@@ -201,6 +202,7 @@ Path,GET,POST,DELETE,PUT,Summary
 ``/studies/{id}/statistics``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Studies/paths/~1studies~1{id}~1statistics/get>`__,,,,Get study statistics
 ``/system``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1system/get>`__,,,,Get system information
 ``/tools``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/Other/paths/~1tools/get>`__,,,,List operations
+``/tools/accepted-sop-classes``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1accepted-sop-classes/get>`__,,,,Get accepted SOPClassUID
 ``/tools/accepted-transfer-syntaxes``,`GET <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/get>`__,,,`PUT <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1accepted-transfer-syntaxes/put>`__,Get accepted transfer syntaxes
 ``/tools/bulk-anonymize``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-anonymize/post>`__,,,Anonymize a set of resources
 ``/tools/bulk-content``,,`POST <https://orthanc.uclouvain.be/api/index.html#tag/System/paths/~1tools~1bulk-content/post>`__,,,Describe a set of resources
