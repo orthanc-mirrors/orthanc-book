@@ -667,7 +667,7 @@ known ``StudyInstanceUID``::
 
 *Note:* Orthanc only implements C-Get as a
 service class provider (SCP) since version 1.7.0. 
-Using C-Get as a service class user (SCU) will only be supported in Orthanc version 1.12.6 (not released yet).
+Using C-Get as a service class user (SCU) is only supported since Orthanc version 1.12.6.
 
 
 Using HTTP instead of the DICOM protocol

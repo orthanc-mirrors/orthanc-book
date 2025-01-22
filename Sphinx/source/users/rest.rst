@@ -1015,8 +1015,8 @@ the modality ``sample`` to another Orthanc whose AET is ``ORTHANCB``::
             }'
 
 
-Performing C-Get (coming in Orthanc 1.12.6)
--------------------------------------------
+Performing C-Get (new in Orthanc 1.12.6)
+----------------------------------------
 
 .. highlight:: bash
 
@@ -1254,8 +1254,8 @@ in order to detect failure or completion::
 
 
 
-Performing Retrieve (with C-Get coming in Orthanc 1.12.6)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Performing Retrieve (with C-Get)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. highlight:: bash
 
