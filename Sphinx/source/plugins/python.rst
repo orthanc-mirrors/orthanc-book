@@ -334,6 +334,7 @@ The route can then be accessed as::
   $ curl http://localhost:8042/toto
   ok
 
+**Note:** from v5.0, it is possible to stream :ref:`stream HTTP answers <python_stream_anwsers>`
 
 Overriding the core REST API
 ............................
@@ -971,6 +972,18 @@ DICOM series:
 Here is the source code:
 
 .. literalinclude:: python/mosaic.py
+                    :language: python
+
+
+.. _python_stream_anwsers:
+
+Streaming HTTP answers (new in 5.0)
+...................................
+
+Starting from v 5.0, it is possible to stream HTTP answers when 
+implementing a REST API route:
+
+.. literalinclude:: python/extend-api-with-streaming.py
                     :language: python
 
 
