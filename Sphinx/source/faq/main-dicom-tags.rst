@@ -98,8 +98,9 @@ e.g from OSIRIX/Horos.  They request ``SpecificCharacterSet`` and
         "Series" : [
         ],
         "Study": [
-            "SpecificCharacterSet",
-            "PerformingPhysicianName"
+            "PerformingPhysicianName",
+            "RETIRED_StudyComments",
+            "RETIRED_InterpretationStatusID"
         ],
         "Patient": []
         }
