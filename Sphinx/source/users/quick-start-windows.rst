@@ -44,7 +44,7 @@ Step 3: Orthanc is running!
 
 At this stage, Orthanc is running as a Windows Service, which means that it will automatically start whenever your computer starts.
 
-The :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` interface is accessible at `http://localhost:8042/ui/app/ <http://localhost:8042/ui/app/>`__. As Orthanc has not received any DICOM file yet, its content is currently empty:
+The :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` interface is accessible at `http://localhost:8042/ui/app/ <http://localhost:8042/ui/app/>`__ (default username/password is ``orthanc``). As Orthanc has not received any DICOM file yet, its content is currently empty:
 
 .. image:: ../images/win-quick-start-orthanc-empty.png
            :align: center
