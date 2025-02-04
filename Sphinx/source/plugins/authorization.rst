@@ -58,7 +58,7 @@ instance use the following configuration file::
       "/home/user/OrthancAuthorization/Build/libOrthancAuthorization.so"
     ],
     "Authorization" : {
-      // .. all options are document below
+      // .. all options are documented below
     }
   }
 
