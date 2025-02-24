@@ -36,11 +36,11 @@ To obtain the Orthanc binaries, you have several possibilities:
 
 Furthermore, if you are running Debian 9 (stretch), Debian 10
 (buster), Debian 11 (bullseye), Debian 12 (bookworm), Ubuntu 18.04 LTS
-(bionic), Ubuntu 20.04 LTS (focal), or Ubuntu 22.04 LTS (jammy) on an
-**AMD64 architecture**, Sébastien Jodogne maintains a **standalone
-Debian repository** that provides the latest versions of the LSB
-binaries. For instance, here is how to install the :ref:`Stone Web
-viewer <stone_webviewer>` on a barebone Docker setup::
+(bionic), Ubuntu 20.04 LTS (focal), Ubuntu 22.04 LTS (jammy), Ubuntu
+24.04 LTS (noble) on an **AMD64 architecture**, Sébastien Jodogne
+maintains a **standalone Debian repository** that provides the latest
+versions of the LSB binaries. For instance, here is how to install the
+:ref:`Stone Web viewer <stone_webviewer>` on a barebone Docker setup::
 
   # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:9
 
