@@ -175,6 +175,13 @@ Python plugins
   announcement on the `Orthanc Users forum
   <https://groups.google.com/g/orthanc-users/c/q3Tncx3b6os/m/iFLq85fKAgAJ>`__.
 
+* Oskar Bożek maintains `orthanc-radiant
+  <https://github.com/boskar/orthanc-radiant/>`__ as an Orthanc plugin
+  written in Python for invoking ``radiant://`` URI scheme from
+  Orthanc Explorer. Check out the original announcement on the
+  `Orthanc Users forum
+  <https://discourse.orthanc-server.org/t/radiant-dicom-viewer-uri-integration-plugin/5589?u=jodogne>`__.
+
 
 Rust plugins
 ^^^^^^^^^^^^

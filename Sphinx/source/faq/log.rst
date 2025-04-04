@@ -189,7 +189,8 @@ REST API, by inspecting the URIs that are prefixed by
 
 * Provided that you have left the ``DeidentifyLogs`` configuration to
   its ``true`` default value, Orthanc logs will not contain any sensitive
-  patient information.
+  patient information at ``default`` or ``verbose`` level; however, 
+  at ``trace`` level, the DICOM logs will still contain PHI.
 
 * Starting from Orthanc 1.12.2, Orthanc is logging the thread name in the
   logs.  If you need to revert back to the previous format, add the 

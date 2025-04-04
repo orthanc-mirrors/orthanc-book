@@ -58,19 +58,21 @@ file::
     "Name" : "MyOrthanc",
     "PostgreSQL" : {
       "EnableIndex" : true,
-      "EnableStorage" : true,
+      "EnableStorage" : false,               // You likely don't need to enable this option 
       "Host" : "localhost",
       "Port" : 5432,
       "Database" : "orthanc",
       "Username" : "orthanc",
       "Password" : "orthanc",
-      "EnableSsl" : false,               // New in release 3.0
-      "MaximumConnectionRetries" : 10,   // New in release 3.0
-      "ConnectionRetryInterval" : 5,     // New in release 3.0
-      "IndexConnectionsCount" : 50,      // New in release 4.0 - new default value in 7.0
-      "TransactionMode": "ReadCommitted",// New in release 6.0 - new default value in 7.0
-      "EnableVerboseLogs": false,        // New in release 6.0
-      "HousekeepingInterval": 1          // New in release 7.0
+      "Lock" : true,
+      "EnableSsl" : false,                   // New in release 3.0
+      "MaximumConnectionRetries" : 10,       // New in release 3.0
+      "ConnectionRetryInterval" : 5,         // New in release 3.0
+      "IndexConnectionsCount" : 50,          // New in release 4.0 - new default value in 7.0
+      "TransactionMode": "ReadCommitted",    // New in release 6.0 - new default value in 7.0
+      "EnableVerboseLogs": false,            // New in release 6.0
+      "HousekeepingInterval": 1,             // New in release 7.0
+      "AllowInconsistentChildCounts": false  // New in release 7.2
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -193,7 +195,6 @@ this behavior:
   <revisions>` to protect metadata and attachments from concurrent
   modifications.
 
-  
 
 .. _postgresql-lock:
 
@@ -249,12 +250,6 @@ This is due to a timeout in the PostgreSQL server. Please make sure to
 in the configuration of your PostgreSQL server
 
 
-Scalability
-^^^^^^^^^^^
-
-When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalability section 
-<scalability>`
-
 Transaction modes (new in version 6.0)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -268,6 +263,33 @@ can be configured in the ``TransactionMode`` configuration of the ``PostgreSQL``
   to write to the same Database.  This was the default setting up to release 6.2.
 - ``ReadCommitted`` that allows multiple threads or Orthanc instances to write at the
   same time to the same Database.  This is the default setting starting from release 7.0.
+
+Optimizations
+^^^^^^^^^^^^^
+
+* ``AllowInconsistentChildCounts`` has been added in the release 7.2 to provide
+  some optimization when accessing e.g tags like ``NumberOfStudyRelatedInstances``.
+  If set to ``true``, childCount values of recently ingested resources will be 
+  incorrect until the next execution of the DB housekeeping thread.
+
+
+Other options
+^^^^^^^^^^^^^
+
+* ``EnableVerboseLogs`` has been added in the release 6.0 to log the 
+  SQL queries that are being executed.  This is mainly target at developers.
+
+* ``HousekeepingInterval`` has been added in the release 7.0 to define the
+  interval (in seconds) at which the DB housekeeping thread is executed.  The
+  DB housekeeping thread is in charge of updating values like the statistics
+  and childCount entries to speed up their computation. 
+
+
+Scalability
+^^^^^^^^^^^
+
+When configuring your PostgreSQL plugin, ensure you've read the :ref:`scalability section 
+<scalability>`
 
 
 Upgrades/Downgrades
@@ -284,14 +306,22 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 6.0 - 6.2                 | 2                                         |
 +---------------------------+-------------------------------------------+
-| from 7.0                  | 3                                         |
+| 7.0 - 7.1                 | 3                                         |
++---------------------------+-------------------------------------------+
+| from 7.2                  | 4                                         |
 +---------------------------+-------------------------------------------+
 
+
 Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
-from e.g plugin 3.3 to 7.0, Orthanc will apply all migration steps autonomously.
+from e.g plugin 3.3 to 7.2, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
+
+To downgrade from revision 4 to revision 3, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev4ToRev3.sql
+  $ psql -U postgres -f Rev4ToRev3.sql
 
 To downgrade from revision 3 to revision 2, one might run this procedure::
 
@@ -334,6 +364,13 @@ To upgrade manually from revision 2 to revision 3::
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev2ToRev3.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev2ToRev3.sql
+  $ psql -U postgres -f PrepareIndex.sql
+
+To upgrade manually from revision 3 to revision 4::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev3ToRev4.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev3ToRev4.sql
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
