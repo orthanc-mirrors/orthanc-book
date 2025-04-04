@@ -138,6 +138,8 @@ speed up the initialization of the plugin. The reasons are explained
 in the `AWS official documentation
 <https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html>`__.
 
+**Warning:** On Microsoft Windows, one may face some certificates validation troubles, see :ref:`this page <https-ca-certificates>`.
+
 
 .. _minio:
   

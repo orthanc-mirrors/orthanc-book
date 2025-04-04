@@ -67,6 +67,7 @@ Specific FAQs
    faq/nginx.rst
    faq/iis.rst
    faq/https.rst
+   faq/https-ca-certificates
    faq/same-origin.rst
    faq/matlab.rst
    faq/series-completion.rst
