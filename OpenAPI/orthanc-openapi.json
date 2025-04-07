@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.6"
+      "version" : "1.12.7"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -483,6 +483,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "PrivateCreator" : {
                               "description" : "The private creator to be used for private tags in `Replace`",
                               "type" : "string"
@@ -768,6 +772,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given instance. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
                   "name" : "Content-Range",
@@ -941,6 +954,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given instance",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
@@ -1381,6 +1403,24 @@
             "description" : "Download one DICOM instance",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM file will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -1535,7 +1575,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -1615,7 +1655,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -1695,7 +1735,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -1875,7 +1915,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -2046,7 +2086,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -2248,7 +2288,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -2319,7 +2359,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -2390,7 +2430,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -2855,6 +2895,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "PrivateCreator" : {
                               "description" : "The private creator to be used for private tags in `Replace`",
                               "type" : "string"
@@ -3095,6 +3139,7 @@
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
                                  "PatientID" : "Vafk,T,6",
@@ -3161,7 +3206,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -3284,7 +3329,7 @@
                   }
                },
                {
-                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (defaults to false)",
+                  "description" : "Returns an unsupported.png placeholder image if unable to provide the image instead of returning a 415 HTTP error (value is true if option is present)",
                   "in" : "query",
                   "name" : "returnUnsupportedImage",
                   "required" : false,
@@ -3430,6 +3475,7 @@
                               "Instances" : [ "6582b1c0-292ad5ab-ba0f088f-f7a1766f-9a29a54f" ],
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160851",
                               "MainDicomTags" : {
                                  "ImageOrientationPatient" : "0\\1\\0\\0\\0\\-1",
                                  "Manufacturer" : "Philips",
@@ -3646,6 +3692,7 @@
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
                                  "InstitutionName" : "HUG",
@@ -3826,12 +3873,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [
-                              "232686ae-c32e-4ee5-bf78-67b2897f3cf2",
-                              "5916f08a-583b-41cd-be61-85fa66f650e2",
-                              "5c4425ed-19ac-449a-bc92-22cce3b5894a",
-                              "..."
-                           ]
+                           "example" : [ "a58970a8-bf47-4cac-8ec0-fd7f836b0efa" ]
                         }
                      }
                   },
@@ -4667,6 +4709,10 @@
                               "description" : "If `true`, run the job in asynchronous mode, which means that the REST API call will immediately return, reporting the identifier of a job. Prefer this flavor wherever possible.",
                               "type" : "boolean"
                            },
+                           "Level" : {
+                              "description" : "Level of the query (`Patient`, `Study`, `Series` or `Instance`)",
+                              "type" : "string"
+                           },
                            "LocalAet" : {
                               "description" : "Local AET that is used for this commands, defaults to `DicomAet` configuration option. Ignored if `DicomModalities` already sets `LocalAet` for this modality.",
                               "type" : "string"
@@ -4679,12 +4725,8 @@
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
                               "type" : "number"
                            },
-                           "Query" : {
-                              "description" : "A query object identifying all the DICOM resources to be retrieved",
-                              "type" : "object"
-                           },
                            "Resources" : {
-                              "description" : "List of queries identifying all the DICOM resources to be sent.  Usage of wildcards is prohibited and the query shall only contain DICOM ID tags.  Additionally, you may provide SOPClassesInStudy to limit the scope of the DICOM negotiation to certain SOPClassUID or to present uncommon SOPClassUID during the DICOM negotation.  By default, Orhanc will propose the most 120 common SOPClassUIDs.",
+                              "description" : "List of queries identifying all the DICOM resources to be sent.  Usage of wildcards is prohibited and the query shall only contain DICOM ID tags.  Additionally, you may provide SOPClassesInStudy to limit the scope of the DICOM negotiation to certain SOPClassUID or to present uncommon SOPClassUID during the DICOM negotiation.  By default, Orhanc will propose the most 120 common SOPClassUIDs.",
                               "items" : {
                                  "type" : "object"
                               },
@@ -5363,6 +5405,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -5441,6 +5487,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -5498,6 +5553,14 @@
                            "Asynchronous" : {
                               "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -5793,6 +5856,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given patient. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
                   "name" : "Content-Range",
@@ -5966,6 +6038,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given patient",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
@@ -6799,6 +6880,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -6860,6 +6950,14 @@
                            "Extended" : {
                               "description" : "If `true`, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*. Default value is `false`.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -7144,6 +7242,10 @@
                            "KeepSource" : {
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
@@ -9200,6 +9302,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -9278,6 +9384,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -9335,6 +9450,14 @@
                            "Asynchronous" : {
                               "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -9630,6 +9753,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given series. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
                   "name" : "Content-Range",
@@ -9803,6 +9935,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given series",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
@@ -10490,6 +10631,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -10551,6 +10701,14 @@
                            "Extended" : {
                               "description" : "If `true`, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*. Default value is `false`.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -10835,6 +10993,10 @@
                            "KeepSource" : {
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
@@ -11290,6 +11452,7 @@
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19910101",
                                  "PatientID" : "Vafk,T,6",
@@ -11561,6 +11724,7 @@
                               "ID" : "49974143-ec23cb52-6b2a1c46-14d5daa0-0822ce1a",
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160911",
                               "MainDicomTags" : {
                                  "AccessionNumber" : "A10011234814",
                                  "InstitutionName" : "HUG",
@@ -11997,6 +12161,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -12075,6 +12243,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -12132,6 +12309,14 @@
                            "Asynchronous" : {
                               "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -12427,6 +12612,15 @@
             "description" : "Get the (binary) content of one attachment associated with the given study. The attachment will not be decompressed if `StorageCompression` is `true`.",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
                   "name" : "Content-Range",
@@ -12600,6 +12794,15 @@
             "deprecated" : false,
             "description" : "Get the (binary) content of one attachment associated with the given study",
             "parameters" : [
+               {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
                {
                   "description" : "Optional content range to access part of the attachment (new in Orthanc 1.12.5)",
                   "in" : "header",
@@ -13433,6 +13636,15 @@
                   }
                },
                {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                   "in" : "query",
                   "name" : "transcode",
@@ -13494,6 +13706,14 @@
                            "Extended" : {
                               "description" : "If `true`, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*. Default value is `false`.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -13859,6 +14079,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -14205,6 +14429,7 @@
                               "ID" : "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0",
                               "IsStable" : true,
                               "Labels" : [],
+                              "LastUpdate" : "20231109T160811",
                               "MainDicomTags" : {
                                  "PatientBirthDate" : "19490301",
                                  "PatientID" : "5Yp0E",
@@ -14688,7 +14913,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 26,
+                              "ApiVersion" : 27,
                               "Capabilities" : {
                                  "HasExtendedChanges" : true,
                                  "HasExtendedFind" : true
@@ -14697,6 +14922,7 @@
                               "DatabaseBackendPlugin" : null,
                               "DatabaseServerIdentifier" : "3d10366d-2038f306-f066fd6f-2648bdad-882aac90",
                               "DatabaseVersion" : 6,
+                              "DefaultRetrieveMethod" : "C-MOVE",
                               "DicomAet" : "ORTHANC",
                               "DicomPort" : 4242,
                               "HasLabels" : true,
@@ -14719,7 +14945,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.5"
+                              "Version" : "1.12.7"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -15012,6 +15238,10 @@
                               "description" : "If set to `false`, instructs Orthanc to the remove original resources. By default, the original resources are kept in Orthanc.",
                               "type" : "boolean"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -15196,6 +15426,10 @@
                               "description" : "Level of the modification (`Patient`, `Study`, `Series` or `Instance`). If absent, the level defaults to `Instance`, but is set to `Patient` if `PatientID` is modified, to `Study` if `StudyInstanceUID` is modified, or to `Series` if `SeriesInstancesUID` is modified. (new in Orthanc 1.9.7)",
                               "type" : "string"
                            },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
+                           },
                            "Permissive" : {
                               "description" : "If `true`, ignore errors during the individual steps of the job.",
                               "type" : "boolean"
@@ -15352,6 +15586,24 @@
             "description" : "Create a ZIP archive containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "A comma separated list of Orthanc resource identifiers to include in the ZIP archive.",
                   "in" : "query",
                   "name" : "resources",
@@ -15391,6 +15643,14 @@
                            "Asynchronous" : {
                               "description" : "If `true`, create the archive in asynchronous mode, which means that a job is submitted to create the archive in background.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -15464,6 +15724,10 @@
                               "description" : "This field can be used to embed an image (pixel data encoded as PNG or JPEG), a PDF, or a 3D manufactoring model (MTL/OBJ/STL) inside the created DICOM instance. The file to be encapsulated must be provided using its [data URI scheme encoding](https://en.wikipedia.org/wiki/Data_URI_scheme). This field can possibly contain a JSON array, in which case a DICOM series is created containing one DICOM instance for each item in the `Content` field.",
                               "type" : "string"
                            },
+                           "Encapsulate" : {
+                              "description" : "If set to `true`, encapsulate the binary data of `ContentData` as such, using a compressed transfer syntax. Only applicable if `ContentData` contains a grayscale or color JPEG image in 8bpp, in which case the transfer syntax is set to \"1.2.840.10008.1.2.4.50\". (new in Orthanc 1.12.7)",
+                              "type" : "boolean"
+                           },
                            "Force" : {
                               "description" : "Avoid the consistency checks for the DICOM tags that enforce the DICOM model of the real-world. You can notably use this flag if you need to manually set the tags `StudyInstanceUID`, `SeriesInstanceUID`, or `SOPInstanceUID`. Be careful with this feature.",
                               "type" : "boolean"
@@ -15522,6 +15786,24 @@
             "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "A comma separated list of Orthanc resource identifiers to include in the DICOMDIR media.",
                   "in" : "query",
                   "name" : "resources",
@@ -15565,6 +15847,14 @@
                            "Extended" : {
                               "description" : "If `true`, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*. Default value is `false`.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -15629,6 +15919,24 @@
             "description" : "Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the 'resources' argument",
             "parameters" : [
                {
+                  "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                  "in" : "query",
+                  "name" : "filename",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "string"
+                  }
+               },
+               {
+                  "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                  "in" : "query",
+                  "name" : "lossy-quality",
+                  "required" : false,
+                  "schema" : {
+                     "type" : "number"
+                  }
+               },
+               {
                   "description" : "A comma separated list of Orthanc resource identifiers to include in the DICOMDIR media.",
                   "in" : "query",
                   "name" : "resources",
@@ -15672,6 +15980,14 @@
                            "Extended" : {
                               "description" : "If `true`, will include additional tags such as `SeriesDescription`, leading to a so-called *extended DICOMDIR*. Default value is `true`.",
                               "type" : "boolean"
+                           },
+                           "Filename" : {
+                              "description" : "Filename to set in the \"Content-Disposition\" HTTP header (including file extension)",
+                              "type" : "string"
+                           },
+                           "LossyQuality" : {
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "type" : "number"
                            },
                            "Priority" : {
                               "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
@@ -16491,7 +16807,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1737550438096\northanc_count_patients 8 1737550438096\northanc_count_series 26 1737550438096\northanc_count_studies 8 1737550438096\northanc_dicom_cache_count 257 1737550438096\northanc_dicom_cache_size_mb 127.976852 1737550438096\northanc_disk_size_mb 983.235352 1737550438096\northanc_jobs_completed 10 1737550438096\northanc_jobs_failed 0 1737550438096\northanc_jobs_pending 0 1737550438096\northanc_jobs_running 0 1737550438096\northanc_jobs_success 10 1737550438096\northanc_last_change 5191 1737550438096\northanc_rest_api_active_requests 1 1737550438095\northanc_rest_api_duration_ms 638 1737550436472\northanc_storage_cache_count 585 1737550438096\northanc_storage_cache_hit_count 27370 1737550437898\northanc_storage_cache_miss_count 39978 1737550432959\northanc_storage_cache_size_mb 127.623787 1737550438096\northanc_storage_read_bytes 10544352600 1737550432959\northanc_storage_read_duration_ms 0 1737550431427\northanc_uncompressed_size_mb 983.235352 1737550438096\northanc_up_time_s 334518 1737550438096\n"
+                        "example" : "orthanc_count_instances 2552 1744023638288\northanc_count_patients 8 1744023638288\northanc_count_series 26 1744023638288\northanc_count_studies 8 1744023638288\northanc_dicom_cache_count 29 1744023638288\northanc_dicom_cache_size_mb 13.5450821 1744023638288\northanc_disk_size_mb 983.235352 1744023638288\northanc_jobs_completed 1 1744023638288\northanc_jobs_failed 0 1744023638288\northanc_jobs_pending 0 1744023638288\northanc_jobs_running 0 1744023638288\northanc_jobs_success 1 1744023638288\northanc_last_change 6551 1744023638288\northanc_rest_api_active_requests 1 1744023638288\northanc_rest_api_duration_ms 642 1744023636811\northanc_storage_cache_count 428 1744023638288\northanc_storage_cache_hit_count 771 1744023638071\northanc_storage_cache_miss_count 428 1744023632849\northanc_storage_cache_size_mb 66.1587219 1744023638288\northanc_storage_read_bytes 69372450 1744023632849\northanc_storage_read_duration_ms 0 1744023631251\northanc_uncompressed_size_mb 983.235352 1744023638288\northanc_up_time_s 223 1744023638288\n"
                      }
                   },
                   "description" : ""
@@ -16510,7 +16826,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250122T125358",
+                        "example" : "20250407T110038",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16532,7 +16848,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250122T125358",
+                        "example" : "20250407T110038",
                         "schema" : {
                            "description" : "The local time"
                         }
