@@ -313,6 +313,35 @@ You can use the ``/instances/.../pdf`` URI to retrieve an embedded PDF
 file.
 
 
+.. _encapsulating-jpeg:
+
+Encapsulating a JPEG file into a DICOM instance
+-----------------------------------------------
+
+Starting with Orthanc 1.12.7, the ``/tools/create-dicom`` route can be
+used to embed a JPEG into a DICOM instance, by setting the argument
+``Encapsulate`` to ``true``. In this case, the JPEG binary content is
+store as-is, without transcoding. The original JPEG file can be
+retrieved in the pixel data. A `sample Python script
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Samples/Python/EncapsulateJPEG.py>`__
+is part of the Orthanc source distribution. Here is a sample
+interactive bash session:
+
+.. code-block:: txt
+
+   $ md5sum /tmp/sample.jpg
+   bbca3961c4587063342a4e90aaff44b6  /tmp/sample.jpg
+   $ ./EncapsulateJPEG.py
+   URL of the newly created instance: http://localhost:8042/instances/1aa8b0f3-841cea86-1b1ce24c-032f1b4c-65f5cc2b/file
+   $ curl http://localhost:8042/instances/1aa8b0f3-841cea86-1b1ce24c-032f1b4c-65f5cc2b/content/7fe0-0010/1 > /tmp/sample2.jpg
+   $ md5sum /tmp/sample2.jpg
+   bbca3961c4587063342a4e90aaff44b6  /tmp/sample2.jpg
+
+Note that we use the route ``/instances/{...}/content/7fe0-0010/1`` to
+retrieve the second component of the compressed pixel data, as the
+first component corresponds to the offset table.
+
+
 .. _private-tags:
 
 Creating DICOM instance with private tags
