@@ -1,7 +1,7 @@
 .. _stone_webviewer:
 
 
-Stone Web Viewer plugin
+Stone Web viewer plugin
 =======================
 
 .. contents::
@@ -83,7 +83,7 @@ Orthanc must of course be restarted after the modification of its
 configuration file. 
 
 Once a :ref:`DICOM study <model-world>` is opened using Orthanc
-Explorer, a yellow button entitled ``Stone Web Viewer`` will show
+Explorer, a yellow button entitled ``Stone Web viewer`` will show
 up. It will open the Web viewer for that particular study.  See also
 the interactive demonstration on the `official homepage of the plugin
 <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__.
@@ -139,10 +139,10 @@ Troubleshooting
 FAQ
 ---
 
-- **Can I use the Stone Viewer in a medical environment?**
+- **Can I use the Stone Web viewer in a medical environment?**
 
-  The Stone Viewer is not a Medical Device; it is not CE marked or FDA
-  approved. The Stone Viewer is free and open-source software that
+  The Stone Web viewer is not a Medical Device; it is not CE marked or FDA
+  approved. The Stone Web viewer is free and open-source software that
   cannot be used for diagnostic or therapeutic purposes.
 
   However, the viewer can be used as a communication tool that allows
@@ -153,11 +153,16 @@ FAQ
   Check out your local regulations to ensure you're using it in a
   legal manner.
 
-- **Can the Stone Web Viewer display DICOM-SR (structured reports)?**
+- **Can the Stone Web viewer display DICOM-SR (structured reports)?**
 
-  The Stone Web viewer doesn't provide built-in support for
-  DICOM-SR. However, it can display DICOM-SR that have been beforehand
-  converted to PDF.
+  Starting with version 3.0, the Stone Web viewer will provide
+  built-in support to render DICOM-SR. Textual reports are generated
+  on-the-fly.  In addition, preliminary support for preliminary
+  support for TID 1500 and TID 1410 will be included, which is in line
+  with the `IHE "AI Results" profile <https://doi.org/10.3233/SHTI240603>`__.
+
+  For earlier versions of the Stone Web viewer, DICOM-SR can be
+  displayed if they have been beforehand converted to PDF.
 
   To this end, you could for instance first use the ``dsr2html``
   command-line tool that is provided by the `DCMTK project
@@ -174,12 +179,11 @@ FAQ
   love to have access to sample DICOM files that could be used to
   enhance the support of structured reports in the Stone Web viewer.
   If you have such sample files, please post them to the `Orthanc
-  Users <https://groups.google.com/g/orthanc-users>`__ discussion
-  forum.
+  Users <https://discourse.orthanc-server.org/>`__ discussion forum.
 
-- **What video formats are supported by the Stone Web Viewer?**
+- **What video formats are supported by the Stone Web viewer?**
 
-  The set of codecs supported by the Stone Viewer is an intersection
+  The set of codecs supported by the Stone Web viewer is an intersection
   of the sets of codecs supported by the `DICOM standard
   <http://dicom.nema.org/medical/dicom/current/output/chtml/part05/PS3.5.html>`__
   and those supported by the `web browsers
