@@ -8,11 +8,13 @@ Don't take it bad if we shared this link with you ;-) :
 
 - ORPHAN
 - ORPHANC
+- ORTAHANC
 - ORTANC
 - ORTANCH
 - ORTHCAN
 - ORTHAC
 - ORTHAN
+- ORTHANAC
 - ORTHANK
 - ORTHANS
 - ORTHNAC
