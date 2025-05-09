@@ -6,6 +6,7 @@ regularly misspelled on the `Orthanc Users group <https://discourse.orthanc-serv
 so here we keep track of all the wrong spellings we have already seen.
 Don't take it bad if we shared this link with you ;-) :
 
+- ORHTANC
 - ORPHAN
 - ORPHANC
 - ORTAHANC
