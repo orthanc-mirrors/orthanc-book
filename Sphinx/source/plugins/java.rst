@@ -38,7 +38,7 @@ Binaries are included in:
 - The `orthancteam/orthanc Docker image <https://hub.docker.com/r/orthancteam/orthanc>`__
 - The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
 
-Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-java/file/tip/NEWS>`__.
+Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-java/file/default/NEWS>`__.
 
 Compilation instructions are available below.
 

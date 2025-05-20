@@ -36,7 +36,7 @@ Binaries are included in:
 - The `Windows Installer <https://www.orthanc-server.com/download-windows.php>`__
 - The `MacOS packages <https://www.orthanc-server.com/static.php?page=download-mac>`__
 
-Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/tip/NEWS>`__.
+Release notes are available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/default/NEWS>`__.
 
 Compilation instructions are available below.
 
@@ -395,7 +395,7 @@ Full configuration
 
 .. highlight:: json
 
-The full list of configuration is available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/tip/Plugin/DefaultConfiguration.json>`__.
+The full list of configuration is available `here <https://orthanc.uclouvain.be/hg/orthanc-authorization/file/default/Plugin/DefaultConfiguration.json>`__.
 
 Here is the list of all the configuration options::
 
