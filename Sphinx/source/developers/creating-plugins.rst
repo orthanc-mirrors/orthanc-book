@@ -43,6 +43,12 @@ Here are some resources about creating C/C++ plugins:
   <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Plugins/Samples/>`__
   (in the ``Plugins/Samples`` folder).
 
+* In particular, `this repository includes the skeleton
+  <https://orthanc.uclouvain.be/hg/orthanc/file/tip/OrthancServer/Plugins/Samples/CppSkeleton>`__
+  of a **sample, minimal C++ plugin** that is prepared to be shipped
+  to end users. This skeleton also illustrates how to properly include
+  the Orthanc Framework and how to use embedded resources.
+
 * A tutorial showing how to implement a basic WADO server is
   `available on CodeProject
   <https://www.codeproject.com/Articles/797118/Implementing-a-WADO-Server-using-Orthanc>`__.
