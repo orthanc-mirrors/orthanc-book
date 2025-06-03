@@ -140,7 +140,10 @@ Here are the main metadata handled by the Orthanc core:
   this resource.  Starting with Orthanc 1.12.1, ``LastUpdate`` is also
   updated when a child resource is deleted.
 * ``RemoteAET`` records the AET of the modality that has sent some
-  DICOM instance to Orthanc using the DICOM protocol.
+  DICOM instance to Orthanc using the DICOM protocol. This metadata is
+  only available at the level of DICOM instances, as the instances of
+  a patient/study/series can possibly originate from different
+  modalities.
 * ``ModifiedFrom`` and ``AnonymizedFrom`` hold from which original
   resource, a resource was modified or anonymized. The presence of
   this metadata indicates that the resource is the result of a

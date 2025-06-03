@@ -81,7 +81,7 @@ However, at some point, you will probably want to customize the settings.
 1. **Locate the Configuration Files**
 
    The Windows configuration is split into multiple configuration files (one main configuration file, plus one for each plugin). These files are typically stored in ``C:\Program Files\Orthanc\Configuration\``.
-   ``orthanc.json`` is the main configuration file.  Its complete documentation is available `here <https://orthanc.uclouvain.be/hg/orthanc/file/tip/OrthancServer/Resources/Configuration.json>`__.
+   ``orthanc.json`` is the main configuration file.  Its complete documentation is available `here <https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/Configuration.json>`__.
    In addition, each :ref:`plugin <plugins>` has its own configuration file that is described in the documentation of the plugin.
 
 .. image:: ../images/win-quick-start-config-files.png

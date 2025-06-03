@@ -987,6 +987,31 @@ implementing a REST API route:
                     :language: python
 
 
+.. _python_couchdb:
+
+Synchronizing Orthanc with CouchDB
+..................................
+
+Python plugins can be used to continuously replicate the content of
+the Orthanc database into a `document-oriented NoSQL database
+<https://en.wikipedia.org/wiki/Document-oriented_database>`__. Here is
+a full working example for `CouchDB
+<https://en.wikipedia.org/wiki/Apache_CouchDB>`__:
+
+.. literalinclude:: python/couchdb.py
+                    :language: python
+
+.. highlight:: bash
+
+This example assumes that CouchDB was started using::
+
+  $ docker run --rm -t -i -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password couchdb:3.3.3
+
+Note that the built-in Web interface of CouchDB (named Fauxton) can be
+opened at: ``http://localhost:5984/_utils/``
+
+
+
 Performance and concurrency
 ---------------------------
 
