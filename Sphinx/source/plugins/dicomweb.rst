@@ -130,6 +130,11 @@ the ``DicomWeb`` section of the Orthanc configuration file::
       "EnableMetadataCache": true,    // Wheter the plugin caches metadata as a gzipped attachment (since release 1.15)
       "MetadataWorkerThreadsCount": 4,// The number of concurrent threads that are used to extract the metadata in Full mode
                                       // (since release 1.14)
+      "WadoRsLoaderThreadsCount": 0,  // The number of concurrent threads that are used to read the files from the storage
+                                      // when answering a WADO-RS call at study or series level.  A value > 1 is meaningful 
+                                      // only if the storage is a distributed network storage (e.g an object storage plugin).
+                                      // A value of 0 means reading and writing are performed in sequence (default behaviour).
+                                      // (since release 1.21)
       "PublicRoot": "/dicom-web/",    // The public Root URI of the DICOMweb API in case it is different from "Root".
                                       // This is useful if, e.g, your Orthanc is behind a reverse-proxy and has another 
                                       // base endpoint than the "Root" one.  Note that, if using a reverse-proxy, make sure to set the "host"
