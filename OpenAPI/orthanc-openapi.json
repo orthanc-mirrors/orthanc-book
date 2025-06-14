@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.7"
+      "version" : "1.12.8"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -224,7 +224,7 @@
                   }
                },
                {
-                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
                   "in" : "query",
                   "name" : "response-content",
                   "required" : false,
@@ -3137,6 +3137,7 @@
                            "description" : "Information about the parent DICOM patient",
                            "example" : {
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
+                              "IsProtected" : false,
                               "IsStable" : true,
                               "Labels" : [],
                               "LastUpdate" : "20231109T160911",
@@ -3873,7 +3874,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [ "a58970a8-bf47-4cac-8ec0-fd7f836b0efa" ]
+                           "example" : []
                         }
                      }
                   },
@@ -5214,7 +5215,7 @@
                   }
                },
                {
-                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
                   "in" : "query",
                   "name" : "response-content",
                   "required" : false,
@@ -5333,6 +5334,7 @@
                            "description" : "Information about the DICOM patient",
                            "example" : {
                               "ID" : "46e6332c-677825b6-202fcf7c-f787bc5f-7b07c382",
+                              "IsProtected" : false,
                               "IsStable" : true,
                               "Labels" : [],
                               "LastUpdate" : "20231109T160830",
@@ -8292,7 +8294,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.18"
+                              "Version" : "1.20"
                            }
                         }
                      }
@@ -9102,7 +9104,7 @@
                   }
                },
                {
-                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
                   "in" : "query",
                   "name" : "response-content",
                   "required" : false,
@@ -11450,6 +11452,7 @@
                            "description" : "Information about the parent DICOM patient",
                            "example" : {
                               "ID" : "2f74083e-9b042648-10edac14-b26950f8-f82ec3a0",
+                              "IsProtected" : false,
                               "IsStable" : true,
                               "Labels" : [],
                               "LastUpdate" : "20231109T160911",
@@ -11948,7 +11951,7 @@
                   }
                },
                {
-                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
+                  "description" : "Defines the content of response for each returned resource.  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`.e.g: 'response-content=MainDicomTags;Children (new in Orthanc 1.12.5 - overrides `expand`)",
                   "in" : "query",
                   "name" : "response-content",
                   "required" : false,
@@ -14427,6 +14430,7 @@
                            "description" : "Information about the parent DICOM patient",
                            "example" : {
                               "ID" : "16738bc3-e47ed42a-43ce044c-a3414a45-cb069bd0",
+                              "IsProtected" : false,
                               "IsStable" : true,
                               "Labels" : [],
                               "LastUpdate" : "20231109T160811",
@@ -14913,14 +14917,16 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 27,
+                              "ApiVersion" : 29,
                               "Capabilities" : {
                                  "HasExtendedChanges" : true,
-                                 "HasExtendedFind" : true
+                                 "HasExtendedFind" : true,
+                                 "HasKeyValueStores" : true,
+                                 "HasQueues" : true
                               },
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
-                              "DatabaseServerIdentifier" : "3d10366d-2038f306-f066fd6f-2648bdad-882aac90",
+                              "DatabaseServerIdentifier" : "be2ba798-1cb577e0-483accf5-d286e8f5-de2599df",
                               "DatabaseVersion" : 6,
                               "DefaultRetrieveMethod" : "C-MOVE",
                               "DicomAet" : "ORTHANC",
@@ -14945,7 +14951,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.7"
+                              "Version" : "1.12.8"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -16276,7 +16282,7 @@
                               "type" : "array"
                            },
                            "ResponseContent" : {
-                              "description" : "Defines the content of response for each returned resource. (this field, if present, overrides the \"Expand\" field).  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`.(new in Orthanc 1.12.5)",
+                              "description" : "Defines the content of response for each returned resource. (this field, if present, overrides the \"Expand\" field).  Allowed values are `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`, `Attachments`.  If not specified, Orthanc will return `MainDicomTags`, `Metadata`, `Children`, `Parent`, `Labels`, `Status`, `IsStable`, `IsProtected`.(new in Orthanc 1.12.5)",
                               "items" : {
                                  "type" : "string"
                               },
@@ -16807,7 +16813,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1744023638288\northanc_count_patients 8 1744023638288\northanc_count_series 26 1744023638288\northanc_count_studies 8 1744023638288\northanc_dicom_cache_count 29 1744023638288\northanc_dicom_cache_size_mb 13.5450821 1744023638288\northanc_disk_size_mb 983.235352 1744023638288\northanc_jobs_completed 1 1744023638288\northanc_jobs_failed 0 1744023638288\northanc_jobs_pending 0 1744023638288\northanc_jobs_running 0 1744023638288\northanc_jobs_success 1 1744023638288\northanc_last_change 6551 1744023638288\northanc_rest_api_active_requests 1 1744023638288\northanc_rest_api_duration_ms 642 1744023636811\northanc_storage_cache_count 428 1744023638288\northanc_storage_cache_hit_count 771 1744023638071\northanc_storage_cache_miss_count 428 1744023632849\northanc_storage_cache_size_mb 66.1587219 1744023638288\northanc_storage_read_bytes 69372450 1744023632849\northanc_storage_read_duration_ms 0 1744023631251\northanc_uncompressed_size_mb 983.235352 1744023638288\northanc_up_time_s 223 1744023638288\n"
+                        "example" : "orthanc_count_instances 2552 1749916381731\northanc_count_patients 8 1749916381731\northanc_count_series 26 1749916381731\northanc_count_studies 8 1749916381731\northanc_dicom_cache_count 1 1749916381731\northanc_dicom_cache_size_mb 0.502557755 1749916381731\northanc_disk_size_mb 983.235352 1749916381731\northanc_jobs_completed 0 1749916381731\northanc_jobs_failed 0 1749916381731\northanc_jobs_pending 0 1749916381731\northanc_jobs_running 0 1749916381731\northanc_jobs_success 0 1749916381731\northanc_last_change 6551 1749916381731\northanc_rest_api_active_requests 1 1749916381731\northanc_rest_api_duration_ms 658 1749916380195\northanc_storage_cache_count 417 1749916381731\northanc_storage_cache_hit_count 567 1749916381503\northanc_storage_cache_miss_count 417 1749916380002\northanc_storage_cache_size_mb 34.7660789 1749916381731\northanc_storage_read_bytes 36454876 1749916380002\northanc_storage_read_duration_ms 0 1749916374668\northanc_uncompressed_size_mb 983.235352 1749916381731\northanc_up_time_s 168 1749916381731\n"
                      }
                   },
                   "description" : ""
@@ -16826,7 +16832,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250407T110038",
+                        "example" : "20250614T155301",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16848,7 +16854,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250407T110038",
+                        "example" : "20250614T155301",
                         "schema" : {
                            "description" : "The local time"
                         }

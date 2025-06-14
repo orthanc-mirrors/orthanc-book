@@ -30,7 +30,7 @@ If you need to develop a complex plugin, it is advised to split it in
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.7/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.8/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
@@ -351,7 +351,7 @@ When calling the REST API from a python plugin, you may use e.g.
 call ``RestApiPostAfterPlugin`` to call the REST API from plugins.
 
 
-Note however, that, as of Orthanc 1.12.7, the Orthanc plugin SDK
+Note however, that, as of Orthanc 1.12.8, the Orthanc plugin SDK
 does not support multiple plugins implementing the same route.
 Orthanc will actually accept e.g a Python plugin that overrides
 a DICOMWeb route but it is impossible to tell which route
@@ -940,7 +940,7 @@ As can be seen in this sample:
 
 * The call to ``orthanc.ExtendOrthancExplorer()`` installs the button
   with JavaScript code that uses the `jQuery Mobile framework
-  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.7,
+  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.8,
   version 1.1.0 of jQuery Mobile is used in Orthanc Explorer).
 
 * If clicking on the button, a GET call to the REST API is made to

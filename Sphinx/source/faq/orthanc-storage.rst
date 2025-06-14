@@ -102,9 +102,9 @@ accessing the storage folder are when this is not needed).
 The database schema is kept as simple as possible, e.g, for SQLite,
 the schema can be found in the following two files of the source code of Orthanc:
 `PrepareDatabase.sql
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.7/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.8/OrthancServer/Sources/Database/PrepareDatabase.sql>`__
 and `InstallTrackAttachmentsSize.sql
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.7/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.8/OrthancServer/Sources/Database/InstallTrackAttachmentsSize.sql>`__.
 
 
 Direct access
