@@ -103,6 +103,7 @@ Tools
 .. toctree::
    :maxdepth: 1
 
+   plugins/advanced-storage.rst
    plugins/authorization.rst
    plugins/delayed-deletion-plugin.rst
    plugins/gdcm.rst

@@ -308,15 +308,22 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 7.0 - 7.1                 | 3                                         |
 +---------------------------+-------------------------------------------+
-| from 7.2                  | 4                                         |
+| 7.2                       | 4                                         |
++---------------------------+-------------------------------------------+
+| from 8.0                  | 5                                         |
 +---------------------------+-------------------------------------------+
 
 
 Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
-from e.g plugin 3.3 to 7.2, Orthanc will apply all migration steps autonomously.
+from e.g plugin 3.3 to 8.0, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
+
+To downgrade from revision 5 to revision 4, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev5ToRev4.sql
+  $ psql -U postgres -f Rev5ToRev4.sql
 
 To downgrade from revision 4 to revision 3, one might run this procedure::
 
@@ -371,6 +378,13 @@ To upgrade manually from revision 3 to revision 4::
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev3ToRev4.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev3ToRev4.sql
+  $ psql -U postgres -f PrepareIndex.sql
+
+To upgrade manually from revision 4 to revision 5::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev4ToRev5.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev4ToRev5.sql
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.

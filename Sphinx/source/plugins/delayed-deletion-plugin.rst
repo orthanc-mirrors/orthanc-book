@@ -18,6 +18,11 @@ the files to delete into a queue that is handled asynchronously.
 This queue is stored in a SQLite DB stored on disk which allows the plugin
 to resume deletions if Orthanc is stopped/restarted while deleting files.
 
+.. note:: 
+  This plugin now has an alternative implementation as part of the
+  :ref:`Advanced storage <advanced-storage>` plugin.
+
+
 
 Configuration
 -------------

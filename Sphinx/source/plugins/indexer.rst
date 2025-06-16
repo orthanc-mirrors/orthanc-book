@@ -18,6 +18,10 @@ interface and in a Web viewer, and can be queried/retrieved by DICOM
 clients. The DICOM files are **not** copied, so this solution has a
 very small footprint in terms of storage requirements.
 
+.. note:: 
+  This plugin now has an alternative implementation as part of the
+  :ref:`Advanced storage <advanced-storage>` plugin.
+
 
 Compilation
 -----------

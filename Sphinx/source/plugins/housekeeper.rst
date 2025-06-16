@@ -50,6 +50,13 @@ Here's a sample configuration section for this plugin with its default values::
       // any changes in configuration
       "Force": false,
 
+      // New in 1.12.9
+      // If "Force" is set to true, forces the "ReconstructFiles"
+      // option when reconstructing resources even if the plugin 
+      // did not detect any changes in the configuration that 
+      // should trigger a Reconstruct.
+      "ForceReconstructFiles": false,
+
       // Delay (in seconds) between reconstruction of 2 studies
       // This avoids overloading Orthanc with the housekeeping
       // process and leaves room for other operations.

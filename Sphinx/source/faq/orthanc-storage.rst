@@ -50,6 +50,9 @@ hierarchy of directories is created to store the attachments: The
 first two hexadecimal characters of the UUID give the first-level
 folder, and the two next characters give the second-level folder.
 
+Since Orthanc 1.12.8, a new :ref:`advanced storage <advanced-storage>` 
+plugin can be used to organize the storage in a more user friendly 
+structure.
 
 
 .. _orthanc-index:
