@@ -119,7 +119,7 @@ The ``NamingScheme`` defines a **relative** path to either the ``"StorageDirecto
 
 The relative path generated from the ``NamingScheme`` is stored in the SQL database. Therefore, you may change the ``NamingScheme`` at any time and you will still be able to access previously saved files.
 
-Indexer Mode
+Indexer mode
 ------------
 
 When the indexer mode is enabled, the plugin continuously synchronizes the content of an Orthanc server with the content of a filesystem, which can then be accessed through Orthanc based on the :ref:`DICOM model of the real world <model-world>`. The indexed DICOM resources are immediately available in a web interface and in a web viewer and can be queried/retrieved by DICOM clients. The DICOM files are **not** copied into the Orthanc storage, so this solution has a very small footprint in terms of storage requirements.
@@ -154,7 +154,7 @@ If you set ``TakeOwnership`` to true, all indexed files will belong to Orthanc, 
 
 Setting ``TakeOwnership`` to true is useful, e.g., when you have been using Orthanc with the default SQLite database and you wish to switch to PostgreSQL. Orthanc will then be able to *adopt* the DICOM files from the previous Orthanc installation. Check this `sample setup <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/sqlite-to-postgresql>`_.
 
-Delayed Deletion Mode
+Delayed deletion mode
 ---------------------
 
 On some file systems, the deletion of files can be quite long, and therefore, a DELETE request on a study with thousands of instances can last minutes.
@@ -179,10 +179,10 @@ The ``Delayed deletion mode`` has its own configuration:
 
 Check the `configuration file <https://github.com/orthanc-server/orthanc-advanced-storage/blob/master/Plugin/Configuration.json>`_ for all the ``Delayed deletion mode`` configurations.
 
-Typical Scenarios
+Typical scenarios
 ^^^^^^^^^^^^^^^^^
 
-Running Out of Storage
+Running out of storage
 """"""""""""""""""""""
 
 You have an Orthanc instance running for a long time, and its storage is almost full. Right now, you have a configuration like this one:
@@ -211,7 +211,7 @@ You can now define an additional volume to store new data, e.g., in ``D:/Orthanc
      }
    }
 
-Importing All Studies from Another PACS
+Importing all studies from another PACS
 """""""""""""""""""""""""""""""""""""""
 
 You were using another PACS and want to switch to Orthanc but have limited storage, or you just want to try Orthanc on your existing dataset. You can use the ``Indexer mode`` to parse the existing dataset, e.g., with this kind of configuration:
@@ -231,7 +231,7 @@ You were using another PACS and want to switch to Orthanc but have limited stora
 
 If you ingest new files in Orthanc through the DICOM protocol or the REST API, they will be stored in ``C:/Orthanc``.
 
-REST API Extensions
+REST API extensions
 -------------------
 
 This plugin brings in a few new API routes:
