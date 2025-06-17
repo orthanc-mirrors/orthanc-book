@@ -151,11 +151,26 @@ The relative path generated from the ``NamingScheme`` is stored in the SQL DB.  
 Indexer mode
 ------------
 
-This plugin can actually also replace the :ref:`Folder Indexer plugin<indexer>`.  The
-Indexer plugin needed a separate SQLite DB which made it impossible to use with multiple
-Orthanc instances or uncomfortable to use together with the PostgreSQL plugin.
+When the indexer mode is enabled, the plugin continuously synchronizes the content of an Orthanc server
+with the content of a filesystem, which can then be accessed, through
+Orthanc, based on the :ref:`DICOM model of the real world <model-world>`.
+The indexed DICOM resources are immediately available in a Web
+interface and in a Web viewer, and can be queried/retrieved by DICOM
+clients. The DICOM files are **not** copied into the Orthanc storage, so this solution has a
+very small footprint in terms of storage requirements.
 
-The advanced-storage implements the same features as the Indexer plugin without requiring
+The indexer mode can parse multiple folders.  If new DICOM files are ingested through DICOM or HTTP,
+they are saved in the default Orthanc storage (defined by ``StorageDirectory`` or by
+the ``MultipleStorages`` configurations).  
+
+**Note:** the plugin should never be configured to index 
+its own Orthanc storage !  However, the plugin might be used to index another Orthanc
+storage e.g. to perform a migration from SQLite to PostgreSQL.
+
+**Note:** This plugin is actually a replacement of the :ref:`Folder Indexer plugin<indexer>`.  The
+Indexer plugin needed a separate SQLite DB which made it impossible to use with multiple
+Orthanc instances or uncomfortable to use together with the PostgreSQL plugin.  The advanced-storage 
+implements the same features as the Indexer plugin without requiring
 a separate DB.  Everything is stored in the Orthanc main Database.
 
 The ``Indexer mode`` has its own configuration::
@@ -181,7 +196,7 @@ exact same behavior as the Indexer plugin.  Orthanc will not own the indexed fil
 and will therefore not delete the files if you delete the related resources in Orthanc.
 
 If you set ``TakeOwnership`` to true, all indexed files will belong to Orthanc
-and will therefore delete the files if you delete the related resources in Orthanc.
+and Orthanc will therefore delete the files if you delete the related resources in Orthanc.
 
 Setting ``TakeOwnership`` to true is useful e.g. when you have been using Orthanc with
 the default SQLite DB and you wish to switch to PostgreSQL.  Orthanc will then be able
@@ -191,11 +206,16 @@ to *adopt* the DICOM files from the previous Orthanc installation.  TODO: check 
 Delayed deletion mode
 ---------------------
 
-This plugin can actually also replace the :ref:`Delayed deletion plugin<delayed-deletion-plugin>`.  The
-Delayed deletion plugin needed a separate SQLite DB which made it impossible to use with multiple
-Orthanc instances or uncomfortable to use together with the PostgreSQL plugin.
+On some file systems, the deletion of files can be quite long and therefore, a DELETE request 
+on a study with thousands of instances can last minutes.
 
-The advanced-storage implements the same features as the Delayed deletion plugin without requiring
+The Delayed deletion mode handles file deletion asynchronously by pushing the files to delete into 
+a queue that is handled asynchronously.
+
+**Note:** This plugin actually replaces the :ref:`Delayed deletion plugin<delayed-deletion-plugin>`.  The
+Delayed deletion plugin needed a separate SQLite DB which made it impossible to use with multiple
+Orthanc instances or uncomfortable to use together with the PostgreSQL plugin. The advanced-storage implements 
+the same features as the Delayed deletion plugin without requiring
 a separate DB.  Everything is stored in the Orthanc main Database.
 
 The ``Delayed deletion mode`` has its own configuration::
