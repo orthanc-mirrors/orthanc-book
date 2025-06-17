@@ -200,7 +200,8 @@ and Orthanc will therefore delete the files if you delete the related resources 
 
 Setting ``TakeOwnership`` to true is useful e.g. when you have been using Orthanc with
 the default SQLite DB and you wish to switch to PostgreSQL.  Orthanc will then be able
-to *adopt* the DICOM files from the previous Orthanc installation.  TODO: check this sample setup TODO
+to *adopt* the DICOM files from the previous Orthanc installation.  Check this
+`sample setup <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/sqlite-to-postgresql>`__.
 
 
 Delayed deletion mode
@@ -234,6 +235,60 @@ The ``Delayed deletion mode`` has its own configuration::
 Check the `configuration file <https://github.com/orthanc-server/orthanc-advanced-storage/blob/master/Plugin/Configuration.json>`__ for 
 all the ``Delayed deletion mode`` configurations.
 
+
+Typical scenarios
+^^^^^^^^^^^^^^^^^
+
+Running out of storage
+""""""""""""""""""""""
+
+You have an Orthanc instance running for a long time and its storage is almost full.  Right now,
+You have a configuration like this one::
+
+  {
+    "IndexDirectory": "C:/Orthanc",
+    "StorageDirectory": "C:/Orthanc"
+  }
+
+You can now define an additionnal volume to store new data e.g in ``D:/Orthanc`` and keep the old
+studies in ``C:/Orthanc``::
+
+  {
+    "IndexDirectory": "C:/Orthanc",
+    "StorageDirectory": "C:/Orthanc",
+    "AdvancedStorage" : {
+      "MultipleStorages": {
+        "Storages": {
+          "1": "D:/Orthanc"
+        },
+        "CurrentWriteStorage": "1"
+      }
+    }
+  }
+
+
+Importing all studies from another PACS
+"""""""""""""""""""""""""""""""""""""""
+
+You were using another PACS and want to switch to Orthanc but have a limited storage
+or, you just want to try Orthanc on your existing data set.  You can use the ``Indexer
+mode`` to parse the existing data set e.g with this kind of configuration::  
+
+  {
+    "IndexDirectory": "C:/Orthanc",
+    "StorageDirectory": "C:/Orthanc",
+    "AdvancedStorage" : {
+      "Indexer": {
+        "Folders": [
+          "C:/My-old-pacs"
+        ],
+        "TakeOwnership": false
+      }
+    }
+  }
+
+If you ingest new files in Orthanc, through the DICOM protocol or the REST API, they will be stored
+in ``C:/Orthanc``.
 
 
 REST API extensions
