@@ -644,6 +644,30 @@ configuration::
 
   end
 
+
+Stabilizing resources
+---------------------
+
+.. highlight:: lua
+
+Starting from Orthanc 1.12.9, one can call the ``SetStableStatus(resourceId, newStateIsStable)`` Lua function to
+force a resource to get ``Stable`` faster and trigger the 
+changes and callbacks::
+
+  function OnStoredInstance(instanceId, tags, metadata)
+
+      PrintRecursive(tags)
+
+      -- let's stability CR series immediately
+      if tags['Modality'] == 'CR' then
+          local seriesId = ParseJson(RestApiGet('/instances/' .. instanceId)) ['ParentSeries']
+
+          print("LUA: setting a series as stable earlier since this is a CR series")
+          SetStableStatus(seriesId, true)  -- true to set the study as Stable, false to set the study as Unstable
+      end
+
+  end
+
 .. _lua-external-modules:
 
 Using external modules
