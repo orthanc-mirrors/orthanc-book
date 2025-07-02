@@ -423,6 +423,9 @@ to the available memory instead of the number of concurrent threads.  Therefore,
 ingesting small files, you can have a lot of thread working together while, if you're ingesting large 
 files, threads might have to wait before receiving a "slot" to access the encryption module.
 
+**Note**: You can not enable ``StorageEncryption`` once files have already been stored without
+encryption.  The plugin is unable to handle both encrypted and unencrypted files at the same time.
+
 
 Compilation
 -----------
