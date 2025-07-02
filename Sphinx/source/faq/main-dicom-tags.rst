@@ -14,7 +14,7 @@ quickly and can conveniently be used for filtering/finding resources
 while, to access other DICOM tags, Orthanc needs to re-open the
 DICOM file which is much slower.
 
-As of Orthanc 1.4.2 (and later), the predefined list is:
+As of Orthanc 1.12.5 (and later), the predefined list is:
 
 * Patients:
     * PatientName
@@ -34,6 +34,7 @@ As of Orthanc 1.4.2 (and later), the predefined list is:
     * InstitutionName
     * RequestingPhysician
     * ReferringPhysicianName
+    * TimezoneOffsetFromUTC (added in 1.12.5)
 
 * Series:
     * SeriesDate
@@ -58,6 +59,10 @@ As of Orthanc 1.4.2 (and later), the predefined list is:
     * PerformedProcedureStepDescription
     * AcquisitionDeviceProcessingDescription
     * ContrastBolusAgent
+    * TimezoneOffsetFromUTC (added in 1.12.5)
+    * PerformedProcedureStepStartDate (added in 1.12.5)
+    * PerformedProcedureStepStartTime (added in 1.12.5)
+    * RequestAttributesSequence (added in 1.12.5)
 
 * Instances:
     * InstanceCreationDate
@@ -88,7 +93,7 @@ considered as an "experimental" feature and you should not store large
 sequences (> 64KB) or sequences containing binary tags.
 
 Here is a sample configuration to optimize C-Find queries at study level
-e.g from OSIRIX/Horos.  They request ``SpecificCharacterSet`` and
+e.g from **OSIRIX/Horos**.  They request ``SpecificCharacterSet`` and
 ``PerformingPhysicianName`` that are not stored in Orthanc DB by default::
 
     {
