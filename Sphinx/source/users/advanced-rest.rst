@@ -430,9 +430,6 @@ may add their own metrics dynamically.
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | Metrics                                                | Meaning                                                                     | Origin                                                         |
 +========================================================+=============================================================================+================================================================+
-| ``orthanc_available_dicom_threads``                    | The min number of DICOM threads count available over the last 10            | Orthanc                                                        |
-|                                                        | seconds                                                                     |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_last_change``                                | The current id of the last `change` event                                   | Orthanc                                                        |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_memory_trimming_duration_ms``                | The max duration [ms] over the last 10 seconds of the last memory           | Orthanc                                                        |
@@ -455,11 +452,19 @@ may add their own metrics dynamically.
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_dicom_cache_size_mb``                        | The size [MB] of all DICOM files currently stored in the DICOM cache        | Orthanc DICOM cache                                            |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
+| ``orthanc_available_dicom_threads``                    | The min number of DICOM threads count available over the last 10            | Orthanc DICOM protocol server                                  |
+|                                                        | seconds                                                                     |                                                                |
++--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_find_scp_duration_ms``                       | The max duration [ms] over the last 10 seconds of a C-Find SCP execution    | Orthanc DICOM protocol server                                  |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_get_scp_duration_ms``                        | The max duration [ms] over the last 10 seconds of a C-Get SCP execution     | Orthanc DICOM protocol server                                  |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_move_scp_duration_ms``                       | The max duration [ms] over the last 10 seconds of a C-Move SCP execution    | Orthanc DICOM protocol server                                  |
++--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
+| ``orthanc_available_http_threads``                     | The min number of HTTP threads count available over the last 10             | Orthanc HTTP server                                            |
+|                                                        | seconds.  This is counting only the threads used by the external HTTP       |                                                                |
+|                                                        | server while ``orthanc_rest_api_active_requests`` also counts the internal  |                                                                |
+|                                                        | requests e.g. made by a plugin                                              |                                                                |
 +--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
 | ``orthanc_rest_api_active_requests``                   | The maximum number of concurrent HTTP requests being handled by the         | Orthanc HTTP server                                            |
 |                                                        | HTTP server over the last 10 seconds.                                       |                                                                |
