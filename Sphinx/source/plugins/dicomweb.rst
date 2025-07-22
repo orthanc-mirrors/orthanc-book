@@ -128,6 +128,7 @@ the ``DicomWeb`` section of the Orthanc configuration file::
       "StudiesMetadata" : "Full",     // How study-level metadata is retrieved (since release 1.1, cf. section below)
       "SeriesMetadata" : "Full",      // How series-level metadata is retrieved (since release 1.1, cf. section below)
       "EnableMetadataCache": true,    // Wheter the plugin caches metadata as a gzipped attachment (since release 1.15)
+      "EnablePerformanceLogs": false, // Wheter to show more detailed logs about performances (since release 1.21)
       "MetadataWorkerThreadsCount": 4,// The number of concurrent threads that are used to extract the metadata in Full mode
                                       // (since release 1.14)
       "WadoRsLoaderThreadsCount": 0,  // The number of concurrent threads that are used to read the files from the storage
