@@ -190,7 +190,7 @@ decision chart:
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
      * `Krzysztof Turkiewicz <mailto:deeveeloop@gmail.com>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
-     * `Stephen D. Scotti <https://www.medinformatics.eu>`__ (English, Austria)
+     * `Stephen D. Scotti <https://www.medinformatics.eu>`__ (English/Italian, Italy)
      * `Yannick Lemaréchal <https://github.com/ylemarechal>`__ (French/English, France/Canada)
 
    * **North America**:
