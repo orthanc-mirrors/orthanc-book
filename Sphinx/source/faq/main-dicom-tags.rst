@@ -132,7 +132,7 @@ all series are supposed to share the same ``StudyDescription``.  But, adding
 ``SeriesDescription`` at ``Study`` level will lead to unpredictible results.
 Orthanc will **not** check that the tags levels are adequate. 
 
-*Note:* As of Orthanc 1.12.8, it is not possible to store Private DICOM tags
+*Note:* As of Orthanc 1.12.9, it is not possible to store Private DICOM tags
 in the ``ExtraMainDicomTags``.
 
 

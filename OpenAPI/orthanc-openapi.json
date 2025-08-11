@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.8"
+      "version" : "1.12.9"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -4740,6 +4740,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-GET command, in seconds",
                               "type" : "number"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -4832,6 +4836,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-MOVE command, in seconds",
                               "type" : "number"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -5084,6 +5092,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-STORE command, in seconds",
                               "type" : "number"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -5441,6 +5453,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -5575,6 +5591,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -6972,6 +6992,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -7283,6 +7307,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -8057,6 +8085,10 @@
                            "Transcode" : {
                               "description" : "Transcode to the provided DICOM transfer syntax before the actual sending",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -8816,6 +8848,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-MOVE command, in seconds",
                               "type" : "number"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -9024,6 +9060,10 @@
                            "Timeout" : {
                               "description" : "Timeout for the C-MOVE command, in seconds",
                               "type" : "number"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -9338,6 +9378,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -9472,6 +9516,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -10723,6 +10771,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -11034,6 +11086,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -12198,6 +12254,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -12332,6 +12392,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -13729,6 +13793,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -13815,6 +13883,10 @@
                            "Synchronous" : {
                               "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
                               "type" : "boolean"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -14120,6 +14192,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -14787,6 +14863,10 @@
                            "Synchronous" : {
                               "description" : "If `true`, run the job in synchronous mode, which means that the HTTP answer will directly contain the result of the job. This is the default, easy behavior, but it is *not* desirable for long jobs, as it might lead to network timeouts.",
                               "type" : "boolean"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -14951,7 +15031,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.8"
+                              "Version" : "1.12.9"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -15285,6 +15365,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -15477,6 +15561,10 @@
                            "Transcode" : {
                               "description" : "Transcode the DICOM instances to the provided DICOM transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "User data that will travel along with the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -15676,6 +15764,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -15880,6 +15972,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -16013,6 +16109,10 @@
                            "Transcode" : {
                               "description" : "If present, the DICOM files in the archive will be transcoded to the provided transfer syntax: https://orthanc.uclouvain.be/book/faq/transcoding.html",
                               "type" : "string"
+                           },
+                           "UserData" : {
+                              "description" : "In asynchronous mode, user data that will be attached to the job.",
+                              "type" : "object"
                            }
                         }
                      }
@@ -16813,7 +16913,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_count_instances 2552 1749916381731\northanc_count_patients 8 1749916381731\northanc_count_series 26 1749916381731\northanc_count_studies 8 1749916381731\northanc_dicom_cache_count 1 1749916381731\northanc_dicom_cache_size_mb 0.502557755 1749916381731\northanc_disk_size_mb 983.235352 1749916381731\northanc_jobs_completed 0 1749916381731\northanc_jobs_failed 0 1749916381731\northanc_jobs_pending 0 1749916381731\northanc_jobs_running 0 1749916381731\northanc_jobs_success 0 1749916381731\northanc_last_change 6551 1749916381731\northanc_rest_api_active_requests 1 1749916381731\northanc_rest_api_duration_ms 658 1749916380195\northanc_storage_cache_count 417 1749916381731\northanc_storage_cache_hit_count 567 1749916381503\northanc_storage_cache_miss_count 417 1749916380002\northanc_storage_cache_size_mb 34.7660789 1749916381731\northanc_storage_read_bytes 36454876 1749916380002\northanc_storage_read_duration_ms 0 1749916374668\northanc_uncompressed_size_mb 983.235352 1749916381731\northanc_up_time_s 168 1749916381731\n"
+                        "example" : "orthanc_available_dicom_threads 4 1754933485145\northanc_available_http_threads_count 49 1754933683397\northanc_count_instances 2552 1754933691628\northanc_count_patients 8 1754933691628\northanc_count_series 26 1754933691628\northanc_count_studies 8 1754933691628\northanc_dicom_cache_count 1 1754933691628\northanc_dicom_cache_size_mb 0.502557755 1754933691628\northanc_disk_size_mb 983.235352 1754933691628\northanc_jobs_completed 0 1754933691628\northanc_jobs_failed 0 1754933691628\northanc_jobs_pending 0 1754933691628\northanc_jobs_running 0 1754933691628\northanc_jobs_success 0 1754933691628\northanc_last_change 6551 1754933691628\northanc_rest_api_active_requests 1 1754933683397\northanc_rest_api_duration_ms 650 1754933690143\northanc_storage_cache_count 400 1754933691629\northanc_storage_cache_hit_count 407 1754933691400\northanc_storage_cache_miss_count 400 1754933689980\northanc_storage_cache_size_mb 3.17403412 1754933691628\northanc_storage_read_bytes 3328216 1754933689980\northanc_storage_read_duration_ms 0 1754933683841\northanc_uncompressed_size_mb 983.235352 1754933691628\northanc_up_time_s 206 1754933691628\n"
                      }
                   },
                   "description" : ""
@@ -16832,7 +16932,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250614T155301",
+                        "example" : "20250811T173451",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16854,7 +16954,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250614T155301",
+                        "example" : "20250811T173451",
                         "schema" : {
                            "description" : "The local time"
                         }
