@@ -12,7 +12,7 @@ def DecodeInstance(output, uri, **request):
         image = Image.open(io.BytesIO(png))
 
         # Downsize the image as a 64x64 thumbnail
-        image.thumbnail((64, 64), Image.ANTIALIAS)
+        image.thumbnail((64, 64), Image.Resampling.LANCZOS)
 
         # Save the thumbnail as JPEG, then send the buffer to the caller
         jpeg = io.BytesIO()
