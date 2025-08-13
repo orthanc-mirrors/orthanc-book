@@ -72,7 +72,8 @@ file::
       "TransactionMode": "ReadCommitted",    // New in release 6.0 - new default value in 7.0
       "EnableVerboseLogs": false,            // New in release 6.0
       "HousekeepingInterval": 1,             // New in release 7.0
-      "AllowInconsistentChildCounts": false  // New in release 7.2
+      "AllowInconsistentChildCounts": false  // New in release 7.2,
+      "UseDynamicConnectionPool": false      // New in release 9.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -182,6 +183,13 @@ this behavior:
 * ``IndexConnectionsCount`` controls the number of connections from
   the index plugin to the PostgreSQL database. Starting from v7.0, it is set to ``50`` by
   default.
+
+* ``UseDynamicConnectionPool`` controls whether idle connections are released
+  and new connections opened when required.  If set to ``false`` (default), all the connections
+  are created when the plugin starts.  If set to ``true``, ``IndexConnectionsCount`` defines
+  the maximum number of active connections.
+  The ``orthanc_index_active_connections`` metrics in the ``/tools/metrics-prometheus``
+  shows the number of connections that are currently being used. 
 
 * ``ConnectionRetryInterval`` is only used when opening one database
   connection to PostgreSQL.
@@ -310,15 +318,22 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 7.2                       | 4                                         |
 +---------------------------+-------------------------------------------+
-| from 8.0                  | 5                                         |
+| 8.0                       | 5                                         |
++---------------------------+-------------------------------------------+
+| 9.0                       | 6                                         |
 +---------------------------+-------------------------------------------+
 
 
 Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
-from e.g plugin 3.3 to 8.0, Orthanc will apply all migration steps autonomously.
+from e.g plugin 3.3 to 9.0, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
+
+To downgrade from revision 6 to revision 5, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev6ToRev5.sql
+  $ psql -U postgres -f Rev6ToRev5.sql
 
 To downgrade from revision 5 to revision 4, one might run this procedure::
 
@@ -385,6 +400,13 @@ To upgrade manually from revision 4 to revision 5::
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev4ToRev5.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev4ToRev5.sql
+  $ psql -U postgres -f PrepareIndex.sql
+
+To upgrade manually from revision 5 to revision 6::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev5ToRev6.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev5ToRev6.sql
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
