@@ -179,6 +179,13 @@ that can be loaded by properly setting the ``Plugins``
 interpreter whose version corresponds to the value of the
 ``PYTHON_VERSION`` argument that was given to CMake.
 
+**Remark:** Since version 6.0 of this plugin, the build process
+requires the `Pystache module <https://pypi.org/project/pystache/>`__
+to be installed in the Python environment used by CMake. On
+Debian/Ubuntu environments, it is sufficient to install the
+``python3-pystache`` package. This dependency is not needed at
+runtime.
+
 **Note for OS X:** As indicated by `Stephen Douglas Scotti
 <https://groups.google.com/g/orthanc-users/c/RnmZKFv8FaY/m/HhvOD2A2CAAJ>`__,
 here is a sample invocation of CMake to force the version of Python to
