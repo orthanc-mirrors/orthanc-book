@@ -35,12 +35,11 @@ As of Orthanc 1.12.5 (and later), the predefined list is:
     * RequestingPhysician
     * ReferringPhysicianName
     * TimezoneOffsetFromUTC (added in 1.12.5)
-    * Duplicated from the Patient level:
-        * PatientName
-        * PatentID
-        * PatientBirthDate
-        * PatientSex
-        * OtherPatientIDs
+    * PatientName *(duplicated from the Patient level)*
+    * PatentID *(duplicated from the Patient level)*
+    * PatientBirthDate *(duplicated from the Patient level)*
+    * PatientSex *(duplicated from the Patient level)*
+    * OtherPatientIDs *(duplicated from the Patient level)*
 
 
 * Series:
