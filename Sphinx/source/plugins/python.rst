@@ -993,6 +993,18 @@ implementing a REST API route:
 .. literalinclude:: python/extend-api-with-streaming.py
                     :language: python
 
+.. _python_set_stable_status:
+
+Changing the Stable status of a resource (new in 6.0)
+...................................
+
+Starting from v 6.0, it is possible to change the ``Stable`` status of a 
+resource without waiting for the stabilization time defined by the ``StableAge``
+configuration.  Changing the ``Stable`` status will also trigger the lua callbacks
+and python plugins that are listening on the ``STABLE_STUDY/STABLE_SERIES/..`` events.
+
+.. literalinclude:: python/set-stable-status.py
+                    :language: python
 
 .. _python_couchdb:
 
