@@ -1006,6 +1006,16 @@ and python plugins that are listening on the ``STABLE_STUDY/STABLE_SERIES/..`` e
 .. literalinclude:: python/set-stable-status.py
                     :language: python
 
+Using Key-Value Stores and Queues (new in 6.0)
+...................................
+
+Starting from v 6.0, it is possible to store messages in queues that are stored
+in the Orthanc DB or to store values in Key-Value Stores that are also stored in DB.  
+
+.. literalinclude:: python/queues-and-kvs.py
+                    :language: python
+
+
 .. _python_couchdb:
 
 Synchronizing Orthanc with CouchDB
