@@ -77,7 +77,7 @@ of the Java plugin (which is written in C++) works as follows::
 
   $ mkdir BuildPlugin
   $ cd BuildPlugin
-  $ cmake ../Plugin -DCMAKE_BUILD_TYPE=Release
+  $ cmake ../Plugin -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_ORTHANC_SDK=OFF
   $ make
 
 This requires the `JNI (Java Native Interface)
@@ -120,7 +120,7 @@ can be compiled as follows::
 
   $ mkdir BuildJavaSDK
   $ cd BuildJavaSDK
-  $ cmake ../JavaSDK
+  $ cmake ../JavaSDK -DUSE_SYSTEM_ORTHANC_SDK=OFF
   $ make
 
 This requires a JDK to be installed on your computer. This generates
@@ -195,7 +195,7 @@ If you get the following error::
   
   LoadLibrary(C:\Program Files\Orthanc Server\Plugins\OrthancJava.dll) failed: Error 126
 
-This very likely means that OrthancJava.dll can not find the ``jvm.dll``.  Check your system ``Path``.
+This very likely means that OrthancJava.dll can not find the ``jvm.dll``. Check your system ``Path`` environment variable.
 
 
 If you get the following errors::
@@ -227,6 +227,27 @@ Java applications can react to Orthanc events as follows:
 
 .. literalinclude:: java/Changes.java
                     :language: java
+
+
+Using the key-value store (new in 2.0)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with release 2.0, Java applications can access the key-value
+NoSQL database that is built in Orthanc >= 1.12.8:
+
+.. literalinclude:: java/KeyValueStore.java
+                    :language: java
+
+
+Using the queues (new in 2.0)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with release 2.0, Java applications can access the queue
+facility that is built in Orthanc >= 1.12.8:
+
+.. literalinclude:: java/Queue.java
+                    :language: java
+
 
 
 Additional samples
