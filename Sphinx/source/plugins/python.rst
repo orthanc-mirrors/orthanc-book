@@ -41,6 +41,21 @@ release 4.3, the code model that is used to generate the Python
 wrapper is shared with the :ref:`Java wrapper <java-plugin>`.
 
 
+.. highlight:: bib
+
+**For researchers**: Please cite this paper::
+
+  @InProceedings{10.1007/978-3-031-96899-0_18,
+    title="Combining Languages to Set a PACS on FHIR",
+    booktitle="Biomedical Engineering Systems and Technologies",
+    year="2026",
+    publisher="Springer Nature Switzerland",
+    pages="314--334",
+    isbn="978-3-031-96899-0",
+    doi="10.1007/978-3-031-96899-0_18"
+    }
+
+
 Source code
 -----------
    

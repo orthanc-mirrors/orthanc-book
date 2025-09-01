@@ -15,8 +15,18 @@ Check out the :ref:`quick start guide <stone-quick-start>`.
 Check out the `demonstration server
 <https://www.orthanc-server.com/static.php?page=stone-web-viewer>`__.
 
-**For researchers**: `Please cite this paper
-<https://doi.org/10.1007/978-3-031-38854-5_20>`__.
+**For researchers**: Please cite this paper::
+
+  @InProceedings{10.1007/978-3-031-38854-5_20,
+    author="Jodogne, S{\'e}bastien",
+    title="On the Use of WebAssembly for Rendering and Segmenting Medical Images",
+    booktitle="Biomedical Engineering Systems and Technologies",
+    year="2023",
+    publisher="Springer Nature Switzerland",
+    pages="393--414",
+    isbn="978-3-031-38854-5",
+    doi="10.1007/978-3-031-96899-0_18"
+  }
 
 
 How to get it

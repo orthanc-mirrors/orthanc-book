@@ -26,8 +26,20 @@ As of release 1.0 of the plugin, **the coverage of the C SDK is about
 74%** (122 functions are automatically wrapped in Java out of a total
 of 165 functions from the Orthanc SDK 1.10.0).
 
-**For researchers**: `Please cite this paper
-<https://doi.org/10.5220/0012384600003657>`__.
+
+.. highlight:: bib
+
+**For researchers**: Please cite this paper::
+
+  @InProceedings{10.1007/978-3-031-96899-0_18,
+    title="Combining Languages to Set a PACS on FHIR",
+    booktitle="Biomedical Engineering Systems and Technologies",
+    year="2026",
+    publisher="Springer Nature Switzerland",
+    pages="314--334",
+    isbn="978-3-031-96899-0",
+    doi="10.1007/978-3-031-96899-0_18"
+    }
 
 
 How to get it ?
