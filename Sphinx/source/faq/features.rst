@@ -337,6 +337,7 @@ complete the **central registry** below:
 * ``Global property 1025`` is used by default by the Housekeeper plugin.
 * ``Global property 5467`` is used by the Osimis Cloud plugin.
 * ``Global property 5468`` is used by the :ref:`DICOMweb plugin <dicomweb>` to store the DICOMweb servers into the Orthanc database.
+* ``Global property 5500`` is used by the :ref:`Education plugin <education>` to store parts of its configuration.
 * ``Metadata 4200`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version <= 0.7.
 * ``Metadata 4201`` is used by the plugin for :ref:`whole-slide imaging <wsi>` with version >= 1.0.
 * ``Metadata 4202`` is used by the :ref:`OHIF plugin <ohif>` to store precomputed information about the DICOM instances.

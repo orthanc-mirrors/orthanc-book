@@ -38,6 +38,16 @@ third-party plugins.  A specific section of the Orthanc Book explains
 Index of the official plugins
 -----------------------------
 
+User interfaces
+^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/orthanc-explorer-2.rst
+   plugins/education.rst
+
+
 Viewers
 ^^^^^^^
 
@@ -45,7 +55,6 @@ Viewers
    :maxdepth: 1
 
    plugins/stone-webviewer.rst
-   plugins/orthanc-explorer-2.rst
    plugins/ohif.rst
    plugins/volview.rst
    plugins/osimis-webviewer.rst
