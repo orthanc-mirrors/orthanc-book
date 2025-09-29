@@ -359,9 +359,8 @@ To downgrade from revision 2 to revision 1, one might run this procedure::
 Note for large databases and multiple Orthanc instances:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-When upgrading from one revision to another, the upgrade might take quite some time.  E.g, we have observed the upgrade
-taking 17 minutes on a DB with 300.000 studies and 150 millions instances when upgrading from revision 1 to 2 and multiple minutes
-when upgrading from revision 2 to 3.  Orthanc will not respond during the upgrade.  Therefore,
+When upgrading from one revision to another, the upgrade might take quite some time.  
+Orthanc will not respond during the upgrade.  Therefore,
 if you have enabled autohealing (automatic restart in case Orthanc is not responsive), you should likely disable it
 during the first start with the PostgreSQL plugin v6.0 or v7.0 which will apply these migrations.
 
@@ -410,6 +409,20 @@ To upgrade manually from revision 5 to revision 6::
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
+
+
+
+Here are typical upgrade durations we have observed, on a DB with around 350.000 studies and more than 150 millions instances
+for a total of 75 TB of data.  Note that, at revision 6, the DB size was around 500 GB - increased from 470 GB at revision 5.
+
+- Upgrade from revision 1 to revision 2: around 17 minutes.
+- Upgrade from revision 2 to revision 3: around 7 minutes.
+- Upgrade from revision 3 to revision 5: immediate.
+- Upgrade from revision 5 to revision 6: around 22 minutes.
+- Then, after upgrading to revision 6, the ``DB HOUSEKEEIPING`` task needs to update some ``ChildCount`` entries.  
+  This is performed while Orthanc is running and accessible and 50 entries are updated every second and this must be performed
+  for every series, study and patient.  With a DB with 350.000 studies, this took around 50 hours.
+
 
 
 Troubleshooting
