@@ -372,44 +372,23 @@ plugin, the one that is compatible with the current revision.
 Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the upgrade
 manually and then, restart the Orthanc containers with the newest version of the plugin.
 
-To upgrade manually from revision 1 to revision 2, one might run this procedure on the existing DB (note: make
+To upgrade manually from revision 1 to revision 6, one might run this procedure on the existing DB (note: make
 sur to select the correct DB and schema (Orthanc is using the default ``public`` shema))::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
-  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
-  $ psql -U postgres -f Rev1ToRev2.sql
-  $ psql -U postgres -f PrepareIndex.sql
-
-To upgrade manually from revision 2 to revision 3::
-
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev2ToRev3.sql
-  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
-  $ psql -U postgres -f Rev2ToRev3.sql
-  $ psql -U postgres -f PrepareIndex.sql
-
-To upgrade manually from revision 3 to revision 4::
-
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev3ToRev4.sql
-  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
-  $ psql -U postgres -f Rev3ToRev4.sql
-  $ psql -U postgres -f PrepareIndex.sql
-
-To upgrade manually from revision 4 to revision 5::
-
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev4ToRev5.sql
-  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
-  $ psql -U postgres -f Rev4ToRev5.sql
-  $ psql -U postgres -f PrepareIndex.sql
-
-To upgrade manually from revision 5 to revision 6::
-
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev5ToRev6.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
+  $ psql -U postgres -f Rev1ToRev2.sql          # skip this step if you are already in Rev2 or higher
+  $ psql -U postgres -f Rev2ToRev3.sql          # skip this step if you are already in Rev3 or higher
+  $ psql -U postgres -f Rev3ToRev4.sql          # skip this step if you are already in Rev4 or higher
+  $ psql -U postgres -f Rev4ToRev5.sql          # skip this step if you are already in Rev5 or higher
   $ psql -U postgres -f Rev5ToRev6.sql
   $ psql -U postgres -f PrepareIndex.sql
 
-These procedures are identical to the one performed automatically by Orthanc when it detects that an upgraded is required.
-
+These procedures are identical to the ones performed automatically by Orthanc when it detects that an upgraded is required.
 
 
 Here are typical upgrade durations we have observed, on a DB with around 350.000 studies and more than 150 millions instances
