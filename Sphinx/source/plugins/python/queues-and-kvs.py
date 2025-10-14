@@ -13,7 +13,8 @@ def ProcessQueueMessages():
     while is_worker_running:
         # get messages from the queue named "instances-to-process" that is stored in Orthanc DB.
         # Get the message from the FRONT for FIFO and from the BACK for a LIFO
-        message = orthanc.DequeueValue("instances-to-process", orthanc.QueueOrigin.FRONT)
+        # from v7.0, prefer the ReserveQueueValue      message = orthanc.DequeueValue("instances-to-process", orthanc.QueueOrigin.FRONT)
+        message, messageId = orthanc.ReserveQueueValue("instances-to-process", orthanc.QueueOrigin.FRONT, 2)
 
         if message is None:
             # no messages in the queue
@@ -21,6 +22,7 @@ def ProcessQueueMessages():
         else:
             payload = json.loads(message.decode('utf-8'))
             resourceId = payload["resource-id"]
+
             orthanc.LogInfo(f"processing resource {resourceId}")
 
             # get the value associated to the key resourceId in the "my-store" Key Value Store.
@@ -31,6 +33,10 @@ def ProcessQueueMessages():
                 orthanc.LogInfo(f"Value for resource {resourceId} is {value.decode('utf-8')}")
                 orthanc.DeleteKeyValue("my-store", resourceId)
 
+            orthanc.RestApiPut(f"/studies/{payload['study-id']}/labels/{payload['my-data']}", b"")
+            # mark the processing as complete (new in v7.0)
+            orthanc.AcknowledgeQueueValue("instances-to-process", messageId)
+
 
 def OnChange(changeType, level, resource: str):
     global worker_thread
@@ -40,6 +46,7 @@ def OnChange(changeType, level, resource: str):
 
         processPayload = {
             "resource-id": resource,
+            "study-id": json.loads(orthanc.RestApiGet(f"/instances/{resource}/study"))["ID"],
             "my-data": "my-data"
         }
 
