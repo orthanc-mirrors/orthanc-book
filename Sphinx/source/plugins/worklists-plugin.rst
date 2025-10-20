@@ -56,11 +56,37 @@ A basic configuration would read as follows::
     ],
     "Worklists" : {
       "Enable": true,
-      "Database": "./WorklistsDatabase",
+
       "FilterIssuerAet": false, // Some modalities do not specify 'ScheduledStationAETitle (0040,0001)'
                                 // in the C-Find and may receive worklists not related to them.  This option 
                                 // adds an extra filtering based on the AET of the modality issuing the C-Find.
-      "LimitAnswers": 0  // Maximum number of answers to be returned (new in release 1.7.3)
+      "LimitAnswers": 0,        // Maximum number of answers to be returned (new in release 1.7.3)
+
+      "Directory": "./WorklistsDatabase",  // The folder from which worklists are read or, from 1.12.10, 
+                                           // where the worklists are created.
+                                           // Note, up to v 1.12.9, this configuration was named "Database"
+                                           // and this old naming is kept for backward compatibility reasons.
+                                           // Don't specify this option if you want to store worklists in the Orthanc DB.
+      // New options in v 1.12.10
+
+      "SaveInOrthancDatabase": false,      // If set to true and if the Orthanc Database supports Key-Value stores
+                                           // (PostgreSQL or SQLite), the worklists must be created through the Rest API
+                                           // and are stored in the Orthanc DB (new in v 1.12.10)
+      "SetStudyInstanceUidIfMissing": true  // Add a StudyInstanceUID to the worklist if none is provided in the Rest API call to create it
+      "DeleteWorklistsOnStableStudy": true,   // Delete the worklist as soon as a a stable study is found with the StudyInstanceUID
+                                              // provided in the worklist.  
+                                              // Note that this check is performed in the Worklist Housekeeper thread.  The plugin
+                                              // does not react synchronously on the Stable Study event.
+                                              // This process is only available if you are providing a StudyInstanceUID
+                                              // or if you have set the 'SetStudyInstanceUIDIfMissing' configuration to true
+      "HousekeepingInterval": 60,            // Interval [in seconds] between 2 execution of the Worklist Housekeeper thread.
+
+      // New options in v 1.12.10 and only if SaveInOrthancDatabase is set to true.
+      
+      "DeleteWorklistsDelay": 24,          // Delay [in hours] after which the worklist is deleted.
+                                           // Note that this check is performed in the Worklist Housekeeper thread.
+                                           // The plugin only deletes worklists that have been created through the Rest API.
+                                           // Set it to 0 if you don't want the plugin to delete worklists after a delay.
     }
   }
 
@@ -87,7 +113,7 @@ Tutorial
   
     "Worklists" : {
       "Enable": true,
-      "Database": "WorklistsDatabase"  // Path to the folder with the worklist files
+      "Directory": "WorklistsDatabase"  // Path to the folder with the worklist files  (note: up to v 1.12.9, use ``"Database"`` instead of ``"Directory"``)
     },
 
 - Add the plugin to the list of plugins to load (this is an example
@@ -130,8 +156,54 @@ Tutorial
 - ``findscu`` will display the matching worklists.
 
 
-How to create a worklist file
------------------------------
+How to create a worklist file using the Rest API - new in 1.12.10
+-----------------------------------------------------------------
+
+.. highlight:: bash
+
+Starting from Orthanc 1.12.10, the plugin provides a Rest API that can be
+used to create worklists.  For example::
+
+  $ curl --request POST http://localhost:8042/plugins/worklists/create \
+      --data '{
+                "Tags" : {
+                  "PatientID": "PID-45",
+                  "PatientName": "Toto",
+                  "ScheduledProcedureStepSequence" : [
+                    {
+                      "Modality": "US",
+                      "ScheduledProcedureStepStartDate": "20251014",
+                      "ScheduledProcedureStepDescription": "Description"
+                    }
+                  ]
+                }
+              }'
+
+In response, you'll get something like::
+  
+  {
+    "ID" : "5fdc7404-f9dc-4798-b6e1-8f715e2f9e71",
+    "Path" : "/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71"
+  }
+
+You can then check the content of the worklist by calling::
+
+  $ curl --request GET http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
+
+To delete it, call::
+
+  $ curl --request DELETE http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
+
+To browse all worklists, call::
+
+  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Simplify
+  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Short
+  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Full
+
+
+
+How to create a worklist file using DCMTK
+-----------------------------------------
 
 .. highlight:: bash
   
