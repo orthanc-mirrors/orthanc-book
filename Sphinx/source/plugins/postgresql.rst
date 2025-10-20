@@ -72,8 +72,10 @@ file::
       "TransactionMode": "ReadCommitted",    // New in release 6.0 - new default value in 7.0
       "EnableVerboseLogs": false,            // New in release 6.0
       "HousekeepingInterval": 1,             // New in release 7.0
-      "AllowInconsistentChildCounts": false  // New in release 7.2,
-      "UseDynamicConnectionPool": false      // New in release 9.0
+      "AllowInconsistentChildCounts": false, // New in release 7.2
+      "UseDynamicConnectionPool": false,     // New in release 9.0
+      "Schema": "public",                    // New in release 9.0+ (not released yet)
+      "ApplicationName": "",                 // New in release 9.0+ (not released yet)
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -198,6 +200,20 @@ this behavior:
   allowed: ``Serializable`` (that was the default value up to version 6.2)
   and ``ReadCommitted`` that is available only from release 6.0 and is the default
   value starting from version 7.0.  See below.
+
+* ``Schema`` has been added in the release 9.0+ (not released yet).  By default,
+  Orthanc uses the ``public`` default schema.  If you wish to use another schema,
+  you must create it before starting Orthanc; Orthanc will not create it.
+  Note that Orthanc might try to install the ``pg_trgm`` extension in the ``public``
+  schema so you should make sure that the ``Username`` also has access to the ``public``
+  schema or that you install the ``pg_trgm`` extension manually in the public schema.
+  Internals: plugin calls ``SET search_path TO $schema`` when opening a new connection
+  to the DB.
+
+* ``ApplicationName`` has been added in the release 9.0+ (not released yet).
+  This value is copied in the ``application_name`` argument in the connection string.  
+  This name is used to identify the origin of queries in statistics and logs in 
+  the PostgreSQL server.
 
 * The PostgreSQL plugin supports the :ref:`revision mechanism
   <revisions>` to protect metadata and attachments from concurrent
@@ -373,7 +389,7 @@ Therefore, in complex setups, it might be simpler/safer to simply shut-down the 
 manually and then, restart the Orthanc containers with the newest version of the plugin.
 
 To upgrade manually from revision 1 to revision 6, one might run this procedure on the existing DB (note: make
-sur to select the correct DB and schema (Orthanc is using the default ``public`` shema))::
+sur to select the correct DB and schema (By default, Orthanc is using the ``public`` shema))::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev2ToRev3.sql
