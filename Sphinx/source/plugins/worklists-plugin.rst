@@ -72,7 +72,7 @@ A basic configuration would read as follows::
       "SaveInOrthancDatabase": false,      // If set to true and if the Orthanc Database supports Key-Value stores
                                            // (PostgreSQL or SQLite), the worklists must be created through the Rest API
                                            // and are stored in the Orthanc DB (new in v 1.12.10)
-      "SetStudyInstanceUidIfMissing": true  // Add a StudyInstanceUID to the worklist if none is provided in the Rest API call to create it
+      "SetStudyInstanceUidIfMissing": true,  // Add a StudyInstanceUID to the worklist if none is provided in the Rest API call to create it
       "DeleteWorklistsOnStableStudy": true,   // Delete the worklist as soon as a a stable study is found with the StudyInstanceUID
                                               // provided in the worklist.  
                                               // Note that this check is performed in the Worklist Housekeeper thread.  The plugin
@@ -83,7 +83,7 @@ A basic configuration would read as follows::
 
       // New options in v 1.12.10 and only if SaveInOrthancDatabase is set to true.
       
-      "DeleteWorklistsDelay": 24,          // Delay [in hours] after which the worklist is deleted.
+      "DeleteWorklistsDelay": 24          // Delay [in hours] after which the worklist is deleted.
                                            // Note that this check is performed in the Worklist Housekeeper thread.
                                            // The plugin only deletes worklists that have been created through the Rest API.
                                            // Set it to 0 if you don't want the plugin to delete worklists after a delay.
