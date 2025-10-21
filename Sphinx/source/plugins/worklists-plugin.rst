@@ -164,7 +164,7 @@ How to create a worklist file using the Rest API - new in 1.12.10
 Starting from Orthanc 1.12.10, the plugin provides a Rest API that can be
 used to create worklists.  For example::
 
-  $ curl --request POST http://localhost:8042/plugins/worklists/create \
+  $ curl --request POST http://localhost:8042/worklists/create \
       --data '{
                 "Tags" : {
                   "PatientID": "PID-45",
@@ -183,22 +183,22 @@ In response, you'll get something like::
   
   {
     "ID" : "5fdc7404-f9dc-4798-b6e1-8f715e2f9e71",
-    "Path" : "/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71"
+    "Path" : "/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71"
   }
 
 You can then check the content of the worklist by calling::
 
-  $ curl --request GET http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
+  $ curl --request GET http://localhost:8042/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
 
 To delete it, call::
 
-  $ curl --request DELETE http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
+  $ curl --request DELETE http://localhost:8042/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
 
 To browse all worklists, call::
 
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Simplify
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Short
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Full
+  $ curl --request GET http://localhost:8042/worklists/?format=Simplify
+  $ curl --request GET http://localhost:8042/worklists/?format=Short
+  $ curl --request GET http://localhost:8042/worklists/?format=Full
 
 
 
