@@ -21,8 +21,8 @@ and offers a Web-based viewer through an intuitive interface to the
 :ref:`whole-slide imaging primitives <wsi>` of Orthanc.
 
 The Education plugin requires the version of Orthanc to be above or
-equal to 1.12.9. Note that this plugin overwrites the way users are
-authenticated by Orthanc.
+equal to 1.12.9. It is released under the AGPL license. Note that this
+plugin overwrites the way users are authenticated by Orthanc.
 
 This development was partially funded by the `Virtual Hospital grant
 <https://www.virtual-hospital.org/>`__ at `Louvain School of
@@ -34,8 +34,8 @@ Overview
 
 The Orthanc plugin supports two modes of operation. The **standalone
 mode** allows Orthanc to operate as a Web server for sharing
-collections of medical images with students. In this mode, instructors
-can provide students with a URL linking to a Web page that lists the
+collections of medical images with learners. In this mode, instructors
+can provide learners with a URL linking to a Web page that lists the
 images in the collection, allowing them to view the images using their
 preferred Web viewer. The following screenshot shows this page:
 
@@ -58,16 +58,16 @@ image to view a demo video:
 |
 
 In this video, the left portion of the screen presents the
-administrative interface of Orthanc, used to associate medical images
-with **collections of images** (those collections are referred to as
-"projects"). The right portion displays the Moodle user interface,
-enabling students to access the images and open Web viewers managed by
-Orthanc. The instructor of the project 
+administrative interface of the Education plugin, used to associate
+medical images with **collections of images** (those collections are
+referred to as "projects"). The right portion displays the Moodle user
+interface, enabling learners to access the images and open Web viewers
+managed by Orthanc. Contrarily to the standalone mode,
 
 Both modes of operation include a **permission system** ensuring that
-students can only view images they are authorized to
+learners can only view images they are authorized to
 access. Additionally, the Education plugin supports multiple
-collections, which can be associated with different teachers.
+collections, which can be associated with different instructors.
 
 
 Compilation
@@ -107,17 +107,59 @@ plugin. Debian and Ubuntu packages can be found in the
 ``https://debian.orthanc-labs.com/``.
 
 
+Terminology
+-----------
+
+This section introduces the various concepts that are necessary to
+understand how the Education plugin for Orthanc works.
 
 
-Standalone mode
----------------
+User management
+^^^^^^^^^^^^^^^
+
+The Education plugin for Orthanc makes the distinction between 3
+categories of users:
+
+* **Administrators** are responsible for the configuration of Orthanc
+  and for the management of the collections of medical images
+  (referred to as "projects"). It is up to the administrators to
+  upload the DICOM images, to create the projects, to dispatch the
+  images among the different projects, and to associate projects with
+  instructors and learners.  To this end, administrators have access
+  to the administrative interface of the Education plugin, as well as
+  to :ref:`Orthanc Explorer <orthanc-explorer>` and :ref:`Orthanc
+  Explorer 2 <orthanc-explorer-2>`.
+
+* **Standard users** represent either instructors (teachers) or
+  learners (students). These users cannot modify the configuration of
+  the platform, upload medical images, or distribute images across
+  projects. Instructors can modify project-specific settings based on
+  their pedagogical objectives, such as controlling project visibility
+  or selecting which viewers are available for a given project. A user
+  may act as an instructor in certain projects and as a learner in
+  others. For this reason, the "teacher vs. learner" terminology is
+  avoided, as it implies a fixed role for each user.
+
+* **Guest users** are users who are not authenticated by the
+  platform. They behave like learners but can only access projects
+  with public visibility. This functionality can be used to publish
+  massive open online courses (MOOCs) through the standalone mode of
+  operation.
+
+The way the Education plugin authenticates administrators and standard
+users is specified in the :ref:`configuration file of Orthanc
+<configuration>`. The following authentication mechanisms are
+available:
+
+* **Login**. In this case, the Education plugin displays a login page
+  where the user can enter their credentials, which are specified in
+  the configuration file.
 
 
-Integration with Learning Management Systems
---------------------------------------------
 
-This plugin adds a dedicated button to Orthanc Explorer, which
-provides an easy, fast access to the OHIF viewers ():
+
 
 
 Labels
+
+HTTPS
