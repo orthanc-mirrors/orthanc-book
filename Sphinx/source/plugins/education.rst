@@ -148,17 +148,37 @@ categories of users:
 
 The way the Education plugin authenticates administrators and standard
 users is specified in the :ref:`configuration file of Orthanc
-<configuration>`. The following authentication mechanisms are
+<configuration>`. The authentication process for administrators can
+differ from the one used for standard users. As of release 1.0 of the
+Education plugin, the following authentication mechanisms are
 available:
 
 * **Login**. In this case, the Education plugin displays a login page
   where the user can enter their credentials, which are specified in
-  the configuration file.
+  the configuration file. Internally, after a successful login, user
+  information is stored as a `JWT
+  <https://en.wikipedia.org/wiki/JSON_Web_Token>`__ session cookie
+  named ``orthanc-education-user``.
+
+* **HTTP headers**. In this case, the user identity is determined by
+  the presence of a specific HTTP header, specified in the
+  ``AuthenticationHttpHeader`` configuration option. This approach can
+  be used in the standalone mode of operation, when `single sign-on
+  (SSO) <https://en.wikipedia.org/wiki/Single_sign-on>`__ is
+  implemented within an institution. At UCLouvain, this authentication
+  mode has been validated with `Shibboleth
+  <https://en.wikipedia.org/wiki/Shibboleth_(software)>`__ in
+  combination with the ``libapache2-mod-shib`` module, with Apache
+  acting as a :ref:`reverse proxy <apache>`. Two options are available
+  for header-based authentication:
+
+  * **Restricted**:
+
+  * **Unrestricted**:
 
 
 
-
-
+Precedence of cookies
 
 Labels
 
