@@ -107,8 +107,8 @@ plugin. Debian and Ubuntu packages can be found in the
 ``https://debian.orthanc-labs.com/``.
 
 
-Terminology
------------
+Usage
+-----
 
 This section introduces the various concepts that are necessary to
 understand how the Education plugin for Orthanc works.
@@ -123,11 +123,12 @@ categories of users:
 * **Administrators** are responsible for the configuration of Orthanc
   and for the management of the collections of medical images
   (referred to as "projects"). It is up to the administrators to
-  upload the DICOM images, to create the projects, to dispatch the
+  upload the DICOM resources, to create the projects, to dispatch the
   images among the different projects, and to associate projects with
-  instructors and learners.  To this end, administrators have access
-  to the administrative interface of the Education plugin, as well as
-  to :ref:`Orthanc Explorer <orthanc-explorer>` and :ref:`Orthanc
+  instructors and learners. To this end, administrators have full
+  access to the administrative interface of the Education plugin, to
+  the configuration of all of the projects, as well as to both
+  :ref:`Orthanc Explorer <orthanc-explorer>` and :ref:`Orthanc
   Explorer 2 <orthanc-explorer-2>`.
 
 * **Standard users** represent either instructors (teachers) or
@@ -143,8 +144,12 @@ categories of users:
 * **Guest users** are users who are not authenticated by the
   platform. They behave like learners but can only access projects
   with public visibility. This functionality can be used to publish
-  massive open online courses (MOOCs) through the standalone mode of
+  massive open online courses (MOOCs) in the standalone mode of
   operation.
+
+
+User authentication
+^^^^^^^^^^^^^^^^^^^
 
 The way the Education plugin authenticates administrators and standard
 users is specified in the :ref:`configuration file of Orthanc
@@ -172,14 +177,183 @@ available:
   acting as a :ref:`reverse proxy <apache>`. Two options are available
   for header-based authentication:
 
-  * **Restricted**:
+  * **Unrestricted**: If the specified HTTP header is present, the
+    user is authenticated immediately, and the header value is
+    interpreted as the user identifier.
 
-  * **Unrestricted**:
+  * **Restricted**: A user is authenticated only if the HTTP header
+    value matches one of the allowed entries defined in the
+    configuration. This option can be used to grant
+    administrator-level access to a specific subset of users.
+
+* **None**. In this mode, the login page is displayed, but no user can
+  log in. This can be used to disable administrator-level access in
+  order to freeze the platform configuration, or to prevent standard
+  users from logging in when LTI-based authentication is available.
+
+* **LTI-based authentication**. This authentication mechanism is
+  automatically activated when LTI support is enabled for integration
+  with a Learning Management System (LMS), such as
+  Moodle. Authentication is then handled through `OIDC-based
+  authentication <https://www.imsglobal.org/spec/lti/v1p3>`__
+  initiated by the LTI platform. The mechanism grants instructor or
+  learner access to a single project, corresponding to the deep link
+  from which the request originates. The role (instructor or learner)
+  is determined by the value of the
+  ``https://purl.imsglobal.org/spec/lti/claim/roles`` field, and the
+  user identifier is derived from the e-mail address provided by the
+  LTI platform.  Upon successful authentication, user information is
+  stored in a JWT session cookie named ``orthanc-education-lti``.
+
+Note that if both the ``orthanc-education-user`` and
+``orthanc-education-lti`` cookies are present, login-based
+authentication takes precedence, since LTI-based authentication
+provides more limited access.
+
+
+Projects
+^^^^^^^^
+
+A project is defined as a collection of :ref:`DICOM resources
+<dicom-format>`.  These resources can be studies, series, or
+instances. The same DICOM resource can be shared by multiple projects.
+Projects are created and managed by administrators. A project is
+defined by the following parameters:
+
+* The **list of instructors** specifies the standard users who are
+  permitted to change the project configuration and review its stored
+  images, including before the project is published to learners.
+
+* The **list of learners** specifies which standard users are allowed
+  to view the medical images in the collection. In standalone mode,
+  learners can choose from a pre-selected set of Web viewers, as
+  defined by the project instructors.
+
+* The **access policy** determines which standard users or guest users
+  are permitted to access the DICOM resources linked to a
+  project. Three policies are available:
+
+  * **Hidden**: The project is accessible only to its instructors and
+    to the platform administrators. This allows instructors to prepare
+    course material before granting students access to the medical
+    images (for example, when setting up examinations).
+
+  * **Active**: The project becomes accessible to the specified list
+    of learners. Guest users cannot access the collection.
+
+  * **Public**: The project is accessible to any standard user, as
+    well as to any guest user. This policy can be used in the context
+    of MOOCs.
+
+* The **primary viewer** is the default Web viewer for the project,
+  whose usage is recommended to learners by the project
+  instructors. As of release 1.0, the following viewers are recognized
+  by the Education plugin: :ref:`Stone Web viewer <stone_webviewer>`,
+  :ref:`OHIF <ohif>`, :ref:`Kitware VolView <volview>`, and
+  :ref:`Whole-slide imaging <wsi>`.
+
+* The **secondary viewers** are a list of additional viewers that may
+  be useful to learners alongside the primary viewer.
+
+* **LTI context ID**: When the Education plugin is used with a
+  Learning Management System (LMS) such as Moodle, this parameter
+  specifies the identifier of the course in the LTI platform. Deep
+  links in the LMS course can only be created to the project whose LTI
+  context ID matches this course.
+
+Here is a screenshot of how projects can be configured in the
+administrative interface of the Education plugin:
+
+.. image:: education/projects-1.png
+           :align: center
+           :width: 800
+
+The individual parameters of a project look as follows:
+
+.. image:: education/projects-2.png
+           :align: center
+           :width: 500
+
+|
+
+
+Collection of images
+^^^^^^^^^^^^^^^^^^^^
+
+The Education plugin offers an administrative interface for **linking
+DICOM resources** to the collection of medical images associated with
+each project:
+
+.. image:: education/images.png
+           :align: center
+           :width: 800
+
+Various filters are available to help identify DICOM resources that
+are not yet assigned to any project. The association of DICOM studies,
+series, and instances to projects is implemented internally using the
+:ref:`labels feature of Orthanc <labels>`.
+
+The **content of individual projects** can be inspected as well:
+
+.. image:: education/content.png
+           :align: center
+           :width: 800
+
+Besides allowing access to the medical images in the collection, this
+page provides three important pieces of information highlighted in
+red:
+
+* The **Orthanc label** that is used to associate DICOM resources with
+  the project. Consequently, as an alternative to the built-in
+  administrative interface, :ref:`Orthanc Explorer <orthanc-explorer>`
+  or :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` can be used to
+  link or unlink images with the project by editing the labels of the
+  DICOM resources of interest.
+
+* The **URL to access the content** of the project by instructors,
+  learners, or guest users (if the project is public).
+
+* An edit box is provided to facilitate adding an image to the project
+  while it is being reviewed in one of the Web viewers supported by
+  Orthanc. To do so, simply **paste the URL of the viewer**.
+
+
+Access to learners
+^^^^^^^^^^^^^^^^^^
+
+After authentication, non-administrator users are redirected to a Web
+page giving access to all projects for which they appear on the list
+of learners:
+
+.. image:: education/learner.png
+           :align: center
+           :width: 800
+
+**Guest users** also have access to this page, but only see the
+projects with a public access policy.
+
+If the authenticated standard user is also an **instructor of the
+project**, this user can modify some parameters of the project (i.e.,
+its access policy, its primary viewer, and its list of secondary
+viewers).
+
+
+DICOM-ization
+^^^^^^^^^^^^^
+
+An important use case of the Education plugin for Orthanc is to
+provide a **virtual microscope** for teaching histology and digital
+pathology. This use case takes advantage of the :ref:`whole-slide
+imaging <wsi>` support implemented by the Orthanc project.
 
 
 
-Precedence of cookies
-
-Labels
+Example configuration
+---------------------
 
 HTTPS
+
+
+Troubleshooting
+---------------
+
