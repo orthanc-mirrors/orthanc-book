@@ -9,7 +9,7 @@ Education plugin for Orthanc
 
 The Education plugin turns Orthanc into a tool for sharing medical
 images with students for **educational purposes**. The plugin also
-supports the **LTI 1.3 protocol**, allowing access from Learning
+supports the **LTI 1.3 protocol**, allowing integration with Learning
 Management Systems such as Moodle.
 
 The images can be displayed using the **Web viewers** that are
@@ -123,23 +123,23 @@ categories of users:
 * **Administrators** are responsible for the configuration of Orthanc
   and for the management of the collections of medical images
   (referred to as "projects"). It is up to the administrators to
-  upload the DICOM resources, to create the projects, to dispatch the
-  images among the different projects, and to associate projects with
-  instructors and learners. To this end, administrators have full
+  **upload the DICOM resources**, to create the projects, to dispatch
+  the images among the different projects, and to associate projects
+  with instructors and learners. To this end, administrators have full
   access to the administrative interface of the Education plugin, to
   the configuration of all of the projects, as well as to both
   :ref:`Orthanc Explorer <orthanc-explorer>` and :ref:`Orthanc
   Explorer 2 <orthanc-explorer-2>`.
 
-* **Standard users** represent either instructors (teachers) or
-  learners (students). These users cannot modify the configuration of
-  the platform, upload medical images, or distribute images across
-  projects. Instructors can modify project-specific settings based on
-  their pedagogical objectives, such as controlling project visibility
-  or selecting which viewers are available for a given project. A user
-  may act as an instructor in certain projects and as a learner in
-  others. For this reason, the "teacher vs. learner" terminology is
-  avoided, as it implies a fixed role for each user.
+* **Standard users** represent either instructors or learners. These
+  users *cannot* modify the configuration of the platform, upload
+  medical images, or distribute images across projects. Instructors
+  can modify project-specific settings based on their pedagogical
+  objectives, such as controlling project visibility or selecting
+  which viewers are available for a given project. A user may act as
+  an instructor in certain projects and as a learner in others. For
+  this reason, the "teacher vs. student" terminology is avoided, as it
+  implies a fixed role for each user.
 
 * **Guest users** are users who are not authenticated by the
   platform. They behave like learners but can only access projects
@@ -197,9 +197,9 @@ available:
   Moodle. Authentication is then handled through `OIDC-based
   authentication <https://www.imsglobal.org/spec/lti/v1p3>`__
   initiated by the LTI platform. The mechanism grants instructor or
-  learner access to a single project, corresponding to the deep link
-  from which the request originates. The role (instructor or learner)
-  is determined by the value of the
+  learner access to a single project, corresponding to the **deep
+  link** from which the request originates. The role (instructor or
+  learner) is determined by the value of the
   ``https://purl.imsglobal.org/spec/lti/claim/roles`` field, and the
   user identifier is derived from the e-mail address provided by the
   LTI platform.  Upon successful authentication, user information is
@@ -211,6 +211,8 @@ authentication takes precedence, since LTI-based authentication
 provides more limited access.
 
 
+.. _education_projects:
+
 Projects
 ^^^^^^^^
 
@@ -221,8 +223,8 @@ Projects are created and managed by administrators. A project is
 defined by the following parameters:
 
 * The **list of instructors** specifies the standard users who are
-  permitted to change the project configuration and review its stored
-  images, including before the project is published to learners.
+  permitted to change the project configuration and to review its
+  stored images before the project is published to the learners.
 
 * The **list of learners** specifies which standard users are allowed
   to view the medical images in the collection. In standalone mode,
@@ -277,6 +279,8 @@ The individual parameters of a project look as follows:
 |
 
 
+.. _education_content:
+
 Collection of images
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -305,18 +309,25 @@ red:
 
 * The **Orthanc label** that is used to associate DICOM resources with
   the project. Consequently, as an alternative to the built-in
-  administrative interface, :ref:`Orthanc Explorer <orthanc-explorer>`
-  or :ref:`Orthanc Explorer 2 <orthanc-explorer-2>` can be used to
-  link or unlink images with the project by editing the labels of the
-  DICOM resources of interest.
+  administrative interface of the Education plugin, :ref:`Orthanc
+  Explorer <orthanc-explorer>` or :ref:`Orthanc Explorer 2
+  <orthanc-explorer-2>` can be used to link or unlink images with the
+  project by **manually editing the labels** of the DICOM resources of
+  interest.  Note that the built-in interface only supports the
+  association of studies and series. If you need to link a **DICOM
+  instance** to a project, you must manually edit the labels.
 
 * The **URL to access the content** of the project by instructors,
   learners, or guest users (if the project is public).
 
 * An edit box is provided to facilitate adding an image to the project
   while it is being reviewed in one of the Web viewers supported by
-  Orthanc. To do so, simply **paste the URL of the viewer**.
+  Orthanc. To do so, simply **paste the URL of the viewer**. This
+  necessitates the ``PublicRoots`` configuration option to include the
+  base URL of the Orthanc instance.
 
+
+.. _education_learners:
 
 Access to learners
 ^^^^^^^^^^^^^^^^^^
@@ -337,23 +348,360 @@ project**, this user can modify some parameters of the project (i.e.,
 its access policy, its primary viewer, and its list of secondary
 viewers).
 
+By default, this page lists all the projects that are available to the
+user. This behavior can be disabled by setting the configuration
+option ``ListProjectsAsLearner`` to ``false``. In this case, the
+instructor will have share the URL tagged as *"Access by instructors
+and learners"* in the :ref:`page listing the content of the project
+<education_content>`.
 
-DICOM-ization
-^^^^^^^^^^^^^
+
+Virtual microscope
+^^^^^^^^^^^^^^^^^^
 
 An important use case of the Education plugin for Orthanc is to
 provide a **virtual microscope** for teaching histology and digital
 pathology. This use case takes advantage of the :ref:`whole-slide
 imaging <wsi>` support implemented by the Orthanc project.
+DICOM-ization is accessible from the administrative interface
+of the Education plugin:
+
+.. image:: education/dicomization.png
+           :align: center
+           :width: 800
+
+|
+
+This interface is only accessible if the
+``WholeSlideImagingDicomizer`` configuration option contains the path
+to the ``OrthancWSIDicomizer`` command-line tool from the
+:ref:`whole-slide imaging framework of Orthanc <wsi>`. Once the upload
+is done, the page named *"Upload status"* provides the status of the
+DICOM-ization, including the logs of the command-line tool.
+
+Some proprietary formats (such as MRXS or NDPI) requires the
+DICOM-ization command-line tool to use the `OpenSlide library
+<https://openslide.org/>`__. In this case, the ``OpenSlideLibrary``
+configuration option must contain the path to the ``openslide.so``
+(GNU/Linux) or ``openslide.dll`` (Microsoft Windows) shared library.
+
+To associate a DICOM-ized whole-slide image with a project, make sure
+to associate the DICOM series in the :ref:`content of the project
+<education_content>` (*not* the DICOM study). Indeed, the whole-slide
+imaging viewer only works at the instance or series level.
+
+Note that future releases may include DICOM-ization of additional
+types of images (e.g., :ref:`3D models <stl-plugin>`, PNG or JPEG
+images,...).
+
+Configuration file
+------------------
+
+Generic configuration
+^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: json
+
+To enable the Education plugin, the :ref:`configuration file
+<configuration>` must contain a specific section named ``Education``::
+
+  {
+    "Plugins" : [
+      "${HOME}/Downloads/libOrthancEducation.so"
+    ],
+    "Education" : {
+      /* Generic options */
+      "Enabled" : true,
+      "PublicRoots" : [
+        "http://localhost:8042"  /* Public base URL where the Orthanc Web server is mapped */
+      ],
+      "ListProjectsAsLearner" : true,
+
+      /* Options for the virtual microscope */
+      "WholeSlideImagingDicomizer" : "${HOME}/Downloads/OrthancWSIDicomizer",
+      "OpenSlideLibrary" : "libopenslide.so",
+
+      /* ...other options... */
+    }
+  }
+
+If you want to use :ref:`Orthanc Explorer 2 <orthanc-explorer-2>`
+together with the Education plugin, make sure to disable its default
+behavior that sets it as the default Web interface of Orthanc::
+
+  {
+    /* ... */
+    "OrthancExplorer2" : {
+      "IsDefaultOrthancUI": false
+     }
+  }
+
+
+Login-based deployments
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Here is a possible configuration for a **standalone deployment** of
+the Education plugin using a login page::
+
+  {
+    /* ... */
+    "Education" : {
+      /* ... */
+      "AuthenticationHttpHeader" : "Mail",
+      "Administrators" : {
+        "Authentication" : "Login",
+        "Credentials" : {
+          "admin" : "pass1"
+        }
+      },
+      "StandardUsers" : {
+        "Authentication" : "Login",
+        "Credentials" : {
+          "instructor" : "pass2",
+          "learner" : "pass3"
+        }
+      }
+    }
+  }
+
+This configuration defines one administrator (whose identifier is
+``admin``) and two standard users (with identifiers ``instructor`` and
+``learner``). Because their passwords are hard-coded, the
+configuration file must not be publicly accessible.
+
+All the requests requiring an authentication will be redirected to the
+login page. The page with the :ref:`list of projects for learners
+<education_learners>` is reachable without login, allowing guest users
+to access public projects (e.g., in the context of MOOCs).
+
+
+Deployments with HTTP headers (SSO)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here is a possible configuration for a **standalone deployment** of
+the Education plugin behind a `single sign-on (SSO)
+<https://en.wikipedia.org/wiki/Single_sign-on>`__ infrastructure::
+
+  {
+    /* ... */
+    "Education" : {
+      /* ... */
+      "Administrators" : {
+        "Authentication" : "RestrictedHttpHeader",
+        "RestrictedHeaders" : [
+          "admin@uclouvain.be"
+        ]
+      },
+      "StandardUsers" : {
+        "Authentication" : "RestrictedHttpHeader",
+        "RestrictedHeaders" : [
+          "instructor@uclouvain.be",
+          "learner@uclouvain.be"
+        ]
+      }
+    }
+  }
+
+This configuration authenticates administrators and standard users
+based on the presence of the ``Mail`` HTTP header, which must be set
+by the SSO infrastructure. In this example, there is one administrator
+(``admin@uclouvain.be``) and two standard users
+(``instructor@uclouvain.be`` and ``learner@uclouvain.be``). If the
+``Mail`` header matches none of those e-mails, the authentication
+results in the guest user.
+
+Evidently, you can emulate a SSO infrastructure by putting a reverse
+proxy (e.g., :ref:`nginx <nginx>` or :ref:`Apache <apache>`) in front
+of Orthanc, asking the reverse proxy to automatically set some HTTP
+header (cf. ``proxy_set_header`` if nginx is used).
+
+When handling large cohorts of learners, it is not practical to list
+all of them in the configuration files. In this case, the
+``Authentication`` option for standard users can be set to
+``HttpHeader``::
+
+  {
+    /* ... */
+    "Education" : {
+      /* ... */
+      "AuthenticationHttpHeader" : "Mail",
+      "Administrators" : {
+        "Authentication" : "RestrictedHttpHeader",
+        "RestrictedHeaders" : [
+          "admin@uclouvain.be"
+        ]
+      },
+      "StandardUsers" : {
+        "Authentication" : "HttpHeader"
+      }
+    }
+  }
+
+When this option is enabled, any HTTP request containing the ``Mail``
+header is authenticated as a standard user. The value of the ``Mail``
+header defines the user identity.
+
+
+.. _education_lti:
+
+LTI deployments
+^^^^^^^^^^^^^^^
+
+Here is the recommended configuration file to integrate the Education
+plugin with a Learning Management Systems such as Moodle::
+
+  {
+    /* ... */
+    "RemoteAccessAllowed" : true,
+    "Education" : {
+      /* ... */
+      "Administrators" : {
+        "Authentication" : "Login",
+        "Credentials" : {
+          "admin" : "pass"
+        }
+      },
+      "StandardUsers" : {
+        "Authentication" : "None"
+      },
+      "LTI": {
+        "Enabled": true,
+        "OrthancUrl" : "https://lti.local:5000",
+        "PlatformUrl" : "http://moodle.local:8100"
+      },
+      "PublicRoots" : [
+        "https://lti.local:5000"
+      ]
+    }
+  }
+
+In this configuration, the administrator is authenticated through a
+login page. Standard users are not authenticated by the mechanisms
+provided by the Education plugin (hence the ``None`` value), but
+instead through the primitives defined by the `LTI 1.3 protocol
+<https://www.imsglobal.org/spec/lti/v1p3>`__.
+
+In this case, Orthanc must also be explicitly provided with its own
+public base URL (``https://lti.local:5000``) and the base URL of the
+LMS (``http://moodle.local:8100``). This information is used to verify
+the security of the bidirectional communication between Orthanc and
+the LMS through the LTI protocol.
+
+Once Orthanc is running, you can configure the LMS platform. In this
+section, we use Moodle as an example, as it is the only LMS that has
+been tested with release 1.0 of the Education plugin. The screenshots
+below are taken from the `video illustrating the configuration steps
+<https://www.youtube.com/watch?v=GD-oPukwxyc>`__.  Open the
+configuration interface of external tools in Moodle:
+
+.. image:: education/lti-1.jpeg
+           :align: center
+           :width: 800
+
+Then click on the *"Add LTI Advantage"* button with the
+``https://lti.local:5000/education/lti/register`` URL. Evidently, you
+will have to adapt this URL with the public root of your Orthanc
+server. This results in the addition of the tool:
+
+.. image:: education/lti-2.jpeg
+           :align: center
+           :width: 256
+
+If you edit the configuration of this newly added external tool (by
+clicking on the pen icon), you see all the parameters that have been
+automatically negotiated between Orthanc and Moodle:
+
+.. image:: education/lti-4.jpeg
+           :align: center
+           :width: 800
+
+An important piece of information is the *"LTI Client ID"*, which
+should also have been filled on the *"Settings"* page of the
+administrative interface of the Education plugin in Orthanc.
+
+For best operation, it is necessary to manually change the default
+values of the *"Tool configuration usage"* and "*Default launch
+container*" as follows:
+
+.. image:: education/lti-3.jpeg
+           :align: center
+           :width: 600
+
+You can then click on the *"Activate"* button to make the "Orthanc for
+Education" external tool available in the Moodle courses.
+
+The LTI context ID for the :ref:`configuration of the project
+<education_projects>` can be retrieved by copying the identifier of
+the course from the URL of the course in Moodle:
+
+.. image:: education/lti-5.jpeg
+           :align: center
+           :width: 600
 
 
 
-Example configuration
----------------------
 
-HTTPS
+Other options
+^^^^^^^^^^^^^
+
+Note that it is always recommended to enable :ref:`HTTPS encryption in
+Orthanc <https>` for security reasons, especially for :ref:`LTI
+deployments <education_lti>`. Some additional security-related options
+are available in the Education plugin::
+
+  {
+    /* ... */
+    "Education" : {
+      /* ... */
+      "MaxLoginAge" : 3600,  /* After how many seconds login-based authentication expires */
+      "SecureCookies" : true,  /* Whether cookies are tagged as "Secure", only set to "false" for debugging */
+    }
+  }
 
 
 Troubleshooting
 ---------------
 
+Several problems can be encountered if using LTI integration with
+Moodle:
+
+* **Error 400** with message ``"Missing field: \"id_token\""`` during the creation of a deep link.
+
+  **Explanation**: This means that the *"LTI Client ID"* in the
+  settings of the Education plugin is out of sync with the Moodle
+  configuration.
+
+  **Resolution**: Modify the settings in Orthanc, or reinstall the
+  "Orthanc for Education" external from scratch.
+
+* **Error 500** with message ``"Unknown LTI context ID"`` during the creation of a deep link.
+
+  **Explanation**: This means that the Moodle course has not been
+  correctly associated with a project in the Orthanc Education plugin.
+
+  **Resolution**: Edit the project settings in Orthanc, and
+  appropriately set the field *"LTI context ID"*.
+
+* Moodle shows the following error during the creation of a deep link:
+  ``"Exception - mod_lti\local\ltiopenid\jwks_helper::fix_jwks_alg():
+  Argument #1 ($jwks) must be of type array, null given, called in
+  [dirroot]/mod/lti/locallib.php"``
+
+  **Explanation**: This means that the cURL library used by Moodle is
+  not allowed to contact the Orthanc Web server, notably the route
+  that provides the OIDC JSON web key (JWK) endpoint (in our example,
+  ``https://lti.local:5000/education/lti/jwks``).
+
+  **Resolution**:
+
+  * Make sure that the domain name used by Orthanc (in our example,
+    ``lti.local``) is secured by a valid HTTPS certificate, and that
+    the HTTPS certificate is trusted by the machine running Moodle.
+
+  * Make sure that the security settings of Moodle (in our example,
+    those settings are accessible at
+    ``http://moodle.local:8100/admin/settings.php?section=httpsecurity``)
+    allow to contact the TCP port on which Orthanc is listening (in
+    our example, the port is ``5000``, but by default it would be
+    ``8042``), and to contact the IP address on which Orthanc is
+    installed.
