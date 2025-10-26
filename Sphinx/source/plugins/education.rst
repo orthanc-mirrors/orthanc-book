@@ -24,9 +24,17 @@ The Education plugin requires the version of Orthanc to be above or
 equal to 1.12.9. It is released under the AGPL license. Note that this
 plugin overwrites the way users are authenticated by Orthanc.
 
-This development was partially funded by the `Virtual Hospital grant
-<https://www.virtual-hospital.org/>`__ at `Louvain School of
-Engineering (EPL) <https://www.uclouvain.be/facultes/epl>`__.
+**Acknowledgments**:
+
+* This development was partially funded by the `Virtual Hospital grant
+  <https://www.virtual-hospital.org/>`__ at `Louvain School of
+  Engineering (EPL) <https://www.uclouvain.be/facultes/epl>`__.
+
+* The initial exploration of the LTI protocol for Orthanc was carried
+  out in Python as part of `Florentin Botton's master's thesis
+  <https://thesis.dial.uclouvain.be/entities/masterthesis/11370371-59e6-4dd4-a24f-c2055df78d8f>`__
+  at EPL, under the supervision of Sébastien Jodogne and entitled
+  *"Medical Imaging Education and Learning Management Systems."*
 
 
 Overview
