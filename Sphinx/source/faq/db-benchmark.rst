@@ -22,6 +22,8 @@ Benchmark
 We have setup a `test scenario <https://github.com/orthanc-server/orthanc-setup-samples/tree/master/docker/databases-benchmark>`_ 
 to compare the performances of the default SQLite engine against the PostgreSQL and the MySQL plugins.
 
+Note: these tests have been performed with the ``orthancteam/orthanc:25.10.3`` Docker images.
+
 .. image:: ../images/db-benchmark.png
            :align: center
            :width: 1000px
