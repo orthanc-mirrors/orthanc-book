@@ -188,6 +188,7 @@ decision chart:
    * **Europe**:
 
      * `Adrian Schiopu <sc.callisto.srl@gmail.com>`__ (Romania)
+     * `Caio Sobreiro <mailto:caiosobreiro@gmail.com>`__ (Portuguese/English, Spain)
      * `Krzysztof Turkiewicz <mailto:deeveeloop@gmail.com>`__ (Polish/English, Poland)
      * `Salim Kanoun <https://github.com/salimkanoun>`__ (French/English/Arabic, France)
      * `Stephen D. Scotti <https://www.medinformatics.eu>`__ (English/Italian, Italy)
@@ -203,6 +204,7 @@ decision chart:
 
    * **South America**:
        
+     * `Caio Sobreiro <mailto:caiosobreiro@gmail.com>`__ (Portuguese/English, from Spain)
      * `Claudio Arenas <mailto:dentista.arenas@gmail.com>`__ (Spanish/English, Chile)
      * `Emilio Huaman <https://www.linkedin.com/in/emilio-alberto-huaman-vega-39719b22a/>`__ (English/Spanish, Perú)
      * `Fernando Sánchez <https://integraper.com/?page_id=529>`__ (English/Spanish, Peru)
@@ -214,8 +216,8 @@ decision chart:
    * **Africa**:
 
      * `Abdrahman Elkafil <mailto:elkafil@nextbehealthcare.com>`__ (English/French/Arabic, Belgium and Morocco)
-     * `Olakunle Dada <mailto:holakunle69@gmail.com>`__ (English/French, Nigeria)
      * `Abdulazeez Alao <mailto:abdulazeezalao247@gmail.com>`__ (Nigeria)
+     * `Olakunle Dada <mailto:holakunle69@gmail.com>`__ (English/French, Nigeria)
 
    * **Asia**:
      
