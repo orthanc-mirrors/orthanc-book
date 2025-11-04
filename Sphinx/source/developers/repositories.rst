@@ -91,12 +91,12 @@ While cloning the repository, you might face an error similar to::
 In such a case, you must explicitly add the cryptographic fingerprint
 of our code server using a more recent option than the
 ``hostfingerprints`` option. To this end, edit the `configuration file
-<https://www.mercurial-scm.org/doc/hgrc.5.html#files>`__ of Mercurial
+<https://mercurial-scm.org/help/topics/config>`__ of Mercurial
 (by default on Microsoft Windows, ``%USERPROFILE%\Mercurial.ini``),
 and add the following lines::
 
   [hostsecurity]
-  orthanc.uclouvain.be:fingerprints=sha256:30:1d:d8:b6:a2:50:23:6a:a1:b7:da:66:b6:aa:2f:fa:59:f3:9d:cd:ed:f8:2c:49:14:57:25:39:84:b9:60:db
+  orthanc.uclouvain.be:fingerprints=sha256:B0:EF:A4:6C:89:62:03:96:32:6B:80:A9:39:FC:91:C5:12:98:6C:25:27:54:ED:E4:98:DA:C2:C8:ED:7A:1F:72
   
 .. highlight:: bash
 
@@ -121,7 +121,7 @@ For old versions of Mercurial that do not support SHA256, add the
 following lines to your ``~/.hgrc`` file::
 
   [hostfingerprints]
-  orthanc.uclouvain.be = 69:C0:EF:E7:05:BB:2A:0B:88:EA:E8:00:C6:1A:95:A3:53:74:C1:D4
+  orthanc.uclouvain.be = 7A:7A:74:92:41:97:A5:C0:16:3E:C8:17:67:FD:16:60:2A:C0:42:D3
 
 .. highlight:: bash
 
