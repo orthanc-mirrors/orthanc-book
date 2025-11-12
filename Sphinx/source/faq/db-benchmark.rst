@@ -42,7 +42,7 @@ This plot is actually not very representative since the DB contains a very small
 The fourth plot shows the time required to retrieve a single instance through :ref:`DICOMweb WADO-RS <dicomweb>`.
 This is typical of API calls performed by the :ref:`Stone Web viewer <stone_webviewer>` or the :ref:`OHIF viewer <ohif>`.
 
-The bad performance of the DICOMWeb plugin with SQLite to compute the ``metadata`` cache can 
+The bad performance of the DICOMweb plugin with SQLite to compute the ``metadata`` cache can 
 actually be explained by the fourth plot that shows that even simple search operations in the database get slower.
 
 
@@ -54,7 +54,7 @@ From a performance point of view, you may stick with SQLite if you do not plan t
 
 Typically, if you are only handling ``CR, DX`` or simple ``US`` images, SQLite is a very good option.
 SQLite also remains a good option if you are using Orthanc as a buffer to transfer, convert or sanitize images
-in a workflow, especially if you do not need the DICOMWeb plugin.
+in a workflow, especially if you do not need the DICOMweb plugin.
 
 As soon as you plan to store thousands of ``MR, CT, MG`` or other large image sets, you should
 switch to the :ref:`PostgreSQL <postgresql>`.

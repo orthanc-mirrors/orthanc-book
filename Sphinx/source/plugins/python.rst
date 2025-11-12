@@ -376,7 +376,7 @@ call ``RestApiPostAfterPlugin`` to call the REST API from plugins.
 Note however, that, as of Orthanc 1.12.9, the Orthanc plugin SDK
 does not support multiple plugins implementing the same route.
 Orthanc will actually accept e.g a Python plugin that overrides
-a DICOMWeb route but it is impossible to tell which route
+a DICOMweb route but it is impossible to tell which route
 will be called in the end since this depends on the registration 
 order of the plugins that is not deterministic.
 
@@ -761,7 +761,7 @@ much as possible.
 
 **Note:** In version 4.2, we have introduced a new version of the C-MOVE SCP 
 handler that can be registered through ``orthanc.RegisterMoveCallback2(CreateMoveCallback, GetMoveSizeCallback, ApplyMoveCallback, FreeMoveCallback)``.
-This `DICOM to DICOMWeb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__ demonstrates how it can be used.
+This `DICOM to DICOMweb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__ demonstrates how it can be used.
 
 
 .. _python_worklists:

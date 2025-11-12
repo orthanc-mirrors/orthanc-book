@@ -164,13 +164,13 @@ These warnings can be enabled/disabled through this configuration::
     }
 
 
-DICOMWeb
+DICOMweb
 ========
 
 Below is a sample configuration that is well suited to
-optimize DICOMWeb routes in general in case you are using the 
+optimize DICOMweb routes in general in case you are using the 
 ``MainDicomTags`` metadata mode.  However, note that, from version
-1.15 of the :ref:`DICOMWeb plugin <dicomweb-server-metadata-config>`, you should favor the ``Full`` mode::
+1.15 of the :ref:`DICOMweb plugin <dicomweb-server-metadata-config>`, you should favor the ``Full`` mode::
 
     {
         "ExtraMainDicomTags" : {

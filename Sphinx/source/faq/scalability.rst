@@ -118,7 +118,7 @@ presence of large databases:
 
 * From Orthanc 1.11.0: you have the ability to add
   more :ref:`main DICOM tags <main-dicom-tags>` in the Orthanc Index 
-  to speed up C-Find, ``tools/find``, DICOMWeb QIDO-RS, WADO-RS and 
+  to speed up C-Find, ``tools/find``, DICOMweb QIDO-RS, WADO-RS and 
   especially WADO-RS Retrieve Metadata.
 
 * Make sure to carefully :ref:`read the logs <log>` in ``--verbose``
