@@ -21,7 +21,7 @@ Configuration of Osirix
   - with a name (eg ``MYORTHANC``)
   - with Q&R activated
   - without authentication
-  - with Send Transfers syntax : Explicit Little Endian
+  - with Send Transfers syntax: Explicit Little Endian
 
 
 Configuration of Orthanc
@@ -49,11 +49,11 @@ Configuration of Docker images by Orthanc Team
 This section applies if you are using the :ref:`orthancteam/orthanc Docker image <docker-orthancteam>`
 to run Orthanc.
 
-Make sure Orthanc has the Dicom Web protocol enabled::
+Make sure Orthanc has the DICOMweb protocol enabled::
 
   DICOM_WEB_PLUGIN_ENABLED: "true"
 
-If using Orthanc in a docker container, map the Orthanc DICOMweb Http Port. Eg in docker-compose file::
+If using Orthanc in a Docker container, map the Orthanc DICOMweb HTTP port. Eg in docker-compose file::
 
   ports:
     - "8042:8042"
