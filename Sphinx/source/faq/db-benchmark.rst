@@ -63,7 +63,7 @@ You should only use :ref:`MySQL <mysql>` or :ref:`ODBC <odbc>` if your company p
 as their performance is not optimal and they currently lack the latest DB features like:
 
 * The ``ExtendedFind`` extension to perform ordering and more advanced filtering in ``/tools/find``.
-* Key-Value Stores and Queues to enable some features like the Rest API
+* Key-Value Stores and Queues to enable some features like the REST API
   of the :ref:`Worklist plugin <worklist>` or enable the :ref:`advanced storage <advanced-storage>` plugin.
 
 

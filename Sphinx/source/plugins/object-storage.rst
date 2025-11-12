@@ -264,7 +264,7 @@ system for improved performances e.g when before opening the study in a viewer.
 When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is useful to move file from the
 file system to the object storage to perform a full data migration to object-storage.
 
-To move files from one storage to the other, you should call the plugin Rest API::
+To move files from one storage to the other, you should call the plugin REST API::
 
     $ curl -X POST http://localhost:8042/move-storage \
       --data '{

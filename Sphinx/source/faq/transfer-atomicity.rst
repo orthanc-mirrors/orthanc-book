@@ -54,7 +54,7 @@ Summary
 |                                                  | * If ``/dicom-web/servers/sample/stow`` returns  | study in a single STOW-RS request             |
 |                                                  |   a 200 or if job is successfull                 |                                               |
 +--------------------------------------------------+--------------------------------------------------+-----------------------------------------------+
-| **Orthanc Rest API**                             | * If every call to ``/instances`` receives a     | No                                            |
+| **Orthanc REST API**                             | * If every call to ``/instances`` receives a     | No                                            |
 |                                                  |   200                                            |                                               |
 |                                                  | * If ``/peers/sample/store`` receives a          |                                               |
 |                                                  |   200 or if job is successfull                   |                                               |
@@ -123,10 +123,10 @@ a ``StableStudy`` event might be triggered even if the study was not fully recei
 
 
 
-Orthanc Rest API
+Orthanc REST API
 ----------------
 
-When transferring a study through the Orthanc Rest API, each instance is transferred individually.
+When transferring a study through the Orthanc REST API, each instance is transferred individually.
 Therefore, on server side, if the transfer is interrupted, the destination has no way to know that the study 
 has been fully transmitted or not.
 
