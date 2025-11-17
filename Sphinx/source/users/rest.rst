@@ -1068,7 +1068,7 @@ operations.
 For example, for a permissive ``C-Move`` or ``C-Get`` operation to retrieve 3 studies from a remote
 modality::
 
-  $ url -v http://localhost:8042/modalities/sample/move \
+  $ curl -v http://localhost:8042/modalities/sample/move \
     --data '{
               "Permissive": true,
               "Level" : "Study",
