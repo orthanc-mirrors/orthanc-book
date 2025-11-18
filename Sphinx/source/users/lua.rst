@@ -591,7 +591,7 @@ but will not modify the list of tags that Orthanc will return.
 
 Also note that the ``IncomingFindRequestFilter`` callback is not applied to
 C-Find requests targeting :ref:`modality worklists
-<worklists-plugin>`. Since Orthanc 1.4.2, the corresponding
+<-new>`. Since Orthanc 1.4.2, the corresponding
 ``IncomingWorklistRequestFilter`` callback can be used to sanitize
 C-FIND requests against worklists::
 

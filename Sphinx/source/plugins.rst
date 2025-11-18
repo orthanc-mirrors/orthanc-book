@@ -68,7 +68,7 @@ Standards
    :maxdepth: 1
 
    plugins/dicomweb.rst
-   plugins/worklists-plugin.rst
+   plugins/worklists-plugin-new.rst
    plugins/wsi.rst
    plugins/neuro.rst
    plugins/stl.rst
@@ -121,6 +121,14 @@ Tools
    plugins/multitenant-dicom.rst
    plugins/serve-folders.rst
    plugins/transfers.rst
+
+Samples
+^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/worklists-plugin.rst
 
 
 .. _plugins-contributed:

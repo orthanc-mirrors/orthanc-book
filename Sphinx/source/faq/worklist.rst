@@ -20,11 +20,10 @@ from a direct access to some RIS database. It is thus up to the
 Orthanc user to provide the worklist generator that is best suited for
 her use.
 
-A :ref:`sample plugin <worklists-plugin>` is available in the source
-distribution of Orthanc to serve the worklists stored in some folder
-on the filesystem. This sample plugin mimics the behavior of the
-``wlmscpfs`` command-line tool from the `DCMTK software
-<https://support.dcmtk.org/docs/wlmscpfs.html>`__.
+A :ref:`worklists plugin <worklists-plugin-new>` is available to serve 
+the worklists stored in some folder on the filesystem or directly in the
+Orthanc database.  It also provides a REST API to create and manage 
+worklists.
 
 For more complex or integrated workflows where you must implement a
 custom MWL plugin, please check the `documentation of the part of the
