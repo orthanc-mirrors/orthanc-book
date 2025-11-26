@@ -702,11 +702,10 @@ Handling DICOM SCP requests (new in 3.2)
 Starting with release 3.2 of the Python plugin, it is possible to
 replace the C-FIND SCP and C-MOVE SCP of Orthanc by a Python
 script. This feature can notably be used to create a custom DICOM
-proxy. Here is a minimal example:
+proxy. Here is a minimal example for a C-Find handler:
 
-.. literalinclude:: python/dicom-find-move-scp.py
+.. literalinclude:: python/dicom-find-scp.py
                     :language: python
-
 
 .. highlight:: text
   
@@ -730,38 +729,19 @@ A more realistic Python script could for instance call the route
 Orthanc using ``orthanc.RestApiPost()``, in order to query the content
 a remote modality through a second C-FIND SCU request (this time
 issued by Orthanc as a SCU).
+
+Here is a minimal example for a C-Move handler:
+
+.. literalinclude:: python/dicom-move-scp.py
+                    :language: python
+
   
 The C-MOVE SCP can be invoked as follows::
   
   $ movescu localhost 4242 -aem TARGET -aec SOURCE -aet MOVESCU -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
 
-The C-MOVE request above would print the following information in the
-Orthanc logs::
 
-  W0610 18:30:36.840865 PluginsManager.cpp:168] C-MOVE request to be handled in Python: {
-      "AccessionNumber": "", 
-      "Level": "INSTANCE", 
-      "OriginatorAET": "MOVESCU", 
-      "OriginatorID": 1, 
-      "PatientID": "", 
-      "SOPInstanceUID": "", 
-      "SeriesInstanceUID": "", 
-      "SourceAET": "SOURCE", 
-      "StudyInstanceUID": "1.2.3.4", 
-      "TargetAET": "TARGET"
-  }
-
-It is now up to your Python callback to process the C-MOVE SCU request,
-for instance by calling the route ``/modalities/{...}/store`` in the
-:ref:`REST API <rest-store-scu>` of Orthanc using
-``orthanc.RestApiPost()``. It is highly advised to create a Python
-thread to handle the request, in order to avoid blocking Orthanc as
-much as possible.
-
-
-**Note:** In version 4.2, we have introduced a new version of the C-MOVE SCP 
-handler that can be registered through ``orthanc.RegisterMoveCallback2(CreateMoveCallback, GetMoveSizeCallback, ApplyMoveCallback, FreeMoveCallback)``.
-This `DICOM to DICOMweb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__ demonstrates how it can be used.
+**Note:** A full sample is available in this `DICOM to DICOMweb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__.
 
 
 .. _python_worklists:

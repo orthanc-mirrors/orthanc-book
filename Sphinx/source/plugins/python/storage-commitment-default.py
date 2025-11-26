@@ -3,10 +3,17 @@ import json
 
 # this plugins provides the same behavior as the default Orthanc implementation
 
-def StorageCommitmentScpCallback(jobId, transactionUid, sopClassUids, sopInstanceUids, remoteAet, calledAet):
+# new callback format from v 7.0; to use with RegisterStorageCommitmentScpCallback2
+def StorageCommitmentScpCallback(jobId, transactionUid, sopClassUids, sopInstanceUids, connection):
     # At the beginning of a Storage Commitment operation, you can build a custom data structure
     # that will be provided as the "data" argument in the StorageCommitmentLookup
     return None
+
+# old prototype to use with RegisterStorageCommitmentScpCallback
+# def StorageCommitmentScpCallback(jobId, transactionUid, sopClassUids, sopInstanceUids, remoteAet, calledAet):
+#     # At the beginning of a Storage Commitment operation, you can build a custom data structure
+#     # that will be provided as the "data" argument in the StorageCommitmentLookup
+#     return None
 
 
 # Reference: `StorageCommitmentScpJob::Lookup` in `OrthancServer/Sources/ServerJobs/StorageCommitmentScpJob.cpp`
@@ -31,4 +38,5 @@ def StorageCommitmentLookup(sopClassUid, sopInstanceUid, data):
 
     return reason
 
-orthanc.RegisterStorageCommitmentScpCallback(StorageCommitmentScpCallback, StorageCommitmentLookup)
+orthanc.RegisterStorageCommitmentScpCallback2(StorageCommitmentScpCallback, StorageCommitmentLookup)  # from v 7.0
+# orthanc.RegisterStorageCommitmentScpCallback(StorageCommitmentScpCallback, StorageCommitmentLookup)
