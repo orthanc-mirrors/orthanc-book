@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.9"
+      "version" : "1.12.10"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -4719,11 +4719,11 @@
                               "type" : "string"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -4811,11 +4811,11 @@
                               "type" : "string"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -4929,11 +4929,11 @@
                            "properties" : {
                               "ID" : {
                                  "description" : "Identifier of the query, to be used with `/queries/{id}`",
-                                 "type" : "object"
+                                 "type" : "string"
                               },
                               "Path" : {
                                  "description" : "Root path to the query in the REST API",
-                                 "type" : "object"
+                                 "type" : "string"
                               }
                            }
                         }
@@ -5063,7 +5063,7 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Port" : {
@@ -5071,7 +5071,7 @@
                               "type" : "number"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -5424,11 +5424,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -7274,11 +7274,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -8064,11 +8064,11 @@
                               "type" : "boolean"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -8244,6 +8244,7 @@
                               "connectivity-checks",
                               "delayed-deletion",
                               "dicom-web",
+                              "education",
                               "gdcm",
                               "housekeeper",
                               "indexer",
@@ -8326,7 +8327,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.20"
+                              "Version" : "1.21"
                            }
                         }
                      }
@@ -8822,11 +8823,11 @@
                               "type" : "boolean"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "RetrieveMethod" : {
@@ -9034,11 +9035,11 @@
                               "type" : "boolean"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "RetrieveMethod" : {
@@ -9349,11 +9350,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -11053,11 +11054,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -11944,7 +11945,7 @@
       "/storage-commitment/{id}/remove" : {
          "post" : {
             "deprecated" : false,
-            "description" : "Remove out of Orthanc, the DICOM instances that have been reported to have been properly received the storage commitment report whose identifier is provided in the URL. This is only possible if the `Status` of the storage commitment report is `Success`. https://orthanc.uclouvain.be/book/users/storage-commitment.html#removing-the-instances",
+            "description" : "Remove out of Orthanc, the DICOM instances that have been reported to have been properly received in the storage commitment report whose identifier is provided in the URL. This is only possible if the `Status` of the storage commitment report is `Success`. https://orthanc.uclouvain.be/book/users/storage-commitment.html#removing-the-instances",
             "parameters" : [
                {
                   "description" : "Identifier of the storage commitment report",
@@ -12225,11 +12226,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -13866,11 +13867,11 @@
                               "type" : "boolean"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Resources" : {
@@ -14159,11 +14160,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -14835,11 +14836,11 @@
                               "type" : "boolean"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "Remove" : {
@@ -15002,7 +15003,8 @@
                                  "HasExtendedChanges" : true,
                                  "HasExtendedFind" : true,
                                  "HasKeyValueStores" : true,
-                                 "HasQueues" : true
+                                 "HasQueues" : true,
+                                 "HasReserveQueueValue" : true
                               },
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
@@ -15031,7 +15033,7 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.9"
+                              "Version" : "1.12.10"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -15039,7 +15041,7 @@
                                  "type" : "number"
                               },
                               "Capabilities" : {
-                                 "description" : "Whether the back-end supports optional features like 'HasExtendedChanges', 'HasExtendedFind' (new in Orthanc 1.12.5) ",
+                                 "description" : "Whether the database back-end supports optional features like 'HasExtendedChanges', 'HasExtendedFind' (new in Orthanc 1.12.5), 'HasKeyValueStores', 'HasQueues' (new in Orthanc 1.12.8), and 'HasReserveQueueValue' (new in Orthanc 1.12.10)",
                                  "type" : "object"
                               },
                               "CheckRevisions" : {
@@ -15329,11 +15331,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -15521,11 +15523,11 @@
                               "type" : "number"
                            },
                            "Permissive" : {
-                              "description" : "If `true`, ignore errors during the individual steps of the job.",
+                              "description" : "If `true`, ignore errors during the individual steps of the job.  Default value is `false`.",
                               "type" : "boolean"
                            },
                            "Priority" : {
-                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.",
+                              "description" : "In asynchronous mode, the priority of the job. The higher the value, the higher the priority.  Default value is `0`",
                               "type" : "number"
                            },
                            "PrivateCreator" : {
@@ -16913,7 +16915,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_available_dicom_threads 4 1754933485145\northanc_available_http_threads_count 49 1754933683397\northanc_count_instances 2552 1754933691628\northanc_count_patients 8 1754933691628\northanc_count_series 26 1754933691628\northanc_count_studies 8 1754933691628\northanc_dicom_cache_count 1 1754933691628\northanc_dicom_cache_size_mb 0.502557755 1754933691628\northanc_disk_size_mb 983.235352 1754933691628\northanc_jobs_completed 0 1754933691628\northanc_jobs_failed 0 1754933691628\northanc_jobs_pending 0 1754933691628\northanc_jobs_running 0 1754933691628\northanc_jobs_success 0 1754933691628\northanc_last_change 6551 1754933691628\northanc_rest_api_active_requests 1 1754933683397\northanc_rest_api_duration_ms 650 1754933690143\northanc_storage_cache_count 400 1754933691629\northanc_storage_cache_hit_count 407 1754933691400\northanc_storage_cache_miss_count 400 1754933689980\northanc_storage_cache_size_mb 3.17403412 1754933691628\northanc_storage_read_bytes 3328216 1754933689980\northanc_storage_read_duration_ms 0 1754933683841\northanc_uncompressed_size_mb 983.235352 1754933691628\northanc_up_time_s 206 1754933691628\n"
+                        "example" : "orthanc_available_dicom_threads 4 1764171884784\northanc_available_http_threads_count 49 1764172093743\northanc_count_instances 2552 1764172100539\northanc_count_patients 8 1764172100539\northanc_count_series 26 1764172100539\northanc_count_studies 8 1764172100539\northanc_dicom_cache_count 167 1764172100539\northanc_dicom_cache_size_mb 83.9109268 1764172100539\northanc_disk_size_mb 983.235352 1764172100539\northanc_jobs_completed 0 1764172100539\northanc_jobs_failed 0 1764172100539\northanc_jobs_pending 0 1764172100539\northanc_jobs_running 0 1764172100539\northanc_jobs_success 0 1764172100539\northanc_last_change 6551 1764172100539\northanc_rest_api_active_requests 1 1764172093743\northanc_rest_api_duration_ms 604 1764172099042\northanc_storage_cache_count 408 1764172100539\northanc_storage_cache_hit_count 683 1764172100350\northanc_storage_cache_miss_count 408 1764172098910\northanc_storage_cache_size_mb 98.1075974 1764172100539\northanc_storage_read_bytes 102873274 1764172098911\northanc_storage_read_duration_ms 0 1764172094128\northanc_uncompressed_size_mb 983.235352 1764172100539\northanc_up_time_s 216 1764172100539\n"
                      }
                   },
                   "description" : ""
@@ -16932,7 +16934,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250811T173451",
+                        "example" : "20251126T154820",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16954,7 +16956,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20250811T173451",
+                        "example" : "20251126T154820",
                         "schema" : {
                            "description" : "The local time"
                         }

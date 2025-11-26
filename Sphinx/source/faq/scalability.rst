@@ -53,7 +53,7 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.12.9 at the time of
+* Make sure to use the latest release of Orthanc (1.12.10 at the time of
   writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
