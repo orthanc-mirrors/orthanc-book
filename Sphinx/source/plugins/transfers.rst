@@ -247,6 +247,9 @@ plugin. They are listed below::
       "Threads" : 6,             // Number of worker threads for one transfer
       "BucketSize" : 4096,       // Optimal size for a bucket (in KB)
       "CacheSize" : 128,         // Size of the memory cache to process DICOM files (in MB)
+                                 // This cache is used by the sender of a Push job and keeps
+                                 // a copy of compressed instances while they are being split
+                                 // in buckets and sent to the destination.
       "MaxPushTransactions" : 4, // Maximum number of simultaneous receptions in push mode
       "MaxHttpRetries" : 0,      // Maximum number of HTTP retries for one bucket
       "PeerConnectivityTimeout": 2, // HTTP Timeout (in seconds) used when checking if a remote peer has the transfer plugin enabled in /transfers/peers GET route
