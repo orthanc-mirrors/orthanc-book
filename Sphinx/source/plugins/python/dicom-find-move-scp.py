@@ -2,6 +2,9 @@ import json
 import orthanc
 import pprint
 
+# this file is not referenced anymore in the book but is still used by Sébastien's 
+# release procedure when releasing the python plugin -> don't remove !
+
 def OnFind(answers, query, issuerAet, calledAet):
     print('Received incoming C-FIND request from %s:' % issuerAet)
 
