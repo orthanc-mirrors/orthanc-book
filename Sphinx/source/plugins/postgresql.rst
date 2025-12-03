@@ -74,8 +74,8 @@ file::
       "HousekeepingInterval": 1,             // New in release 7.0
       "AllowInconsistentChildCounts": false, // New in release 7.2
       "UseDynamicConnectionPool": false,     // New in release 9.0
-      "Schema": "public",                    // New in release 9.0+ (not released yet)
-      "ApplicationName": "",                 // New in release 9.0+ (not released yet)
+      "Schema": "public",                    // New in release 10.0
+      "ApplicationName": "",                 // New in release 10.0
     },
     "Plugins" : [
       "/home/user/orthanc-databases/BuildPostgreSQL/libOrthancPostgreSQLIndex.so",
@@ -201,7 +201,7 @@ this behavior:
   and ``ReadCommitted`` that is available only from release 6.0 and is the default
   value starting from version 7.0.  See below.
 
-* ``Schema`` has been added in the release 9.0+ (not released yet).  By default,
+* ``Schema`` has been added in the release 10.0.  By default,
   Orthanc uses the ``public`` default schema.  If you wish to use another schema,
   you must create it before starting Orthanc; Orthanc will not create it.
   Note that Orthanc might try to install the ``pg_trgm`` extension in the ``public``
@@ -210,7 +210,7 @@ this behavior:
   Internals: plugin calls ``SET search_path TO $schema`` when opening a new connection
   to the DB.
 
-* ``ApplicationName`` has been added in the release 9.0+ (not released yet).
+* ``ApplicationName`` has been added in the release 10.0.
   This value is copied in the ``application_name`` argument in the connection string.  
   This name is used to identify the origin of queries in statistics and logs in 
   the PostgreSQL server.
@@ -338,13 +338,21 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 9.0                       | 6                                         |
 +---------------------------+-------------------------------------------+
+| 10.0                      | 10 (skipped 7, 8 and 9 to sync schema     |
+|                           | revision and plugin version)              |
++---------------------------+-------------------------------------------+
 
 
 Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
-from e.g plugin 3.3 to 9.0, Orthanc will apply all migration steps autonomously.
+from e.g plugin 3.3 to 10.0, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
+
+To downgrade from revision 10 to revision 6, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev10ToRev6.sql
+  $ psql -U postgres -f Rev10ToRev6.sql
 
 To downgrade from revision 6 to revision 5, one might run this procedure::
 
@@ -396,12 +404,14 @@ sur to select the correct DB and schema (By default, Orthanc is using the ``publ
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev3ToRev4.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev4ToRev5.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev5ToRev6.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev6ToRev10.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev1ToRev2.sql          # skip this step if you are already in Rev2 or higher
   $ psql -U postgres -f Rev2ToRev3.sql          # skip this step if you are already in Rev3 or higher
   $ psql -U postgres -f Rev3ToRev4.sql          # skip this step if you are already in Rev4 or higher
   $ psql -U postgres -f Rev4ToRev5.sql          # skip this step if you are already in Rev5 or higher
-  $ psql -U postgres -f Rev5ToRev6.sql
+  $ psql -U postgres -f Rev5ToRev6.sql          # skip this step if you are already in Rev6 or higher
+  $ psql -U postgres -f Rev6ToRev10.sql
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the ones performed automatically by Orthanc when it detects that an upgraded is required.
