@@ -10,6 +10,8 @@ is_worker_running = False
 def ProcessQueueMessages():
     global is_worker_running
 
+    orthanc.SetCurrentThreadName("QUEUE-PROC")
+
     while is_worker_running:
         # get messages from the queue named "instances-to-process" that is stored in Orthanc DB.
         # Get the message from the FRONT for FIFO and from the BACK for a LIFO
