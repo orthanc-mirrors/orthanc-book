@@ -424,7 +424,7 @@ for a total of 75 TB of data.  Note that, at revision 6, the DB size was around 
 - Upgrade from revision 2 to revision 3: around 7 minutes.
 - Upgrade from revision 3 to revision 5: immediate.
 - Upgrade from revision 5 to revision 6: around 22 minutes.
-- Then, after upgrading to revision 6, the ``DB HOUSEKEEIPING`` task needs to update some ``ChildCount`` entries.  
+- Then, after upgrading to revision 6, the ``DB HOUSEKEEPING`` task needs to update some ``ChildCount`` entries.  
   This is performed while Orthanc is running and accessible and 50 entries are updated every second and this must be performed
   for every series, study and patient.  With a DB with 350.000 studies, this took around 50 hours.
 
