@@ -121,6 +121,8 @@ Tools
    plugins/multitenant-dicom.rst
    plugins/serve-folders.rst
    plugins/transfers.rst
+   plugins/pixels-masker.rst
+
 
 Samples
 ^^^^^^^
