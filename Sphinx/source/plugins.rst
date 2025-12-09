@@ -170,6 +170,13 @@ C/C++ plugins
   `associated description
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthanc-mongodb>`__.
 
+* `JPEG-XL Support
+  <https://github.com/kaitakeradiology/orthanc-jxl/>`__ by Ryan
+  Walklin: This plugin brings support for the JPEG-XL transfer syntax
+  for decoding and transcoding. Check out the `initial announcement
+  <https://discourse.orthanc-server.org/t/jpeg-xl-support-transfer-syntax-decode-and-transcode-plugins/>`__.
+
+
 
 Python plugins
 ^^^^^^^^^^^^^^
