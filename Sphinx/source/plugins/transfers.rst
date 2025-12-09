@@ -253,7 +253,10 @@ plugin. They are listed below::
       "MaxPushTransactions" : 4, // Maximum number of simultaneous receptions in push mode
       "MaxHttpRetries" : 0,      // Maximum number of HTTP retries for one bucket
       "PeerConnectivityTimeout": 2, // HTTP Timeout (in seconds) used when checking if a remote peer has the transfer plugin enabled in /transfers/peers GET route
-      "PeerCommitTimeout": 600   // HTTP Timeout (in seconds) used when committing a push transaction (new in 1.6)
+      "PeerCommitTimeout": 600,  // HTTP Timeout (in seconds) used when committing a push transaction (new in 1.6)
+      "CommitThreadsCount": 1    // Number of threads used to perform the "commit" phase of a Push/Pull transfer.  
+                                 // A value > 1 is meaningful only if the storage is a distributed network storage (e.g object storage plugin).
+                                 // (new in 1.7)
     }
   }
 
