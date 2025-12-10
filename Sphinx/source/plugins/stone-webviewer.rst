@@ -151,17 +151,21 @@ FAQ
 
 - **Can I use the Stone Web viewer in a medical environment?**
 
-  The Stone Web viewer is not a Medical Device; it is not CE marked or FDA
-  approved. The Stone Web viewer is free and open-source software that
-  cannot be used for diagnostic or therapeutic purposes.
+  The Stone Web Viewer is not a medical device and is not CE-marked or
+  FDA-approved. The Stone Web viewer is free and open-source software
+  that should not be used for diagnostic or therapeutic purposes. Any
+  clinical use is undertaken solely at the discretion and
+  responsibility of the physician.
 
-  However, the viewer can be used as a communication tool that allows
-  researchers, teachers, technicians, medical physicists, general
-  practitioner or patients to visualize medical images for information
-  only.
+  The viewer may be used as a communication and visualization tool to
+  support activities such as research, education, technical analysis,
+  quality control, or general image review by physicians, scientists,
+  educators, technicians, medical physicists, general practitioners,
+  or patients.
 
-  Check out your local regulations to ensure you're using it in a
-  legal manner.
+  Please consult and comply with all applicable local laws and
+  regulations to ensure that your use of the software is lawful and
+  appropriate.
 
 - **Can the Stone Web viewer display DICOM-SR (structured reports)?**
 
