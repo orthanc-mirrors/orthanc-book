@@ -107,6 +107,8 @@ Sample configuration::
     "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
     "UseTransferManager": false,              // optional: see below (available from version 2.3.0)
+    "TransferPoolSize": 10,                   // optional: see below (available from version 2.3.0)
+    "TransferBufferSize": 5,                  // optional: see below (available from version 2.3.0)
     "EnableAwsSdkLogs": false,                // optional: include AWS SDK logs in Orthanc logs
     "StorageClass": "STANDARD"                // optional: see below (available from version 2.5.0)
   }
@@ -124,6 +126,7 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
 
 The **UseTransferManager** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
 This option was introduced in version 2.3.0.  If set to false (default value), the default "object" mode is used.
+The **TransferPoolSize** and **TransferBufferSize** configurations can be used to fine tune the Transfer Manager mode.
 
 The **StorageClass** configuration is used to select the `Storage Class <https://aws.amazon.com/s3/storage-classes/>`__ of the uploaded files.
 This option was introduced in version 2.5.0.  Allowed values are ``"STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", 
