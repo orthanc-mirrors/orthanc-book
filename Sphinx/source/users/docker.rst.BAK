@@ -20,4 +20,4 @@ Note that:
 * The build artifacts can be found in folder ``/root/orthanc/Build``.
 
 * This command launches the mainline version. To start a released version,
-  use e.g. ``jodogne/orthanc-debug:1.12.9``.
+  use e.g. ``jodogne/orthanc-debug:1.12.10``.

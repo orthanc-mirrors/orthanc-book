@@ -1,12 +1,23 @@
 .. _worklists-plugin:
 
 
-Sample Modality Worklists plugin
-================================
+Sample Modality Worklists plugin (legacy - for developers)
+==========================================================
+
+.. warning:: 
+  This page documents the ``Sample Modality Worklists plugin`` that
+  is provided with Orthanc since version 1.0.0 and is mainly a sample 
+  plugin to help developers write their own plugin.
+
+  Starting from November 2025, a more feature rich  :ref:`Worklists plugin <worklists-plugin-new>` is being
+  packaged independently.  This new plugin provides a REST API to create, delete and edit
+  worklists.  It also integrates nicely with :ref:`Orthanc Explorer 2 <orthanc-explorer-2>`
+  that provides a user interface to browse and create new worklists.
+
 
 .. contents::
 
-This page describes the **official sample plugin** turning Orthanc
+This page describes the **sample plugin** turning Orthanc
 into a server of DICOM worklists. General information about how
 Orthanc supports DICOM worklists through plugins is explained in the
 :ref:`FAQ <worklist>`.
@@ -44,7 +55,7 @@ Basic configuration
 1. First, generate the :ref:`default configuration of Orthanc <configuration>`.
 2. Then, modify the ``Plugins`` option to point to the folder containing
    the shared library of the plugin.
-3. Finally, create a section "ModalityWorklists" in the configuration
+3. Finally, create a section "Worklists" in the configuration
    file to configure the worklist server.
 
 A basic configuration would read as follows::
@@ -62,31 +73,7 @@ A basic configuration would read as follows::
                                 // adds an extra filtering based on the AET of the modality issuing the C-Find.
       "LimitAnswers": 0,        // Maximum number of answers to be returned (new in release 1.7.3)
 
-      "Directory": "./WorklistsDatabase",  // The folder from which worklists are read or, from 1.12.10, 
-                                           // where the worklists are created.
-                                           // Note, up to v 1.12.9, this configuration was named "Database"
-                                           // and this old naming is kept for backward compatibility reasons.
-                                           // Don't specify this option if you want to store worklists in the Orthanc DB.
-      // New options in v 1.12.10
-
-      "SaveInOrthancDatabase": false,      // If set to true and if the Orthanc Database supports Key-Value stores
-                                           // (PostgreSQL or SQLite), the worklists must be created through the Rest API
-                                           // and are stored in the Orthanc DB (new in v 1.12.10)
-      "SetStudyInstanceUidIfMissing": true,  // Add a StudyInstanceUID to the worklist if none is provided in the Rest API call to create it
-      "DeleteWorklistsOnStableStudy": true,   // Delete the worklist as soon as a a stable study is found with the StudyInstanceUID
-                                              // provided in the worklist.  
-                                              // Note that this check is performed in the Worklist Housekeeper thread.  The plugin
-                                              // does not react synchronously on the Stable Study event.
-                                              // This process is only available if you are providing a StudyInstanceUID
-                                              // or if you have set the 'SetStudyInstanceUIDIfMissing' configuration to true
-      "HousekeepingInterval": 60,            // Interval [in seconds] between 2 execution of the Worklist Housekeeper thread.
-
-      // New options in v 1.12.10 and only if SaveInOrthancDatabase is set to true.
-      
-      "DeleteWorklistsDelay": 24          // Delay [in hours] after which the worklist is deleted.
-                                           // Note that this check is performed in the Worklist Housekeeper thread.
-                                           // The plugin only deletes worklists that have been created through the Rest API.
-                                           // Set it to 0 if you don't want the plugin to delete worklists after a delay.
+      "Database": "./WorklistsDatabase",  // The folder from which worklists are read.
     }
   }
 
@@ -113,7 +100,7 @@ Tutorial
   
     "Worklists" : {
       "Enable": true,
-      "Directory": "WorklistsDatabase"  // Path to the folder with the worklist files  (note: up to v 1.12.9, use ``"Database"`` instead of ``"Directory"``)
+      "Database": "WorklistsDatabase"  // Path to the folder with the worklist files
     },
 
 - Add the plugin to the list of plugins to load (this is an example
@@ -154,52 +141,6 @@ Tutorial
   default DICOM TCP port of Orthanc.
 
 - ``findscu`` will display the matching worklists.
-
-
-How to create a worklist file using the Rest API - new in 1.12.10
------------------------------------------------------------------
-
-.. highlight:: bash
-
-Starting from Orthanc 1.12.10, the plugin provides a Rest API that can be
-used to create worklists.  For example::
-
-  $ curl --request POST http://localhost:8042/plugins/worklists/create \
-      --data '{
-                "Tags" : {
-                  "PatientID": "PID-45",
-                  "PatientName": "Toto",
-                  "ScheduledProcedureStepSequence" : [
-                    {
-                      "Modality": "US",
-                      "ScheduledProcedureStepStartDate": "20251014",
-                      "ScheduledProcedureStepDescription": "Description"
-                    }
-                  ]
-                }
-              }'
-
-In response, you'll get something like::
-  
-  {
-    "ID" : "5fdc7404-f9dc-4798-b6e1-8f715e2f9e71",
-    "Path" : "/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71"
-  }
-
-You can then check the content of the worklist by calling::
-
-  $ curl --request GET http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
-
-To delete it, call::
-
-  $ curl --request DELETE http://localhost:8042/plugins/worklists/5fdc7404-f9dc-4798-b6e1-8f715e2f9e71
-
-To browse all worklists, call::
-
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Simplify
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Short
-  $ curl --request GET http://localhost:8042/plugins/worklists/?format=Full
-
 
 
 How to create a worklist file using DCMTK

@@ -6,8 +6,12 @@ import os
 # https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.11.0/OrthancServer/Plugins/Samples/ModalityWorklists/WorklistsDatabase
 WORKLIST_DIR = '/tmp/WorklistsDatabase'
 
-def OnWorklist(answers, query, issuerAet, calledAet):
-    print('Received incoming C-FIND worklist request from %s:' % issuerAet)
+def OnWorklist(answers, query, connection):  # new from v 7.0: issuerAet and calledAet are available from the connection object
+    print('Received incoming C-FIND worklist request from %s %s %s:' % (connection.GetConnectionRemoteAet(), connection.GetConnectionRemoteIp(), connection.GetConnectionCalledAet()))
+
+    # old prototype still available
+    # def OnWorklist(answers, query, issuerAet, calledAet):
+    #     print('Received incoming C-FIND worklist request from %s:' % issuerAet)
 
     # Get a memory buffer containing the DICOM instance
     dicom = query.WorklistGetDicomQuery()
@@ -30,4 +34,5 @@ def OnWorklist(answers, query, issuerAet, calledAet):
                     orthanc.LogWarning('Matching worklist: %s' % path)
                     answers.WorklistAddAnswer(query, content)
 
-orthanc.RegisterWorklistCallback(OnWorklist)
+orthanc.RegisterWorklistCallback2(OnWorklist)  # new from v 7.0
+# orthanc.RegisterWorklistCallback(OnWorklist)

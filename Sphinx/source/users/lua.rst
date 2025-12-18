@@ -164,19 +164,19 @@ This implies that Lua scripting in Orthanc does not support any
 kind of concurrency but may also lead to some deadlocks.
 
 If a lua function (e.g. ``OnHeartBeat``) performs an HTTP call to an 
-external Rest API (e.g. ``http://myserver.com/orthanc_is_alive.php``)
-which, in turn, calls the Orthanc Rest API (e.g. call ``http://orthanc:8042/system``),
+external REST API (e.g. ``http://myserver.com/orthanc_is_alive.php``)
+which, in turn, calls the Orthanc REST API (e.g. call ``http://orthanc:8042/system``),
 odds are high that you meet a deadlock because Orthanc, when handling a
-Rest API calls, may try to execute some Lua callbacks (e.g. ``IncomingHttpRequestFilter``) 
+REST API calls, may try to execute some Lua callbacks (e.g. ``IncomingHttpRequestFilter``) 
 while the Lua context is still blocked inside the ``OnHeartBeat`` function.
 
 To avoid deadlocks, always make sure to avoid such back-and-forth communications
 or make sure they happen asynchronously: your webservice should call the
-Orthanc Rest API after it has returned from the endpoint called by
+Orthanc REST API after it has returned from the endpoint called by
 ``OnHeartBeat``.
 
 Note that these deadlocks won't happen when a lua function calls its own
-Orthanc Rest API using the ``RestApiGet``, ``RestApiPost``, ... functions.
+Orthanc REST API using the ``RestApiGet``, ``RestApiPost``, ... functions.
 
 
 .. _lua-rest:
@@ -591,7 +591,7 @@ but will not modify the list of tags that Orthanc will return.
 
 Also note that the ``IncomingFindRequestFilter`` callback is not applied to
 C-Find requests targeting :ref:`modality worklists
-<worklists-plugin>`. Since Orthanc 1.4.2, the corresponding
+<worklists-plugin-new>`. Since Orthanc 1.4.2, the corresponding
 ``IncomingWorklistRequestFilter`` callback can be used to sanitize
 C-FIND requests against worklists::
 

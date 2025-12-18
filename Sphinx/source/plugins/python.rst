@@ -30,7 +30,7 @@ If you need to develop a complex plugin, it is advised to split it in
 Python plugins have access to more features and a more consistent SDK
 than :ref:`Lua scripts <lua>`. The largest part of the Python API is
 automatically generated from the `Orthanc plugin SDK in C
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.9/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.10/OrthancServer/Plugins/Include/orthanc/OrthancCPlugin.h>`__
 using the `Clang <https://en.wikipedia.org/wiki/Clang>`__ compiler
 front-end.
 
@@ -373,10 +373,10 @@ When calling the REST API from a python plugin, you may use e.g.
 call ``RestApiPostAfterPlugin`` to call the REST API from plugins.
 
 
-Note however, that, as of Orthanc 1.12.9, the Orthanc plugin SDK
+Note however, that, as of Orthanc 1.12.10, the Orthanc plugin SDK
 does not support multiple plugins implementing the same route.
 Orthanc will actually accept e.g a Python plugin that overrides
-a DICOMWeb route but it is impossible to tell which route
+a DICOMweb route but it is impossible to tell which route
 will be called in the end since this depends on the registration 
 order of the plugins that is not deterministic.
 
@@ -702,11 +702,10 @@ Handling DICOM SCP requests (new in 3.2)
 Starting with release 3.2 of the Python plugin, it is possible to
 replace the C-FIND SCP and C-MOVE SCP of Orthanc by a Python
 script. This feature can notably be used to create a custom DICOM
-proxy. Here is a minimal example:
+proxy. Here is a minimal example for a C-Find handler:
 
-.. literalinclude:: python/dicom-find-move-scp.py
+.. literalinclude:: python/dicom-find-scp.py
                     :language: python
-
 
 .. highlight:: text
   
@@ -730,38 +729,19 @@ A more realistic Python script could for instance call the route
 Orthanc using ``orthanc.RestApiPost()``, in order to query the content
 a remote modality through a second C-FIND SCU request (this time
 issued by Orthanc as a SCU).
+
+Here is a minimal example for a C-Move handler:
+
+.. literalinclude:: python/dicom-move-scp.py
+                    :language: python
+
   
 The C-MOVE SCP can be invoked as follows::
   
   $ movescu localhost 4242 -aem TARGET -aec SOURCE -aet MOVESCU -S -k QueryRetrieveLevel=IMAGE -k StudyInstanceUID=1.2.3.4
 
-The C-MOVE request above would print the following information in the
-Orthanc logs::
 
-  W0610 18:30:36.840865 PluginsManager.cpp:168] C-MOVE request to be handled in Python: {
-      "AccessionNumber": "", 
-      "Level": "INSTANCE", 
-      "OriginatorAET": "MOVESCU", 
-      "OriginatorID": 1, 
-      "PatientID": "", 
-      "SOPInstanceUID": "", 
-      "SeriesInstanceUID": "", 
-      "SourceAET": "SOURCE", 
-      "StudyInstanceUID": "1.2.3.4", 
-      "TargetAET": "TARGET"
-  }
-
-It is now up to your Python callback to process the C-MOVE SCU request,
-for instance by calling the route ``/modalities/{...}/store`` in the
-:ref:`REST API <rest-store-scu>` of Orthanc using
-``orthanc.RestApiPost()``. It is highly advised to create a Python
-thread to handle the request, in order to avoid blocking Orthanc as
-much as possible.
-
-
-**Note:** In version 4.2, we have introduced a new version of the C-MOVE SCP 
-handler that can be registered through ``orthanc.RegisterMoveCallback2(CreateMoveCallback, GetMoveSizeCallback, ApplyMoveCallback, FreeMoveCallback)``.
-This `DICOM to DICOMWeb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__ demonstrates how it can be used.
+**Note:** A full sample is available in this `DICOM to DICOMweb proxy sample project <https://github.com/orthanc-team/dicom-dicomweb-proxy/blob/main/proxy.py>`__.
 
 
 .. _python_worklists:
@@ -962,7 +942,7 @@ As can be seen in this sample:
 
 * The call to ``orthanc.ExtendOrthancExplorer()`` installs the button
   with JavaScript code that uses the `jQuery Mobile framework
-  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.9,
+  <https://demos.jquerymobile.com/1.1.0/>`__ (as of Orthanc 1.12.10,
   version 1.1.0 of jQuery Mobile is used in Orthanc Explorer).
 
 * If clicking on the button, a GET call to the REST API is made to
@@ -1011,7 +991,7 @@ implementing a REST API route:
 .. _python_set_stable_status:
 
 Changing the Stable status of a resource (new in 6.0)
-...................................
+.....................................................
 
 Starting from v 6.0, it is possible to change the ``Stable`` status of a 
 resource without waiting for the stabilization time defined by the ``StableAge``
@@ -1022,7 +1002,7 @@ and python plugins that are listening on the ``STABLE_STUDY/STABLE_SERIES/..`` e
                     :language: python
 
 Using Key-Value Stores and Queues (new in 6.0)
-...................................
+..............................................
 
 Starting from v 6.0, it is possible to store messages in queues that are stored
 in the Orthanc DB or to store values in Key-Value Stores that are also stored in DB.  

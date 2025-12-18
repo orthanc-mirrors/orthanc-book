@@ -29,7 +29,7 @@ with Orthanc (do not hesitate to `warn us
 * `Aeskulap <https://github.com/pipelka/aeskulap>`__.
 * `Weasis
   <https://nroduit.github.io/en/basics/customize/integration/#orthanc-web-server>`__
-  (through the :ref:`DICOM web plugin <dicomweb>`). The Orthanc Users
+  (through the :ref:`DICOMweb plugin <dicomweb>`). The Orthanc Users
   discussion group contains a `reportedly working configuration
   <https://groups.google.com/g/orthanc-users/c/lFa47FOL-Ok/m/Lu_QKIN8BAAJ>`__.
 * `Oviyam <http://oviyam.raster.in/>`__ (`instructions are available

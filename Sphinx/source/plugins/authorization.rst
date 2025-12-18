@@ -535,7 +535,7 @@ Starting from Orthanc 1.5.8, you can pass authorization tokens in the
 url search params when opening the Orthanc explorer, i.e.
 ``http://localhost:8042/app/explorer.html?token=1234``.  This token
 will be included as an HTTP header in every request sent to the
-Orthanc Rest API. It will also be included in the URL search params
+Orthanc REST API. It will also be included in the URL search params
 when opening the Orthanc or :ref:`Osimis Web viewer
 <osimis_webviewer>`.
 

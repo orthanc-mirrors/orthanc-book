@@ -61,6 +61,7 @@ Specific FAQs
    faq/orthanc-ids.rst
    faq/main-dicom-tags.rst
    faq/versioning.rst
+   faq/db-benchmark.rst
    faq/debian-daemon.rst
    faq/redhat.rst
    faq/apache.rst

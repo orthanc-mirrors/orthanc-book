@@ -138,7 +138,7 @@ all series are supposed to share the same ``StudyDescription``.  But, adding
 ``SeriesDescription`` at ``Study`` level will lead to unpredictible results.
 Orthanc will **not** check that the tags levels are adequate. 
 
-*Note:* As of Orthanc 1.12.9, it is not possible to store Private DICOM tags
+*Note:* As of Orthanc 1.12.10, it is not possible to store Private DICOM tags
 in the ``ExtraMainDicomTags``.
 
 
@@ -164,13 +164,13 @@ These warnings can be enabled/disabled through this configuration::
     }
 
 
-DICOMWeb
+DICOMweb
 ========
 
 Below is a sample configuration that is well suited to
-optimize DICOMWeb routes in general in case you are using the 
+optimize DICOMweb routes in general in case you are using the 
 ``MainDicomTags`` metadata mode.  However, note that, from version
-1.15 of the :ref:`DICOMWeb plugin <dicomweb-server-metadata-config>`, you should favor the ``Full`` mode::
+1.15 of the :ref:`DICOMweb plugin <dicomweb-server-metadata-config>`, you should favor the ``Full`` mode::
 
     {
         "ExtraMainDicomTags" : {

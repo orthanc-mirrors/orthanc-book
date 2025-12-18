@@ -89,7 +89,7 @@ When generating archives asynchronously, you should take care of
 the ``MediaArchiveSize`` configuration that defines the maximum
 number of ZIP/media archives that are maintained by Orthanc, as a 
 response to the asynchronous creation of archive. As of Orthanc
-1.12.9, this value is ``1`` by default.
+1.12.10, this value is ``1`` by default.
 
 .. _jobs-monitoring:
 
@@ -139,7 +139,7 @@ The ``State`` field can be:
   ``ErrorCode`` and ``ErrorDescription`` fields for more information.
 * ``Paused``: The job has been paused.
 * ``Retry``: The job has failed internally, and has been scheduled for
-  re-submission after a delay. As of Orthanc 1.12.9, this feature is not
+  re-submission after a delay. As of Orthanc 1.12.10, this feature is not
   used by any type of job.
 
 In order to wait for the end of an asynchronous call, the caller will
@@ -148,7 +148,7 @@ calls), waiting for the ``State`` field to become ``Success`` or
 ``Failure``.
 
 Note that the `integration tests of Orthanc
-<https://orthanc.uclouvain.be/hg/orthanc-tests/file/Orthanc-1.12.9/Tests/Toolbox.py>`__
+<https://orthanc.uclouvain.be/hg/orthanc-tests/file/Orthanc-1.12.10/Tests/Toolbox.py>`__
 give an example about how to monitor a job in Python using the REST
 API (cf. function ``MonitorJob()``).
 
@@ -221,7 +221,7 @@ archive, then to download it locally::
 Note how we retrieve the content of the archive by accessing the
 ``archive`` output of the job (check out the virtual method
 ``IJob::GetOutput()`` from the `source code
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.9/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.10/OrthancServer/Sources/ServerJobs/ArchiveJob.cpp>`__
 of Orthanc).
 
 Here is the corresponding sequence of commands to generate a DICOMDIR
@@ -230,7 +230,7 @@ media::
   $ curl http://localhost:8042/studies/27f7126f-4f66fb14-03f4081b-f9341db2-53925988/media -d '{"Asynchronous":true}'
   $ curl http://localhost:8042/jobs/6332be8a-0052-44fb-8cc2-ac959aeccad9/archive > a.zip
 
-As of Orthanc 1.12.9, only the creation of a ZIP or a DICOMDIR archive
+As of Orthanc 1.12.10, only the creation of a ZIP or a DICOMDIR archive
 produces such "outputs".
 
 
@@ -427,85 +427,118 @@ the ``/tools/metrics-prometheus`` URI of the REST API. For instance::
 The metrics only appear in the response once they have been recorded at least once.  Furthermore, some plugins
 may add their own metrics dynamically.
 
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| Metrics                                                | Meaning                                                                     | Origin                                                         |
-+========================================================+=============================================================================+================================================================+
-| ``orthanc_last_change``                                | The current id of the last `change` event                                   | Orthanc                                                        |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_memory_trimming_duration_ms``                | The max duration [ms] over the last 10 seconds of the last memory           | Orthanc                                                        |
-|                                                        | trimming duration                                                           |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_store_dicom_duration_ms``                    | The max duration [ms] over the last 10 seconds needed to store a            | Orthanc                                                        |
-|                                                        | DICOM file (received from HTTP, DICOM protocol or from a plugin)            |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_up_time_s``                                  | The time [s] spent since Orthanc started                                    | Orthanc                                                        |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_count_instances``                            | The number of instances stored in DB                                        | Orthanc DB                                                     |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_count_series``                               | The number of series stored in DB                                           | Orthanc DB                                                     |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_count_studies``                              | The number of studies stored in DB                                          | Orthanc DB                                                     |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_count_patients``                             | The number of patients stored in DB                                         | Orthanc DB                                                     |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_dicom_cache_count``                          | The number of DICOM files currently stored in the DICOM cache               | Orthanc DICOM cache                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_dicom_cache_size_mb``                        | The size [MB] of all DICOM files currently stored in the DICOM cache        | Orthanc DICOM cache                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_available_dicom_threads``                    | The min number of DICOM threads count available over the last 10            | Orthanc DICOM protocol server                                  |
-|                                                        | seconds                                                                     |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_find_scp_duration_ms``                       | The max duration [ms] over the last 10 seconds of a C-Find SCP execution    | Orthanc DICOM protocol server                                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_get_scp_duration_ms``                        | The max duration [ms] over the last 10 seconds of a C-Get SCP execution     | Orthanc DICOM protocol server                                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_move_scp_duration_ms``                       | The max duration [ms] over the last 10 seconds of a C-Move SCP execution    | Orthanc DICOM protocol server                                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_available_http_threads``                     | The min number of HTTP threads count available over the last 10             | Orthanc HTTP server                                            |
-|                                                        | seconds.  This is counting only the threads used by the external HTTP       |                                                                |
-|                                                        | server while ``orthanc_rest_api_active_requests`` also counts the internal  |                                                                |
-|                                                        | requests e.g. made by a plugin                                              |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_rest_api_active_requests``                   | The maximum number of concurrent HTTP requests being handled by the         | Orthanc HTTP server                                            |
-|                                                        | HTTP server over the last 10 seconds.                                       |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_rest_api_duration_ms``                       | The max duration [ms] over the last 10 seconds required to handle           | Orthanc HTTP server                                            |
-|                                                        | an HTTP request                                                             |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_jobs_pending``                               | The current number of jobs whose execution is currently pending             | Orthanc Jobs engine                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_jobs_running``                               | The current number of jobs currently being executed                         | Orthanc Jobs engine                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_jobs_completed``                             | The current number of jobs completed (failed or success)                    | Orthanc Jobs engine                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_jobs_success``                               | The current number of jobs that have succeeded                              | Orthanc Jobs engine                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_jobs_failed``                                | The current number of jobs that have failed                                 | Orthanc Jobs engine                                            |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_disk_size_mb``                               | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc Storage                                                |
-|                                                        | (possibly compressed size)                                                  |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_uncompressed_size_mb``                       | The size [MB] of all DICOM files currently stored in Orthanc                | Orthanc Storage                                                |
-|                                                        | (uncompressed size)                                                         |                                                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_cache_count``                        | The number of files currently stored in the Storage cache                   | Orthanc Storage cache                                          |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_cache_size_mb``                      | The size [MB] of all files currently stored in the Storage cache            | Orthanc Storage cache                                          |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_create_duration_ms``                 | The max duration [ms] over the last 10 seconds to save a file to disk       | Orthanc Storage (default file system storage)                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_read_duration_ms``                   | The max duration [ms] over the last 10 seconds to read a file from disk     | Orthanc Storage (default file system storage)                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_remove_duration_ms``                 | The max duration [ms] over the last 10 seconds to delete a file from disk   | Orthanc Storage (default file system storage)                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_read_bytes``                         | The total number of bytes read from disk since Orthanc started              | Orthanc Storage (default file system storage)                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_storage_written_bytes``                      | The total number of bytes written to disk since Orthanc started             | Orthanc Storage (default file system storage)                  |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
-| ``orthanc_index_active_connections_count``             | The the current number of active connections to the PostgreSQL server.      | Orthanc PostgreSQL Index plugin                                |
-+--------------------------------------------------------+-----------------------------------------------------------------------------+----------------------------------------------------------------+
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| Metrics                                                     | Meaning                                                                           | Origin                                                               |
++=============================================================+===================================================================================+======================================================================+
+| ``orthanc_last_change``                                     | The current id of the last `change` event                                         | Orthanc                                                              |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_memory_trimming_duration_ms``                     | The max duration [ms] over the last 10 seconds of the last memory                 | Orthanc                                                              |
+|                                                             | trimming duration                                                                 |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_store_dicom_duration_ms``                         | The max duration [ms] over the last 10 seconds needed to store a                  | Orthanc                                                              |
+|                                                             | DICOM file (received from HTTP, DICOM protocol or from a plugin)                  |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_up_time_s``                                       | The time [s] spent since Orthanc started                                          | Orthanc                                                              |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_count_instances``                                 | The number of instances stored in DB                                              | Orthanc DB                                                           |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_count_series``                                    | The number of series stored in DB                                                 | Orthanc DB                                                           |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_count_studies``                                   | The number of studies stored in DB                                                | Orthanc DB                                                           |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_count_patients``                                  | The number of patients stored in DB                                               | Orthanc DB                                                           |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_dicom_cache_count``                               | The number of DICOM files currently stored in the DICOM cache                     | Orthanc DICOM cache                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_dicom_cache_size_mb``                             | The size [MB] of all DICOM files currently stored in the DICOM cache              | Orthanc DICOM cache                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_available_dicom_threads``                         | The min number of DICOM threads count available over the last 10                  | Orthanc DICOM protocol server                                        |
+|                                                             | seconds                                                                           |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_find_scp_duration_ms``                            | The max duration [ms] over the last 10 seconds of a C-Find SCP execution          | Orthanc DICOM protocol server                                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_get_scp_duration_ms``                             | The max duration [ms] over the last 10 seconds of a C-Get SCP execution           | Orthanc DICOM protocol server                                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_move_scp_duration_ms``                            | The max duration [ms] over the last 10 seconds of a C-Move SCP execution          | Orthanc DICOM protocol server                                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_available_http_threads``                          | The min number of HTTP threads count available over the last 10                   | Orthanc HTTP server                                                  |
+|                                                             | seconds.  This is counting only the threads used by the external HTTP             |                                                                      |
+|                                                             | server while ``orthanc_rest_api_active_requests`` also counts the internal        |                                                                      |
+|                                                             | requests e.g. made by a plugin                                                    |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_rest_api_active_requests``                        | The maximum number of concurrent HTTP requests being handled by the               | Orthanc HTTP server                                                  |
+|                                                             | HTTP server over the last 10 seconds.                                             |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_rest_api_duration_ms``                            | The max duration [ms] over the last 10 seconds required to handle                 | Orthanc HTTP server                                                  |
+|                                                             | an HTTP request                                                                   |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_jobs_pending``                                    | The current number of jobs whose execution is currently pending                   | Orthanc Jobs engine                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_jobs_running``                                    | The current number of jobs currently being executed                               | Orthanc Jobs engine                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_jobs_completed``                                  | The current number of jobs completed (failed or success)                          | Orthanc Jobs engine                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_jobs_success``                                    | The current number of jobs that have succeeded                                    | Orthanc Jobs engine                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_jobs_failed``                                     | The current number of jobs that have failed                                       | Orthanc Jobs engine                                                  |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_disk_size_mb``                                    | The size [MB] of all DICOM files currently stored in Orthanc                      | Orthanc Storage                                                      |
+|                                                             | (possibly compressed size)                                                        |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_uncompressed_size_mb``                            | The size [MB] of all DICOM files currently stored in Orthanc                      | Orthanc Storage                                                      |
+|                                                             | (uncompressed size)                                                               |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_cache_count``                             | The number of files currently stored in the Storage cache                         | Orthanc Storage cache                                                |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_cache_size_mb``                           | The size [MB] of all files currently stored in the Storage cache                  | Orthanc Storage cache                                                |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_create_duration_ms``                      | The max duration [ms] over the last 10 seconds to save a file to disk             | Orthanc Storage (default file system storage)                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_read_duration_ms``                        | The max duration [ms] over the last 10 seconds to read a file from disk           | Orthanc Storage (default file system storage)                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_remove_duration_ms``                      | The max duration [ms] over the last 10 seconds to delete a file from disk         | Orthanc Storage (default file system storage)                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_read_bytes``                              | The total number of bytes read from disk since Orthanc started                    | Orthanc Storage (default file system storage)                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_storage_written_bytes``                           | The total number of bytes written to disk since Orthanc started                   | Orthanc Storage (default file system storage)                        |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_index_active_connections_count``                  | The current number of active connections to the PostgreSQL server.                | Orthanc PostgreSQL Index plugin                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_aborted_push_count``                    | The number of push transfers that have been discarded without being               | Transfers plugin                                                     |
+|                                                             | committed (on the receiver side)                                                  |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_created_push_count``                    | The number of push transfers that have been created                               | Transfers plugin                                                     |
+|                                                             | (on the receiver side)                                                            |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_committed_push_count``                  | The number of push transfers that have been committed                             | Transfers plugin                                                     |
+|                                                             | (on the receiver side)                                                            |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_available_push_count``                  | The number of push transfers that are available                                   | Transfers plugin                                                     |
+|                                                             | out of the ``MaxPushTransactions``.  (on the receiver side)                       |                                                                      |
+|                                                             | Note: aborted transfers might consume available "slots" but will be pushed        |                                                                      |
+|                                                             | out when room is required for a new active transfer.                              |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_cache_hit_count``                       | The number of times the cache could be used to transfer an instance.              | Transfers plugin                                                     |
+|                                                             | (on the sender side)                                                              |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_cache_miss_count``                      | The number of times the cache could not be used to transfer an instance.          | Transfers plugin                                                     |
+|                                                             | (on the sender side)                                                              |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_used_cache_size``                       | The current size [bytes] of cache.                                                | Transfers plugin                                                     |
+|                                                             | (on the sender side)                                                              |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_push_total_received_bytes_count``       | The total number of bytes received during push transfers                          | Transfers plugin                                                     |
+|                                                             | (on the receiver side).  The bytes are added just at the beginning of the commit. |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_push_total_time_spent_in_commit_ms``    | The total time [ms] spent in push transfers commit operations.                    | Transfers plugin                                                     |
+|                                                             | (on the receiver side).  The value is updated at the end of the commit.           |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
+| ``orthanc_transfers_push_total_time_spent_in_reception_ms`` | The total time [ms] spent in push transfers reception, before the                 | Transfers plugin                                                     |
+|                                                             | commit operation. (on the receiver side).  The value is updated at the beginning  |                                                                      |
+|                                                             | of the commit.                                                                    |                                                                      |
++-------------------------------------------------------------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------+
 
-
+ 
 
 .. highlight:: bash
 

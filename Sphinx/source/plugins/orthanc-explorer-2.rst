@@ -105,7 +105,7 @@ DICOM Modifications
 
 Since version 0.6.0, it is possible to edit some of the DICOM Tags directly in the User Interface.
 :ref:`DICOM Modification <anonymization>` is quite a complex topic that is provided by Orthanc
-Rest API.  The Orthanc Explorer 2 User Interface aims at simplifying its use but is also limiting
+REST API.  The Orthanc Explorer 2 User Interface aims at simplifying its use but is also limiting
 it to common use cases mainly related to correcting errors in Patient and Study DICOM Tags.
 
 At study level, it is possible to:

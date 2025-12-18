@@ -18,7 +18,7 @@ def OnInstances(output, uri, **request):
         instances = orthanc.RestApiGet(uri)
         output.AnswerBuffer(instances, "application/json")
 
-# reimplement a DICOMWeb /studies/../metadata route
+# reimplement a DICOMweb /studies/../metadata route
 def OnDicomWebStudiesMetadata(output, uri, **request):
     
     orthanc.LogWarning("My DICOMWEB /studies/../metadata")
@@ -39,8 +39,8 @@ def OnDicomWebStudiesMetadata(output, uri, **request):
 orthanc.RegisterRestCallback('/instances', OnInstances)
 
 # The code below should be avoided since you actually don't know which route will finally be called:
-# the one from the DICOMWeb plugin or the one from this python plugin
+# the one from the DICOMweb plugin or the one from this python plugin
 # orthanc.RegisterRestCallback('/dicom-web/studies/(.*)/metadata', OnDicomWebStudiesMetadata)
 
-# Therefore, you should use another base route to differentiate it from the DICOMWeb plugin route
+# Therefore, you should use another base route to differentiate it from the DICOMweb plugin route
 orthanc.RegisterRestCallback('/my-dicom-web/studies/(.*)/metadata', OnDicomWebStudiesMetadata)

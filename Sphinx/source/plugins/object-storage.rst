@@ -107,6 +107,8 @@ Sample configuration::
     "StorageEncryption" : {},                 // optional: see the section related to encryption
     "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
     "UseTransferManager": false,              // optional: see below (available from version 2.3.0)
+    "TransferPoolSize": 10,                   // optional: see below (available from version 2.3.0)
+    "TransferBufferSize": 5,                  // optional: see below (available from version 2.3.0)
     "EnableAwsSdkLogs": false,                // optional: include AWS SDK logs in Orthanc logs
     "StorageClass": "STANDARD"                // optional: see below (available from version 2.5.0)
   }
@@ -124,6 +126,7 @@ The **EndPoint** configuration is used when accessing an S3 compatible cloud pro
 
 The **UseTransferManager** configuration is used to select the `Transfer Manager <https://docs.aws.amazon.com/sdk-for-cpp/v1/developer-guide/examples-s3-transfermanager.html>`__ mode in the AWS SDK client.
 This option was introduced in version 2.3.0.  If set to false (default value), the default "object" mode is used.
+The **TransferPoolSize** and **TransferBufferSize** configurations can be used to fine tune the Transfer Manager mode.
 
 The **StorageClass** configuration is used to select the `Storage Class <https://aws.amazon.com/s3/storage-classes/>`__ of the uploaded files.
 This option was introduced in version 2.5.0.  Allowed values are ``"STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", 
@@ -264,7 +267,7 @@ system for improved performances e.g when before opening the study in a viewer.
 When the ``HybridMode`` is set to ``WriteToObjectStorage``, it is useful to move file from the
 file system to the object storage to perform a full data migration to object-storage.
 
-To move files from one storage to the other, you should call the plugin Rest API::
+To move files from one storage to the other, you should call the plugin REST API::
 
     $ curl -X POST http://localhost:8042/move-storage \
       --data '{

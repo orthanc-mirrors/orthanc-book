@@ -44,7 +44,7 @@ For GNU/Linux users, the Stone Web viewer is part of the
 The compilation process is quite complex since it requires using the
 `Emscripten <https://emscripten.org/>`__ compiler toolchain. The full
 build instructions are available in the `source code
-<https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.6/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
+<https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-3.0/Applications/StoneWebViewer/WebAssembly/NOTES.txt>`__.
 
 
 Usage
@@ -103,11 +103,11 @@ Advanced options
 
 * The configuration of the Web viewer can be fine-tuned by adapting
   some **advanced options** in the `configuration file
-  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.6/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-3.0/Applications/StoneWebViewer/WebApplication/configuration.json>`__.
 
 * The source distribution of the Stone Web viewer contains a
   `NOTES.txt file
-  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.6/Applications/StoneWebViewer/NOTES.txt>`__
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-3.0/Applications/StoneWebViewer/NOTES.txt>`__
   that discusses the differences with the :ref:`Osimis Web viewer
   <osimis_webviewer>` as well as **advanced features** of the software
   (opening multiple studies, authorization, display of OsiriX
@@ -151,17 +151,21 @@ FAQ
 
 - **Can I use the Stone Web viewer in a medical environment?**
 
-  The Stone Web viewer is not a Medical Device; it is not CE marked or FDA
-  approved. The Stone Web viewer is free and open-source software that
-  cannot be used for diagnostic or therapeutic purposes.
+  The Stone Web Viewer is not a medical device and is not CE-marked or
+  FDA-approved. The Stone Web viewer is free and open-source software
+  that should not be used for diagnostic or therapeutic purposes. Any
+  clinical use is undertaken solely at the discretion and
+  responsibility of the physician.
 
-  However, the viewer can be used as a communication tool that allows
-  researchers, teachers, technicians, medical physicists, general
-  practitioner or patients to visualize medical images for information
-  only.
+  The viewer may be used as a communication and visualization tool to
+  support activities such as research, education, technical analysis,
+  quality control, or general image review by physicians, scientists,
+  educators, technicians, medical physicists, general practitioners,
+  or patients.
 
-  Check out your local regulations to ensure you're using it in a
-  legal manner.
+  Please consult and comply with all applicable local laws and
+  regulations to ensure that your use of the software is lawful and
+  appropriate.
 
 - **Can the Stone Web viewer display DICOM-SR (structured reports)?**
 
@@ -226,7 +230,7 @@ FAQ
 - **How can I migrate from Osimis Web viewer to Stone Web viewer?**
 
   Full instructions are provided in the `source distribution
-  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-2.6/Applications/StoneWebViewer/NOTES.txt>`__.
+  <https://orthanc.uclouvain.be/hg/orthanc-stone/file/StoneWebViewer-3.0/Applications/StoneWebViewer/NOTES.txt>`__.
 
 - **What are the future plans?**
 

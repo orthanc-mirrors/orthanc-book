@@ -68,7 +68,7 @@ Standards
    :maxdepth: 1
 
    plugins/dicomweb.rst
-   plugins/worklists-plugin.rst
+   plugins/worklists-plugin-new.rst
    plugins/wsi.rst
    plugins/neuro.rst
    plugins/stl.rst
@@ -121,6 +121,16 @@ Tools
    plugins/multitenant-dicom.rst
    plugins/serve-folders.rst
    plugins/transfers.rst
+   plugins/pixels-masker.rst
+
+
+Samples
+^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   plugins/worklists-plugin.rst
 
 
 .. _plugins-contributed:
@@ -159,6 +169,13 @@ C/C++ plugins
   <https://github.com/Doc-Cirrus/orthanc-mongodb>`__ and the
   `associated description
   <https://github.com/jodogne/OrthancContributed/tree/master/Plugins/orthanc-mongodb>`__.
+
+* `JPEG-XL Support
+  <https://github.com/kaitakeradiology/orthanc-jxl/>`__ by Ryan
+  Walklin: This plugin brings support for the JPEG-XL transfer syntax
+  for decoding and transcoding. Check out the `initial announcement
+  <https://discourse.orthanc-server.org/t/jpeg-xl-support-transfer-syntax-decode-and-transcode-plugins/>`__.
+
 
 
 Python plugins

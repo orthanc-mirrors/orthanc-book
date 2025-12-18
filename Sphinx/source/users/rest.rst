@@ -98,7 +98,7 @@ significantly `reduce the execution time of POST requests
     $ curl -X POST -H "Expect:" http://localhost:8042/instances --data-binary @CT.X.1.2.276.0.7230010.dcm
 
 The code distribution of Orthanc contains a `sample Python script
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.9/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.10/OrthancServer/Resources/Samples/ImportDicomFiles/ImportDicomFiles.py>`__
 that recursively upload the content of some folder into Orthanc using
 the REST API::
 
@@ -110,7 +110,7 @@ provides more features than ``ImportDicomFiles.py``. It can notably
 import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2`` archives
 without having to uncompress them first. It also provides more
 comprehensive command-line options. `Check this script out
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.9/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.10/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
     
 
 .. highlight:: perl
@@ -1041,7 +1041,7 @@ needs to propose the SOP classes that it will accept to receive.  By default,
 Orthanc will propose the 120 most common SOP classes defined in the DCMTK library.
 If you know the resources you are going to retrieve contain uncommon SOP classes,
 you may provide a ``"SOPClassesInStudy"`` field in the payload.  In this case, Orthanc
-will only propose only these SOP classes during the association; provided that they are 
+will only propose these SOP classes during the association; provided that they are 
 accepted by Orthanc (see ``"AcceptedSopClasses"/"RejectedSopClasses"`` configurations)::
 
   $ curl --request POST --url http://localhost:8042/modalities/samples/get \
@@ -1055,6 +1055,149 @@ accepted by Orthanc (see ``"AcceptedSopClasses"/"RejectedSopClasses"`` configura
               ], 
               "Timeout": 60 
             }'
+
+
+DIMSE Error status (new in Orthanc 1.12.10)
+-------------------------------------------
+
+Starting with Orthanc 1.12.10, when performing C-Move, C-Get and C-Store
+operations, you can get access to the ``DIMSE Error Status`` and, possibly,
+to the instances ids that have been received during the C-Move or C-Get retrieve
+operations.
+
+For example, for a permissive ``C-Move`` or ``C-Get`` operation to retrieve 3 studies from a remote
+modality::
+
+  $ curl -v http://localhost:8042/modalities/sample/move \
+    --data '{
+              "Permissive": true,
+              "Level" : "Study",
+              "TargetAet": "ORTHANC",
+              "Resources" : [
+                {"StudyInstanceUID" : "1.2.3"},
+                {"StudyInstanceUID" : "3.4.5"}
+              ]
+            }
+
+You'll get this type of response::
+  
+  {
+   "Description" : "REST API",
+   "Details" :
+   [
+      {
+         "DimseErrorStatus" : 0,
+         "Query" : {
+            "0008,0052" : "STUDY",
+            "0020,000d" : "1.2.3"
+         },
+         "ReceivedInstancesIds" :
+            ["ca58b590-8a115ed5-906f7f21-c7af8058-2637f722"]
+      },
+      {
+         "DimseErrorStatus" : 49152,
+         "Query" : {
+            "0008,0052" : "STUDY",
+            "0020,000d" : "3.4.5"
+         },
+         "ReceivedInstancesIds" : []
+      }
+   ],
+   "LocalAet" : "ORTHANC",
+   "Query" :
+   [
+      {
+         "0008,0052" : "STUDY",
+         "0020,000d" : "1.2.3"
+      },
+      {
+         "0008,0052" : "STUDY",
+         "0020,000d" : "3.4.5"
+      }
+   ],
+   "RemoteAet" : "SAMPLE",
+   "TargetAet" : "ORTHANC"
+  
+If you are creating an asynchronous operation, you'll get the same detailed
+information in the ``Content.Details`` field of the job.
+
+If you are running a non-permissive operation (default), for example, a ``C-Get``::
+
+  $ curl -v http://localhost:8042/modalities/sample/get \
+    --data '{
+              "Permissive": false,
+              "Level" : "Study",
+              "Resources" : [
+                {"StudyInstanceUID" : "1.2.3"},
+                {"StudyInstanceUID" : "3.4.5"}
+              ]
+            }
+
+If one of the resource is missing, you'll get a ``RetrieveJob`` error payload
+in the HTTP response::
+  
+  {
+    "Details" : "C-GET SCU to AET \"SAMPLE\" has failed with DIMSE status 0xC000",
+    "ErrorPayload" :
+    {
+      "Content" :
+      [
+        {
+          "DimseErrorStatus" : 0,
+          "Query" : {
+            "0008,0052" : "STUDY",
+            "0020,000d" : "1.2.3"
+          },
+          "ReceivedInstancesIds" :
+            ["ca58b590-8a115ed5-906f7f21-c7af8058-2637f722"]
+        },
+        {
+          "DimseErrorStatus" : 49152,
+          "Query" : {
+            "0008,0052" : "STUDY",
+            "0020,000d" : "3.4.5"
+          },
+          "ReceivedInstancesIds" : []
+        }
+      ],
+      "Type" : "RetrieveJob"
+    },
+    "HttpError" : "Internal Server Error",
+    "HttpStatus" : 500,
+    "Message" : "Error in the network protocol",
+    "Method" : "POST",
+    "OrthancError" : "Error in the network protocol",
+    "OrthancStatus" : 9,
+    "Uri" : "/modalities/sample/get"
+  }
+
+If you are running a non-permissive ``C-Store`` operation that fails, for example::
+
+  $ curl -v http://localhost:8042/modalities/sample/store \
+    --data '{
+              "Resources" : ["595df1a1-74fe920a-4b9e3509-826f17a3-762a2dc3"]
+            }
+
+You'll get a simple ``Dimse`` error payload like::
+
+  {
+    "Details" : "C-STORE SCU to AET \"SAMPLE\" has failed with DIMSE status 0xA700",
+    "ErrorPayload" :
+    {
+      "Content" :
+      {
+        "DimseErrorStatus" : 42752
+      },
+      "Type" : "Dimse"
+    },
+    "HttpError" : "Internal Server Error",
+    "HttpStatus" : 500,
+    "Message" : "Error in the network protocol",
+    "Method" : "POST",
+    "OrthancError" : "Error in the network protocol",
+    "OrthancStatus" : 9,
+    "Uri" : "/modalities/sample/store"
+  }  
 
 
 
