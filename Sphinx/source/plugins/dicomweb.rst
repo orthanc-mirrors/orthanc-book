@@ -237,7 +237,7 @@ are processed:
   using the ``StudiesMetadataExtrapolatedTags`` and
   ``SeriesMetadataExtrapolatedTags`` configuration options as follows
   
-Sample configuration for the ``Extrapoate`` mode:: 
+Sample configuration for the ``Extrapolate`` mode:: 
 
   {
     [...]
