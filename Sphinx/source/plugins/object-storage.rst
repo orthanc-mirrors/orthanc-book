@@ -281,6 +281,13 @@ This call creates a ``MoveStorageJob`` that can then be monitor to the ``/jobs``
 
 The allowed values for ``TargetStorage`` are ``file-system`` or ``object-storage``.
 
+*Note:* There is currently no way to know on which storage a file is stored but, 
+if you call ``/move-storage`` the function will detect it and will not try to move
+a file that is already on the target storage.
+
+*Note:* In the current versions, the plugin might display a false error message in the logs
+when trying to read a file from a storage while it is on the other one.
+
 
 Other configuration options
 ---------------------------
