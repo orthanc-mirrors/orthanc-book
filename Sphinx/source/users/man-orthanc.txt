@@ -124,7 +124,7 @@ COPYRIGHT
        University Hospital of Liege (Belgium)
        Copyright © 2017-2023 Osimis S.A. (Belgium)
        Copyright © 2024-2025 Orthanc Team SRL (Belgium)
-       Copyright © 2021-2025 Sebastien Jodogne, ICTEAM UCLouvain (Belgium) Li‐
+       Copyright © 2021-2026 Sebastien Jodogne, ICTEAM UCLouvain (Belgium) Li‐
        censing	GPLv3+:	 GNU  GPL  version  3  or  later   <http://gnu.org/li‐
        censes/gpl.html>.
        This  is	 free  software:  you  are free to change and redistribute it.
