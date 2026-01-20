@@ -208,8 +208,8 @@ Here is a description of the parameters:
 
 * ``builtin`` is an optional Boolean that specifies whether the
   request targets only the built-in REST API of Orthanc (if set to
-  ``true``), or the full the REST API after being tainted by plugins
-  (if set to ``false``).
+  ``true``), or the full REST API after being tainted by plugins
+  (if set to ``false`` - this is the default value).
 
 * ``headers`` is an optional argument and was added in release
   1.5.7. It allows to provide the REST API endpoint with HTTP headers.
