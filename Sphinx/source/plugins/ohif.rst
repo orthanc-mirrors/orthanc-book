@@ -88,7 +88,7 @@ Furthermore, the :ref:`Docker images <docker>`
 ``jodogne/orthanc-plugins`` and ``orthancteam/orthanc`` also contain the
 plugin. Debian and Ubuntu packages can be found in the
 :ref:`standalone repository <binaries>`
-``https://debian.orthanc-labs.com/``.
+``https://orthanc.uclouvain.be/debian/``.
 
 
 Configuration

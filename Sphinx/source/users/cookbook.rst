@@ -49,8 +49,8 @@ Docker setup::
   $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
 
   $ apt install --upgrade ca-certificates
-  $ wget -qO - https://debian.orthanc-labs.com/archive.key | apt-key add -
-  $ apt-add-repository "deb https://debian.orthanc-labs.com/ `grep VERSION_CODENAME /etc/os-release | cut -d'=' -f 2` main"
+  $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | apt-key add -
+  $ apt-add-repository "deb https://orthanc.uclouvain.be/debian/ `grep VERSION_CODENAME /etc/os-release | cut -d'=' -f 2` main"
 
   $ apt clean && apt update
   $ apt install orthanc-stone-webviewer
