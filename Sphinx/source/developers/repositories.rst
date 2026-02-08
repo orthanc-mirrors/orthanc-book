@@ -63,9 +63,11 @@ Read-only access
 
 Anybody has full read-only access to all of the Orthanc official
 repositories, on our `self-hosted server
-<https://orthanc.uclouvain.be/hg/>`__. As the ``hg serve`` tool that is
-used by our Web server tends to be slow, we recommend people to
-locally clone our Mercurial repositories.
+<https://orthanc.uclouvain.be/hg/>`__. As the ``hg serve`` tool that
+is used by our server is continuously targeted by aggressive Web
+crawlers, we kindly ask people to locally clone our Mercurial
+repositories if they want to explore the source code of the Orthanc
+ecosystem.
 
 .. highlight:: bash
 
@@ -76,7 +78,7 @@ Locally cloning one of those Mercurial repositories (say, the main
 
 You can then use separate tools such as `TortoiseHg
 <https://en.wikipedia.org/wiki/TortoiseHg>`__ to browse the code with
-richer features than the Web interface.
+richer features than the Web interface of ``hg serve``.
 
 
 Recent versions of Mercurial
