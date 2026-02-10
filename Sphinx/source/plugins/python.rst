@@ -870,12 +870,21 @@ any `object-based storage
 <https://en.wikipedia.org/wiki/Object_storage>`__ technology available
 in Python (such as `Ceph
 <https://en.wikipedia.org/wiki/Ceph_(software)>`__ or AWS S3-like
-tools). The performance will not be as good as a C/C++ native plugin
+tools). The performance will likely not be as good as a C/C++ native plugin
 (cf. the :ref:`cloud storage <object-storage>`, the :ref:`PostgreSQL
 <postgresql>` and the :ref:`MySQL <mysql>` plugins), but it can be
 used for prototyping or for basic setups.
 
-Here is a full, self-explaining sample:
+Note that the signatures of these callbacks has changed between
+version 3.3 and 7.1 (not released yet)
+
+Here is a full self-explaining sample for plugin from 7.1
+
+.. literalinclude:: python/storage-area-3.py
+                    :language: python
+
+Here is a full, self-explaining sample for plugin 3.3 and later 
+(still compatible with 7.1 but with reduced features):
 
 .. literalinclude:: python/storage-area.py
                     :language: python
