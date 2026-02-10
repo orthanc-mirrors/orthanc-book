@@ -65,6 +65,8 @@ A basic configuration would read as follows::
                                               // or if you have set the 'SetStudyInstanceUIDIfMissing' configuration to true
       "HousekeepingInterval": 60,             // Interval [in seconds] between 2 execution of the Worklist Housekeeper thread.
 
+      "LogMatchedWorklistIds": false,         // Debug: if set to true, displays the ID of each matched worklist (new in v 0.9.3 - not released yet).
+
       // New options only if SaveInOrthancDatabase is set to true.
       
       "DeleteWorklistsDelay": 24          // Delay [in hours] after which the worklist is deleted.
