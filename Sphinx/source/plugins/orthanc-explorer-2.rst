@@ -173,7 +173,7 @@ and ``EnableModification`` configurations.
 Retrieve a study from a distant modality and open the viewer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to open e.g. the :ref:`Stone Web viewer <stone_webviewer>`:: on a study that is not yet
+If you want to open e.g. the :ref:`Stone Web viewer <stone_webviewer>` on a study that is not yet
 stored in Orthanc but that you know that it is stored in a remote modality, you may use this endpoint::
 
     http://localhost:8042/ui/app/retrieve-and-view.html?StudyInstanceUID=1.2.3....&modality=pacs&viewer=stone-viewer
