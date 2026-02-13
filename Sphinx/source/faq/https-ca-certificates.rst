@@ -17,8 +17,8 @@ validate the certificates received from the distant servers (cURL
 "--ca-native" option). In most of the setups, this is perfectly fine and 
 the servers certificates are validated correctly.
 
-However, one could face some troubles, especially on Microsoft Windows
-setups.
+However, one could face some troubles, especially on **Microsoft
+Windows** setups.
 
 To fix them, download the CA certificate store (in PEM format) from the
 `cURL project <https://curl.haxx.se/docs/caextract.html>`__.
@@ -32,4 +32,11 @@ And then, store it on the drive and modify your configuration file according to
     "HttpsCACertificates" : "C:\\Program Files\\Orthanc Server\\resources\\cacert.pem"
   }
 
-.. highlight:: text
+
+On **GNU/Linux distributions**, you will most probably find a file
+named ``ca-certificates.crt`` somewhere within the ``/etc/`` folder.
+For instance, on Ubuntu/Debian derivatives::
+
+  {
+    "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt"
+  }

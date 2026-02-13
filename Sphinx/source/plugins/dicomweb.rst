@@ -454,6 +454,8 @@ automatically use the global configuration options ``HttpProxy``,
 ``Pkcs11``. Make sure to adapt them if need be.
 
 
+.. _dicomweb-client-user-interface:
+
 Quickstart - DICOMweb client
 ----------------------------
 
@@ -673,6 +675,7 @@ Orthanc. The :ref:`status of the job <jobs-monitoring>` can then be
 monitored using the Orthanc REST API.
 
 
+.. _dicomweb-client-wado-rs:
 
 Retrieving DICOM resources from a WADO-RS server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -743,3 +746,74 @@ Integration tests are `available separately
 and provide samples for more advanced features of the REST API (such
 as dynamically adding/updating/removing remote DICOMweb servers using
 HTTP PUT and DELETE methods).
+
+
+.. _nci_idc:
+
+Accessing NCI Imaging Data Commons (IDC)
+----------------------------------------
+
+The `NCI Imaging Data Commons (IDC) <https://learn.canceridc.dev/>`__
+is a cloud-based data repository that provides access to large-scale,
+cancer-related medical imaging datasets integrated with genomic and
+clinical data. It is part of the broader National Cancer Institute
+Cancer Research Data Commons. The IDC hosts and synchronizes imaging
+collections from :ref:`The Cancer Imaging Archive (TCIA) <tcia>`,
+serving as a cloud-native extension that facilitates advanced
+computational workflows on TCIA data.
+
+.. highlight:: json
+
+Importantly, the IDC servers support the `DICOMweb protocol
+<https://learn.canceridc.dev/data/downloading-data/dicomweb-access>`__,
+which can be leveraged by the DICOMweb plugin for Orthanc to query and
+retrieve imaging studies directly. Here is a minimal configuration
+file to access IDC from Orthanc::
+
+  {
+    "Plugins" : [
+      "/home/user/OrthancDicomWeb/Build/libOrthancDicomWeb.so"
+    ],
+    "HttpsCACertificates" : "/etc/ssl/certs/ca-certificates.crt",
+    "DicomWeb" : {
+      "Servers" : {
+        "idc" : [
+          "https://proxy.imaging.datacommons.cancer.gov/current/viewer-only-no-downloads-see-tinyurl-dot-com-slash-3j3d9jyp/dicomWeb"
+        ]
+      }
+    }
+  }
+
+You might have to adapt the ``HttpsCACertificates`` to point to the
+file containing your :ref:`trusted HTTPS certificates
+<https-ca-certificates>`. This configuration declares a :ref:`DICOMweb
+endpoint <dicomweb-client-config>` called ``idc`` that points to the
+official so-called `"IDC-maintained DICOM store via proxy"
+<https://learn.canceridc.dev/data/organization-of-data/dicom-stores#idc-maintained-dicom-store-via-proxy>`__.
+
+The :ref:`Web interface of the Orthanc DICOMweb plugin
+<dicomweb-client-user-interface>` will then allow you to query the
+content of the IDC servers, which includes the collections from The
+Cancer Imaging Archive (TCIA). There is however a caveat IDC servers
+do not allow filtering images by collection, as they prevent requests
+against the ``Study ID`` tag at the study level.
+
+.. highlight:: text
+
+The main use case of the IDC DICOMweb endpoint is therefore to
+`download imaging studies
+<https://learn.canceridc.dev/data/downloading-data/dicomweb-access#unique-identifiers-locating-the-relevant-slides>`__
+whose unique identifiers (i.e., their ``Study Instance UID`` tag) has
+been obtained through other means. Here is a working example to
+trigger the download of a DICOM study from IDC using the REST API of
+:ref:`Orthanc DICOMweb plugin <dicomweb-client-wado-rs>`::
+
+  $ curl http://localhost:8042/dicom-web/servers/idc/retrieve -X POST -d @- << EOF
+  {
+    "Resources" : [
+      {
+        "Study" : "1.3.6.1.4.1.9590.100.1.2.267826310912478261209862427462784808028"
+      }
+    ]
+  }
+  EOF
