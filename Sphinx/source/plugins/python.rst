@@ -303,7 +303,11 @@ this could possibly introduce concurrency issues: Make sure that your
 Python code is **thread-safe** before enabling this option! Indeed,
 different threads must not modify the Python objects that are used
 during a call to the SDK of Orthanc.
-
+Also note that, with ``AllowThreads`` set to ``false``, your python plugin 
+might deadlock if e.g. you have implemented a storage plugin in python and
+you are deleting a resource from your python plugin: the storage python 
+plugin code will not be able to execute since the GIL will be locked 
+by the thread that is deleting the resource.
 
 .. warning::
    Never call your Python plugin ``orthanc.py``! Otherwise, your plugin will
