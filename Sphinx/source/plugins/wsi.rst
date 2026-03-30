@@ -70,7 +70,7 @@ If static linking is not desired, here are build instructions for
 Ubuntu 16.04 (provided build dependencies for the :ref:`core of
 Orthanc <compiling>` have already been installed)::
 
-  $ sudo apt-get install libopenjpeg-dev
+  $ sudo apt install libopenjpeg-dev
 
   # Firstly, compile the command-line tools
   $ mkdir Applications/Build

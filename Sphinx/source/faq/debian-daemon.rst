@@ -5,12 +5,12 @@ Starting Orthanc as a GNU/Linux daemon
 
 .. highlight:: bash
 
-"init" flavor
--------------
+"init" flavor (old instructions)
+--------------------------------
 
 To install Orthanc as a GNU/Linux `init daemon
-<https://en.wikipedia.org/wiki/Init>`__ on a Debian/Ubuntu system, you
-can:
+<https://en.wikipedia.org/wiki/Init>`__ on an old Debian/Ubuntu
+system, you can:
 
 1. Download this `service script
    <https://salsa.debian.org/med-team/orthanc/raw/master/debian/orthanc.init>`_

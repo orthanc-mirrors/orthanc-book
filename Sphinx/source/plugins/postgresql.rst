@@ -499,7 +499,7 @@ If static linking is not desired, here are build instructions for
 Ubuntu 16.04 (provided build dependencies for the :ref:`core of
 Orthanc <compiling>` have already been installed)::
 
-  $ sudo apt-get install libpq-dev postgresql-server-dev-all
+  $ sudo apt install libpq-dev postgresql-server-dev-all
   $ mkdir BuildPostgreSQL
   $ cd BuildPostgreSQL
   $ cmake ../PostgreSQL -DCMAKE_BUILD_TYPE=Release \
