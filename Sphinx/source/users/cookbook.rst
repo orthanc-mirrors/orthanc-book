@@ -63,14 +63,14 @@ Docker setup::
   $ apt install orthanc-stone-webviewer
   $ Orthanc /etc/orthanc
 
-For older versions of Debian or Ubuntu that still use `apt-key` (such
+For older versions of Debian or Ubuntu that still use ``apt-key`` (such
 as Debian 9 or 10), you can use::
 
   # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:9
 
   $ cat <<EOF > /etc/apt/sources.list
   deb http://archive.debian.org/debian stretch main
-  deb http://archive.debian.org//debian-security stretch/updates main
+  deb http://archive.debian.org/debian-security stretch/updates main
   EOF
   $ apt update
   $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
@@ -90,7 +90,7 @@ Note that this standalone Debian repository **does not** contain the
 against the system-wide version of your Python or Java runtime
 environment. You should install the ``orthanc-python`` or
 ``orthanc-java`` package from your native Debian/Ubuntu distribution
-if available, or compile the plugin from sources.
+if available, or compile the corresponding plugin from sources.
 
 
 .. _orthanc-explorer:
