@@ -41,25 +41,48 @@ Custom Debian/Ubuntu repository
 .. highlight:: bash
 
 If you are running Debian 9 (stretch), Debian 10 (buster), Debian 11
-(bullseye), Debian 12 (bookworm), Ubuntu 18.04 LTS (bionic), Ubuntu
-20.04 LTS (focal), Ubuntu 22.04 LTS (jammy), or Ubuntu 24.04 LTS
-(noble) on an **AMD64 architecture**, Sébastien Jodogne maintains a
-**standalone Debian repository** that provides the latest versions of
-the LSB binaries. For instance, here is how to install the :ref:`Stone
-Web viewer <stone_webviewer>` on a barebone Docker setup::
+(bullseye), Debian 12 (bookworm), Debian 13 (trixie), Ubuntu 18.04 LTS
+(bionic), Ubuntu 20.04 LTS (focal), Ubuntu 22.04 LTS (jammy), or
+Ubuntu 24.04 LTS (noble) on an **AMD64 architecture**, Sébastien
+Jodogne maintains a **standalone Debian repository** that provides the
+latest versions of the LSB binaries. For instance, here is how to
+install the :ref:`Stone Web viewer <stone_webviewer>` on a barebone
+Docker setup::
 
-  # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:9
+  # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:13
 
   $ apt update
-  $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
+  $ DEBIAN_FRONTEND=noninteractive apt install -y wget curl nano gnupg apt-transport-https
 
-  $ apt install --upgrade ca-certificates
-  $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | apt-key add -
-  $ apt-add-repository "deb https://orthanc.uclouvain.be/debian/ `grep VERSION_CODENAME /etc/os-release | cut -d'=' -f 2` main"
+  $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | gpg --dearmor -o /usr/share/keyrings/orthanc-archive-keyring.gpg
+  $ export DISTRO_ID=`grep '^ID' /etc/os-release | cut -d'=' -f 2`
+  $ export DISTRO_VERSION=`grep '^VERSION_CODENAME' /etc/os-release | cut -d'=' -f 2`
+  $ echo "deb [signed-by=/usr/share/keyrings/orthanc-archive-keyring.gpg] https://orthanc.uclouvain.be/${DISTRO_ID} ${DISTRO_VERSION} main" > /etc/apt/sources.list.d/orthanc.list
 
   $ apt clean && apt update
   $ apt install orthanc-stone-webviewer
-  $ /etc/init.d/orthanc start
+  $ Orthanc /etc/orthanc
+
+For older versions of Debian or Ubuntu that still use `apt-key` (such
+as Debian 9 or 10), you can use::
+
+  # docker run --rm -t -i -p 8042:8042 -p 4242:4242 debian:9
+
+  $ cat <<EOF > /etc/apt/sources.list
+  deb http://archive.debian.org/debian stretch main
+  deb http://archive.debian.org//debian-security stretch/updates main
+  EOF
+  $ apt update
+  $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
+
+  $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | apt-key add -
+  $ export DISTRO_ID=`grep '^ID' /etc/os-release | cut -d'=' -f 2`
+  $ export DISTRO_VERSION=`grep '^VERSION_CODENAME' /etc/os-release | cut -d'=' -f 2`
+  $ apt-add-repository -y "deb https://orthanc.uclouvain.be/${DISTRO_ID} ${DISTRO_VERSION} main"
+
+  $ apt clean && apt update
+  $ apt install orthanc-stone-webviewer
+  $ Orthanc /etc/orthanc
 
 Note that this standalone Debian repository **does not** contain the
 :ref:`Python plugin <python-plugin>` and the :ref:`Java plugin
