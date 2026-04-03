@@ -373,6 +373,37 @@ notably:
   dataset of the instance (if applicable).
 
 
+.. _lua-filter-cstore-dicom:
+
+Filtering outgoing C-Store DICOM instances
+------------------------------------------
+
+.. highlight:: lua
+
+Starting with Orthanc 1.12.11, you can discard instances that
+are supposed to be sent to a remote-modality e.g. if this modality
+is not able to handle them correctly::
+
+ function OutgoingCStoreInstanceFilter(dicom, destination)
+    -- print(' -------- filtering outgoing instance ---- ' .. destination['RemoteAet'] .. " / " .. dicom.SOPInstanceUID .. " / " .. dicom.SOPClassUID)
+
+    -- Don't send uncommon Siemens specific SOPClasses or RGB images to 'CVIRES02'
+   if destination['RemoteAet'] == 'CVIRES02' and (dicom.SOPClassUID == '1.3.12.2.1107.5.9.1' or dicom.PhotometricInterpretation == 'RGB') then
+        -- print(' -------- discarding instance ---- ' .. dicom.SOPInstanceUID)
+        return false  -- don't send it
+   else
+        return true   -- send it
+   end
+ end
+
+The argument ``dicom`` corresponds to a `Lua table
+<http://www.lua.org/pil/2.5.html>`__ (i.e. an associative array) that
+contains the DICOM tags of the outgoing instance.
+
+The argument ``destination`` is a Lua table containing 2 fields:
+``RemoteIp`` and ``RemoteAet``.
+
+
 .. _lua-filter-rest:
 
 Filtering incoming REST requests
