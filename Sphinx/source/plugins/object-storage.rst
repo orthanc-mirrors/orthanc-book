@@ -212,7 +212,10 @@ Sample configuration::
     "StorageStructure": "flat",               // see below
     "EnableLegacyUnknownFiles": true,         // optional: see below
     "StorageEncryption" : {},                 // optional: see the section related to encryption
-    "HybridMode": "Disabled"                  // optional: see the section related to Hybrid storage
+    "HybridMode": "Disabled",                 // optional: see the section related to Hybrid storage
+    //"AccessTier": "Hot"                     // optional: allowed values: "Hot", "Cold", "Cool", "Archive", "Premium".
+                                              //           If not set: use the Azure defaults
+                                              //           New in 2.5.2
   }
 
 
