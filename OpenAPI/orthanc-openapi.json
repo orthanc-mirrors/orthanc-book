@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.12.10"
+      "version" : "1.12.11"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -4408,7 +4408,7 @@
                               "type" : "boolean"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-ECHO command, in seconds",
+                              "description" : "Timeout for the C-ECHO command, in seconds.  Orthanc will close the DICOM association if no C-ECHO answer is received within this time period.",
                               "type" : "number"
                            }
                         }
@@ -4738,7 +4738,7 @@
                               "type" : "boolean"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-GET command, in seconds",
+                              "description" : "Timeout for the C-GET command, in seconds.  Orthanc will close the DICOM association if no DICOM messages are received within this time period.",
                               "type" : "number"
                            },
                            "UserData" : {
@@ -4834,7 +4834,7 @@
                               "type" : "string"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-MOVE command, in seconds",
+                              "description" : "Timeout for the C-MOVE command, in seconds.  Orthanc will close the DICOM association if no DICOM messages (e.g., C-STORE sub-operations or responses) are received within this time period.",
                               "type" : "number"
                            },
                            "UserData" : {
@@ -4911,7 +4911,7 @@
                               "type" : "object"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-FIND command and subsequent C-MOVE retrievals, in seconds (new in Orthanc 1.9.1)",
+                              "description" : "Timeout for the C-FIND command and subsequent C-GET/C-MOVE retrievals, in seconds (new in Orthanc 1.9.1).  Orthanc will close the related DICOM associations if no DICOM messages are received within this time period.",
                               "type" : "number"
                            }
                         }
@@ -5090,7 +5090,7 @@
                               "type" : "boolean"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-STORE command, in seconds",
+                              "description" : "Timeout for the C-STORE command, in seconds.  Orthanc will close the DICOM association if no DICOM messages (e.g., C-STORE responses) are received within this time period.",
                               "type" : "number"
                            },
                            "UserData" : {
@@ -5577,7 +5577,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -5595,6 +5595,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -6978,7 +6982,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -6996,6 +7000,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -8327,7 +8335,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.21"
+                              "Version" : "1.22"
                            }
                         }
                      }
@@ -8847,7 +8855,7 @@
                               "type" : "string"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-MOVE command, in seconds",
+                              "description" : "Timeout for the C-MOVE command, in seconds.  Orthanc will close the DICOM association if no DICOM messages (e.g., C-STORE sub-operations or responses) are received within this time period.",
                               "type" : "number"
                            },
                            "UserData" : {
@@ -9059,7 +9067,7 @@
                               "type" : "string"
                            },
                            "Timeout" : {
-                              "description" : "Timeout for the C-MOVE command, in seconds",
+                              "description" : "Timeout for the C-MOVE command, in seconds.  Orthanc will close the DICOM association if no DICOM messages (e.g., C-STORE sub-operations or responses) are received within this time period.",
                               "type" : "number"
                            },
                            "UserData" : {
@@ -9503,7 +9511,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -9521,6 +9529,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -10758,7 +10770,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -10776,6 +10788,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -12379,7 +12395,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -12397,6 +12413,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -13780,7 +13800,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -13798,6 +13818,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -14998,7 +15022,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 29,
+                              "ApiVersion" : 30,
                               "Capabilities" : {
                                  "HasExtendedChanges" : true,
                                  "HasExtendedFind" : true,
@@ -15010,8 +15034,8 @@
                               "DatabaseBackendPlugin" : null,
                               "DatabaseServerIdentifier" : "be2ba798-1cb577e0-483accf5-d286e8f5-de2599df",
                               "DatabaseVersion" : 6,
-                              "DefaultRetrieveMethod" : "C-MOVE",
                               "DicomAet" : "ORTHANC",
+                              "DicomDefaultRetrieveMethod" : "C-MOVE",
                               "DicomPort" : 4242,
                               "HasLabels" : true,
                               "HttpPort" : 8042,
@@ -15028,12 +15052,13 @@
                               "MaximumStorageSize" : 0,
                               "Name" : "Orthanc Demo",
                               "OverwriteInstances" : false,
+                              "PatientLevelEnabled" : true,
                               "PluginsEnabled" : true,
                               "ReadOnly" : false,
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "UserMetadata" : {},
-                              "Version" : "1.12.10"
+                              "Version" : "1.12.11"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -15060,12 +15085,12 @@
                                  "description" : "Version of the database: https://orthanc.uclouvain.be/book/developers/db-versioning.html",
                                  "type" : "number"
                               },
-                              "DefaultRetrieveMethod" : {
-                                 "description" : "The DefaultRetrieveMethod configuration",
-                                 "type" : "string"
-                              },
                               "DicomAet" : {
                                  "description" : "The DICOM AET of Orthanc",
+                                 "type" : "string"
+                              },
+                              "DicomDefaultRetrieveMethod" : {
+                                 "description" : "The DicomDefaultRetrieveMethod configuration",
                                  "type" : "string"
                               },
                               "DicomPort" : {
@@ -15110,6 +15135,10 @@
                               },
                               "OverwriteInstances" : {
                                  "description" : "Whether instances are overwritten when re-ingested (new in Orthanc 1.11.0)",
+                                 "type" : "boolean"
+                              },
+                              "PatientLevelEnabled" : {
+                                 "description" : "Whether Patient level routes and sanity checks are enabled (new in Orthanc 1.12.11)",
                                  "type" : "boolean"
                               },
                               "PluginsEnabled" : {
@@ -15623,7 +15652,7 @@
                               "type" : "array"
                            },
                            "LabelsConstraint" : {
-                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0)",
+                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0). From 1.12.11: using `None` together with an empty list of labels looks for the resources that do not have any labels attached.",
                               "type" : "string"
                            },
                            "Level" : {
@@ -15745,7 +15774,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -15770,6 +15799,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -15953,7 +15986,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -15978,6 +16011,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -16090,7 +16127,7 @@
                               "type" : "string"
                            },
                            "LossyQuality" : {
-                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in v1.12.7)",
+                              "description" : "If transcoding to a lossy transfer syntax, this entry defines the quality as an integer between 1 and 100.  If not provided, the value is defined by the \"DicomLossyTranscodingQuality\" configuration. (new in 1.12.7)",
                               "type" : "number"
                            },
                            "Priority" : {
@@ -16115,6 +16152,10 @@
                            "UserData" : {
                               "description" : "In asynchronous mode, user data that will be attached to the job.",
                               "type" : "object"
+                           },
+                           "Utf8" : {
+                              "description" : "If `true`, filenames will be encoded using UTF-8 in the ZIP archive, which may not be supported by your operating system or by your ZIP uncompression software. If `false`, filenames will be encoded using plain ASCII, which was the default in Orthanc <= 1.12.10. Default value is defined by the \"ZipUseUtf8\" configuration option. (new in 1.12.11)",
+                              "type" : "boolean"
                            }
                         }
                      }
@@ -16338,7 +16379,7 @@
                               "type" : "array"
                            },
                            "LabelsConstraint" : {
-                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0)",
+                              "description" : "Constraint on the labels, can be `All`, `Any`, or `None` (defaults to `All`, new in Orthanc 1.12.0). From 1.12.11: using `None` together with an empty list of labels looks for the resources that do not have any labels attached.",
                               "type" : "string"
                            },
                            "Level" : {
@@ -16915,7 +16956,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_available_dicom_threads 4 1764171884784\northanc_available_http_threads_count 49 1764172093743\northanc_count_instances 2552 1764172100539\northanc_count_patients 8 1764172100539\northanc_count_series 26 1764172100539\northanc_count_studies 8 1764172100539\northanc_dicom_cache_count 167 1764172100539\northanc_dicom_cache_size_mb 83.9109268 1764172100539\northanc_disk_size_mb 983.235352 1764172100539\northanc_jobs_completed 0 1764172100539\northanc_jobs_failed 0 1764172100539\northanc_jobs_pending 0 1764172100539\northanc_jobs_running 0 1764172100539\northanc_jobs_success 0 1764172100539\northanc_last_change 6551 1764172100539\northanc_rest_api_active_requests 1 1764172093743\northanc_rest_api_duration_ms 604 1764172099042\northanc_storage_cache_count 408 1764172100539\northanc_storage_cache_hit_count 683 1764172100350\northanc_storage_cache_miss_count 408 1764172098910\northanc_storage_cache_size_mb 98.1075974 1764172100539\northanc_storage_read_bytes 102873274 1764172098911\northanc_storage_read_duration_ms 0 1764172094128\northanc_uncompressed_size_mb 983.235352 1764172100539\northanc_up_time_s 216 1764172100539\n"
+                        "example" : "orthanc_available_dicom_threads 4 1776167738134\northanc_available_http_threads_count 49 1776167993897\northanc_count_instances 2552 1776168000874\northanc_count_patients 8 1776168000874\northanc_count_series 26 1776168000874\northanc_count_studies 8 1776168000874\northanc_dicom_cache_count 1 1776168000874\northanc_dicom_cache_size_mb 0.502557755 1776168000874\northanc_disk_size_mb 983.235352 1776168000874\northanc_jobs_completed 0 1776168000874\northanc_jobs_failed 0 1776168000874\northanc_jobs_pending 0 1776168000874\northanc_jobs_running 0 1776168000874\northanc_jobs_success 0 1776168000874\northanc_last_change 6551 1776168000874\northanc_logged_warnings_count 55 1776167918982\northanc_rest_api_active_requests 1 1776167993897\northanc_rest_api_duration_ms 646 1776167999347\northanc_storage_cache_count 567 1776168000874\northanc_storage_cache_hit_count 426 1776168000686\northanc_storage_cache_miss_count 489 1776167999190\northanc_storage_cache_size_mb 102.449173 1776168000874\northanc_storage_read_bytes 66338934 1776167999190\northanc_storage_read_duration_ms 1 1776167994286\northanc_transfers_aborted_push_count 0 1776168000873\northanc_transfers_available_push_count 4 1776168000873\northanc_transfers_cache_hit_count 0 1776168000873\northanc_transfers_cache_miss_count 0 1776168000873\northanc_transfers_committed_push_count 0 1776168000873\northanc_transfers_created_push_count 0 1776168000873\northanc_transfers_push_total_received_bytes_count 0 1776168000873\northanc_transfers_push_total_time_spent_in_commit_ms 0 1776168000873\northanc_transfers_push_total_time_spent_in_reception_ms 0 1776168000873\northanc_transfers_used_cache_size 0 1776168000873\northanc_uncompressed_size_mb 983.235352 1776168000874\northanc_up_time_s 262 1776168000874\n"
                      }
                   },
                   "description" : ""
@@ -16934,7 +16975,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20251126T154820",
+                        "example" : "20260414T120000",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -16956,7 +16997,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20251126T154820",
+                        "example" : "20260414T120001",
                         "schema" : {
                            "description" : "The local time"
                         }
