@@ -372,6 +372,36 @@ notably:
 * ``TransferSyntaxUID`` contains the transfer syntax UID of the
   dataset of the instance (if applicable).
 
+Filtering incoming DICOM instances from C-Store
+-----------------------------------------------
+
+.. highlight:: lua
+
+
+The ``ReceivedCStoreInstanceFilter()`` Lua function is quite similar to 
+``ReceivedInstanceFilter()`` but is invoked only when the instance is received
+via C-STORE and it enables returning a more detailed DIMSE Error Status.
+
+If this callback returns ``0x0000`` (SUCCESS), the instance is accepted for storage. 
+If it returns any other DIMSE Error status, the instance is discarded and the sending
+modality receives the returned value as the DIMSE Error status. 
+This mechanism can be used to filter the incoming DICOM instances. 
+
+Here is an example of a Lua filter that rejects incoming instances of MR modality
+when it comes from the ``WRONG`` AET::
+
+ function ReceivedCStoreInstanceFilter(dicom, origin, info) 
+   if (origin['RemoteAet'] == 'WRONG' and dicom.Modality == 'MR') then
+        print(' -------- skipping instance ---- ' .. dicom.SOPInstanceUID)
+        return 0xB006  -- elements discarded (any non zero DIMSE Status means that the instance will be discarded)
+   else
+        return 0x0000  -- success: accept the instance
+   end
+ end
+
+The arguments ``dicom``, ``origin`` and ``info`` are identical
+to the ones of ``ReceivedInstanceFilter()``.
+
 
 .. _lua-filter-cstore-dicom:
 
