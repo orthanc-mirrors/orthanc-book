@@ -106,6 +106,15 @@ are not DICOM files, and are thus rejected by the target Orthanc
 server. More information are available `on the discussion group
 <https://groups.google.com/d/msg/orthanc-users/Zlhtcpo76qQ/tp8EqaRCAQAJ>`__.
 
+**Alternative:** Starting with Orthanc 1.8.1, the source distribution
+of Orthanc includes another Python script named ``OrthancImport.py``
+that provides more features than ``ImportDicomFiles.py``. It can
+notably import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2``
+archives without having to uncompress them first. It also provides
+more comprehensive command-line options. `Check this script out
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.11/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+
+
 
 Generic replication
 -------------------
