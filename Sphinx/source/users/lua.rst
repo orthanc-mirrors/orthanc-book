@@ -155,6 +155,10 @@ These callbacks were removed in Orthanc 1.9.0.
 If a callback is specified multiple times in separate scripts, the
 event handler of the latest loaded script is used.
 
+All ``Stable``, ``Deleted``, ``Updated``, ``Jobs`` and ``OnStoredInstance`` events
+callbacks are queued and executed asynchronously in a separate 
+``LUA-EVENTS`` thread.
+
 Concurrency and deadlocks
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
