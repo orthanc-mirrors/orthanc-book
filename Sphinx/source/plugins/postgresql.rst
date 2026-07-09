@@ -338,7 +338,7 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 9.0                       | 6                                         |
 +---------------------------+-------------------------------------------+
-| 10.0                      | 10 (skipped 7, 8 and 9 to sync schema     |
+| 10.0 - 10.X               | 10 (skipped 7, 8 and 9 to sync schema     |
 |                           | revision and plugin version)              |
 +---------------------------+-------------------------------------------+
 
