@@ -109,8 +109,9 @@ but can be specified to control the way Orthanc is run.
 - ``NO_JOBS=true`` will start Orthanc with the ``--no-jobs`` option
 - ``LOGDIR=/logs`` will start Orthanc with the ``--logdir=/logs`` option (introduced in 21.9.1)
 - ``LOGFILE=/logs`` will start Orthanc with the ``--logfile=/logs/orthanc.log`` option (introduced in 21.9.1)
+- ``LOGS_THREADNAMES_IN_CONTEXT`` will start Orthanc with the ``--logs-threadnames-in-context`` option (introduced in 26.7.0)
 - ``ORTHANC_JSON`` can be used to pass a JSON "root" configuration (see below).
-- ``ORTHANC_PASSWORD`` can be used to create an `orthanc` user and set his password (introduced in 26.6.1+).
+- ``ORTHANC_PASSWORD`` can be used to create an `orthanc` user and set his password (introduced in 26.7.0).
 - ``BEFORE_ORTHANC_STARTUP_SCRIPT`` can be used to `run a custom script <https://groups.google.com/g/orthanc-users/c/EXjTq2ZU1vw/m/02CwW1jzAQAJ>`__ before starting Orthanc.
 - ``FORCE_HOST_ID`` and ``GENERATE_HOST_ID_IF_MISSING`` can be used to control the content of /etc/hostid (introduced in 22.9.1). 
   DCMTK calls gethostid() when generating DICOM UIDs (used, e.g, in modifications/anonymizations).
