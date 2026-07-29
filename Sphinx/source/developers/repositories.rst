@@ -320,11 +320,12 @@ Issue tracker
 -------------
 
 The `official bug tracker <https://orthanc.uclouvain.be/bugs/>`__ of the
-Orthanc project runs thanks to `Bugzilla
-<https://en.wikipedia.org/wiki/Bugzilla>`__.
+Orthanc project runs thanks to `Roundup
+<https://en.wikipedia.org/wiki/Roundup_(issue_tracker)>`__.
 
-We have done our best to automatically import most of the history
-from the old BitBucket bug tracker.
+We have done our best to automatically import most of the history from
+our old Bitbucket (used until 2020-06) and Bugzilla (used until
+2026-07) bug trackers.
 
 Before posting any issue, make sure to carefully, completely read the
 :ref:`page about how to ask support <support>`. In particular, most
