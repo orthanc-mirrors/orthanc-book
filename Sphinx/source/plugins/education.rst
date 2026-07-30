@@ -26,9 +26,9 @@ plugin overwrites the way users are authenticated by Orthanc.
 
 **Acknowledgments**:
 
-* This development was partially funded by the `Virtual Hospital grant
-  <https://www.virtual-hospital.org/>`__ at `Louvain School of
-  Engineering (EPL) <https://www.uclouvain.be/facultes/epl>`__.
+* This development was partially funded by the Virtual Hospital Grant
+  at `Louvain School of Engineering (EPL)
+  <https://www.uclouvain.be/facultes/epl>`__.
 
 * The initial exploration of the LTI protocol for Orthanc was carried
   out in Python as part of `Florentin Botton's master's thesis
