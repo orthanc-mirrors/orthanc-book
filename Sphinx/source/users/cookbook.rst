@@ -55,9 +55,8 @@ Docker setup::
   $ DEBIAN_FRONTEND=noninteractive apt install -y wget curl nano gnupg apt-transport-https
 
   $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | gpg --dearmor -o /usr/share/keyrings/orthanc-archive-keyring.gpg
-  $ export DISTRO_ID=`grep '^ID' /etc/os-release | cut -d'=' -f 2`
   $ export DISTRO_VERSION=`grep '^VERSION_CODENAME' /etc/os-release | cut -d'=' -f 2`
-  $ echo "deb [signed-by=/usr/share/keyrings/orthanc-archive-keyring.gpg] https://orthanc.uclouvain.be/${DISTRO_ID} ${DISTRO_VERSION} main" > /etc/apt/sources.list.d/orthanc.list
+  $ echo "deb [signed-by=/usr/share/keyrings/orthanc-archive-keyring.gpg] https://orthanc.uclouvain.be/debian ${DISTRO_VERSION} main" > /etc/apt/sources.list.d/orthanc.list
 
   $ apt clean && apt update
   $ apt install orthanc-stone-webviewer
@@ -76,9 +75,8 @@ as Debian 9 or 10), you can use::
   $ DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common wget curl nano gnupg apt-transport-https
 
   $ wget -qO - https://orthanc.uclouvain.be/debian/archive.key | apt-key add -
-  $ export DISTRO_ID=`grep '^ID' /etc/os-release | cut -d'=' -f 2`
   $ export DISTRO_VERSION=`grep '^VERSION_CODENAME' /etc/os-release | cut -d'=' -f 2`
-  $ apt-add-repository -y "deb https://orthanc.uclouvain.be/${DISTRO_ID} ${DISTRO_VERSION} main"
+  $ apt-add-repository -y "deb https://orthanc.uclouvain.be/debian ${DISTRO_VERSION} main"
 
   $ apt clean && apt update
   $ apt install orthanc-stone-webviewer
