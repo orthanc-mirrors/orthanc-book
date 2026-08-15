@@ -8,7 +8,7 @@ Configuration of Orthanc
 Configuring Orthanc simply consists in providing a configuration file.
 Orthanc has numerous configuration that are documented in the `default
 configuration file
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.11/OrthancServer/Resources/Configuration.json>`_. This
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.13.0/OrthancServer/Resources/Configuration.json>`_. This
 file is in the `JSON <https://en.wikipedia.org/wiki/JSON>`_ file
 format. You can generate this file file with the following call::
 
@@ -20,6 +20,14 @@ The default configuration file would:
   ``ORTHANC`` that listens on the port 4242.
 * Create a HTTP server for the REST API that listens on the port 8042.
 * Store the Orthanc database in a folder called ``OrthancStorage``.
+
+Starting with Orthanc 1.13.0, an `advanced configuration file
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.13.0/OrthancServer/Resources/AdvancedConfiguration.json>`__
+complements the content of this standard configuration file with
+advanced options to fine-tune Orthanc. This advanced file can be
+generated with::
+
+    $ Orthanc --advanced-config=AdvancedConfiguration.json
 
 .. highlight:: json
 

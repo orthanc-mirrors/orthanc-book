@@ -11,7 +11,7 @@ DESCRIPTION
        Orthanc, lightweight, RESTful DICOM server for healthcare  and  medical
        research.
 
-       The  "CONFIGURATION"  argument  can be a single file or a directory. In
+       The  "CONFIGURATION" argument can be a list of files or directories. In
        the case of a directory, all the JSON files it contains will be merged.
        If no configuration path is given on the command line, a set of default
        parameters is used. Please refer to the Orthanc Book for the  full  in‐
@@ -26,23 +26,48 @@ DESCRIPTION
        The recommended set of options to debug DICOM communications is "--ver‐
        bose --trace-dicom --logfile=dicom.log"
 
-   Command-line options:
+   Generic options:
        --help display this help and exit
 
-       --logdir=[dir]
-	      directory where to store the log files (by default, the  log  is
-	      dumped to stderr)
+       --version
+	      output version information and exit
 
-       --logfile=[file]
-	      file  where  to store the log of Orthanc (by default, the log is
-	      dumped to stderr)
-
-       --config=[file]
+       --config file
 	      create a sample configuration file and exit (if "file"  is  "-",
 	      dumps to stdout)
 
+       --advanced-config file
+	      create  a file containing the advanced configuration options and
+	      exit (if "file" is "-", dumps to stdout)
+
        --errors
 	      print the supported error codes and exit
+
+       --upgrade
+	      allow Orthanc to upgrade the version  of	the  database  (beware
+	      that  the database will become incompatible with former versions
+	      of Orthanc)
+
+       --no-jobs
+	      don't restart the jobs that were stored during the  last	execu‐
+	      tion of Orthanc
+
+       --openapi file
+	      write  the  OpenAPI  documentation  and  exit (if "file" is "-",
+	      dumps to stdout)
+
+       --cheatsheet file
+	      write the cheat sheet of REST API as CSV and exit (if "file"  is
+	      "-", dumps to stdout)
+
+   Logging options:
+       --logdir dir
+	      directory	 where	to store the log files (by default, the log is
+	      dumped to stderr)
+
+       --logfile file
+	      file where to store the log of Orthanc (by default, the  log  is
+	      dumped to stderr)
 
        --verbose
 	      be verbose in logs
@@ -50,25 +75,14 @@ DESCRIPTION
        --trace
 	      highest verbosity in logs (for debug)
 
-       --upgrade
-	      allow  Orthanc  to  upgrade  the version of the database (beware
-	      that the database will become incompatible with former  versions
-	      of Orthanc)
+       --logs-no-thread
+	      remove thread names from logs
 
-       --no-jobs
-	      don't  restart  the jobs that were stored during the last execu‐
-	      tion of Orthanc
+       --logs-no-context
+	      remove contexts from logs
 
-       --openapi=[file]
-	      write the OpenAPI documentation and  exit	 (if  "file"  is  "-",
-	      dumps to stdout)
-
-       --cheatsheet=[file]
-	      write  the cheat sheet of REST API as CSV and exit (if "file" is
-	      "-", dumps to stdout)
-
-       --version
-	      output version information and exit
+       --logs-thread-names-in-context
+	      include caller thread names in log contexts
 
    Fine-tuning of log categories:
        --verbose-generic
@@ -98,7 +112,8 @@ DESCRIPTION
        --verbose-dicom
 	      be verbose in logs of category "dicom"
 
-       --trace-dicom use highest verbosity for logs of category "dicom"
+       --trace-dicom
+	      use highest verbosity for logs of category "dicom"
 
        --verbose-jobs
 	      be verbose in logs of category "jobs"
@@ -106,7 +121,8 @@ DESCRIPTION
        --trace-jobs
 	      use highest verbosity for logs of category "jobs"
 
-       --verbose-lua be verbose in logs of category "lua"
+       --verbose-lua
+	      be verbose in logs of category "lua"
 
        --trace-lua
 	      use highest verbosity for logs of category "lua"
@@ -120,14 +136,15 @@ AUTHOR
        Written by Sebastien Jodogne <s.jodogne@orthanc-labs.com>
 
 COPYRIGHT
-       Copyright © 2012-2016 Sebastien Jodogne,	 Medical  Physics  Department,
+       Copyright  ©  2012-2016	Sebastien Jodogne, Medical Physics Department,
        University Hospital of Liege (Belgium)
        Copyright © 2017-2023 Osimis S.A. (Belgium)
        Copyright © 2024-2026 Orthanc Team SRL (Belgium)
-       Copyright © 2021-2026 Sebastien Jodogne, ICTEAM UCLouvain (Belgium) Li‐
-       censing	GPLv3+:	 GNU  GPL  version  3  or  later   <http://gnu.org/li‐
+       Copyright © 2021-2026 Sebastien Jodogne, ICTEAM UCLouvain (Belgium)
+
+       Licensing GPLv3+:  GNU  GPL  version  3	or  later  <http://gnu.org/li‐
        censes/gpl.html>.
        This  is	 free  software:  you  are free to change and redistribute it.
        There is NO WARRANTY, to the extent permitted by law.
 
-Orthanc 1.12.11			  April 2026			    ORTHANC(1)
+Orthanc 1.13.0			  August 2026			    ORTHANC(1)

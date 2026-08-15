@@ -112,7 +112,7 @@ that provides more features than ``ImportDicomFiles.py``. It can
 notably import the content of ``.zip``, ``.tar.gz`` or ``.tar.bz2``
 archives without having to uncompress them first. It also provides
 more comprehensive command-line options. `Check this script out
-<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.12.11/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
+<https://orthanc.uclouvain.be/hg/orthanc/file/Orthanc-1.13.0/OrthancServer/Resources/Samples/ImportDicomFiles/OrthancImport.py>`__.
 
 
 
