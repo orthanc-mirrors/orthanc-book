@@ -17,21 +17,7 @@ At the time of writing, we know that Orthanc is being used in
 production in hospitals with more than 65TB of data, 340,000 studies
 and around 150 millions of instances (please `get in touch with us
 <https://www.orthanc-server.com/static.php?page=contact>`__ if you can
-share other testimonials). Here are links to some testimonials that were published
-on the `Orthanc Users discussion forum
-<https://discourse.orthanc-server.org>`__ discussion
-group: `1
-<https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/KmWnwEijAgAJ>`__,
-`2
-<https://groups.google.com/d/msg/orthanc-users/-L0D1c2y6rw/nLXxtYzuCQAJ>`__,
-`3
-<https://groups.google.com/d/msg/orthanc-users/s5-XlgA2BEY/ZpYagqBwAAAJ>`__,
-`4
-<https://groups.google.com/d/msg/orthanc-users/A4hPaJo439s/NwR6zk9FCgAJ>`__,
-`5
-<https://groups.google.com/d/msg/orthanc-users/Z5cLwbVgJc0/SxVzxF7ABgAJ>`__,
-`6
-<https://groups.google.com/d/msg/orthanc-users/6tGNOqlUk-Q/vppkAYnFAQAJ>`__...
+share other testimonials).
 
 The stress is actually put on the underlying database engine, and on
 the storage area (check out :ref:`orthanc-storage`). As explained in
