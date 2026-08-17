@@ -85,6 +85,8 @@ presence of large databases:
 
 * Make sure to fine tune the :ref:`threads related configurations <scalability-threads>`.
 
+* Make sure to fine tune the :ref:`memory related configurations <scalability-memory>`.
+
 * If you are using a postgreSQL plugin between v 4.0 and v 6.2, by default, the
   PostgreSQL index plugin uses 1 single connection to the PostgreSQL
   database. You can have multiple connections by setting the
@@ -212,7 +214,7 @@ a 3 GB DICOM file while there is only 2 GB RAM on the system, the system will cr
 +=========================================+=====================================================================================+=========+==============================================+=========================================================================================================================+
 | ``MaximumStorageCacheSize``             | Maximum size of the storage cache in MB.  The storage cache                         | 128     | ``orthanc_storage_cache_miss_count``         | The cache is relevant mainly if you are using the received DICOM data directly after you have                           |
 |                                         | is stored in RAM and contains a copy of recently accessed files                     |         | ``orthanc_storage_cache_hit_count``          | received it.  E.g. when you are viewing data directly after acquisition or if you are using                             |
-|                                         |                                                                                     |         | ``orthanc_storage_cache_count``              | Orthanc as a router.  In this case, it might be interresting to have a large cache size (possibly                       |
+|                                         |                                                                                     |         | ``orthanc_storage_cache_count``              | Orthanc as a router.  In this case, it might be interesting to have a large cache size (possibly                       |
 |                                         |                                                                                     |         | ``orthanc_storage_cache_size_mb``            | of multiple GB) to avoid reading data from disk.                                                                        |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | ``DicomParserCacheSize``                | Maximum size of the cache of parsed DICOM files in MB.                              | 256     | ``orthanc_dicom_parser_cache_miss_count``    | This cache is relevant when e.g. a viewer or the Rest API request the same DICOM tags multiple times.                   |
