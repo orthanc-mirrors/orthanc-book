@@ -159,87 +159,92 @@ presence of large databases:
 Controlling the threads
 -----------------------
 
-Orthanc uses many `threads <https://en.wikipedia.org/wiki/Thread_(computing)>`__ 
-to perform operations in parallel.  Depending on your infrastructure and
-usage, you may fine tune many configurations related to threading:
+Orthanc uses multiple `threads <https://en.wikipedia.org/wiki/Thread_(computing)>`__ 
+to perform operations in parallel. Depending on your infrastructure and
+usage, you can fine-tune many configurations options related to multithreading:
 
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-|                Option                 |                           Purpose                           | Default |                 Related metrics                 |                                         Recommended Adjustments                                          |
+|                Option                 |                           Purpose                           | Default |                 Related metrics                 |                                         Recommended adjustments                                          |
 +=======================================+=============================================================+=========+=================================================+==========================================================================================================+
-| ``HttpThreadsCount``                  | Threads for handling the Rest API.                          | 50      | ``orthanc_available_http_threads_count``        | Increase when the number of available threads is too low. An alternative adjustment is to spin           |
-|                                       |                                                             |         |                                                 | another Orthanc on another VM, connected to the same PostgreSQL Database to spread the workload.         |
+| ``HttpThreadsCount``                  | Threads for handling incoming requests to the REST API.     | 50      | ``orthanc_available_http_threads_count``        | Increase when the number of available threads is too low. An alternative adjustment is to spin           |
+|                                       |                                                             |         |                                                 | another Orthanc on another VM, connected to the same PostgreSQL database to spread the workload.         |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-| ``DicomThreadsCount``                 | Threads for handling DICOM SCP operations.                  | 4       | ``orthanc_available_dicom_threads``             | Increase when the number of available threads is too low e.g, if Orthanc must handle many C-STORE        |
-|                                       |                                                             |         |                                                 | and C-FIND in parallel. E.g: if Orthanc is connected to 100 DICOM modalities, statistically, there might |
-|                                       |                                                             |         |                                                 | be 10 modalities that will try to communicate with Orthanc at a given time.  You should therefore        |
-|                                       |                                                             |         |                                                 | increase it to 10.                                                                                       |
+| ``DicomThreadsCount``                 | Threads for handling incoming DICOM SCP connections.        | 4       | ``orthanc_available_dicom_threads``             | Increase when the number of available threads is too low, typically if Orthanc must handle many C-STORE  |
+|                                       |                                                             |         |                                                 | and C-FIND in parallel. For instance: If Orthanc is connected to 100 DICOM modalities, statistically,    |
+|                                       |                                                             |         |                                                 | there might be 10 modalities that will try to communicate with Orthanc at any given time, so you should  |
+|                                       |                                                             |         |                                                 | increase this option to 10.                                                                              |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-| ``ConcurrentJobs``                    | Maximum number of processing jobs that are simultaneously   | 2       | ``orthanc_jobs_running``                        | Increase when the number of pending jobs is too high.  Note that each job may itself use multiple        |
-|                                       | running at any given time.                                  |         | ``orthanc_jobs_pending``                        | to execute.                                                                                              |
+| ``ConcurrentJobs``                    | Maximum number of processing jobs that are simultaneously   | 2       | ``orthanc_jobs_running``                        | Increase when the number of pending jobs is too high. Note that each job may itself use multiple         |
+|                                       | running at any given time.                                  |         | ``orthanc_jobs_pending``                        | threads to execute.                                                                                      |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-| ``JobsEngineThreadsCount.``           | Number of threads that are used to perform a resource       | 1       |                                                 | Increase to 8-16 if you are using a distributed object storage for the Orthanc Storage.                  |
+| ``JobsEngineThreadsCount``,           | Number of threads that are used to perform a resource       | 1       |                                                 | Increase to 8-16 if you are using a distributed object storage as the Orthanc storage area.              |
 | ``ResourceModification``              | modification or anonymization.                              |         |                                                 |                                                                                                          |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-| ``StorageLoaderThreadsCount``         | Number of threads that are used to read files from Storage. | 4       | ``orthanc_storage_available_threads``           | Increase when the number of available threads is too low.  Typically if you are using a distributed      |
-|                                       |                                                             |         |                                                 | object storage for the Orthanc Storage, increase to e.g. 20.                                             |
+| ``StorageLoaderThreadsCount``         | Number of threads that are used to read files from the      | 4       | ``orthanc_storage_available_threads``           | Increase when the number of available threads is too low. Typically, if you are using a distributed      |
+|                                       | storage area.                                               |         |                                                 | object storage for the Orthanc storage area, increase to, say, 20.                                       |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 | ``DicomParserThreadsCount``           | Number of threads that are used to parse DICOM files and    | 2       | ``orthanc_dicom_parser_available_threads``      | Increase when the number of available threads is too low.                                                |
-|                                       | access DICOM Tags that are not in the SQL Database.         |         |                                                 |                                                                                                          |
+|                                       | access DICOM tags that are not indexed in the database.     |         |                                                 |                                                                                                          |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
-| ``TranscoderThreadsCount``            | Number of threads that are used to transcode DICOM files    | 4       | ``orthanc_transcoder_available_threads``        | Increase when the number of available threads is too low.                                                |
+| ``TranscoderThreadsCount``            | Number of threads that are used to transcode DICOM files.   | 4       | ``orthanc_transcoder_available_threads``        | Increase when the number of available threads is too low.                                                |
 |                                       |                                                             |         |                                                 |                                                                                                          |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 | ``SequentialDicomReaderThreadsCount`` | Number of threads used for the sequential access to DICOM   | 4       | ``orthanc_sequential_reader_available_threads`` | Increase when the number of available threads is too low.  If not defined, the default value is          |
-|                                       | instances (for archive jobs, C-STORE SCU, C-GET SCP and     |         |                                                 | identical to ``StorageLoaderThreadsCount`` so you should probably never adjust this value.               |
-|                                       | C-MOVE SCP)                                                 |         |                                                 |                                                                                                          |
+|                                       | instances (for archive jobs, C-STORE SCU, C-GET SCP, and    |         |                                                 | identical to ``StorageLoaderThreadsCount``, so you should probably never adjust this value.              |
+|                                       | C-MOVE SCP).                                                |         |                                                 |                                                                                                          |
 +---------------------------------------+-------------------------------------------------------------+---------+-------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 
-Pay attention that all these threads might consume a lot of memory and you might need to limit the memory usage.
+Pay attention that all these threads might consume a lot of memory and
+you might need to limit the memory usage, so check out the :ref:`next
+section <scalability-memory>`.
 
 .. _scalability-memory:
 
 Controlling memory usage
 ------------------------
 
-Starting with Orthanc 1.13.0, you may fine tune many configurations related to
-the memory consumption.  However, you should always keep in mind that, when
-handling large DICOM files, Orthanc needs to store the full file in memory and,
-possibly multiple times during a transcoding or a compression so, even if you
-have set limits on memory usage, Orthanc might overpass these limits and this might
-result in an Out Of memory error (OOM).  E.g. if, at some point, Orthanc must handle
-a 3 GB DICOM file while there is only 2 GB RAM on the system, the system will crash !
+Starting with Orthanc 1.13.0, you can fine-tune many configuration
+options related to the memory consumption. However, you should always
+keep in mind that, when handling large DICOM files, Orthanc needs to
+store the full file in RAM, possibly multiple times during transcoding
+or compression. As a consequence, even if you set limits on memory
+usage, Orthanc may punctually exceed these limits, which can result in
+an out-of-memory (OOM) error. For instance, if, at some point, Orthanc
+must handle a 3GB DICOM file while there is only 2GB RAM on the
+system, the system would crash.
 
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-|                 Option                  |                                       Purpose                                       | Default |               Related metrics                |                                                 Recommended Adjustments                                                 |
+|                 Option                  |                                       Purpose                                       | Default |               Related metrics                |                                                 Recommended adjustments                                                 |
 +=========================================+=====================================================================================+=========+==============================================+=========================================================================================================================+
-| ``MaximumStorageCacheSize``             | Maximum size of the storage cache in MB.  The storage cache                         | 128     | ``orthanc_storage_cache_miss_count``         | The cache is relevant mainly if you are using the received DICOM data directly after you have                           |
-|                                         | is stored in RAM and contains a copy of recently accessed files                     |         | ``orthanc_storage_cache_hit_count``          | received it.  E.g. when you are viewing data directly after acquisition or if you are using                             |
-|                                         |                                                                                     |         | ``orthanc_storage_cache_count``              | Orthanc as a router.  In this case, it might be interesting to have a large cache size (possibly                       |
-|                                         |                                                                                     |         | ``orthanc_storage_cache_size_mb``            | of multiple GB) to avoid reading data from disk.                                                                        |
+| ``MaximumStorageCacheSize``             | Maximum size of the storage cache (in MB). The storage cache                        | 128     | ``orthanc_storage_cache_miss_count``         | This cache is mainly useful when you use the received DICOM data immediately after receiving it,                        |
+|                                         | is stored in RAM and contains the content of the recently accessed                  |         | ``orthanc_storage_cache_hit_count``          | or when REST API clients access the same DICOM instances across multiple calls. For instance, when you are viewing data |
+|                                         | :ref:`attachments <attachments>` from the storage area, which notably               |         | ``orthanc_storage_cache_count``              | directly after acquisition, if you are using Orthanc as a router, or if multiple users access the same study in a       |
+|                                         | include the DICOM files.                                                            |         | ``orthanc_storage_cache_size_mb``            | viewer. In such situations, it might be interesting to have a large cache size (possibly of multiple GB) to avoid       |
+|                                         |                                                                                     |         |                                              | reading the same data multiple times from the disk or from the distributed filesystem.                                  |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-| ``DicomParserCacheSize``                | Maximum size of the cache of parsed DICOM files in MB.                              | 256     | ``orthanc_dicom_parser_cache_miss_count``    | This cache is relevant when e.g. a viewer or the Rest API request the same DICOM tags multiple times.                   |
-|                                         | is stored in RAM and contains a copy of recently accessed files                     |         | ``orthanc_dicom_parser_cache_hit_count``     | However, it is expected that the cache miss is very high and you should probably not worry about it.                    |
-|                                         |                                                                                     |         | ``orthanc_dicom_parser_cache_count``         |                                                                                                                         |
+| ``DicomParserCacheSize``                | Maximum size of the cache of parsed DICOM files (in MB).                            | 256     | ``orthanc_dicom_parser_cache_miss_count``    | This cache is relevant when, e.g., a viewer or the REST API successively request different DICOM tags from the same     |
+|                                         | This cache is stored in RAM and contains a parsed version of the most recently      |         | ``orthanc_dicom_parser_cache_hit_count``     | DICOM instance. However, it is expected that the cache miss is very high and you should probably not worry about it.    |
+|                                         | accessed DICOM instances.                                                           |         | ``orthanc_dicom_parser_cache_count``         |                                                                                                                         |
 |                                         |                                                                                     |         | ``orthanc_dicom_parser_cache_size_mb``       |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-| ``TranscoderCacheSize``                 | Maximum size of the cache of transcoded DICOM files in MB.                          | 256     | ``orthanc_transcoder_cache_miss_count``      | This cache is relevant when e.g. a viewer or the Rest API request the same transcoded DICOM files multiple times.       |
-|                                         | is stored in RAM and contains a copy of recently accessed files                     |         | ``orthanc_transcoder_cache_hit_count``       | However, it is expected that the cache miss is very high and you should probably not worry about it.                    |
-|                                         |                                                                                     |         | ``orthanc_transcoder_cache_count``           |                                                                                                                         |
+| ``TranscoderCacheSize``                 | Maximum size of the cache of transcoded DICOM files (in MB).                        | 256     | ``orthanc_transcoder_cache_miss_count``      | This cache is relevant when, e.g., a viewer or the REST API request the same transcoded DICOM instance multiple times.  |
+|                                         | This cache is stored in RAM and contains a parsed version of the most recently      |         | ``orthanc_transcoder_cache_hit_count``       | This cache is useful because trancsoding a DICOM instance can be a highly costly operation.                             |
+|                                         | transcoded DICOM instances.                                                         |         | ``orthanc_transcoder_cache_count``           | However, it is expected that the cache miss is very high and you should probably not worry about it.                    |
 |                                         |                                                                                     |         | ``orthanc_transcoder_cache_size_mb``         |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | ``StorageMemoryCapacity``               | Peak amount of RAM (in MB) that can be allocated by the threads                     | 512     | ``orthanc_storage_memory_usage_mb``          | Monitor ``orthanc_storage_memory_usage_mb``.  If it is regularly close to the configured capacity, this means that      |
-|                                         | loading from the storage area.                                                      |         | ``orthanc_storage_memory_max_usage_mb``      | some storage loader threads might will have to wait until more RAM is available which will degrade the performance.     |
+|                                         | loading from the storage area.                                                      |         | ``orthanc_storage_memory_max_usage_mb``      | some storage loader threads might have to wait until more RAM is available, which can degrade the performance.          |
 |                                         | Note that this limit can be exceeded when a single file is larger than this option. |         | ``orthanc_storage_memory_count``             |                                                                                                                         |
 |                                         |                                                                                     |         | ``orthanc_storage_memory_capacity_mb``       |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | ``DicomParserMemoryCapacity``           | Peak amount of RAM (in MB) that can be allocated by the threads                     | 256     | ``orthanc_dicom_parser_memory_usage_mb``     | Monitor ``orthanc_dicom_parser_memory_usage_mb``.  If it is regularly close to the configured capacity, this means that |
-|                                         | that parse the DICOM files.                                                         |         | ``orthanc_dicom_parser_memory_max_usage_mb`` | some DICOM parser threads might will have to wait until more RAM is available which will degrade the performance.       |
-|                                         | Note that this limit can be exceeded when a single file is larger than this option. |         | ``orthanc_dicom_parser_memory_count``        |                                                                                                                         |
+|                                         | that parse the DICOM files. Note that this limit can be exceeded                    |         | ``orthanc_dicom_parser_memory_max_usage_mb`` | some DICOM parser threads might have to wait until more RAM is available, which can degrade the performance.            |
+|                                         | when a single DICOM instance is larger than this option.                            |         | ``orthanc_dicom_parser_memory_count``        |                                                                                                                         |
 |                                         |                                                                                     |         | ``orthanc_dicom_parser_memory_capacity_mb``  |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | ``TranscoderMemoryCapacity``            | Peak amount of RAM (in MB) that can be allocated by the threads                     | 256     | ``orthanc_transcoder_memory_usage_mb``       | Monitor ``orthanc_transcoder_memory_usage_mb``.  If it is regularly close to the configured capacity, this means that   |
-|                                         | that transcode the DICOM files.                                                     |         | ``orthanc_transcoder_memory_max_usage_mb``   | some transcoder threads might will have to wait until more RAM is available which will degrade the performance.         |
-|                                         | Note that this limit can be exceeded when a single file is larger than this option. |         | ``orthanc_transcoder_memory_count``          |                                                                                                                         |
+|                                         | that transcode the DICOM files. Note that this limit can be exceeded                |         | ``orthanc_transcoder_memory_max_usage_mb``   | some transcoder threads might have to wait until more RAM is available, which can degrade the performance.              |
+|                                         | when a single transcoded DICOM instance is larger than this option.                 |         | ``orthanc_transcoder_memory_count``          |                                                                                                                         |
 |                                         |                                                                                     |         | ``orthanc_transcoder_memory_capacity_mb``    |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | ``SequentialDicomReaderWindowCapacity`` | Maximum amount of RAM (in MB) allocated to each local                               | 128     |                                              | There is currently no way to monitor these memory consumptions.                                                         |
@@ -248,32 +253,49 @@ a 3 GB DICOM file while there is only 2 GB RAM on the system, the system will cr
 |                                         | Note that this limit can be exceeded when a single file is larger than this option. |         |                                              |                                                                                                                         |
 +-----------------------------------------+-------------------------------------------------------------------------------------+---------+----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
 
-All the **Caches** will always fill to their full capacity as soon as they are used so you should always expect them to consume the declared amount of RAM.
+All the **caches** will progressively fill to their full capacity as
+soon as they are used, so you should always expect them to consume
+their allocated amount of RAM.
 
-For the **MemoryCapacities**, the RAM will be used only when a thread requires RAM in this particular RAM space and the RAM will be released as soon
-as the thread has finished its job with this particular data.  If, at some point, a thread requires X MB of RAM and this amount of RAM is currently not
-available, it will have to wait until other threads have freed X MB.
+For the **memory capacities**, RAM is allocated only when a thread
+requires memory from the corresponding memory area, and is released as
+soon as the thread has finished its job with this particular data.
+If, at some point, a thread requires X MB of RAM and this amount of
+RAM is currently not available, the thread must wait until other
+threads have freed X MB.
 
-E.g.  If you have declared 512 MB of ``StorageMemoryCapacity`` and if have 2 threads that have reserved 200 MB each to each handle a 200 MB file and
-a third thread would like to reserve 200 MB for another file, the third thread will have to wait until one of the first two threads has completed
-its work and until there are at least 200 MB of available memory in that RAM space.
+For instance, if you have configured ``StorageMemoryCapacity`` to 512
+MB and two threads have each reserved 200 MB to process a 200 MB file,
+a third thread that needs to reserve 200 MB for another file will have
+to wait until one of the first two threads has finished its work and
+at least 200 MB of memory is available in the corresponding memory
+capacity.
 
-If you have declared 512 MB of ``StorageMemoryCapacity`` and if have 2 threads that have reserved 200 MB each to each handle a 200 MB file and
-a third thread would like to reserve 600 MB for another file, the third thread will have to wait until both threads have completed their work and,
-only at that time, the 3rd thread will be allocated 600 MB (more than the declared maximum capacity !!!).  The maximum usage of this RAM space will be recorded
-in the ``orthanc_*_memory_max_usage_mb`` metrics.
+Conversely, if you have configured ``StorageMemoryCapacity`` to 512 MB
+and two threads have each reserved 200 MB to process a 200 MB file, a
+third thread that needs to reserve 600 MB for another file will have
+to wait until both threads have finished their work. Only then will
+the third thread be allocated 600 MB, punctually exceeding the
+declared maximum capacity. The maximum usage of this memory space will
+be recorded in the ``orthanc_*_memory_max_usage_mb`` metrics.
 
-**Note**: Orthanc also uses RAM that is not part of these RAM spaces where the memory is controlled.  It is very difficult to evaluate the amount
-of RAM that is not controlled but you should consider that an extra 128 MB is required.
+**Note**: Orthanc also uses RAM that is not part of the memory areas
+controlled by these memory capacities. It is difficult to estimate the
+amount of RAM used outside these controlled areas, as it depends on
+your usage patterns, but you should allow for an additional 128 MB of
+RAM.
 
 
-How can I compute the total amount of memory Orthanc will consume ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How can I compute the total amount of memory Orthanc will consume?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this section, we will consider 2 scenario: 
-- in the first one, you know that your Orthanc
-instance only handles `small` DICOM files that are less than 10-20 MB (MRI, CT, CR, DX, standard US, ...)
-- in the second one, where Orthanc also handles `large` DICOM files between 300 MB and 4 GB (Mammography, Cardiac US, ...).
+In this section, we will consider 2 scenarios:
+
+* In the first one, your Orthanc server only handles `small` DICOM
+  instances that are less than 10-20 MB (MRI, CT, CR, DX, standard US,...).
+
+* In the second one, Orthanc also handles `large` DICOM instances between
+  300 MB and 4 GB (videos, cardiac US, whole-slide images,...).
 
 For both scenario, consider we have these configurations:
 
@@ -298,7 +320,7 @@ For both scenario, consider we have these configurations:
     "TranscoderMemoryCapacity": 256
   }
 
-In the first scenario, where Orthanc handles small files, Orthanc should never exceed the ``*MemoryCapacity`` configurations:
+In the first scenario, where Orthanc handles small instances, Orthanc should never exceed the ``*MemoryCapacity`` configurations:
 
 .. code-block:: txt
 
@@ -349,11 +371,12 @@ that is 600 MB, therefore, exceeding the ``*MemoryCapacity`` configurations:
 Running Orthanc on a system with limited RAM
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are running Orthanc on a system with very limited memory, you should
-configure Orthanc accordingly.
-
-You should probably leave 64 MB to the OS, don't use any caches in Orthanc, reduce the number of **SequentialDicomReaderThreadsCount**
-and reduce all **MemoryCapacities** and reduce the number of HTTP and DICOM threads. E.g.:
+If you are running Orthanc on a system with very limited memory, you
+should configure Orthanc accordingly. You should probably leave 64 MB
+to the OS, disable caches in Orthanc, reduce the number of
+``SequentialDicomReaderThreadsCount``, reduce all
+``MemoryCapacities``, and reduce the number of HTTP and DICOM
+threads. Here is an example:
 
 .. code-block:: txt
 
