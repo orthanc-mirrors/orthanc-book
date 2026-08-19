@@ -283,7 +283,8 @@ be recorded in the ``orthanc_*_memory_max_usage_mb`` metrics.
 controlled by these memory capacities. It is difficult to estimate the
 amount of RAM used outside these controlled areas, as it depends on
 your usage patterns, but you should allow for an additional 128 MB of
-RAM.
+RAM.  Also note that plugins can also consume RAM that is not taken
+into account either.
 
 
 How can I compute the total amount of memory Orthanc will consume?
