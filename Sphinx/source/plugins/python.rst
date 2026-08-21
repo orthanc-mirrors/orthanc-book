@@ -1048,6 +1048,23 @@ Note that the built-in Web interface of CouchDB (named Fauxton) can be
 opened at: ``http://localhost:5984/_utils/``
 
 
+.. _python_http_authentication:
+
+Implementing user authentication (new in 7.2)
+.............................................
+
+Release 7.2 of the Python plugin for Orthanc introduces support for
+HTTP authentication through the new function:
+``orthanc.RegisterHttpAuthenticationCallback()``.
+
+The source distribution of the Python plugin `contains a full sample
+<https://orthanc.uclouvain.be/hg/orthanc-python/file/default/Resources/Samples/SampleHttpAuthentication.py>`__
+illustrating how to use this function to implement basic cookie-based
+HTTP authentication. Note that a more realistic implementation would
+use `JWT-based authentication
+<https://en.wikipedia.org/wiki/JSON_Web_Token>`__.
+
+
 
 Performance and concurrency
 ---------------------------
