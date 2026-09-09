@@ -86,8 +86,8 @@ Orthanc <compiling>` have already been installed)::
 
 
 
-Usage of the plugin
--------------------
+Usage of the Web viewer plugin
+------------------------------
 
 .. highlight:: text
 
@@ -106,9 +106,9 @@ GNU/Linux::
     ]
   }
 
-Orthanc must of course be restarted after the modification of its
-configuration file. The WSI plugin has no specific configuration
-option.
+Orthanc must evidently be restarted after the modification of its
+configuration file. It is not necessary to set any specific
+configuration option to have the viewer plugin running.
 
 Once a :ref:`DICOM series <model-world>` is opened using :ref:`Orthanc
 Explorer <orthanc-explorer>`, a yellow button entitled ``Whole-Slide
@@ -117,6 +117,83 @@ images. This button will open the WSI viewer for that particular
 series. This behavior can be seen on the Orthanc Explorer interface
 running on our `WSI demonstration server
 <https://orthanc.uclouvain.be/wsi-orthanc/app/explorer.html>`__.
+
+Note that physical units can be disabled by passing the
+``&no-scaling`` GET argument in the URL used to open the viewer. This
+will remove the scaling information, and pixels will be used as the
+units. This feature was introduced in version 4.0 of the plugin.
+
+
+Annotations (new in 4.0)
+------------------------
+
+Starting with release 4.0, the Web Viewer plugin provides a user
+interface for **drawing annotations over the whole-slide images**. The
+viewer also supports a notion of individual **user layers** that can be
+edited and shown or hidden independently. Annotations are enabled by
+default, but they can be disabled by modifying the :ref:`configuration
+file <configuration>` as follows::
+
+  {
+    [...]
+    "WholeSlideImaging" : {
+      "EnableAnnotations" : false
+    }
+  }
+
+Annotations are persistent in the Orthanc database, provided that the
+plugin was compiled using Orthanc SDK 1.12.9 or later.
+
+By default, annotations are global to the Orthanc server. However, you
+can enable **per-user annotation**, provided that a user
+authentication mechanism is set up. If you are using Orthanc in an
+educational context, we recommend installing the :ref:`education
+plugin <education>` alongside the whole-slide imaging plugin. The
+education plugin provides user authentication. To enable this, use the
+following configuration::
+
+  {
+    [...]
+    "WholeSlideImaging" : {
+      "AuthenticationSource" : "Plugin"
+    }
+  }
+
+If you do not want to rely on the education plugin, the whole-slide
+imaging plugin can be configured to obtain user authentication
+information from an **HTTP header**. This header can be set by any
+:ref:`reverse proxy <nginx>` or an `institutional SSO infrastructure
+<https://en.wikipedia.org/wiki/Single_sign-on>`__. Here is the associated
+configuration::
+
+  {
+    [...]
+    "WholeSlideImaging" : {
+      "AuthenticationSource" : "HttpHeader",
+      "AuthenticationHttpHeader" : "Mail",    /* Use the HTTP header "Mail" */
+      "Instructors" : [
+        "admin@uclouvain.be",
+        "instructor@uclouvain.be"
+      ]
+    }
+  }
+
+This sample configuration also shows how to distinguish between the
+two types of users supported by the viewer plugin: **instructors and
+learners**. By default, a user is considered a learner. However, if
+the HTTP header matches one of the values specified in the
+``Instructors`` configuration option, the user is considered an
+instructor. This distinction between learners and instructors is
+central to the annotation sharing feature (see below). Note that when
+using the education plugin, the distinction between instructors and
+learners is handled by the education plugin.
+
+
+Sharing
+
+``&project=``
+
+
 
 
 Support of IIIF
