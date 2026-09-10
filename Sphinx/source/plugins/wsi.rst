@@ -129,8 +129,15 @@ Annotations (new in 4.0)
 
 Starting with release 4.0, the Web Viewer plugin provides a user
 interface for **drawing annotations over the whole-slide images**. The
-viewer also supports a notion of individual **user layers** that can be
-edited and shown or hidden independently. Annotations are enabled by
+viewer also supports a notion of individual **user layers** that can
+be edited and shown or hidden independently. Here is a screenshot of
+the user interface:
+
+.. image:: ../images/2026-09-10-wsi-annotations.png
+           :align: center
+           :width: 640px
+
+Annotations are enabled by
 default, but they can be disabled by modifying the :ref:`configuration
 file <configuration>` as follows::
 
@@ -149,8 +156,8 @@ can enable **per-user annotation**, provided that a user
 authentication mechanism is set up. If you are using Orthanc in an
 educational context, we recommend installing the :ref:`education
 plugin <education>` alongside the whole-slide imaging plugin. The
-education plugin provides user authentication. To enable this, use the
-following configuration::
+education plugin will provide user authentication. To enable this, use
+the following configuration::
 
   {
     [...]
@@ -162,9 +169,9 @@ following configuration::
 If you do not want to rely on the education plugin, the whole-slide
 imaging plugin can be configured to obtain user authentication
 information from an **HTTP header**. This header can be set by any
-:ref:`reverse proxy <nginx>` or an `institutional SSO infrastructure
-<https://en.wikipedia.org/wiki/Single_sign-on>`__. Here is the associated
-configuration::
+:ref:`reverse proxy <nginx>` or by an `institutional SSO
+infrastructure <https://en.wikipedia.org/wiki/Single_sign-on>`__. Here
+is the associated configuration::
 
   {
     [...]
@@ -188,12 +195,102 @@ central to the annotation sharing feature (see below). Note that when
 using the education plugin, the distinction between instructors and
 learners is handled by the education plugin.
 
+Individual user layers can be **shared** between users. This can be
+particularly useful in pedagogical settings, where an instructor wants
+to broadcast questions to learners, or where a group of learners
+collaborates on a contouring exercise. The sharing workflow starts
+with the owner of the layer sharing its content by clicking on the
+"share" icon next to the layer of interest:
 
-Sharing
+.. image:: ../images/2026-09-10-wsi-sharing.png
+           :align: center
+           :width: 640px
 
-``&project=``
+Note that the layer can be made public to all users or shared with a
+specific subset of users. Once the layer owner has shared a layer,
+another user can import it into their workspace:
 
+.. image:: ../images/2026-09-10-wsi-importing.png
+           :align: center
+           :width: 640px
 
+The name of the layer owner is required to import one of their layers.
+Once a shared layer is imported, it is displayed in read-only mode.
+However, it can still be shown or hidden, and its color can be
+changed.
+
+By default, layer sharing is disabled. The following two configuration
+options control layer sharing::
+
+  {
+    [...]
+    "WholeSlideImaging" : {
+      [...]
+      "EnableAnnotationsSharing" : true,
+      "EnableLearnerToLearnerSharing" : true
+    }
+  }
+
+The distinction between instructors and learners plays a key role in
+layer sharing. In a pedagogical context, it can be important to limit
+how learners communicate, while allowing instructors to remain the
+trusted source of information. At the same time, learners can still
+use collaborative editing features inside a group of
+students. Conversely, instructors should be able to access layers
+shared by any learner, for instance to correct an exercise.
+
+This leads to the following visibility rules:
+
+**Instructors can see:**
+
+* All layers marked as public, regardless of whether they were created
+  by an instructor or a learner.
+
+* Any layer explicitly shared with them by another user.
+
+**Learners can see:**
+
+* All public layers created by instructors. These layers are visible
+  to all learners.
+
+* Any instructor layer explicitly shared with them.
+
+* Any learner layer explicitly shared with them, provided that
+  learner-to-learner sharing is enabled (see the
+  ``EnableLearnerToLearnerSharing`` configuration option).
+
+.. note::
+
+   A learner's public layers are visible only to instructors. They are
+   never visible to other learners, regardless of the
+   learner-to-learner sharing configuration.
+
+   This means that, for a learner, marking a layer as public submits
+   the layer to the instructors rather than sharing it with the whole
+   class.  This prevents a learner's work from being visible to all
+   other learners, while still allowing collaboration within a
+   specific group through explicit sharing.
+
+.. note::
+
+   The ``EnableLearnerToLearnerSharing`` configuration option affects
+   only sharing between learners. It has no effect on the visibility
+   of learner layers to instructors, and does not change the behavior
+   of public learner layers. Public learner layers are never visible
+   to other learners, whether learner-to-learner sharing is enabled or
+   disabled.
+
+Finally, annotations for each whole-slide image (i.e., for each DICOM
+series or instance) displayed by the whole-slide imaging viewer can be
+separated into different **projects**.  The current project is
+selected using the ``&project=`` GET argument in the URL used to open
+the viewer. Changing the project creates a separate workspace for its
+layers and annotations. If the ``project`` argument is not specified,
+the default project is the empty string.  The :ref:`education plugin
+<education>` automatically sets the project argument: each course
+corresponds to a separate project.  This makes it possible to share
+the same whole-slide image across multiple courses without mixing
+their annotations.
 
 
 Support of IIIF
