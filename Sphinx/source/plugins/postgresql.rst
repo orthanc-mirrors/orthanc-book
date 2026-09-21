@@ -338,16 +338,23 @@ New vesions of the PostgreSQL might modify the DB schema by adding new columns/t
 +---------------------------+-------------------------------------------+
 | 9.0                       | 6                                         |
 +---------------------------+-------------------------------------------+
-| 10.0 - 10.X               | 10 (skipped 7, 8 and 9 to sync schema     |
+| 10.0 - 10.3               | 10 (skipped 7, 8 and 9 to sync schema     |
 |                           | revision and plugin version)              |
++---------------------------+-------------------------------------------+
+| 11.0                      | 11                                        |
 +---------------------------+-------------------------------------------+
 
 
 Upgrades from one revision to the other is always automatic.  Furthermore, if you are upgrading
-from e.g plugin 3.3 to 10.0, Orthanc will apply all migration steps autonomously.
+from e.g plugin 3.3 to 11.0, Orthanc will apply all migration steps autonomously.
 
 However, if, for some reasons, you would like to reinstall a previous plugin version, the
 older plugin might refuse to start because the revision is newer and unknown to it.
+
+To downgrade from revision 11 to revision 10, one might run this procedure::
+
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev11ToRev10.sql
+  $ psql -U postgres -f Rev10ToRev6.sql
 
 To downgrade from revision 10 to revision 6, one might run this procedure::
 
@@ -396,7 +403,7 @@ plugin, the one that is compatible with the current revision.
 Therefore, in complex setups, it might be simpler/safer to simply shut-down the Orthanc containers, perform the upgrade
 manually and then, restart the Orthanc containers with the newest version of the plugin.
 
-To upgrade manually from revision 1 to revision 6, one might run this procedure on the existing DB (note: make
+To upgrade manually from revision 1 to revision 11, one might run this procedure on the existing DB (note: make
 sur to select the correct DB and schema (By default, Orthanc is using the ``public`` shema))::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev1ToRev2.sql
@@ -405,13 +412,15 @@ sur to select the correct DB and schema (By default, Orthanc is using the ``publ
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev4ToRev5.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev5ToRev6.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev6ToRev10.sql
+  $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Upgrades/Rev10ToRev11.sql
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/PrepareIndex.sql
   $ psql -U postgres -f Rev1ToRev2.sql          # skip this step if you are already in Rev2 or higher
   $ psql -U postgres -f Rev2ToRev3.sql          # skip this step if you are already in Rev3 or higher
   $ psql -U postgres -f Rev3ToRev4.sql          # skip this step if you are already in Rev4 or higher
   $ psql -U postgres -f Rev4ToRev5.sql          # skip this step if you are already in Rev5 or higher
   $ psql -U postgres -f Rev5ToRev6.sql          # skip this step if you are already in Rev6 or higher
-  $ psql -U postgres -f Rev6ToRev10.sql
+  $ psql -U postgres -f Rev6ToRev10.sql         # skip this step if you are already in Rev10 or higher
+  $ psql -U postgres -f Rev10ToRev11.sql
   $ psql -U postgres -f PrepareIndex.sql
 
 These procedures are identical to the ones performed automatically by Orthanc when it detects that an upgraded is required.
