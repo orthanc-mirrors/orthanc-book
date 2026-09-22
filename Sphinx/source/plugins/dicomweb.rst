@@ -123,8 +123,16 @@ the ``DicomWeb`` section of the Orthanc configuration file::
       "QidoCaseSensitive" : true,     // For QIDO-RS server, whether search is case sensitive (since release 0.5)
       "Host" : "",                    // Hard-codes the name of the host for subsequent WADO-RS requests.  
                                       // e.g: "localhost:8042", "dicomweb.mydomain.org"
-                                      // If empty (default), the plugin will guess it from other configurations or 
-                                      // from the reverse-proxy 'forwarded' headers.
+                                      // If empty (default), the plugin will guess its value from the
+                                      // "Host", "X-Forwarded-Host", "Forwarded" HTTP headers.
+                                      // If empty, since release 1.25, you should provide a list of "AllowedHosts".
+      "AllowedHosts" : [],            // List of trusted values for the host guessed from the "Host", "X-Forwarded-Host"
+                                      // and "Forwarded" HTTP headers.
+                                      // e.g: ["dicomweb.mydomain.org", "*.mydomain.org", "orthanc.local:8042"]
+                                      // You must defined either "Host" or "AllowedHosts" (recommanded way).
+                                      // If Orthanc is accessed only via "localhost" or "127.0.0.1", there is no need
+                                      // to configure any of them.
+                                      // (since release 1.25)
       "StudiesMetadata" : "Full",     // How study-level metadata is retrieved (since release 1.1, cf. section below)
       "SeriesMetadata" : "Full",      // How series-level metadata is retrieved (since release 1.1, cf. section below)
       "EnableMetadataCache": true,    // Wheter the plugin caches metadata as a gzipped attachment (since release 1.15)
@@ -163,12 +171,6 @@ releases <= 0.6 of the plugin, but are not used anymore::
 These older configuration options were used to limit the size of the
 HTTP requests, by issuing multiple calls to STOW-RS (set both options
 to 0 to send one single request).
-
-
-**Remark 2:** The option ``Host`` is deprecated. Starting with release
-0.7 of the DICOMweb plugin, its value are computed from the standard
-HTTP headers ``Forwarded`` and ``Host``, as provided by the HTTP
-clients.
 
 
 .. _dicomweb-server-metadata-config:
