@@ -132,8 +132,8 @@ uncompressed video sequences, that are often referred to as **cine**
 or **2D+t** images (e.g. for `ultrasound imaging
 <https://en.wikipedia.org/wiki/Medical_ultrasound>`__).
 
-`As written in its DICOM conformance statement
-<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/DicomConformanceStatement.txt>`__,
+`As written in its DICOM conformance summary
+<https://orthanc.uclouvain.be/hg/orthanc/file/default/OrthancServer/Resources/DicomConformance.txt>`__,
 the Orthanc software can receive, store and send any kind of DICOM
 images (i.e. all the standard transfer syntaxes are
 supported). Furthermore, Orthanc can :ref:`convert most uncompressed
