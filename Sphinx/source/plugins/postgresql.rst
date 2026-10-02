@@ -354,7 +354,7 @@ older plugin might refuse to start because the revision is newer and unknown to 
 To downgrade from revision 11 to revision 10, one might run this procedure::
 
   $ wget https://orthanc.uclouvain.be/hg/orthanc-databases/raw-file/default/PostgreSQL/Plugins/SQL/Downgrades/Rev11ToRev10.sql
-  $ psql -U postgres -f Rev10ToRev6.sql
+  $ psql -U postgres -f Rev11ToRev10.sql
 
 To downgrade from revision 10 to revision 6, one might run this procedure::
 
