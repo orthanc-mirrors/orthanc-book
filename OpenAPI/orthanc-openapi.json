@@ -2,7 +2,7 @@
    "info" : {
       "description" : "This is the full documentation of the [REST API](https://orthanc.uclouvain.be/book/users/rest.html) of Orthanc.<p>This reference is automatically generated from the source code of Orthanc. A [shorter cheat sheet](https://orthanc.uclouvain.be/book/users/rest-cheatsheet.html) is part of the Orthanc Book.<p>An earlier, manually crafted version from August 2019, is [still available](2019-08-orthanc-openapi.html), but is not up-to-date anymore ([source](https://groups.google.com/g/orthanc-users/c/NUiJTEICSl8/m/xKeqMrbqAAAJ)).",
       "title" : "Orthanc API",
-      "version" : "1.13.0"
+      "version" : "1.13.1"
    },
    "openapi" : "3.0.0",
    "paths" : {
@@ -3874,7 +3874,7 @@
                      "application/json" : {
                         "schema" : {
                            "description" : "JSON array containing either the jobs identifiers, or detailed information about the reported jobs (if `expand` argument is provided)",
-                           "example" : [ "8d01242e-41cb-425c-a2be-ea692d448c80" ]
+                           "example" : []
                         }
                      }
                   },
@@ -8335,7 +8335,7 @@
                               "ExtendsOrthancExplorer" : true,
                               "ID" : "dicom-web",
                               "RootUri" : "../dicom-web/app/client/index.html",
-                              "Version" : "1.23"
+                              "Version" : "1.24"
                            }
                         }
                      }
@@ -15022,7 +15022,7 @@
                         "schema" : {
                            "description" : "",
                            "example" : {
-                              "ApiVersion" : 31,
+                              "ApiVersion" : 32,
                               "Capabilities" : {
                                  "HasExtendedChanges" : true,
                                  "HasExtendedFind" : true,
@@ -15032,7 +15032,7 @@
                               },
                               "CheckRevisions" : false,
                               "DatabaseBackendPlugin" : null,
-                              "DatabaseServerIdentifier" : "a67fa91c-20328956-26614107-bbaec3f4-5cbbc6f9",
+                              "DatabaseServerIdentifier" : "be2ba798-1cb577e0-483accf5-d286e8f5-de2599df",
                               "DatabaseVersion" : 6,
                               "DicomAet" : "ORTHANC",
                               "DicomDefaultRetrieveMethod" : "C-MOVE",
@@ -15074,24 +15074,25 @@
                               "StorageAreaPlugin" : null,
                               "StorageCompression" : false,
                               "StoreMD5ForAttachments" : true,
-                              "ThirdPartyPatches" : [ "civetweb-1.16.patch", "dcmtk-3.7.0-max-nested-sequence.patch" ],
+                              "ThirdPartyPatches" : [ "civetweb-1.16.patch" ],
                               "ThirdPartyVersions" : {
                                  "boost" : "1.69.0",
                                  "civetweb" : "1.16.0",
-                                 "dcmtk" : "3.7.0",
+                                 "dcmtk" : "3.7.1",
                                  "jsoncpp" : "0.10.6",
                                  "libcurl" : "8.17.0",
                                  "libjpeg" : "9.0",
                                  "libpng" : "1.6.50",
                                  "lua" : "5.4.7",
-                                 "openssl" : "3.1.4",
+                                 "minizip" : "1.3.2",
+                                 "openssl" : "3.5.9",
                                  "protobuf" : "3.5.1",
                                  "pugixml" : "1.14.0",
                                  "sqlite" : "3.50.4",
                                  "zlib" : "1.3.1"
                               },
                               "UserMetadata" : {},
-                              "Version" : "1.13.0"
+                              "Version" : "1.13.1"
                            },
                            "properties" : {
                               "ApiVersion" : {
@@ -16297,7 +16298,7 @@
       "/tools/dicom-conformance" : {
          "get" : {
             "deprecated" : false,
-            "description" : "Get the DICOM conformance statement of Orthanc",
+            "description" : "Get the DICOM conformance summary of Orthanc",
             "parameters" : [],
             "responses" : {
                "200" : {
@@ -16305,7 +16306,7 @@
                      "text/plain" : {
                         "examples" : {},
                         "schema" : {
-                           "description" : "The DICOM conformance statement"
+                           "description" : "The DICOM conformance summary"
                         }
                      }
                   },
@@ -17012,7 +17013,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "orthanc_available_dicom_threads 4 1786830654645\northanc_available_http_threads_count 49 1786831381722\northanc_count_instances 2552 1786831388757\northanc_count_patients 8 1786831388757\northanc_count_series 26 1786831388757\northanc_count_studies 8 1786831388757\northanc_dicom_parser_available_threads 1 1786831382129\northanc_dicom_parser_cache_count 1094 1786831387100\northanc_dicom_parser_cache_hit_count 1409 1786831388571\northanc_dicom_parser_cache_miss_count 1094 1786831387099\northanc_dicom_parser_cache_size_mb 180.565399 1786831387100\northanc_dicom_parser_memory_capacity_mb 256 1786831388571\northanc_dicom_parser_memory_count 0 1786831388571\northanc_dicom_parser_memory_max_usage_mb 5.39834976 1786831388571\northanc_dicom_parser_memory_usage_mb 0 1786831388571\northanc_dicomweb_wadors_average_bandwidth_per_call_mbytes_per_second_5m 0 1786831388756\northanc_dicomweb_wadors_total_bytes_transferred 18923976 1786831388756\northanc_disk_size_mb 983.235352 1786831388757\northanc_jobs_pending 0 1786831388757\northanc_jobs_running 0 1786831388757\northanc_jobs_total_completed 1 1786830924198\northanc_jobs_total_success 1 1786830924198\northanc_last_change 6551 1786831388757\northanc_logged_errors_count 28 1786830811928\northanc_logged_warnings_count 426 1786831314046\northanc_rest_api_active_requests 1 1786831381722\northanc_rest_api_duration_ms 881 1786831387424\northanc_sequential_reader_available_threads 4 1786830916520\northanc_storage_available_threads 3 1786831382129\northanc_storage_cache_count 567 1786831387100\northanc_storage_cache_hit_count 167 1786831313647\northanc_storage_cache_miss_count 1453 1786831387099\northanc_storage_cache_size_mb 116.382149 1786831387100\northanc_storage_memory_capacity_mb 512 1786831387100\northanc_storage_memory_count 0 1786831387100\northanc_storage_memory_max_usage_mb 46.4766159 1786831387100\northanc_storage_memory_usage_mb 0 1786831387100\northanc_storage_read_bytes 440209974 1786831387100\northanc_storage_read_duration_ms 0 1786831387100\northanc_transcoder_available_threads 4 1786830860422\northanc_transcoder_cache_count 198 1786830832071\northanc_transcoder_cache_hit_count 198 1786830865075\northanc_transcoder_cache_miss_count 198 1786830832066\northanc_transcoder_cache_size_mb 99.4703598 1786830832071\northanc_transcoder_memory_capacity_mb 256 1786830865075\northanc_transcoder_memory_count 0 1786830865075\northanc_transcoder_memory_max_usage_mb 3.01407051 1786830865075\northanc_transcoder_memory_usage_mb 0 1786830865075\northanc_transfers_aborted_push_count 0 1786831388756\northanc_transfers_available_push_count 4 1786831388756\northanc_transfers_cache_hit_count 0 1786831388756\northanc_transfers_cache_miss_count 0 1786831388756\northanc_transfers_committed_push_count 0 1786831388756\northanc_transfers_created_push_count 0 1786831388756\northanc_transfers_push_total_received_bytes_count 0 1786831388756\northanc_transfers_push_total_time_spent_in_commit_ms 0 1786831388756\northanc_transfers_push_total_time_spent_in_reception_ms 0 1786831388756\northanc_transfers_used_cache_size 0 1786831388756\northanc_uncompressed_size_mb 983.235352 1786831388757\northanc_up_time_s 734 1786831388757\n"
+                        "example" : "orthanc_available_dicom_threads 4 1794937546570\northanc_available_http_threads_count 49 1794937762682\northanc_count_instances 2552 1794937769436\northanc_count_patients 8 1794937769436\northanc_count_series 26 1794937769436\northanc_count_studies 8 1794937769436\northanc_dicom_parser_available_threads 1 1794937763085\northanc_dicom_parser_cache_count 434 1794937767936\northanc_dicom_parser_cache_hit_count 459 1794937769215\northanc_dicom_parser_cache_miss_count 435 1794937767936\northanc_dicom_parser_cache_size_mb 16.2433262 1794937767936\northanc_dicom_parser_memory_capacity_mb 256 1794937769216\northanc_dicom_parser_memory_count 0 1794937769216\northanc_dicom_parser_memory_max_usage_mb 1.83153152 1794937769216\northanc_dicom_parser_memory_usage_mb 0 1794937769216\northanc_dicomweb_wadors_average_bandwidth_per_call_mbytes_per_second_5m 2114.85791 1794937769435\northanc_dicomweb_wadors_total_bytes_transferred 1053732 1794937769435\northanc_disk_size_mb 983.235352 1794937769436\northanc_jobs_pending 0 1794937769436\northanc_jobs_running 0 1794937769436\northanc_last_change 7015 1794937769436\northanc_logged_warnings_count 85 1794937702513\northanc_rest_api_active_requests 1 1794937762682\northanc_rest_api_duration_ms 709 1794937768211\northanc_sequential_reader_available_threads 4 1794937546567\northanc_storage_available_threads 3 1794937763085\northanc_storage_cache_count 452 1794937767936\northanc_storage_cache_hit_count 4 1794937701765\northanc_storage_cache_miss_count 453 1794937767936\northanc_storage_cache_size_mb 40.2777481 1794937767936\northanc_storage_memory_capacity_mb 512 1794937767936\northanc_storage_memory_count 0 1794937767936\northanc_storage_memory_max_usage_mb 30.9844093 1794937767936\northanc_storage_memory_usage_mb 0 1794937767936\northanc_storage_read_bytes 42071366 1794937767936\northanc_storage_read_duration_ms 0 1794937767936\northanc_transcoder_available_threads 4 1794937546566\northanc_transcoder_cache_count 0 1794937546567\northanc_transcoder_cache_hit_count 0 1794937546567\northanc_transcoder_cache_miss_count 0 1794937546567\northanc_transcoder_cache_size_mb 0 1794937546567\northanc_transcoder_memory_capacity_mb 256 1794937546567\northanc_transcoder_memory_count 0 1794937546567\northanc_transcoder_memory_max_usage_mb 0 1794937546567\northanc_transcoder_memory_usage_mb 0 1794937546567\northanc_transfers_aborted_push_count 0 1794937769435\northanc_transfers_available_push_count 4 1794937769435\northanc_transfers_cache_hit_count 0 1794937769435\northanc_transfers_cache_miss_count 0 1794937769435\northanc_transfers_committed_push_count 0 1794937769435\northanc_transfers_created_push_count 0 1794937769435\northanc_transfers_push_total_received_bytes_count 0 1794937769435\northanc_transfers_push_total_time_spent_in_commit_ms 0 1794937769436\northanc_transfers_push_total_time_spent_in_reception_ms 0 1794937769435\northanc_transfers_used_cache_size 0 1794937769435\northanc_uncompressed_size_mb 983.235352 1794937769436\northanc_up_time_s 223 1794937769436\n"
                      }
                   },
                   "description" : ""
@@ -17031,7 +17032,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20260815T220308",
+                        "example" : "20261117T174929",
                         "schema" : {
                            "description" : "The UTC time"
                         }
@@ -17053,7 +17054,7 @@
                "200" : {
                   "content" : {
                      "text/plain" : {
-                        "example" : "20260815T220308",
+                        "example" : "20261117T174929",
                         "schema" : {
                            "description" : "The local time"
                         }

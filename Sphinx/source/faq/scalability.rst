@@ -39,7 +39,7 @@ Recommended setup for best performance
 Here is a generic setup that should provide best performance in the
 presence of large databases:
 
-* Make sure to use the latest release of Orthanc (1.13.0 at the time of
+* Make sure to use the latest release of Orthanc (1.13.1 at the time of
   writing) running on a GNU/Linux distribution.
 
 * We suggest to use the latest release of the :ref:`PostgreSQL plugin
@@ -434,7 +434,7 @@ The absence of memory leaks in Orthanc is verified thanks to `valgrind
 <https://valgrind.org/>`__.
 
 **Note:** It is not yet clear if the below section is still applicable
-to Orthanc 1.13.0 since we have introduced new memory handling configurations.
+to Orthanc >= 1.13.0, since we have introduced new memory handling configurations.
 
 
 On GNU/Linux systems, you might however `observe a large memory
