@@ -69,7 +69,7 @@ A basic configuration would read as follows::
 
       // New options only if SaveInOrthancDatabase is set to true.
       
-      "DeleteWorklistsDelay": 24          // Delay [in hours] after which the worklist is deleted.
+      "DeleteWorklistsDelay": 0           // Delay [in hours] after which the worklist is deleted.
                                           // Note that this check is performed in the Worklist Housekeeper thread.
                                           // The plugin only deletes worklists that have been created through the REST API.
                                           // Set it to 0 if you don't want the plugin to delete worklists after a delay.
